@@ -1,6 +1,6 @@
 {
   "name": "genestack-ui",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "description": "UI library",
   "main": "dist/genestack-ui.js",
   "scripts": {
