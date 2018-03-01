@@ -9,4 +9,4 @@ import Button from 'components/button/button';
 import Input from 'components/input/input';
 import Form from 'components/form/form';
 
-export default {Button, Input, Form};
+export {Button, Input, Form};
