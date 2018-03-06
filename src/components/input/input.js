@@ -24,7 +24,7 @@ export default class Input extends PureComponent {
     }
 
     render() {
-        const {value, className, ...props} = this.props;
+        const {value, className, onChange, ...props} = this.props;
 
         return (
             <input

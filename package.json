@@ -9,7 +9,7 @@
     "prepublishOnly": "npm install && npm run build",
     "styleguide": "styleguidist server",
     "styleguide:build": "styleguidist build",
-    "lint": "eslint --fix src/**",
+    "lint": "eslint --fix src/** && stylelint src/**/*.css --fix",
     "clean": "rm -rf dist"
   },
   "repository": {

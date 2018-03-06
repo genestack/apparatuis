@@ -30,7 +30,7 @@ export default function Button(props) {
 
 Button.propTypes = {
     children: PropTypes.node.isRequired,
-    onClick: PropTypes.func.isRequired,
+    onClick: PropTypes.func,
     kind: PropTypes.oneOf(['default', 'primary']),
     type: PropTypes.oneOf(['button', 'submit']),
     className: PropTypes.string,
@@ -43,5 +43,6 @@ Button.defaultProps = {
     type: 'button',
     className: '',
     isDisabled: false,
-    value: null
+    value: null,
+    onClick: null
 };
