@@ -12,28 +12,28 @@
     margin-bottom: 0;
     font-size: 14px;
     line-height: 20px;
-    color: #333;
+    color: rgb(51, 51, 51);
     text-align: center;
-    text-shadow: 0 1px 1px rgba(255,255,255,0.75);
+    text-shadow: 0 1px 1px rgba(255, 255, 255, 0.75);
     vertical-align: middle;
     cursor: pointer;
-    background-image: linear-gradient(to bottom,#fff,#e6e6e6);
+    background-image: linear-gradient(to bottom, rgb(255, 255, 255), rgb(230, 230, 230));
     background-repeat: repeat-x;
-    border: 1px solid #ccc;
-    border-color: rgba(0,0,0,0.1) rgba(0,0,0,0.1) rgba(0,0,0,0.25);
-    border-bottom-color: #b3b3b3;
+    border: 1px solid rgb(204, 204, 204);
+    border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+    border-bottom-color: rgb(179, 179, 179);
     border-radius: 2px;
-    box-shadow: inset 0 1px 0 rgba(255,255,255,0.2), 0 1px 2px rgba(0,0,0,0.05);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
 }
 
 .btn + .btn {
     margin-left: 10px;
 }
 
-.btn:hover,
+.btn:hover:not([disabled]),
 .btn:focus {
     text-decoration: none;
-    background-color: #e6e6e6;
+    background-color: rgb(230, 230, 230);
     background-position: 0 -15px;
     transition: background-position 0.1s linear;
 }
@@ -42,18 +42,17 @@
     cursor: default;
     opacity: 0.65;
     box-shadow: none;
-    pointer-events: none;
+    background-position: 0;
 }
 
 .btnPrimary {
-    color: white;
-    background: #00acfe;
-    background: linear-gradient(to bottom, #00acfe 0%, #02a4f1 44%, #0497dd 100%);
+    color: rgb(255, 255, 255);
+    background: linear-gradient(to bottom, rgb(0, 172, 254) 0%, rgb(2, 164, 241) 44%, rgb(4, 151, 221) 100%);
     text-shadow: none;
-    border: 1px solid #0497dd;
-    border-bottom: 1px solid #1680b2;
+    border: 1px solid rgb(4, 151, 221);
+    border-bottom: 1px solid rgb(22, 128, 178);
 }
 
-.btnPrimary:hover {
-    background: linear-gradient(to bottom, #00bffe 0%, #02A4F1 44%, #04A7DD 100%);
+.btnPrimary:hover:not([disabled]) {
+    background: linear-gradient(to bottom, rgb(0, 191, 254) 0%, rgb(2, 164, 241) 44%, rgb(4, 167, 221) 100%);
 }
