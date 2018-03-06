@@ -32,7 +32,6 @@
 
 .btn:hover,
 .btn:focus {
-    color: #333;
     text-decoration: none;
     background-color: #e6e6e6;
     background-position: 0 -15px;
@@ -41,10 +40,9 @@
 
 .btn[disabled] {
     cursor: default;
-    background-image: none;
-    background-color: initial;
     opacity: 0.65;
-    box-shadow: none
+    box-shadow: none;
+    pointer-events: none;
 }
 
 .btnPrimary {
@@ -54,4 +52,8 @@
     text-shadow: none;
     border: 1px solid #0497dd;
     border-bottom: 1px solid #1680b2;
+}
+
+.btnPrimary:hover {
+    background: linear-gradient(to bottom, #00bffe 0%, #02A4F1 44%, #04A7DD 100%);
 }
