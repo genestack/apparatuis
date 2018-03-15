@@ -5,9 +5,10 @@
  * The copyright notice above does not evidence any
  * actual or intended publication of such source code.
  */
-import Button from 'components/button/button';
-import Input from 'components/input/input';
-import Form from 'components/form/form';
-import Paginator from 'components/paginator/paginator';
+import Button from './components/button/button';
+import ButtonGroup from './components/button/buttons-group';
+import Input from './components/input/input';
+import Form from './components/form/form';
+import Paginator from './components/paginator/paginator';
 
-export {Button, Input, Form, Paginator};
+export {Button, ButtonGroup, Input, Form, Paginator};

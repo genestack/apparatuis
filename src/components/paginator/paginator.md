@@ -1,8 +1,9 @@
 ```js
-initialState = { currentPage: 0 };
+initialState = { offset: 0 };
 <Paginator
-    pagesLength={10}
-    currentPage={state.currentPage}
-    handlePageChange={(newPage) => setState({currentPage: newPage})}
+    offset={state.offset}
+    itemsPerPage={10}
+    itemsLength={113}
+    handlePageChange={(newPage) => setState({offset: newPage})}
 />
 ```

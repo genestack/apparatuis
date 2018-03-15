@@ -8,7 +8,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import styles from './button.css';
+import styles from './button.module.css';
 
 export default function Button(props) {
     const {type, kind, children, className, isDisabled, onClick, ...otherProps} = props;

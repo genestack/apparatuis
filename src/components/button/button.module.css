@@ -32,6 +32,7 @@
 
 .btn:hover:not([disabled]),
 .btn:focus {
+    z-index: 1;
     text-decoration: none;
     background-color: rgb(230, 230, 230);
     background-position: 0 -15px;
@@ -55,4 +56,27 @@
 
 .btnPrimary:hover:not([disabled]) {
     background: linear-gradient(to bottom, rgb(0, 191, 254) 0%, rgb(2, 164, 241) 44%, rgb(4, 167, 221) 100%);
+}
+
+.btnGroup {
+	display: flex;
+    align-items: center;
+}
+
+.btnGroup > .btn:not(:first-child):not(:last-child) {
+    border-radius: 0;
+}
+.btnGroup > .btn:not(:first-child) {
+    margin-left: -1px;
+}
+.btnGroup > .btn + .btn {
+    margin-left: -1px;
+}
+.btnGroup > .btn:first-child {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+}
+.btnGroup > .btn:last-child {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
 }

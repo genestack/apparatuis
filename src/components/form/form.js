@@ -8,7 +8,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import styles from './form.css';
+import styles from './form.module.css';
 
 export default function Form({children, onSubmit, className, ...props}) {
     return (
