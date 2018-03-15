@@ -24,14 +24,14 @@ export default class Input extends PureComponent {
     }
 
     render() {
-        const {value, className, onChange, ...props} = this.props;
+        const {value, className, ...props} = this.props;
 
         return (
             <input
+                {...props}
                 className={classNames(className, styles.input)}
                 value={value}
                 onChange={this.handleChange}
-                {...props}
             />
         );
     }
