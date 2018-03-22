@@ -6,21 +6,15 @@
         Default button
     </Button>
     <Button
-        onClick={(event, value) => alert(`clicked on primary button with value=${value}`)}
+        onClick={(event, value) => alert('clicked on a button')}
     >
-        Primary button
+        One more button
     </Button>
     <Button
         onClick={() => alert('clicked on default button')}
         disabled
     >
         Default disabled button
-    </Button>
-    <Button
-        onClick={(event, value) => alert(`clicked on primary button with value=${value}`)}
-        disabled
-    >
-        Primary disabled button
     </Button>
 </ButtonsGroup>
 ```

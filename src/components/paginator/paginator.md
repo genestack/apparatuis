@@ -4,6 +4,6 @@ initialState = { offset: 0 };
     offset={state.offset}
     itemsPerPage={10}
     itemsLength={113}
-    handlePageChange={(newPage) => setState({offset: newPage})}
+    onChange={(newOffset) => setState({offset: newOffset})}
 />
 ```

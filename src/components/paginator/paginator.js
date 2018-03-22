@@ -20,34 +20,42 @@ export default class Paginator extends PureComponent {
     }
 
     handleClickPrevious() {
-        const {handlePageChange, offset, itemsPerPage} = this.props;
-        handlePageChange(offset - itemsPerPage);
+        const {onChange, offset, itemsPerPage} = this.props;
+        onChange(offset - itemsPerPage);
     }
 
     handleClickNext() {
-        const {handlePageChange, offset, itemsPerPage} = this.props;
-        handlePageChange(offset + itemsPerPage);
+        const {onChange, offset, itemsPerPage} = this.props;
+
+        onChange(offset + itemsPerPage);
     }
 
     render() {
         const {offset, itemsPerPage, itemsLength} = this.props;
+        const isFirstPage = offset === 0;
+        const isLastPage = offset + itemsPerPage >= itemsLength;
+        const firstShownItem = offset + 1;
+        const lastShownItem = Math.min(offset + itemsPerPage, itemsLength);
 
-        return itemsLength <= itemsPerPage ? null : (
+        return (
             <div className={styles.container}>
                 <div className={styles.info}>
-                    {offset + 1} — {Math.min(offset + itemsPerPage, itemsLength)} of {itemsLength}
+                    {firstShownItem === lastShownItem ?
+                        lastShownItem
+                        : `${firstShownItem} — ${lastShownItem}`}
+                    {' '}of {itemsLength}
                 </div>
                 <ButtonsGroup>
                     <Button
-                        onClick={offset !== 0 ? this.handleClickPrevious : null}
-                        isDisabled={offset === 0}
+                        onClick={this.handleClickPrevious}
+                        isDisabled={isFirstPage}
                         title="Previous page"
                     >
                         &lt;
                     </Button>
                     <Button
-                        onClick={offset + itemsPerPage < itemsLength ? this.handleClickNext : null}
-                        isDisabled={offset + itemsPerPage >= itemsLength}
+                        onClick={this.handleClickNext}
+                        isDisabled={isLastPage}
                         title="Next page"
                     >
                         &gt;
@@ -59,7 +67,7 @@ export default class Paginator extends PureComponent {
 }
 
 Paginator.propTypes = {
-    handlePageChange: PropTypes.func.isRequired,
+    onChange: PropTypes.func.isRequired,
     itemsLength: PropTypes.number.isRequired,
     itemsPerPage: PropTypes.number.isRequired,
     offset: PropTypes.number.isRequired

@@ -6,9 +6,9 @@
  * actual or intended publication of such source code.
  */
 import Button from './components/button/button';
-import ButtonGroup from './components/button/buttons-group';
+import ButtonsGroup from './components/button/buttons-group';
 import Input from './components/input/input';
 import Form from './components/form/form';
 import Paginator from './components/paginator/paginator';
 
-export {Button, ButtonGroup, Input, Form, Paginator};
+export {Button, ButtonsGroup, Input, Form, Paginator};
