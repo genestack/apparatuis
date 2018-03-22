@@ -7,10 +7,8 @@
  */
 import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
-import classNames from 'classnames';
 import styles from './paginator.module.css';
-import Button from 'components/button/button';
-import ButtonsGroup from 'components/button/buttons-group';
+import Button from './../button/button';
 
 export default class Paginator extends PureComponent {
     constructor(props) {
@@ -45,22 +43,20 @@ export default class Paginator extends PureComponent {
                         : `${firstShownItem} — ${lastShownItem}`}
                     {' '}of {itemsLength}
                 </div>
-                <ButtonsGroup>
-                    <Button
-                        onClick={this.handleClickPrevious}
-                        isDisabled={isFirstPage}
-                        title="Previous page"
-                    >
-                        &lt;
-                    </Button>
-                    <Button
-                        onClick={this.handleClickNext}
-                        isDisabled={isLastPage}
-                        title="Next page"
-                    >
-                        &gt;
-                    </Button>
-                </ButtonsGroup>
+                <Button
+                    onClick={this.handleClickPrevious}
+                    isDisabled={isFirstPage}
+                    title="Previous page"
+                >
+                    ◀
+                </Button>
+                <Button
+                    onClick={this.handleClickNext}
+                    isDisabled={isLastPage}
+                    title="Next page"
+                >
+                    ▶
+                </Button>
             </div>
         );
     }

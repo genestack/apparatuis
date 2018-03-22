@@ -59,23 +59,27 @@
 }
 
 .btnGroup {
-	display: flex;
+    display: flex;
     align-items: center;
 }
 
 .btnGroup > .btn:not(:first-child):not(:last-child) {
     border-radius: 0;
 }
+
 .btnGroup > .btn:not(:first-child) {
     margin-left: -1px;
 }
+
 .btnGroup > .btn + .btn {
     margin-left: -1px;
 }
+
 .btnGroup > .btn:first-child {
     border-top-right-radius: 0;
     border-bottom-right-radius: 0;
 }
+
 .btnGroup > .btn:last-child {
     border-top-left-radius: 0;
     border-bottom-left-radius: 0;
