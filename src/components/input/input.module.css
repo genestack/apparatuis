@@ -6,7 +6,7 @@
  * actual or intended publication of such source code.
  */
 
-.input {
+.input.input {
     width: 100%;
     background-color: rgb(255, 255, 255);
     border: 1px solid rgb(204, 204, 204);
@@ -27,4 +27,9 @@
     outline: 0;
     outline: thin dotted \9;
     box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(82, 168, 236, 0.6);
+}
+
+.input.hasError, .input.hasError:focus {
+    border-color: #E9323C;
+    box-shadow: 0 0 6px #f8b9b7;
 }

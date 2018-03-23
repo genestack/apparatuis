@@ -7,5 +7,13 @@ initialState = { value: '' };
     />
     <br />
     value: {state.value}
+    <br />
+    <br />
+    With an error:
+    <Input
+        onChange={(event, value) => setState({value})}
+        value={state.value}
+        hasError
+    />
 </div>
 ```

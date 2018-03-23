@@ -24,12 +24,12 @@ export default class Input extends PureComponent {
     }
 
     render() {
-        const {value, className, ...props} = this.props;
+        const {value, className, hasError, ...props} = this.props;
 
         return (
             <input
                 {...props}
-                className={classNames(className, styles.input)}
+                className={classNames(className, styles.input, {[styles.hasError]: hasError})}
                 value={value}
                 onChange={this.handleChange}
             />
@@ -41,10 +41,12 @@ Input.propTypes = {
     value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
     onChange: PropTypes.func.isRequired,
     name: PropTypes.string,
-    className: PropTypes.string
+    className: PropTypes.string,
+    hasError: PropTypes.bool
 };
 
 Input.defaultProps = {
     name: null,
-    className: ''
+    className: '',
+    hasError: false
 };
