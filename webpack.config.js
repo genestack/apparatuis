@@ -17,11 +17,6 @@ module.exports = {
         path: path.join(__dirname, 'dist'),
         filename: 'genestack-ui.js'
     },
-    resolve: {
-        alias: {
-            components: path.resolve('./src/components')
-        }
-    },
     module: {
         rules: [
             {
