@@ -7,6 +7,7 @@
  */
 const path = require('path');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const customProperties = require('postcss-custom-properties');
 
 module.exports = {
     devtool: false,
@@ -25,7 +26,7 @@ module.exports = {
                 include: /src/
             },
             {
-                test: /\.css$/,
+                test: /\.module\.css/,
                 include: /src/,
                 use: ExtractTextPlugin.extract({
                     fallback: [{
@@ -37,6 +38,26 @@ module.exports = {
                             modules: true,
                             importLoader: 1,
                             localIdentName: '[name]__[local]--[hash:base64:5]'
+                        }
+                    }]
+                })
+            },
+            {
+                test: /\.css/,
+                exclude: /\.module\.css/,
+                use: ExtractTextPlugin.extract({
+                    fallback: [{
+                        loader: 'style-loader'
+                    }],
+                    use: [{
+                        loader: 'css-loader',
+                        options: {
+                            importLoader: 1
+                        }
+                    }, {
+                        loader: 'postcss-loader',
+                        options: {
+                            plugins: [customProperties]
                         }
                     }]
                 })
