@@ -1,0 +1,219 @@
+:root {
+    --gs-tooltip-background-color: rgb(55, 55, 55);
+    --gs-tooltip-background--error: rgb(139, 0, 0);
+    --gs-tooltip-color: rgb(255, 255, 255);
+    --gs-tooltip-arrow-width: 5px;
+    --gs-tooltip-distance: var(--gs-tooltip-arrow-width);
+}
+
+.genestack-ui-tooltip {
+    position: absolute;
+    z-index: 1070;
+    display: block;
+    visibility: visible;
+    font-size: 12px;
+    line-height: 1.5;
+    opacity: 0.9;
+}
+
+.genestack-ui-tooltip-hidden {
+    display: none;
+}
+
+.genestack-ui-tooltip-placement-top,
+.genestack-ui-tooltip-placement-topLeft,
+.genestack-ui-tooltip-placement-topRight {
+    padding: var(--gs-tooltip-arrow-width) 0 var(--gs-tooltip-distance) 0;
+}
+
+.genestack-ui-tooltip-placement-right,
+.genestack-ui-tooltip-placement-rightTop,
+.genestack-ui-tooltip-placement-rightBottom {
+    padding: 0 var(--gs-tooltip-arrow-width) 0 var(--gs-tooltip-distance);
+}
+
+.genestack-ui-tooltip-placement-bottom,
+.genestack-ui-tooltip-placement-bottomLeft,
+.genestack-ui-tooltip-placement-bottomRight {
+    padding: var(--gs-tooltip-distance) 0 var(--gs-tooltip-arrow-width) 0;
+}
+
+.genestack-ui-tooltip-placement-left,
+.genestack-ui-tooltip-placement-leftTop,
+.genestack-ui-tooltip-placement-leftBottom {
+    padding: 0 var(--gs-tooltip-distance) 0 var(--gs-tooltip-arrow-width);
+}
+
+.genestack-ui-tooltip-inner {
+    padding: 8px 10px;
+    color: var(--gs-tooltip-color);
+    text-align: left;
+    text-decoration: none;
+    background-color: var(--gs-tooltip-background-color);
+    border-radius: 6px;
+    box-shadow: 0 0 4px rgba(0, 0, 0, 0.17);
+}
+
+.genestack-ui-tooltip-arrow {
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-color: transparent;
+    border-style: solid;
+}
+
+.genestack-ui-tooltip-placement-top .genestack-ui-tooltip-arrow,
+.genestack-ui-tooltip-placement-topLeft .genestack-ui-tooltip-arrow,
+.genestack-ui-tooltip-placement-topRight .genestack-ui-tooltip-arrow {
+    bottom: calc(var(--gs-tooltip-distance) - var(--gs-tooltip-arrow-width));
+    margin-left: calc(-1 * var(--gs-tooltip-arrow-width));
+    border-width: var(--gs-tooltip-arrow-width) var(--gs-tooltip-arrow-width) 0;
+    border-top-color: var(--gs-tooltip-background-color);
+}
+
+.genestack-ui-tooltip-placement-top .genestack-ui-tooltip-arrow {
+    left: 50%;
+}
+
+.genestack-ui-tooltip-placement-topLeft .genestack-ui-tooltip-arrow {
+    left: 15%;
+}
+
+.genestack-ui-tooltip-placement-topRight .genestack-ui-tooltip-arrow {
+    right: 15%;
+}
+
+.genestack-ui-tooltip-placement-right .genestack-ui-tooltip-arrow,
+.genestack-ui-tooltip-placement-rightTop .genestack-ui-tooltip-arrow,
+.genestack-ui-tooltip-placement-rightBottom .genestack-ui-tooltip-arrow {
+    left: calc(var(--gs-tooltip-distance) - var(--gs-tooltip-arrow-width));
+    margin-top: calc(-1 * var(--gs-tooltip-arrow-width));
+    border-width: var(--gs-tooltip-arrow-width) var(--gs-tooltip-arrow-width) var(--gs-tooltip-arrow-width) 0;
+    border-right-color: var(--gs-tooltip-background-color);
+}
+
+.genestack-ui-tooltip-placement-right .genestack-ui-tooltip-arrow {
+    top: 50%;
+}
+
+.genestack-ui-tooltip-placement-rightTop .genestack-ui-tooltip-arrow {
+    top: 15%;
+    margin-top: 0;
+}
+
+.genestack-ui-tooltip-placement-rightBottom .genestack-ui-tooltip-arrow {
+    bottom: 15%;
+}
+
+.genestack-ui-tooltip-placement-left .genestack-ui-tooltip-arrow,
+.genestack-ui-tooltip-placement-leftTop .genestack-ui-tooltip-arrow,
+.genestack-ui-tooltip-placement-leftBottom .genestack-ui-tooltip-arrow {
+    right: calc(var(--gs-tooltip-distance) - var(--gs-tooltip-arrow-width));
+    margin-top: var(--gs-tooltip-arrow-width);
+    border-width: var(--gs-tooltip-arrow-width) 0 var(--gs-tooltip-arrow-width) var(--gs-tooltip-arrow-width);
+    border-left-color: var(--gs-tooltip-background-color);
+}
+
+.genestack-ui-tooltip-placement-left .genestack-ui-tooltip-arrow {
+    top: 50%;
+}
+
+.genestack-ui-tooltip-placement-leftTop .genestack-ui-tooltip-arrow {
+    top: 15%;
+    margin-top: 0;
+}
+
+.genestack-ui-tooltip-placement-leftBottom .genestack-ui-tooltip-arrow {
+    bottom: 15%;
+}
+
+.genestack-ui-tooltip-placement-bottom .genestack-ui-tooltip-arrow,
+.genestack-ui-tooltip-placement-bottomLeft .genestack-ui-tooltip-arrow,
+.genestack-ui-tooltip-placement-bottomRight .genestack-ui-tooltip-arrow {
+    top: calc(var(--gs-tooltip-distance) - var(--gs-tooltip-arrow-width));
+    margin-left: calc(-1 * var(--gs-tooltip-arrow-width));
+    border-width: 0 var(--gs-tooltip-arrow-width) var(--gs-tooltip-arrow-width);
+    border-bottom-color: var(--gs-tooltip-background-color);
+}
+
+.genestack-ui-tooltip-placement-bottom .genestack-ui-tooltip-arrow {
+    left: 50%;
+}
+
+.genestack-ui-tooltip-placement-bottomLeft .genestack-ui-tooltip-arrow {
+    left: 15%;
+}
+
+.genestack-ui-tooltip-placement-bottomRight .genestack-ui-tooltip-arrow {
+    right: 15%;
+}
+
+.genestack-ui-tooltip--error .genestack-ui-tooltip-inner {
+    background: var(--gs-tooltip-background--error);
+}
+
+.genestack-ui-tooltip--error .genestack-ui-tooltip-arrow {
+    border-right-color: rgb(139, 0, 0);
+}
+
+.genestack-ui-tooltip.genestack-ui-tooltip-zoom-enter,
+.genestack-ui-tooltip.genestack-ui-tooltip-zoom-leave {
+    display: block;
+}
+
+.genestack-ui-tooltip-zoom-enter,
+.genestack-ui-tooltip-zoom-appear {
+    opacity: 0;
+    animation-duration: 0.3s;
+    animation-fill-mode: both;
+    animation-timing-function: cubic-bezier(0.18, 0.89, 0.32, 1.28);
+    animation-play-state: paused;
+}
+
+.genestack-ui-tooltip-zoom-leave {
+    animation-duration: 0.3s;
+    animation-fill-mode: both;
+    animation-timing-function: cubic-bezier(0.6, -0.3, 0.74, 0.05);
+    animation-play-state: paused;
+}
+
+.genestack-ui-tooltip-zoom-enter.genestack-ui-tooltip-zoom-enter-active,
+.genestack-ui-tooltip-zoom-appear.genestack-ui-tooltip-zoom-appear-active {
+    animation-name: rcToolTipZoomIn;
+    animation-play-state: running;
+}
+
+.genestack-ui-tooltip-zoom-leave.genestack-ui-tooltip-zoom-leave-active {
+    animation-name: rcToolTipZoomOut;
+    animation-play-state: running;
+}
+
+@keyframes rcToolTipZoomIn {
+
+    0% {
+        opacity: 0;
+        transform-origin: 50% 50%;
+        transform: scale(0, 0);
+    }
+
+    100% {
+        opacity: 1;
+        transform-origin: 50% 50%;
+        transform: scale(1, 1);
+    }
+}
+
+@keyframes rcToolTipZoomOut {
+
+    0% {
+        opacity: 1;
+        transform-origin: 50% 50%;
+        transform: scale(1, 1);
+    }
+
+    100% {
+        opacity: 0;
+        transform-origin: 50% 50%;
+        transform: scale(0, 0);
+    }
+}
