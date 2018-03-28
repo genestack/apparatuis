@@ -10,5 +10,6 @@ import ButtonsGroup from './components/button/buttons-group';
 import Input from './components/input/input';
 import Form from './components/form/form';
 import Paginator from './components/paginator/paginator';
+import Tooltip from './components/tooltip/tooltip';
 
-export {Button, ButtonsGroup, Input, Form, Paginator};
+export {Button, ButtonsGroup, Input, Form, Paginator, Tooltip};
