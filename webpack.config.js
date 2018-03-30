@@ -7,7 +7,8 @@
  */
 const path = require('path');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
-const customProperties = require('postcss-custom-properties');
+const postcssCustomProperties = require('postcss-custom-properties');
+const postcssImport = require('postcss-import');
 
 module.exports = {
     devtool: false,
@@ -39,6 +40,11 @@ module.exports = {
                             importLoader: 1,
                             localIdentName: '[name]__[local]--[hash:base64:5]'
                         }
+                    }, {
+                        loader: 'postcss-loader',
+                        options: {
+                            plugins: [postcssImport, postcssCustomProperties({preserve: false})]
+                        }
                     }]
                 })
             },
@@ -57,7 +63,7 @@ module.exports = {
                     }, {
                         loader: 'postcss-loader',
                         options: {
-                            plugins: [customProperties]
+                            plugins: [postcssImport, postcssCustomProperties({preserve: false})]
                         }
                     }]
                 })

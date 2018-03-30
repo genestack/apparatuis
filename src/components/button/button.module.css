@@ -5,11 +5,13 @@
  * The copyright notice above does not evidence any
  * actual or intended publication of such source code.
  */
+ @import './../../variables.css';
 
 .btn {
     display: inline-block;
     padding: 4px 9px;
     margin-bottom: 0;
+    font-family: var(--gs-font-family);
     font-size: 14px;
     line-height: 20px;
     color: rgb(51, 51, 51);
