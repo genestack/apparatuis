@@ -71,6 +71,12 @@
     border-top-color: var(--gs-tooltip-background-color);
 }
 
+.genestack-ui-tooltip--error.genestack-ui-tooltip-placement-top .genestack-ui-tooltip-arrow,
+.genestack-ui-tooltip--error.genestack-ui-tooltip-placement-topLeft .genestack-ui-tooltip-arrow,
+.genestack-ui-tooltip--error.genestack-ui-tooltip-placement-topRight .genestack-ui-tooltip-arrow {
+    border-top-color: var(--gs-tooltip-background--error);
+}
+
 .genestack-ui-tooltip-placement-top .genestack-ui-tooltip-arrow {
     left: 50%;
 }
@@ -92,6 +98,12 @@
     border-right-color: var(--gs-tooltip-background-color);
 }
 
+.genestack-ui-tooltip--error.genestack-ui-tooltip-placement-right .genestack-ui-tooltip-arrow,
+.genestack-ui-tooltip--error.genestack-ui-tooltip-placement-rightTop .genestack-ui-tooltip-arrow,
+.genestack-ui-tooltip--error.genestack-ui-tooltip-placement-rightBottom .genestack-ui-tooltip-arrow {
+    border-right-color: var(--gs-tooltip-background--error);
+}
+
 .genestack-ui-tooltip-placement-right .genestack-ui-tooltip-arrow {
     top: 50%;
 }
@@ -109,9 +121,15 @@
 .genestack-ui-tooltip-placement-leftTop .genestack-ui-tooltip-arrow,
 .genestack-ui-tooltip-placement-leftBottom .genestack-ui-tooltip-arrow {
     right: calc(var(--gs-tooltip-distance) - var(--gs-tooltip-arrow-width));
-    margin-top: var(--gs-tooltip-arrow-width);
+    margin-top: calc(-1 * var(--gs-tooltip-arrow-width));
     border-width: var(--gs-tooltip-arrow-width) 0 var(--gs-tooltip-arrow-width) var(--gs-tooltip-arrow-width);
     border-left-color: var(--gs-tooltip-background-color);
+}
+
+.genestack-ui-tooltip--error.genestack-ui-tooltip--error.genestack-ui-tooltip-placement-left .genestack-ui-tooltip-arrow,
+.genestack-ui-tooltip-placement-leftTop .genestack-ui-tooltip-arrow,
+.genestack-ui-tooltip--error.genestack-ui-tooltip-placement-leftBottom .genestack-ui-tooltip-arrow {
+    border-left-color: var(--gs-tooltip-background--error);
 }
 
 .genestack-ui-tooltip-placement-left .genestack-ui-tooltip-arrow {
@@ -136,6 +154,12 @@
     border-bottom-color: var(--gs-tooltip-background-color);
 }
 
+.genestack-ui-tooltip--error.genestack-ui-tooltip-placement-bottom .genestack-ui-tooltip-arrow,
+.genestack-ui-tooltip--error.genestack-ui-tooltip-placement-bottomLeft .genestack-ui-tooltip-arrow,
+.genestack-ui-tooltip--error.genestack-ui-tooltip-placement-bottomRight .genestack-ui-tooltip-arrow {
+    border-bottom-color: var(--gs-tooltip-background--error);
+}
+
 .genestack-ui-tooltip-placement-bottom .genestack-ui-tooltip-arrow {
     left: 50%;
 }
@@ -150,10 +174,6 @@
 
 .genestack-ui-tooltip--error .genestack-ui-tooltip-inner {
     background: var(--gs-tooltip-background--error);
-}
-
-.genestack-ui-tooltip--error .genestack-ui-tooltip-arrow {
-    border-right-color: rgb(139, 0, 0);
 }
 
 .genestack-ui-tooltip.genestack-ui-tooltip-zoom-enter,

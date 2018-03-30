@@ -47,6 +47,7 @@ export default class Paginator extends PureComponent {
                     onClick={this.handleClickPrevious}
                     isDisabled={isFirstPage}
                     title="Previous page"
+                    className={styles.button}
                 >
                     ◀
                 </Button>
@@ -54,6 +55,7 @@ export default class Paginator extends PureComponent {
                     onClick={this.handleClickNext}
                     isDisabled={isLastPage}
                     title="Next page"
+                    className={styles.button}
                 >
                     ▶
                 </Button>
