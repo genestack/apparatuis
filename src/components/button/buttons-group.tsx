@@ -5,18 +5,12 @@
  * The copyright notice above does not evidence any
  * actual or intended publication of such source code.
  */
-import React from 'react';
-import PropTypes from 'prop-types';
-import styles from './button.module.css';
+import React from 'react'
+import PropTypes from 'prop-types'
+import styles from './button.module.css'
 
-export default function ButtonsGroup({children}) {
-    return (
+export default ((props: {children: React.ReactNode}) =>
         <div className={styles.btnGroup}>
-            {children}
+            {props.children}
         </div>
-    );
-}
-
-ButtonsGroup.propTypes = {
-    children: PropTypes.node.isRequired
-};
+) as  React.SFC<{children:React.ReactNode}>

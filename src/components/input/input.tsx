@@ -10,21 +10,22 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import styles from './input.module.css';
 
-export default class Input extends PureComponent {
-    constructor(props) {
-        super(props);
-        this.handleChange = this.handleChange.bind(this);
+export default class Input extends PureComponent<InputProps> {
+    static defaultProps = {
+        name: null,
+        className: '',
+        hasError: false,
     }
 
     handleChange(event) {
-        const {onChange, name} = this.props;
-        const {value} = event.currentTarget;
+        const {onChange, name} = this.props
+        const {value} = event.currentTarget
 
-        onChange(event, name ? {[name]: value} : value);
+        onChange(event, name ? {[name]: value} : value)
     }
 
     render() {
-        const {value, className, hasError, ...props} = this.props;
+        const {value, className, hasError, ...props} = this.props
 
         return (
             <input
@@ -33,20 +34,14 @@ export default class Input extends PureComponent {
                 value={value}
                 onChange={this.handleChange}
             />
-        );
+        )
     }
 }
 
-Input.propTypes = {
-    value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
-    onChange: PropTypes.func.isRequired,
-    name: PropTypes.string,
-    className: PropTypes.string,
-    hasError: PropTypes.bool
-};
-
-Input.defaultProps = {
-    name: null,
-    className: '',
-    hasError: false
-};
+type InputProps = {
+    value: string | number
+    onChange: Function
+    name?: string
+    className?: string
+    hasError?: boolean
+}

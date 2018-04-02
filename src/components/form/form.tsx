@@ -10,24 +10,23 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import styles from './form.module.css';
 
-export default function Form({children, onSubmit, className, ...props}) {
-    return (
-        <form
-            className={classNames(className, styles.form)}
-            onSubmit={onSubmit}
-            {...props}
-        >
-            {children}
-        </form>
-    );
-}
+const Form: React.SFC<any> = ({children, onSubmit, className, ...props}) =>
+    <form
+        className={classNames(className, styles.form)}
+        onSubmit={onSubmit}
+        {...props}
+    >
+        {children}
+    </form>
 
-Form.propTypes = {
-    children: PropTypes.node.isRequired,
-    onSubmit: PropTypes.func.isRequired,
-    className: PropTypes.string
-};
+type FormProps = {
+    children: React.ReactNode
+    onSubmit: Function
+    className?: string
+}
 
 Form.defaultProps = {
     className: ''
-};
+}
+
+export default Form

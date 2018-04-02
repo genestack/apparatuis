@@ -5,15 +5,12 @@
  * The copyright notice above does not evidence any
  * actual or intended publication of such source code.
  */
-import React from 'react';
-import PropTypes from 'prop-types';
-import classNames from 'classnames';
-import styles from './button.module.css';
+import React from 'react'
+import PropTypes from 'prop-types'
+import classNames from 'classnames'
+import styles from './button.module.css'
 
-export default function Button(props) {
-    const {type, kind, children, className, isDisabled, onClick, ...otherProps} = props;
-
-    return (
+const Button: React.SFC<any> = ({type, kind, children, className, isDisabled, onClick, ...otherProps}) =>
         <button
             type={type}
             className={classNames(className, styles.btn, {
@@ -25,8 +22,7 @@ export default function Button(props) {
         >
             {children}
         </button>
-    );
-}
+
 
 Button.propTypes = {
     children: PropTypes.node.isRequired,
@@ -36,7 +32,7 @@ Button.propTypes = {
     className: PropTypes.string,
     isDisabled: PropTypes.bool,
     value: PropTypes.any
-};
+}
 
 Button.defaultProps = {
     kind: 'default',
@@ -45,4 +41,7 @@ Button.defaultProps = {
     isDisabled: false,
     value: null,
     onClick: null
-};
+}
+
+
+export default Button
