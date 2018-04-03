@@ -6,11 +6,11 @@
  * actual or intended publication of such source code.
  */
 import React from 'react'
-import PropTypes from 'prop-types'
 import classNames from 'classnames'
 import styles from './button.module.css'
 
-const Button: React.SFC<ButtonProps> = ({kind, children, className, isDisabled, ...otherProps}: ButtonProps) =>
+const Button: React.SFC<ButtonProps> =
+    ({kind, children, className, isDisabled, ...otherProps}: ButtonProps) =>
         <button
             className={classNames(className, styles.btn, {
                 [styles.btnPrimary]: kind === 'primary'
@@ -22,8 +22,11 @@ const Button: React.SFC<ButtonProps> = ({kind, children, className, isDisabled, 
         </button>
 
 
-type ButtonProps =
-    & React.DetailedHTMLProps<React.ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement>
+export type ButtonProps =
+    & React.DetailedHTMLProps<
+            React.ButtonHTMLAttributes<HTMLButtonElement>,
+            HTMLButtonElement
+        >
     & {
         kind?: 'default' | 'primary'
         isDisabled?: boolean

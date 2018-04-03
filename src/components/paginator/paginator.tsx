@@ -11,7 +11,7 @@ import Button from '../button/button'
 
 export default class Paginator extends PureComponent<PaginatorProps> {
 
-    handleClickPrevious() {
+    handleClickPrevious () {
         const {onChange, offset, itemsPerPage} = this.props
         onChange(offset - itemsPerPage)
     }
@@ -53,11 +53,11 @@ export default class Paginator extends PureComponent<PaginatorProps> {
                     ▶
                 </Button>
             </div>
-        );
+        )
     }
 }
 
-type PaginatorProps = {
+export type PaginatorProps = {
     onChange: Function
     itemsLength: number
     itemsPerPage: number

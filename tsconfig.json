@@ -3,10 +3,10 @@
     "compilerOptions": {
         "allowJs": false,
         "sourceMap": true,
-        "sourceRoot": "./src/",
+        "sourceRoot": "./src",
         "outDir": "./dist",
         "noImplicitAny": false,
-        "module": "esnext",
+        "module": "es6",
         "target": "es2016",
         "jsx": "react",
         "moduleResolution": "node",

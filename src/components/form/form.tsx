@@ -17,8 +17,11 @@ const Form: React.SFC<FormProps> = ({children, className, ...props}) =>
         {children}
     </form>
 
-type FormProps =
-    & React.DetailedHTMLProps<React.FormHTMLAttributes<HTMLFormElement>, HTMLFormElement>
+export type FormProps =
+    & React.DetailedHTMLProps<
+            React.FormHTMLAttributes<HTMLFormElement>,
+            HTMLFormElement
+        >
     & {
         children: React.ReactNode
         className?: string

@@ -6,7 +6,6 @@
  * actual or intended publication of such source code.
  */
 import React from 'react'
-import PropTypes from 'prop-types'
 import styles from './button.module.css'
 
 export default ((props: {children: React.ReactNode}) =>

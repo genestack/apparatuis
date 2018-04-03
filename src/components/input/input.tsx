@@ -38,7 +38,7 @@ export default class Input extends PureComponent<InputProps> {
     }
 }
 
-type InputProps = {
+export type InputProps = {
     value: string | number
     onChange: Function
     name?: string
