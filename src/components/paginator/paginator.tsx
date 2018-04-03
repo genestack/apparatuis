@@ -6,7 +6,6 @@
  * actual or intended publication of such source code.
  */
 import React, {PureComponent} from 'react'
-import PropTypes from 'prop-types'
 import styles from './paginator.module.css'
 import Button from '../button/button'
 
@@ -63,4 +62,4 @@ type PaginatorProps = {
     itemsLength: number
     itemsPerPage: number
     offset: number
-};
+}

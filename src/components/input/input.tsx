@@ -5,10 +5,10 @@
  * The copyright notice above does not evidence any
  * actual or intended publication of such source code.
  */
-import React, {PureComponent} from 'react';
-import PropTypes from 'prop-types';
-import classNames from 'classnames';
-import styles from './input.module.css';
+import React, {PureComponent} from 'react'
+import PropTypes from 'prop-types'
+import classNames from 'classnames'
+import styles from './input.module.css'
 
 export default class Input extends PureComponent<InputProps> {
     static defaultProps = {

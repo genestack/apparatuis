@@ -12,7 +12,6 @@ import classNames from 'classnames'
 import './tooltip.css'
 
 
-
 const Tooltip: React.SFC<TooltipProps> = ({children, isError = false, overlayClassName = '', ...props}) =>
         <RcTooltip
             prefixCls="genestack-ui-tooltip"
