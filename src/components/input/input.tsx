@@ -18,6 +18,7 @@ export default ({className = '', hasError = false, ...props}: InputProps) =>
 
 const handleChange = ({onChange, name}: InputProps) =>
     (event: React.ChangeEvent<HTMLInputElement>) =>
+        onChange &&
         onChange(
             event,
             name

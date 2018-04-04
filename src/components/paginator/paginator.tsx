@@ -10,7 +10,7 @@ import styles from './paginator.module.css';
 import Button from '../button/button';
 
 export default (props: PaginatorProps) => {
-    const {offset, itemsPerPage, itemsLength} = this.props;
+    const {offset, itemsPerPage, itemsLength} = props;
     const isFirstPage = offset === 0;
     const isLastPage = offset + itemsPerPage >= itemsLength;
     const firstShownItem = offset + 1;
