@@ -6,10 +6,8 @@
  * actual or intended publication of such source code.
  */
 import React from 'react';
-import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import styles from './input.module.css';
-import {lensPath} from 'ramda';
 
 export default ({className = '', hasError = false, ...props}: InputProps) =>
     <input
@@ -27,7 +25,8 @@ const handleChange = ({onChange, name}: InputProps) =>
                 : valueLens(event),
         );
 
-const valueLens = lensPath(['currentTarget', 'value']);
+const valueLens = event =>
+    event.currentTarget.value;
 
 export type InputProps =
     & React.DetailedHTMLProps<

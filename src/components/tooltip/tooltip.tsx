@@ -6,28 +6,28 @@
  * actual or intended publication of such source code.
  */
 
-import React from 'react'
-import RcTooltip from 'rc-tooltip'
-import classNames from 'classnames'
-import './tooltip.css'
+import React from 'react';
+import RcTooltip from 'rc-tooltip';
+import classNames from 'classnames';
+import './tooltip.css';
 
 const Tooltip: React.SFC<TooltipProps> =
     ({isError = false, overlayClassName = '', ...props}) =>
         <RcTooltip
-            prefixCls="genestack-ui-tooltip"
+            prefixCls='genestack-ui-tooltip'
             overlayClassName={
                 classNames(overlayClassName, {
                     'genestack-ui-tooltip--error': isError
                 })
             }
             {...props}
-        />
+        />;
 
 export type TooltipProps =
     & RcTooltip['props']
     & {
-        isError? : boolean
+        isError?: boolean
         overlayClassName?: string
-    }
+    };
 
-export default Tooltip
+export default Tooltip;
