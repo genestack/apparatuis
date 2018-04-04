@@ -1,51 +1,51 @@
 {
-	"name": "genestack-ui",
-	"version": "4.0.0",
-	"description": "UI library",
-	"main": "src/",
-	"repository": {
-		"type": "git",
-		"url": "https://github.com/genestack/frontend-libraries/tree/master/ui-widgets/genestack-ui"
-	},
-	"keywords": [
-		"genestack",
-		"ui"
-	],
-	"author": "Genestack Limited",
-	"license": "UNLICENSED",
-	"stylelint": {
-		"extends": [
-			"genestack-stylelint-config"
-		]
-	},
-	"scripts": {
-		"styleguide": "styleguidist server",
-		"styleguide:build": "rm -rf dist && mkdir dist && tsc -p ./ && cpx  'src/**/*.css' './dist/' && styleguidist build",
-		"clean": "rm -rf dist"
-	},
-	"devDependencies": {
-		"genestack-frontend-builder": "^0.6.0",
-		"cpx": "^1.5.0",
-		"react-styleguidist": "^6.2.5",
-		"stylelint": "^8.3.1",
-		"tslint": "^5.9.1",
-		"tslint-react": "^3.5.1",
-		"typescript": "^2.8.1"
-	},
-	"dependencies": {
-		"@types/classnames": "^2.2.3",
-		"@types/prop-types": "^15.5.2",
-		"@types/rc-tooltip": "^3.4.11",
-		"@types/react": "^16.3.2",
-		"@types/ramda": "^0.25.21",
-		"classnames": "^2.2.5",
-		"prop-types": "^15.6.0",
-		"ramda": "^0.25.0",
-		"rc-tooltip": "^3.7.0",
-		"react": "^16.2.0",
-		"react-dom": "^16.2.0"
-	},
-	"peerDependencies": {
-		"genestack-frontend-builder": "^0.6.0"
-	}
+  "name": "genestack-ui",
+  "version": "4.0.0",
+  "description": "UI library",
+  "main": "src/",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/genestack/frontend-libraries/tree/master/ui-widgets/genestack-ui"
+  },
+  "keywords": [
+    "genestack",
+    "ui"
+  ],
+  "author": "Genestack Limited",
+  "license": "UNLICENSED",
+  "stylelint": {
+    "extends": [
+      "genestack-stylelint-config"
+    ]
+  },
+  "scripts": {
+    "styleguide": "styleguidist server",
+    "styleguide:build": "rm -rf dist && mkdir dist && tsc -p ./ && cpx  'src/**/*.css' './dist/' && styleguidist build",
+    "clean": "rm -rf dist"
+  },
+  "devDependencies": {
+    "genestack-frontend-builder": "^0.6.0",
+    "cpx": "^1.5.0",
+    "react-styleguidist": "^6.2.5",
+    "stylelint": "^8.3.1",
+    "tslint": "^5.9.1",
+    "tslint-react": "^3.5.1",
+    "typescript": "^2.8.1"
+  },
+  "dependencies": {
+    "@types/classnames": "^2.2.3",
+    "@types/prop-types": "^15.5.2",
+    "@types/rc-tooltip": "^3.4.11",
+    "@types/react": "^16.3.2",
+    "@types/ramda": "^0.25.21",
+    "classnames": "^2.2.5",
+    "prop-types": "^15.6.0",
+    "ramda": "^0.25.0",
+    "rc-tooltip": "^3.7.0",
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0"
+  },
+  "peerDependencies": {
+    "genestack-frontend-builder": "^0.6.0"
+  }
 }
