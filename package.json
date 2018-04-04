@@ -19,17 +19,11 @@
 		]
 	},
 	"scripts": {
-		"build": "rm -rf dist && mkdir dist && tsc -p ./ && cpx  'src/**/*.css' './dist/'",
-		"watch": "rm -rf dist && mkdir dist && tsc --watch -p ./ & cpx 'src/**/*.css' './dist/' -w",
 		"styleguide": "styleguidist server",
-		"styleguide:build": "styleguidist build",
+		"styleguide:build": "rm -rf dist && mkdir dist && tsc -p ./ && cpx  'src/**/*.css' './dist/' && styleguidist build",
 		"clean": "rm -rf dist"
 	},
 	"devDependencies": {
-		"@types/classnames": "^2.2.3",
-		"@types/prop-types": "^15.5.2",
-		"@types/rc-tooltip": "^3.4.11",
-		"@types/react": "^16.3.2",
 		"genestack-frontend-builder": "^0.6.0",
 		"cpx": "^1.5.0",
 		"react-styleguidist": "^6.2.5",
@@ -39,6 +33,10 @@
 		"typescript": "^2.8.1"
 	},
 	"dependencies": {
+		"@types/classnames": "^2.2.3",
+		"@types/prop-types": "^15.5.2",
+		"@types/rc-tooltip": "^3.4.11",
+		"@types/react": "^16.3.2",
 		"@types/ramda": "^0.25.21",
 		"classnames": "^2.2.5",
 		"prop-types": "^15.6.0",
