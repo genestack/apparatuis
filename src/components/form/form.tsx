@@ -9,26 +9,16 @@ import React from 'react'
 import classNames from 'classnames'
 import styles from './form.module.css'
 
-const Form: React.SFC<FormProps> = ({children, className, ...props}) =>
-    <form
-        className={classNames(className, styles.form)}
-        {...props}
-    >
-        {children}
-    </form>
+export default (props: React.SFC<FormProps>) =>
+    <form {...addClass(props)} />
+
+const addClass = ({className = '', ...rest}) => ({
+    ...rest,
+    className: classNames(className, styles.form),
+})
 
 export type FormProps =
-    & React.DetailedHTMLProps<
-            React.FormHTMLAttributes<HTMLFormElement>,
-            HTMLFormElement
-        >
-    & {
-        children: React.ReactNode
-        className?: string
-    }
-
-Form.defaultProps = {
-    className: ''
-}
-
-export default Form
+    React.DetailedHTMLProps<
+        React.FormHTMLAttributes<HTMLFormElement>,
+        HTMLFormElement
+    >

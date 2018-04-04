@@ -5,43 +5,36 @@
  * The copyright notice above does not evidence any
  * actual or intended publication of such source code.
  */
-import React, {PureComponent} from 'react'
+import * as React from 'react'
 import PropTypes from 'prop-types'
 import classNames from 'classnames'
 import styles from './input.module.css'
+import {lensPath} from 'ramda'
 
-export default class Input extends PureComponent<InputProps> {
-    static defaultProps = {
-        name: null,
-        className: '',
-        hasError: false,
-    }
+export default ({className = '', hasError = false, ...props}: InputProps) =>
+    <input
+        {...props}
+        className={classNames(className, styles.input, {[styles.hasError]: hasError})}
+        onChange={handleChange(props)}
+    />
 
-    handleChange(event) {
-        const {onChange, name} = this.props
-        const {value} = event.currentTarget
-
-        onChange(event, name ? {[name]: value} : value)
-    }
-
-    render() {
-        const {value, className, hasError, ...props} = this.props
-
-        return (
-            <input
-                {...props}
-                className={classNames(className, styles.input, {[styles.hasError]: hasError})}
-                value={value}
-                onChange={this.handleChange}
-            />
+const handleChange = ({onChange, name}: InputProps) =>
+    (event: React.ChangeEvent<HTMLInputElement>) =>
+        onChange(
+            event,
+            name
+                ? {[name]: valueLens(event)}
+                : valueLens(event),
         )
-    }
-}
 
-export type InputProps = {
-    value: string | number
-    onChange: Function
-    name?: string
-    className?: string
-    hasError?: boolean
-}
+const valueLens = lensPath(['currentTarget', 'value'])
+
+export type InputProps =
+    & React.DetailedHTMLProps<
+            React.InputHTMLAttributes<HTMLInputElement>,
+            HTMLInputElement
+        >
+    & {
+        onChange: (event: React.ChangeEvent<HTMLInputElement>, any) => any
+        hasError?: boolean
+    }

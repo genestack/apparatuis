@@ -9,18 +9,14 @@ import React from 'react'
 import classNames from 'classnames'
 import styles from './button.module.css'
 
-const Button: React.SFC<ButtonProps> =
-    ({kind, children, className, isDisabled, ...otherProps}: ButtonProps) =>
+export default ({kind = 'default', className = '', isDisabled, ...otherProps}: ButtonProps) =>
         <button
             className={classNames(className, styles.btn, {
-                [styles.btnPrimary]: kind === 'primary'
+                [styles.btnPrimary]: kind === 'primary',
             })}
             disabled={isDisabled}
             {...otherProps}
-        >
-            {children}
-        </button>
-
+        />
 
 export type ButtonProps =
     & React.DetailedHTMLProps<
@@ -31,11 +27,3 @@ export type ButtonProps =
         kind?: 'default' | 'primary'
         isDisabled?: boolean
     }
-
-Button.defaultProps = {
-    kind: 'default',
-    type: 'button',
-    className: '',
-}
-
-export default Button

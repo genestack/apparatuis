@@ -5,11 +5,8 @@
  * The copyright notice above does not evidence any
  * actual or intended publication of such source code.
  */
-import React from 'react'
+import * as React from 'react'
 import styles from './button.module.css'
 
-export default ((props: {children: React.ReactNode}) =>
-        <div className={styles.btnGroup}>
-            {props.children}
-        </div>
-) as  React.SFC<{children:React.ReactNode}>
+export default (props: React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>) =>
+    <div className={styles.btnGroup} {...props}/>

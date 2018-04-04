@@ -12,7 +12,7 @@ import classNames from 'classnames'
 import './tooltip.css'
 
 const Tooltip: React.SFC<TooltipProps> =
-    ({children, isError = false, overlayClassName = '', ...props}) =>
+    ({isError = false, overlayClassName = '', ...props}) =>
         <RcTooltip
             prefixCls="genestack-ui-tooltip"
             overlayClassName={
@@ -21,14 +21,11 @@ const Tooltip: React.SFC<TooltipProps> =
                 })
             }
             {...props}
-        >
-            {children}
-        </RcTooltip>
+        />
 
 export type TooltipProps =
     & RcTooltip['props']
     & {
-        children
         isError? : boolean
         overlayClassName?: string
     }

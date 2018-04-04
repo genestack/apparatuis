@@ -2,8 +2,7 @@
 	"name": "genestack-ui",
 	"version": "3.0.1",
 	"description": "UI library",
-	"main": "dist/index.js",
-	"types": "src/",
+	"main": "src/index.ts",
 	"repository": {
 		"type": "git",
 		"url": "https://github.com/genestack/frontend-libraries/tree/master/ui-widgets/genestack-ui"
@@ -19,12 +18,19 @@
 			"genestack-stylelint-config"
 		]
 	},
+	"scripts": {
+		"build": "rm -rf dist && mkdir dist && tsc -p ./ && cpx  'src/**/*.css' './dist/'",
+		"watch": "rm -rf dist && mkdir dist && tsc --watch -p ./ & cpx 'src/**/*.css' './dist/' -w",
+		"styleguide": "styleguidist server",
+		"styleguide:build": "styleguidist build",
+		"clean": "rm -rf dist"
+	},
 	"devDependencies": {
 		"@types/classnames": "^2.2.3",
 		"@types/prop-types": "^15.5.2",
 		"@types/rc-tooltip": "^3.4.11",
 		"@types/react": "^16.3.2",
-		"genestack-frontend-builder": "^0.5.0",
+		"genestack-frontend-builder": "^0.6.0",
 		"cpx": "^1.5.0",
 		"react-styleguidist": "^6.2.5",
 		"stylelint": "^8.3.1",
@@ -33,13 +39,15 @@
 		"typescript": "^2.8.1"
 	},
 	"dependencies": {
+		"@types/ramda": "^0.25.21",
 		"classnames": "^2.2.5",
 		"prop-types": "^15.6.0",
+		"ramda": "^0.25.0",
 		"rc-tooltip": "^3.7.0",
 		"react": "^16.2.0",
 		"react-dom": "^16.2.0"
 	},
 	"peerDependencies": {
-		"genestack-frontend-builder": "^0.5.0"
+		"genestack-frontend-builder": "^0.6.0"
 	}
 }
