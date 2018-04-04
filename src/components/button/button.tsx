@@ -5,18 +5,18 @@
  * The copyright notice above does not evidence any
  * actual or intended publication of such source code.
  */
-import React from 'react'
-import classNames from 'classnames'
-import styles from './button.module.css'
+import React from 'react';
+import classNames from 'classnames';
+import styles from './button.module.css';
 
 export default ({kind = 'default', className = '', isDisabled, ...otherProps}: ButtonProps) =>
-        <button
-            className={classNames(className, styles.btn, {
-                [styles.btnPrimary]: kind === 'primary',
-            })}
-            disabled={isDisabled}
-            {...otherProps}
-        />
+    <button
+        className={classNames(className, styles.btn, {
+            [styles.btnPrimary]: kind === 'primary',
+        })}
+        disabled={isDisabled}
+        {...otherProps}
+    />;
 
 export type ButtonProps =
     & React.DetailedHTMLProps<
@@ -26,4 +26,4 @@ export type ButtonProps =
     & {
         kind?: 'default' | 'primary'
         isDisabled?: boolean
-    }
+    };

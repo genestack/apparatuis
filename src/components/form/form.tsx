@@ -5,20 +5,20 @@
  * The copyright notice above does not evidence any
  * actual or intended publication of such source code.
  */
-import React from 'react'
-import classNames from 'classnames'
-import styles from './form.module.css'
+import React from 'react';
+import classNames from 'classnames';
+import styles from './form.module.css';
 
 export default (props: React.SFC<FormProps>) =>
-    <form {...addClass(props)} />
+    <form {...addClass(props)} />;
 
 const addClass = ({className = '', ...rest}) => ({
     ...rest,
     className: classNames(className, styles.form),
-})
+});
 
 export type FormProps =
     React.DetailedHTMLProps<
         React.FormHTMLAttributes<HTMLFormElement>,
         HTMLFormElement
-    >
+    >;
