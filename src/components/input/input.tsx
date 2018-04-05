@@ -10,32 +10,32 @@ import classNames from 'classnames';
 import styles from './input.module.css';
 
 export default class extends React.Component<InputProps> {
+    
+    handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        const {onChange, name} = this.props;
+        const value = event.currentTarget.value;
+
+        onChange(
+            event,
+            name
+                ? {[name]: value}
+                : value,
+        );
+    }
+
     render () {
         const {className = '', hasError = false, ref = null, ...props} = this.props;
-        
+
         return (
             <input
                 {...props}
                 ref={ref}
                 className={classNames(className, styles.input, {[styles.hasError]: hasError})}
-                onChange={handleChange(props)}
+                onChange={this.handleChange}
             />
         );
     }
 };
-
-const handleChange = ({onChange, name}: InputProps) =>
-    (event: React.ChangeEvent<HTMLInputElement>) =>
-        onChange &&
-        onChange(
-            event,
-            name
-                ? {[name]: valueLens(event)}
-                : valueLens(event),
-        );
-
-const valueLens = event =>
-    event.currentTarget.value;
 
 export type InputProps =
     & React.DetailedHTMLProps<
