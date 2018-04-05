@@ -11,8 +11,7 @@ import RcTooltip from 'rc-tooltip';
 import classNames from 'classnames';
 import './tooltip.css';
 
-const Tooltip: React.SFC<TooltipProps> =
-    ({isError = false, overlayClassName = '', ...props}) =>
+export default ({isError = false, overlayClassName = '', ...props}: TooltipProps) =>
         <RcTooltip
             prefixCls='genestack-ui-tooltip'
             overlayClassName={
@@ -29,5 +28,3 @@ export type TooltipProps =
         isError?: boolean
         overlayClassName?: string
     };
-
-export default Tooltip;

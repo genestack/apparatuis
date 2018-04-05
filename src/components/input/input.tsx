@@ -9,13 +9,20 @@ import React from 'react';
 import classNames from 'classnames';
 import styles from './input.module.css';
 
-export default ({className = '', hasError = false, ref = null, ...props}: InputProps) =>
-    <input
-        {...props}
-        ref={ref}
-        className={classNames(className, styles.input, {[styles.hasError]: hasError})}
-        onChange={handleChange(props)}
-    />;
+export default class extends React.Component<InputProps> {
+    render () {
+        const {className = '', hasError = false, ref = null, ...props} = this.props;
+        
+        return (
+            <input
+                {...props}
+                ref={ref}
+                className={classNames(className, styles.input, {[styles.hasError]: hasError})}
+                onChange={handleChange(props)}
+            />
+        );
+    }
+};
 
 const handleChange = ({onChange, name}: InputProps) =>
     (event: React.ChangeEvent<HTMLInputElement>) =>
