@@ -5,7 +5,7 @@
  * The copyright notice above does not evidence any
  * actual or intended publication of such source code.
  */
-import React, {PureComponent} from 'react';
+import React from 'react';
 import styles from './paginator.module.css';
 import Button from '../button/button';
 
