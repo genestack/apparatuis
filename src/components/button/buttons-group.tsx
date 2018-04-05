@@ -6,17 +6,7 @@
  * actual or intended publication of such source code.
  */
 import React from 'react';
-import PropTypes from 'prop-types';
 import styles from './button.module.css';
 
-export default function ButtonsGroup({children}) {
-    return (
-        <div className={styles.btnGroup}>
-            {children}
-        </div>
-    );
-}
-
-ButtonsGroup.propTypes = {
-    children: PropTypes.node.isRequired
-};
+export default (props: React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>) =>
+    <div className={styles.btnGroup} {...props}/>;

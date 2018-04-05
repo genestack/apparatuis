@@ -13,18 +13,20 @@ const postcssImport = require('postcss-import');
 module.exports = {
     devtool: false,
     cache: true,
-    entry: './src/index.js',
+    entry: './src/index.ts',
     output: {
         libraryTarget: 'commonjs',
         path: path.join(__dirname, 'dist'),
         filename: 'genestack-ui.js'
     },
+    resolve: {
+        extensions: [".ts", ".tsx", ".js"]
+    },
     module: {
         rules: [
-            {
-                test: /\.js?$/,
-                loader: 'babel-loader',
-                include: /src/
+            { 
+                test: /\.tsx?$/, 
+                loader: "ts-loader" 
             },
             {
                 test: /\.module\.css/,
