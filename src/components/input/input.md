@@ -5,6 +5,10 @@ initialState = { value: '' };
         onChange={(event, value) => setState({value})}
         value={state.value}
     />
+        <Input
+            onChange={(event, value) => setState({value})}
+            value={state.value}
+        />
     <br />
     value: {state.value}
     <br />

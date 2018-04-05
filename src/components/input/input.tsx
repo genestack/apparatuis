@@ -9,9 +9,10 @@ import React from 'react';
 import classNames from 'classnames';
 import styles from './input.module.css';
 
-export default ({className = '', hasError = false, ...props}: InputProps) =>
+export default ({className = '', hasError = false, ref = null, ...props}: InputProps) =>
     <input
         {...props}
+        ref={ref}
         className={classNames(className, styles.input, {[styles.hasError]: hasError})}
         onChange={handleChange(props)}
     />;

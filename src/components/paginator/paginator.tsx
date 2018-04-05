@@ -54,7 +54,7 @@ export type PaginatorProps =
     };
 
 const clickPrevious = ({onChange, offset, itemsPerPage}: PaginatorProps) => () =>
-        onChange(offset - itemsPerPage)
+    onChange(offset - itemsPerPage);
 
 const clickNext = ({onChange, offset, itemsPerPage}: PaginatorProps) => () =>
-        onChange(offset + itemsPerPage)
+    onChange(offset + itemsPerPage);

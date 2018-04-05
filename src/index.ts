@@ -11,3 +11,4 @@ export {default as Input} from './components/input/input';
 export {default as Form} from './components/form/form';
 export {default as Paginator} from './components/paginator/paginator';
 export {default as Tooltip} from './components/tooltip/tooltip';
+export {default as toClass} from './utils/toClass';
