@@ -1,5 +1,17 @@
+/*
+ * Copyright (c) 2011-2018 Genestack Limited
+ * All Rights Reserved
+ * THIS IS UNPUBLISHED PROPRIETARY SOURCE CODE OF GENESTACK LIMITED
+ * The copyright notice above does not evidence any
+ * actual or intended publication of such source code.
+ */
+
 import React, {ComponentType, ComponentClass} from 'react';
 
+/**
+ * Convert Functional component to class to get "ref" availability
+ * @param baseComponent 
+ */
 const toClass =
     <P>(baseComponent: React.ComponentType<P>): React.ComponentClass<P> =>
         isClassComponent(baseComponent)
