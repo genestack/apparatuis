@@ -1,13 +1,14 @@
-import React from 'react';
+import React, {ComponentType, ComponentClass} from 'react';
 
-const toClass = <Props>(baseComponent: React.SFC<Props>) =>
-    isClassComponent(baseComponent)
-        ?   baseComponent
-        :   wrapWithClass(baseComponent);
+const toClass =
+    <P>(baseComponent: React.ComponentType<P>): React.ComponentClass<P> =>
+        isClassComponent(baseComponent)
+            ?   baseComponent
+            :   wrapWithClass(baseComponent);
 
-
-const wrapWithClass = <Props>(baseComponent: React.SFC<Props>) =>
-    class extends React.Component<Props> {
+const wrapWithClass = <P>(baseComponent: React.SFC<P>) =>
+    class extends React.Component<P> {
+        static displayName = getDisplayName(baseComponent);
         static propTypes = baseComponent.propTypes;
         static contextTypes = baseComponent.contextTypes;
         static defaultProps = baseComponent.defaultProps;
@@ -19,16 +20,15 @@ const wrapWithClass = <Props>(baseComponent: React.SFC<Props>) =>
         }
     };
 
-const isClassComponent = Component =>
-    Component &&
-    Component.prototype &&
-    typeof Component.prototype.render === 'function';
+const isClassComponent =
+    <P>(сomponent: ComponentType<P>): сomponent is ComponentClass<P> =>
+        сomponent &&
+        сomponent.prototype &&
+        typeof сomponent.prototype.render === 'function';
 
-
-const getDisplayName = Component =>
-    typeof Component === 'string'
-        ? Component
-        : Component.displayName || Component.name || 'Component';
-
+const getDisplayName = component =>
+    typeof component === 'string'
+        ? component
+        : (component.displayName && component.displayName + 'Class') || component.name || 'Component';
 
 export default toClass;
