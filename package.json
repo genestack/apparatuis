@@ -1,6 +1,6 @@
 {
   "name": "genestack-ui",
-  "version": "4.0.0",
+  "version": "5.0.0",
   "description": "UI library",
   "main": "src/",
   "repository": {
@@ -62,6 +62,6 @@
     "react-dom": "^16.2.0"
   },
   "peerDependencies": {
-    "genestack-frontend-builder": "^0.6.0"
+    "genestack-frontend-builder": "^0.7.0"
   }
 }
