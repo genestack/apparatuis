@@ -8,7 +8,7 @@
 
 import React from 'react';
 import Textarea from 'react-textarea-autosize';
-import mapProps from '../../utils/mapProps';
+import styles from './textarea-autosize.module.css';
 
 type OnValueChanger = (value: number | string| string[]) => any;
 
@@ -28,14 +28,14 @@ export default class TextareaAutosize extends React.Component<TextareaAutosizePr
     }
 
     render() {
-        const {onChange, onValueChange, ref, ...omited} = this.props;
+        const {onChange, onValueChange, ref, className = '', ...omited} = this.props;
 
         return  (
             <Textarea
+                    className={styles.textarea + ' ' + className}
                     {...omited}
                     onChange={this.onChange}
             />
         );
-    }
-}
-
+    };
+};
