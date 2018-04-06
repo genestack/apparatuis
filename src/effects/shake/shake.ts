@@ -6,8 +6,8 @@
  * actual or intended publication of such source code.
  */
 
-import ReactDOM from 'react-dom'
-import React from 'react'
+import ReactDOM from 'react-dom';
+import React from 'react';
 import {shake} from './shake.module.css';
 
 const ANIMATION_DURATION = 350;
@@ -19,10 +19,10 @@ const ANIMATION_DURATION = 350;
  */
 export default (node: React.ReactInstance) => {
     const element = ReactDOM.findDOMNode(node);
-    element.classList.add('gs-sd__invalid-shake');
+    element.classList.add(shake);
 
     setTimeout(
-        () => element.classList.remove('gs-sd__invalid-shake'),
-        ANIMATION_DURATION
+        () => element.classList.remove(shake),
+        10000
     );
 };
