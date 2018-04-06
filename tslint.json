@@ -43,6 +43,7 @@
         "indent": [true, "spaces", 4],
         "member-access": false,
         "no-unused-variable": [true, { "ignore-pattern": "^React$" }],
+        "no-unused-expression": false,
         "jsx-no-multiline-js": false,
         "jsx-wrap-multiline": false,
         "ban-types": [true, ["Object", "Use {} instead."], ["String", "Use 'string' instead"]],

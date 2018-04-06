@@ -1,0 +1,32 @@
+/*
+ * Copyright (c) 2011-2018 Genestack Limited
+ * All Rights Reserved
+ * THIS IS UNPUBLISHED PROPRIETARY SOURCE CODE OF GENESTACK LIMITED
+ * The copyright notice above does not evidence any
+ * actual or intended publication of such source code.
+ */
+
+.shake {
+    animation-name: shake-animation;
+    animation-iteration-count: 1;
+    animation-duration: 350ms;
+    animation-timing-function: linear;
+}
+
+@keyframes shake-animation {
+    8%, 41% {
+        transform: translateX(-5px);
+    }
+    25%, 58% {
+        transform: translateX(5px);
+    }
+    75% {
+        transform: translateX(-1px);
+    }
+    92% {
+        transform: translateX(1px);
+    }
+    0%, 100% {
+        transform: translateX(0);
+    }
+}
