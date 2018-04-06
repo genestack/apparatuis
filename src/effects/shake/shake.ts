@@ -23,6 +23,6 @@ export default (node: React.ReactInstance) => {
 
     setTimeout(
         () => element.classList.remove(shake),
-        10000
+        ANIMATION_DURATION
     );
 };
