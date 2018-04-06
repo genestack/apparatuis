@@ -5,12 +5,13 @@
  * The copyright notice above does not evidence any
  * actual or intended publication of such source code.
  */
+
 import React from 'react';
 import classNames from 'classnames';
 import styles from './input.module.css';
 
 export default class extends React.Component<InputProps> {
-    
+
     handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const {onChange, name} = this.props;
         const value = event.currentTarget.value;
@@ -23,7 +24,7 @@ export default class extends React.Component<InputProps> {
         );
     }
 
-    render () {
+    render() {
         const {className = '', hasError = false, ref = null, ...props} = this.props;
 
         return (

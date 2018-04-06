@@ -11,4 +11,11 @@ export {default as Input} from './components/input/input';
 export {default as Form} from './components/form/form';
 export {default as Paginator} from './components/paginator/paginator';
 export {default as Tooltip} from './components/tooltip/tooltip';
+export {default as TextareaAutosize} from './components/textarea-autosize/textarea-autosize';
 export {default as toClass} from './utils/toClass';
+
+import * as effects from './effects/';
+
+export {
+    effects
+};
