@@ -15,15 +15,23 @@ type OnValueChanger = (value: number | string| string[]) => any;
 type TextareaAutosizeProps =
     & Textarea['props']
     & {
+        onChange: (event: React.ChangeEvent<HTMLTextAreaElement>, value?: any) => void;
         onValueChange?: OnValueChanger
     };
 
 export default class TextareaAutosize extends React.Component<TextareaAutosizeProps> {
 
     onChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
-        const {onChange, onValueChange} = this.props;
+        const {onChange, onValueChange, name} = this.props;
+        const {value} = event.currentTarget;
 
-        onChange && onChange(event);
+        onChange && onChange(
+            event,
+            name
+                ? {[name]: value}
+                : value,
+        );
+
         onValueChange && onValueChange(event.currentTarget.value);
     }
 
