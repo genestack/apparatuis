@@ -5,8 +5,9 @@
  * The copyright notice above does not evidence any
  * actual or intended publication of such source code.
  */
-
-.textarea {
+ @import './../../variables.css';
+ 
+.textarea-autosize {
     font-family: var(--gs-font-family);
     font-size: 14px;
     line-height: 20px;

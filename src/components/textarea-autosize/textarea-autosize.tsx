@@ -9,13 +9,14 @@
 import React from 'react';
 import Textarea from 'react-textarea-autosize';
 import styles from './textarea-autosize.module.css';
+import classnames from 'classnames'
 
 type OnValueChanger = (value: number | string| string[]) => any;
 
 type TextareaAutosizeProps =
     & Textarea['props']
     & {
-        onChange: (event: React.ChangeEvent<HTMLTextAreaElement>, value?: any) => void;
+        onChange?: (event: React.ChangeEvent<HTMLTextAreaElement>, value?: any) => void;
         onValueChange?: OnValueChanger
     };
 
@@ -36,11 +37,11 @@ export default class TextareaAutosize extends React.Component<TextareaAutosizePr
     }
 
     render() {
-        const {onChange, onValueChange, ref, className = '', ...omited} = this.props;
+        const {onChange, onValueChange, ref, className, ...omited} = this.props;
 
         return  (
             <Textarea
-                    className={styles.textarea + ' ' + className}
+                    className={classnames(styles['textarea-autosize'], className)}
                     {...omited}
                     onChange={this.onChange}
             />
