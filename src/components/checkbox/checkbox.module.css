@@ -5,7 +5,4 @@
  * The copyright notice above does not evidence any
  * actual or intended publication of such source code.
  */
-
-export {default as shake} from './shake/shake';
-
-const a = a => a +1;
+ @import './../../variables.css';

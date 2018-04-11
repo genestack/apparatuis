@@ -8,47 +8,48 @@
 
 import React from 'react';
 import classNames from 'classnames';
-import styles from './input.module.css';
+import styles from './checkbox.module.css';
 
-export default class extends React.Component<InputProps> {
+export default class extends React.Component<CheckboxProps> {
 
     handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const {onChange, onValueChange, name} = this.props;
-        const {value} = event.currentTarget;
+        const value = event.currentTarget.checked;
 
         onChange && onChange(
             event,
             name
                 ? {[name]: value}
-                : value
+                : value,
         );
 
         onValueChange && onValueChange(value);
     }
 
     render() {
-        const {className = '', hasError = false, ref = null, ...props} = this.props;
+        const {className = '', ref = null, value, ...props} = this.props;
 
         return (
             <input
                 {...props}
+                type="checkbox"
                 ref={ref}
-                className={classNames(className, styles.input, {[styles.hasError]: hasError})}
+                className={classNames(className)}
                 onChange={this.handleChange}
             />
         );
     }
 };
 
-export type InputProps =
+export type CheckboxProps =
     & React.DetailedHTMLProps<
             React.InputHTMLAttributes<HTMLInputElement>,
             HTMLInputElement
         >
     & {
         onChange: (event: React.ChangeEvent<HTMLInputElement>, any) => any
-        hasError?: boolean
         onValueChange?: OnValueChanger
+        checked?: boolean
     };
 
-type OnValueChanger = (value: string) => any;
+type OnValueChanger = (value: boolean) => any;

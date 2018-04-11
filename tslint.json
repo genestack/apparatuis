@@ -11,7 +11,7 @@
         "semicolon": [true, "always", "ignore-interfaces"],
         "no-consecutive-blank-lines": [true, 2],
         "jsx-boolean-value": false,
-        "trailing-comma": [true, {
+        "trailing-comma": [false, {
             "multiline": {
                 "objects": "always",
                 "arrays": "always",
