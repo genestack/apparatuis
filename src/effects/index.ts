@@ -7,5 +7,3 @@
  */
 
 export {default as shake} from './shake/shake';
-
-const a = a => a +1;

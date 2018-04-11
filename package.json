@@ -63,7 +63,8 @@
     "rc-tooltip": "^3.7.0",
     "react": "^16.3.1",
     "react-dom": "^16.2.0",
-    "react-textarea-autosize": "^6.1.0"
+    "react-textarea-autosize": "^6.1.0",
+    "typelevel-ts": "^0.2.3"
   },
   "peerDependencies": {
     "genestack-frontend-builder": "^0.7.0"

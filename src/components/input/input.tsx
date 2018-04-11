@@ -9,6 +9,7 @@
 import React from 'react';
 import classNames from 'classnames';
 import styles from './input.module.css';
+import {ObjectOmit} from 'typelevel-ts';
 
 export default class extends React.Component<InputProps> {
 
@@ -41,14 +42,17 @@ export default class extends React.Component<InputProps> {
 };
 
 export type InputProps =
-    & React.DetailedHTMLProps<
-            React.InputHTMLAttributes<HTMLInputElement>,
-            HTMLInputElement
+    &   ObjectOmit<
+            React.DetailedHTMLProps<
+                React.InputHTMLAttributes<HTMLInputElement>,
+                HTMLInputElement
+            >,
+            'type'
         >
-    & {
-        onChange: (event: React.ChangeEvent<HTMLInputElement>, any) => any
-        hasError?: boolean
-        onValueChange?: OnValueChanger
-    };
+    &   {
+            onChange?: (event: React.ChangeEvent<HTMLInputElement>, value: any) => any
+            hasError?: boolean
+            onValueChange?: OnValueChanger
+        };
 
 type OnValueChanger = (value: string) => any;

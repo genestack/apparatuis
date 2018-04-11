@@ -8,9 +8,9 @@
 
 import React from 'react';
 import classNames from 'classnames';
-import styles from './checkbox.module.css';
+import {ObjectOmit} from 'typelevel-ts'
 
-export default class extends React.Component<CheckboxProps> {
+export default class Checkbox extends React.Component<CheckboxProps> {
 
     handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const {onChange, onValueChange, name} = this.props;
@@ -18,7 +18,7 @@ export default class extends React.Component<CheckboxProps> {
 
         onChange && onChange(
             event,
-            name
+            typeof name === 'string'
                 ? {[name]: value}
                 : value,
         );
@@ -27,29 +27,37 @@ export default class extends React.Component<CheckboxProps> {
     }
 
     render() {
-        const {className = '', ref = null, value, ...props} = this.props;
+        const {ref = null, value, ...props} = this.props;
 
         return (
             <input
                 {...props}
                 type="checkbox"
                 ref={ref}
-                className={classNames(className)}
                 onChange={this.handleChange}
             />
         );
     }
 };
 
-export type CheckboxProps =
-    & React.DetailedHTMLProps<
+type CheckboxProps =
+    &   BaseInputProps
+    &   {
+            onChange?: (
+                            event: React.ChangeEvent<HTMLInputElement>, 
+                            value?: any 
+                        ) => any
+            onValueChange?: OnValueChangeCallback<boolean>
+            checked?: boolean
+        };
+
+type BaseInputProps = 
+    ObjectOmit<
+        React.DetailedHTMLProps<
             React.InputHTMLAttributes<HTMLInputElement>,
             HTMLInputElement
-        >
-    & {
-        onChange: (event: React.ChangeEvent<HTMLInputElement>, any) => any
-        onValueChange?: OnValueChanger
-        checked?: boolean
-    };
+        >,
+        'type'
+    >
 
-type OnValueChanger = (value: boolean) => any;
+type OnValueChangeCallback<T> = (value: T) => any;
