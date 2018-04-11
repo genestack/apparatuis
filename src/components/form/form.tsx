@@ -9,7 +9,7 @@ import React from 'react';
 import classNames from 'classnames';
 import styles from './form.module.css';
 
-export default (props: React.SFC<FormProps>) =>
+export default (props: FormProps) =>
     <form {...addClass(props)} />;
 
 const addClass = ({className = '', ...rest}) => ({
