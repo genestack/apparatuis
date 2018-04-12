@@ -30,15 +30,15 @@ export default class TextareaAutosize extends React.Component<TextareaAutosizePr
             event,
             name
                 ? {[name]: value}
-                : value,
+                : value
         );
 
         onValueChange && onValueChange(event.currentTarget.value);
     }
 
     render() {
-        const {onChange, onValueChange, ref, className, ...omited} = this.props;
-
+        const {onChange, onValueChange, className, ...omited} = this.props as any;
+        
         return  (
             <Textarea
                     className={classnames(styles['textarea-autosize'], className)}

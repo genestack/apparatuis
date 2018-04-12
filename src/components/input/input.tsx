@@ -36,7 +36,7 @@ export default class extends React.Component<InputProps> {
             />
         );
     }
-};
+}
 
 export type InputProps =
     & React.DetailedHTMLProps<
