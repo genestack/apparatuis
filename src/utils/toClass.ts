@@ -10,8 +10,9 @@ import React, {ComponentType, ComponentClass} from 'react';
 
 /**
  * Convert Functional component to class to get "ref" availability
- * @param baseComponent 
+ * @param baseComponent
  */
+
 const toClass =
     <P>(baseComponent: React.ComponentType<P>): React.ComponentClass<P> =>
         isClassComponent(baseComponent)

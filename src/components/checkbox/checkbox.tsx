@@ -8,7 +8,7 @@
 
 import React from 'react';
 import classNames from 'classnames';
-import {ObjectOmit} from 'typelevel-ts'
+import {ObjectOmit} from 'typelevel-ts';
 
 export default class Checkbox extends React.Component<CheckboxProps> {
 
@@ -30,7 +30,6 @@ export default class Checkbox extends React.Component<CheckboxProps> {
 
         const {value, ...props} = this.props;
 
-
         return (
             <input
                 {...props}
@@ -39,26 +38,26 @@ export default class Checkbox extends React.Component<CheckboxProps> {
             />
         );
     }
-};
+}
 
 type CheckboxProps =
     &   BaseInputProps
     &   {
             onChange?: (
-                            event: React.ChangeEvent<HTMLInputElement>, 
-                            value?: any 
+                            event: React.ChangeEvent<HTMLInputElement>,
+                            value?: any
                         ) => any
             onValueChange?: OnValueChangeCallback<boolean>
             checked?: boolean
         };
 
-type BaseInputProps = 
+type BaseInputProps =
     ObjectOmit<
         React.DetailedHTMLProps<
             React.InputHTMLAttributes<HTMLInputElement>,
             HTMLInputElement
         >,
         'type'
-    >
+    >;
 
 type OnValueChangeCallback<T> = (value: T) => any;
