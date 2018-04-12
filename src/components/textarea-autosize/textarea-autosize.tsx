@@ -33,7 +33,7 @@ export default class TextareaAutosize extends React.Component<TextareaAutosizePr
                 : value
         );
 
-        onValueChange && onValueChange(event.currentTarget.value);
+        onValueChange && onValueChange(value);
     }
 
     render() {

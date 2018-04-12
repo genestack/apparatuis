@@ -27,12 +27,14 @@ export default class Checkbox extends React.Component<CheckboxProps> {
     }
 
     render() {
+
         const {value, ...props} = this.props;
+
 
         return (
             <input
                 {...props}
-                type="checkbox"
+                type='checkbox'
                 onChange={this.handleChange}
             />
         );
@@ -42,7 +44,7 @@ export default class Checkbox extends React.Component<CheckboxProps> {
 type CheckboxProps =
     &   BaseInputProps
     &   {
-            onChange?:  (
+            onChange?: (
                             event: React.ChangeEvent<HTMLInputElement>, 
                             value?: any 
                         ) => any
