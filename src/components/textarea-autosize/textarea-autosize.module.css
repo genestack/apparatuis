@@ -5,8 +5,8 @@
  * The copyright notice above does not evidence any
  * actual or intended publication of such source code.
  */
- @import './../../variables.css';
- 
+@import "./../../variables.css";
+
 .textarea-autosize {
     font-family: var(--gs-font-family);
     font-size: 14px;

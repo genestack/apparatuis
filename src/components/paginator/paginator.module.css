@@ -5,7 +5,7 @@
  * The copyright notice above does not evidence any
  * actual or intended publication of such source code.
  */
- @import './../../variables.css';
+@import "./../../variables.css";
 
 .container {
     margin: 20px 0;

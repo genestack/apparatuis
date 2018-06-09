@@ -54,4 +54,4 @@ export type InputProps =
             onValueChange?: OnValueChanger
         };
 
- type OnValueChanger = (value: string) => any;
+type OnValueChanger = (value: string) => any;

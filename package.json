@@ -21,7 +21,8 @@
   },
   "scripts": {
     "styleguide": "styleguidist server",
-    "clean": "rm -rf dist"
+    "clean": "rm -rf dist",
+    "lint": "tslint src/**/*.tsx src/**/*.ts --fix && stylelint src/**/*.css --fix"
   },
   "devDependencies": {
     "cpx": "^1.5.0",

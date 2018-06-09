@@ -17,16 +17,18 @@ export default class Select extends PureComponent<SelectProps> {
         isDisabled: false,
         hasError: false,
         width: 200
-    }
+    };
 
     state = {
         isFocused: false
-    }
+    };
 
-    handleFocus = () => this.setState({isFocused: true})
-    handleBlur = () => this.setState({isFocused: false})
+    handleFocus = () => this.setState({isFocused: true});
+    handleBlur = () => this.setState({isFocused: false});
 
     handleChange = (event) => {
+        // event.target.value is always a string, but option.value may be a number
+        // tslint:disable-next-line: triple-equals
         const selectedOption = this.props.options.find((option) => option.value == event.target.value) || null;
         this.props.onChange(event, selectedOption);
     }
@@ -64,8 +66,7 @@ export default class Select extends PureComponent<SelectProps> {
                     ))}
                 </select>
             </div>
-        )
-
+        );
     }
 }
 
@@ -77,9 +78,9 @@ export type SelectProps = {
     hasError?: boolean,
     width?: string | number,
     onChange: (event: object, value: option) => any
-}
+};
 
 type option = {
     label: string | number,
     value: string | number,
-}
+};

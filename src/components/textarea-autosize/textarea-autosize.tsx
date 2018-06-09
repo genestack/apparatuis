@@ -46,5 +46,5 @@ export default class TextareaAutosize extends React.Component<TextareaAutosizePr
                     onChange={this.onChange}
             />
         );
-    };
-};
+    }
+}
