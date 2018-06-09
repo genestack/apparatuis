@@ -48,6 +48,7 @@ export default class Select extends PureComponent<SelectProps> {
             >
                 <select
                     className={styles.select}
+                    value={value ? value.value : WITHOUT_VALUE}
                     onFocus={this.handleFocus}
                     onBlur={this.handleBlur}
                     disabled={isDisabled}
@@ -56,7 +57,7 @@ export default class Select extends PureComponent<SelectProps> {
                     {options.map((option) => (
                         <option
                             value={option.value}
-                            selected={value ? option.value === value.value : false}
+                            key={option.value}
                         >
                             {option.label}
                         </option>
