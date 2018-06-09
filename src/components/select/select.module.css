@@ -1,0 +1,75 @@
+/*
+ * Copyright (c) 2011-2018 Genestack Limited
+ * All Rights Reserved
+ * THIS IS UNPUBLISHED PROPRIETARY SOURCE CODE OF GENESTACK LIMITED
+ * The copyright notice above does not evidence any
+ * actual or intended publication of such source code.
+ */
+@import './../../variables.css';
+
+ .container {
+    position: relative;
+    height: 30px;
+    overflow: hidden;
+    border-radius: 4px;
+    border: 1px solid rgb(204, 204, 204);
+}
+
+.container:before {
+    content: "";
+    top: 0;
+    right: 0;
+    width: 27px;
+    height: 100%;
+    background-color: rgb(255, 255, 255);
+    direction: block;
+}
+
+.container:after {
+    content: "";
+    border: 4px solid rgb(51, 51, 51, 0);
+    border-top-color: rgb(51, 51, 51);
+    display: block;
+    position: absolute;
+    right: 10px;
+    top: 13px;
+}
+
+.container.isFocused {
+    border-color: rgba(82, 168, 236, 0.8);
+    box-shadow: 0px 0px 7px 0px rgba(82, 168, 236, 0.6);
+}
+
+.container.isDisabled {
+    background-color: rgb(240, 240, 240);
+    border-color: rgb(211, 211, 211);
+}
+
+.container.isDisabled:after {
+    border-top-color: rgb(145, 145, 145);
+}
+
+.select {
+    font-size: 14px;
+    font-family: var(--gs-font-family);
+    border: none;
+    background-color: rgb(255, 255, 255);
+    width: calc(100% + 20px);
+    line-height: 30px;
+}
+
+.withValue .select {
+    color: rgb(51, 51, 51);
+}
+
+.withValue.isDisabled .select {
+    color: rgb(85, 85, 85);
+}
+
+.withoutValue .select {
+    color: rgb(145, 145, 145);
+}
+
+.select:focus {
+    outline: none;
+}
