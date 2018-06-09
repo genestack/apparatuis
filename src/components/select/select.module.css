@@ -45,6 +45,10 @@
     border-color: rgb(211, 211, 211);
 }
 
+.container.hasError {
+    border-color: rgb(185, 74, 72);
+}
+
 .container.isDisabled:after {
     border-top-color: rgb(145, 145, 145);
 }

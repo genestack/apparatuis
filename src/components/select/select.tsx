@@ -15,6 +15,7 @@ export default class Select extends PureComponent<SelectProps> {
     public static defaultProps: Partial<SelectProps> = {
         placeholder: 'Select a value...',
         isDisabled: false,
+        hasError: false,
         width: 200
     }
 
@@ -31,16 +32,15 @@ export default class Select extends PureComponent<SelectProps> {
     }
 
     render() {
-        const {value, placeholder, isDisabled, width} = this.props;
+        const {value, placeholder, isDisabled, hasError, width} = this.props;
         const options = [{value: WITHOUT_VALUE, label: placeholder}, ...this.props.options];
-
-        const text = value ? value.label : placeholder;
 
         return (
             <div
                 className={classNames(styles.container, {
                     [styles.isFocused]: this.state.isFocused,
                     [styles.isDisabled]: isDisabled,
+                    [styles.hasError]: hasError,
                     [styles.withValue]: !!value,
                     [styles.withoutValue]: !value
                 })}
@@ -53,7 +53,14 @@ export default class Select extends PureComponent<SelectProps> {
                     disabled={isDisabled}
                     onChange={this.handleChange}
                 >
-                    {options.map((option) => <option value={option.value}>{option.label}</option>)}
+                    {options.map((option) => (
+                        <option
+                            value={option.value}
+                            selected={value ? option.value === value.value : false}
+                        >
+                            {option.label}
+                        </option>
+                    ))}
                 </select>
             </div>
         )
@@ -66,6 +73,7 @@ export type SelectProps = {
     value: option,
     placeholder?: string,
     isDisabled?: boolean,
+    hasError?: boolean,
     width?: string | number,
     onChange: (event: object, value: option) => any
 }
