@@ -22,15 +22,18 @@
     width: 27px;
     height: 100%;
     background-color: rgb(255, 255, 255);
-    direction: block;
+    position: absolute;
+    display: block;
+    pointer-events: none;
 }
 
 .container:after {
     content: "";
     border: 4px solid rgb(51, 51, 51, 0);
     border-top-color: rgb(51, 51, 51);
-    display: block;
     position: absolute;
+    display: block;
+    pointer-events: none;
     right: 10px;
     top: 13px;
 }
