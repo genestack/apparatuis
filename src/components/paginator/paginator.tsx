@@ -47,9 +47,9 @@ export default (props: PaginatorProps) => {
 export type PaginatorProps =
     & React.Props<HTMLDivElement>
     & {
-        onChange: (value: number) => any
-        itemsLength: number
-        itemsPerPage: number
+        onChange: (value: number) => any,
+        itemsLength: number,
+        itemsPerPage: number,
         offset: number
     };
 

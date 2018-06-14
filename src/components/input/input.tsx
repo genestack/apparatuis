@@ -49,8 +49,8 @@ export type InputProps =
             'type'
         >
     &   {
-            onChange?: (event: React.ChangeEvent<HTMLInputElement>, value: any) => any
-            hasError?: boolean
+            onChange?: (event: React.ChangeEvent<HTMLInputElement>, value: any) => any,
+            hasError?: boolean,
             onValueChange?: OnValueChanger
         };
 
