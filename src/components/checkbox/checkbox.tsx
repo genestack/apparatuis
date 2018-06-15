@@ -46,8 +46,8 @@ type CheckboxProps =
             onChange?: (
                             event: React.ChangeEvent<HTMLInputElement>,
                             value?: any
-                        ) => any
-            onValueChange?: OnValueChangeCallback<boolean>
+                        ) => any,
+            onValueChange?: OnValueChangeCallback<boolean>,
             checked?: boolean
         };
 

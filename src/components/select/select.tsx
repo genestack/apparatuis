@@ -12,7 +12,7 @@ import styles from './select.module.css';
 const WITHOUT_VALUE = 'WITHOUT_VALUE';
 
 export default class Select extends PureComponent<SelectProps> {
-    public static defaultProps: Partial<SelectProps> = {
+    static defaultProps: Partial<SelectProps> = {
         placeholder: 'Select a value...',
         isDisabled: false,
         hasError: false,

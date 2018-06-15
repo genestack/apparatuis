@@ -24,6 +24,6 @@ export type ButtonProps =
             HTMLButtonElement
         >
     & {
-        kind?: 'default' | 'primary'
+        kind?: 'default' | 'primary',
         isDisabled?: boolean
     };
