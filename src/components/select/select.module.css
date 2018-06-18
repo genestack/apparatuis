@@ -27,6 +27,10 @@
     pointer-events: none;
 }
 
+.container.isDisabled:before {
+    background-color: rgb(240, 240, 240);
+}
+
 .container:after {
     content: "";
     border: 4px solid rgb(51, 51, 51, 0);
@@ -63,6 +67,10 @@
     background-color: rgb(255, 255, 255);
     width: calc(100% + 20px);
     line-height: 30px;
+}
+
+.select:disabled {
+    background-color: unset;
 }
 
 .withValue .select {

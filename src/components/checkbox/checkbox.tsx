@@ -13,6 +13,7 @@ import styles from './checkbox.module.css';
 
 export default class Checkbox extends React.Component<CheckboxProps> {
     static defaultProps: Partial<CheckboxProps> = {
+        name: null,
         className: '',
         isDisabled: false
     };
@@ -31,23 +32,33 @@ export default class Checkbox extends React.Component<CheckboxProps> {
     }
 
     render() {
-        const {isChecked, isDisabled, children, ...props} = this.props;
-
-        if (!children) {
-            return (
-                <div {...props} onClick={this.handleChange}>
-                    <CheckboxIcon isChecked={isChecked} isDisabled={isDisabled} />
-                </div>
-            );
-        }
+        const {isChecked, isDisabled, children, onChange, onValueChange, name, ...props} = this.props;
 
         return (
-            <label {...props} className={classNames(styles.container, props.className)} onClick={this.handleChange}>
-                <CheckboxIcon
-                    isChecked={isChecked}
-                    isDisabled={isDisabled}
+            <label
+                {...props}
+                className={classNames(styles.container, props.className)}
+            >
+                <input
+                    type="checkbox"
+                    className={styles.input}
+                    checked={isChecked}
+                    disabled={isDisabled}
+                    onChange={this.handleChange}
                 />
-                <span className={styles.text}>{children}</span>
+                <div
+                    className={classNames(styles.iconBorder, {
+                        [styles.iconBorderDisabled]: isDisabled,
+                        [styles.iconBorderChecked]: isChecked
+                    })}
+                >
+                    {isChecked && (
+                        <CheckboxIcon isDisabled={isDisabled} />
+                    )}
+                </div>
+                {children && (
+                    <div className={styles.text}>{children}</div>
+                )}
             </label>
         );
     }

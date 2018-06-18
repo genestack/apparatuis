@@ -8,8 +8,14 @@
  @import "./../../variables.css";
 
 .container {
-    display: flex;
+    display: inline-flex;
     align-items: center;
+    margin-bottom: 0;
+}
+
+.input {
+    position: absolute;
+    visibility: hidden;
 }
 
 .iconBorder {

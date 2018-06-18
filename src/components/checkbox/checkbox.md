@@ -25,6 +25,7 @@ initialState = { value: true };
     <br />
     <Checkbox
         isDisabled
+        isChecked={false}
     >
         Inactive and disabled
     </Checkbox>
