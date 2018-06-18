@@ -37,7 +37,7 @@ export default class Checkbox extends React.Component<CheckboxProps> {
         return (
             <label
                 {...props}
-                className={classNames(styles.container, props.className)}
+                className={classNames(styles.container, props.className, {[styles.containerDisabled]: isDisabled})}
             >
                 <input
                     type="checkbox"

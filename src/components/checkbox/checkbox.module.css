@@ -13,6 +13,10 @@
     margin-bottom: 0;
 }
 
+.containerDisabled {
+    cursor: not-allowed;
+}
+
 .input {
     position: absolute;
     visibility: hidden;
