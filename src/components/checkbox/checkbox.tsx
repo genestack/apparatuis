@@ -5,59 +5,65 @@
  * The copyright notice above does not evidence any
  * actual or intended publication of such source code.
  */
-
 import React from 'react';
 import classNames from 'classnames';
 import {ObjectOmit} from 'typelevel-ts';
+import CheckboxIcon from './checkboxIcon';
+import styles from './checkbox.module.css';
 
 export default class Checkbox extends React.Component<CheckboxProps> {
+    static defaultProps: Partial<CheckboxProps> = {
+        className: '',
+        isDisabled: false
+    };
 
-    handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        const {onChange, onValueChange, name} = this.props;
-        const value = event.currentTarget.checked;
+    handleChange = (event) => {
+        const {onChange, onValueChange, name, isChecked} = this.props;
 
         onChange && onChange(
             event,
             typeof name === 'string'
-                ? {[name]: value}
-                : value,
+                ? {[name]: !isChecked}
+                : !isChecked,
         );
 
-        onValueChange && onValueChange(value);
+        onValueChange && onValueChange(!isChecked);
     }
 
     render() {
+        const {isChecked, isDisabled, children, ...props} = this.props;
 
-        const {value, ...props} = this.props;
+        if (!children) {
+            return (
+                <div {...props} onClick={this.handleChange}>
+                    <CheckboxIcon isChecked={isChecked} isDisabled={isDisabled} />
+                </div>
+            );
+        }
 
         return (
-            <input
-                {...props}
-                type='checkbox'
-                onChange={this.handleChange}
-            />
+            <label {...props} className={classNames(styles.container, props.className)} onClick={this.handleChange}>
+                <CheckboxIcon
+                    isChecked={isChecked}
+                    isDisabled={isDisabled}
+                />
+                <span className={styles.text}>{children}</span>
+            </label>
         );
     }
 }
 
-type CheckboxProps =
-    &   BaseInputProps
-    &   {
-            onChange?: (
-                            event: React.ChangeEvent<HTMLInputElement>,
-                            value?: any
-                        ) => any,
-            onValueChange?: OnValueChangeCallback<boolean>,
-            checked?: boolean
-        };
-
-type BaseInputProps =
-    ObjectOmit<
-        React.DetailedHTMLProps<
-            React.InputHTMLAttributes<HTMLInputElement>,
-            HTMLInputElement
-        >,
-        'type'
-    >;
+type CheckboxProps = {
+    onChange?: (
+                    event: object,
+                    value?: any
+                ) => void,
+    onValueChange?: OnValueChangeCallback<boolean>,
+    name?: string,
+    isChecked: boolean,
+    isDisabled?: boolean,
+    className?: string,
+    chidren: any
+};
 
 type OnValueChangeCallback<T> = (value: T) => any;
