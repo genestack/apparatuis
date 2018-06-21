@@ -12,7 +12,7 @@
     height: 30px;
     overflow: hidden;
     border-radius: 4px;
-    border: 1px solid rgb(204, 204, 204);
+    border: 1px solid var(--gs-color-input-borders);
 }
 
 .container:before {
@@ -28,7 +28,7 @@
 }
 
 .container.isDisabled:before {
-    background-color: rgb(240, 240, 240);
+    background-color: var(--gs-color-background-disabled);
 }
 
 .container:after {
@@ -48,7 +48,7 @@
 }
 
 .container.isDisabled {
-    background-color: rgb(240, 240, 240);
+    background-color: var(--gs-color-background-disabled);
     border-color: rgb(211, 211, 211);
 }
 
@@ -57,7 +57,7 @@
 }
 
 .container.isDisabled:after {
-    border-top-color: rgb(145, 145, 145);
+    border-top-color: var(--gs-color-input-placeholders);
 }
 
 .select {
@@ -82,7 +82,7 @@
 }
 
 .withoutValue .select {
-    color: rgb(145, 145, 145);
+    color: var(--gs-color-input-placeholders);
 }
 
 .select:focus {

@@ -19,7 +19,11 @@
 
 .input {
     position: absolute;
-    visibility: hidden;
+    opacity: 0;
+}
+
+.input:focus + .iconBorder {
+    box-shadow: 0  0 3px 1px var(--gs-color-accent-main);
 }
 
 .iconBorder {
@@ -28,7 +32,7 @@
     width: 16px;
     height: 16px;
     border-radius: 3px;
-    border: 1px solid rgb(204, 204, 204);
+    border: 1px solid var(--gs-color-input-borders);
     box-sizing: border-box;
 }
 
@@ -39,21 +43,21 @@
 }
 
 .iconBorderChecked {
-    background-color: var(--gs-color-blue-dark-2);
-    border-color: var(--gs-color-blue-dark-2);
+    background-color: var(--gs-color-accent-main);
+    border-color: var(--gs-color-accent-main);
 }
 
 .iconBorderDisabled, .iconBorderChecked.iconBorderDisabled {
-    background-color:rgb(239, 239, 239);
-    border-color: rgb(204, 204, 204);
+    background-color:var(--gs-color-background-disabled);
+    border-color: var(--gs-color-input-borders);
 }
 
-.iconBird {
+.checkmark {
     fill: rgb(255, 255, 255);
 }
 
-.iconBirdDisabled {
-    fill: var(--gs-color-gray-4);
+.checkmarkDisabled {
+    fill: var(--gs-color-input-placeholders);
 }
 
 .text {

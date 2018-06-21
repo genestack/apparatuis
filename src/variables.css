@@ -1,6 +1,9 @@
 :root {
     --gs-font-family: Helvetica, Arial, "Myriad Pro", sans-serif;
 
-    --gs-color-blue-dark-2: rgb(34, 129, 241);
-    --gs-color-gray-4: rgb(145, 145, 145);
+    /* color palette */
+    --gs-color-accent-main: rgb(34, 129, 241);
+    --gs-color-input-placeholders: rgb(145, 145, 145);
+    --gs-color-background-disabled: rgb(240, 240, 240);
+    --gs-color-input-borders: rgb(204, 204, 204);
 }

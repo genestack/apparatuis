@@ -64,7 +64,13 @@ export default class Checkbox extends React.Component<CheckboxProps> {
     }
 }
 
-type CheckboxProps = {
+type BaseCheckboxProps =
+    ObjectOmit<
+        React.HTMLAttributes<HTMLLabelElement>,
+        'onChange'
+    >;
+
+type CheckboxProps = BaseCheckboxProps & {
     onChange?: (
                     event: object,
                     value?: any
@@ -73,8 +79,7 @@ type CheckboxProps = {
     name?: string,
     isChecked: boolean,
     isDisabled?: boolean,
-    className?: string,
-    chidren: any
+    className?: string
 };
 
 type OnValueChangeCallback<T> = (value: T) => any;
