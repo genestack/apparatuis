@@ -1,0 +1,67 @@
+/*
+ * Copyright (c) 2011-2018 Genestack Limited
+ * All Rights Reserved
+ * THIS IS UNPUBLISHED PROPRIETARY SOURCE CODE OF GENESTACK LIMITED
+ * The copyright notice above does not evidence any
+ * actual or intended publication of such source code.
+ */
+ @import "./../../variables.css";
+
+.container {
+    display: inline-flex;
+    align-items: center;
+    margin-bottom: 0;
+}
+
+.containerDisabled {
+    cursor: not-allowed;
+}
+
+.input {
+    position: absolute;
+    opacity: 0;
+}
+
+.input:focus + .iconBorder {
+    box-shadow: 0  0 3px 1px var(--gs-color-accent-main);
+}
+
+.iconBorder {
+    display: inline-block;
+    position: relative;
+    width: 16px;
+    height: 16px;
+    border-radius: 3px;
+    border: 1px solid var(--gs-color-input-borders);
+    box-sizing: border-box;
+}
+
+.iconSvg {
+    position: absolute;
+    top: 3px;
+    left: 2px;
+}
+
+.iconBorderChecked {
+    background-color: var(--gs-color-accent-main);
+    border-color: var(--gs-color-accent-main);
+}
+
+.iconBorderDisabled, .iconBorderChecked.iconBorderDisabled {
+    background-color:var(--gs-color-background-disabled);
+    border-color: var(--gs-color-input-borders);
+}
+
+.checkmark {
+    fill: rgb(255, 255, 255);
+}
+
+.checkmarkDisabled {
+    fill: var(--gs-color-input-placeholders);
+}
+
+.text {
+    margin-left: 10px;
+    font-family: var(--gs-font-family);
+    font-size: 14px;
+}
