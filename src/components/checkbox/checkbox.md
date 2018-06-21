@@ -19,7 +19,7 @@ initialState = { value: true };
         isChecked
         isDisabled
     >
-        Active and disabled
+        Checked and disabled
     </Checkbox>
 
     <br />
@@ -27,7 +27,7 @@ initialState = { value: true };
         isDisabled
         isChecked={false}
     >
-        Inactive and disabled
+        Unchecked and disabled
     </Checkbox>
 </div>
 ```
