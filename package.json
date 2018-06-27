@@ -25,6 +25,7 @@
     "lint": "tslint src/**/*.tsx src/**/*.ts --fix && stylelint src/**/*.css --fix"
   },
   "devDependencies": {
+    "autoprefixer": "^8.6.4",
     "cpx": "^1.5.0",
     "css-loader": "^0.28.9",
     "genestack-frontend-builder": "^0.7.0",

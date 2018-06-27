@@ -9,6 +9,7 @@ const path = require('path');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const postcssCustomProperties = require('postcss-custom-properties');
 const postcssImport = require('postcss-import');
+const autoprefixer = require('autoprefixer');
 
 module.exports = {
     devtool: false,
@@ -24,9 +25,9 @@ module.exports = {
     },
     module: {
         rules: [
-            { 
-                test: /\.tsx?$/, 
-                loader: "ts-loader" 
+            {
+                test: /\.tsx?$/,
+                loader: "ts-loader"
             },
             {
                 test: /\.module\.css/,
@@ -45,7 +46,11 @@ module.exports = {
                     }, {
                         loader: 'postcss-loader',
                         options: {
-                            plugins: [postcssImport, postcssCustomProperties({preserve: false})]
+                            plugins: [
+                                postcssImport,
+                                postcssCustomProperties({preserve: false}),
+                                autoprefixer
+                            ]
                         }
                     }]
                 })
@@ -65,7 +70,11 @@ module.exports = {
                     }, {
                         loader: 'postcss-loader',
                         options: {
-                            plugins: [postcssImport, postcssCustomProperties({preserve: false})]
+                            plugins: [
+                                postcssImport,
+                                postcssCustomProperties({preserve: false}),
+                                autoprefixer
+                            ]
                         }
                     }]
                 })
