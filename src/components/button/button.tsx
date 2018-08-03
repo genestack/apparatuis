@@ -10,7 +10,7 @@ import classNames from 'classnames';
 import styles from './button.module.css';
 
 
-export default ({kind = 'default', className = '', isDisabled, size = 'm', ...otherProps}: ButtonProps) =>
+export default ({kind = 'default', className = '', isDisabled, size = 'medium', ...otherProps}: ButtonProps) =>
     <button
         className={classNames(className, styles.btn, styles[size], {
             [styles.btnPrimary]: kind === 'primary'
@@ -19,7 +19,7 @@ export default ({kind = 'default', className = '', isDisabled, size = 'm', ...ot
         {...otherProps}
     />;
 
-type sizeType = 's' | 'm';
+type sizeType = 'small' | 'medium';
 
 export type ButtonProps =
     & React.DetailedHTMLProps<
