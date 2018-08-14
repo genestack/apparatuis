@@ -13,28 +13,24 @@
     font-family: var(--gs-font-family);
     color: rgb(51, 51, 51);
     text-align: center;
-    text-shadow: 0 1px 1px rgba(255, 255, 255, 0.75);
     vertical-align: middle;
     cursor: pointer;
-    background-image: linear-gradient(to bottom, rgb(255, 255, 255), rgb(230, 230, 230));
-    background-repeat: repeat-x;
-    border: 1px solid var(--gs-color-input-borders);
-    border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
-    border-bottom-color: rgb(179, 179, 179);
     border-radius: 4px;
-    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
+    box-sizing: border-box;
 }
 
 .medium {
     font-size: 14px;
     line-height: 20px;
-    padding: 4px 15px;
+    padding: 0px 15px;
+    height: 30px;
 }
 
 .small {
     font-size: 12px;
     line-height: 15px;
-    padding: 4px 10px;
+    padding: 0px 10px;
+    height: 25px;
 }
 
 .btn + .btn {
@@ -45,9 +41,6 @@
 .btn:focus {
     z-index: 1;
     text-decoration: none;
-    background-color: rgb(230, 230, 230);
-    background-position: 0 -15px;
-    transition: background-position 0.1s linear;
     outline: none;
 }
 
@@ -56,35 +49,6 @@
     opacity: 0.65;
     box-shadow: none;
     background-position: 0;
-}
-
-.btnPrimary {
-    color: rgb(255, 255, 255);
-    text-shadow: none;
-    background: rgba(34, 129, 241, 1);
-    box-shadow: inset 0 -1px 0 rgba(13, 81, 162, 1);
-    border-radius: 4px;
-    border-color: transparent;
-}
-
-.btnPrimary:hover:not([disabled]),
-.btnPrimary:focus {
-    background: linear-gradient(rgba(7, 158, 242, 1), rgba(34, 129, 241, 1));
-    box-shadow: 0 2px 6px rgba(34, 129, 241, 0.8), inset 0 -1px 0 rgba(13, 82, 162, 1);
-}
-
-/*
- * TODO: hack to increase selector weight - overwise it will be overriden by ".btn:hover:not([disabled])" selector
- * should be removed after regular button implementation
- */
-.btnPrimary:active.btnPrimary:active {
-    background: linear-gradient(rgba(34, 129, 241, 1), rgba(7, 158, 242, 1));
-    box-shadow: inset 0 1px 4px rgba(15, 93, 139, 1);
-}
-
-.btnPrimary[disabled] {
-    background: rgba(34, 129, 241, 1);
-    opacity: 0.7;
 }
 
 .btnGroup {

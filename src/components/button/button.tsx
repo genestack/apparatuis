@@ -8,12 +8,14 @@
 import React from 'react';
 import classNames from 'classnames';
 import styles from './button.module.css';
-
+import primaryStyles from './button-primary.module.css';
+import defaultStyles from './button-default.module.css';
 
 export default ({kind = 'default', className = '', isDisabled, size = 'medium', ...otherProps}: ButtonProps) =>
     <button
         className={classNames(className, styles.btn, styles[size], {
-            [styles.btnPrimary]: kind === 'primary'
+            [primaryStyles.btnPrimary]: kind === 'primary',
+            [defaultStyles.btnDefault]: kind === 'default'
         })}
         disabled={isDisabled}
         {...otherProps}

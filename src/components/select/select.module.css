@@ -33,7 +33,7 @@
 
 .container:after {
     content: "";
-    border: 4px solid rgb(51, 51, 51, 0);
+    border: 4px solid rgba(51, 51, 51, 0);
     border-top-color: rgb(51, 51, 51);
     position: absolute;
     display: block;
@@ -63,6 +63,8 @@
 .select {
     font-size: 14px;
     font-family: var(--gs-font-family);
+    appearance: none;
+    padding-left: 10px;
     margin-bottom: 0;
     border: none;
     background-color: rgb(255, 255, 255);
