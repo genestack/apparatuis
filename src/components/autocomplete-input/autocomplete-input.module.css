@@ -8,6 +8,6 @@
 
 @import "./../../variables.css";
 
-.selectedSuggestion {
+.activeSuggestion {
     color: rgba(200, 0, 0);
 }
