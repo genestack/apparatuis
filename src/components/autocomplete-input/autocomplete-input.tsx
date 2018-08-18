@@ -71,8 +71,6 @@ const renderSuggestion = ({item, index, getItemProps, highlightedIndex}) => {
 
 class AutocompleteInput extends React.Component<any> {
 
-    inputRef: any = React.createRef()
-
     state = {
         menuIsOpen: false,
         value: ''
@@ -128,6 +126,7 @@ class AutocompleteInput extends React.Component<any> {
 
     }
 
+    input: any = null
 
     render() {
 
@@ -164,9 +163,10 @@ class AutocompleteInput extends React.Component<any> {
 
             }) => (
                 <div>
-                  <input
+                  <Input
 
                     {...getInputProps({
+                        ref: (input) => this.input = input,
                         onKeyDown: (event) => this.handleKeyDown({
                             event,
                             isOpen,
@@ -180,7 +180,7 @@ class AutocompleteInput extends React.Component<any> {
                   {isOpen ?
                       (
                           <SuggestionsList
-                            inputRef={this.inputRef}
+                            input={this.input}
                             value={inputValue}
                             render={({loading, error, items}) => {
                                    if (loading) {

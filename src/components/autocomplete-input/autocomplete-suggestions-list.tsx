@@ -18,7 +18,7 @@ class SuggestionsList extends React.PureComponent<any> {
 
     state = SuggestionsList.initialState
 
-    isMounted: boolean = false
+    mounted: boolean = false
 
     reset = (overrides) => {
         this.setState({
@@ -27,12 +27,25 @@ class SuggestionsList extends React.PureComponent<any> {
         });
     }
 
+    geometry: any = null
+
+    constructor(props) {
+        super(props);
+        const inputDOMNode = ReactDOM.findDOMNode(props.input);
+        const inputDOMRect = inputDOMNode.getBoundingClientRect();
+
+        this.geometry = {
+            top: inputDOMNode.offsetHeight + inputDOMRect.y + window.pageYOffset + 'px',
+            width: inputDOMNode.offsetWidth + 'px',
+            left: inputDOMRect.x + window.pageXOffset + 'px'
+        };
+
+        console.log(this.geometry, window.pageXOffset);
+    }
+
     componentDidMount() {
-        this.isMounted = true;
+        this.mounted = true;
         this.fetch(this.props.value);
-        setTimeout(() => {
-            console.log(this.props.inputRef);
-        }, 1000);
     }
 
     componentDidUpdate(prevProps) {
@@ -42,7 +55,7 @@ class SuggestionsList extends React.PureComponent<any> {
     }
 
     componentWillUnmount() {
-        this.isMounted = false;
+        this.mounted = false;
     }
 
     fetch(value) {
@@ -54,7 +67,7 @@ class SuggestionsList extends React.PureComponent<any> {
 
         return fetchFromSomewhere(value)
             .then((result) => {
-                if (isActual && this.isMounted) {
+                if (isActual && this.mounted) {
                     this.setState({
                         items: result,
                         loading: false,
@@ -63,7 +76,7 @@ class SuggestionsList extends React.PureComponent<any> {
                 }
             })
             .catch((error) => {
-                if (isActual && this.isMounted) {
+                if (isActual && this.mounted) {
                     this.setState({
                         items: [],
                         loading: false,
