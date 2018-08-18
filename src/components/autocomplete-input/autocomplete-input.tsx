@@ -45,9 +45,9 @@ function stateReducer(state, changes) {
 }
 
 
-const renderLoader = () => (<div>{'Loading...'}</div>);
+const renderLoader = () => null;
 
-const renderError = () => (<div>{'ERROR'}</div>);
+const renderError = () => null;
 
 const renderSuggestion = ({item, index, getItemProps, highlightedIndex}) => {
     const isActive = highlightedIndex === index;
@@ -96,7 +96,6 @@ class AutocompleteInput extends React.Component<any> {
     handleChange = (selectedItem, downshift) => {
         console.log(selectedItem, downshift);
         this.setState({
-            value: selectedItem,
             menuIsOpen: false
         }, () => {
 
@@ -137,11 +136,8 @@ class AutocompleteInput extends React.Component<any> {
 
               selectedItem={this.state.value}
               onChange={this.handleChange}
-
-              defaultHighlightedIndex={0}
-
               onOuterClick={() => this.setState({
-                  menuIsOpen: false
+                  menuIsOpen: !false
               })}
               onStateChange={this.handleStateChange}
           >

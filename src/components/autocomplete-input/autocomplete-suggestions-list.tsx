@@ -10,6 +10,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import {debounce} from './utils';
 import fetchFromSomewhere from './test-fixtures';
+import styles from './autocomplete-suggestions-list.module.css';
 
 
 class SuggestionsList extends React.PureComponent<any> {
@@ -20,27 +21,19 @@ class SuggestionsList extends React.PureComponent<any> {
 
     mounted: boolean = false
 
-    reset = (overrides) => {
-        this.setState({
-            ...SuggestionsList.initialState,
-            ...overrides
-        });
-    }
-
-    geometry: any = null
+    cssStyle: any = null
 
     constructor(props) {
         super(props);
         const inputDOMNode = ReactDOM.findDOMNode(props.input);
         const inputDOMRect = inputDOMNode.getBoundingClientRect();
 
-        this.geometry = {
+        this.cssStyle = {
             top: inputDOMNode.offsetHeight + inputDOMRect.y + window.pageYOffset + 'px',
-            width: inputDOMNode.offsetWidth + 'px',
+            minWidth: inputDOMNode.offsetWidth + 'px',
             left: inputDOMRect.x + window.pageXOffset + 'px'
         };
 
-        console.log(this.geometry, window.pageXOffset);
     }
 
     componentDidMount() {
@@ -56,6 +49,13 @@ class SuggestionsList extends React.PureComponent<any> {
 
     componentWillUnmount() {
         this.mounted = false;
+    }
+
+    reset = (overrides) => {
+        this.setState({
+            ...SuggestionsList.initialState,
+            ...overrides
+        });
     }
 
     fetch(value) {
@@ -89,10 +89,11 @@ class SuggestionsList extends React.PureComponent<any> {
 
     debouncedFetch = debounce(this.fetch, 200, false)
 
-
     render() {
         return (
-            <div>
+            <div
+              style={this.cssStyle}
+              className={styles.container}>
               {this.props.render({
                   items: this.state.items,
                   loading: this.state.loading,
