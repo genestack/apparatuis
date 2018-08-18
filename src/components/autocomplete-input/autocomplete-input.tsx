@@ -11,7 +11,7 @@ import Downshift from 'downshift';
 import classnames from 'classnames';
 
 import Input from '../input/input';
-import SuggestionsList from './autocomplete-suggestions-provider';
+import SuggestionsList from './autocomplete-suggestions-list';
 import styles from './autocomplete-input.module.css';
 
 
@@ -71,7 +71,7 @@ const renderSuggestion = ({item, index, getItemProps, highlightedIndex}) => {
 
 class AutocompleteInput extends React.Component<any> {
 
-    inputRef = React.createRef()
+    inputRef: any = React.createRef()
 
     state = {
         menuIsOpen: false,
@@ -136,7 +136,6 @@ class AutocompleteInput extends React.Component<any> {
         return (
             <Downshift
 
-
               selectedItem={this.state.value}
               onChange={this.handleChange}
 
@@ -146,7 +145,6 @@ class AutocompleteInput extends React.Component<any> {
                   menuIsOpen: false
               })}
               onStateChange={this.handleStateChange}
-              inputValue={this.state.value}
           >
             {({
                 clearItems,
@@ -166,8 +164,8 @@ class AutocompleteInput extends React.Component<any> {
 
             }) => (
                 <div>
-                  <Input
-                    ref={this.inputRef}
+                  <input
+
                     {...getInputProps({
                         onKeyDown: (event) => this.handleKeyDown({
                             event,
@@ -182,6 +180,7 @@ class AutocompleteInput extends React.Component<any> {
                   {isOpen ?
                       (
                           <SuggestionsList
+                            inputRef={this.inputRef}
                             value={inputValue}
                             render={({loading, error, items}) => {
                                    if (loading) {

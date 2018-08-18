@@ -18,6 +18,8 @@ class SuggestionsList extends React.PureComponent<any> {
 
     state = SuggestionsList.initialState
 
+    isMounted: boolean = false
+
     reset = (overrides) => {
         this.setState({
             ...SuggestionsList.initialState,
@@ -25,14 +27,12 @@ class SuggestionsList extends React.PureComponent<any> {
         });
     }
 
-    constructor(props) {
-        super(props);
-        //this.isMounted = false;
-    }
-
     componentDidMount() {
-        //this.isMounted = true;
+        this.isMounted = true;
         this.fetch(this.props.value);
+        setTimeout(() => {
+            console.log(this.props.inputRef);
+        }, 1000);
     }
 
     componentDidUpdate(prevProps) {
@@ -42,7 +42,7 @@ class SuggestionsList extends React.PureComponent<any> {
     }
 
     componentWillUnmount() {
-        //this.isMounted = false;
+        this.isMounted = false;
     }
 
     fetch(value) {
@@ -54,7 +54,7 @@ class SuggestionsList extends React.PureComponent<any> {
 
         return fetchFromSomewhere(value)
             .then((result) => {
-                if (isActual) {
+                if (isActual && this.isMounted) {
                     this.setState({
                         items: result,
                         loading: false,
@@ -63,7 +63,7 @@ class SuggestionsList extends React.PureComponent<any> {
                 }
             })
             .catch((error) => {
-                if (isActual) {
+                if (isActual && this.isMounted) {
                     this.setState({
                         items: [],
                         loading: false,
