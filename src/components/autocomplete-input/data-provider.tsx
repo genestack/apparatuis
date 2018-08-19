@@ -78,7 +78,11 @@ export default class DataProvider extends React.PureComponent<DataProviderProps>
 }
 
 type DataProviderProps = {
-    children: (any) => JSX.Element,
+    children: ({
+        items: array,
+        loading: boolean,
+        error: any
+    }) => JSX.Element,
     value: string,
     fetch?: (value: string) => Promise<any>,
     onLoaded?: (array) => any
