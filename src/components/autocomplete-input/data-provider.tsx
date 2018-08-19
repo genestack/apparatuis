@@ -23,6 +23,7 @@ export default class DataProvider extends React.PureComponent<any> {
         this.mounted = true;
 
         this.setState({
+            ...DataProvider.initialState,
             loading: true
         }, () => this.fetch(this.props.value));
     }
@@ -31,6 +32,7 @@ export default class DataProvider extends React.PureComponent<any> {
         const value = this.props.value;
         if (prevProps.value !== value) {
             this.setState({
+                ...DataProvider.initialState,
                 loading: true
             }, () => this.debouncedFetch(value));
         }
