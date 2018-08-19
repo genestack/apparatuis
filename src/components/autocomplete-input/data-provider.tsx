@@ -11,7 +11,7 @@ import {debounce} from './utils';
 import fetchFromSomewhere from './test-fixtures';
 
 
-export default class DataProvider extends React.PureComponent<any> {
+export default class DataProvider extends React.PureComponent<DataProviderProps> {
 
     static initialState = {loading: false, error: null, items: []}
 
@@ -69,7 +69,7 @@ export default class DataProvider extends React.PureComponent<any> {
     debouncedFetch = debounce(this.fetch, 200, false)
 
     render() {
-        return (this.props.children as (any) => JSX.Element)({
+        return this.props.children({
             items: this.state.items,
             loading: this.state.loading,
             error: this.state.error
@@ -77,3 +77,9 @@ export default class DataProvider extends React.PureComponent<any> {
     }
 }
 
+type DataProviderProps = {
+    children: (any) => JSX.Element,
+    value: string,
+    fetch?: (value: string) => Promise<any>,
+    onLoaded?: (array) => any
+};
