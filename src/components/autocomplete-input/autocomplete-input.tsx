@@ -9,208 +9,137 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import Downshift from 'downshift';
 import classnames from 'classnames';
+import DataProvider from './data-provider';
+import {calcMenuStyles} from './utils';
+import styles from './styles.module.css';
 
-import Input from '../input/input';
-import SuggestionsList from './autocomplete-suggestions-list';
-import styles from './autocomplete-input.module.css';
 
+const Input = React.forwardRef((props, ref: React.RefObject<HTMLInputElement>) => (
+    <input ref={ref} {...props} />
+));
 
 // appending to body to prevent from being hided by parent "overflow: hidden" css-rule
+const MenuPortal = ({children}) => ReactDOM.createPortal(children, document.body);
 
-
-
-
-
-console.log(Object.keys(Downshift.stateChangeTypes));
-
-function stateReducer(state, changes) {
-  // this prevents the menu from being closed when the user
-  // selects an item with a keyboard or mouse
-    switch (changes.type) {
-    case Downshift.stateChangeTypes.changeInput:
-        return {
-            ...changes,
-            isOpen: true
-        };
-    case Downshift.stateChangeTypes.keyDownEnter:
-    case Downshift.stateChangeTypes.clickItem:
-      return {
-        ...changes,
-        isOpen: state.isOpen,
-        highlightedIndex: state.highlightedIndex,
-      }
-    default:
-      return changes
-  }
-}
-
-
-const renderLoader = () => null;
-
-const renderError = () => null;
-
-const renderSuggestion = ({item, index, getItemProps, highlightedIndex}) => {
-    const isActive = highlightedIndex === index;
-    const itemClassNames = classnames({
-        [styles.activeSuggestion]: isActive
-    });
-
+const Menu = React.forwardRef((props: any, ref: React.RefObject<HTMLUListElement>) => {
+    const {children, isOpen, ...rest} = props;
+    const style = {
+        ...props.style,
+        display: isOpen ? 'block' : 'none'
+    };
     return (
-        <div
-          className={itemClassNames}
-          key={item}
-          {...getItemProps({
-              item,
-              index
-          })}>
-          {item}
-        </div>
+        <MenuPortal>
+            <ul ref={ref} {...rest} style={style} className={styles.suggestions}>
+                {children}
+            </ul>
+        </MenuPortal>
     );
-}
+});
+
+const renderLoading = () => <li>{'loading...'}</li>;
+
+const renderError = () => <li>{'error'}</li>;
+
+const renderNoMatches = () => <li>{'no matches'}</li>;
+
+const renderSuggestion = ({item, index, getItemProps, selectedItem, highlightedIndex}) => {
+    const isActive = highlightedIndex === index;
+    const isSelected = selectedItem === item;
+    const itemClassNames = classnames(styles.suggestion, {
+        [styles.activeSuggestion]: isActive,
+        [styles.selectedSuggestion]: isSelected
+    });
+    return (
+        <li
+            className={itemClassNames}
+            key={item}
+            {...getItemProps({
+                item,
+                index
+            })}>
+            {item}
+        </li>
+    );
+};
 
 
-class AutocompleteInput extends React.Component<any> {
+export default class AutocompleteInput extends React.Component<any> {
+
+    inputRef: React.RefObject<HTMLInputElement> = React.createRef()
 
     state = {
-        menuIsOpen: false,
         value: ''
     }
 
-    handleKeyDown = ({
-        event,
-        isOpen,
-        highlightedIndex,
-        selectHighlightedItem,
-        reset
-    }) => {
-        if (isOpen && ['Tab', ',', ';'].includes(event.key)) {
-            event.preventDefault();
-            if (highlightedIndex != null) {
-                selectHighlightedItem();
-            } else {
-                reset();
-            }
-        }
-    }
-
-    handleChange = (selectedItem, downshift) => {
-        console.log(selectedItem, downshift);
-        this.setState({
-            menuIsOpen: false
-        }, () => {
-
-            downshift.reset();
-
-        });
-        /*this.setState(
-            (state) => ({
-                ...state
-            })
-            () => {
-                downshift.reset()
-                //this.props.onChange(this.state.selectedContacts)
-            },
-        )*/
-    }
-
-
     handleStateChange = (changes, downshift) => {
-        console.log(changes, downshift);
-
         if (changes.hasOwnProperty('selectedItem')) {
-            this.setState({value: changes.selectedItem})
+            this.setState({value: changes.selectedItem});
         } else if (changes.hasOwnProperty('inputValue')) {
-            this.setState({value: changes.inputValue})
+            this.setState({value: changes.inputValue});
         }
-
     }
-
-    input: any = null
 
     render() {
-
-
-
         return (
             <Downshift
-
-              selectedItem={this.state.value}
-              onChange={this.handleChange}
-              onOuterClick={() => this.setState({
-                  menuIsOpen: !false
-              })}
-              onStateChange={this.handleStateChange}
-          >
-            {({
-                clearItems,
-                getItemProps,
-                getInputProps,
-                getLabelProps,
-                getMenuProps,
-                highlightedIndex,
-                inputValue,
-                isOpen,
-                reset,
-
-                selectedItem,
-                setHighlightedIndex,
-                setItemCount,
-                selectHighlightedItem
-
-            }) => (
-                <div>
-                  <Input
-
-                    {...getInputProps({
-                        ref: (input) => this.input = input,
-                        onKeyDown: (event) => this.handleKeyDown({
-                            event,
-                            isOpen,
-                            highlightedIndex,
-                            selectHighlightedItem,
-                            reset
-                        })
-                    })} />
-
-
-                  {isOpen ?
-                      (
-                          <SuggestionsList
-                            input={this.input}
-                            value={inputValue}
-                            render={({loading, error, items}) => {
-                                   if (loading) {
-                                       return renderLoader();
-                                   }
-
-                                   if (error) {
-                                       return renderError();
-                                   }
-
-                                   return items.map((item, index) =>
-                                      renderSuggestion({
-                                           item,
-                                           index,
-                                           getItemProps,
-                                           highlightedIndex
-                                      })
-                                   );
-                            }}
-                            onLoaded={({items: suggestions}) => {
-                                clearItems();
-                                if (suggestions) {
-                                    setHighlightedIndex(suggestions.length ? 0 : null);
-                                    setItemCount(suggestions.length);
-                                }
-                            }} />
-
-                      ) :
-                   null}
-
-                </div>
-            )}
-         </Downshift>);
+                selectedItem={this.state.value}
+                onStateChange={this.handleStateChange}
+            >
+                {({
+                    clearItems,
+                    getItemProps,
+                    getInputProps,
+                    getMenuProps,
+                    highlightedIndex,
+                    inputValue,
+                    isOpen,
+                    selectedItem,
+                    setHighlightedIndex,
+                    setItemCount
+                }) => {
+                    const cssStyle = calcMenuStyles(this.inputRef.current); // todo: memoize
+                    return (
+                        <div>
+                            <Input ref={this.inputRef} {...getInputProps()} />
+                            <Menu {...getMenuProps({isOpen: isOpen && Boolean(inputValue), style: cssStyle})}>
+                                <DataProvider value={inputValue} onLoaded={(items) => {
+                                    clearItems();
+                                    if (items) {
+                                        setHighlightedIndex(items.length ? 0 : null);
+                                        setItemCount(items.length);
+                                    }
+                                }}>
+                                    {
+                                        ({items, loading, error}) => {
+                                            if (isOpen === false) {
+                                                return null;
+                                            }
+                                            if (loading) {
+                                                return renderLoading();
+                                            }
+                                            if (error) {
+                                                return renderError();
+                                            }
+                                            if (items && items.length === 0) {
+                                                return renderNoMatches();
+                                            }
+                                            return items.map(
+                                                (item, index) => renderSuggestion({
+                                                    item,
+                                                    index,
+                                                    getItemProps,
+                                                    highlightedIndex,
+                                                    selectedItem
+                                                })
+                                            );
+                                        }
+                                    }
+                                </DataProvider>
+                            </Menu>
+                        </div>
+                    );
+                }}
+            </Downshift>
+        );
     }
 }
-
-export default AutocompleteInput;

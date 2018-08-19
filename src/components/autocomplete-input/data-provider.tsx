@@ -10,40 +10,30 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import {debounce} from './utils';
 import fetchFromSomewhere from './test-fixtures';
-import styles from './autocomplete-suggestions-list.module.css';
 
 
-class SuggestionsList extends React.PureComponent<any> {
+export default class DataProvider extends React.PureComponent<any> {
 
     static initialState = {loading: false, error: null, items: []}
 
-    state = SuggestionsList.initialState
+    state = DataProvider.initialState
 
     mounted: boolean = false
 
-    cssStyle: any = null
-
-    constructor(props) {
-        super(props);
-        const inputDOMNode = ReactDOM.findDOMNode(props.input);
-        const inputDOMRect = inputDOMNode.getBoundingClientRect();
-
-        this.cssStyle = {
-            top: inputDOMNode.offsetHeight + inputDOMRect.y + window.pageYOffset + 'px',
-            minWidth: inputDOMNode.offsetWidth + 'px',
-            left: inputDOMRect.x + window.pageXOffset + 'px'
-        };
-
-    }
-
     componentDidMount() {
         this.mounted = true;
-        this.fetch(this.props.value);
+
+        this.setState({
+            loading: true
+        }, () => this.fetch(this.props.value));
     }
 
     componentDidUpdate(prevProps) {
-        if (prevProps.value !== this.props.value) {
-            this.debouncedFetch(this.props.value);
+        const value = this.props.value;
+        if (prevProps.value !== value) {
+            this.setState({
+                loading: true
+            }, () => this.debouncedFetch(value));
         }
     }
 
@@ -51,18 +41,7 @@ class SuggestionsList extends React.PureComponent<any> {
         this.mounted = false;
     }
 
-    reset = (overrides) => {
-        this.setState({
-            ...SuggestionsList.initialState,
-            ...overrides
-        });
-    }
-
     fetch(value) {
-        this.reset({
-            loading: true
-        });
-
         const isActual = () => value === this.props.value;
 
         return fetchFromSomewhere(value)
@@ -72,7 +51,7 @@ class SuggestionsList extends React.PureComponent<any> {
                         items: result,
                         loading: false,
                         error: null
-                    }, () => this.props.onLoaded(result));
+                    }, () => this.props.onLoaded && this.props.onLoaded(result));
                 }
             })
             .catch((error) => {
@@ -84,24 +63,16 @@ class SuggestionsList extends React.PureComponent<any> {
                     });
                 }
             });
-
     }
 
     debouncedFetch = debounce(this.fetch, 200, false)
 
     render() {
-        return (
-            <div
-              style={this.cssStyle}
-              className={styles.container}>
-              {this.props.render({
-                  items: this.state.items,
-                  loading: this.state.loading,
-                  error: this.state.error
-              })}
-            </div>
-        );
+        return (this.props.children as (any) => JSX.Element)({
+            items: this.state.items,
+            loading: this.state.loading,
+            error: this.state.error
+        });
     }
 }
 
-export default SuggestionsList;

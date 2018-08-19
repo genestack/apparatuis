@@ -22,6 +22,19 @@ function debounce(func, wait, immediate) { // source: https://gist.github.com/sa
     };
 }
 
+function calcMenuStyles(inputDOMNode) {
+    if (!inputDOMNode) return {};
+    const inputDOMRect = inputDOMNode.getBoundingClientRect();
+    return {
+        position: 'absolute',
+        zIndex: 1070,
+        top: inputDOMNode.offsetHeight + inputDOMRect.y + window.pageYOffset + 'px',
+        minWidth: inputDOMNode.offsetWidth + 'px',
+        left: inputDOMRect.x + window.pageXOffset + 'px'
+    };
+}
+
 export {
-    debounce
+    debounce,
+    calcMenuStyles
 };
