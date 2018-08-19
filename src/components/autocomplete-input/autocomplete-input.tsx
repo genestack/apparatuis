@@ -53,10 +53,8 @@ const renderSuggestion = ({item, index, getItemProps, selectedItem, highlightedI
         <li
             className={itemClassNames}
             key={item}
-            {...getItemProps({
-                item,
-                index
-            })}>
+            {...getItemProps({item, index})}
+        >
             {item}
         </li>
     );
@@ -64,14 +62,13 @@ const renderSuggestion = ({item, index, getItemProps, selectedItem, highlightedI
 
 
 export default class AutocompleteInput extends React.Component<any> {
-
     inputRef: React.RefObject<HTMLInputElement> = React.createRef()
 
     state = {
         value: ''
     }
 
-    handleStateChange = (changes, downshift) => {
+    handleStateChange = (changes) => {
         if (changes.hasOwnProperty('selectedItem')) {
             this.setState({value: changes.selectedItem});
         } else if (changes.hasOwnProperty('inputValue')) {
@@ -98,17 +95,21 @@ export default class AutocompleteInput extends React.Component<any> {
                     setItemCount
                 }) => {
                     const cssStyle = calcMenuStyles(this.inputRef.current); // todo: memoize
+                    const isMenuVisible = isOpen && Boolean(inputValue);
                     return (
-                        <div>
+                        <div className={styles.autocomplete}>
                             <Input ref={this.inputRef} {...getInputProps()} />
-                            <Menu {...getMenuProps({isOpen: isOpen && Boolean(inputValue), style: cssStyle})}>
-                                <DataProvider value={inputValue} onLoaded={(items) => {
-                                    clearItems();
-                                    if (items) {
-                                        setHighlightedIndex(items.length ? 0 : null);
-                                        setItemCount(items.length);
-                                    }
-                                }}>
+                            <Menu {...getMenuProps({isOpen: isMenuVisible, style: cssStyle})}>
+                                <DataProvider
+                                    value={inputValue}
+                                    onLoaded={(items) => {
+                                        clearItems();
+                                        if (items) {
+                                            setHighlightedIndex(items.length ? 0 : null);
+                                            setItemCount(items.length);
+                                        }
+                                    }}
+                                >
                                     {
                                         ({items, loading, error}) => {
                                             if (isOpen === false) {

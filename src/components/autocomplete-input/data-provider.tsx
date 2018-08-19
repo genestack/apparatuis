@@ -7,7 +7,6 @@
  */
 
 import React from 'react';
-import ReactDOM from 'react-dom';
 import {debounce} from './utils';
 import fetchFromSomewhere from './test-fixtures';
 
@@ -44,7 +43,7 @@ export default class DataProvider extends React.PureComponent<any> {
     fetch(value) {
         const isActual = () => value === this.props.value;
 
-        return fetchFromSomewhere(value)
+        return (this.props.fetch || fetchFromSomewhere)(value)
             .then((result) => {
                 if (isActual && this.mounted) {
                     this.setState({
