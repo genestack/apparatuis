@@ -8,12 +8,11 @@
 
 import React from 'react';
 import {debounce} from './utils';
-import fetchFromSomewhere from './test-fixtures';
 
 
 export default class DataProvider extends React.PureComponent<DataProviderProps> {
 
-    static initialState = {loading: false, error: null, items: []}
+    static initialState = {loading: false, error: null, items: [], value: null}
 
     state = DataProvider.initialState
 
@@ -45,13 +44,14 @@ export default class DataProvider extends React.PureComponent<DataProviderProps>
     fetch(value) {
         const isActual = () => value === this.props.value;
 
-        return (this.props.fetch || fetchFromSomewhere)(value)
+        return this.props.fetch(value)
             .then((result) => {
                 if (isActual && this.mounted) {
                     this.setState({
                         items: result,
                         loading: false,
-                        error: null
+                        error: null,
+                        value
                     }, () => this.props.onLoaded && this.props.onLoaded(result));
                 }
             })
@@ -60,7 +60,8 @@ export default class DataProvider extends React.PureComponent<DataProviderProps>
                     this.setState({
                         items: [],
                         loading: false,
-                        error: error || true
+                        error: error || true,
+                        value
                     });
                 }
             });
@@ -69,10 +70,12 @@ export default class DataProvider extends React.PureComponent<DataProviderProps>
     debouncedFetch = debounce(this.fetch, 200, false)
 
     render() {
+        const {items, loading, error, value} = this.state;
         return this.props.children({
-            items: this.state.items,
-            loading: this.state.loading,
-            error: this.state.error
+            items,
+            loading,
+            error,
+            value
         });
     }
 }
@@ -81,9 +84,10 @@ type DataProviderProps = {
     children: ({
         items: array,
         loading: boolean,
-        error: any
+        error: any,
+        value: string
     }) => JSX.Element,
     value: string,
-    fetch?: (value: string) => Promise<any>,
+    fetch: (value: string) => Promise<any>,
     onLoaded?: (array) => any
 };

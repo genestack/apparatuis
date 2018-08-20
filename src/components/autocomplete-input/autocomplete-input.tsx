@@ -15,7 +15,7 @@ import styles from './styles.module.css';
 
 
 const Input = React.forwardRef((props, ref: React.RefObject<HTMLInputElement>) => (
-    <input ref={ref} {...props} />
+    <input ref={ref} {...props} className={styles.input} />
 ));
 
 // appending to body to prevent from being hided by parent "overflow: hidden" css-rule
@@ -42,21 +42,22 @@ const renderError = () => <li>{'error'}</li>;
 
 const renderNoMatches = () => <li>{'no matches'}</li>;
 
-const renderSuggestion = ({item, index, getItemProps, selectedItem, highlightedIndex}) => {
+const renderSuggestion = ({item, index, value, getItemProps, selectedItem, highlightedIndex}) => {
     const isActive = highlightedIndex === index;
     const isSelected = selectedItem === item;
     const itemClassNames = classnames(styles.suggestion, {
         [styles.activeSuggestion]: isActive,
         [styles.selectedSuggestion]: isSelected
     });
+    const highlightRegExp = new RegExp(`(${value})`, 'ig');
+    const itemWithHighlights = item.replace(highlightRegExp, '<mark>$1</mark>');
+
     return (
         <li
             className={itemClassNames}
             key={item}
             {...getItemProps({item, index})}
-        >
-            {item}
-        </li>
+            dangerouslySetInnerHTML={{__html: itemWithHighlights}} />
     );
 };
 
@@ -65,14 +66,32 @@ export default class AutocompleteInput extends React.Component<any> {
     inputRef: React.RefObject<HTMLInputElement> = React.createRef()
 
     state = {
-        value: ''
+        value: this.props.value || ''
+    }
+
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.value !== this.state.value) {
+            this.setState({
+                value: nextProps.value
+            });
+        }
+    }
+
+    handleChange = () => {
+        if (this.props.onChange) {
+            this.props.onChange(this.state.value);
+        }
     }
 
     handleStateChange = (changes) => {
         if (changes.hasOwnProperty('selectedItem')) {
-            this.setState({value: changes.selectedItem});
+            this.setState({
+                value: changes.selectedItem
+            }, this.handleChange);
         } else if (changes.hasOwnProperty('inputValue')) {
-            this.setState({value: changes.inputValue});
+            this.setState({
+                value: changes.inputValue
+            }, this.handleChange);
         }
     }
 
@@ -102,6 +121,7 @@ export default class AutocompleteInput extends React.Component<any> {
                             <Menu {...getMenuProps({isOpen: isMenuVisible, style: cssStyle})}>
                                 <DataProvider
                                     value={inputValue}
+                                    fetch={this.props.fetch}
                                     onLoaded={(items) => {
                                         clearItems();
                                         if (items) {
@@ -111,7 +131,7 @@ export default class AutocompleteInput extends React.Component<any> {
                                     }}
                                 >
                                     {
-                                        ({items, loading, error}) => {
+                                        ({items, loading, error, value}) => {
                                             if (isOpen === false) {
                                                 return null;
                                             }
@@ -121,6 +141,9 @@ export default class AutocompleteInput extends React.Component<any> {
                                             if (error) {
                                                 return renderError();
                                             }
+                                            if (value !== inputValue) {
+                                                return null;
+                                            }
                                             if (items && items.length === 0) {
                                                 return renderNoMatches();
                                             }
@@ -128,6 +151,7 @@ export default class AutocompleteInput extends React.Component<any> {
                                                 (item, index) => renderSuggestion({
                                                     item,
                                                     index,
+                                                    value,
                                                     getItemProps,
                                                     highlightedIndex,
                                                     selectedItem
