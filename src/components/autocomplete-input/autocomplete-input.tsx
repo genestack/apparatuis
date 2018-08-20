@@ -36,11 +36,11 @@ const Menu = React.forwardRef((props: any, ref: React.RefObject<HTMLUListElement
     );
 });
 
-const renderLoading = () => <li>{'loading...'}</li>;
+const renderLoading = () => <li className={styles.loadingState}>{'Searching...'}</li>;
 
-const renderError = () => <li>{'error'}</li>;
+const renderError = () => <li className={styles.errorState}>{'Network error occurred. Try again later.'}</li>;
 
-const renderNoMatches = () => <li>{'no matches'}</li>;
+const renderNoMatches = () => <li className={styles.emptyResultState}>{'No results found'}</li>;
 
 const renderSuggestion = ({item, index, value, getItemProps, selectedItem, highlightedIndex}) => {
     const isActive = highlightedIndex === index;

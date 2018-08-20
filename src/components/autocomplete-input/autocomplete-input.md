@@ -25,7 +25,7 @@
         ].sort((a, b) => a.localeCompare(b));
     
         return new Promise((resolve, reject) => {
-            const timeout = 200;
+            const timeout = 500;
             const items = data.filter(item => item.includes(value)).splice(0, 5);
             setTimeout(
                 () => Math.random() > 0.9 ?
