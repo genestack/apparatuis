@@ -10,14 +10,25 @@ import classNames from 'classnames';
 import styles from './button.module.css';
 
 
-export default ({kind = 'default', className = '', isDisabled, size = 'medium', ...otherProps}: ButtonProps) =>
-    <button
-        className={classNames(className, styles.btn, styles[size], {
-            [styles.btnPrimary]: kind === 'primary'
-        })}
-        disabled={isDisabled}
-        {...otherProps}
-    />;
+export default React.forwardRef((props: ButtonProps, ref: React.RefObject<HTMLButtonElement>) => {
+    const {
+        kind = 'default',
+        className = '',
+        isDisabled,
+        size = 'medium',
+        ...otherProps
+    } = props;
+    return (
+        <button
+            ref={ref}
+            className={classNames(className, styles.btn, styles[size], {
+                [styles.btnPrimary]: kind === 'primary'
+            })}
+            disabled={isDisabled}
+            {...otherProps}
+        />
+    );
+});
 
 type sizeType = 'small' | 'medium';
 
