@@ -11,34 +11,40 @@ import classNames from 'classnames';
 import styles from './input.module.css';
 import {ObjectOmit} from 'typelevel-ts';
 
-export default class extends React.Component<InputProps> {
 
-    handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        const {onChange, onValueChange, name} = this.props;
-        const {value} = event.currentTarget;
+export default React.forwardRef((props: InputProps, ref: React.RefObject<HTMLInputElement>) => {
+    const {
+        className = '',
+        hasError = false,
+        ...restProps
+    } = props;
+    const {
+        onChange,
+        onValueChange,
+        name
+    } = props;
 
-        onChange && onChange(
-            event,
-            name
-                ? {[name]: value}
-                : value
-        );
+    return (
+        <input
+            ref={ref}
+            {...restProps}
+            className={classNames(className, styles.input, {[styles.hasError]: hasError})}
+            onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+                const {value} = event.currentTarget;
 
-        onValueChange && onValueChange(value);
-    }
+                onChange && onChange(
+                    event,
+                    name
+                        ? {[name]: value}
+                        : value
+                );
 
-    render() {
-        const {className = '', hasError = false, ...props} = this.props;
+                onValueChange && onValueChange(value);
+            }}
+        />
+    );
+});
 
-        return (
-            <input
-                {...props}
-                className={classNames(className, styles.input, {[styles.hasError]: hasError})}
-                onChange={this.handleChange}
-            />
-        );
-    }
-}
 
 export type InputProps =
     &   ObjectOmit<
