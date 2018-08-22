@@ -16,18 +16,17 @@ export default React.forwardRef((props: InputProps, ref: React.RefObject<HTMLInp
     const {
         className = '',
         hasError = false,
-        ...restProps
-    } = props;
-    const {
         onChange,
         onValueChange,
-        name
+        name,
+        ...restProps
     } = props;
 
     return (
         <input
             ref={ref}
             {...restProps}
+            name={name}
             className={classNames(className, styles.input, {[styles.hasError]: hasError})}
             onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
                 const {value} = event.currentTarget;
