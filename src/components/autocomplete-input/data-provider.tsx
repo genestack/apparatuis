@@ -7,87 +7,79 @@
  */
 
 import React from 'react';
-import {debounce} from './utils';
+import debounce from 'lodash.debounce';
 
 
 export default class DataProvider extends React.PureComponent<DataProviderProps> {
 
-    static initialState = {loading: false, error: null, items: [], value: null}
+    static initialState = {isLoading: false, error: null, items: [], value: null};
 
-    state = DataProvider.initialState
+    state = DataProvider.initialState;
 
-    mounted: boolean = false
+    mounted: boolean = false;
 
     componentDidMount() {
         this.mounted = true;
-
-        this.setState({
-            ...DataProvider.initialState,
-            loading: true
-        }, () => this.fetch(this.props.value));
-    }
-
-    componentDidUpdate(prevProps) {
-        const value = this.props.value;
-        if (prevProps.value !== value) {
-            this.setState({
-                ...DataProvider.initialState,
-                loading: true
-            }, () => this.debouncedFetch(value));
-        }
     }
 
     componentWillUnmount() {
         this.mounted = false;
     }
 
-    fetch(value) {
-        const isActual = () => value === this.props.value;
+    fetch = () => {
+        const value = this.state.value;
+        const checkIfActual = () => value === this.state.value;
 
         return this.props.fetch(value)
             .then((result) => {
-                if (isActual && this.mounted) {
+                if (checkIfActual() && this.mounted) {
                     this.setState({
                         items: result,
-                        loading: false,
-                        error: null,
-                        value
+                        isLoading: false,
+                        error: null
                     }, () => this.props.onLoaded && this.props.onLoaded(result));
                 }
             })
             .catch((error) => {
-                if (isActual && this.mounted) {
+                if (checkIfActual() && this.mounted) {
                     this.setState({
                         items: [],
-                        loading: false,
-                        error: error || true,
-                        value
+                        isLoading: false,
+                        error: error || true
                     });
                 }
             });
     }
 
-    debouncedFetch = debounce(this.fetch, 200, false)
+    debouncedFetch = debounce(this.fetch, 200, false);
+
+    handleValueChange = (value) => this.setState({
+        isLoading: true,
+        value
+    }, this.debouncedFetch)
 
     render() {
-        const {items, loading, error, value} = this.state;
+        const {items, isLoading, error, value} = this.state;
         return this.props.children({
+            value,
             items,
-            loading,
+            isLoading,
             error,
-            value
+            onValueChange: this.handleValueChange
         });
     }
 }
 
-type DataProviderProps = {
-    children: ({
-        items: array,
-        loading: boolean,
-        error: any,
-        value: string
-    }) => JSX.Element,
+type DataProviderChildrenProps = {
     value: string,
+    items: any[],
+    isLoading: boolean,
+    error: any,
+    onValueChange: (value: string) => any
+};
+
+type DataProviderProps = {
     fetch: (value: string) => Promise<any>,
-    onLoaded?: (array) => any
+    onLoaded?: (array) => any,
+    children: (prop: DataProviderChildrenProps) => JSX.Element
 };

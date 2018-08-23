@@ -9,14 +9,11 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import Downshift from 'downshift';
 import classnames from 'classnames';
-import DataProvider from './data-provider';
-import {calcMenuStyles} from './utils';
+
+import Input from '../input/input';
+
 import styles from './styles.module.css';
 
-
-const Input = React.forwardRef((props, ref: React.RefObject<HTMLInputElement>) => (
-    <input ref={ref} {...props} className={styles.input} />
-));
 
 // appending to body to prevent from being hided by parent "overflow: hidden" css-rule
 const MenuPortal = ({children}) => ReactDOM.createPortal(children, document.body);
@@ -57,109 +54,74 @@ const renderSuggestion = ({item, index, value, getItemProps, selectedItem, highl
             className={itemClassNames}
             key={item}
             {...getItemProps({item, index})}
-            dangerouslySetInnerHTML={{__html: itemWithHighlights}} />
+            dangerouslySetInnerHTML={{__html: itemWithHighlights}}
+        />
     );
 };
 
 
-export default class AutocompleteInput extends React.Component<any> {
-    inputRef: React.RefObject<HTMLInputElement> = React.createRef()
+export default class AutocompleteInput extends React.Component<AutocompleteInputProps> {
 
-    state = {
-        value: this.props.value || ''
-    }
-
-    componentWillReceiveProps(nextProps) {
-        if (nextProps.value !== this.state.value) {
-            this.setState({
-                value: nextProps.value
-            });
-        }
-    }
-
-    handleChange = () => {
-        if (this.props.onChange) {
-            this.props.onChange(this.state.value);
-        }
-    }
+    inputRef: React.RefObject<{}> = React.createRef();
 
     handleStateChange = (changes) => {
         if (changes.hasOwnProperty('selectedItem')) {
-            this.setState({
-                value: changes.selectedItem
-            }, this.handleChange);
+            this.props.onValueChange(changes.selectedItem);
         } else if (changes.hasOwnProperty('inputValue')) {
-            this.setState({
-                value: changes.inputValue
-            }, this.handleChange);
+            this.props.onValueChange(changes.inputValue);
         }
     }
 
+    renderMenuContent({getItemProps, highlightedIndex, selectedItem}) {
+        const {isLoading, error, items, value} = this.props;
+        if (isLoading) {
+            return renderLoading();
+        }
+        if (error) {
+            return renderError();
+        }
+        if (items && items.length === 0) {
+            return renderNoMatches();
+        }
+        return items.map(
+            (item, index) => renderSuggestion({
+                item,
+                index,
+                value,
+                getItemProps,
+                highlightedIndex,
+                selectedItem
+            })
+        );
+    }
+
     render() {
+        const {value} = this.props;
         return (
             <Downshift
-                selectedItem={this.state.value}
+                selectedItem={value}
                 onStateChange={this.handleStateChange}
             >
                 {({
-                    clearItems,
                     getItemProps,
                     getInputProps,
                     getMenuProps,
                     highlightedIndex,
                     inputValue,
                     isOpen,
-                    selectedItem,
-                    setHighlightedIndex,
-                    setItemCount
+                    selectedItem
                 }) => {
-                    const cssStyle = calcMenuStyles(this.inputRef.current); // todo: memoize
+                    const menuStyle = calcMenuStyles(this.inputRef.current); // todo: memoize
                     const isMenuVisible = isOpen && Boolean(inputValue);
                     return (
-                        <div className={styles.autocomplete}>
+                        <div>
                             <Input ref={this.inputRef} {...getInputProps()} />
-                            <Menu {...getMenuProps({isOpen: isMenuVisible, style: cssStyle})}>
-                                <DataProvider
-                                    value={inputValue}
-                                    fetch={this.props.fetch}
-                                    onLoaded={(items) => {
-                                        clearItems();
-                                        if (items) {
-                                            setHighlightedIndex(items.length ? 0 : null);
-                                            setItemCount(items.length);
-                                        }
-                                    }}
-                                >
-                                    {
-                                        ({items, loading, error, value}) => {
-                                            if (isOpen === false) {
-                                                return null;
-                                            }
-                                            if (loading) {
-                                                return renderLoading();
-                                            }
-                                            if (error) {
-                                                return renderError();
-                                            }
-                                            if (value !== inputValue) {
-                                                return null;
-                                            }
-                                            if (items && items.length === 0) {
-                                                return renderNoMatches();
-                                            }
-                                            return items.map(
-                                                (item, index) => renderSuggestion({
-                                                    item,
-                                                    index,
-                                                    value,
-                                                    getItemProps,
-                                                    highlightedIndex,
-                                                    selectedItem
-                                                })
-                                            );
-                                        }
-                                    }
-                                </DataProvider>
+                            <Menu {...getMenuProps({isOpen: isMenuVisible, style: menuStyle})}>
+                                {this.renderMenuContent({
+                                    getItemProps,
+                                    highlightedIndex,
+                                    selectedItem
+                                })}
                             </Menu>
                         </div>
                     );
@@ -167,4 +129,24 @@ export default class AutocompleteInput extends React.Component<any> {
             </Downshift>
         );
     }
+}
+
+type AutocompleteInputProps = {
+    items: any[],
+    isLoading: boolean,
+    error: any,
+    onValueChange: (value: string) => any
+    value: string
+};
+
+function calcMenuStyles(inputDOMNode) {
+    if (!inputDOMNode) return {};
+    const inputDOMRect = inputDOMNode.getBoundingClientRect();
+    return {
+        position: 'absolute',
+        zIndex: 1070,
+        top: inputDOMNode.offsetHeight + inputDOMRect.y + window.pageYOffset + 'px',
+        minWidth: inputDOMNode.offsetWidth + 'px',
+        left: inputDOMRect.x + window.pageXOffset + 'px'
+    };
 }
