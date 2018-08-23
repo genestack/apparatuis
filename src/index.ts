@@ -14,6 +14,8 @@ export {default as Paginator} from './components/paginator/paginator';
 export {default as Select} from './components/select/select';
 export {default as Tooltip} from './components/tooltip/tooltip';
 export {default as TextareaAutosize} from './components/textarea-autosize/textarea-autosize';
+export {default as AutocompleteInput} from './components/autocomplete-input/autocomplete-input';
+export {default as AutocompleteDataProvider} from './components/autocomplete-input/data-provider';
 export {default as toClass} from './utils/toClass';
 
 import * as effects from './effects/';
