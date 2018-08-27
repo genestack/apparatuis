@@ -1,7 +1,8 @@
 ```js
+const AutocompleteDataProvider = require('./data-provider').default;
 initialState = { emulateNetworkError: false };
 <div>
-    <DataProvider fetch={(value) => {
+    <AutocompleteDataProvider fetch={(value) => {
         const data = [
             'Don Perry',
             'Olivia Nguyen',
@@ -46,7 +47,7 @@ initialState = { emulateNetworkError: false };
                 value={value}
             />
         )}
-    </DataProvider>
+    </AutocompleteDataProvider>
 
     <p>
         <Checkbox
