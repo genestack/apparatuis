@@ -24,11 +24,11 @@ initialState = { emulateNetworkError: false };
             'Melvin Williams',
             'Harriet Carroll'
         ].sort((a, b) => a.localeCompare(b));
-    
+
         return new Promise((resolve, reject) => {
-            const timeout = 500;
+            const timeout = 400;
             const items = data.filter(item => item.includes(value)).slice(0, 5);
-                         
+
             setTimeout(
                 () => state.emulateNetworkError ?
                     reject() :
@@ -47,14 +47,14 @@ initialState = { emulateNetworkError: false };
             />
         )}
     </DataProvider>
-    
+
     <p>
         <Checkbox
-            isChecked={state.emulateNetworkError} 
+            isChecked={state.emulateNetworkError}
             onChange={(event, value) => setState({
                 emulateNetworkError: value
-            })} 
-        >   
+            })}
+        >
             Emulate network error
         </Checkbox>
     </p>

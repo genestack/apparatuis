@@ -101,6 +101,7 @@ export default class AutocompleteInput extends React.Component<AutocompleteInput
             <Downshift
                 selectedItem={value}
                 onStateChange={this.handleStateChange}
+                defaultHighlightedIndex={0}
             >
                 {({
                     getItemProps,
