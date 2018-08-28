@@ -8,7 +8,8 @@
 import React from 'react';
 import classNames from 'classnames';
 import styles from './button.module.css';
-
+import primaryStyles from './button-primary.module.css';
+import defaultStyles from './button-default.module.css';
 
 export default React.forwardRef((props: ButtonProps, ref: React.RefObject<HTMLButtonElement>) => {
     const {
@@ -22,7 +23,8 @@ export default React.forwardRef((props: ButtonProps, ref: React.RefObject<HTMLBu
         <button
             ref={ref}
             className={classNames(className, styles.btn, styles[size], {
-                [styles.btnPrimary]: kind === 'primary'
+                [primaryStyles.btnPrimary]: kind === 'primary',
+                [defaultStyles.btnDefault]: kind === 'default'
             })}
             disabled={isDisabled}
             {...otherProps}
