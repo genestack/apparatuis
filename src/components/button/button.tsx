@@ -11,15 +11,26 @@ import styles from './button.module.css';
 import primaryStyles from './button-primary.module.css';
 import defaultStyles from './button-default.module.css';
 
-export default ({kind = 'default', className = '', isDisabled, size = 'medium', ...otherProps}: ButtonProps) =>
-    <button
-        className={classNames(className, styles.btn, styles[size], {
-            [primaryStyles.btnPrimary]: kind === 'primary',
-            [defaultStyles.btnDefault]: kind === 'default'
-        })}
-        disabled={isDisabled}
-        {...otherProps}
-    />;
+export default React.forwardRef((props: ButtonProps, ref: React.RefObject<HTMLButtonElement>) => {
+    const {
+        kind = 'default',
+        className = '',
+        isDisabled,
+        size = 'medium',
+        ...otherProps
+    } = props;
+    return (
+        <button
+            ref={ref}
+            className={classNames(className, styles.btn, styles[size], {
+                [primaryStyles.btnPrimary]: kind === 'primary',
+                [defaultStyles.btnDefault]: kind === 'default'
+            })}
+            disabled={isDisabled}
+            {...otherProps}
+        />
+    );
+});
 
 type sizeType = 'small' | 'medium';
 
