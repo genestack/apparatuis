@@ -83,8 +83,10 @@ export default class AutocompleteInput extends React.Component<AutocompleteInput
         if (items && items.length === 0) {
             return renderNoMatches();
         }
+        const renderSuggestionFn = this.props.renderSuggestion || renderSuggestion;
+
         return items.map(
-            (item, index) => renderSuggestion({
+            (item, index) => renderSuggestionFn({
                 item,
                 index,
                 value,
@@ -132,12 +134,22 @@ export default class AutocompleteInput extends React.Component<AutocompleteInput
     }
 }
 
+type RenderSuggestionProps = {
+    item: string,
+    index: number,
+    value: string,
+    getItemProps: (any) => any,
+    selectedItem: string,
+    highlightedIndex: number
+};
+
 type AutocompleteInputProps = {
     items: any[],
     isLoading: boolean,
     error: any,
     onValueChange: (value: string) => any
-    value: string
+    value: string,
+    renderSuggestion?: (props: RenderSuggestionProps) => JSX.Element
 };
 
 function calcMenuStyles(inputDOMNode) {
