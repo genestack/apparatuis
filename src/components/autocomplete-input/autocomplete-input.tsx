@@ -7,11 +7,9 @@
  */
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Downshift from 'downshift';
 import classnames from 'classnames';
-
 import Input from '../input/input';
-
+import Downshift from './downshift-issue-512-fix';
 import styles from './styles.module.css';
 
 
