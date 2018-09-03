@@ -72,16 +72,20 @@ export default class AutocompleteInput extends React.Component<AutocompleteInput
 
     renderMenuContent({getItemProps, highlightedIndex, selectedItem}) {
         const {isLoading, error, items, value} = this.props;
+        const renderSuggestionFn = this.props.renderSuggestion || renderSuggestion;
+        const renderLoadingFn = this.props.renderLoading || renderLoading;
+        const renderErrorFn = this.props.renderError || renderError;
+        const renderNoMatchesFn = this.props.renderNoMatches || renderNoMatches;
+
         if (isLoading) {
-            return renderLoading();
+            return renderLoadingFn();
         }
         if (error) {
-            return renderError();
+            return renderErrorFn(error);
         }
         if (items && items.length === 0) {
-            return renderNoMatches();
+            return renderNoMatchesFn();
         }
-        const renderSuggestionFn = this.props.renderSuggestion || renderSuggestion;
 
         return items.map(
             (item, index) => renderSuggestionFn({
@@ -147,7 +151,10 @@ type AutocompleteInputProps = {
     error: any,
     onValueChange: (value: string) => any
     value: string,
-    renderSuggestion?: (props: RenderSuggestionProps) => JSX.Element
+    renderSuggestion?: (props: RenderSuggestionProps) => JSX.Element,
+    renderLoading?: () => JSX.Element,
+    renderNoMatches?: () => JSX.Element,
+    renderError?: (error: any) =>  JSX.Element
 };
 
 function calcMenuStyles(inputDOMNode) {
