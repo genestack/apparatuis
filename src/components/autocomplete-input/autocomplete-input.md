@@ -1,6 +1,30 @@
 ```js
 const AutocompleteDataProvider = require('./data-provider').default;
-initialState = { emulateNetworkError: false };
+initialState = {
+    emulateNetworkError: false,
+    customRenderSuggestion: false,
+    customRenderLoading: false,
+    customRenderNoMatches: false,
+    customRenderError: false
+};
+
+customRenderSuggestionFn = ({item, index, getItemProps}) => (
+    <li key={index} {...getItemProps({item, index})}>
+        {item} {index}
+    </li>
+);
+
+customRenderLoadingFn = () => (
+    <li>{'Loading...'}</li>
+);
+
+customRenderNoMatchesFn = () => (
+    <li>{'No matches'}</li>
+);
+
+customRenderErrorFn = () => (
+    <li>{'ERROR'}</li>
+);
 
 fetchFn = (value) => {
     const data = [
@@ -52,18 +76,49 @@ fetchFn = (value) => {
         </Checkbox>
     </p>
 
+
     <p>
-        <AutocompleteDataProvider fetch={fetchFn}>
-            {({items, isLoading, value, error, onValueChange}) => (
-                <AutocompleteInput
-                    items={items}
-                    isLoading={isLoading}
-                    error={error}
-                    onValueChange={onValueChange}
-                    value={value}
-                />
-            )}
-        </AutocompleteDataProvider>
+        <Checkbox
+            isChecked={state.customRenderSuggestion}
+            onChange={(event, value) => setState({
+                customRenderSuggestion: value
+            })}
+        >
+            Custom <b>renderSuggestion</b>
+        </Checkbox>
+
+        <br />
+
+        <Checkbox
+            isChecked={state.customRenderLoading}
+            onChange={(event, value) => setState({
+                customRenderLoading: value
+            })}
+        >
+            Custom <b>renderLoading</b>
+        </Checkbox>
+
+        <br />
+
+        <Checkbox
+            isChecked={state.customRenderNoMatches}
+            onChange={(event, value) => setState({
+                customRenderNoMatches: value
+            })}
+        >
+            Custom <b>renderNoMatches</b>
+        </Checkbox>
+
+        <br />
+
+        <Checkbox
+            isChecked={state.customRenderError}
+            onChange={(event, value) => setState({
+                customRenderError: value
+            })}
+        >
+            Custom <b>renderError</b>
+        </Checkbox>
     </p>
 
     <p>
@@ -75,13 +130,10 @@ fetchFn = (value) => {
                     error={error}
                     onValueChange={onValueChange}
                     value={value}
-                    renderSuggestion={
-                        ({item, index, getItemProps}) => (
-                            <li key={index} {...getItemProps({item, index})}>
-                                {item} {index}
-                            </li>
-                        )
-                    }
+                    renderSuggestion={state.customRenderSuggestion ? customRenderSuggestionFn : undefined}
+                    renderLoading={state.customRenderLoading ? customRenderLoadingFn : undefined}
+                    renderNoMatches={state.customRenderNoMatches ? customRenderNoMatchesFn : undefined}
+                    renderError={state.customRenderError ? customRenderErrorFn : undefined}
                 />
             )}
         </AutocompleteDataProvider>
