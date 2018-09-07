@@ -125,6 +125,7 @@ fetchFn = (value) => {
         <AutocompleteDataProvider fetch={fetchFn}>
             {({items, isLoading, value, error, onValueChange}) => (
                 <AutocompleteInput
+                    hasError={Boolean(error)}
                     items={items}
                     isLoading={isLoading}
                     error={error}

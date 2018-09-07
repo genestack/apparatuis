@@ -8,7 +8,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import classnames from 'classnames';
-import Input from '../input/input';
+import Input, {InputProps} from '../input/input';
 import Downshift from './downshift-issue-512-fix';
 import styles from './styles.module.css';
 
@@ -100,21 +100,19 @@ export default class AutocompleteInput extends React.Component<AutocompleteInput
     }
 
     render() {
-        const {value, placeholder = ''} = this.props;
-        const inputProps = {
-            placeholder,
-            onKeyDown: (event) => {
-                // Prevent Downshift's default 'Enter' behavior
-                // (menu is opened but there're no suggetions)
-                if (event.key === 'Enter' && this.props.items.length === 0) {
-                    event.nativeEvent.preventDownshiftDefault = true;
-                }
-            }
-        };
+        const inputProps: InputProps = omit([
+            'items',
+            'isLoading',
+            'error',
+            'renderSuggestion',
+            'renderLoading',
+            'renderNoMatches',
+            'renderError'
+        ], this.props);
 
         return (
             <Downshift
-                selectedItem={value}
+                selectedItem={inputProps.value}
                 onStateChange={this.handleStateChange}
                 defaultHighlightedIndex={0}
             >
@@ -156,18 +154,17 @@ type RenderSuggestionProps = {
     highlightedIndex: number
 };
 
-type AutocompleteInputProps = {
-    items: any[],
-    isLoading: boolean,
-    error: any,
-    onValueChange: (value: string) => any
-    value: string,
-    placeholder?: string,
-    renderSuggestion?: (props: RenderSuggestionProps) => JSX.Element,
-    renderLoading?: () => JSX.Element,
-    renderNoMatches?: () => JSX.Element,
-    renderError?: (error: any) =>  JSX.Element
-};
+type AutocompleteInputProps =
+    & InputProps
+    & {
+        items: any[],
+        isLoading: boolean,
+        error: any,
+        renderSuggestion?: (props: RenderSuggestionProps) => JSX.Element,
+        renderLoading?: () => JSX.Element,
+        renderNoMatches?: () => JSX.Element,
+        renderError?: (error: any) =>  JSX.Element
+    };
 
 function calcMenuStyles(inputDOMNode) {
     if (!inputDOMNode) return {};
@@ -179,4 +176,13 @@ function calcMenuStyles(inputDOMNode) {
         minWidth: inputDOMNode.offsetWidth + 'px',
         left: inputDOMRect.x + window.pageXOffset + 'px'
     };
+}
+
+function omit(omitProps, props) {
+    return Object.keys(props)
+        .reduce((newObj, key) => (
+            omitProps.includes(key) ?
+                newObj :
+                {...newObj, [key]: props[key]}
+        ), {});
 }
