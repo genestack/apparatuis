@@ -12,7 +12,7 @@ import debounce from 'lodash.debounce';
 
 export default class DataProvider extends React.PureComponent<DataProviderProps> {
 
-    static initialState = {isLoading: false, error: null, items: [], value: null};
+    static initialState = {isLoading: false, error: null, items: [], value: ''};
 
     state = DataProvider.initialState;
 

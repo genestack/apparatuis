@@ -125,11 +125,13 @@ fetchFn = (value) => {
         <AutocompleteDataProvider fetch={fetchFn}>
             {({items, isLoading, value, error, onValueChange}) => (
                 <AutocompleteInput
+                    hasError={Boolean(error)}
                     items={items}
                     isLoading={isLoading}
                     error={error}
                     onValueChange={onValueChange}
                     value={value}
+                    placeholder={'Autocomplete placeholder'}
                     renderSuggestion={state.customRenderSuggestion ? customRenderSuggestionFn : undefined}
                     renderLoading={state.customRenderLoading ? customRenderLoadingFn : undefined}
                     renderNoMatches={state.customRenderNoMatches ? customRenderNoMatchesFn : undefined}
