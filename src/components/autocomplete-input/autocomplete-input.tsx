@@ -162,6 +162,7 @@ type AutocompleteInputProps = {
     error: any,
     onValueChange: (value: string) => any
     value: string,
+    placeholder?: string,
     renderSuggestion?: (props: RenderSuggestionProps) => JSX.Element,
     renderLoading?: () => JSX.Element,
     renderNoMatches?: () => JSX.Element,
