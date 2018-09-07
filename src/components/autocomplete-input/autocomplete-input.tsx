@@ -102,7 +102,14 @@ export default class AutocompleteInput extends React.Component<AutocompleteInput
     render() {
         const {value, placeholder = ''} = this.props;
         const inputProps = {
-            placeholder
+            placeholder,
+            onKeyDown: (event) => {
+                // Prevent Downshift's default 'Enter' behavior
+                // (menu is opened but there're no suggetions)
+                if (event.key === 'Enter' && this.props.items.length === 0) {
+                    event.nativeEvent.preventDownshiftDefault = true;
+                }
+            }
         };
 
         return (
