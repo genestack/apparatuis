@@ -130,6 +130,7 @@ fetchFn = (value) => {
                     error={error}
                     onValueChange={onValueChange}
                     value={value}
+                    placeholder={'Autocomplete placeholder'}
                     renderSuggestion={state.customRenderSuggestion ? customRenderSuggestionFn : undefined}
                     renderLoading={state.customRenderLoading ? customRenderLoadingFn : undefined}
                     renderNoMatches={state.customRenderNoMatches ? customRenderNoMatchesFn : undefined}
