@@ -20,6 +20,10 @@
     border-radius: 3px;
 }
 
+.suggestions:empty {
+    display: none !important;
+}
+
 .suggestion {
     padding: 4px 10px;
     font-size: 14px;

@@ -100,7 +100,11 @@ export default class AutocompleteInput extends React.Component<AutocompleteInput
     }
 
     render() {
-        const {value} = this.props;
+        const {value, placeholder = ''} = this.props;
+        const inputProps = {
+            placeholder
+        };
+
         return (
             <Downshift
                 selectedItem={value}
@@ -120,7 +124,7 @@ export default class AutocompleteInput extends React.Component<AutocompleteInput
                     const isMenuVisible = isOpen && Boolean(inputValue);
                     return (
                         <div>
-                            <Input ref={this.inputRef} {...getInputProps()} />
+                            <Input ref={this.inputRef} {...getInputProps(inputProps)} />
                             <Menu {...getMenuProps({isOpen: isMenuVisible, style: menuStyle})}>
                                 {this.renderMenuContent({
                                     getItemProps,
