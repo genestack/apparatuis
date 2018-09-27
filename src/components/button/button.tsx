@@ -18,9 +18,8 @@ export default React.forwardRef((props: ButtonProps, ref: React.RefObject<HTMLBu
         className = '',
         isDisabled,
         size = 'medium',
-        tooltip = null,
+        tooltipProps = null,
         onClick,
-        tabIndex = null,
         ...otherProps
     } = props;
 
@@ -35,15 +34,15 @@ export default React.forwardRef((props: ButtonProps, ref: React.RefObject<HTMLBu
                 [primaryStyles.btnPrimary]: kind === 'primary',
                 [defaultStyles.btnDefault]: kind === 'default'
             })}
-            tabIndex={isDisabled ? -1 : tabIndex}
+            tabIndex={isDisabled ? -1 : null}
             aria-disabled={isDisabled}
             {...otherProps}
         />
     ;
 
-    if (tooltip) {
+    if (tooltipProps) {
         return (
-            <Tooltip placement="top" mouseLeaveDelay={0} {...tooltip}>
+            <Tooltip placement="top" mouseLeaveDelay={0} {...tooltipProps}>
                 {button}
             </Tooltip>
         );
@@ -62,5 +61,5 @@ export type ButtonProps =
         kind?: 'default' | 'primary',
         size?: sizeType,
         isDisabled?: boolean,
-        tooltip?: TooltipProps
+        tooltipProps?: TooltipProps
     };

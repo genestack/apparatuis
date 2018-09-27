@@ -7,9 +7,8 @@ export default function IconButton(props: propTypes) {
     const {
         className = '',
         isDisabled,
-        tooltip = null,
+        tooltipProps = null,
         onClick,
-        tabIndex = null,
         ...otherProps
     } = props;
 
@@ -19,15 +18,15 @@ export default function IconButton(props: propTypes) {
             className={classNames(className, styles.btn, {
                 [styles.disabled]: isDisabled,
             })}
-            tabIndex={isDisabled ? -1 : tabIndex}
+            tabIndex={isDisabled ? -1 : null}
             aria-disabled={isDisabled}
             {...otherProps}
         />
     );
 
-    if (tooltip) {
+    if (tooltipProps) {
         return (
-            <Tooltip placement="top" mouseLeaveDelay={0} {...tooltip}>
+            <Tooltip placement="top" mouseLeaveDelay={0} {...tooltipProps}>
                 {button}
             </Tooltip>
         );
@@ -42,5 +41,5 @@ type propTypes =
         >
     & {
         isDisabled?: boolean,
-        tooltip?: TooltipProps
+        tooltipProps?: TooltipProps
     };
