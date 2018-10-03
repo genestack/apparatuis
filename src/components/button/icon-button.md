@@ -1,0 +1,11 @@
+```js
+<div>
+    <IconButton onClick={() => alert('clicked')}>
+        <img width="22" src="https://goo.gl/fGkAat" />
+    </IconButton>
+    <br/>
+    <IconButton onClick={() => alert('clicked')} isDisabled>
+        <img width="22" src="https://goo.gl/fGkAat" />
+    </IconButton> - disabled
+</div>
+```
