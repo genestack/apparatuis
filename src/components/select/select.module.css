@@ -7,88 +7,44 @@
  */
 @import "./../../variables.css";
 
-.container {
-    position: relative;
-    height: 30px;
-    overflow: hidden;
-    border-radius: 4px;
-    border: 1px solid var(--gs-color-input-borders);
-}
-
-.container:before {
-    content: "";
-    top: 0;
-    right: 0;
-    width: 27px;
-    height: 100%;
-    background-color: rgb(255, 255, 255);
-    position: absolute;
-    display: block;
-    pointer-events: none;
-}
-
-.container.isDisabled:before {
-    background-color: var(--gs-color-background-disabled);
-}
-
-.container:after {
-    content: "";
-    border: 4px solid rgba(51, 51, 51, 0);
-    border-top-color: rgb(51, 51, 51);
-    position: absolute;
-    display: block;
-    pointer-events: none;
-    right: 10px;
-    top: 13px;
-}
-
-.container.isFocused {
-    border-color: rgba(82, 168, 236, 0.8);
-    box-shadow: 0 0 7px 0 rgba(82, 168, 236, 0.6);
-}
-
-.container.isDisabled {
-    background-color: var(--gs-color-background-disabled);
-    border-color: rgb(211, 211, 211);
-}
-
-.container.hasError {
-    border-color: rgb(185, 74, 72);
-}
-
-.container.isDisabled:after {
-    border-top-color: var(--gs-color-input-placeholders);
-}
-
 .select {
     font-size: 14px;
     font-family: var(--gs-font-family);
     appearance: none;
-    padding: 0 0 0 10px;
+    padding: 0 28px 0 10px;
     margin-bottom: 0;
-    border: none;
     background-color: rgb(255, 255, 255);
-    width: calc(100% + 20px);
-    height: 100%;
+    background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAYAAADED76LAAAAO0lEQVQoU2NcsGDB/8mTJzNgA7m5uQyMIAlsikCSCQkJjGAF6IpgkiBxuAKYIhAN0gnTiKIAmzvooAAAEIUX6MIrqiQAAAAASUVORK5CYII=");
+    background-position: calc(100% - 10px) calc(50% + 2px);
+    background-repeat: no-repeat;
+    height: 30px;
     line-height: 30px;
-}
-
-.select:disabled {
-    background-color: unset;
-}
-
-.withValue .select {
+    border-radius: 4px;
+    border: 1px solid var(--gs-color-input-borders);
     color: rgb(51, 51, 51);
 }
 
-.withValue.isDisabled .select {
-    color: rgb(85, 85, 85);
-}
-
-.withoutValue .select {
-    color: var(--gs-color-input-placeholders);
-}
-
 .select:focus {
-    outline: none;
+    border-color: rgba(82, 168, 236, 0.8);
+    outline: 0;
+    outline: thin dotted \9;
+    box-shadow: 0 0 7px 0 rgba(82, 168, 236, 0.6);
+}
+
+.select.hasError {
+    border-color: rgb(185, 74, 72);
+}
+
+.select.hasError:focus {
+    box-shadow: 0 0 4px rgba(233, 50, 60, 0.4);
+}
+
+.select:disabled {
+    color: rgb(85, 85, 85);
+    background-color: var(--gs-color-background-disabled);
+}
+
+.select.emptyValue:disabled,
+.select.emptyValue {
+    color: var(--gs-color-input-placeholders);
 }

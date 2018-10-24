@@ -9,78 +9,109 @@ import React, {PureComponent} from 'react';
 import classNames from 'classnames';
 import styles from './select.module.css';
 
-const WITHOUT_VALUE = 'WITHOUT_VALUE';
+
+const emptyValue = '';
 
 export default class Select extends PureComponent<SelectProps> {
     static defaultProps: Partial<SelectProps> = {
         placeholder: 'Select a value...',
-        isDisabled: false,
-        hasError: false,
-        width: 200
+        hasError: false
     };
-
-    state = {
-        isFocused: false
-    };
-
-    handleFocus = () => this.setState({isFocused: true});
-    handleBlur = () => this.setState({isFocused: false});
 
     handleChange = (event) => {
-        // event.target.value is always a string, but option.value may be a number
-        // tslint:disable-next-line: triple-equals
-        const selectedOption = this.props.options.find((option) => option.value == event.target.value) || null;
-        this.props.onChange(event, selectedOption);
+        const {onChange, onValueChange, options} = this.props;
+        const option = options[parseInt(event.target.value, 10)];
+        onChange && onChange({
+            ...event,
+            target: {
+                ...event.target,
+                // stringify value for the "native" event
+                value: option ? String(option.value) : emptyValue
+            }
+        });
+
+        if (!onValueChange) {
+            return;
+        }
+
+        const value = option ?
+            option.value :
+            emptyValue;
+
+        onValueChange(value);
     }
 
     render() {
-        const {value, placeholder, isDisabled, hasError, width} = this.props;
-        const options = [{value: WITHOUT_VALUE, label: placeholder}, ...this.props.options];
+        const {
+            value,
+            placeholder,
+            hasError,
+            required,
+            className,
+            options,
+            onChange, onValueChange, ...rest
+        } = this.props;
+
+        const isEmptyValue =
+            value === emptyValue ||
+            value === undefined ||
+            value === null;
+
+        const selectHasError = hasError || (required && isEmptyValue);
+
+        const selectValue = isEmptyValue ?
+            emptyValue :
+            options.findIndex((option) => option.value === value);
+
+        const selectClassName = classNames(
+            className,
+            styles.select,
+            {
+                [styles.emptyValue]: isEmptyValue,
+                [styles.hasError]: selectHasError
+            }
+        );
 
         return (
-            <div
-                className={classNames(styles.container, {
-                    [styles.isFocused]: this.state.isFocused,
-                    [styles.isDisabled]: isDisabled,
-                    [styles.hasError]: hasError,
-                    [styles.withValue]: !!value,
-                    [styles.withoutValue]: !value
-                })}
-                style={{width}}
+            <select
+                className={selectClassName}
+                value={selectValue}
+                onChange={this.handleChange}
+                required={required}
+                {...rest}
             >
-                <select
-                    className={styles.select}
-                    value={value ? value.value : WITHOUT_VALUE}
-                    onFocus={this.handleFocus}
-                    onBlur={this.handleBlur}
-                    disabled={isDisabled}
-                    onChange={this.handleChange}
-                >
-                    {options.map((option) => (
-                        <option
-                            value={option.value}
-                            key={option.value}
-                        >
-                            {option.label}
-                        </option>
-                    ))}
-                </select>
-            </div>
+                {required && !isEmptyValue ?
+                    null :
+                    <option value={emptyValue}>
+                        {placeholder}
+                    </option>}
+                {options.map((option, index) => (
+                    <option
+                        value={index}
+                        key={option.value}
+                    >
+                        {option.label}
+                    </option>
+                ))}
+            </select>
         );
     }
 }
 
-export type SelectProps = {
-    options: Array<option>,
-    value: option,
-    placeholder?: string,
-    isDisabled?: boolean,
-    hasError?: boolean,
-    width?: string | number,
-    onChange: (event: object, value: option) => any
-};
+export type SelectProps =
+    & React.DetailedHTMLProps<
+        React.SelectHTMLAttributes<HTMLSelectElement>,
+        HTMLSelectElement
+    >
+    & {
+        options: Array<option>,
+        value: any,
+        placeholder?: string,
+        hasError?: boolean,
+        onValueChange: (value: any) => any
+    };
 
 type option = {
-    label: string | number,
-    value: string | number,
+    value: any,
+    label: string
 };

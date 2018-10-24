@@ -1,36 +1,62 @@
 ```js
 initialState = { value: null };
+
+const options = [
+    {value: true, label: 'Option 1 (Boolean, true)'},
+    {value: "true", label: 'Option 2 (String, "true")'},
+    {value: 1, label: 'Option 3 (Integer, 1)'},
+    {value: "1", label: 'Option 4 (String, "1")'}
+];
+
 <div>
-    <Select
-        placeholder="Select attribute..."
-        options={[{value: 2, label: 'Option 1'}, {value:3, label: 'Option 2'}, {value: 4, label: 'Option 3'}, ]}
-        value={state.value}
-        onChange={(event, value) => setState({value})}
-    />
-    <br />
-    <Select
-        placeholder="Select attribute..."
-        options={[{value: 2, label: 'Option 1'}, {value:3, label: 'Option 2'}, {value: 4, label: 'Option 3'}, ]}
-        value={state.value}
-        onChange={(event, value) => setState({value})}
-        isDisabled
-    />
-    <br />
-    <Select
-        placeholder="Select attribute..."
-        options={[{value: 2, label: 'Option 1'}, {value:3, label: 'Option 2'}, {value: 4, label: 'Option 3'}, ]}
-        value={state.value}
-        onChange={(event, value) => setState({value})}
-        hasError
-    />
-    <br />
-    <Select
-        placeholder="Select attribute..."
-        options={[{value: 2, label: 'Option 1'}, {value:3, label: 'Option 2'}, {value: 4, label: 'Option 3'}, ]}
-        value={state.value}
-        onChange={(event, value) => setState({value})}
-        hasError
-        isDisabled
-    />
+    <p>
+        <Select
+            placeholder="Select attribute..."
+            options={options}
+            value={state.value}
+            onValueChange={(value) => setState({value})}
+        />
+    </p>
+
+    <p>
+        <Select
+            placeholder="Select attribute..."
+            options={options}
+            value={state.value}
+            onValueChange={(value) => setState({value})}
+            disabled
+        />
+    </p>
+
+    <p>
+        <Select
+            placeholder="Select attribute..."
+            options={options}
+            value={state.value}
+            onValueChange={(value) => setState({value})}
+            hasError
+        />
+    </p>
+
+    <p>
+        <Select
+            placeholder="Select attribute..."
+            options={options}
+            value={state.value}
+            onValueChange={(value) => setState({value})}
+            hasError
+            disabled
+        />
+    </p>
+
+    <p>
+        <Select
+            placeholder="Select attribute..."
+            options={options}
+            value={state.value}
+            onValueChange={(value) => setState({value})}
+            required
+        />
+    </p>
 </div>
 ```
