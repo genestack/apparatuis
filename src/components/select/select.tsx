@@ -21,27 +21,32 @@ export default class Select extends PureComponent<SelectProps> {
     handleChange = (event) => {
         const {onChange, onValueChange, options} = this.props;
         const option = options[parseInt(event.target.value, 10)];
-        onChange && onChange({
-            ...event,
-            target: {
-                ...event.target,
-                // stringify value for the "native" event
-                value: option ? String(option.value) : emptyValue
-            }
-        });
 
-        if (!onValueChange) {
-            return;
+        if (onChange) {
+            // original event has option index as its value,
+            // however in standard event it would be a stringified option.value
+            const eventValue = option ? String(option.value) : emptyValue;
+            onChange({
+                ...event,
+                target: {
+                    ...event.target,
+                    value: eventValue
+                }
+            });
         }
 
-        const value = option ?
-            option.value :
-            emptyValue;
-
-        onValueChange(value);
+        if (onValueChange) {
+            const value = option ?
+                option.value :
+                emptyValue;
+            onValueChange(value);
+        }
     }
 
     render() {
+        // "onChange" and "onValueChange" extracted here
+        // just to not allow them to be in the "rest" variable.
+        // "rest" is used to pass props down to native select-element
         const {
             value,
             placeholder,
@@ -85,14 +90,18 @@ export default class Select extends PureComponent<SelectProps> {
                     <option value={emptyValue}>
                         {placeholder}
                     </option>}
-                {options.map((option, index) => (
-                    <option
-                        value={index}
-                        key={option.value}
-                    >
-                        {option.label}
-                    </option>
-                ))}
+                {options.map((option, index) => {
+                    // we use index as a value to be able to use actual option.value in "onValueChage"
+                    // (not its stringified copy)
+                    return (
+                        <option
+                            value={index}
+                            key={option.value}
+                        >
+                            {option.label}
+                        </option>
+                    );
+                })}
             </select>
         );
     }
