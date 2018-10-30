@@ -6,7 +6,7 @@ import styles from './icon-button.module.css';
 export default function IconButton(props: propTypes) {
     const {
         className = '',
-        isDisabled,
+        disabled,
         tooltipProps = null,
         onClick,
         ...otherProps
@@ -14,12 +14,12 @@ export default function IconButton(props: propTypes) {
 
     const button = (
         <button
-            onClick={isDisabled ? null : onClick}
+            onClick={disabled ? null : onClick}
             className={classNames(className, styles.btn, {
-                [styles.disabled]: isDisabled,
+                [styles.disabled]: disabled,
             })}
-            tabIndex={isDisabled ? -1 : null}
-            aria-disabled={isDisabled}
+            tabIndex={disabled ? -1 : null}
+            aria-disabled={disabled}
             {...otherProps}
         />
     );
@@ -40,6 +40,5 @@ type propTypes =
             HTMLButtonElement
         >
     & {
-        isDisabled?: boolean,
         tooltipProps?: TooltipProps
     };

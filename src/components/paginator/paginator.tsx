@@ -26,7 +26,7 @@ export default (props: PaginatorProps) => {
             </div>
             <Button
                 onClick={clickPrevious(props)}
-                isDisabled={isFirstPage}
+                disabled={isFirstPage}
                 title='Previous page'
                 className={styles.button}
             >
@@ -34,7 +34,7 @@ export default (props: PaginatorProps) => {
             </Button>
             <Button
                 onClick={clickNext(props)}
-                isDisabled={isLastPage}
+                disabled={isLastPage}
                 title='Next page'
                 className={styles.button}
             >

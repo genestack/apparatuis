@@ -12,74 +12,72 @@ import CheckboxIcon from './checkboxIcon';
 import styles from './checkbox.module.css';
 
 export default class Checkbox extends React.Component<CheckboxProps> {
-    static defaultProps: Partial<CheckboxProps> = {
-        name: null,
-        className: '',
-        isDisabled: false
-    };
 
     handleChange = (event) => {
-        const {onChange, onValueChange, name, isChecked} = this.props;
-
-        onChange && onChange(
-            event,
-            typeof name === 'string'
-                ? {[name]: !isChecked}
-                : !isChecked,
-        );
-
-        onValueChange && onValueChange(!isChecked);
+        const {onChange, onValueChange} = this.props;
+        if (onChange) {
+            onChange(event);
+        }
+        if (onValueChange) {
+            onValueChange(event.target.checked);
+        }
     }
 
     render() {
-        const {isChecked, isDisabled, children, onChange, onValueChange, name, ...props} = this.props;
+        const {
+            className, children, // extract as React-specific properties
+            checked, disabled, // valid HTML attributes, but should be extracted to construct a className
+            onChange, onValueChange, // because of "handleChange" method
+
+            // "restProps" is used to pass props down to native input-element
+            ...restProps
+        } = this.props;
+
+        const labelClassName = classNames(
+            styles.container,
+            className,
+            {
+                [styles.containerDisabled]: disabled
+            }
+        );
 
         return (
-            <label
-                {...props}
-                className={classNames(styles.container, props.className, {[styles.containerDisabled]: isDisabled})}
-            >
+            <label className={labelClassName}>
                 <input
                     type="checkbox"
                     className={styles.input}
-                    checked={isChecked}
-                    disabled={isDisabled}
+                    checked={checked}
+                    disabled={disabled}
                     onChange={this.handleChange}
+                    {...restProps}
                 />
-                <div
+                <span
                     className={classNames(styles.iconBorder, {
-                        [styles.iconBorderDisabled]: isDisabled,
-                        [styles.iconBorderChecked]: isChecked
+                        [styles.iconBorderDisabled]: disabled,
+                        [styles.iconBorderChecked]: checked
                     })}
                 >
-                    {isChecked && (
-                        <CheckboxIcon isDisabled={isDisabled} />
+                    {checked && (
+                        <CheckboxIcon disabled={disabled} />
                     )}
-                </div>
+                </span>
                 {children && (
-                    <div className={styles.text}>{children}</div>
+                    <span className={styles.text}>{children}</span>
                 )}
             </label>
         );
     }
 }
 
-type BaseCheckboxProps =
-    ObjectOmit<
-        React.HTMLAttributes<HTMLLabelElement>,
-        'onChange'
-    >;
 
-type CheckboxProps = BaseCheckboxProps & {
-    onChange?: (
-                    event: object,
-                    value?: any
-                ) => void,
-    onValueChange?: OnValueChangeCallback<boolean>,
-    name?: string,
-    isChecked: boolean,
-    isDisabled?: boolean,
-    className?: string
-};
+type CheckboxProps =
+    React.DetailedHTMLProps<
+        React.InputHTMLAttributes<HTMLInputElement>,
+        HTMLInputElement
+    >
+    & {
+        onValueChange?: OnValueChangeCallback<boolean>,
+        className?: string
+    };
 
 type OnValueChangeCallback<T> = (value: T) => any;

@@ -67,7 +67,7 @@ fetchFn = (value) => {
 
     <p>
         <Checkbox
-            isChecked={state.emulateNetworkError}
+            checked={state.emulateNetworkError}
             onChange={(event, value) => setState({
                 emulateNetworkError: value
             })}
@@ -79,7 +79,7 @@ fetchFn = (value) => {
 
     <p>
         <Checkbox
-            isChecked={state.customRenderSuggestion}
+            checked={state.customRenderSuggestion}
             onChange={(event, value) => setState({
                 customRenderSuggestion: value
             })}
@@ -90,7 +90,7 @@ fetchFn = (value) => {
         <br />
 
         <Checkbox
-            isChecked={state.customRenderLoading}
+            checked={state.customRenderLoading}
             onChange={(event, value) => setState({
                 customRenderLoading: value
             })}
@@ -101,7 +101,7 @@ fetchFn = (value) => {
         <br />
 
         <Checkbox
-            isChecked={state.customRenderNoMatches}
+            checked={state.customRenderNoMatches}
             onChange={(event, value) => setState({
                 customRenderNoMatches: value
             })}
@@ -112,7 +112,7 @@ fetchFn = (value) => {
         <br />
 
         <Checkbox
-            isChecked={state.customRenderError}
+            checked={state.customRenderError}
             onChange={(event, value) => setState({
                 customRenderError: value
             })}
