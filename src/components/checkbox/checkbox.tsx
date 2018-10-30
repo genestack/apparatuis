@@ -71,9 +71,12 @@ export default class Checkbox extends React.Component<CheckboxProps> {
 
 
 type CheckboxProps =
-    React.DetailedHTMLProps<
-        React.InputHTMLAttributes<HTMLInputElement>,
-        HTMLInputElement
+    ObjectOmit<
+        React.DetailedHTMLProps<
+            React.InputHTMLAttributes<HTMLInputElement>,
+            HTMLInputElement
+        >,
+        'type'
     >
     & {
         onValueChange?: OnValueChangeCallback<boolean>,
