@@ -6,18 +6,23 @@
  * actual or intended publication of such source code.
  */
 import React from 'react';
+import classNames from 'classnames';
 import styles from './paginator.module.css';
 import Button from '../button/button';
 
 export default (props: PaginatorProps) => {
-    const {offset, itemsPerPage, itemsLength} = props;
+    const {offset, itemsPerPage, itemsLength, className} = props;
     const isFirstPage = offset === 0;
     const isLastPage = offset + itemsPerPage >= itemsLength;
     const firstShownItem = offset + 1;
     const lastShownItem = Math.min(offset + itemsPerPage, itemsLength);
+    const paginatorFullClassName = classNames(
+        styles.container,
+        className
+    );
 
     return (
-        <div className={styles.container}>
+        <div className={paginatorFullClassName}>
             <div className={styles.info}>
                 {firstShownItem === lastShownItem
                     ? lastShownItem
@@ -50,7 +55,8 @@ export type PaginatorProps =
         onChange: (value: number) => any,
         itemsLength: number,
         itemsPerPage: number,
-        offset: number
+        offset: number,
+        className?: string
     };
 
 const clickPrevious = ({onChange, offset, itemsPerPage}: PaginatorProps) => () =>
