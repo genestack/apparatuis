@@ -44,12 +44,12 @@ export default class Checkbox extends React.Component<CheckboxProps> {
         return (
             <label className={labelClassName}>
                 <input
-                    type="checkbox"
                     className={styles.input}
                     checked={checked}
                     disabled={disabled}
                     onChange={this.handleChange}
                     {...restProps}
+                    type="checkbox"
                 />
                 <span
                     className={classNames(styles.iconBorder, {
