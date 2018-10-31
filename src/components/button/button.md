@@ -13,7 +13,7 @@
     </Button>
     <Button
         onClick={() => alert('clicked on default button')}
-        isDisabled
+        disabled
         tooltipProps={{overlay: "Due to Genestack's guides, each disabled button should have a hint with an explanation"}}
     >
         Default disabled button
@@ -21,7 +21,7 @@
     <Button
         kind="primary"
         onClick={(event, value) => alert(`clicked on primary button with value=${value}`)}
-        isDisabled
+        disabled
         tooltipProps={{overlay:
             <div>Due to Genestack's guides,<br/> each disabled button should have a hint with an explanation</div>
         }}

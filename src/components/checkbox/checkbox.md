@@ -2,31 +2,25 @@
 initialState = { value: true };
 <div>
     <Checkbox
-        onChange={(event, value) => setState({value})}
-        isChecked={state.value}
+        onValueChange={(value) => setState({value})}
+        checked={state.value}
     />
 
     <br />
     <Checkbox
-        onChange={(event, value) => setState({value})}
-        isChecked={state.value}
+        onValueChange={(value) => setState({value})}
+        checked={state.value}
     >
         Label text
     </Checkbox>
 
     <br />
-    <Checkbox
-        isChecked
-        isDisabled
-    >
+    <Checkbox checked disabled>
         Checked and disabled
     </Checkbox>
 
     <br />
-    <Checkbox
-        isDisabled
-        isChecked={false}
-    >
+    <Checkbox disabled>
         Unchecked and disabled
     </Checkbox>
 </div>

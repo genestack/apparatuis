@@ -16,7 +16,7 @@ export default React.forwardRef((props: ButtonProps, ref: React.RefObject<HTMLBu
     const {
         kind = 'default',
         className = '',
-        isDisabled,
+        disabled,
         size = 'medium',
         tooltipProps = null,
         onClick,
@@ -25,17 +25,17 @@ export default React.forwardRef((props: ButtonProps, ref: React.RefObject<HTMLBu
 
     const button =
         <button
-            onClick={isDisabled ? null : onClick}
+            onClick={disabled ? null : onClick}
             ref={ref}
             className={classNames(className, styles.btn, styles[size], {
-                [styles.disabled]: isDisabled,
-                [primaryStyles.disabled]: isDisabled,
-                [defaultStyles.disabled]: isDisabled,
+                [styles.disabled]: disabled,
+                [primaryStyles.disabled]: disabled,
+                [defaultStyles.disabled]: disabled,
                 [primaryStyles.btnPrimary]: kind === 'primary',
                 [defaultStyles.btnDefault]: kind === 'default'
             })}
-            tabIndex={isDisabled ? -1 : null}
-            aria-disabled={isDisabled}
+            tabIndex={disabled ? -1 : null}
+            aria-disabled={disabled}
             {...otherProps}
         />
     ;
@@ -60,6 +60,5 @@ export type ButtonProps =
     & {
         kind?: 'default' | 'primary',
         size?: sizeType,
-        isDisabled?: boolean,
         tooltipProps?: TooltipProps
     };
