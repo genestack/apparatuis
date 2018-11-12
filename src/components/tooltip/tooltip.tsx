@@ -11,20 +11,11 @@ import RcTooltip from 'rc-tooltip';
 import classNames from 'classnames';
 import './tooltip.css';
 
-export default ({isError = false, overlayClassName = '', ...props}: TooltipProps) =>
-        <RcTooltip
-            prefixCls='genestack-ui-tooltip'
-            overlayClassName={
-                classNames(overlayClassName, {
-                    'genestack-ui-tooltip--error': isError
-                })
-            }
-            {...props}
-        />;
+export default (props: TooltipProps) => (
+    <RcTooltip
+        prefixCls='genestack-ui-tooltip'
+        {...props}
+    />
+);
 
-export type TooltipProps =
-    & RcTooltip['props']
-    & {
-        isError?: boolean
-        overlayClassName?: string
-    };
+export type TooltipProps = RcTooltip['props'];

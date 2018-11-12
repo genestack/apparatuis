@@ -5,7 +5,6 @@ Implemented by [rc-tooltip](https://github.com/react-component/tooltip) with Gen
         overlay="This field is required"
         visible={true}
         getTooltipContainer={() => document.getElementById('tooltip-container')}
-        isError
     >
         <Input style={{width: '300px'}} hasError />
     </Tooltip>
