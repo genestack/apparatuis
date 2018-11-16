@@ -26,6 +26,9 @@
     "ts-check": "tsc --noEmit -p ."
   },
   "devDependencies": {
+    "@types/extract-text-webpack-plugin": "^3.0.3",
+    "@types/lodash.debounce": "^4.0.3",
+    "@types/node": "^10.5.2",
     "@types/react": "^16.4.6",
     "@types/react-dom": "^16.0.6",
     "autoprefixer": "^8.6.4",

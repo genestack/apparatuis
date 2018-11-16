@@ -18,7 +18,7 @@ export default class Select extends PureComponent<SelectProps> {
         hasError: false
     };
 
-    handleChange = (event) => {
+    handleChange: React.ChangeEventHandler<HTMLSelectElement> = (event) => {
         const {onChange, onValueChange, options} = this.props;
         const option = options[parseInt(event.target.value, 10)];
 

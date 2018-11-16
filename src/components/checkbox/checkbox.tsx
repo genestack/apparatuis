@@ -13,7 +13,7 @@ import styles from './checkbox.module.css';
 
 export default class Checkbox extends React.Component<CheckboxProps> {
 
-    handleChange = (event) => {
+    handleChange: React.ChangeEventHandler<HTMLInputElement> = (event) => {
         const {onChange, onValueChange} = this.props;
         if (onChange) {
             onChange(event);
