@@ -12,7 +12,7 @@ import styles from './button.module.css';
 import primaryStyles from './button-primary.module.css';
 import defaultStyles from './button-default.module.css';
 
-export default React.forwardRef((props: ButtonProps, ref: React.RefObject<HTMLButtonElement>) => {
+export default React.forwardRef<HTMLButtonElement, ButtonProps>((props, ref) => {
     const {
         kind = 'default',
         className = '',
@@ -25,7 +25,7 @@ export default React.forwardRef((props: ButtonProps, ref: React.RefObject<HTMLBu
 
     const button =
         <button
-            onClick={disabled ? null : onClick}
+            onClick={disabled ? undefined : onClick}
             ref={ref}
             className={classNames(className, styles.btn, styles[size], {
                 [styles.disabled]: disabled,
@@ -34,7 +34,7 @@ export default React.forwardRef((props: ButtonProps, ref: React.RefObject<HTMLBu
                 [primaryStyles.btnPrimary]: kind === 'primary',
                 [defaultStyles.btnDefault]: kind === 'default'
             })}
-            tabIndex={disabled ? -1 : null}
+            tabIndex={disabled ? -1 : undefined}
             aria-disabled={disabled}
             {...otherProps}
         />
@@ -52,13 +52,8 @@ export default React.forwardRef((props: ButtonProps, ref: React.RefObject<HTMLBu
 
 type sizeType = 'small' | 'medium';
 
-export type ButtonProps =
-    & React.DetailedHTMLProps<
-            React.ButtonHTMLAttributes<HTMLButtonElement>,
-            HTMLButtonElement
-        >
-    & {
-        kind?: 'default' | 'primary',
-        size?: sizeType,
-        tooltipProps?: TooltipProps
-    };
+export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+    kind?: 'default' | 'primary',
+    size?: sizeType,
+    tooltipProps?: TooltipProps
+}

@@ -22,7 +22,8 @@
   "scripts": {
     "styleguide": "styleguidist server",
     "clean": "rm -rf dist",
-    "lint": "tslint src/**/*.tsx src/**/*.ts --fix && stylelint src/**/*.css --fix"
+    "lint": "tslint src/**/*.tsx src/**/*.ts --fix && stylelint src/**/*.css --fix",
+    "ts-check": "tsc --noEmit -p ."
   },
   "devDependencies": {
     "@types/react": "^16.4.6",
@@ -44,7 +45,7 @@
     "ts-loader": "^3.5.0",
     "tslint": "^5.9.1",
     "tslint-react": "^3.5.1",
-    "typescript": "^2.8.1",
+    "typescript": "^2.8.4",
     "webpack": "^3.11.0"
   },
   "dependencies": {
@@ -60,7 +61,7 @@
     "react": "^16.3.2",
     "react-dom": "^16.3.2",
     "react-textarea-autosize": "^6.1.0",
-    "typelevel-ts": "^0.2.3"
+    "typelevel-ts": "^0.2.4"
   },
   "peerDependencies": {
     "genestack-frontend-builder": ">= 0.7.0 < 2.0.0"

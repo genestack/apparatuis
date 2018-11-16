@@ -34,7 +34,7 @@ export default class Downshift extends OriginalDownshift {
             isOpen: false,
             highlightedIndex: this.props.defaultHighlightedIndex,
             selectedItem: item,
-            inputValue: this.props.itemToString(item),
+            inputValue: (this.props.itemToString as any)(item),
             ...pickState(otherStateToSet),
         }, cb)
 }

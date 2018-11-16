@@ -11,12 +11,13 @@ import classnames from 'classnames';
 import Input, {InputProps} from '../input/input';
 import Downshift from './downshift-issue-512-fix';
 import styles from './styles.module.css';
+import { GetInputPropsOptions } from 'downshift';
 
 
 // appending to body to prevent from being hided by parent "overflow: hidden" css-rule
 const MenuPortal = ({children}) => <Fragment>{ReactDOM.createPortal(children, document.body)}</Fragment>;
 
-const Menu = React.forwardRef((props: any, ref: React.RefObject<HTMLUListElement>) => {
+const Menu = React.forwardRef<HTMLUListElement, any>((props, ref) => {
     const {children, isOpen, ...rest} = props;
     const style = {
         ...props.style,
@@ -60,13 +61,17 @@ const renderSuggestion = ({item, index, value, getItemProps, selectedItem, highl
 
 export default class AutocompleteInput extends React.Component<AutocompleteInputProps> {
 
-    inputRef: React.RefObject<{}> = React.createRef();
+    inputRef = React.createRef<HTMLInputElement>();
 
     handleStateChange = (changes) => {
+        const { onValueChange } = this.props;
+
+        if (!onValueChange) { return; }
+
         if (changes.hasOwnProperty('selectedItem')) {
-            this.props.onValueChange(changes.selectedItem);
+            onValueChange(changes.selectedItem);
         } else if (changes.hasOwnProperty('inputValue')) {
-            this.props.onValueChange(changes.inputValue);
+            onValueChange(changes.inputValue);
         }
     }
 
@@ -91,7 +96,7 @@ export default class AutocompleteInput extends React.Component<AutocompleteInput
             (item, index) => renderSuggestionFn({
                 item,
                 index,
-                value,
+                value: value as any,
                 getItemProps,
                 highlightedIndex,
                 selectedItem
@@ -125,11 +130,17 @@ export default class AutocompleteInput extends React.Component<AutocompleteInput
                     isOpen,
                     selectedItem
                 }) => {
+                    const inputComponentProps: InputProps =
+                        getInputProps(inputProps as React.InputHTMLAttributes<HTMLInputElement>);
                     const menuStyle = calcMenuStyles(this.inputRef.current); // todo: memoize
                     const isMenuVisible = isOpen && Boolean(inputValue);
+
                     return (
                         <div>
-                            <Input ref={this.inputRef} {...getInputProps(inputProps)} />
+                            <Input
+                                ref={this.inputRef}
+                                {...inputComponentProps}
+                            />
                             <Menu {...getMenuProps({isOpen: isMenuVisible, style: menuStyle})}>
                                 {this.renderMenuContent({
                                     getItemProps,

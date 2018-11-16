@@ -14,11 +14,11 @@ export default function IconButton(props: propTypes) {
 
     const button = (
         <button
-            onClick={disabled ? null : onClick}
+            onClick={disabled ? undefined : onClick}
             className={classNames(className, styles.btn, {
                 [styles.disabled]: disabled,
             })}
-            tabIndex={disabled ? -1 : null}
+            tabIndex={disabled ? -1 : undefined}
             aria-disabled={disabled}
             {...otherProps}
         />
