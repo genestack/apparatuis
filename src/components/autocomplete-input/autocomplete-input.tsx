@@ -5,7 +5,7 @@
  * The copyright notice above does not evidence any
  * actual or intended publication of such source code.
  */
-import React from 'react';
+import React, { Fragment } from 'react';
 import ReactDOM from 'react-dom';
 import classnames from 'classnames';
 import Input, {InputProps} from '../input/input';
@@ -14,7 +14,7 @@ import styles from './styles.module.css';
 
 
 // appending to body to prevent from being hided by parent "overflow: hidden" css-rule
-const MenuPortal = ({children}) => ReactDOM.createPortal(children, document.body);
+const MenuPortal = ({children}) => <Fragment>{ReactDOM.createPortal(children, document.body)}</Fragment>;
 
 const Menu = React.forwardRef((props: any, ref: React.RefObject<HTMLUListElement>) => {
     const {children, isOpen, ...rest} = props;
