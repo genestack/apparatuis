@@ -23,9 +23,11 @@
     "styleguide": "styleguidist server",
     "clean": "rm -rf dist",
     "lint": "tslint src/**/*.tsx src/**/*.ts --fix && stylelint src/**/*.css --fix",
-    "ts-check": "tsc --noEmit -p ."
+    "ts-check": "tsc --noEmit -p .",
+    "test": "npm run ts-check"
   },
   "devDependencies": {
+    "@types/autoprefixer": "^6.7.3",
     "@types/extract-text-webpack-plugin": "^3.0.3",
     "@types/lodash.debounce": "^4.0.3",
     "@types/node": "^10.5.2",
