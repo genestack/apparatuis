@@ -9,7 +9,7 @@
 import React from 'react';
 import classNames from 'classnames';
 import styles from './input.module.css';
-import {ObjectOmit} from 'typelevel-ts';
+import { Omit } from '../../utils/omit';
 
 export default React.forwardRef<HTMLInputElement, InputProps>((props, ref) => {
     const {
@@ -44,7 +44,7 @@ export default React.forwardRef<HTMLInputElement, InputProps>((props, ref) => {
 });
 
 
-export interface InputProps extends ObjectOmit<React.InputHTMLAttributes<HTMLInputElement>, 'type' | 'onChange'> {
+export interface InputProps extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'type' | 'onChange'> {
     onChange?: (event: React.ChangeEvent<HTMLInputElement>, value: any) => void,
     hasError?: boolean,
     onValueChange?: OnValueChanger
