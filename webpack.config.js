@@ -5,7 +5,6 @@
  * The copyright notice above does not evidence any
  * actual or intended publication of such source code.
  */
-/// <reference types="node" />
 
 const path = require('path');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
