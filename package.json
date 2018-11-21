@@ -29,10 +29,7 @@
   "devDependencies": {
     "@types/autoprefixer": "^6.7.3",
     "@types/extract-text-webpack-plugin": "^3.0.3",
-    "@types/lodash.debounce": "^4.0.3",
     "@types/node": "^10.5.2",
-    "@types/react": "^16.4.6",
-    "@types/react-dom": "^16.0.6",
     "autoprefixer": "^8.6.4",
     "cpx": "^1.5.0",
     "css-loader": "^0.28.9",
@@ -55,8 +52,11 @@
   },
   "dependencies": {
     "@types/classnames": "^2.2.3",
+    "@types/lodash.debounce": "^4.0.3",
     "@types/prop-types": "^15.5.2",
     "@types/rc-tooltip": "^3.4.11",
+    "@types/react": "^16.4.6",
+    "@types/react-dom": "^16.0.6",
     "@types/react-textarea-autosize": "^4.3.2",
     "classnames": "^2.2.5",
     "downshift": "^2.1.1",
