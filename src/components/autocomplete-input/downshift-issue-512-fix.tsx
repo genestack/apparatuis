@@ -7,7 +7,7 @@
  */
 
 // TODO: see https://github.com/paypal/downshift/issues/512
-import OriginalDownshift from 'downshift';
+import OriginalDownshift, { Actions } from 'downshift';
 
 
 const stateKeys = [
@@ -18,8 +18,8 @@ const stateKeys = [
     'type'
 ];
 
-const pickState = (state = {}) => {
-    const result = {};
+const pickState = (state: any = {}) => {
+    const result: any = {};
     stateKeys.forEach((k) => {
         if (state.hasOwnProperty(k)) {
             result[k] = state[k];
@@ -29,12 +29,12 @@ const pickState = (state = {}) => {
 };
 
 export default class Downshift extends OriginalDownshift {
-    selectItem = (item, otherStateToSet, cb) =>
+    selectItem: Actions<any>['selectItem'] = (item, otherStateToSet, cb) =>
         (this as any).internalSetState({
             isOpen: false,
             highlightedIndex: this.props.defaultHighlightedIndex,
             selectedItem: item,
-            inputValue: this.props.itemToString(item),
+            inputValue: (this.props.itemToString as any)(item),
             ...pickState(otherStateToSet),
         }, cb)
 }

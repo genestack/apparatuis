@@ -19,6 +19,9 @@ const ANIMATION_DURATION = 350;
  */
 export default (node: React.ReactInstance) => {
     const element = ReactDOM.findDOMNode(node);
+
+    if (!(element instanceof Element)) { return; }
+
     element.classList.add(shake);
 
     setTimeout(

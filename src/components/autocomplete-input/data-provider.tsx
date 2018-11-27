@@ -51,9 +51,9 @@ export default class DataProvider extends React.PureComponent<DataProviderProps>
             });
     }
 
-    debouncedFetch = debounce(this.fetch, 100, false);
+    debouncedFetch = debounce(this.fetch, 100);
 
-    handleValueChange = (value) => this.setState({
+    handleValueChange = (value: string) => this.setState({
         isLoading: true,
         value
     }, this.debouncedFetch)
@@ -80,6 +80,6 @@ type DataProviderChildrenProps = {
 
 type DataProviderProps = {
     fetch: (value: string) => Promise<any>,
-    onLoaded?: (array) => any,
+    onLoaded?: (array: any) => any,
     children: (prop: DataProviderChildrenProps) => JSX.Element
 };

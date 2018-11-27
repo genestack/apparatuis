@@ -9,10 +9,9 @@
 import React from 'react';
 import classNames from 'classnames';
 import styles from './input.module.css';
-import {ObjectOmit} from 'typelevel-ts';
+import { Omit } from '../../utils/omit';
 
-
-export default React.forwardRef((props: InputProps, ref: React.RefObject<HTMLInputElement>) => {
+export default React.forwardRef<HTMLInputElement, InputProps>((props, ref) => {
     const {
         className = '',
         hasError = false,
@@ -45,18 +44,10 @@ export default React.forwardRef((props: InputProps, ref: React.RefObject<HTMLInp
 });
 
 
-export type InputProps =
-    &   ObjectOmit<
-            React.DetailedHTMLProps<
-                React.InputHTMLAttributes<HTMLInputElement>,
-                HTMLInputElement
-            >,
-            'type'
-        >
-    &   {
-            onChange?: (event: React.ChangeEvent<HTMLInputElement>, value: any) => any,
-            hasError?: boolean,
-            onValueChange?: OnValueChanger
-        };
+export interface InputProps extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'type' | 'onChange'> {
+    onChange?: (event: React.ChangeEvent<HTMLInputElement>, value: any) => void,
+    hasError?: boolean,
+    onValueChange?: OnValueChanger
+}
 
 type OnValueChanger = (value: string) => any;

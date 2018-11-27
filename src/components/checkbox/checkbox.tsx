@@ -7,13 +7,13 @@
  */
 import React from 'react';
 import classNames from 'classnames';
-import {ObjectOmit} from 'typelevel-ts';
 import CheckboxIcon from './checkboxIcon';
 import styles from './checkbox.module.css';
+import { Omit } from '../../utils/omit';
 
 export default class Checkbox extends React.Component<CheckboxProps> {
 
-    handleChange = (event) => {
+    handleChange: React.ChangeEventHandler<HTMLInputElement> = (event) => {
         const {onChange, onValueChange} = this.props;
         if (onChange) {
             onChange(event);
@@ -70,17 +70,9 @@ export default class Checkbox extends React.Component<CheckboxProps> {
 }
 
 
-type CheckboxProps =
-    ObjectOmit<
-        React.DetailedHTMLProps<
-            React.InputHTMLAttributes<HTMLInputElement>,
-            HTMLInputElement
-        >,
-        'type'
-    >
-    & {
-        onValueChange?: OnValueChangeCallback<boolean>,
-        className?: string
-    };
+interface CheckboxProps extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'type'> {
+    onValueChange?: OnValueChangeCallback<boolean>;
+    className?: string;
+}
 
 type OnValueChangeCallback<T> = (value: T) => any;

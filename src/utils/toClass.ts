@@ -39,7 +39,7 @@ const isClassComponent =
         сomponent.prototype &&
         typeof сomponent.prototype.render === 'function';
 
-const getDisplayName = (component) =>
+const getDisplayName = (component: string | React.ComponentClass<any> | React.StatelessComponent<any>) =>
     typeof component === 'string'
         ? component
         : (component.displayName && component.displayName + 'Class') || component.name || 'Component';

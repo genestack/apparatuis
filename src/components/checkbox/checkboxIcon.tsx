@@ -8,7 +8,6 @@
 
 import React from 'react';
 import classNames from 'classnames';
-import {ObjectOmit} from 'typelevel-ts';
 import styles from './checkbox.module.css';
 
 export default function CheckboxIcon(props: CheckboxProps) {
