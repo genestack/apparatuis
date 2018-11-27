@@ -1,6 +1,6 @@
 {
   "name": "genestack-ui",
-  "version": "6.5.0",
+  "version": "6.5.1",
   "description": "UI library",
   "main": "src/",
   "types": "src/",
@@ -20,7 +20,7 @@
     ]
   },
   "scripts": {
-    "styleguide": "styleguidist server",
+    "start": "styleguidist server",
     "clean": "rm -rf dist",
     "lint": "tslint src/**/*.tsx src/**/*.ts --fix && stylelint src/**/*.css --fix",
     "ts-check": "tsc --noEmit -p .",
