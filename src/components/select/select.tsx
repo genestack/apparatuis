@@ -96,7 +96,7 @@ export default class Select extends PureComponent<SelectProps> {
                     return (
                         <option
                             value={index}
-                            key={option.value}
+                            key={option.label}
                         >
                             {option.label}
                         </option>

@@ -4,9 +4,9 @@ initialState = { value: null };
 
 const options = [
     {value: true, label: 'Option 1 (Boolean, true)'},
-    {value: "false", label: 'Option 2 (String, "false")'},
+    {value: "true", label: 'Option 2 (String, "true")'},
     {value: 1, label: 'Option 3 (Integer, 1)'},
-    {value: "2", label: 'Option 4 (String, "2")'}
+    {value: "1", label: 'Option 4 (String, "1")'}
 ];
 
 <div>
