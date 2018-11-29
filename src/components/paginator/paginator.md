@@ -1,4 +1,5 @@
 ```js
+const Paginator = require('./paginator').default;
 initialState = { offset: 0 };
 <Paginator
     offset={state.offset}

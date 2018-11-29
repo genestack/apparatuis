@@ -1,5 +1,7 @@
 ```js
+const AutocompleteInput = require('./autocomplete-input.tsx').default;
 const AutocompleteDataProvider = require('./data-provider').default;
+const Checkbox = require('../checkbox/checkbox').default;
 initialState = {
     emulateNetworkError: false,
     customRenderSuggestion: false,
@@ -65,7 +67,7 @@ fetchFn = (value) => {
 
 <div>
 
-    <p>
+    <div>
         <Checkbox
             checked={state.emulateNetworkError}
             onChange={(event, value) => setState({
@@ -74,10 +76,10 @@ fetchFn = (value) => {
         >
             Emulate network error
         </Checkbox>
-    </p>
+    </div>
 
 
-    <p>
+    <div>
         <Checkbox
             checked={state.customRenderSuggestion}
             onChange={(event, value) => setState({
@@ -119,9 +121,9 @@ fetchFn = (value) => {
         >
             Custom <b>renderError</b>
         </Checkbox>
-    </p>
+    </div>
 
-    <p>
+    <div>
         <AutocompleteDataProvider fetch={fetchFn}>
             {({items, isLoading, value, error, onValueChange}) => (
                 <AutocompleteInput
@@ -139,6 +141,6 @@ fetchFn = (value) => {
                 />
             )}
         </AutocompleteDataProvider>
-    </p>
+    </div>
 </div>
 ```

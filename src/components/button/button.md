@@ -1,4 +1,5 @@
 ```js
+const Button = require('./button').default;
 <div>
     <Button
         onClick={() => alert('clicked on default button')}

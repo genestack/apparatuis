@@ -1,4 +1,5 @@
 ```js
+const Checkbox = require('./checkbox').default;
 initialState = { value: true };
 <div>
     <Checkbox

@@ -1,4 +1,6 @@
 ```js
+const ButtonsGroup = require('./buttons-group').default;
+const Button = require('../button/button').default;
 <ButtonsGroup>
     <Button
         onClick={() => alert('clicked on default button')}
