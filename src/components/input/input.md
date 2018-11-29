@@ -1,5 +1,5 @@
 ```js
-const Input = require('./input).default;
+const Input = require('./input').default;
 initialState = { value: '' };
 <div>
     <Input
