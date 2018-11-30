@@ -268,7 +268,7 @@ import styles from './some.module.css';
 
 Every component must have `root` class if it uses CSS.
 
-There is `mergeClassesProps` method in utils for more handy work with `classes`.
+There is `mergePropsWithClasses` method in utils for more handy work with `classes`.
 
 ```tsx
 // tab.tsx
@@ -276,14 +276,14 @@ import styles from './tab.module.css';
 import { createClassNamesMerger, WithStyles } from '../../utils/styles';
 
 type ClassKeys = 'root' | 'icon' | 'label' | 'disabled';
-const mergeClassesPropss = createClassNamesMerger<ClassKeys>(styles);
+const mergePropsWithClasses = createClassNamesMerger<ClassKeys>(styles);
 
-interface TabProps extends WithStyles<typeof mergeClassesPropss> {
+interface TabProps extends WithStyles<typeof mergePropsWithClasses> {
     disabled?: boolean;
 }
 
 function Tab(props: TabProps) {
-    const { classes, style, disabled } = mergeClassesPropss(props);
+    const { classes, style, disabled } = mergePropsWithClasses(props);
 
     const rootClassName = cn(classes.root, {
         [classes.disabled]: disabled,
@@ -302,7 +302,7 @@ function Tab(props: TabProps) {
 ```
 
 Note that the `className` prop is merged to `classes.root` always.
-The `mergeClassesPropss` always returns a `props` object extended with `classes` and `classes.root` properties.
+The `mergePropsWithClasses` always returns a `props` object extended with `classes` and `classes.root` properties.
 
 ### Prefer `interface` to `type` in TypeScript defenitions
 
