@@ -39,3 +39,17 @@ describe('class names merger', () => {
         expect(props.classes.root).toMatch(/\b__className\b/);
     });
 });
+
+describe('class names merger should always create root className', () => {
+    it('props.classes.root should not have value without props.className', () => {
+        const mergePropsWithClasses = createClassNamesMerger({});
+        const props = mergePropsWithClasses({});
+        expect(props.classes.root).toEqual('');
+    });
+
+    it('props.classes.root should not have props.className value', () => {
+        const mergePropsWithClasses = createClassNamesMerger({});
+        const props = mergePropsWithClasses({ className: '__root' });
+        expect(props.classes.root).toEqual('__root');
+    });
+});
