@@ -10,42 +10,35 @@ This approach is based on [Material UI API Design Approach](https://material-ui.
 
 ### Composition
 
-Using the `children` property is the idiomatic way to do composition with React.
+Use children property to populate main area/slot of the component.
+Component has its main area when the base abstraction it provides could be considered as a "wrapper", i.e. element,
+which main purpose is to decorate its content and the content of the element is something user really cares about.
+Good examples could be a `Dialog`, a `TableCell` or `Menu`.
 
 ```tsx
-// Bad
-<Menu
-    items={[
-      { title: 'Menu Item 1', onClick: () => console.log('clicked') }
-    ]}
-/>
-
-// Good
 <Menu>
-    <MenuItem onClick={() => console.log('clicked')}>
-        Menu Item 1
-    </MenuItem>
+    <MenuItem />
+    <MenuItem />
 </Menu>
+
+<Dialog>
+    <form>
+        <DialogTitle />
+        <DialogContent />
+        <DialogContent />
+        <DialogActions />
+    </form>
+</Dialog>
 ```
 
-Sometimes we only need limited child composition, for instance when we don't need to allow child to order permutations. In this case, providing explicit properties makes the implementation simpler and more performant.
+In case when component's content decorates component itself
+e.g. icon for a `Tab` or `FileLink` use named props with components in them.
 
 ```tsx
-// just example of abstract `Tab` that could have `icon` and `label`
-// in this case children are redundant because `Tab` can have only single `icon`
-// and single `label`
-<Tab>
-    <TabIcon><AddIcon /></TabIcon>
-    <TabLabel>Add</TabLabel>
+<Tab icon={<AddIcon />}>
+    <span>Add Element</span>
 </Tab>
-
-// right variant
-<Tab
-    icon={<AddIcon />}
-    label="Add"
-/>
 ```
-
 
 ### Spread props
 
@@ -102,7 +95,8 @@ function Input(props: InputProps) {
 
 ### Ref props
 
-Do not use `React.forwardRef` for functional components. Use `{specific}Ref` prop instead. Also use only `React.RefObject` (peer dep: `react: ">= 16.3 < 17"`)
+Do not use `React.forwardRef` for functional components. Use `{specific}Ref` prop instead.
+Also use only `React.RefObject` (peer dep: `react: ">= 16.3 < 17"`)
 
 ```tsx
 interface Props {
@@ -114,7 +108,11 @@ function Input(props: Props) {
 }
 ```
 
-In React `ref` could use `React.ReactInstance` or `HTMLElement`. The common rule is that if we use `html` component like `<input/>` or `<button />` we get `HTMLElement` in `ref`. But if we pass ref to custom React component like `<Input />` or `<Button />` we get `ReactInstance` or nothing if the component is function. Moreover if in the future a functional component is updated to a class component, its `API` will get a breaking change.
+In React `ref` could use `React.ReactInstance` or `HTMLElement`.
+The common rule is that if we use `html` component like `<input/>` or `<button />` we get `HTMLElement` in `ref`.
+But if we pass ref to custom React component like `<Input />` or `<Button />` we get `ReactInstance`
+or nothing if the component is function. Moreover if in the future a functional component is updated
+to a class component, its `API` will get a breaking change.
 
 ```tsx
 // this is a functional component
@@ -134,7 +132,9 @@ If we use `inputRef`, this problem is gone:
 <Input inputRef={(node: HTMLElement => {})} />
 ```
 
-Use `rootRef` for the `root` element and semantic name for the `target` element (ex: `inputRef`) if it is not the `root`. If you'd like to allow access to `additional` elements through refs, use semantic names as well (ex. `labelRef` or `iconRef` for `Tab` component).
+Use `rootRef` for the `root` element and semantic name for the `target` element (ex: `inputRef`)
+if it is not the `root`. If you'd like to allow access to `additional` elements through refs,
+use semantic names as well (ex. `labelRef` or `iconRef` for `Tab` component).
 
 ```tsx
 interface TabProps extends React.HTMLAttributes<HTMLDivElement> {
@@ -204,7 +204,8 @@ function Input(props: InputProps) {
 }
 ```
 
-Do not use `targetRef` or `targetProps` because `targetProps` is always a part of whole props of component and `targetRef` is not semantic enough.
+Do not use `targetRef` or `targetProps` because `targetProps` is always a part of whole props of component
+and `targetRef` is not semantic enough.
 
 See also Material UI Approach sections:
  - [Nested Components](https://material-ui.com/guides/api/#nested-components)
@@ -292,7 +293,8 @@ function MainPage() {
 
 ### Prefer `interface` to `type` in TypeScript defenitions
 
-`[Type A] & [Type B]` is not extending but merging types. Components mostly **extend** or **replace** other component props.
+`[Type A] & [Type B]` is not extending but merging types.
+Components mostly **extend** or **replace** other component props.
 
 ```ts
 // the next line is valid for TS compiler
