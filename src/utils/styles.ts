@@ -13,7 +13,7 @@ function forEachKeys<T, K extends keyof T>(
 }
 
 type ClassKeys<P> = P extends WithClasses<infer K> ? K | 'root' : string;
-type ClassNamesMap<K extends string> = Partial<Record<K, string>>;
+export type ClassNamesMap<K extends string> = Partial<Record<K, string>>;
 
 export interface WithClasses<K extends string> {
     className?: string;

@@ -215,6 +215,8 @@ See also Material UI Approach sections:
 
 For more flexible customization of components look we should expose posibility
 to add any `className` or state's `className` of any nested components.
+For this purposes `classes` propery and `mergeClassesProps` util
+are being used in components.
 
 ```css
 /* tab.module.css */
@@ -226,64 +228,17 @@ to add any `className` or state's `className` of any nested components.
 
 ```tsx
 // tab.tsx
-import _styles from './tab.module.css';
-
-type ClassKeys = 'root' | 'icon' | 'label' | 'disabled';
-const styles = _styles as Record<ClassKeys, string>;
-
-interface TabProps {
-    className?: string;
-    classes?: Partial<typeof styles>;
-    style?: React.CSSProperties;
-    disabled?: boolean;
-}
-
-function Tab(props: TabProps) {
-    const { className, classes, style, disabled } = props;
-
-    const rootClassName = cn(className, styles.root, classes.root, {
-        [classes.disabled]: disabled,
-        [styles.disabled]: disabled,
-    });
-
-    const iconClassName = cn(styles.icon, classes.icon);
-    const labelClassName = cn(styles.label, classes.label);
-
-    return (
-        <div className={rootClassName} style={style}>
-            <div className={iconClassName} />
-            <div className={labelClassName} />
-        </div>
-    )
-}
-
-// Usage
-
-import styles from './some.module.css';
-
-<Tab className={styles.tab} classes={{
-    disabled: styles.tabDisabled,
-}} />
-```
-
-Every component must have `root` class if it uses CSS.
-
-There is `mergePropsWithClasses` method in utils for more handy work with `classes`.
-
-```tsx
-// tab.tsx
 import styles from './tab.module.css';
-import { createClassNamesMerger, WithStyles } from '../../utils/styles';
+import { mergeClassesProps, WithClasses } from '../../utils/styles';
 
 type ClassKeys = 'root' | 'icon' | 'label' | 'disabled';
-const mergePropsWithClasses = createClassNamesMerger<ClassKeys>(styles);
 
-interface TabProps extends WithStyles<typeof mergePropsWithClasses> {
+interface TabProps extends WithStyles<ClassKeys> {
     disabled?: boolean;
 }
 
 function Tab(props: TabProps) {
-    const { classes, style, disabled } = mergePropsWithClasses(props);
+    const { classes, style, disabled } = mergeClassesProps(props, styles);
 
     const rootClassName = cn(classes.root, {
         [classes.disabled]: disabled,
@@ -301,8 +256,39 @@ function Tab(props: TabProps) {
 }
 ```
 
-Note that the `className` prop is merged to `classes.root` always.
+Note that the `className` prop is always merged to `classes.root` and removed from original `props`;
 The `mergePropsWithClasses` always returns a `props` object extended with `classes` and `classes.root` properties.
+`WithStyles` interface add `className` and `classes` properties to component's props.
+
+After that we can use `Tab` component like this:
+
+```css
+.mainTab { /* ... */ }
+.mainTabDisabled { /* ... */ }
+```
+
+```tsx
+import { ClassNamesMap } from '../../utils/style';
+import { Tab } from './components/tab';
+import _styles from './page.module.css';
+
+// you also can use `ClassNamesMap` from utils to type your styles
+const styles = _styles as ClassNamesMap<'mainTab' | 'mainTabDisabled'>;
+
+function MainPage() {
+    return (
+        <Header>
+            <PageTabs>
+                <Tab
+                    className={styles.mainTab}
+                    classes={{ disabled: styles.mainTabDisabled }}
+                    label="Tab With Extended Styles"
+                />
+            </PageTabs>
+        </Header>
+    );
+}
+```
 
 ### Prefer `interface` to `type` in TypeScript defenitions
 
