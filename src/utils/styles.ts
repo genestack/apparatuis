@@ -1,4 +1,3 @@
-import * as React from 'react';
 import cn from 'classnames';
 import { Omit } from '../../node_modules/@types/lodash';
 
