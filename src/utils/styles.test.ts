@@ -1,14 +1,14 @@
-import { createClassNamesMerger } from './styles';
+import { mergeClassesProps } from './styles';
 
 const sortClassNames = (str: string) => str.split(' ').sort().join(' ');
 
 describe('class names merger', () => {
-    const mergePropsWithClasses = createClassNamesMerger({
+    const moduleClassNames = {
         'root': '_root',
         'comp': '_comp',
-    });
+    };
 
-    const props = mergePropsWithClasses({
+    const props = mergeClassesProps({
         someProp: true,
         className: '__className',
         classes: {
@@ -16,11 +16,11 @@ describe('class names merger', () => {
             'comp': '__comp',
             'any': '__any',
         },
-    });
+    }, moduleClassNames);
 
     it('props should have valid keys', () => {
         expect(props).toHaveProperty('someProp');
-        expect(props).toHaveProperty('className');
+        expect(props).not.toHaveProperty('className');
         expect(props).toHaveProperty('classes');
     });
 
@@ -42,14 +42,12 @@ describe('class names merger', () => {
 
 describe('class names merger should always create root className', () => {
     it('props.classes.root should not have value without props.className', () => {
-        const mergePropsWithClasses = createClassNamesMerger({});
-        const props = mergePropsWithClasses({});
+        const props = mergeClassesProps({}, {});
         expect(props.classes.root).toEqual('');
     });
 
     it('props.classes.root should not have props.className value', () => {
-        const mergePropsWithClasses = createClassNamesMerger({});
-        const props = mergePropsWithClasses({ className: '__root' });
+        const props = mergeClassesProps({ className: '__root' }, {});
         expect(props.classes.root).toEqual('__root');
     });
 });

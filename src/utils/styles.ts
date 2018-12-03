@@ -1,5 +1,6 @@
 import * as React from 'react';
 import cn from 'classnames';
+import { Omit } from '../../node_modules/@types/lodash';
 
 function forEachKeys<T, K extends keyof T>(
     obj: T,
@@ -11,42 +12,35 @@ function forEachKeys<T, K extends keyof T>(
     });
 }
 
-type ClassNameMap<C extends string> = Record<C, string>;
+type ClassKeys<P> = P extends WithClasses<infer K> ? K | 'root' : string;
+type ClassNamesMap<K extends string> = Partial<Record<K, string>>;
 
-interface PublicProps<K extends string> {
+export interface WithClasses<K extends string> {
     className?: string;
-    style?: React.CSSProperties;
-    classes?: Partial<ClassNameMap<K>>;
+    classes?: ClassNamesMap<K>;
 }
 
-interface PrivateProps<K extends string> {
-    classes: ClassNameMap<K | 'root'>;
-}
+type PrivateProps<
+    P extends WithClasses<any>,
+    K extends ClassKeys<P>
+> = Omit<P, 'classes' | 'className'> & { classes: Record<K, string> };
 
-type ClassNamesMegre<K extends string = string> = <Props>(
-    props: Props
-) => Props & PrivateProps<K>;
+export function mergeClassesProps<P extends WithClasses<any>, K extends ClassKeys<P>>(
+    props: P,
+    styles: ClassNamesMap<string>
+): PrivateProps<P, K> {
+    const { classes: publicClasses, className, ...rest } = (props as any);
 
-export function createClassNamesMerger<K extends string>(
-    styles: ClassNameMap<K>
-): ClassNamesMegre<K> {
-    return <Props extends PublicProps<K>>(props: Props) => {
-        const classes = {} as ClassNameMap<K | 'root'>;
+    const privateClasses: ClassNamesMap<K> = {};
 
-        classes.root = cn(props.className);
+    privateClasses.root = cn(className);
 
-        forEachKeys(styles, (key, value) => {
-            classes[key] = cn(classes[key], value, props.classes && props.classes[key]);
-        });
+    forEachKeys(styles, (key, value) => {
+        privateClasses[key] = cn(privateClasses[key], value, publicClasses && publicClasses[key]);
+    });
 
-        return {
-            ...(props as any),
-            classes
-        };
+    return {
+        ...rest,
+        classes: privateClasses
     };
 }
-
-export type WithStyles<
-    T extends ClassNamesMegre,
-    K extends string = T extends ClassNamesMegre<infer K> ? K : never
-> = PublicProps<K>;
