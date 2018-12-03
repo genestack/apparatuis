@@ -215,7 +215,7 @@ See also Material UI Approach sections:
 
 For more flexible customization of components look we should expose posibility
 to add any `className` or state's `className` of any nested components.
-For this purposes `classes` propery and `mergeClassesProps` util
+For this purposes `classes` property and `mergeClassesProps` util
 are being used in components.
 
 ```css
