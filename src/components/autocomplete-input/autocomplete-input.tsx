@@ -188,7 +188,7 @@ interface RenderSuggestionProps {
 
 type RenderSuggestion = (props: RenderSuggestionProps) => JSX.Element;
 
-type AutocompleteInputProps = InputProps & {
+interface AutocompleteInputProps extends InputProps {
     items: any[];
     isLoading: boolean;
     error: any;
@@ -196,7 +196,7 @@ type AutocompleteInputProps = InputProps & {
     renderLoading?: () => JSX.Element;
     renderNoMatches?: () => JSX.Element;
     renderError?: (error: any) => JSX.Element;
-};
+}
 
 function calcMenuStyles(inputDOMNode: HTMLInputElement | null) {
     if (!inputDOMNode) return {};

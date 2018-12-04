@@ -21,6 +21,7 @@
 }
 
 .suggestions:empty {
+    /* stylelint-disable-next-line declaration-no-important */
     display: none !important;
 }
 

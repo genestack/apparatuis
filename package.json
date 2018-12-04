@@ -17,15 +17,26 @@
   "stylelint": {
     "extends": [
       "genestack-stylelint-config"
-    ]
+    ],
+    "rules": {
+      "declaration-colon-newline-after": null,
+      "rule-empty-line-before": [
+        "always",
+        {
+          "except": [
+            "first-nested"
+          ]
+        }
+      ]
+    }
   },
   "scripts": {
     "start": "styleguidist server",
     "clean": "rm -rf dist",
-    "lint": "tslint src/**/*.tsx src/**/*.ts --fix && stylelint src/**/*.css --fix",
-    "ts-check": "tsc --noEmit -p .",
     "tslint": "tslint -c ../../../tslint.json -p .",
-    "test": "npm run ts-check"
+    "csslint": "stylelint src/**/*.css",
+    "ts-check": "tsc --noEmit -p .",
+    "test": "npm run tslint && npm run csslint && npm run ts-check"
   },
   "devDependencies": {
     "@types/autoprefixer": "^6.7.3",
