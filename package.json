@@ -33,7 +33,7 @@
     "css-loader": "^0.28.9",
     "genestack-frontend-builder": "^0.7.0",
     "genestack-stylelint-config": "^2.0.0",
-    "genestack-jest-config": "^1.0.0",
+    "genestack-jest-config": "^1.1.0",
     "genestack-tsconfig": "^1.0.0",
     "genestack-tslint-config": "^3.0.0",
     "jest": "^23.3.0",
