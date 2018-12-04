@@ -1,12 +1,12 @@
 ```js
 const Select = require('./select').default;
-initialState = { value: null };
+initialState = {value: null};
 
 const options = [
     {value: true, label: 'Option 1 (Boolean, true)'},
-    {value: "true", label: 'Option 2 (String, "true")'},
+    {value: 'true', label: 'Option 2 (String, "true")'},
     {value: 1, label: 'Option 3 (Integer, 1)'},
-    {value: "1", label: 'Option 4 (String, "1")'}
+    {value: '1', label: 'Option 4 (String, "1")'}
 ];
 
 <div>
@@ -59,5 +59,5 @@ const options = [
             required
         />
     </p>
-</div>
+</div>;
 ```

@@ -24,6 +24,7 @@
     "clean": "rm -rf dist",
     "lint": "tslint src/**/*.tsx src/**/*.ts --fix && stylelint src/**/*.css --fix",
     "ts-check": "tsc --noEmit -p .",
+    "tslint": "tslint -c ../../../tslint.json -p .",
     "test": "npm run ts-check"
   },
   "devDependencies": {

@@ -1,17 +1,11 @@
 ```js
 const Checkbox = require('./checkbox').default;
-initialState = { value: true };
+initialState = {value: true};
 <div>
-    <Checkbox
-        onValueChange={(value) => setState({value})}
-        checked={state.value}
-    />
+    <Checkbox onValueChange={(value) => setState({value})} checked={state.value} />
 
     <br />
-    <Checkbox
-        onValueChange={(value) => setState({value})}
-        checked={state.value}
-    >
+    <Checkbox onValueChange={(value) => setState({value})} checked={state.value}>
         Label text
     </Checkbox>
 
@@ -21,8 +15,6 @@ initialState = { value: true };
     </Checkbox>
 
     <br />
-    <Checkbox disabled>
-        Unchecked and disabled
-    </Checkbox>
-</div>
+    <Checkbox disabled>Unchecked and disabled</Checkbox>
+</div>;
 ```

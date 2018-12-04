@@ -23,7 +23,7 @@ export default React.forwardRef<HTMLButtonElement, ButtonProps>((props, ref) => 
         ...otherProps
     } = props;
 
-    const button =
+    const button = (
         <button
             onClick={disabled ? undefined : onClick}
             ref={ref}
@@ -38,7 +38,7 @@ export default React.forwardRef<HTMLButtonElement, ButtonProps>((props, ref) => 
             aria-disabled={disabled}
             {...otherProps}
         />
-    ;
+    );
 
     if (tooltipProps) {
         return (
@@ -53,7 +53,7 @@ export default React.forwardRef<HTMLButtonElement, ButtonProps>((props, ref) => 
 type sizeType = 'small' | 'medium';
 
 export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-    kind?: 'default' | 'primary',
-    size?: sizeType,
-    tooltipProps?: TooltipProps
+    kind?: 'default' | 'primary';
+    size?: sizeType;
+    tooltipProps?: TooltipProps;
 }

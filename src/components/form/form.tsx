@@ -9,16 +9,14 @@ import React from 'react';
 import classNames from 'classnames';
 import styles from './form.module.css';
 
-export default (props: FormProps) =>
-    <form {...addClass(props)} />;
+export default (props: FormProps) => <form {...addClass(props)} />;
 
 const addClass = ({className = '', ...rest}) => ({
     ...rest,
-    className: classNames(className, styles.form),
+    className: classNames(className, styles.form)
 });
 
-export type FormProps =
-    React.DetailedHTMLProps<
-        React.FormHTMLAttributes<HTMLFormElement>,
-        HTMLFormElement
-    >;
+export type FormProps = React.DetailedHTMLProps<
+    React.FormHTMLAttributes<HTMLFormElement>,
+    HTMLFormElement
+>;

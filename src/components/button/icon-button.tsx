@@ -4,19 +4,13 @@ import Tooltip, {TooltipProps} from './../tooltip/tooltip';
 import styles from './icon-button.module.css';
 
 export default function IconButton(props: propTypes) {
-    const {
-        className = '',
-        disabled,
-        tooltipProps = null,
-        onClick,
-        ...otherProps
-    } = props;
+    const {className = '', disabled, tooltipProps = null, onClick, ...otherProps} = props;
 
     const button = (
         <button
             onClick={disabled ? undefined : onClick}
             className={classNames(className, styles.btn, {
-                [styles.disabled]: disabled,
+                [styles.disabled]: disabled
             })}
             tabIndex={disabled ? -1 : undefined}
             aria-disabled={disabled}
@@ -34,11 +28,9 @@ export default function IconButton(props: propTypes) {
     return button;
 }
 
-type propTypes =
-    & React.DetailedHTMLProps<
-            React.ButtonHTMLAttributes<HTMLButtonElement>,
-            HTMLButtonElement
-        >
-    & {
-        tooltipProps?: TooltipProps
-    };
+type propTypes = React.DetailedHTMLProps<
+    React.ButtonHTMLAttributes<HTMLButtonElement>,
+    HTMLButtonElement
+> & {
+    tooltipProps?: TooltipProps;
+};

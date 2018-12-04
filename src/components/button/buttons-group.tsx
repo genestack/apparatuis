@@ -8,5 +8,6 @@
 import React from 'react';
 import styles from './button.module.css';
 
-export default (props: React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>) =>
-    <div className={styles.btnGroup} {...props}/>;
+export default (
+    props: React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>
+) => <div className={styles.btnGroup} {...props} />;

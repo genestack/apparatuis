@@ -13,11 +13,8 @@ import React, {ComponentType, ComponentClass} from 'react';
  * @param baseComponent
  */
 
-const toClass =
-    <P>(baseComponent: React.ComponentType<P>): React.ComponentClass<P> =>
-        isClassComponent(baseComponent)
-            ?   baseComponent
-            :   wrapWithClass(baseComponent);
+const toClass = <P>(baseComponent: React.ComponentType<P>): React.ComponentClass<P> =>
+    isClassComponent(baseComponent) ? baseComponent : wrapWithClass(baseComponent);
 
 const wrapWithClass = <P>(baseComponent: React.SFC<P>) =>
     class extends React.Component<P> {
@@ -28,20 +25,21 @@ const wrapWithClass = <P>(baseComponent: React.SFC<P>) =>
 
         render() {
             return typeof baseComponent === 'string'
-                ?   React.createElement(baseComponent, this.props)
-                :   baseComponent(this.props, this.context);
+                ? React.createElement(baseComponent, this.props)
+                : baseComponent(this.props, this.context);
         }
     };
 
-const isClassComponent =
-    <P>(сomponent: ComponentType<P>): сomponent is ComponentClass<P> =>
-        сomponent &&
-        сomponent.prototype &&
-        typeof сomponent.prototype.render === 'function';
+const isClassComponent = <P>(сomponent: ComponentType<P>): сomponent is ComponentClass<P> =>
+    сomponent && сomponent.prototype && typeof сomponent.prototype.render === 'function';
 
-const getDisplayName = (component: string | React.ComponentClass<any> | React.StatelessComponent<any>) =>
+const getDisplayName = (
+    component: string | React.ComponentClass<any> | React.StatelessComponent<any>
+) =>
     typeof component === 'string'
         ? component
-        : (component.displayName && component.displayName + 'Class') || component.name || 'Component';
+        : (component.displayName && component.displayName + 'Class') ||
+          component.name ||
+          'Component';
 
 export default toClass;

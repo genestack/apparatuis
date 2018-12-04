@@ -8,14 +8,8 @@
 
 import React from 'react';
 import RcTooltip from 'rc-tooltip';
-import classNames from 'classnames';
 import './tooltip.css';
 
-export default (props: TooltipProps) => (
-    <RcTooltip
-        prefixCls='genestack-ui-tooltip'
-        {...props}
-    />
-);
+export default (props: TooltipProps) => <RcTooltip prefixCls="genestack-ui-tooltip" {...props} />;
 
 export type TooltipProps = RcTooltip['props'];

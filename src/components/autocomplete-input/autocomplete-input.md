@@ -16,17 +16,11 @@ customRenderSuggestionFn = ({item, index, getItemProps}) => (
     </li>
 );
 
-customRenderLoadingFn = () => (
-    <li>{'Loading...'}</li>
-);
+customRenderLoadingFn = () => <li>{'Loading...'}</li>;
 
-customRenderNoMatchesFn = () => (
-    <li>{'No matches'}</li>
-);
+customRenderNoMatchesFn = () => <li>{'No matches'}</li>;
 
-customRenderErrorFn = () => (
-    <li>{'ERROR'}</li>
-);
+customRenderErrorFn = () => <li>{'ERROR'}</li>;
 
 fetchFn = (value) => {
     const data = [
@@ -54,37 +48,34 @@ fetchFn = (value) => {
 
     return new Promise((resolve, reject) => {
         const timeout = 400;
-        const items = data.filter(item => item.includes(value)).slice(0, 5);
+        const items = data.filter((item) => item.includes(value)).slice(0, 5);
 
-        setTimeout(
-            () => state.emulateNetworkError ?
-                reject() :
-                resolve(items),
-            timeout
-        );
+        setTimeout(() => (state.emulateNetworkError ? reject() : resolve(items)), timeout);
     });
 };
 
 <div>
-
     <div>
         <Checkbox
             checked={state.emulateNetworkError}
-            onChange={(event, value) => setState({
-                emulateNetworkError: value
-            })}
+            onChange={(event, value) =>
+                setState({
+                    emulateNetworkError: value
+                })
+            }
         >
             Emulate network error
         </Checkbox>
     </div>
 
-
     <div>
         <Checkbox
             checked={state.customRenderSuggestion}
-            onChange={(event, value) => setState({
-                customRenderSuggestion: value
-            })}
+            onChange={(event, value) =>
+                setState({
+                    customRenderSuggestion: value
+                })
+            }
         >
             Custom <b>renderSuggestion</b>
         </Checkbox>
@@ -93,9 +84,11 @@ fetchFn = (value) => {
 
         <Checkbox
             checked={state.customRenderLoading}
-            onChange={(event, value) => setState({
-                customRenderLoading: value
-            })}
+            onChange={(event, value) =>
+                setState({
+                    customRenderLoading: value
+                })
+            }
         >
             Custom <b>renderLoading</b>
         </Checkbox>
@@ -104,9 +97,11 @@ fetchFn = (value) => {
 
         <Checkbox
             checked={state.customRenderNoMatches}
-            onChange={(event, value) => setState({
-                customRenderNoMatches: value
-            })}
+            onChange={(event, value) =>
+                setState({
+                    customRenderNoMatches: value
+                })
+            }
         >
             Custom <b>renderNoMatches</b>
         </Checkbox>
@@ -115,9 +110,11 @@ fetchFn = (value) => {
 
         <Checkbox
             checked={state.customRenderError}
-            onChange={(event, value) => setState({
-                customRenderError: value
-            })}
+            onChange={(event, value) =>
+                setState({
+                    customRenderError: value
+                })
+            }
         >
             Custom <b>renderError</b>
         </Checkbox>
@@ -134,13 +131,17 @@ fetchFn = (value) => {
                     onValueChange={onValueChange}
                     value={value}
                     placeholder={'Autocomplete placeholder'}
-                    renderSuggestion={state.customRenderSuggestion ? customRenderSuggestionFn : undefined}
+                    renderSuggestion={
+                        state.customRenderSuggestion ? customRenderSuggestionFn : undefined
+                    }
                     renderLoading={state.customRenderLoading ? customRenderLoadingFn : undefined}
-                    renderNoMatches={state.customRenderNoMatches ? customRenderNoMatchesFn : undefined}
+                    renderNoMatches={
+                        state.customRenderNoMatches ? customRenderNoMatchesFn : undefined
+                    }
                     renderError={state.customRenderError ? customRenderErrorFn : undefined}
                 />
             )}
         </AutocompleteDataProvider>
     </div>
-</div>
+</div>;
 ```

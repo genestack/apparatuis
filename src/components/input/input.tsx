@@ -9,17 +9,10 @@
 import React from 'react';
 import classNames from 'classnames';
 import styles from './input.module.css';
-import { Omit } from '../../utils/omit';
+import {Omit} from '../../utils/omit';
 
 export default React.forwardRef<HTMLInputElement, InputProps>((props, ref) => {
-    const {
-        className = '',
-        hasError = false,
-        onChange,
-        onValueChange,
-        name,
-        ...restProps
-    } = props;
+    const {className = '', hasError = false, onChange, onValueChange, name, ...restProps} = props;
 
     return (
         <input
@@ -30,12 +23,7 @@ export default React.forwardRef<HTMLInputElement, InputProps>((props, ref) => {
             onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
                 const {value} = event.currentTarget;
 
-                onChange && onChange(
-                    event,
-                    name
-                        ? {[name]: value}
-                        : value
-                );
+                onChange && onChange(event, name ? {[name]: value} : value);
 
                 onValueChange && onValueChange(value);
             }}
@@ -43,11 +31,11 @@ export default React.forwardRef<HTMLInputElement, InputProps>((props, ref) => {
     );
 });
 
-
-export interface InputProps extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'type' | 'onChange'> {
-    onChange?: (event: React.ChangeEvent<HTMLInputElement>, value: any) => void,
-    hasError?: boolean,
-    onValueChange?: OnValueChanger
+export interface InputProps
+    extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'type' | 'onChange'> {
+    onChange?: (event: React.ChangeEvent<HTMLInputElement>, value: any) => void;
+    hasError?: boolean;
+    onValueChange?: OnValueChanger;
 }
 
 type OnValueChanger = (value: string) => any;

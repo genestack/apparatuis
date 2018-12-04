@@ -1,3 +1,0 @@
-{
-    "extends": "./node_modules/genestack-tslint-config/tslint.json"
-}

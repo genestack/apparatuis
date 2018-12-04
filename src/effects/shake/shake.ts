@@ -20,12 +20,11 @@ const ANIMATION_DURATION = 350;
 export default (node: React.ReactInstance) => {
     const element = ReactDOM.findDOMNode(node);
 
-    if (!(element instanceof Element)) { return; }
+    if (!(element instanceof Element)) {
+        return;
+    }
 
     element.classList.add(shake);
 
-    setTimeout(
-        () => element.classList.remove(shake),
-        ANIMATION_DURATION
-    );
+    setTimeout(() => element.classList.remove(shake), ANIMATION_DURATION);
 };

@@ -21,6 +21,4 @@ export {default as toClass} from './utils/toClass';
 
 import * as effects from './effects/';
 
-export {
-    effects
-};
+export {effects};

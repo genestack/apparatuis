@@ -5,7 +5,7 @@
  * The copyright notice above does not evidence any
  * actual or intended publication of such source code.
  */
- @import "./../../variables.css";
+@import "./../../variables.css";
 
 .container {
     display: inline-flex;
@@ -23,7 +23,7 @@
 }
 
 .input:focus + .iconBorder {
-    box-shadow: 0  0 3px 1px var(--gs-color-accent-main);
+    box-shadow: 0 0 3px 1px var(--gs-color-accent-main);
 }
 
 .iconBorder {
@@ -47,8 +47,9 @@
     border-color: var(--gs-color-accent-main);
 }
 
-.iconBorderDisabled, .iconBorderChecked.iconBorderDisabled {
-    background-color:var(--gs-color-background-disabled);
+.iconBorderDisabled,
+.iconBorderChecked.iconBorderDisabled {
+    background-color: var(--gs-color-background-disabled);
     border-color: var(--gs-color-input-borders);
 }
 

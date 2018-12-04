@@ -4,9 +4,10 @@ const IconButton = require('./icon-button').default;
     <IconButton onClick={() => alert('clicked')}>
         <img width="22" src="https://goo.gl/fGkAat" />
     </IconButton>
-    <br/>
+    <br />
     <IconButton onClick={() => alert('clicked')} disabled>
         <img width="22" src="https://goo.gl/fGkAat" />
-    </IconButton> - disabled
-</div>
+    </IconButton>{' '}
+    - disabled
+</div>;
 ```

@@ -16,23 +16,20 @@ export default (props: PaginatorProps) => {
     const isLastPage = offset + itemsPerPage >= itemsLength;
     const firstShownItem = offset + 1;
     const lastShownItem = Math.min(offset + itemsPerPage, itemsLength);
-    const paginatorFullClassName = classNames(
-        styles.container,
-        className
-    );
+    const paginatorFullClassName = classNames(styles.container, className);
 
     return (
         <div className={paginatorFullClassName}>
             <div className={styles.info}>
                 {firstShownItem === lastShownItem
                     ? lastShownItem
-                    : `${firstShownItem} — ${lastShownItem}`}
-                {' '}of {itemsLength}
+                    : `${firstShownItem} — ${lastShownItem}`}{' '}
+                of {itemsLength}
             </div>
             <Button
                 onClick={clickPrevious(props)}
                 disabled={isFirstPage}
-                title='Previous page'
+                title="Previous page"
                 className={styles.button}
             >
                 ◀
@@ -40,7 +37,7 @@ export default (props: PaginatorProps) => {
             <Button
                 onClick={clickNext(props)}
                 disabled={isLastPage}
-                title='Next page'
+                title="Next page"
                 className={styles.button}
             >
                 ▶
@@ -49,15 +46,13 @@ export default (props: PaginatorProps) => {
     );
 };
 
-export type PaginatorProps =
-    & React.Props<HTMLDivElement>
-    & {
-        onChange: (value: number) => any,
-        itemsLength: number,
-        itemsPerPage: number,
-        offset: number,
-        className?: string
-    };
+export type PaginatorProps = React.Props<HTMLDivElement> & {
+    onChange: (value: number) => any;
+    itemsLength: number;
+    itemsPerPage: number;
+    offset: number;
+    className?: string;
+};
 
 const clickPrevious = ({onChange, offset, itemsPerPage}: PaginatorProps) => () =>
     onChange(offset - itemsPerPage);

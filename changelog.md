@@ -1,17 +1,28 @@
 # Changelog
+
 All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
+
 ### Changed
-- no changes
+
+-   no changes
+
 ### Added
-- no addings
+
+-   no addings
+
 ### Fixed
-- no fixes
+
+-   no fixes
 
 ## [7.0.0-alpha.2] - 2018-11-28
+
 ### Fixed
-- Fix typescript compiler checks
+
+-   Fix typescript compiler checks
+
 ### Added
-- Types check to tests
-- Readme.md
+
+-   Types check to tests
+-   Readme.md

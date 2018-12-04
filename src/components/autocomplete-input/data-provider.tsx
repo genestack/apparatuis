@@ -9,9 +9,7 @@
 import React from 'react';
 import debounce from 'lodash.debounce';
 
-
 export default class DataProvider extends React.PureComponent<DataProviderProps> {
-
     static initialState = {isLoading: false, error: null, items: [], value: ''};
 
     state = DataProvider.initialState;
@@ -30,14 +28,18 @@ export default class DataProvider extends React.PureComponent<DataProviderProps>
         const value = this.state.value;
         const checkIfActual = () => value === this.state.value;
 
-        return this.props.fetch(value)
+        return this.props
+            .fetch(value)
             .then((result) => {
                 if (checkIfActual() && this.mounted) {
-                    this.setState({
-                        items: result,
-                        isLoading: false,
-                        error: null
-                    }, () => this.props.onLoaded && this.props.onLoaded(result));
+                    this.setState(
+                        {
+                            items: result,
+                            isLoading: false,
+                            error: null
+                        },
+                        () => this.props.onLoaded && this.props.onLoaded(result)
+                    );
                 }
             })
             .catch((error) => {
@@ -49,14 +51,18 @@ export default class DataProvider extends React.PureComponent<DataProviderProps>
                     });
                 }
             });
-    }
+    };
 
     debouncedFetch = debounce(this.fetch, 100);
 
-    handleValueChange = (value: string) => this.setState({
-        isLoading: true,
-        value
-    }, this.debouncedFetch)
+    handleValueChange = (value: string) =>
+        this.setState(
+            {
+                isLoading: true,
+                value
+            },
+            this.debouncedFetch
+        );
 
     render() {
         const {items, isLoading, error, value} = this.state;
@@ -70,16 +76,16 @@ export default class DataProvider extends React.PureComponent<DataProviderProps>
     }
 }
 
-type DataProviderChildrenProps = {
-    value: string,
-    items: any[],
-    isLoading: boolean,
-    error: any,
-    onValueChange: (value: string) => any
-};
+interface DataProviderChildrenProps {
+    value: string;
+    items: any[];
+    isLoading: boolean;
+    error: any;
+    onValueChange: (value: string) => any;
+}
 
-type DataProviderProps = {
-    fetch: (value: string) => Promise<any>,
-    onLoaded?: (array: any) => any,
-    children: (prop: DataProviderChildrenProps) => JSX.Element
-};
+interface DataProviderProps {
+    fetch: (value: string) => Promise<any>;
+    onLoaded?: (array: any) => any;
+    children: (prop: DataProviderChildrenProps) => JSX.Element;
+}

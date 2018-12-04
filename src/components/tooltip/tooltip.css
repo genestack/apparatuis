@@ -90,7 +90,8 @@
 .genestack-ui-tooltip-placement-rightBottom .genestack-ui-tooltip-arrow {
     left: calc(var(--gs-tooltip-distance) - var(--gs-tooltip-arrow-width));
     margin-top: calc(-1 * var(--gs-tooltip-arrow-width));
-    border-width: var(--gs-tooltip-arrow-width) var(--gs-tooltip-arrow-width) var(--gs-tooltip-arrow-width) 0;
+    border-width: var(--gs-tooltip-arrow-width) var(--gs-tooltip-arrow-width)
+        var(--gs-tooltip-arrow-width) 0;
     border-right-color: var(--gs-tooltip-background-color);
 }
 
@@ -112,7 +113,8 @@
 .genestack-ui-tooltip-placement-leftBottom .genestack-ui-tooltip-arrow {
     right: calc(var(--gs-tooltip-distance) - var(--gs-tooltip-arrow-width));
     margin-top: calc(-1 * var(--gs-tooltip-arrow-width));
-    border-width: var(--gs-tooltip-arrow-width) 0 var(--gs-tooltip-arrow-width) var(--gs-tooltip-arrow-width);
+    border-width: var(--gs-tooltip-arrow-width) 0 var(--gs-tooltip-arrow-width)
+        var(--gs-tooltip-arrow-width);
     border-left-color: var(--gs-tooltip-background-color);
 }
 
@@ -183,7 +185,6 @@
 }
 
 @keyframes rcToolTipZoomIn {
-
     0% {
         opacity: 0;
         transform-origin: 50% 50%;
@@ -198,7 +199,6 @@
 }
 
 @keyframes rcToolTipZoomOut {
-
     0% {
         opacity: 1;
         transform-origin: 50% 50%;

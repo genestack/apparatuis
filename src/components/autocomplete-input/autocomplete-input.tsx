@@ -5,17 +5,16 @@
  * The copyright notice above does not evidence any
  * actual or intended publication of such source code.
  */
-import React, { Fragment } from 'react';
+import React, {Fragment} from 'react';
 import ReactDOM from 'react-dom';
 import classnames from 'classnames';
 import Input, {InputProps} from '../input/input';
 import Downshift from './downshift-issue-512-fix';
 import styles from './styles.module.css';
-import { GetInputPropsOptions, DownshiftProps, PropGetters, DownshiftState } from 'downshift';
-
+import {DownshiftProps, PropGetters, DownshiftState} from 'downshift';
 
 // appending to body to prevent from being hided by parent "overflow: hidden" css-rule
-const MenuPortal = ({children}: { children: React.ReactNode }) => (
+const MenuPortal = ({children}: {children: React.ReactNode}) => (
     <Fragment>{ReactDOM.createPortal(children, document.body)}</Fragment>
 );
 
@@ -36,11 +35,20 @@ const Menu = React.forwardRef<HTMLUListElement, any>((props, ref) => {
 
 const renderLoading = () => <li className={styles.loadingState}>{'Searching...'}</li>;
 
-const renderError = () => <li className={styles.errorState}>{'Network error occurred. Try again later.'}</li>;
+const renderError = () => (
+    <li className={styles.errorState}>{'Network error occurred. Try again later.'}</li>
+);
 
 const renderNoMatches = () => <li className={styles.emptyResultState}>{'No results found'}</li>;
 
-const renderSuggestion: RenderSuggestion = ({item, index, value, getItemProps, selectedItem, highlightedIndex}) => {
+const renderSuggestion: RenderSuggestion = ({
+    item,
+    index,
+    value,
+    getItemProps,
+    selectedItem,
+    highlightedIndex
+}) => {
     const isActive = highlightedIndex === index;
     const isSelected = selectedItem === item;
     const itemClassNames = classnames(styles.suggestion, {
@@ -67,23 +75,27 @@ interface RenderMenuContentProps<Item> {
 }
 
 export default class AutocompleteInput extends React.Component<AutocompleteInputProps> {
-
     inputRef = React.createRef<HTMLInputElement>();
 
-
     handleStateChange: DownshiftProps<string>['onStateChange'] = (changes) => {
-        const { onValueChange } = this.props;
+        const {onValueChange} = this.props;
 
-        if (!onValueChange) { return; }
+        if (!onValueChange) {
+            return;
+        }
 
         if (changes.hasOwnProperty('selectedItem')) {
             onValueChange(changes.selectedItem as any);
         } else if (changes.hasOwnProperty('inputValue')) {
             onValueChange(changes.inputValue as any);
         }
-    }
+    };
 
-    renderMenuContent({getItemProps, highlightedIndex, selectedItem}: RenderMenuContentProps<string>) {
+    renderMenuContent({
+        getItemProps,
+        highlightedIndex,
+        selectedItem
+    }: RenderMenuContentProps<string>) {
         const {isLoading, error, items, value} = this.props;
         const renderSuggestionFn = this.props.renderSuggestion || renderSuggestion;
         const renderLoadingFn = this.props.renderLoading || renderLoading;
@@ -100,28 +112,31 @@ export default class AutocompleteInput extends React.Component<AutocompleteInput
             return renderNoMatchesFn();
         }
 
-        return items.map(
-            (item, index) => renderSuggestionFn({
+        return items.map((item, index) =>
+            renderSuggestionFn({
                 item,
                 index,
                 value: value as any,
                 getItemProps,
                 highlightedIndex: highlightedIndex as any,
-                selectedItem: selectedItem as any,
+                selectedItem: selectedItem as any
             })
         );
     }
 
     render() {
-        const inputProps: InputProps = omit([
-            'items',
-            'isLoading',
-            'error',
-            'renderSuggestion',
-            'renderLoading',
-            'renderNoMatches',
-            'renderError'
-        ], this.props);
+        const inputProps: InputProps = omit(
+            [
+                'items',
+                'isLoading',
+                'error',
+                'renderSuggestion',
+                'renderLoading',
+                'renderNoMatches',
+                'renderError'
+            ],
+            this.props
+        );
 
         return (
             <Downshift
@@ -138,17 +153,15 @@ export default class AutocompleteInput extends React.Component<AutocompleteInput
                     isOpen,
                     selectedItem
                 }) => {
-                    const inputComponentProps: InputProps =
-                        getInputProps(inputProps as React.InputHTMLAttributes<HTMLInputElement>);
+                    const inputComponentProps: InputProps = getInputProps(
+                        inputProps as React.InputHTMLAttributes<HTMLInputElement>
+                    );
                     const menuStyle = calcMenuStyles(this.inputRef.current); // todo: memoize
                     const isMenuVisible = isOpen && Boolean(inputValue);
 
                     return (
                         <div>
-                            <Input
-                                ref={this.inputRef}
-                                {...inputComponentProps}
-                            />
+                            <Input ref={this.inputRef} {...inputComponentProps} />
                             <Menu {...getMenuProps({isOpen: isMenuVisible, style: menuStyle})}>
                                 {this.renderMenuContent({
                                     getItemProps,
@@ -164,28 +177,26 @@ export default class AutocompleteInput extends React.Component<AutocompleteInput
     }
 }
 
-type RenderSuggestionProps = {
-    item: string,
-    index: number,
-    value: string,
-    getItemProps: (any: any) => any,
-    selectedItem: string,
-    highlightedIndex: number
-};
+interface RenderSuggestionProps {
+    item: string;
+    index: number;
+    value: string;
+    getItemProps: (any: any) => any;
+    selectedItem: string;
+    highlightedIndex: number;
+}
 
 type RenderSuggestion = (props: RenderSuggestionProps) => JSX.Element;
 
-type AutocompleteInputProps =
-    & InputProps
-    & {
-        items: any[],
-        isLoading: boolean,
-        error: any,
-        renderSuggestion?: RenderSuggestion,
-        renderLoading?: () => JSX.Element,
-        renderNoMatches?: () => JSX.Element,
-        renderError?: (error: any) =>  JSX.Element
-    };
+type AutocompleteInputProps = InputProps & {
+    items: any[];
+    isLoading: boolean;
+    error: any;
+    renderSuggestion?: RenderSuggestion;
+    renderLoading?: () => JSX.Element;
+    renderNoMatches?: () => JSX.Element;
+    renderError?: (error: any) => JSX.Element;
+};
 
 function calcMenuStyles(inputDOMNode: HTMLInputElement | null) {
     if (!inputDOMNode) return {};
@@ -201,11 +212,9 @@ function calcMenuStyles(inputDOMNode: HTMLInputElement | null) {
     };
 }
 
-function omit(omitProps: string[], props: { [key: string]: any }) {
-    return Object.keys(props)
-        .reduce((newObj, key) => (
-            omitProps.includes(key) ?
-                newObj :
-                {...newObj, [key]: props[key]}
-        ), {});
+function omit(omitProps: string[], props: {[key: string]: any}) {
+    return Object.keys(props).reduce(
+        (newObj, key) => (omitProps.includes(key) ? newObj : {...newObj, [key]: props[key]}),
+        {}
+    );
 }

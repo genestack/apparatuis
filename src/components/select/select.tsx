@@ -9,7 +9,6 @@ import React, {PureComponent} from 'react';
 import classNames from 'classnames';
 import styles from './select.module.css';
 
-
 const emptyValue = '';
 
 export default class Select extends PureComponent<SelectProps> {
@@ -36,12 +35,10 @@ export default class Select extends PureComponent<SelectProps> {
         }
 
         if (onValueChange) {
-            const value = option ?
-                option.value :
-                emptyValue;
+            const value = option ? option.value : emptyValue;
             onValueChange(value);
         }
-    }
+    };
 
     render() {
         // "onChange" and "onValueChange" extracted here
@@ -54,28 +51,23 @@ export default class Select extends PureComponent<SelectProps> {
             required,
             className,
             options,
-            onChange, onValueChange, ...rest
+            onChange,
+            onValueChange,
+            ...rest
         } = this.props;
 
-        const isEmptyValue =
-            value === emptyValue ||
-            value === undefined ||
-            value === null;
+        const isEmptyValue = value === emptyValue || value === undefined || value === null;
 
         const selectHasError = hasError || (required && isEmptyValue);
 
-        const selectValue = isEmptyValue ?
-            emptyValue :
-            options.findIndex((option) => option.value === value);
+        const selectValue = isEmptyValue
+            ? emptyValue
+            : options.findIndex((option) => option.value === value);
 
-        const selectClassName = classNames(
-            className,
-            styles.select,
-            {
-                [styles.emptyValue]: isEmptyValue,
-                [styles.hasError]: selectHasError
-            }
-        );
+        const selectClassName = classNames(className, styles.select, {
+            [styles.emptyValue]: isEmptyValue,
+            [styles.hasError]: selectHasError
+        });
 
         return (
             <select
@@ -85,19 +77,14 @@ export default class Select extends PureComponent<SelectProps> {
                 required={required}
                 {...rest}
             >
-                {required && !isEmptyValue ?
-                    null :
-                    <option value={emptyValue}>
-                        {placeholder}
-                    </option>}
+                {required && !isEmptyValue ? null : (
+                    <option value={emptyValue}>{placeholder}</option>
+                )}
                 {options.map((option, index) => {
                     // we use index as a value to be able to use actual option.value in "onValueChage"
                     // (not its stringified copy)
                     return (
-                        <option
-                            value={index}
-                            key={option.label}
-                        >
+                        <option value={index} key={option.label}>
                             {option.label}
                         </option>
                     );
@@ -107,20 +94,18 @@ export default class Select extends PureComponent<SelectProps> {
     }
 }
 
-export type SelectProps =
-    & React.DetailedHTMLProps<
-        React.SelectHTMLAttributes<HTMLSelectElement>,
-        HTMLSelectElement
-    >
-    & {
-        options: Array<option>,
-        value: any,
-        placeholder?: string,
-        hasError?: boolean,
-        onValueChange: (value: any) => any
-    };
-
-type option = {
-    value: any,
-    label: string
+export type SelectProps = React.DetailedHTMLProps<
+    React.SelectHTMLAttributes<HTMLSelectElement>,
+    HTMLSelectElement
+> & {
+    options: Array<Option>;
+    value: any;
+    placeholder?: string;
+    hasError?: boolean;
+    onValueChange: (value: any) => any;
 };
+
+interface Option {
+    value: any;
+    label: string;
+}

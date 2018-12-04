@@ -22,73 +22,76 @@ module.exports = {
         filename: 'genestack-ui.js'
     },
     resolve: {
-        extensions: [".ts", ".tsx", ".js"]
+        extensions: ['.ts', '.tsx', '.js']
     },
     module: {
         rules: [
             {
                 test: /\.tsx?$/,
-                loader: "ts-loader"
+                loader: 'ts-loader'
             },
             {
                 test: /\.module\.css/,
                 include: /src/,
                 use: ExtractTextPlugin.extract({
-                    fallback: [{
-                        loader: 'style-loader'
-                    }],
-                    use: [{
-                        loader: 'css-loader',
-                        options: {
-                            modules: true,
-                            importLoader: 1,
-                            localIdentName: '[name]__[local]--[hash:base64:5]'
+                    fallback: [
+                        {
+                            loader: 'style-loader'
                         }
-                    }, {
-                        loader: 'postcss-loader',
-                        options: {
-                            plugins: [
-                                postcssImport,
-                                postcssCustomProperties({preserve: false}),
-                                autoprefixer
-                            ]
+                    ],
+                    use: [
+                        {
+                            loader: 'css-loader',
+                            options: {
+                                modules: true,
+                                importLoader: 1,
+                                localIdentName: '[name]__[local]--[hash:base64:5]'
+                            }
+                        },
+                        {
+                            loader: 'postcss-loader',
+                            options: {
+                                plugins: [
+                                    postcssImport,
+                                    postcssCustomProperties({preserve: false}),
+                                    autoprefixer
+                                ]
+                            }
                         }
-                    }]
+                    ]
                 })
             },
             {
                 test: /\.css/,
                 exclude: /\.module\.css/,
                 use: ExtractTextPlugin.extract({
-                    fallback: [{
-                        loader: 'style-loader'
-                    }],
-                    use: [{
-                        loader: 'css-loader',
-                        options: {
-                            importLoader: 1
+                    fallback: [
+                        {
+                            loader: 'style-loader'
                         }
-                    }, {
-                        loader: 'postcss-loader',
-                        options: {
-                            plugins: [
-                                postcssImport,
-                                postcssCustomProperties({preserve: false}),
-                                autoprefixer
-                            ]
+                    ],
+                    use: [
+                        {
+                            loader: 'css-loader',
+                            options: {
+                                importLoader: 1
+                            }
+                        },
+                        {
+                            loader: 'postcss-loader',
+                            options: {
+                                plugins: [
+                                    postcssImport,
+                                    postcssCustomProperties({preserve: false}),
+                                    autoprefixer
+                                ]
+                            }
                         }
-                    }]
+                    ]
                 })
             }
         ]
     },
-    plugins: [
-        new ExtractTextPlugin('genestack-ui.css')
-    ],
-    externals: [
-        'classnames',
-        'react',
-        'react-dom',
-        'prop-types'
-    ]
+    plugins: [new ExtractTextPlugin('genestack-ui.css')],
+    externals: ['classnames', 'react', 'react-dom', 'prop-types']
 };

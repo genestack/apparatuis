@@ -1,11 +1,7 @@
 ```js
 const Button = require('./button').default;
 <div>
-    <Button
-        onClick={() => alert('clicked on default button')}
-    >
-        Default button
-    </Button>
+    <Button onClick={() => alert('clicked on default button')}>Default button</Button>
     <Button
         kind="primary"
         onClick={(event, value) => alert(`clicked on primary button with value=${value}`)}
@@ -15,7 +11,10 @@ const Button = require('./button').default;
     <Button
         onClick={() => alert('clicked on default button')}
         disabled
-        tooltipProps={{overlay: "Due to Genestack's guides, each disabled button should have a hint with an explanation"}}
+        tooltipProps={{
+            overlay:
+                "Due to Genestack's guides, each disabled button should have a hint with an explanation"
+        }}
     >
         Default disabled button
     </Button>
@@ -23,8 +22,13 @@ const Button = require('./button').default;
         kind="primary"
         onClick={(event, value) => alert(`clicked on primary button with value=${value}`)}
         disabled
-        tooltipProps={{overlay:
-            <div>Due to Genestack's guides,<br/> each disabled button should have a hint with an explanation</div>
+        tooltipProps={{
+            overlay: (
+                <div>
+                    Due to Genestack's guides,<br /> each disabled button should have a hint with an
+                    explanation
+                </div>
+            )
         }}
     >
         Primary disabled button
@@ -38,7 +42,7 @@ const Button = require('./button').default;
         kind="primary"
         onClick={(event, value) => alert(`clicked on primary button with value=${value}`)}
     >
-        Small Primary  button
+        Small Primary button
     </Button>
     <Button
         size="small"
@@ -46,5 +50,5 @@ const Button = require('./button').default;
     >
         Small default button
     </Button>
-</div>
+</div>;
 ```
