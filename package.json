@@ -33,7 +33,7 @@
   "scripts": {
     "start": "styleguidist server",
     "clean": "rm -rf dist",
-    "tslint": "tslint -c ../../../tslint.json -p .",
+    "tslint": "tslint -p .",
     "csslint": "stylelint src/**/*.css",
     "ts-check": "tsc --noEmit -p .",
     "test": "npm run tslint && npm run csslint && npm run ts-check"
