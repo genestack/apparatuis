@@ -15,12 +15,12 @@
     transition: border linear 0.2s, box-shadow linear 0.2s;
     display: block;
     box-sizing: border-box;
-    height: 30;
-    padding: 0 10;
+    height: 30px;
+    padding: 0 10px;
     margin-bottom: 0;
     font-family: var(--gs-font-family);
     font-size: 14px;
-    line-height: 30;
+    line-height: 30px;
     color: rgb(85, 85, 85);
     border-radius: 4px;
 }
