@@ -326,9 +326,15 @@ interface B extends Omit<A, 'foo'> {
 }
 ```
 
+### onChange
+
+We keep approach to not change standard React API insofar as possible.
+So we should not change `onChage` method for custom inputs.
+Custom property `onValueChanged(value: InputType)` is more obviously and simpler in that cases.
+
 ### Pure components
 
-Avoid using `PureComponent` since optimization is mostly application-specific task.
+Avoid using `PureComponent` in common UI components since optimization is mostly application-specific task.
 
 ### Type defenitions at the top
 
