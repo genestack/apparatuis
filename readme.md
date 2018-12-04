@@ -42,19 +42,19 @@ e.g. icon for a `Tab` or `FileLink` use named props with components in them.
 
 ### Spread props
 
-Any component should spread its props to element it renders.
+Any component should spread its props to its children elements.
+
 There are few common types of elements that any component could render:
 
-- the root element
-- the target element
-- additional elements
+- The **root element** – just the root element of the virtual DOM tree that is been returned from
+  component's `render` method.
+- The **target element** – the element that bears main component's load, e.g. `input` for
+  `Autocomplete`. Usually both _root_ and _target_ elements are the same but not always.
+- **Additional elements** – all the rest elements playing less significant roles
 
-Any component that renders elements has a single `root` element.
-In common cases the `root` element is the `target` element.
-Any element that is not the `root` or the `target` is an `additional` element.
-Main purpose of the `root` element is CSS. The `target` element is used for API purposes.
-
-So `className` and `style` props should always be passed to the `root` component.
+In those cases where `root` and `target` are not the same element, main purpose of the `root`
+element is styling. Main purpose of the `target` element than is to deliver business logic.
+Therefore `className` and `style` props should always be passed to the `root` component.
 Other props are passed to the `target` component.
 
 ```tsx
@@ -95,8 +95,15 @@ function Input(props: InputProps) {
 
 ### Ref props
 
-Do not use `React.forwardRef` for functional components. Use `{specific}Ref` prop instead.
-Also use only `React.RefObject` (peer dep: `react: ">= 16.3 < 17"`)
+In react components `ref` is a special prop which is used as a fallback in those cases where user
+may need access to component's imperative API. It makes sense either for stateful components (which
+can declare imperative API as its public methods) or for html elements. It doesn't make sense for
+functional components and therefore is not used for them. Though, there is a workaround with
+`React.forwardRef` provided. It could be used to allow functional components to "proxy" their `ref`
+property towards one of their children. In our API approach this method is forbidden. If you need to
+provide a `ref` pointing to component's children, use `{elementName}Ref` property. Set its type
+as `React.RefObject` (React of version >= 16.3 needed) so that user could make a `ref` with
+`React.createRef()` method:
 
 ```tsx
 interface Props {
@@ -106,30 +113,6 @@ interface Props {
 function Input(props: Props) {
   return <input ref={props.inputRef} />
 }
-```
-
-In React `ref` could use `React.ReactInstance` or `HTMLElement`.
-The common rule is that if we use `html` component like `<input/>` or `<button />` we get `HTMLElement` in `ref`.
-But if we pass ref to custom React component like `<Input />` or `<Button />` we get `ReactInstance`
-or nothing if the component is function. Moreover if in the future a functional component is updated
-to a class component, its `API` will get a breaking change.
-
-```tsx
-// this is a functional component
-<Input ref={(node: HTMLElement) => {}} />
-
-// but now it is a class component
-<Input ref={(node: Input => {})} />
-```
-
-If we use `inputRef`, this problem is gone:
-
-```tsx
-// this is a functional component
-<Input inputRef={(node: HTMLElement) => {}} />
-
-// but now it is a class component
-<Input inputRef={(node: HTMLElement => {})} />
 ```
 
 Use `rootRef` for the `root` element and semantic name for the `target` element (ex: `inputRef`)
@@ -170,9 +153,10 @@ function Input(props: InputProps) {
 
 ### Elements props
 
-In some cases you can provide access to any `additional` or `non-target root` props for more flexible API.
-In this cases you should define `{additional}Props` for additional elements (ex. `labelProps` and `iconProps` for `Tab`)
-and `rootProps` for the `root` element if it is not the `target` element.
+In some cases you can provide access to any `additional` or non-`target`/`root` props to make API
+more flexible. In those cases you should define `{componentName}Props` for additional elements
+(ex. `labelProps` and `iconProps` for `Tab`). Use `rootProps` for the `root` element if it is not
+the `target` element.
 
 ```tsx
 interface TabProps extends React.HTMLAttributes<HTMLDivElement> {
@@ -204,8 +188,9 @@ function Input(props: InputProps) {
 }
 ```
 
-Do not use `targetRef` or `targetProps` because `targetProps` is always a part of whole props of component
-and `targetRef` is not semantic enough.
+Do not use `targetRef` or `targetProps` because props for `target` element are made by spreading
+component's own props on it (with an exception for `className` and `style` properties which
+always go to the `root` element, see below). Also `targetRef` is not semantic enough.
 
 See also Material UI Approach sections:
  - [Nested Components](https://material-ui.com/guides/api/#nested-components)
@@ -214,10 +199,9 @@ See also Material UI Approach sections:
 
 ### ClassNames
 
-For more flexible customization of components look we should expose posibility
-to add any `className` or state's `className` of any nested components.
-For this purposes `classes` property and `mergeClassesProps` util
-are being used in components.
+For more flexible customization of components look we should provide a way to add custom
+`className` strings to nested components or amend their modifiers (e.g. `disabled`, `active`,
+`primary` etc.). Use `classes` property and `mergeClassesProps` utility function for that purpose.
 
 ```css
 /* tab.module.css */
@@ -230,6 +214,7 @@ are being used in components.
 ```tsx
 // tab.tsx
 import styles from './tab.module.css';
+import cn from 'classnames';
 import { mergeClassesProps, WithClasses } from '../../utils/styles';
 
 type ClassKeys = 'root' | 'icon' | 'label' | 'disabled';
@@ -241,25 +226,19 @@ interface TabProps extends WithStyles<ClassKeys> {
 function Tab(props: TabProps) {
     const { classes, style, disabled } = mergeClassesProps(props, styles);
 
-    const rootClassName = cn(classes.root, {
-        [classes.disabled]: disabled,
-    });
-
-    const iconClassName = classes.icon;
-    const labelClassName = classes.label;
-
     return (
-        <div className={rootClassName} style={style}>
-            <div className={iconClassName} />
-            <div className={labelClassName} />
+        <div className={cn(classes.root, { [classes.disabled]: disabled })} style={style}>
+            <div className={classes.icon} />
+            <div className={classes.icon} />
         </div>
     )
 }
 ```
 
-Note that the `className` prop is always merged to `classes.root` and removed from original `props`;
-The `mergePropsWithClasses` always returns a `props` object extended with `classes` and `classes.root` properties.
-`WithStyles` interface add `className` and `classes` properties to component's props.
+The `mergePropsWithClasses` function returns a `props` object extended with `classes` property that
+is merged with `styles`. Note that the `className` prop is always merged to `classes.root` and
+removed from original `props`. `WithStyles` interface adds `className` and `classes` properties to
+component's props.
 
 After that we can use `Tab` component like this:
 
@@ -291,52 +270,18 @@ function MainPage() {
 }
 ```
 
-### Prefer `interface` to `type` in TypeScript defenitions
-
-`[Type A] & [Type B]` is not extending but merging types.
-Components mostly **extend** or **replace** other component props.
-
-```ts
-// the next line is valid for TS compiler
-// in the result the final type will be { foo: number & string }
-type A = { foo: string } & { foo: number };
-
-// the next line throws TS error
-// because `number` does not satisfy `number & string`
-const a: A = {
-    foo: 1, // in this place TS
-};
-```
-
-Using interfaces we get an error of types incompatibility on the defenition stage, not on the using stage:
-
-```ts
-interface A {
-  foo: string;
-}
-
-// [ts] Interface 'B' incorrectly extends interface 'A'
-interface B extends A {
-  foo: number;
-}
-
-// to replace some property use `Omit` helper from utils
-interface B extends Omit<A, 'foo'> {
-  foo: number;
-}
-```
-
 ### onChange
 
-We keep approach to not change standard React API insofar as possible.
-So we should not change `onChage` method for custom inputs.
-Custom property `onValueChanged(value: InputType)` is more obviously and simpler in that cases.
+We follow the approach to not change standard React API whenever possible.
+So we should not change standard method signatures, specifically we should not change signature of
+`onChage` method for custom inputs. Use custom property `onValueChanged(value: InputType)` for that
+purpose as it is more straightforward and simpler.
 
 ### Pure components
 
 Avoid using `PureComponent` in common UI components since optimization is mostly application-specific task.
 
-### Type defenitions at the top
+### Type definitions at the top
 
 Declare component's `Props` and `State` interfaces at the top of component's file.
 First of all we check which component API has and only then how it works.
