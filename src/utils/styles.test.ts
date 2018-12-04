@@ -43,7 +43,7 @@ describe('result of calling mergeClassesProps', () => {
         });
     });
 
-    it('should have classes.root property which equals empty estring when className property is omited', () => {
+    it('should have classes.root property which equals empty string when className property is omited', () => {
         const props = mergeClassesProps({}, {});
         expect(props.classes.root).toEqual('');
     });
