@@ -1,5 +1,5 @@
 import cn from 'classnames';
-import { Omit } from '../../node_modules/@types/lodash';
+import { Omit } from './omit';
 
 function forEachKeys<T, K extends keyof T>(
     obj: T,
