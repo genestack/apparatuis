@@ -42,8 +42,6 @@ e.g. icon for a `Tab` or `FileLink` use named props with components in them.
 
 ### Spread props
 
-Any component should spread its props to its children elements.
-
 There are few common types of elements that any component could render:
 
 - The **root element** – just the root element of the virtual DOM tree that is been returned from
@@ -51,6 +49,8 @@ There are few common types of elements that any component could render:
 - The **target element** – the element that bears main component's load, e.g. `input` for
   `Autocomplete`. Usually both _root_ and _target_ elements are the same but not always.
 - **Additional elements** – all the rest elements playing less significant roles
+
+Any component should spread its props to the target element. 
 
 In those cases where `root` and `target` are not the same element, main purpose of the `root`
 element is styling. Main purpose of the `target` element than is to deliver business logic.
