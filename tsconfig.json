@@ -4,8 +4,6 @@
     "strict": true,
     "skipLibCheck": false,
     "noImplicitAny": true,
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
     "typeRoots": ["./node_modules/@types", "./typings/"]
   },
   "exclude": ["./dist", "./coverage"]
