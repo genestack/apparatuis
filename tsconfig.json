@@ -1,9 +1,6 @@
 {
   "extends": "./node_modules/genestack-tsconfig/tsconfig.json",
   "compilerOptions": {
-    "strict": true,
-    "skipLibCheck": false,
-    "noImplicitAny": true,
     "typeRoots": ["./node_modules/@types", "./typings/"]
   },
   "exclude": ["./dist", "./coverage"]

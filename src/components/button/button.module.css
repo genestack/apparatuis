@@ -37,8 +37,8 @@
     margin-left: 10px;
 }
 
-.btn:hover:not([disabled]),
-.btn:focus {
+.btn:focus,
+.btn:hover:not([disabled]) {
     z-index: 1;
     text-decoration: none;
     outline: none;
@@ -54,10 +54,6 @@
 .btnGroup {
     display: flex;
     align-items: center;
-}
-
-.btnGroup > .btn:not(:first-child):not(:last-child) {
-    border-radius: 0;
 }
 
 .btnGroup > .btn:not(:first-child) {
@@ -76,4 +72,8 @@
 .btnGroup > .btn:last-child {
     border-top-left-radius: 0;
     border-bottom-left-radius: 0;
+}
+
+.btnGroup > .btn:not(:first-child):not(:last-child) {
+    border-radius: 0;
 }

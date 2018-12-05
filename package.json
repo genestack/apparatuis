@@ -14,29 +14,13 @@
   ],
   "author": "Genestack Limited",
   "license": "UNLICENSED",
-  "stylelint": {
-    "extends": [
-      "genestack-stylelint-config"
-    ],
-    "rules": {
-      "declaration-colon-newline-after": null,
-      "rule-empty-line-before": [
-        "always",
-        {
-          "except": [
-            "first-nested"
-          ]
-        }
-      ]
-    }
-  },
   "scripts": {
     "start": "styleguidist server",
     "clean": "rm -rf dist",
-    "tslint": "tslint -p .",
-    "csslint": "stylelint src/**/*.css",
-    "ts-check": "tsc --noEmit -p .",
-    "test": "npm run tslint && npm run csslint && npm run ts-check"
+    "tslint": "../../../node_modules/.bin/tslint -p .",
+    "stylelint": "../../../node_modules/.bin/stylelint src/**/*.css",
+    "tscheck": "tsc --noEmit -p .",
+    "test": "npm run tslint && npm run stylelint && npm run tscheck"
   },
   "devDependencies": {
     "@types/autoprefixer": "^6.7.3",
@@ -46,9 +30,7 @@
     "cpx": "^1.5.0",
     "css-loader": "^0.28.9",
     "genestack-frontend-builder": "^0.7.0",
-    "genestack-stylelint-config": "^1.0.1",
     "genestack-tsconfig": "^1.0.0",
-    "genestack-tslint-config": "^1.0.0",
     "postcss-custom-properties": "^7.0.0",
     "postcss-import": "^11.1.0",
     "postcss-loader": "^2.1.3",
@@ -58,10 +40,7 @@
     "react-dom": "^16.3.2",
     "react-styleguidist": "^6.2.5",
     "style-loader": "^0.20.2",
-    "stylelint": "^8.3.1",
     "ts-loader": "^3.5.0",
-    "tslint": "^5.9.1",
-    "tslint-react": "^3.5.1",
     "typescript": "^2.9.2",
     "webpack": "^3.11.0"
   },

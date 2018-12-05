@@ -22,7 +22,8 @@
 }
 
 /*
- * TODO: hack to increase selector weight - overwise it will be overriden by ".btn:hover:not(.disabled)" selector
+ * TODO: hack to increase selector weight -
+ * overwise it will be overriden by ".btn:hover:not(.disabled)" selector
  * should be removed after regular button implementation
  */
 

@@ -44,7 +44,7 @@
     background-color: var(--gs-color-background-disabled);
 }
 
-.select.emptyValue:disabled,
-.select.emptyValue {
+.select.emptyValue,
+.select.emptyValue:disabled {
     color: var(--gs-color-input-placeholders);
 }
