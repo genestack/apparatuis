@@ -119,7 +119,7 @@ type InternalProps<P extends WithClasses<any>> = Omit<
  * @param props - Original component's props
  * @param styles - Hasmap imported from css module
  * @returns Transformed original components's props with `classes` hashmap
- * and omitted `className` prop which has moved to `classes.root`
+ * and omitted `className` prop which is moved to `classes.root`
  */
 export function mergeClassesProps<P extends WithClasses<any>>(
     props: P,
