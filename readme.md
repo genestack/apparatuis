@@ -1,3 +1,10 @@
+<!--
+   Copyright (c) 2011-2018 Genestack Limited
+   All Rights Reserved
+   THIS IS UNPUBLISHED PROPRIETARY SOURCE CODE OF GENESTACK LIMITED
+   The copyright notice above does not evidence any
+   actual or intended publication of such source code.
+-->
 # Genestack Frontend UI Kit
 
 ## Development
@@ -50,7 +57,7 @@ There are few common types of elements that any component could render:
   `Autocomplete`. Usually both _root_ and _target_ elements are the same but not always.
 - **Additional elements** – all the rest elements playing less significant roles
 
-Any component should spread its props to the target element. 
+Any component should spread its props to the target element.
 
 In those cases where `root` and `target` are not the same element, main purpose of the `root`
 element is styling. Main purpose of the `target` element than is to deliver business logic.
@@ -205,10 +212,14 @@ For more flexible customization of components look we should provide a way to ad
 
 ```css
 /* tab.module.css */
-.root { /*...*/ }
-.icon { /*...*/ }
-.label { /*...*/ }
-.disabled { /*...*/ }
+
+.root { /* ... */ }
+
+.icon { /* ... */ }
+
+.label { /* ... */ }
+
+.disabled { /* ... */ }
 ```
 
 ```tsx
@@ -244,6 +255,7 @@ After that we can use `Tab` component like this:
 
 ```css
 .mainTab { /* ... */ }
+
 .mainTabDisabled { /* ... */ }
 ```
 
