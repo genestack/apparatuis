@@ -108,10 +108,10 @@ type ClassKeys<P> = P extends WithClasses<infer K> ? K | 'root' : string;
  * We remove optional `classes` and `className` from original props because
  * `className` moved to `classes.root` so `classes` key becomes permanent.
  */
-type InternalProps<P extends WithClasses<any>, K extends ClassKeys<P>> = Omit<
+type InternalProps<P extends WithClasses<any>> = Omit<
     P,
     'classes' | 'className'
-> & { classes: ClassNames<K> };
+> & { classes: ClassNames<ClassKeys<P>> };
 
 /**
  * Merge `props.classes` with `styles` hashmap from css modules.
@@ -121,13 +121,13 @@ type InternalProps<P extends WithClasses<any>, K extends ClassKeys<P>> = Omit<
  * @returns Transformed original components's props with `classes` hashmap
  * and omitted `className` prop which has moved to `classes.root`
  */
-export function mergeClassesProps<
-    P extends WithClasses<any>,
-    K extends ClassKeys<P>
->(props: P, styles: ClassNames<string>): InternalProps<P, K> {
+export function mergeClassesProps<P extends WithClasses<any>>(
+    props: P,
+    styles: ClassNames<string>
+): InternalProps<P> {
     const { classes: publicClasses, className, ...rest } = props as any;
 
-    const privateClasses = {} as ClassNames<K>;
+    const privateClasses = {} as ClassNames<ClassKeys<P>>;
 
     privateClasses.root = cn(className);
 

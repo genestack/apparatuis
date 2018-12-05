@@ -5,24 +5,36 @@
  * The copyright notice above does not evidence any
  * actual or intended publication of such source code.
  */
-import { mergeClassesProps } from './styles';
+import { mergeClassesProps, WithClasses } from './styles';
 
-const sortClassNames = (str: string) => str.split(' ').sort().join(' ');
+const sortClassNames = (str: string) =>
+    str
+        .split(' ')
+        .sort()
+        .join(' ');
 
 describe('result of calling mergeClassesProps', () => {
     describe('in common case', () => {
-        const mergeClassesSample = () => mergeClassesProps({
-            someProp: true,
-            className: '__className',
-            classes: {
-                'root': '__root',
-                'comp': '__comp',
-                'any': '__any',
-            },
-        }, {
-            'root': '_root',
-            'comp': '_comp',
-        });
+        interface Props extends WithClasses<'root' | 'comp'> {
+            someProp: boolean;
+        }
+
+        const mergeClassesSample = () =>
+            mergeClassesProps(
+                {
+                    someProp: true,
+                    className: '__className',
+                    classes: {
+                        root: '__root',
+                        comp: '__comp',
+                        any: '__any'
+                    }
+                } as Props,
+                {
+                    root: '_root',
+                    comp: '_comp'
+                }
+            );
 
         it('should have valid keys', () => {
             const props = mergeClassesSample();
@@ -40,8 +52,12 @@ describe('result of calling mergeClassesProps', () => {
 
         it('should have classes property with valid values', () => {
             const props = mergeClassesSample();
-            expect(sortClassNames(props.classes.root)).toEqual(sortClassNames('_root __root __className'));
-            expect(sortClassNames(props.classes.comp)).toEqual(sortClassNames('_comp __comp'));
+            expect(sortClassNames(props.classes.root)).toEqual(
+                sortClassNames('_root __root __className')
+            );
+            expect(sortClassNames(props.classes.comp)).toEqual(
+                sortClassNames('_comp __comp')
+            );
         });
 
         it('should have classes.root property which equals main className', () => {
