@@ -17,8 +17,8 @@
   "scripts": {
     "start": "styleguidist server",
     "clean": "rm -rf dist",
-    "tslint": "../../../node_modules/.bin/tslint -p .",
-    "stylelint": "../../../node_modules/.bin/stylelint src/**/*.css",
+    "tslint": "tslint -p .",
+    "stylelint": "stylelint src/**/*.css",
     "tscheck": "tsc --noEmit -p .",
     "test": "npm run tslint && npm run stylelint && npm run tscheck"
   },
@@ -30,7 +30,9 @@
     "cpx": "^1.5.0",
     "css-loader": "^0.28.9",
     "genestack-frontend-builder": "^0.7.0",
+    "genestack-stylelint-config": "^2.0.0",
     "genestack-tsconfig": "^1.0.0",
+    "genestack-tslint-config": "^3.0.0",
     "postcss-custom-properties": "^7.0.0",
     "postcss-import": "^11.1.0",
     "postcss-loader": "^2.1.3",
@@ -40,7 +42,10 @@
     "react-dom": "^16.3.2",
     "react-styleguidist": "^6.2.5",
     "style-loader": "^0.20.2",
+    "stylelint": "^9.3.0",
     "ts-loader": "^3.5.0",
+    "tslint": "^5.10.0",
+    "tslint-react": "^3.6.0",
     "typescript": "^2.9.2",
     "webpack": "^3.11.0"
   },

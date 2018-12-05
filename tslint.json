@@ -1,0 +1,6 @@
+{
+  "extends": "genestack-tslint-config",
+  "linterOptions": {
+    "exclude": ["**/**.js"]
+  }
+}
