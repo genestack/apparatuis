@@ -17,7 +17,6 @@ import { Omit } from './omit';
 
 /**
  * @example
- * import cn from 'classnames'
  * import { Button } from './components/button';
  * import * as styles from './my-styles.module.css';
  *
@@ -36,7 +35,6 @@ import { Omit } from './omit';
 
 /**
  * @example
- * import cn from 'classnames'
  * import { Button } from './components/button';
  * import * as styles from './my-styles.module.css';
  *
@@ -59,14 +57,14 @@ import { Omit } from './omit';
  */
 
 /**
- * Object that presents hashmap of classNames.
+ * Type for objects that represent hash map of classNames with keys of type K.
  * {
  *   "classNameKey1": "__classNameValue1",
  *   "classNameKey2": "__classNameValue2",
  *   // ...etc
  * }
  *
- * Used for `classes` property or `styles` hashmap imported from css modules.
+ * Used for `classes` property or `styles` hash map imported from css modules.
  */
 export type ClassNames<K extends string> = Record<K, string>;
 
@@ -90,14 +88,14 @@ export interface WithClasses<K extends string> {
      */
     className?: string;
     /**
-     * Hashmap of class names which component will add
+     * Hash map of class names which component will add
      * to its elements's and internal state's class names.
      */
     classes?: Partial<ClassNames<K>>;
 }
 
 /**
- * Private helper type for infering possible class names keys from component's props
+ * Private helper type for inferring possible class names keys from component's props
  * to define internal `classes` type.
  * We add the 'root' key because we always move `className` property to `classes.root`
  */
@@ -114,11 +112,11 @@ type InternalProps<P extends WithClasses<any>> = Omit<
 > & { classes: ClassNames<ClassKeys<P>> };
 
 /**
- * Merge `props.classes` with `styles` hashmap from css modules.
+ * Merge `props.classes` with `styles` hash map from css modules.
  *
  * @param props - Original component's props
  * @param styles - Hasmap imported from css module
- * @returns Transformed original components's props with `classes` hashmap
+ * @returns Transformed original components's props with `classes` hash map
  * and omitted `className` prop which is moved to `classes.root`
  */
 export function mergeClassesProps<P extends WithClasses<any>>(
