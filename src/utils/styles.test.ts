@@ -5,7 +5,7 @@
  * The copyright notice above does not evidence any
  * actual or intended publication of such source code.
  */
-import { mergeClassesProps, WithClasses } from './styles';
+import {mergeClassesProps, WithClasses} from './styles';
 
 const sortClassNames = (str: string) =>
     str
@@ -55,9 +55,7 @@ describe('result of calling mergeClassesProps', () => {
             expect(sortClassNames(props.classes.root)).toEqual(
                 sortClassNames('_root __root __className')
             );
-            expect(sortClassNames(props.classes.comp)).toEqual(
-                sortClassNames('_comp __comp')
-            );
+            expect(sortClassNames(props.classes.comp)).toEqual(sortClassNames('_comp __comp'));
         });
 
         it('should have classes.root property which equals main className', () => {
@@ -72,7 +70,7 @@ describe('result of calling mergeClassesProps', () => {
     });
 
     it('should have classes.root property which equals className property when classes property is omited', () => {
-        const props = mergeClassesProps({ className: '__root' }, {});
+        const props = mergeClassesProps({className: '__root'}, {});
         expect(props.classes.root).toEqual('__root');
     });
 });

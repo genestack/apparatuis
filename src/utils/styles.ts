@@ -6,7 +6,7 @@
  * actual or intended publication of such source code.
  */
 import cn from 'classnames';
-import { Omit } from './omit';
+import {Omit} from './omit';
 
 /**
  * You might need to change the style of a component in some very specific situation.
@@ -106,10 +106,9 @@ type ClassKeys<P> = P extends WithClasses<infer K> ? K | 'root' : string;
  * We remove optional `classes` and `className` from original props because
  * `className` moved to `classes.root` so `classes` key becomes permanent.
  */
-type InternalProps<P extends WithClasses<any>> = Omit<
-    P,
-    'classes' | 'className'
-> & { classes: ClassNames<ClassKeys<P>> };
+type InternalProps<P extends WithClasses<any>> = Omit<P, 'classes' | 'className'> & {
+    classes: ClassNames<ClassKeys<P>>;
+};
 
 /**
  * Merge `props.classes` with `styles` hash map from css modules.
@@ -123,7 +122,7 @@ export function mergeClassesProps<P extends WithClasses<any>>(
     props: P,
     styles: ClassNames<string>
 ): InternalProps<P> {
-    const { classes: publicClasses, className, ...rest } = props as any;
+    const {classes: publicClasses, className, ...rest} = props as any;
 
     const privateClasses = {} as ClassNames<ClassKeys<P>>;
 
@@ -131,11 +130,7 @@ export function mergeClassesProps<P extends WithClasses<any>>(
 
     Object.keys(styles).forEach((key) => {
         const value = styles[key];
-        privateClasses[key] = cn(
-            privateClasses[key],
-            value,
-            publicClasses && publicClasses[key]
-        );
+        privateClasses[key] = cn(privateClasses[key], value, publicClasses && publicClasses[key]);
     });
 
     return {

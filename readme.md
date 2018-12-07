@@ -5,6 +5,7 @@
    The copyright notice above does not evidence any
    actual or intended publication of such source code.
 -->
+
 # Genestack Frontend UI Kit
 
 ## Development
@@ -51,11 +52,11 @@ e.g. icon for a `Tab` or `FileLink` use named props with components in them.
 
 There are few common types of elements that any component could render:
 
-- The **root element** – just the root element of the virtual DOM tree that is been returned from
-  component's `render` method.
-- The **target element** – the element that bears main component's load, e.g. `input` for
-  `Autocomplete`. Usually both _root_ and _target_ elements are the same but not always.
-- **Additional elements** – all the rest elements playing less significant roles
+-   The **root element** – just the root element of the virtual DOM tree that is been returned from
+    component's `render` method.
+-   The **target element** – the element that bears main component's load, e.g. `input` for
+    `Autocomplete`. Usually both _root_ and _target_ elements are the same but not always.
+-   **Additional elements** – all the rest elements playing less significant roles
 
 Any component should spread its props to the target element.
 
@@ -72,7 +73,7 @@ interface TabProps extends React.HTMLAttributes<HTMLDivElement> {
 }
 
 function Tab(props: TabProps) {
-    const { icon, label, ...rootProps } = props;
+    const {icon, label, ...rootProps} = props;
     return (
         <div {...rootProps} className={cn(rootProps.className, 'gs-tab')}>
             {/* additional element `icon` */}
@@ -88,13 +89,10 @@ function Tab(props: TabProps) {
 interface InputProps extends React.HTMLAttributes<HTMLInputElement> {}
 
 function Input(props: InputProps) {
-    const { className, style, ...targetProps } = props;
+    const {className, style, ...targetProps} = props;
     return (
         <div className={cn(className, 'gs-input-root')} style={style}>
-            <input
-                {...targetProps}
-                className={cn(targetProps.className, 'gs-input')}
-            />
+            <input {...targetProps} className={cn(targetProps.className, 'gs-input')} />
         </div>
     );
 }
@@ -114,11 +112,11 @@ as `React.RefObject` (React of version >= 16.3 needed) so that user could make a
 
 ```tsx
 interface Props {
-  inputRef: React.RefObject<HTMLInputElement>;
+    inputRef: React.RefObject<HTMLInputElement>;
 }
 
 function Input(props: Props) {
-  return <input ref={props.inputRef} />
+    return <input ref={props.inputRef} />;
 }
 ```
 
@@ -134,7 +132,7 @@ interface TabProps extends React.HTMLAttributes<HTMLDivElement> {
 }
 
 function Tab(props: TabProps) {
-    const { rootRef, iconRef, labelRef, ...rootProps } = props;
+    const {rootRef, iconRef, labelRef, ...rootProps} = props;
     return (
         <div ref={rootRef}>
             <div ref={iconRef} />
@@ -149,7 +147,7 @@ interface InputProps extends React.HTMLAttributes<HTMLInputElement> {
 }
 
 function Input(props: InputProps) {
-    const { rootRef, inputRef } = props;
+    const {rootRef, inputRef} = props;
     return (
         <div ref={rootRef}>
             <input ref={inputRef} />
@@ -172,7 +170,7 @@ interface TabProps extends React.HTMLAttributes<HTMLDivElement> {
 }
 
 function Tab(props: TabProps) {
-    const { iconProps, labelProps, ...rootProps } = props;
+    const {iconProps, labelProps, ...rootProps} = props;
     return (
         <div {...rootProps}>
             <div {...iconProps} />
@@ -186,7 +184,7 @@ interface InputProps extends React.HTMLAttributes<HTMLInputElement> {
 }
 
 function Input(props: InputProps) {
-    const { rootProps, ...targetProps } = props;
+    const {rootProps, ...targetProps} = props;
     return (
         <div {...rootProps}>
             <input {...targetProps} />
@@ -200,9 +198,10 @@ component's own props on it (with an exception for `className` and `style` prope
 always go to the `root` element, see below). Also `targetRef` is not semantic enough.
 
 See also Material UI Approach sections:
- - [Nested Components](https://material-ui.com/guides/api/#nested-components)
- - [Controlled components](https://material-ui.com/guides/api/#property-naming)
- - [boolean vs enum](https://material-ui.com/guides/api/#boolean-vs-enum)
+
+-   [Nested Components](https://material-ui.com/guides/api/#nested-components)
+-   [Controlled components](https://material-ui.com/guides/api/#property-naming)
+-   [boolean vs enum](https://material-ui.com/guides/api/#boolean-vs-enum)
 
 ### ClassNames
 
@@ -213,20 +212,28 @@ For more flexible customization of components look we should provide a way to ad
 ```css
 /* tab.module.css */
 
-.root { /* ... */ }
+.root {
+    /* ... */
+}
 
-.icon { /* ... */ }
+.icon {
+    /* ... */
+}
 
-.label { /* ... */ }
+.label {
+    /* ... */
+}
 
-.disabled { /* ... */ }
+.disabled {
+    /* ... */
+}
 ```
 
 ```tsx
 // tab.tsx
 import styles from './tab.module.css';
 import cn from 'classnames';
-import { mergeClassesProps, WithClasses } from '../../utils/styles';
+import {mergeClassesProps, WithClasses} from '../../utils/styles';
 
 type ClassKeys = 'root' | 'icon' | 'label' | 'disabled';
 
@@ -235,14 +242,14 @@ interface TabProps extends WithStyles<ClassKeys> {
 }
 
 function Tab(props: TabProps) {
-    const { classes, style, disabled } = mergeClassesProps(props, styles);
+    const {classes, style, disabled} = mergeClassesProps(props, styles);
 
     return (
-        <div className={cn(classes.root, { [classes.disabled]: disabled })} style={style}>
+        <div className={cn(classes.root, {[classes.disabled]: disabled})} style={style}>
             <div className={classes.icon} />
             <div className={classes.icon} />
         </div>
-    )
+    );
 }
 ```
 
@@ -254,14 +261,18 @@ component's props.
 After that we can use `Tab` component like this:
 
 ```css
-.mainTab { /* ... */ }
+.mainTab {
+    /* ... */
+}
 
-.mainTabDisabled { /* ... */ }
+.mainTabDisabled {
+    /* ... */
+}
 ```
 
 ```tsx
-import { ClassNamesMap } from '../../utils/style';
-import { Tab } from './components/tab';
+import {ClassNamesMap} from '../../utils/style';
+import {Tab} from './components/tab';
 import _styles from './page.module.css';
 
 // you also can use `ClassNamesMap` from utils to type your styles
@@ -273,7 +284,7 @@ function MainPage() {
             <PageTabs>
                 <Tab
                     className={styles.mainTab}
-                    classes={{ disabled: styles.mainTabDisabled }}
+                    classes={{disabled: styles.mainTabDisabled}}
                     label="Tab With Extended Styles"
                 />
             </PageTabs>
