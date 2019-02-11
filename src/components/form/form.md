@@ -1,6 +1,7 @@
 ```js
-const Form = require('./form').default;
-const Input = require('../input/input').default;
+const {Input} = require('../input');
+const {Form} = require('.');
+
 <Form onSubmit={() => ({})}>
     <Input value="" onChange={() => ({})} />
 </Form>;

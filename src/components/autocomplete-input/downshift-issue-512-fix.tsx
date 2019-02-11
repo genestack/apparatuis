@@ -7,6 +7,7 @@
  */
 
 // TODO: see https://github.com/paypal/downshift/issues/512
+// tslint:disable-next-line:match-default-export-name
 import OriginalDownshift, {Actions} from 'downshift';
 
 const stateKeys = ['highlightedIndex', 'inputValue', 'isOpen', 'selectedItem', 'type'];
@@ -18,11 +19,13 @@ const pickState = (state: any = {}) => {
             result[k] = state[k];
         }
     });
+
     return result;
 };
 
-export default class Downshift extends OriginalDownshift {
-    selectItem: Actions<any>['selectItem'] = (item, otherStateToSet, cb) =>
+/** Patched Downshift */
+export class Downshift extends OriginalDownshift {
+    public selectItem: Actions<any>['selectItem'] = (item, otherStateToSet, cb) =>
         (this as any).internalSetState(
             {
                 isOpen: false,

@@ -6,25 +6,48 @@
  * actual or intended publication of such source code.
  */
 
-import React from 'react';
 import debounce from 'lodash.debounce';
+import React from 'react';
 
-export default class DataProvider extends React.PureComponent<DataProviderProps> {
-    static initialState = {isLoading: false, error: null, items: [], value: ''};
+const FETCH_DEBOUNCE_DURATION = 100;
 
-    state = DataProvider.initialState;
+interface State {
+    isLoading: boolean;
+    error: any;
+    items: any[];
+    value: string;
+}
 
-    mounted: boolean = false;
+interface DataProviderChildrenProps {
+    value: string;
+    items: any[];
+    isLoading: boolean;
+    error: any;
+    onValueChange(value: string): any;
+}
 
-    componentDidMount() {
+/** DataProvider public properties */
+export interface Props {
+    fetch(value: string): Promise<any>;
+    onLoaded?(array: any): any;
+    children(prop: DataProviderChildrenProps): JSX.Element;
+}
+
+/** DataProvider */
+export class AutocompleteDataProvider extends React.PureComponent<Props, State> {
+    public state: State = {isLoading: false, error: null, items: [], value: ''};
+
+    private mounted = false;
+
+    public componentDidMount() {
         this.mounted = true;
     }
 
-    componentWillUnmount() {
+    public componentWillUnmount() {
         this.mounted = false;
     }
 
-    fetch = () => {
+    private fetch = () => {
         const value = this.state.value;
         const checkIfActual = () => value === this.state.value;
 
@@ -53,9 +76,9 @@ export default class DataProvider extends React.PureComponent<DataProviderProps>
             });
     };
 
-    debouncedFetch = debounce(this.fetch, 100);
+    private debouncedFetch = debounce(this.fetch, FETCH_DEBOUNCE_DURATION);
 
-    handleValueChange = (value: string) =>
+    private handleValueChange = (value: string) => {
         this.setState(
             {
                 isLoading: true,
@@ -63,9 +86,11 @@ export default class DataProvider extends React.PureComponent<DataProviderProps>
             },
             this.debouncedFetch
         );
+    };
 
-    render() {
+    public render() {
         const {items, isLoading, error, value} = this.state;
+
         return this.props.children({
             value,
             items,
@@ -74,18 +99,4 @@ export default class DataProvider extends React.PureComponent<DataProviderProps>
             onValueChange: this.handleValueChange
         });
     }
-}
-
-interface DataProviderChildrenProps {
-    value: string;
-    items: any[];
-    isLoading: boolean;
-    error: any;
-    onValueChange: (value: string) => any;
-}
-
-interface DataProviderProps {
-    fetch: (value: string) => Promise<any>;
-    onLoaded?: (array: any) => any;
-    children: (prop: DataProviderChildrenProps) => JSX.Element;
 }

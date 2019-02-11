@@ -1,5 +1,5 @@
 ```js
-const Select = require('./select').default;
+const {Select} = require('.');
 initialState = {value: null};
 
 const options = [

@@ -5,14 +5,27 @@
  * The copyright notice above does not evidence any
  * actual or intended publication of such source code.
  */
-import React from 'react';
 import classNames from 'classnames';
-import CheckboxIcon from './checkboxIcon';
-import styles from './checkbox.module.css';
+import React from 'react';
+
 import {Omit} from '../../utils/omit';
 
-export default class Checkbox extends React.Component<CheckboxProps> {
-    handleChange: React.ChangeEventHandler<HTMLInputElement> = (event) => {
+import {CheckboxIcon} from './checkbox-icon';
+import styles from './checkbox.module.css';
+
+type TargetProps = React.InputHTMLAttributes<HTMLInputElement>;
+
+/** Checkbox public properties */
+export interface Props extends Omit<TargetProps, 'type'> {
+    onValueChange?: OnValueChangeCallback<boolean>;
+    className?: string;
+}
+
+type OnValueChangeCallback<T> = (value: T) => any;
+
+/** Checkbox */
+export class Checkbox extends React.Component<Props> {
+    private handleChange: React.ChangeEventHandler<HTMLInputElement> = (event) => {
         const {onChange, onValueChange} = this.props;
         if (onChange) {
             onChange(event);
@@ -22,7 +35,7 @@ export default class Checkbox extends React.Component<CheckboxProps> {
         }
     };
 
-    render() {
+    public render() {
         const {
             className,
             children, // extract as React-specific properties
@@ -62,10 +75,3 @@ export default class Checkbox extends React.Component<CheckboxProps> {
         );
     }
 }
-
-interface CheckboxProps extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'type'> {
-    onValueChange?: OnValueChangeCallback<boolean>;
-    className?: string;
-}
-
-type OnValueChangeCallback<T> = (value: T) => any;

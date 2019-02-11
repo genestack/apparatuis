@@ -1,5 +1,5 @@
 ```js
-const TextareaAutosize = require('./textarea-autosize').default;
+const {TextareaAutosize} = require('.');
 initialState = {value: 'Hey!'};
 <TextareaAutosize value={state.value} onValueChange={(value) => setState({value})} />;
 ```

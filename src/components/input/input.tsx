@@ -6,36 +6,56 @@
  * actual or intended publication of such source code.
  */
 
-import React from 'react';
 import classNames from 'classnames';
-import styles from './input.module.css';
+import React from 'react';
+
 import {Omit} from '../../utils/omit';
 
-export default React.forwardRef<HTMLInputElement, InputProps>((props, ref) => {
-    const {className = '', hasError = false, onChange, onValueChange, name, ...restProps} = props;
+import styles from './input.module.css';
+
+type TargetProps = React.InputHTMLAttributes<HTMLInputElement>;
+
+type OnValueChanger = (value: string | null | undefined) => any;
+
+/** Input public properties */
+export interface Props extends Omit<TargetProps, 'onChange'> {
+    onChange?(event: React.ChangeEvent<HTMLInputElement>, value: any): void;
+    hasError?: boolean;
+    onValueChange?: OnValueChanger;
+    targetRef?: React.Ref<HTMLInputElement>;
+}
+
+/** Input wrapper */
+export const Input = (props: Props) => {
+    const {
+        className = '',
+        hasError = false,
+        onChange,
+        onValueChange,
+        name,
+        targetRef,
+        ...restProps
+    } = props;
+
+    const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        const {value} = event.currentTarget;
+
+        if (onChange) {
+            onChange(event, name ? {[name]: value} : value);
+        }
+
+        if (onValueChange) {
+            onValueChange(value);
+        }
+    };
 
     return (
         <input
-            ref={ref}
             {...restProps}
+            ref={targetRef}
             name={name}
             className={classNames(className, styles.input, {[styles.hasError]: hasError})}
-            onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-                const {value} = event.currentTarget;
-
-                onChange && onChange(event, name ? {[name]: value} : value);
-
-                onValueChange && onValueChange(value);
-            }}
+            onChange={handleChange}
         />
     );
-});
-
-export interface InputProps
-    extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'type' | 'onChange'> {
-    onChange?: (event: React.ChangeEvent<HTMLInputElement>, value: any) => void;
-    hasError?: boolean;
-    onValueChange?: OnValueChanger;
-}
-
-type OnValueChanger = (value: string) => any;
+};

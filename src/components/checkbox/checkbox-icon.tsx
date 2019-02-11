@@ -7,9 +7,17 @@
  */
 
 import React from 'react';
+
 import styles from './checkbox.module.css';
 
-export default function CheckboxIcon(props: CheckboxProps) {
+interface Props {
+    disabled?: boolean;
+}
+
+/**
+ * Checkbox Icon
+ */
+export function CheckboxIcon(props: Props) {
     const {disabled} = props;
 
     return (
@@ -21,8 +29,4 @@ export default function CheckboxIcon(props: CheckboxProps) {
             />
         </svg>
     );
-}
-
-interface CheckboxProps {
-    disabled?: boolean;
 }

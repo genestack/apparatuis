@@ -5,13 +5,61 @@
  * The copyright notice above does not evidence any
  * actual or intended publication of such source code.
  */
+import classNames from 'classnames';
+import {DownshiftProps, PropGetters, DownshiftState} from 'downshift';
 import React, {Fragment} from 'react';
 import ReactDOM from 'react-dom';
-import classnames from 'classnames';
-import Input, {InputProps} from '../input/input';
-import Downshift from './downshift-issue-512-fix';
+
+import {Omit} from '../../utils/omit';
+import {Input, InputProps} from '../input';
+
+import {Downshift} from './downshift-issue-512-fix';
 import styles from './styles.module.css';
-import {DownshiftProps, PropGetters, DownshiftState} from 'downshift';
+
+interface RenderSuggestionProps {
+    item: string;
+    index: number;
+    value: string;
+    getItemProps(any: any): any;
+    selectedItem: string;
+    highlightedIndex: number;
+}
+
+type RenderSuggestion = (props: RenderSuggestionProps) => JSX.Element;
+
+/** AutocompleteInput public properties */
+export interface Props extends Omit<InputProps, 'targetRef'> {
+    items: any[];
+    isLoading: boolean;
+    error: any;
+    renderSuggestion?: RenderSuggestion;
+    renderLoading?(): JSX.Element;
+    renderNoMatches?(): JSX.Element;
+    renderError?(error: any): JSX.Element;
+}
+
+function calcMenuStyles(inputDOMNode: HTMLInputElement | null) {
+    if (!inputDOMNode) {
+        return {};
+    }
+
+    const inputDOMRect = inputDOMNode.getBoundingClientRect();
+
+    return {
+        position: 'absolute',
+        zIndex: 1070,
+        top: `${inputDOMNode.offsetHeight + inputDOMRect.top + window.pageYOffset}px`,
+        minWidth: `${inputDOMNode.offsetWidth}px`,
+        left: `${inputDOMRect.left + window.pageXOffset}px`
+    };
+}
+
+function omit(omitProps: string[], props: {[key: string]: any}) {
+    return Object.keys(props).reduce(
+        (newObj, key) => (omitProps.includes(key) ? newObj : {...newObj, [key]: props[key]}),
+        {} as any
+    );
+}
 
 // appending to body to prevent from being hided by parent "overflow: hidden" css-rule
 const MenuPortal = ({children}: {children: React.ReactNode}) => (
@@ -24,6 +72,7 @@ const Menu = React.forwardRef<HTMLUListElement, any>((props, ref) => {
         ...props.style,
         display: isOpen ? 'block' : 'none'
     };
+
     return (
         <MenuPortal>
             <ul ref={ref} {...rest} style={style} className={styles.suggestions}>
@@ -51,7 +100,7 @@ const renderSuggestion: RenderSuggestion = ({
 }) => {
     const isActive = highlightedIndex === index;
     const isSelected = selectedItem === item;
-    const itemClassNames = classnames(styles.suggestion, {
+    const itemClassNames = classNames(styles.suggestion, {
         [styles.activeSuggestion]: isActive,
         [styles.selectedSuggestion]: isSelected
     });
@@ -74,10 +123,11 @@ interface RenderMenuContentProps<Item> {
     selectedItem: DownshiftState<Item>['selectedItem'];
 }
 
-export default class AutocompleteInput extends React.Component<AutocompleteInputProps> {
-    inputRef = React.createRef<HTMLInputElement>();
+/** AutocompleteInput */
+export class AutocompleteInput extends React.Component<Props> {
+    private inputRef = React.createRef<HTMLInputElement>();
 
-    handleStateChange: DownshiftProps<string>['onStateChange'] = (changes) => {
+    private handleStateChange: DownshiftProps<string>['onStateChange'] = (changes) => {
         const {onValueChange} = this.props;
 
         if (!onValueChange) {
@@ -85,13 +135,13 @@ export default class AutocompleteInput extends React.Component<AutocompleteInput
         }
 
         if (changes.hasOwnProperty('selectedItem')) {
-            onValueChange(changes.selectedItem as any);
+            onValueChange(changes.selectedItem);
         } else if (changes.hasOwnProperty('inputValue')) {
-            onValueChange(changes.inputValue as any);
+            onValueChange(changes.inputValue);
         }
     };
 
-    renderMenuContent({
+    private renderMenuContent({
         getItemProps,
         highlightedIndex,
         selectedItem
@@ -124,7 +174,7 @@ export default class AutocompleteInput extends React.Component<AutocompleteInput
         );
     }
 
-    render() {
+    public render() {
         const inputProps: InputProps = omit(
             [
                 'items',
@@ -161,7 +211,7 @@ export default class AutocompleteInput extends React.Component<AutocompleteInput
 
                     return (
                         <div>
-                            <Input ref={this.inputRef} {...inputComponentProps} />
+                            <Input targetRef={this.inputRef} {...inputComponentProps} />
                             <Menu {...getMenuProps({isOpen: isMenuVisible, style: menuStyle})}>
                                 {this.renderMenuContent({
                                     getItemProps,
@@ -175,46 +225,4 @@ export default class AutocompleteInput extends React.Component<AutocompleteInput
             </Downshift>
         );
     }
-}
-
-interface RenderSuggestionProps {
-    item: string;
-    index: number;
-    value: string;
-    getItemProps: (any: any) => any;
-    selectedItem: string;
-    highlightedIndex: number;
-}
-
-type RenderSuggestion = (props: RenderSuggestionProps) => JSX.Element;
-
-interface AutocompleteInputProps extends InputProps {
-    items: any[];
-    isLoading: boolean;
-    error: any;
-    renderSuggestion?: RenderSuggestion;
-    renderLoading?: () => JSX.Element;
-    renderNoMatches?: () => JSX.Element;
-    renderError?: (error: any) => JSX.Element;
-}
-
-function calcMenuStyles(inputDOMNode: HTMLInputElement | null) {
-    if (!inputDOMNode) return {};
-
-    const inputDOMRect = inputDOMNode.getBoundingClientRect();
-
-    return {
-        position: 'absolute',
-        zIndex: 1070,
-        top: inputDOMNode.offsetHeight + inputDOMRect.top + window.pageYOffset + 'px',
-        minWidth: inputDOMNode.offsetWidth + 'px',
-        left: inputDOMRect.left + window.pageXOffset + 'px'
-    };
-}
-
-function omit(omitProps: string[], props: {[key: string]: any}) {
-    return Object.keys(props).reduce(
-        (newObj, key) => (omitProps.includes(key) ? newObj : {...newObj, [key]: props[key]}),
-        {}
-    );
 }

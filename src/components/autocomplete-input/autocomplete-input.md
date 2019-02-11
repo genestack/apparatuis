@@ -1,7 +1,8 @@
 ```js
-const AutocompleteInput = require('./autocomplete-input.tsx').default;
-const AutocompleteDataProvider = require('./data-provider').default;
-const Checkbox = require('../checkbox/checkbox').default;
+const {Checkbox} = require('../checkbox');
+
+const {AutocompleteDataProvider, AutocompleteInput} = require('.');
+
 initialState = {
     emulateNetworkError: false,
     customRenderSuggestion: false,

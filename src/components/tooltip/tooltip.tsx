@@ -6,10 +6,18 @@
  * actual or intended publication of such source code.
  */
 
-import React from 'react';
+// tslint:disable-next-line:match-default-export-name
 import RcTooltip from 'rc-tooltip';
+import React from 'react';
+
 import './tooltip.css';
 
-export default (props: TooltipProps) => <RcTooltip prefixCls="genestack-ui-tooltip" {...props} />;
+type TargetProps = RcTooltip['props'];
 
-export type TooltipProps = RcTooltip['props'];
+/** Tooltip public properties */
+export interface Props extends TargetProps {}
+
+/**
+ * RcTooltip wrapper
+ */
+export const Tooltip = (props: Props) => <RcTooltip prefixCls="genestack-ui-tooltip" {...props} />;

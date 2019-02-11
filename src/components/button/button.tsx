@@ -5,14 +5,27 @@
  * The copyright notice above does not evidence any
  * actual or intended publication of such source code.
  */
-import React from 'react';
 import classNames from 'classnames';
-import Tooltip, {TooltipProps} from './../tooltip/tooltip';
-import styles from './button.module.css';
-import primaryStyles from './button-primary.module.css';
-import defaultStyles from './button-default.module.css';
+import React from 'react';
 
-export default React.forwardRef<HTMLButtonElement, ButtonProps>((props, ref) => {
+import {TooltipProps, Tooltip} from '../tooltip';
+
+import styles from './button.module.css';
+// tslint:disable-next-line:ordered-imports
+import defaultStyles from './button-default.module.css';
+import primaryStyles from './button-primary.module.css';
+
+type TargetProps = React.ButtonHTMLAttributes<HTMLButtonElement>;
+
+/** Button public properties */
+export interface Props extends TargetProps {
+    kind?: 'default' | 'primary';
+    size?: 'small' | 'medium';
+    tooltipProps?: TooltipProps;
+}
+
+/** Button */
+export const Button = (props: Props) => {
     const {
         kind = 'default',
         className = '',
@@ -26,7 +39,6 @@ export default React.forwardRef<HTMLButtonElement, ButtonProps>((props, ref) => 
     const button = (
         <button
             onClick={disabled ? undefined : onClick}
-            ref={ref}
             className={classNames(className, styles.btn, styles[size], {
                 [styles.disabled]: disabled,
                 [primaryStyles.disabled]: disabled,
@@ -47,13 +59,6 @@ export default React.forwardRef<HTMLButtonElement, ButtonProps>((props, ref) => 
             </Tooltip>
         );
     }
+
     return button;
-});
-
-type sizeType = 'small' | 'medium';
-
-export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-    kind?: 'default' | 'primary';
-    size?: sizeType;
-    tooltipProps?: TooltipProps;
-}
+};
