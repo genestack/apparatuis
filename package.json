@@ -21,7 +21,7 @@
     "stylelint": "stylelint src/**/*.css",
     "tscheck": "tsc --noEmit -p .",
     "jest": "jest -c node_modules/genestack-jest-config/jest.config.js",
-    "test": "npm run tslint && npm run stylelint && npm run tscheck"
+    "test": "npm run tslint && npm run stylelint && npm run tscheck && npm run jest"
   },
   "devDependencies": {
     "@types/autoprefixer": "^6.7.3",
@@ -35,7 +35,7 @@
     "genestack-jest-config": "^1.1.0",
     "genestack-stylelint-config": "^2.0.0",
     "genestack-tsconfig": "^2.0.0",
-    "genestack-tslint-config": "^3.0.0",
+    "genestack-tslint-config": "^6.0.0",
     "jest": "^23.3.0",
     "postcss-custom-properties": "^7.0.0",
     "postcss-import": "^11.1.0",

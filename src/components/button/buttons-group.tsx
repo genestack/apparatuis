@@ -5,9 +5,17 @@
  * The copyright notice above does not evidence any
  * actual or intended publication of such source code.
  */
+import classNames from 'classnames';
 import React from 'react';
+
 import styles from './button.module.css';
 
-export default (
-    props: React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>
-) => <div className={styles.btnGroup} {...props} />;
+type TargetProps = React.HTMLAttributes<HTMLDivElement>;
+
+/** Buttons Group public properties */
+export interface Props extends TargetProps {}
+
+/** Buttons Group */
+export const ButtonsGroup = (props: Props) => (
+    <div {...props} className={classNames(styles.btnGroup, props.className)} />
+);

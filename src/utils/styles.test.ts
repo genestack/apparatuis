@@ -19,22 +19,22 @@ describe('result of calling mergeClassesProps', () => {
             someProp: boolean;
         }
 
-        const mergeClassesSample = () =>
-            mergeClassesProps(
-                {
-                    someProp: true,
-                    className: '__className',
-                    classes: {
-                        root: '__root',
-                        comp: '__comp',
-                        any: '__any'
-                    }
-                } as Props,
-                {
-                    root: '_root',
-                    comp: '_comp'
+        const mergeClassesSample = () => {
+            const props = {
+                someProp: true,
+                className: '__className',
+                classes: {
+                    root: '__root',
+                    comp: '__comp',
+                    any: '__any'
                 }
-            );
+            };
+
+            return mergeClassesProps(props as Props, {
+                root: '_root',
+                comp: '_comp'
+            });
+        };
 
         it('should have valid keys', () => {
             const props = mergeClassesSample();
@@ -64,13 +64,21 @@ describe('result of calling mergeClassesProps', () => {
         });
     });
 
-    it('should have classes.root property which equals empty string when className property is omited', () => {
-        const props = mergeClassesProps({}, {});
-        expect(props.classes.root).toEqual('');
-    });
+    it(
+        'should have classes.root property which equals empty string ' +
+            'when className property is omited',
+        () => {
+            const props = mergeClassesProps({}, {});
+            expect(props.classes.root).toEqual('');
+        }
+    );
 
-    it('should have classes.root property which equals className property when classes property is omited', () => {
-        const props = mergeClassesProps({className: '__root'}, {});
-        expect(props.classes.root).toEqual('__root');
-    });
+    it(
+        'should have classes.root property which equals className property when ' +
+            'classes property is omited',
+        () => {
+            const props = mergeClassesProps({className: '__root'}, {});
+            expect(props.classes.root).toEqual('__root');
+        }
+    );
 });

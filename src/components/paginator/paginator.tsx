@@ -5,12 +5,35 @@
  * The copyright notice above does not evidence any
  * actual or intended publication of such source code.
  */
-import React from 'react';
 import classNames from 'classnames';
-import styles from './paginator.module.css';
-import Button from '../button/button';
+import React from 'react';
 
-export default (props: PaginatorProps) => {
+import {Omit} from '../../utils/omit';
+import {Button} from '../button';
+
+import styles from './paginator.module.css';
+
+type TargetProps = React.HTMLAttributes<HTMLDivElement>;
+
+/** Paginator public properties */
+export interface Props extends Omit<TargetProps, 'onChange'> {
+    onChange(value: number): any;
+    itemsLength: number;
+    itemsPerPage: number;
+    offset: number;
+    className?: string;
+}
+
+const clickPrevious = ({onChange, offset, itemsPerPage}: Props) => () =>
+    onChange(offset - itemsPerPage);
+
+const clickNext = ({onChange, offset, itemsPerPage}: Props) => () =>
+    onChange(offset + itemsPerPage);
+
+/**
+ * Paginator React component.
+ */
+export const Paginator = (props: Props) => {
     const {offset, itemsPerPage, itemsLength, className} = props;
     const isFirstPage = offset === 0;
     const isLastPage = offset + itemsPerPage >= itemsLength;
@@ -45,17 +68,3 @@ export default (props: PaginatorProps) => {
         </div>
     );
 };
-
-export type PaginatorProps = React.Props<HTMLDivElement> & {
-    onChange: (value: number) => any;
-    itemsLength: number;
-    itemsPerPage: number;
-    offset: number;
-    className?: string;
-};
-
-const clickPrevious = ({onChange, offset, itemsPerPage}: PaginatorProps) => () =>
-    onChange(offset - itemsPerPage);
-
-const clickNext = ({onChange, offset, itemsPerPage}: PaginatorProps) => () =>
-    onChange(offset + itemsPerPage);

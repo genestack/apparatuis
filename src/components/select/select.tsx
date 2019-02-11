@@ -5,19 +5,39 @@
  * The copyright notice above does not evidence any
  * actual or intended publication of such source code.
  */
-import React, {PureComponent} from 'react';
 import classNames from 'classnames';
+import React, {PureComponent} from 'react';
+
 import styles from './select.module.css';
 
 const emptyValue = '';
 
-export default class Select extends PureComponent<SelectProps> {
-    static defaultProps: Partial<SelectProps> = {
+type TargetProps = React.SelectHTMLAttributes<HTMLSelectElement>;
+
+interface Option {
+    value: any;
+    label: string;
+}
+
+/** Select public properties */
+export interface Props extends TargetProps {
+    options: Option[];
+    value: any;
+    placeholder?: string;
+    hasError?: boolean;
+    onValueChange(value: any): any;
+}
+
+/**
+ * Select wrapper
+ */
+export class Select extends PureComponent<Props> {
+    public static defaultProps: Partial<Props> = {
         placeholder: 'Select a value...',
         hasError: false
     };
 
-    handleChange: React.ChangeEventHandler<HTMLSelectElement> = (event) => {
+    private handleChange: React.ChangeEventHandler<HTMLSelectElement> = (event) => {
         const {onChange, onValueChange, options} = this.props;
         const option = options[parseInt(event.target.value, 10)];
 
@@ -40,7 +60,7 @@ export default class Select extends PureComponent<SelectProps> {
         }
     };
 
-    render() {
+    public render() {
         // "onChange" and "onValueChange" extracted here
         // just to not allow them to be in the "rest" variable.
         // "rest" is used to pass props down to native select-element
@@ -81,7 +101,8 @@ export default class Select extends PureComponent<SelectProps> {
                     <option value={emptyValue}>{placeholder}</option>
                 )}
                 {options.map((option, index) => {
-                    // we use index as a value to be able to use actual option.value in "onValueChage"
+                    // we use index as a value to be able
+                    // to use actual option.value in "onValueChange"
                     // (not its stringified copy)
                     return (
                         <option value={index} key={option.label}>
@@ -92,20 +113,4 @@ export default class Select extends PureComponent<SelectProps> {
             </select>
         );
     }
-}
-
-export type SelectProps = React.DetailedHTMLProps<
-    React.SelectHTMLAttributes<HTMLSelectElement>,
-    HTMLSelectElement
-> & {
-    options: Array<Option>;
-    value: any;
-    placeholder?: string;
-    hasError?: boolean;
-    onValueChange: (value: any) => any;
-};
-
-interface Option {
-    value: any;
-    label: string;
 }

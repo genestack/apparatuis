@@ -6,34 +6,48 @@
  * actual or intended publication of such source code.
  */
 
+import classNames from 'classnames';
 import React from 'react';
-import Textarea from 'react-textarea-autosize';
+// tslint:disable-next-line:match-default-export-name
+import ReactTextareaAutosize from 'react-textarea-autosize';
+
+import {Omit} from '../../utils/omit';
+
 import styles from './textarea-autosize.module.css';
-import classnames from 'classnames';
 
 type OnValueChanger = (value: number | string | string[]) => any;
 
-type TextareaAutosizeProps = Textarea['props'] & {
-    onChange?: (event: React.ChangeEvent<HTMLTextAreaElement>, value?: any) => void;
-    onValueChange?: OnValueChanger;
-};
+type TargetProps = ReactTextareaAutosize['props'];
 
-export default class TextareaAutosize extends React.Component<TextareaAutosizeProps> {
-    onChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
+/** Textarea Autosize public properties */
+export interface Props extends Omit<TargetProps, 'onChange'> {
+    onChange?(event: React.ChangeEvent<HTMLTextAreaElement>, value?: any): void;
+    onValueChange?: OnValueChanger;
+}
+
+/**
+ * React Textarea Autosize wrapper
+ */
+export class TextareaAutosize extends React.Component<Props> {
+    private onChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
         const {onChange, onValueChange, name} = this.props;
         const {value} = event.currentTarget;
 
-        onChange && onChange(event, name ? {[name]: value} : value);
+        if (onChange) {
+            onChange(event, name ? {[name]: value} : value);
+        }
 
-        onValueChange && onValueChange(value);
+        if (onValueChange) {
+            onValueChange(value);
+        }
     };
 
-    render() {
+    public render() {
         const {onChange, onValueChange, className, ...omited} = this.props as any;
 
         return (
-            <Textarea
-                className={classnames(styles['textarea-autosize'], className)}
+            <ReactTextareaAutosize
+                className={classNames(styles['textarea-autosize'], className)}
                 {...omited}
                 onChange={this.onChange}
             />

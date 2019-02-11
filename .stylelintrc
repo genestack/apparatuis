@@ -1,3 +1,4 @@
 {
-  "extends": "genestack-stylelint-config"
+  "extends": "genestack-stylelint-config",
+  "ignoreFiles": ["**/*.ts", "**/*.tsx"]
 }

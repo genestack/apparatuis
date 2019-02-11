@@ -5,7 +5,8 @@
  * The copyright notice above does not evidence any
  * actual or intended publication of such source code.
  */
-import cn from 'classnames';
+import classNames from 'classnames';
+
 import {Omit} from './omit';
 
 /**
@@ -124,13 +125,18 @@ export function mergeClassesProps<P extends WithClasses<any>>(
 ): InternalProps<P> {
     const {classes: publicClasses, className, ...rest} = props as any;
 
+    // tslint:disable-next-line:no-object-literal-type-assertion
     const privateClasses = {} as ClassNames<ClassKeys<P>>;
 
-    privateClasses.root = cn(className);
+    privateClasses.root = classNames(className);
 
     Object.keys(styles).forEach((key) => {
         const value = styles[key];
-        privateClasses[key] = cn(privateClasses[key], value, publicClasses && publicClasses[key]);
+        privateClasses[key] = classNames(
+            privateClasses[key],
+            value,
+            publicClasses && publicClasses[key]
+        );
     });
 
     return {

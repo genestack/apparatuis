@@ -5,18 +5,17 @@
  * The copyright notice above does not evidence any
  * actual or intended publication of such source code.
  */
-import React from 'react';
 import classNames from 'classnames';
+import React from 'react';
+
 import styles from './form.module.css';
 
-export default (props: FormProps) => <form {...addClass(props)} />;
+type TargetProps = React.FormHTMLAttributes<HTMLFormElement>;
 
-const addClass = ({className = '', ...rest}) => ({
-    ...rest,
-    className: classNames(className, styles.form)
-});
+/** Form public properties */
+export interface Props extends TargetProps {}
 
-export type FormProps = React.DetailedHTMLProps<
-    React.FormHTMLAttributes<HTMLFormElement>,
-    HTMLFormElement
->;
+/** Form CSS wrapper */
+export const Form = (props: Props) => (
+    <form {...props} className={classNames(props.className, styles.form)} />
+);

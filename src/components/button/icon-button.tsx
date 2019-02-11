@@ -1,9 +1,26 @@
-import React from 'react';
+/*
+ * Copyright (c) 2011-2019 Genestack Limited
+ * All Rights Reserved
+ * THIS IS UNPUBLISHED PROPRIETARY SOURCE CODE OF GENESTACK LIMITED
+ * The copyright notice above does not evidence any
+ * actual or intended publication of such source code.
+ */
 import classNames from 'classnames';
-import Tooltip, {TooltipProps} from './../tooltip/tooltip';
+import React from 'react';
+
+import {Tooltip, TooltipProps} from '../tooltip';
+
 import styles from './icon-button.module.css';
 
-export default function IconButton(props: propTypes) {
+type TargetProps = React.ButtonHTMLAttributes<HTMLButtonElement>;
+
+/** IconButton public properties */
+export interface Props extends TargetProps {
+    tooltipProps?: TooltipProps;
+}
+
+/** Icon Button */
+export function IconButton(props: Props) {
     const {className = '', disabled, tooltipProps = null, onClick, ...otherProps} = props;
 
     const button = (
@@ -25,12 +42,6 @@ export default function IconButton(props: propTypes) {
             </Tooltip>
         );
     }
+
     return button;
 }
-
-type propTypes = React.DetailedHTMLProps<
-    React.ButtonHTMLAttributes<HTMLButtonElement>,
-    HTMLButtonElement
-> & {
-    tooltipProps?: TooltipProps;
-};
