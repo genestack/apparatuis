@@ -6,4 +6,4 @@
  * actual or intended publication of such source code.
  */
 export {AutocompleteInput, Props as AutocompleteInputProps} from './autocomplete-input';
-export {DataProvider, Props as DataProviderProps} from './data-provider';
+export {AutocompleteDataProvider, Props as AutocompleteDataProviderProps} from './data-provider';

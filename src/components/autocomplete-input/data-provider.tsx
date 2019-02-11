@@ -34,10 +34,8 @@ export interface Props {
 }
 
 /** DataProvider */
-export class DataProvider extends React.PureComponent<Props, State> {
-    public static initialState: State = {isLoading: false, error: null, items: [], value: ''};
-
-    public state: State = DataProvider.initialState;
+export class AutocompleteDataProvider extends React.PureComponent<Props, State> {
+    public state: State = {isLoading: false, error: null, items: [], value: ''};
 
     private mounted = false;
 

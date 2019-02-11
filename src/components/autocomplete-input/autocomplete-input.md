@@ -1,7 +1,7 @@
 ```js
 const {Checkbox} = require('../checkbox');
 
-const {DataProvider, AutocompleteInput} = require('.');
+const {AutocompleteDataProvider, AutocompleteInput} = require('.');
 
 initialState = {
     emulateNetworkError: false,
@@ -122,7 +122,7 @@ fetchFn = (value) => {
     </div>
 
     <div>
-        <DataProvider fetch={fetchFn}>
+        <AutocompleteDataProvider fetch={fetchFn}>
             {({items, isLoading, value, error, onValueChange}) => (
                 <AutocompleteInput
                     hasError={Boolean(error)}
@@ -142,7 +142,7 @@ fetchFn = (value) => {
                     renderError={state.customRenderError ? customRenderErrorFn : undefined}
                 />
             )}
-        </DataProvider>
+        </AutocompleteDataProvider>
     </div>
 </div>;
 ```
