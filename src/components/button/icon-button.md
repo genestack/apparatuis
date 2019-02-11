@@ -1,5 +1,5 @@
 ```js
-const IconButton = require('./icon-button').default;
+const {IconButton} = require('.');
 <div>
     <IconButton onClick={() => alert('clicked')}>
         <img width="22" src="https://goo.gl/fGkAat" />

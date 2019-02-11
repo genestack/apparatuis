@@ -1,9 +1,9 @@
 Implemented by [rc-tooltip](https://github.com/react-component/tooltip) with Genestack custom styles
 
 ```js
-const Tooltip = require('./tooltip').default;
-const Button = require('../button/button').default;
-const Input = require('../input/input').default;
+const {Input} = require('../input');
+const {Button} = require('../button');
+const {Tooltip} = require('.');
 <div id="tooltip-container" style={{position: 'relative'}}>
     <Tooltip
         overlay="This field is required"

@@ -1,7 +1,8 @@
 ```js
-const AutocompleteInput = require('./autocomplete-input.tsx').default;
-const AutocompleteDataProvider = require('./data-provider').default;
-const Checkbox = require('../checkbox/checkbox').default;
+const {Checkbox} = require('../checkbox');
+
+const {DataProvider, AutocompleteInput} = require('.');
+
 initialState = {
     emulateNetworkError: false,
     customRenderSuggestion: false,
@@ -121,7 +122,7 @@ fetchFn = (value) => {
     </div>
 
     <div>
-        <AutocompleteDataProvider fetch={fetchFn}>
+        <DataProvider fetch={fetchFn}>
             {({items, isLoading, value, error, onValueChange}) => (
                 <AutocompleteInput
                     hasError={Boolean(error)}
@@ -141,7 +142,7 @@ fetchFn = (value) => {
                     renderError={state.customRenderError ? customRenderErrorFn : undefined}
                 />
             )}
-        </AutocompleteDataProvider>
+        </DataProvider>
     </div>
 </div>;
 ```

@@ -1,5 +1,5 @@
 ```js
-const Button = require('./button').default;
+const {Button} = require('.');
 <div>
     <Button onClick={() => alert('clicked on default button')}>Default button</Button>
     <Button

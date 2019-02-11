@@ -10,9 +10,10 @@ import React from 'react';
 
 import {TooltipProps, Tooltip} from '../tooltip';
 
+import styles from './button.module.css';
+// tslint:disable-next-line:ordered-imports
 import defaultStyles from './button-default.module.css';
 import primaryStyles from './button-primary.module.css';
-import styles from './button.module.css';
 
 type TargetProps = React.ButtonHTMLAttributes<HTMLButtonElement>;
 
