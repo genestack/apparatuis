@@ -36,7 +36,6 @@
     "genestack-stylelint-config": "^2.0.0",
     "genestack-tsconfig": "^2.0.0",
     "genestack-tslint-config": "^6.0.0",
-    "identity-obj-proxy": "^3.0.0",
     "jest": "^23.3.0",
     "postcss-custom-properties": "^7.0.0",
     "postcss-import": "^11.1.0",
