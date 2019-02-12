@@ -8,7 +8,7 @@ exports[`Typography Component by default should match snapshot 1`] = `
 </div>
 `;
 
-exports[`Typography Component when pass HTML "button" name value to \`as\` property should match snapshot 1`] = `
+exports[`Typography Component when pass "button" string to \`as\` property should match snapshot 1`] = `
 <button
   className="root"
 >

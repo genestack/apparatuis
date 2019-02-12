@@ -1,8 +1,5 @@
 {
   "extends": "genestack-tslint-config",
-  "rules": {
-    "jsx-no-lambda": false
-  },
   "linterOptions": {
     "exclude": ["**/**.js"]
   }

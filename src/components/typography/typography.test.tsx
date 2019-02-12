@@ -37,7 +37,7 @@ describe('Typography Component', () => {
         });
     });
 
-    describe('when pass HTML "button" name value to `as` property', () => {
+    describe('when pass "button" string to `as` property', () => {
         const getComponent = () => render(<Typography as="button">Test String</Typography>);
 
         test('should match snapshot', () => {
