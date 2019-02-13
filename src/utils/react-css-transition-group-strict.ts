@@ -7,7 +7,6 @@
  */
 
 import {CSSTransitionProps} from 'react-transition-group/CSSTransition';
-
 import {
     TransitionProps,
     UNMOUNTED,
@@ -17,6 +16,8 @@ import {
     EXITING
 } from 'react-transition-group/Transition';
 
+import {OmitIndexSignature} from './omit-index-signature';
+
 type TransitionStatus =
     | typeof UNMOUNTED
     | typeof EXITED
@@ -24,12 +25,11 @@ type TransitionStatus =
     | typeof ENTERED
     | typeof EXITING;
 
-import {OmitIndexSignature} from './omit-index-signature';
-
 interface ChildrenProps {
     className?: string;
 }
 
+/** This type could be removed after update `@types/react-transition-group` to `v2.0.15` */
 type TransitionChildren =
     | React.ReactElement<ChildrenProps>
     | ((status: TransitionStatus) => React.ReactElement<ChildrenProps>);
