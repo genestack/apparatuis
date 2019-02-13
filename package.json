@@ -29,6 +29,7 @@
     "@types/jest": "^23.1.5",
     "@types/node": "^10.5.2",
     "@types/react-test-renderer": "^16.0.1",
+    "@types/react-transition-group": "^2.0.11",
     "autoprefixer": "^8.6.4",
     "cpx": "^1.5.0",
     "css-loader": "^0.28.9",
@@ -68,7 +69,8 @@
     "lodash.debounce": "^4.0.8",
     "prop-types": "^15.6.0",
     "rc-tooltip": "^3.7.0",
-    "react-textarea-autosize": "^6.1.0"
+    "react-textarea-autosize": "^6.1.0",
+    "react-transition-group": "^2.3.1"
   },
   "peerDependencies": {
     "genestack-frontend-builder": ">= 0.7.0 < 2.0.0",

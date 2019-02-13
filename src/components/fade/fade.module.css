@@ -1,0 +1,28 @@
+/*
+ * Copyright (c) 2011-2019 Genestack Limited
+ * All Rights Reserved
+ * THIS IS UNPUBLISHED PROPRIETARY SOURCE CODE OF GENESTACK LIMITED
+ * The copyright notice above does not evidence any
+ * actual or intended publication of such source code.
+ */
+
+.root {
+    will-change: opacity;
+    transition: opacity ease-in 200ms;
+}
+
+.enter {
+    opacity: 1;
+}
+
+.enterDone {
+    opacity: 1;
+}
+
+.exit {
+    opacity: 0;
+}
+
+.exitDone {
+    opacity: 0;
+}
