@@ -6,21 +6,19 @@
  * actual or intended publication of such source code.
  */
 import * as React from 'react';
-import CSSTransition, {CSSTransitionProps} from 'react-transition-group/CSSTransition';
+import CSSTransition from 'react-transition-group/CSSTransition';
 
 import {Omit} from '../../utils/omit';
-import {OmitIndexSignature} from '../../utils/omit-index-signature';
+import {StrictCSSTransitionProps} from '../../utils/react-css-transition-group-strict';
 
 import * as styles from './shake.module.css';
 
-const TRANSITION_TIMEOUT: CSSTransitionProps['timeout'] = {
+const TRANSITION_TIMEOUT: StrictCSSTransitionProps['timeout'] = {
     enter: 350,
     exit: 0
 };
 
-type TargetProps = Omit<OmitIndexSignature<CSSTransitionProps>, 'classNames' | 'timeout'> & {
-    className?: string;
-};
+type TargetProps = Omit<StrictCSSTransitionProps, 'className' | 'classNames' | 'timeout'>;
 
 interface ChildrenProps {
     className?: string;
@@ -31,7 +29,7 @@ export interface Props extends TargetProps {
     children: React.ReactElement<ChildrenProps>;
 }
 
-const classNames: CSSTransitionProps['classNames'] = {
+const classNames: StrictCSSTransitionProps['classNames'] = {
     enter: styles.enter,
     enterDone: styles.enterDone
 };
