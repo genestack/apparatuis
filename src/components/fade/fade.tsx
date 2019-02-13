@@ -5,44 +5,52 @@
  * The copyright notice above does not evidence any
  * actual or intended publication of such source code.
  */
+import classNames from 'classnames';
 import * as React from 'react';
 import CSSTransition from 'react-transition-group/CSSTransition';
 
 import {Omit} from '../../utils/omit';
 import {StrictCSSTransitionProps} from '../../utils/react-css-transition-group-strict';
+import {WithClasses, mergeClassesProps} from '../../utils/styles';
 
 import * as styles from './fade.module.css';
 
-const DURATION_TIMEOUT = 200;
+const DURATION_TIMEOUT = 300;
 
-type TargetProps = Omit<StrictCSSTransitionProps, 'className' | 'classNames' | 'timeout'>;
+type TargetProps = Omit<StrictCSSTransitionProps, 'classNames' | 'timeout' | 'children'>;
 
-interface ChildrenProps {
-    className?: string;
-}
+type Children = React.ReactElement<{className?: string}>;
 
 /** Public Fade properties */
-export interface Props extends TargetProps {
-    children: React.ReactElement<ChildrenProps>;
+export interface Props extends TargetProps, WithClasses<keyof typeof styles> {
+    children: Children;
 }
-
-const classNames: StrictCSSTransitionProps['classNames'] = {
-    enter: styles.enter,
-    enterDone: styles.enterDone,
-    exit: styles.exit,
-    exitDone: styles.exitDone
-};
 
 /**
  * Fade transition component is used for smoothed showing and hiding elements through opacity.
  *
  * It uses [react-transition-group](https://github.com/reactjs/react-transition-group) internally.
  */
-export const Fade = (props: Props) => (
-    <CSSTransition
-        {...props}
-        className={styles.root}
-        classNames={classNames}
-        timeout={DURATION_TIMEOUT}
-    />
-);
+export const Fade = (props: Props) => {
+    const {className, classes, ...rest} = mergeClassesProps(props, styles);
+    const child = React.Children.only(props.children) as Children;
+
+    return (
+        <CSSTransition
+            {...rest}
+            classNames={{
+                appear: classes.appear,
+                appearActive: classes.appearActive,
+                enter: classes.enter,
+                enterDone: classes.enterDone,
+                exit: classes.exit,
+                exitDone: classes.exitDone
+            }}
+            timeout={DURATION_TIMEOUT}
+        >
+            {React.cloneElement(child, {
+                className: classNames(className, child.props.className, classes.root)
+            })}
+        </CSSTransition>
+    );
+};

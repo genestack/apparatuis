@@ -14,4 +14,3 @@ export * from './components/select';
 export * from './components/tooltip';
 export * from './components/textarea-autosize';
 export * from './components/autocomplete-input';
-export * from './components/autocomplete-input/data-provider';

@@ -8,13 +8,9 @@
 import * as React from 'react';
 import {create as render} from 'react-test-renderer';
 
-import {Typography} from '.';
+import {sortClassNames} from '../../test-utils/sort-class-names';
 
-const sortClassNames = (str: string) =>
-    str
-        .split(' ')
-        .sort()
-        .join(' ');
+import {Typography} from '.';
 
 describe('Typography Component', () => {
     describe('by default', () => {

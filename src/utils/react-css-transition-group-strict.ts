@@ -35,7 +35,6 @@ type TransitionChildren =
     | ((status: TransitionStatus) => React.ReactElement<ChildrenProps>);
 
 interface FixType {
-    className?: string;
     children: TransitionChildren;
 }
 

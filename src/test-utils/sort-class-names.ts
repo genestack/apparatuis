@@ -5,10 +5,10 @@
  * The copyright notice above does not evidence any
  * actual or intended publication of such source code.
  */
-export const root: string;
-export const appear: string;
-export const appearActive: string;
-export const enter: string;
-export const enterDone: string;
-export const exit: string;
-export const exitDone: string;
+
+/** Split and sort className */
+export const sortClassNames = (str: string) =>
+    str
+        .split(' ')
+        .sort()
+        .join(' ');
