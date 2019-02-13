@@ -7,7 +7,7 @@
  */
 
 .root {
-    animation-name: unset;
+    animation-name: none;
     animation-iteration-count: 1;
     animation-duration: 350ms;
     animation-timing-function: linear;
@@ -18,7 +18,7 @@
 }
 
 .enterDone {
-    animation-name: unset;
+    animation-name: none;
 }
 
 @keyframes shake-animation {
