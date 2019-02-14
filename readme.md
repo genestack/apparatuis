@@ -56,14 +56,8 @@ There are few common types of elements that any component could render:
     component's `render` method.
 -   The **target element** – the element that bears main component's load, e.g. `input` for
     `Autocomplete`. Usually both _root_ and _target_ elements are the same but not always.
+    Main purpose of the `target` element than is to deliver business logic.
 -   **Additional elements** – all the rest elements playing less significant roles
-
-Any component should spread its props to the target element.
-
-In those cases where `root` and `target` are not the same element, main purpose of the `root`
-element is styling. Main purpose of the `target` element than is to deliver business logic.
-Therefore `className` and `style` props should always be passed to the `root` component.
-Other props are passed to the `target` component.
 
 ```tsx
 // root == target
@@ -73,9 +67,9 @@ interface TabProps extends React.HTMLAttributes<HTMLDivElement> {
 }
 
 function Tab(props: TabProps) {
-    const {icon, label, ...rootProps} = props;
+    const {icon, label, className, ...targetProps} = props;
     return (
-        <div {...rootProps} className={cn(rootProps.className, 'gs-tab')}>
+        <div {...targetProps} className={cn(className, 'gs-tab')}>
             {/* additional element `icon` */}
             <div className="gs-tab-icon">{icon}</div>
             {/* additional element `label` */}
@@ -89,10 +83,11 @@ function Tab(props: TabProps) {
 interface InputProps extends React.HTMLAttributes<HTMLInputElement> {}
 
 function Input(props: InputProps) {
-    const {className, style, ...targetProps} = props;
+    // about root props see `Elements props` section
+    const {className, style, rootProps, ...targetProps} = props;
     return (
-        <div className={cn(className, 'gs-input-root')} style={style}>
-            <input {...targetProps} className={cn(targetProps.className, 'gs-input')} />
+        <div className={cn(rootProps.className, 'gs-input-root')} style={rootProps.style}>
+            <input {...targetProps} className={cn(className, 'gs-input')} />
         </div>
     );
 }
@@ -194,8 +189,7 @@ function Input(props: InputProps) {
 ```
 
 Do not use `targetRef` or `targetProps` because props for `target` element are made by spreading
-component's own props on it (with an exception for `className` and `style` properties which
-always go to the `root` element, see below). Also `targetRef` is not semantic enough.
+component's own props on it. Also `targetRef` is not semantic enough.
 
 See also Material UI Approach sections:
 
@@ -242,10 +236,10 @@ interface TabProps extends WithStyles<ClassKeys> {
 }
 
 function Tab(props: TabProps) {
-    const {classes, style, disabled} = mergeClassesProps(props, styles);
+    const {className, classes, style, disabled} = mergeClassesProps(props, styles);
 
     return (
-        <div className={cn(classes.root, {[classes.disabled]: disabled})} style={style}>
+        <div className={cn(className, classes.root, {[classes.disabled]: disabled})} style={style}>
             <div className={classes.icon} />
             <div className={classes.icon} />
         </div>
@@ -254,8 +248,7 @@ function Tab(props: TabProps) {
 ```
 
 The `mergePropsWithClasses` function returns a `props` object extended with `classes` property that
-is merged with `styles`. Note that the `className` prop is always merged to `classes.root` and
-removed from original `props`. `WithStyles` interface adds `className` and `classes` properties to
+is merged with `styles`. `WithStyles` interface adds `className` and `classes` properties to
 component's props.
 
 After that we can use `Tab` component like this:

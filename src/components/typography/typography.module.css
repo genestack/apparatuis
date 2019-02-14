@@ -1,0 +1,95 @@
+/*
+ * Copyright (c) 2011-2019 Genestack Limited
+ * All Rights Reserved
+ * THIS IS UNPUBLISHED PROPRIETARY SOURCE CODE OF GENESTACK LIMITED
+ * The copyright notice above does not evidence any
+ * actual or intended publication of such source code.
+ */
+
+/** default body block variant */
+
+.root {
+    box-sizing: border-box;
+    color: rgba(52, 52, 52, 1);
+    font-weight: normal;
+    display: block;
+    font-size: 14px;
+    line-height: 20px;
+    font-family: "Helvetica", sans-serif;
+    align-self: baseline;
+}
+
+/** accent */
+
+.primary {
+    font-weight: bold;
+}
+
+.secondary {
+    color: rgba(0, 0, 0, 0.43);
+}
+
+/** box */
+
+.inline {
+    display: inline;
+    vertical-align: baseline;
+}
+
+.paragraph {
+    margin-bottom: 14px;
+}
+
+/** inversed */
+
+.inversed {
+    color: rgba(255, 255, 255, 1);
+}
+
+.inversed.secondary {
+    color: rgba(136, 136, 136, 1);
+}
+
+/** headline variant */
+
+.headline {
+    font-size: 24px;
+    line-height: 28px;
+}
+
+.headline.paragraph {
+    margin-bottom: 24px;
+}
+
+/** title variant */
+
+.title {
+    font-size: 18px;
+    line-height: 22px;
+}
+
+.title.paragraph {
+    margin-bottom: 18px;
+}
+
+/** subtitle */
+
+.subtitle {
+    font-size: 16px;
+    line-height: 22px;
+}
+
+.subtitle.paragraph {
+    margin-bottom: 16px;
+}
+
+/** caption variant */
+
+.caption {
+    font-size: 12px;
+    line-height: 16px;
+}
+
+.caption.paragraph {
+    margin-bottom: 12px;
+}

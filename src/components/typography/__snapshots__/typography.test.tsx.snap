@@ -1,0 +1,25 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Typography Component by default should match snapshot 1`] = `
+<div
+  className="root"
+>
+  Test String
+</div>
+`;
+
+exports[`Typography Component when pass "button" string to \`as\` property should match snapshot 1`] = `
+<button
+  className="root"
+>
+  Test String
+</button>
+`;
+
+exports[`Typography Component when pass React.Component to \`as\` property should match snapshot 1`] = `
+<p
+  className="root"
+>
+  Test String
+</p>
+`;
