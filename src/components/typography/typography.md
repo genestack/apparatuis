@@ -1,6 +1,17 @@
 ```js
 const {Typography} = require('.');
 
+class CustomComponent extends React.Component {
+    render() {
+        return (
+            <div className={this.props.className}>
+                <b>Label: </b>
+                {this.props.children}
+            </div>
+        );
+    }
+}
+
 <React.Fragment>
     <Typography variant="headline" accent="primary" box="paragraph">
         Typography Headline{' '}
@@ -50,6 +61,14 @@ const {Typography} = require('.');
         <Typography as="a" href="/#typography" variant="subtitle" box="inline" accent="secondary">
             an anchor
         </Typography>
+    </Typography>
+
+    <Typography box="paragraph" accent="secondary" as={CustomComponent}>
+        Custom Component Example
+    </Typography>
+
+    <Typography box="paragraph" as={(props) => <a href="." {...props} />}>
+        Render Prop Example
     </Typography>
 </React.Fragment>;
 ```
