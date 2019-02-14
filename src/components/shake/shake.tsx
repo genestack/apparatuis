@@ -34,6 +34,9 @@ export interface Props extends TargetProps, WithClasses<keyof typeof styles> {
  * Useful for indicating to user about wrong values of inputs or impossible actions.
  *
  * It uses [react-transition-group](https://github.com/reactjs/react-transition-group) internally.
+ *
+ * This transition does not have exit stage. So pass `onEntered` callback
+ * to subscribe shake transition complete.
  */
 export const Shake = (props: Props) => {
     const {className, classes, ...rest} = mergeClassesProps(props, styles);
