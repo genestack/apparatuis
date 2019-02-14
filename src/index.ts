@@ -16,3 +16,4 @@ export * from './components/textarea-autosize';
 export * from './components/autocomplete-input';
 export * from './components/fade';
 export * from './components/shake';
+export * from './components/backdrop';
