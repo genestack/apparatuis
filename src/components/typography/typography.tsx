@@ -64,7 +64,7 @@ export interface Props extends TargetProps, WithClasses<keyof typeof styles> {
 }
 
 /**
- * Component that renders text with concrete preset.
+ * Component that renders text with specific preset.
  * Its purpose is to reduce amount of custom CSS text styles.
  * It is one of the base components of whole UI Kit.
  * Will be moved to UI Kit.
