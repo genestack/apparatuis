@@ -5,13 +5,9 @@
  * The copyright notice above does not evidence any
  * actual or intended publication of such source code.
  */
-import {mergeClassesProps, WithClasses} from './styles';
+import {sortClassNames} from '../test-utils/sort-class-names';
 
-const sortClassNames = (str: string) =>
-    str
-        .split(' ')
-        .sort()
-        .join(' ');
+import {mergeClassesProps, WithClasses} from './styles';
 
 describe('result of calling mergeClassesProps', () => {
     describe('in common case', () => {
