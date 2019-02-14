@@ -43,9 +43,10 @@ export class Backdrop extends React.Component<Props, State> {
 
     /** @HACK */
     /**
-     * Looks like there is a bug in current version of `react-transition-group`.
+     * There is a bug in our version of `react-transition-group`.
+     * https://git.io/fh7uq
      * `unmountOnExit: true` cause to disabled appear animation.
-     * TODO: update `react-transition-group` and remove state.
+     * TODO: update `react-transition-group` package and remove the state.
      */
     public static getDerivedStateFromProps(props: Props, state: State): State {
         return {
