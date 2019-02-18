@@ -20,7 +20,7 @@ interface RenderSuggestionProps {
     item: string;
     index: number;
     value: string;
-    getItemProps(any: any): any;
+    getItemProps: (any: any) => any;
     selectedItem: string;
     highlightedIndex: number;
 }
@@ -33,9 +33,9 @@ export interface Props extends Omit<InputProps, 'targetRef'> {
     isLoading: boolean;
     error: any;
     renderSuggestion?: RenderSuggestion;
-    renderLoading?(): JSX.Element;
-    renderNoMatches?(): JSX.Element;
-    renderError?(error: any): JSX.Element;
+    renderLoading?: () => JSX.Element;
+    renderNoMatches?: () => JSX.Element;
+    renderError?: (error: any) => JSX.Element;
 }
 
 function calcMenuStyles(inputDOMNode: HTMLInputElement | null) {

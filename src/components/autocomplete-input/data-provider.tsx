@@ -23,14 +23,14 @@ interface DataProviderChildrenProps {
     items: any[];
     isLoading: boolean;
     error: any;
-    onValueChange(value: string): any;
+    onValueChange: (value: string) => any;
 }
 
 /** DataProvider public properties */
 export interface Props {
-    fetch(value: string): Promise<any>;
-    onLoaded?(array: any): any;
-    children(prop: DataProviderChildrenProps): JSX.Element;
+    fetch: (value: string) => Promise<any>;
+    onLoaded?: (array: any) => any;
+    children: (prop: DataProviderChildrenProps) => JSX.Element;
 }
 
 /** DataProvider */
