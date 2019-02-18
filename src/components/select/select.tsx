@@ -25,7 +25,7 @@ export interface Props extends TargetProps {
     value: any;
     placeholder?: string;
     hasError?: boolean;
-    onValueChange(value: any): any;
+    onValueChange: (value: any) => any;
 }
 
 /**

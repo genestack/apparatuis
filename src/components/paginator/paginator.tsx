@@ -17,7 +17,7 @@ type TargetProps = React.HTMLAttributes<HTMLDivElement>;
 
 /** Paginator public properties */
 export interface Props extends Omit<TargetProps, 'onChange'> {
-    onChange(value: number): any;
+    onChange: (value: number) => any;
     itemsLength: number;
     itemsPerPage: number;
     offset: number;

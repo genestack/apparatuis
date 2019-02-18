@@ -21,7 +21,7 @@ type TargetProps = ReactTextareaAutosize['props'];
 
 /** Textarea Autosize public properties */
 export interface Props extends Omit<TargetProps, 'onChange'> {
-    onChange?(event: React.ChangeEvent<HTMLTextAreaElement>, value?: any): void;
+    onChange?: (event: React.ChangeEvent<HTMLTextAreaElement>, value?: any) => void;
     onValueChange?: OnValueChanger;
 }
 

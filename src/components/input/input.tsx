@@ -19,7 +19,7 @@ type OnValueChanger = (value: string | null | undefined) => any;
 
 /** Input public properties */
 export interface Props extends Omit<TargetProps, 'onChange'> {
-    onChange?(event: React.ChangeEvent<HTMLInputElement>, value: any): void;
+    onChange?: (event: React.ChangeEvent<HTMLInputElement>, value: any) => void;
     hasError?: boolean;
     onValueChange?: OnValueChanger;
     targetRef?: React.Ref<HTMLInputElement>;
