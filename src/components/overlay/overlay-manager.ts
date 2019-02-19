@@ -160,19 +160,19 @@ export class OverlayManager {
     }
 
     public unmount(overlay: OverlayComponent, opts: UnmountOpts = {}) {
-        const focusState = this.getStateByOverlay(overlay);
+        const overlayState = this.getStateByOverlay(overlay);
 
-        if (!focusState) {
+        if (!overlayState) {
             return;
         }
 
         if (this.isTopOverlay(overlay)) {
             if (
                 opts.restoreFocus &&
-                focusState.lastActiveElement &&
-                this.isElementInContainer(focusState.lastActiveElement)
+                overlayState.lastActiveElement &&
+                this.isElementInContainer(overlayState.lastActiveElement)
             ) {
-                focusState.lastActiveElement.focus();
+                overlayState.lastActiveElement.focus();
             }
         } else {
             this.moveLastFocusToNextOverlay(overlay);
