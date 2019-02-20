@@ -113,8 +113,8 @@ describe('Overlay Manager', () => {
                 document.body.style.paddingRight = '10px';
 
                 const manager = new OverlayManager(document.body);
-                const modal = createOverlayMock();
-                manager.mount(modal, {isModal: true});
+                const overlay = createOverlayMock();
+                manager.mount(overlay);
 
                 expect(document.body.style.overflow).toBe('hidden');
                 expect(document.body.style.paddingRight).toBe('40px');
@@ -122,53 +122,27 @@ describe('Overlay Manager', () => {
 
             it('should set right styles to body', () => {
                 const manager = new OverlayManager(document.body);
-                const modal = createOverlayMock();
-                manager.mount(modal, {isModal: true});
-
-                expect(document.body.style.overflow).toBe('hidden');
-                expect(document.body.style.paddingRight).toBe('30px');
-            });
-
-            it('should not change body styles when mounting non-modals', () => {
-                const manager = new OverlayManager(document.body);
                 const overlay = createOverlayMock();
                 manager.mount(overlay);
 
-                expect(document.body.style.overflow).toBe('');
-                expect(document.body.style.paddingRight).toBe('0px');
+                expect(document.body.style.overflow).toBe('hidden');
+                expect(document.body.style.paddingRight).toBe('30px');
             });
         });
 
         describe('unmount method', () => {
-            it('should reset body styles when there are no modals', () => {
+            it('should not reset body styles when there is at least one overlay', () => {
                 const manager = new OverlayManager(document.body);
-                const modal = createOverlayMock();
-                const overlay = createOverlayMock();
+                const firstOverlay = createOverlayMock();
+                const secondOverlay = createOverlayMock();
 
-                manager.mount(modal, {isModal: true});
-                manager.mount(overlay, {isModal: false});
+                manager.mount(firstOverlay);
+                manager.mount(secondOverlay);
 
                 expect(document.body.style.overflow).toBe('hidden');
                 expect(document.body.style.paddingRight).toBe('30px');
 
-                manager.unmount(modal);
-
-                expect(document.body.style.overflow).toBe('');
-                expect(document.body.style.paddingRight).toBe('0px');
-            });
-
-            it('should not reset body styles when there is at least one modal', () => {
-                const manager = new OverlayManager(document.body);
-                const modal = createOverlayMock();
-                const overlay = createOverlayMock();
-
-                manager.mount(modal, {isModal: true});
-                manager.mount(overlay, {isModal: false});
-
-                expect(document.body.style.overflow).toBe('hidden');
-                expect(document.body.style.paddingRight).toBe('30px');
-
-                manager.unmount(overlay);
+                manager.unmount(firstOverlay);
 
                 expect(document.body.style.overflow).toBe('hidden');
                 expect(document.body.style.paddingRight).toBe('30px');

@@ -18,11 +18,6 @@ export type OverlayComponent = React.ReactInstance;
 interface OverlayState {
     overlay: OverlayComponent;
     lastActiveElement: HTMLElement | null;
-    isModal: boolean;
-}
-
-interface MountOpts {
-    isModal?: boolean;
 }
 
 interface UnmountOpts {
@@ -31,9 +26,9 @@ interface UnmountOpts {
 
 /**
  * Object that knows about opened overlays (dialogs, popovers) on the page.
- * Any overlay could be modal. Modal overlays block page content and scroll.
+ * Any Overlay is modal that blocks page content and scroll.
  *
- * It removes scrollbar from container when any modal overlay is opened.
+ * OverlayManager removes scrollbar from container when any overlay is opened.
  * Also it serves focus states of elements when any overlay is closing.
  * After overlay is closed we could restore focus on element that was in focus
  * when overlay was opened.
@@ -105,8 +100,8 @@ export class OverlayManager {
         return this.overlaysStack.find((state) => state.overlay === overlay) || null;
     }
 
-    private moveLastFocusToNextOverlay(overlay: OverlayComponent) {
-        const currentIndex = this.getFocusStateIndexByModal(overlay);
+    private moveLastActiveFocusToNextOverlay(overlayState: OverlayState) {
+        const currentIndex = this.overlaysStack.indexOf(overlayState);
 
         const nextIndex = currentIndex + 1;
 
@@ -117,16 +112,21 @@ export class OverlayManager {
         }
     }
 
-    private removeStateByOverlay(overlay: OverlayComponent) {
-        this.overlaysStack.splice(this.getFocusStateIndexByModal(overlay), 1);
+    private removeStateByOverlay(overlayState: OverlayState) {
+        this.overlaysStack.splice(this.overlaysStack.indexOf(overlayState), 1);
 
-        if (!this.hasModalsInStack()) {
+        if (!this.overlaysStack.length) {
             this.resetContainerStyles();
         }
     }
 
-    private hasModalsInStack() {
-        return this.overlaysStack.some((item) => item.isModal);
+    private restoreLastActiveFocus(overlayState: OverlayState) {
+        if (
+            overlayState.lastActiveElement &&
+            this.isElementInContainer(overlayState.lastActiveElement)
+        ) {
+            overlayState.lastActiveElement.focus();
+        }
     }
 
     public isTopOverlay(overlay: OverlayComponent) {
@@ -139,7 +139,7 @@ export class OverlayManager {
         return index + 1 === this.overlaysStack.length;
     }
 
-    public mount(overlay: OverlayComponent, opts: MountOpts = {}) {
+    public mount(overlay: OverlayComponent) {
         if (this.getStateByOverlay(overlay)) {
             return;
         }
@@ -150,11 +150,10 @@ export class OverlayManager {
 
         this.overlaysStack.push({
             overlay,
-            lastActiveElement,
-            isModal: !!opts.isModal
+            lastActiveElement
         });
 
-        if (this.hasModalsInStack()) {
+        if (this.overlaysStack.length) {
             this.applyContainerStyles();
         }
     }
@@ -166,18 +165,12 @@ export class OverlayManager {
             return;
         }
 
-        if (this.isTopOverlay(overlay)) {
-            if (
-                opts.restoreFocus &&
-                overlayState.lastActiveElement &&
-                this.isElementInContainer(overlayState.lastActiveElement)
-            ) {
-                overlayState.lastActiveElement.focus();
-            }
-        } else {
-            this.moveLastFocusToNextOverlay(overlay);
+        if (!this.isTopOverlay(overlay)) {
+            this.moveLastActiveFocusToNextOverlay(overlayState);
+        } else if (opts.restoreFocus) {
+            this.restoreLastActiveFocus(overlayState);
         }
 
-        this.removeStateByOverlay(overlay);
+        this.removeStateByOverlay(overlayState);
     }
 }
