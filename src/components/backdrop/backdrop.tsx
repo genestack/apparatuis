@@ -9,6 +9,7 @@
 import classNames from 'classnames';
 import * as React from 'react';
 
+import {chain} from '../../utils/chain';
 import {Omit} from '../../utils/omit';
 import {WithClasses} from '../../utils/styles';
 import {FadeProps, Fade} from '../fade';
@@ -54,21 +55,21 @@ export class Backdrop extends React.Component<Props, State> {
         };
     }
 
-    private handleFadeExited = (node: HTMLElement) => {
-        const {fadeProps} = this.props;
-        if (fadeProps && fadeProps.onExited) {
-            fadeProps.onExited(node);
-        }
-
+    private handleFadeExited = () => {
         this.setState({mounted: this.props.open});
     };
 
     public render() {
-        const {open, invisible, className, fadeProps, ...rest} = this.props;
+        const {open, invisible, className, fadeProps = {}, ...rest} = this.props;
         const {mounted} = this.state;
 
         return mounted ? (
-            <Fade in={open} {...fadeProps} appear onExited={this.handleFadeExited}>
+            <Fade
+                in={open}
+                {...fadeProps}
+                appear
+                onExited={chain(fadeProps.onExited, this.handleFadeExited)}
+            >
                 <div
                     {...rest}
                     className={classNames(className, styles.root, {[styles.invisible]: invisible})}
