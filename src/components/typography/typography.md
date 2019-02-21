@@ -1,74 +1,199 @@
 ```js
+const {Checkbox} = require('../checkbox');
 const {Typography} = require('.');
 
-class CustomComponent extends React.Component {
-    render() {
-        return (
-            <div className={this.props.className}>
-                <b>Label: </b>
-                {this.props.children}
-            </div>
-        );
-    }
-}
+const Frame = (props) => <div style={{background: '#E5E5E5', padding: '16px 0'}} {...props} />;
+const Row = (props) => <div style={{display: 'flex'}} {...props} />;
+const Paper = (props) => (
+    <div
+        {...props}
+        style={{
+            boxSizing: 'border-box',
+            background: props.inverted ? '#333333' : '#FFFFFF',
+            padding: '0 24px',
+            margin: '0 16px',
+            maxWidth: props.useMaxWidth ? 264 : null,
+            flexGrow: 1,
+            ...props.style
+        }}
+    />
+);
+const Controls = (props) => (
+    <div style={{flexShrink: 0, flexGrow: 0, marginLeft: 16, textAlign: 'right'}} {...props} />
+);
+const Spacer = () => <div style={{marginTop: 32}} />;
 
-<React.Fragment>
-    <Typography variant="headline" accent="primary" box="paragraph">
-        Typography Headline{' '}
-        <Typography variant="body" box="inline" accent="secondary">
-            (with some helper)
-        </Typography>
-    </Typography>
+initialState = {
+    inverted: false,
+    quiet: true,
+    useMaxWidth: true
+};
 
-    <Typography variant="title" box="paragraph">
-        Title{' '}
-        <Typography variant="body" box="inline" accent="primary">
-            (with loud text)
-        </Typography>
-    </Typography>
-
-    <div style={{background: 'rgba(0,0,0,0.8)', overflow: 'hidden'}}>
-        <Typography variant="subtitle" box="paragraph" inversed>
-            Fear is the path to the dark side.{' '}
-            <Typography variant="caption" box="inline" accent="secondary" inversed>
-                (Yoda)
+<Frame>
+    <Row>
+        <Paper style={{padding: '0 20px 40px 40px'}}>
+            <Typography as="h1" variant="header" box="paragraph">
+                Small Airways Smoking Hackett 2012 SRP005411 (SRA)
             </Typography>
-        </Typography>
-    </div>
+            <Typography as="p" box="paragraph">
+                I&R, Homo sapiens,{' '}
+                <Typography quiet box="inline">
+                    Tissue:
+                </Typography>{' '}
+                Epithelium of Bronchiole
+            </Typography>
+            <Typography as="h2" variant="title" box="paragraph">
+                Description and Background
+            </Typography>
+            <Typography as="p" box="paragraph">
+                Morphological changes in the small airway epithelium are the first histopathological
+                manifestations of smoking-induced lung disease. Gene expression profiling using
+                microarrays has permitted the identification of changes in the small airway
+                epithelium of chronic cigarette smokers who have normal pulmonary function.
+            </Typography>
+            <Typography as="p" box="paragraph">
+                The availability of high throughput, massively parallel RNA sequencing (RNA-Seq) of
+                the entire transcriptome opens the possibility of a higher sensitivity and more
+                detailed characterization of the response of the small airway epithelium to smoking.
+            </Typography>
+            <Typography as="h3" variant="section" box="paragraph">
+                Epithelium of Bronchiole Basic information
+            </Typography>
+            <Typography as="p" box="paragraph">
+                Epithelial cells were obtained by fiberoptic bronchoscopy and brushing of healthy
+                smokers (n=6) and n=5 healthy nonsmokers, all with normal lung function and chest
+                x-rays. RNA was extracted and used for massively parallel sequencing of PolyA
+                selected transcripts using the Illumina Genome Snalyzer II.
+            </Typography>
 
-    <Typography variant="caption" box="paragraph">
-        Typography caption
-    </Typography>
-
-    <Typography box="paragraph">
-        I am a body text with some{' '}
-        <Typography box="inline" accent="primary">
-            primary
-        </Typography>{' '}
-        and{' '}
-        <Typography box="inline" accent="secondary">
-            secondary
-        </Typography>{' '}
-        words.
-    </Typography>
-
-    <Typography box="paragraph">
-        Also I can be{' '}
-        <Typography as="button" variant="title" box="inline">
-            a button
-        </Typography>
-        {' or '}
-        <Typography as="a" href="/#typography" variant="subtitle" box="inline" accent="secondary">
-            an anchor
-        </Typography>
-    </Typography>
-
-    <Typography box="paragraph" accent="secondary" as={CustomComponent}>
-        Custom Component Example
-    </Typography>
-
-    <Typography box="paragraph" as={(props) => <a href="." {...props} />}>
-        Render Prop Example
-    </Typography>
-</React.Fragment>;
+            <Typography as="p" variant="caption" box="paragraph">
+                The availability of high throughput, massively parallel RNA sequencing (RNA-Seq) of
+                the entire transcriptome opens the possibility of a higher sensitivity and more
+                detailed characterization of the response of the small airway epithelium to smoking.
+            </Typography>
+        </Paper>
+    </Row>
+    <Spacer />
+    <Row>
+        <Controls>
+            <Typography as="label" box="paragraph">
+                Inverted{' '}
+                <Checkbox
+                    checked={state.inverted}
+                    onValueChange={(inverted) => setState({inverted})}
+                />
+            </Typography>
+            <Typography as="label" box="paragraph">
+                Quiet{' '}
+                <Checkbox checked={state.quiet} onValueChange={(quiet) => setState({quiet})} />
+            </Typography>
+            <Typography as="label" box="paragraph">
+                Use max width{' '}
+                <Checkbox
+                    checked={state.useMaxWidth}
+                    onValueChange={(useMaxWidth) => setState({useMaxWidth})}
+                />
+            </Typography>
+        </Controls>
+        <Paper inverted={state.inverted} useMaxWidth={state.useMaxWidth}>
+            <Typography as="h1" variant="header" box="paragraph" inverted={state.inverted}>
+                <Typography
+                    variant="header"
+                    box="inline"
+                    quiet={state.quiet}
+                    inverted={state.inverted}
+                >
+                    Quiet Header
+                </Typography>{' '}
+                Helvetica Bold{' '}
+                <Typography
+                    variant="title"
+                    box="inline"
+                    quiet={state.quiet}
+                    inverted={state.inverted}
+                >
+                    24/32
+                </Typography>
+            </Typography>
+            <Typography as="h2" variant="title" box="paragraph" inverted={state.inverted}>
+                <Typography
+                    variant="title"
+                    box="inline"
+                    quiet={state.quiet}
+                    inverted={state.inverted}
+                >
+                    Quiet Title
+                </Typography>{' '}
+                Helvetica Bold{' '}
+                <Typography
+                    variant="title"
+                    box="inline"
+                    quiet={state.quiet}
+                    inverted={state.inverted}
+                >
+                    20/28
+                </Typography>
+            </Typography>
+            <Typography as="h3" variant="section" box="paragraph" inverted={state.inverted}>
+                <Typography
+                    variant="section"
+                    box="inline"
+                    quiet={state.quiet}
+                    inverted={state.inverted}
+                >
+                    Quiet Section
+                </Typography>{' '}
+                Helvetica Bold
+                <Typography
+                    variant="body"
+                    box="inline"
+                    quiet={state.quiet}
+                    inverted={state.inverted}
+                >
+                    20/28
+                </Typography>
+            </Typography>
+            <Typography as="p" box="paragraph" inverted={state.inverted}>
+                <Typography box="inline" quiet={state.quiet} inverted={state.inverted}>
+                    Quiet body text
+                </Typography>{' '}
+                Helvetica Normal
+                <Typography
+                    variant="caption"
+                    box="inline"
+                    quiet={state.quiet}
+                    inverted={state.inverted}
+                >
+                    14/20
+                </Typography>
+            </Typography>
+            <Typography
+                variant="caption"
+                box="paragraph"
+                quiet={state.quiet}
+                inverted={state.inverted}
+            >
+                Quiet caption text – small body text Helvetica Normal 12/18
+            </Typography>
+            <Typography variant="caption" box="paragraph" inverted={state.inverted}>
+                <Typography variant="caption" box="inline" quiet inverted={state.inverted}>
+                    Tissue:
+                </Typography>{' '}
+                Epithelium of Bronchiole
+            </Typography>
+            <Spacer />
+            <Typography box="paragraph" inverted={state.inverted}>
+                A &lt;STRONG&gt; tag{' '}
+                <strong>
+                    is working well with <em>texts</em> and <em>captions</em>
+                </strong>
+            </Typography>
+            <Typography box="paragraph" inverted={state.inverted}>
+                <Typography quiet box="inline" inverted={state.inverted}>
+                    Quiet is useful for secondary information
+                </Typography>, while <em>Italic</em> is done with &lt;EM&gt; tag.
+            </Typography>
+        </Paper>
+    </Row>
+</Frame>;
 ```

@@ -5,28 +5,23 @@
  * The copyright notice above does not evidence any
  * actual or intended publication of such source code.
  */
+@import "./../../variables.css";
 
 /** default body block variant */
 
 .root {
     box-sizing: border-box;
-    color: rgba(52, 52, 52, 1);
+    color: var(--gs-color-dark);
     font-weight: normal;
     display: block;
-    font-size: 14px;
-    line-height: 20px;
-    font-family: "Helvetica", sans-serif;
+    font-family: "Helvetica", "Arial", "Myriad Pro", sans-serif;
     align-self: baseline;
 }
 
-/** accent */
+/** quiet */
 
-.primary {
-    font-weight: bold;
-}
-
-.secondary {
-    color: rgba(0, 0, 0, 0.43);
+.quiet {
+    color: var(--gs-color-grey);
 }
 
 /** box */
@@ -40,56 +35,81 @@
     margin-bottom: 14px;
 }
 
-/** inversed */
+/** inverted */
 
-.inversed {
-    color: rgba(255, 255, 255, 1);
+.inverted {
+    color: var(--gs-color-bright-white);
 }
 
-.inversed.secondary {
-    color: rgba(136, 136, 136, 1);
+.inverted.quiet {
+    /**
+     * This color should be got from functions.
+     * TODO: remove variable
+     */
+    --gs-color-bright-white-6: rgba(255, 255, 255, 0.6);
+
+    color: var(--gs-color-bright-white-6);
 }
 
-/** headline variant */
+/** header variant */
 
-.headline {
+.header {
     font-size: 24px;
-    line-height: 28px;
+    line-height: 32px;
+    font-weight: bold;
 }
 
-.headline.paragraph {
-    margin-bottom: 24px;
+.header.paragraph {
+    margin-top: calc(var(--gs-spacing-unit) * 3);
+    margin-bottom: var(--gs-spacing-unit);
 }
 
 /** title variant */
 
 .title {
-    font-size: 18px;
-    line-height: 22px;
+    font-size: 20px;
+    line-height: 28px;
+    font-weight: bold;
 }
 
 .title.paragraph {
-    margin-bottom: 18px;
+    margin-top: calc(var(--gs-spacing-unit) * 2);
+    margin-bottom: var(--gs-spacing-unit);
 }
 
-/** subtitle */
+/** section */
 
-.subtitle {
-    font-size: 16px;
-    line-height: 22px;
+.section {
+    font-size: 14px;
+    line-height: 20px;
+    font-weight: bold;
 }
 
-.subtitle.paragraph {
-    margin-bottom: 16px;
+.section.paragraph {
+    margin-top: calc(var(--gs-spacing-unit) * 2);
+    margin-bottom: var(--gs-spacing-unit);
+}
+
+/** section */
+
+.body {
+    font-size: 14px;
+    line-height: 20px;
+}
+
+.body.paragraph {
+    margin-top: calc(var(--gs-spacing-unit) * 0.5);
+    margin-bottom: calc(var(--gs-spacing-unit) * 0.5);
 }
 
 /** caption variant */
 
 .caption {
     font-size: 12px;
-    line-height: 16px;
+    line-height: 18px;
 }
 
 .caption.paragraph {
-    margin-bottom: 12px;
+    margin-top: calc(var(--gs-spacing-unit) * 0.5);
+    margin-bottom: calc(var(--gs-spacing-unit) * 0.5);
 }

@@ -24,13 +24,11 @@ export interface Props extends TargetProps, WithClasses<keyof typeof styles> {
      *
      * Default: `"body"`
      */
-    variant?: 'headline' | 'title' | 'subtitle' | 'body' | 'caption';
+    variant?: 'header' | 'title' | 'section' | 'body' | 'caption';
     /**
-     * Increases or decreases the text accent with font color or weight.
-     *
-     * Default: `"normal"`
+     * Makes text quiet. It is useful for secondary information
      */
-    accent?: 'normal' | 'primary' | 'secondary';
+    quiet?: boolean;
     /**
      * Describes how the text is presented in block model.
      *
@@ -46,8 +44,7 @@ export interface Props extends TargetProps, WithClasses<keyof typeof styles> {
      *
      * Default: `"false"`
      */
-    inversed?: boolean;
-
+    inverted?: boolean;
     /**
      * You could redefine the target component by passing ReactType.
      *
@@ -73,9 +70,9 @@ export function Typography(props: Props) {
     const {
         as: Component = 'div',
         variant = 'body',
-        accent = 'normal',
+        quiet,
         box = 'block',
-        inversed,
+        inverted,
         classes,
         className,
         ...rest
@@ -85,15 +82,15 @@ export function Typography(props: Props) {
         <Component
             {...rest}
             className={classNames(className, classes.root, {
-                [classes.headline]: variant === 'headline',
+                [classes.header]: variant === 'header',
                 [classes.title]: variant === 'title',
-                [classes.subtitle]: variant === 'subtitle',
+                [classes.section]: variant === 'section',
+                [classes.body]: variant === 'body',
                 [classes.caption]: variant === 'caption',
 
-                [classes.primary]: accent === 'primary',
-                [classes.secondary]: accent === 'secondary',
+                [classes.quiet]: quiet,
 
-                [classes.inversed]: inversed,
+                [classes.inverted]: inverted,
 
                 [classes.inline]: box === 'inline',
 

@@ -28,12 +28,12 @@
     width: 16px;
     height: 16px;
     border-radius: 3px;
-    border: 1px solid var(--gs-color-input-borders);
+    border: 1px solid var(--gs-color-grey-light);
     box-sizing: border-box;
 }
 
 .input:focus + .iconBorder {
-    box-shadow: 0 0 3px 1px var(--gs-color-accent-main);
+    box-shadow: 0 0 3px 1px var(--gs-color-action-primary);
 }
 
 .iconSvg {
@@ -43,14 +43,14 @@
 }
 
 .iconBorderChecked {
-    background-color: var(--gs-color-accent-main);
-    border-color: var(--gs-color-accent-main);
+    background-color: var(--gs-color-action-primary);
+    border-color: var(--gs-color-action-primary);
 }
 
 .iconBorderDisabled,
 .iconBorderChecked.iconBorderDisabled {
-    background-color: var(--gs-color-background-disabled);
-    border-color: var(--gs-color-input-borders);
+    background-color: var(--gs-color-white-snow);
+    border-color: var(--gs-color-grey-light);
 }
 
 .checkmark {
@@ -58,7 +58,7 @@
 }
 
 .checkmarkDisabled {
-    fill: var(--gs-color-input-placeholders);
+    fill: var(--gs-color-grey);
 }
 
 .text {

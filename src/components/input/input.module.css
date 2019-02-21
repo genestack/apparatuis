@@ -10,7 +10,7 @@
 .input.input {
     width: 100%;
     background-color: rgb(255, 255, 255);
-    border: 1px solid var(--gs-color-input-borders);
+    border: 1px solid var(--gs-color-grey-light);
     box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.15);
     transition: border linear 0.2s, box-shadow linear 0.2s;
     display: block;
