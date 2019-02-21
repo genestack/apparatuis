@@ -300,4 +300,12 @@ describe('<FocusTrap />', () => {
             expect(onFocus).toHaveBeenCalled();
         });
     });
+
+    it('should export focus method to instance', () => {
+        const wrapper = mount(<FocusTrap />);
+        const instance = wrapper.instance() as FocusTrap;
+
+        expect(instance).toHaveProperty('focus');
+        expect(typeof instance.focus).toBe('function');
+    });
 });
