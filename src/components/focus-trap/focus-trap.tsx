@@ -15,9 +15,13 @@ type TargetProps = React.HTMLAttributes<HTMLDivElement>;
 
 /** FocusTrap public properties */
 export interface Props extends TargetProps {
+    /** Trap focus when component is mounted */
     focusOnMount?: boolean;
+    /** Enable to focus root container */
     enableSelfFocus?: boolean;
+    /** Properties of start sentinel */
     startSentinelProps?: SentinelProps;
+    /** Properties of end sentinel */
     endSentinelProps?: SentinelProps;
 }
 
@@ -55,6 +59,12 @@ function focusElement(element: HTMLElement) {
  * he could not focus element outside this trap by `Tab` key.
  * It is useful when modal overlay has shown to disable
  * all page content under the overlay for focusing.
+ *
+ * Uses two "sentinel" elements with `tabIndex = 0`
+ * before and after root container to prevent
+ * browser blur out the trap. This practice is used in W3C dialog example.
+ *
+ * @see https://www.w3.org/TR/wai-aria-practices/examples/dialog-modal/dialog.html
  */
 export class FocusTrap extends React.Component<Props> {
     private trapRef = React.createRef<HTMLDivElement>();
