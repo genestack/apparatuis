@@ -44,10 +44,6 @@ export class OverlayManager {
         this.container = container;
     }
 
-    private isElementInContainer(element: HTMLElement) {
-        return this.container.contains(element);
-    }
-
     private applyContainerStyles() {
         const {container} = this;
 
@@ -107,12 +103,12 @@ export class OverlayManager {
 
         const {lastActiveElement} = this.overlaysStack[currentIndex];
 
-        if (lastActiveElement && this.isElementInContainer(lastActiveElement)) {
+        if (lastActiveElement && this.container.contains(lastActiveElement)) {
             this.overlaysStack[nextIndex].lastActiveElement = lastActiveElement;
         }
     }
 
-    private removeStateByOverlay(overlayState: OverlayState) {
+    private removeState(overlayState: OverlayState) {
         this.overlaysStack.splice(this.overlaysStack.indexOf(overlayState), 1);
 
         if (!this.overlaysStack.length) {
@@ -121,11 +117,17 @@ export class OverlayManager {
     }
 
     private restoreLastActiveFocus(overlayState: OverlayState) {
-        if (
-            overlayState.lastActiveElement &&
-            this.isElementInContainer(overlayState.lastActiveElement)
-        ) {
-            overlayState.lastActiveElement.focus();
+        const {lastActiveElement} = overlayState;
+
+        if (lastActiveElement && this.container.contains(lastActiveElement)) {
+            if (
+                lastActiveElement instanceof HTMLBodyElement &&
+                document.activeElement instanceof HTMLElement
+            ) {
+                document.activeElement.blur();
+            } else {
+                lastActiveElement.focus();
+            }
         }
     }
 
@@ -153,9 +155,7 @@ export class OverlayManager {
             lastActiveElement
         });
 
-        if (this.overlaysStack.length) {
-            this.applyContainerStyles();
-        }
+        this.applyContainerStyles();
     }
 
     public unmount(overlay: OverlayComponent, opts: UnmountOpts = {}) {
@@ -171,6 +171,6 @@ export class OverlayManager {
             this.restoreLastActiveFocus(overlayState);
         }
 
-        this.removeStateByOverlay(overlayState);
+        this.removeState(overlayState);
     }
 }

@@ -18,3 +18,4 @@ export * from './components/fade';
 export * from './components/shake';
 export * from './components/backdrop';
 export * from './components/focus-trap';
+export * from './components/overlay';
