@@ -92,7 +92,7 @@ describe('Typography Component', () => {
         const root = component.root.findByType('div');
 
         expect(sortClassNames(root.props.className)).toEqual(
-            sortClassNames('root test-class-name')
+            sortClassNames('root body test-class-name')
         );
     });
 

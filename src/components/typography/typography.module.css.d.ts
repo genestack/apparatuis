@@ -8,19 +8,19 @@
 /** default body block variant */
 export const root: string;
 
-/** accent */
-export const primary: string;
-export const secondary: string;
+/** quiet */
+export const quiet: string;
 
 /** box */
 export const inline: string;
 export const paragraph: string;
 
-/** inversed */
-export const inversed: string;
+/** inverted */
+export const inverted: string;
 
 /** variant */
-export const headline: string;
+export const header: string;
 export const title: string;
-export const subtitle: string;
+export const section: string;
+export const body: string;
 export const caption: string;

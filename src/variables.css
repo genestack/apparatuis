@@ -1,9 +1,30 @@
+/*
+ * Copyright (c) 2011-2019 Genestack Limited
+ * All Rights Reserved
+ * THIS IS UNPUBLISHED PROPRIETARY SOURCE CODE OF GENESTACK LIMITED
+ * The copyright notice above does not evidence any
+ * actual or intended publication of such source code.
+ */
+
 :root {
+    /* TODO: remove this variable. All component should use typography component */
     --gs-font-family: Helvetica, Arial, "Myriad Pro", sans-serif;
 
+    /* Spacing unit is used for margins and paddings as basic unit */
+    --gs-spacing-unit: 8px;
+
     /* color palette */
-    --gs-color-accent-main: rgb(34, 129, 241);
-    --gs-color-input-placeholders: rgb(145, 145, 145);
-    --gs-color-background-disabled: rgb(240, 240, 240);
-    --gs-color-input-borders: rgb(204, 204, 204);
+
+    /* actions */
+    --gs-color-action-primary: rgba(34, 129, 241, 1);
+    --gs-color-action-primary-dark: rgba(4, 100, 189, 1);
+
+    /* greys */
+    --gs-color-dark: rgba(51, 51, 51, 1);
+    --gs-color-grey: rgba(129, 129, 129, 1);
+    --gs-color-grey-light: rgba(205, 205, 205, 1);
+    --gs-color-smoke: rgba(211, 211, 211, 1);
+    --gs-color-grey-snow: rgba(238, 238, 238, 1);
+    --gs-color-white-snow: rgba(245, 245, 245, 1);
+    --gs-color-bright-white: rgba(255, 255, 255, 1);
 }

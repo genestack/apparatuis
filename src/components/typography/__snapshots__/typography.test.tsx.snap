@@ -2,7 +2,7 @@
 
 exports[`Typography Component by default should match snapshot 1`] = `
 <div
-  className="root"
+  className="root body"
 >
   Test String
 </div>
@@ -10,7 +10,7 @@ exports[`Typography Component by default should match snapshot 1`] = `
 
 exports[`Typography Component when pass "button" string to \`as\` property should match snapshot 1`] = `
 <button
-  className="root"
+  className="root body"
 >
   Test String
 </button>
@@ -18,7 +18,7 @@ exports[`Typography Component when pass "button" string to \`as\` property shoul
 
 exports[`Typography Component when pass React.Component to \`as\` property should match snapshot 1`] = `
 <p
-  className="root"
+  className="root body"
 >
   Test String
 </p>
