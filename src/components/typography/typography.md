@@ -4,17 +4,17 @@ const {Typography} = require('.');
 
 const Frame = (props) => <div style={{background: '#E5E5E5', padding: '16px 0'}} {...props} />;
 const Row = (props) => <div style={{display: 'flex'}} {...props} />;
-const Paper = (props) => (
+const Paper = ({inverted, useMaxWidth, ...rest}) => (
     <div
-        {...props}
+        {...rest}
         style={{
             boxSizing: 'border-box',
-            background: props.inverted ? '#333333' : '#FFFFFF',
+            background: inverted ? '#333333' : '#FFFFFF',
             padding: '0 24px',
             margin: '0 16px',
-            maxWidth: props.useMaxWidth ? 264 : null,
+            maxWidth: useMaxWidth ? 264 : null,
             flexGrow: 1,
-            ...props.style
+            ...rest.style
         }}
     />
 );
@@ -37,7 +37,7 @@ initialState = {
             </Typography>
             <Typography as="p" box="paragraph">
                 I&R, Homo sapiens,{' '}
-                <Typography quiet box="inline">
+                <Typography as="span" quiet box="inline">
                     Tissue:
                 </Typography>{' '}
                 Epithelium of Bronchiole
@@ -98,6 +98,7 @@ initialState = {
         <Paper inverted={state.inverted} useMaxWidth={state.useMaxWidth}>
             <Typography as="h1" variant="header" box="paragraph" inverted={state.inverted}>
                 <Typography
+                    as="span"
                     variant="header"
                     box="inline"
                     quiet={state.quiet}
@@ -107,6 +108,7 @@ initialState = {
                 </Typography>{' '}
                 Helvetica Bold{' '}
                 <Typography
+                    as="span"
                     variant="title"
                     box="inline"
                     quiet={state.quiet}
@@ -117,6 +119,7 @@ initialState = {
             </Typography>
             <Typography as="h2" variant="title" box="paragraph" inverted={state.inverted}>
                 <Typography
+                    as="span"
                     variant="title"
                     box="inline"
                     quiet={state.quiet}
@@ -126,6 +129,7 @@ initialState = {
                 </Typography>{' '}
                 Helvetica Bold{' '}
                 <Typography
+                    as="span"
                     variant="title"
                     box="inline"
                     quiet={state.quiet}
@@ -136,6 +140,7 @@ initialState = {
             </Typography>
             <Typography as="h3" variant="section" box="paragraph" inverted={state.inverted}>
                 <Typography
+                    as="span"
                     variant="section"
                     box="inline"
                     quiet={state.quiet}
@@ -145,6 +150,7 @@ initialState = {
                 </Typography>{' '}
                 Helvetica Bold
                 <Typography
+                    as="span"
                     variant="body"
                     box="inline"
                     quiet={state.quiet}
@@ -154,11 +160,12 @@ initialState = {
                 </Typography>
             </Typography>
             <Typography as="p" box="paragraph" inverted={state.inverted}>
-                <Typography box="inline" quiet={state.quiet} inverted={state.inverted}>
+                <Typography as="span" box="inline" quiet={state.quiet} inverted={state.inverted}>
                     Quiet body text
                 </Typography>{' '}
                 Helvetica Normal
                 <Typography
+                    as="span"
                     variant="caption"
                     box="inline"
                     quiet={state.quiet}
@@ -176,7 +183,13 @@ initialState = {
                 Quiet caption text – small body text Helvetica Normal 12/18
             </Typography>
             <Typography variant="caption" box="paragraph" inverted={state.inverted}>
-                <Typography variant="caption" box="inline" quiet inverted={state.inverted}>
+                <Typography
+                    as="span"
+                    variant="caption"
+                    box="inline"
+                    quiet
+                    inverted={state.inverted}
+                >
                     Tissue:
                 </Typography>{' '}
                 Epithelium of Bronchiole
@@ -189,7 +202,7 @@ initialState = {
                 </strong>
             </Typography>
             <Typography box="paragraph" inverted={state.inverted}>
-                <Typography quiet box="inline" inverted={state.inverted}>
+                <Typography quiet as="span" box="inline" inverted={state.inverted}>
                     Quiet is useful for secondary information
                 </Typography>, while <em>Italic</em> is done with &lt;EM&gt; tag.
             </Typography>
