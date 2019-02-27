@@ -7,12 +7,9 @@
  */
 // tslint:disable no-use-before-declare no-non-null-assertion no-unnecessary-type-assertion
 import * as enzyme from 'enzyme';
-import ReactSixteenAdapter from 'enzyme-adapter-react-16';
 import * as React from 'react';
 
 import {Overlay, Props, OverlayCloseReason} from './overlay';
-
-enzyme.configure({adapter: new ReactSixteenAdapter()});
 
 jest.useFakeTimers();
 

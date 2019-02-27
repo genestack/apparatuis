@@ -17,9 +17,10 @@ module.exports = {
 
     transform: {
         '\\.tsx?$': 'ts-jest',
-        '\\.module\\.css$': '<rootDir>/jest-css-modules-transform'
+        '\\.module\\.css$': '<rootDir>/test-utils/jest-css-modules-transform'
     },
     moduleNameMapper: {
-        '^((?!(module)).)*\\.css$': '<rootDir>/jest-css-mock.js'
-    }
+        '^((?!(module)).)*\\.css$': '<rootDir>/test-utils/jest-css-mock.js'
+    },
+    setupTestFrameworkScriptFile: '<rootDir>/test-utils/setup-jest.js'
 };

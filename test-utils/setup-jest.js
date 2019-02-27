@@ -5,9 +5,7 @@
  * The copyright notice above does not evidence any
  * actual or intended publication of such source code.
  */
+const {configure} = require('enzyme');
+const ReactSixteenAdapter = require('enzyme-adapter-react-16');
 
-import '..';
-
-test('Just an empty test to calculate real coverage', () => {
-    expect(true).toBe(true);
-});
+configure({adapter: new ReactSixteenAdapter()});

@@ -8,7 +8,7 @@
 import * as React from 'react';
 import {create as render} from 'react-test-renderer';
 
-import {sortClassNames} from '../../test-utils/sort-class-names';
+import {sortClassNames} from '../../../test-utils/sort-class-names';
 
 import {Typography} from '.';
 

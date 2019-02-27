@@ -6,16 +6,13 @@
  * actual or intended publication of such source code.
  */
 // tslint:disable no-empty
-import {mount, configure} from 'enzyme';
-import ReactSixteenAdapter from 'enzyme-adapter-react-16';
+import {mount} from 'enzyme';
 import * as React from 'react';
 
 import {Typography} from '../typography';
 
 import {ListItemCell} from './list-item-cell';
 import {ListItemText} from './list-item-text';
-
-configure({adapter: new ReactSixteenAdapter()});
 
 describe('<ListItemText />', () => {
     test('should use ListItemCell as root element', () => {

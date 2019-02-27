@@ -6,13 +6,10 @@
  * actual or intended publication of such source code.
  */
 // tslint:disable no-unbound-method no-non-null-assertion max-file-line-count
-import {mount, configure, ReactWrapper} from 'enzyme';
-import ReactSixteenAdapter from 'enzyme-adapter-react-16';
+import {mount, ReactWrapper} from 'enzyme';
 import * as React from 'react';
 
 import {FocusTrap} from './focus-trap';
-
-configure({adapter: new ReactSixteenAdapter()});
 
 function simulateTabKeyDown({shiftKey}: {shiftKey: boolean} = {shiftKey: false}) {
     const element = document.activeElement instanceof HTMLElement ? document.activeElement : null;
