@@ -37,12 +37,15 @@
     opacity: 0.6;
     background: none;
     box-shadow: none;
-    cursor: default;
-    pointer-events: none;
+    cursor: not-allowed;
 }
 
 .content {
     display: flex;
     align-items: baseline;
     width: 100%;
+}
+
+.disabled .content {
+    pointer-events: none;
 }
