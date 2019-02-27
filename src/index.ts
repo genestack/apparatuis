@@ -21,3 +21,4 @@ export * from './components/focus-trap';
 export * from './components/overlay';
 export * from './components/paper';
 export * from './components/divider';
+export * from './components/flex-expander';
