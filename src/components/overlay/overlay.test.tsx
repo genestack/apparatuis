@@ -37,6 +37,7 @@ describe('<Overlay />', () => {
     afterEach(() => {
         if (localWrapper) {
             localWrapper.unmount();
+            localWrapper = null;
         }
     });
 
@@ -152,6 +153,7 @@ describe('<Overlay />', () => {
         const activeElement = document.activeElement;
 
         const wrapper = mount(<Overlay open onClose={onClose} />);
+
         wrapper.setProps({open: false});
 
         jest.runAllTimers();
