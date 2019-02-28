@@ -28,54 +28,6 @@ describe('<Paper />', () => {
         });
     });
 
-    describe('when pass "button" string to `as` property', () => {
-        const getComponent = () => shallow(<Paper as="button">Test String</Paper>);
-
-        test('should render string children', () => {
-            expect(getComponent().text()).toBe('Test String');
-        });
-
-        test('should render div HTML element', () => {
-            expect(getComponent().is('button')).toBe(true);
-        });
-    });
-
-    describe('when pass React.Component to `as` property', () => {
-        class MyComponent extends React.Component {
-            public render() {
-                return <p {...this.props} />;
-            }
-        }
-
-        const getComponent = () => shallow(<Paper as={MyComponent}>Test String</Paper>);
-
-        test('should use the React.Component as root element', () => {
-            expect(getComponent().is(MyComponent)).toBe(true);
-        });
-
-        test('should render the custom component children', () => {
-            expect(
-                getComponent()
-                    .children()
-                    .text()
-            ).toBe('Test String');
-        });
-    });
-
-    it('should spread all properties to the root element', () => {
-        const handleClick = jest.fn();
-
-        const component = shallow(
-            <Paper as="a" id="test-id" onClick={handleClick}>
-                Test String
-            </Paper>
-        );
-
-        const props = component.find('a').props();
-        expect(props.id).toBe('test-id');
-        expect(props.onClick).toBe(handleClick);
-    });
-
     it('should merge class name with own', () => {
         const component = shallow(<Paper className="test-class-name">Test String</Paper>);
 

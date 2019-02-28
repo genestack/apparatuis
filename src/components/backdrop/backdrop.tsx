@@ -11,7 +11,7 @@ import * as React from 'react';
 
 import {chain} from '../../utils/chain';
 import {Omit} from '../../utils/omit';
-import {WithClasses} from '../../utils/styles';
+import {WithClasses, mergeClassesProps} from '../../utils/styles';
 import {FadeProps, Fade} from '../fade';
 
 import * as styles from './backdrop.module.css';
@@ -60,7 +60,10 @@ export class Backdrop extends React.Component<Props, State> {
     };
 
     public render() {
-        const {open, invisible, className, fadeProps = {}, ...rest} = this.props;
+        const {open, invisible, className, fadeProps = {}, classes, ...rest} = mergeClassesProps(
+            this.props,
+            styles
+        );
         const {mounted} = this.state;
 
         return mounted ? (
@@ -72,7 +75,9 @@ export class Backdrop extends React.Component<Props, State> {
             >
                 <div
                     {...rest}
-                    className={classNames(className, styles.root, {[styles.invisible]: invisible})}
+                    className={classNames(className, classes.root, {
+                        [classes.invisible]: invisible
+                    })}
                 />
             </Fade>
         ) : null;

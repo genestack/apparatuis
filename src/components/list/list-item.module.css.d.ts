@@ -5,11 +5,9 @@
  * The copyright notice above does not evidence any
  * actual or intended publication of such source code.
  */
-@import "../../variables.css";
-
-.root {
-    box-sizing: border-box;
-    background: var(--gs-color-bright-white);
-    box-shadow: 0 0 8px rgba(0, 0, 0, 0.15);
-    border: 1px solid var(--gs-color-smoke);
-}
+export const root: string;
+export const focused: string;
+export const hovered: string;
+export const active: string;
+export const disabled: string;
+export const content: string;

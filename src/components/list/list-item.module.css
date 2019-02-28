@@ -1,0 +1,51 @@
+/*
+ * Copyright (c) 2011-2019 Genestack Limited
+ * All Rights Reserved
+ * THIS IS UNPUBLISHED PROPRIETARY SOURCE CODE OF GENESTACK LIMITED
+ * The copyright notice above does not evidence any
+ * actual or intended publication of such source code.
+ */
+@import "../../variables.css";
+
+.root {
+    box-sizing: border-box;
+    display: flex;
+    min-height: calc(var(--gs-spacing-unit) * 4);
+    padding-left: calc(var(--gs-spacing-unit) * 2);
+    padding-right: calc(var(--gs-spacing-unit) * 2);
+    outline: none;
+    align-items: center;
+    cursor: pointer;
+}
+
+.root:focus,
+.root.focused {
+    background: rgba(224, 245, 255, 1);
+}
+
+.root:hover,
+.root.hovered {
+    background: rgba(224, 245, 255, 1);
+}
+
+.root:active,
+.root.active {
+    background: rgba(194, 233, 253, 1);
+}
+
+.root.disabled {
+    opacity: 0.6;
+    background: none;
+    box-shadow: none;
+    cursor: not-allowed;
+}
+
+.content {
+    display: flex;
+    align-items: baseline;
+    width: 100%;
+}
+
+.disabled .content {
+    pointer-events: none;
+}

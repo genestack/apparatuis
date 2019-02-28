@@ -5,16 +5,17 @@
  * The copyright notice above does not evidence any
  * actual or intended publication of such source code.
  */
-import {shallow, configure} from 'enzyme';
+import {mount, configure} from 'enzyme';
 import ReactSixteenAdapter from 'enzyme-adapter-react-16';
 import * as React from 'react';
 
-import {Divider} from './divider';
+import {List} from './list';
 
 configure({adapter: new ReactSixteenAdapter()});
 
-describe('<Divider />', () => {
-    test('should render hr HTML element', () => {
-        expect(shallow(<Divider />).is('hr')).toBe(true);
+describe('<List />', () => {
+    test('should render div HTML element', () => {
+        const wrapper = mount(<List />);
+        expect(wrapper.children().is('div')).toBe(true);
     });
 });

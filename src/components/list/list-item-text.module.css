@@ -8,8 +8,12 @@
 @import "../../variables.css";
 
 .root {
-    box-sizing: border-box;
-    background: var(--gs-color-bright-white);
-    box-shadow: 0 0 8px rgba(0, 0, 0, 0.15);
-    border: 1px solid var(--gs-color-smoke);
+    min-width: 0;
+    flex-shrink: 1;
+}
+
+.nowrap {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }

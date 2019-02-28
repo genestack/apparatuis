@@ -9,7 +9,10 @@
 
 .root {
     box-sizing: border-box;
-    background: var(--gs-color-bright-white);
-    box-shadow: 0 0 8px rgba(0, 0, 0, 0.15);
-    border: 1px solid var(--gs-color-smoke);
+    flex-grow: 0;
+    flex-shrink: 0;
+}
+
+.root:not(:first-child) {
+    margin-left: calc(var(--gs-spacing-unit) / 2);
 }

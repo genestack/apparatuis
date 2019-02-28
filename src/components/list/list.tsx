@@ -10,19 +10,20 @@ import * as React from 'react';
 
 import {WithClasses, mergeClassesProps} from '../../utils/styles';
 
-import * as styles from './paper.module.css';
+import * as styles from './list.module.css';
 
 type TargetProps = React.HTMLAttributes<HTMLDivElement>;
 
-/** Paper public props */
+/** List public properties */
 export interface Props extends TargetProps, WithClasses<keyof typeof styles> {}
 
 /**
- * Paper is a block with background and shadow.
- * Is used for overlay components.
+ * Lists are a continuous group of text.
+ * They are composed of items containing primary text and supplemental cells
+ * which are represented by icons, radios, checkboxes or other text.
  */
-export function Paper(props: Props) {
+export const List = (props: Props) => {
     const {className, classes, ...rest} = mergeClassesProps(props, styles);
 
     return <div {...rest} className={classNames(className, classes.root)} />;
-}
+};
