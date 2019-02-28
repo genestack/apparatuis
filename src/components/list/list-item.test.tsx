@@ -5,13 +5,10 @@
  * The copyright notice above does not evidence any
  * actual or intended publication of such source code.
  */
-import {mount, configure} from 'enzyme';
-import ReactSixteenAdapter from 'enzyme-adapter-react-16';
+import {mount} from 'enzyme';
 import * as React from 'react';
 
 import {ListItem} from './list-item';
-
-configure({adapter: new ReactSixteenAdapter()});
 
 describe('<ListItem />', () => {
     test('should render div HTML element', () => {

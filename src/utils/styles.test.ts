@@ -5,7 +5,7 @@
  * The copyright notice above does not evidence any
  * actual or intended publication of such source code.
  */
-import {sortClassNames} from '../test-utils/sort-class-names';
+import {sortClassNames} from '../../test-utils/sort-class-names';
 
 import {mergeClassesProps, WithClasses} from './styles';
 

@@ -5,13 +5,10 @@
  * The copyright notice above does not evidence any
  * actual or intended publication of such source code.
  */
-import {shallow, configure} from 'enzyme';
-import ReactSixteenAdapter from 'enzyme-adapter-react-16';
+import {shallow} from 'enzyme';
 import * as React from 'react';
 
 import {Divider} from './divider';
-
-configure({adapter: new ReactSixteenAdapter()});
 
 describe('<Divider />', () => {
     test('should render hr HTML element', () => {
