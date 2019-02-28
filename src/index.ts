@@ -23,3 +23,4 @@ export * from './components/paper';
 export * from './components/divider';
 export * from './components/flex-expander';
 export * from './components/list';
+export * from './components/grow';
