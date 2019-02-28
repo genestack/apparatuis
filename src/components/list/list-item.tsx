@@ -58,13 +58,13 @@ export function ListItem(props: Props) {
             tabIndex={disabled ? -1 : tabIndex}
             {...rest}
             className={classNames(className, classes.root, {
-                [styles.active]: active,
-                [styles.hovered]: hovered,
-                [styles.focused]: focused,
-                [styles.disabled]: disabled
+                [classes.active]: active,
+                [classes.hovered]: hovered,
+                [classes.focused]: focused,
+                [classes.disabled]: disabled
             })}
         >
-            <div {...contentProps} className={classNames(contentProps.className, styles.content)}>
+            <div {...contentProps} className={classNames(contentProps.className, classes.content)}>
                 {children}
             </div>
         </Component>

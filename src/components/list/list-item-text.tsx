@@ -33,6 +33,13 @@ export function ListItemText(props: Props) {
 
     const title = rest.title || (typeof rest.children === 'string' ? rest.children : undefined);
 
+    if (!title) {
+        console.error(
+            '<ListItemText /> content could be truncated. ' +
+                'Pass non-empty `title` property or use string children'
+        );
+    }
+
     return (
         <ListItemCell
             {...rest}
