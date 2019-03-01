@@ -22,15 +22,4 @@ describe('<Grow />', () => {
 
         expect(props.className).toContain('grow');
     });
-
-    test('should pass transformOrigin to children element style', () => {
-        const wrapper = mount(
-            <Grow className="grow" horizontalOrigin="top" verticalOrigin="left">
-                <div className="div" />
-            </Grow>
-        );
-
-        const props = wrapper.find('.div').props();
-        expect(props.style && props.style.transformOrigin).toBe('left top');
-    });
 });

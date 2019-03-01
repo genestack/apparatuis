@@ -10,9 +10,7 @@ import * as React from 'react';
 
 import * as styles from './icon.module.css';
 
-interface Props {
-    className?: string;
-}
+type TargetProps = React.SVGAttributes<React.ReactSVGElement>;
 
 /**
  * Component adds common styles for `SVG` icons.
@@ -20,18 +18,24 @@ interface Props {
  *
  * @visibleName Icon
  */
-export function createIcon<P extends Props>(icon: React.SFC<P> | JSX.Element) {
-    class SomeIcon extends React.PureComponent<P> {
+export function createIcon<P extends TargetProps = TargetProps>(icon: React.SFC<P> | JSX.Element) {
+    class Icon extends React.PureComponent<P> {
         public render() {
-            const element = typeof icon === 'function' ? icon(this.props) : icon;
+            if (typeof icon === 'function') {
+                const element = icon(this.props);
 
-            return element
-                ? React.cloneElement(element, {
-                      className: classNames(element.props.className, styles.root)
-                  })
-                : null;
+                return element
+                    ? React.cloneElement(element, {
+                          className: classNames(element.props.className, styles.root)
+                      })
+                    : null;
+            }
+
+            return React.cloneElement(icon, {
+                className: classNames(icon.props.className, this.props.className, styles.root)
+            });
         }
     }
 
-    return SomeIcon;
+    return Icon;
 }
