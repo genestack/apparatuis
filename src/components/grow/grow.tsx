@@ -21,13 +21,9 @@ type TargetProps = Omit<StrictTransitionProps, 'timeout' | 'children'>;
 
 type Children = React.ReactElement<{className?: string; style?: React.CSSProperties}>;
 
-type Origin = 'center' | 'top' | 'left' | 'bottom' | 'right';
-
 /** Public Grow properties */
 export interface Props extends TargetProps, WithClasses<keyof typeof styles> {
     children: Children;
-    verticalOrigin?: Origin;
-    horizontalOrigin?: Origin;
 }
 
 /**
@@ -36,13 +32,7 @@ export interface Props extends TargetProps, WithClasses<keyof typeof styles> {
  * It uses [react-transition-group](https://github.com/reactjs/react-transition-group) internally.
  */
 export const Grow = (props: Props) => {
-    const {
-        className,
-        classes,
-        verticalOrigin = 'center',
-        horizontalOrigin = 'center',
-        ...rest
-    } = mergeClassesProps(props, styles);
+    const {className, classes, ...rest} = mergeClassesProps(props, styles);
     const child = React.Children.only(props.children) as Children;
 
     return (
@@ -59,11 +49,7 @@ export const Grow = (props: Props) => {
             timeout={DURATION_TIMEOUT}
         >
             {React.cloneElement(child, {
-                className: classNames(className, child.props.className, classes.root),
-                style: {
-                    ...child.props.style,
-                    transformOrigin: `${verticalOrigin} ${horizontalOrigin}`
-                }
+                className: classNames(className, child.props.className, classes.root)
             })}
         </CSSTransition>
     );
