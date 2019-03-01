@@ -1,0 +1,51 @@
+/*
+ * Copyright (c) 2011-2019 Genestack Limited
+ * All Rights Reserved
+ * THIS IS UNPUBLISHED PROPRIETARY SOURCE CODE OF GENESTACK LIMITED
+ * The copyright notice above does not evidence any
+ * actual or intended publication of such source code.
+ */
+
+.root {
+    border-radius: 6px;
+    max-width: 300px;
+    outline: none;
+    display: flex;
+    overflow: hidden;
+}
+
+.root:focus {
+    box-shadow: 0 0 3px rgb(73, 197, 255);
+}
+
+.popover[data-placement^="top-start"] .root {
+    border-bottom-left-radius: 0;
+}
+
+.popover[data-placement^="top-end"] .root {
+    border-bottom-right-radius: 0;
+}
+
+.popover[data-placement^="right-start"] .root {
+    border-top-left-radius: 0;
+}
+
+.popover[data-placement^="right-end"] .root {
+    border-bottom-left-radius: 0;
+}
+
+.popover[data-placement^="bottom-end"] .root {
+    border-top-right-radius: 0;
+}
+
+.popover[data-placement^="bottom-start"] .root {
+    border-top-left-radius: 0;
+}
+
+.popover[data-placement^="left-end"] .root {
+    border-bottom-right-radius: 0;
+}
+
+.popover[data-placement^="left-start"] .root {
+    border-top-right-radius: 0;
+}

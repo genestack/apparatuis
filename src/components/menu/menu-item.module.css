@@ -18,11 +18,21 @@
     width: 100%;
 }
 
-.icon {
+.root:hover,
+.root.hovered {
+    background: transparent;
+}
+
+.root:focus,
+.root.focused {
+    background: rgba(224, 245, 255, 1);
+}
+
+.iconCell {
     width: 20px;
 }
 
-.root:hover:not(:focus),
-.root.hovered:not(.focused) {
-    background: transparent;
+.content {
+    display: flex;
+    align-items: baseline;
 }

@@ -5,8 +5,11 @@
  * The copyright notice above does not evidence any
  * actual or intended publication of such source code.
  */
-@import "../../variables.css";
+import {wrapPureComponent} from '../../utils/wrap-pure-component';
+import {List, ListProps} from '../list';
 
-.overlay {
-    z-index: var(--gs-z-index-menu);
-}
+/** SubMenu public properties */
+export type Props = ListProps;
+
+/** Shortcut to List */
+export const SubMenu = wrapPureComponent(List);
