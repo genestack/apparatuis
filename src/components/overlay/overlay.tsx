@@ -12,7 +12,6 @@ import * as ReactDOM from 'react-dom';
 import {chain} from '../../utils/chain';
 import {Omit} from '../../utils/omit';
 import {Backdrop, BackdropProps} from '../backdrop';
-import {FocusTrap} from '../focus-trap';
 
 import {OverlayManager} from './overlay-manager';
 import * as styles from './overlay.module.css';
@@ -57,9 +56,15 @@ export interface Props extends TargetProps {
     /** Do not listen `Escape` keypress for closing */
     disableEscHandler?: boolean;
     /** Do not restore focus on last active element when overlay has hidden */
-    disableAutoFocus?: boolean;
+    disableRestoreFocus?: boolean;
+    /** Makes backdrop invisible. Shortcut to Backdrop.invisible */
+    invisible?: boolean;
     /** Properties of nested Backdrop component */
-    backdropProps?: Omit<BackdropProps, 'open'>;
+    backdropProps?: Omit<BackdropProps, 'open' | 'invisible'>;
+}
+
+interface State {
+    exited: boolean;
 }
 
 /**
@@ -68,8 +73,20 @@ export interface Props extends TargetProps {
  *   - with click on `<Backdrop />`
  *   - with `Escape` keydown
  */
-export class Overlay extends React.Component<Props> {
-    private focusTrapRef = React.createRef<FocusTrap>();
+export class Overlay extends React.Component<Props, State> {
+    public static getDerivedStateFromProps(props: Props, state: State): State {
+        if (props.open) {
+            return {
+                exited: false
+            };
+        }
+
+        return state;
+    }
+
+    public state: State = {
+        exited: true
+    };
 
     public componentDidMount() {
         if (this.props.open) {
@@ -78,30 +95,24 @@ export class Overlay extends React.Component<Props> {
     }
 
     public componentDidUpdate(props: Props) {
-        if (props.open !== this.props.open) {
-            if (this.props.open) {
-                this.open();
-            }
+        if (this.props.open && !props.open) {
+            this.open();
         }
     }
 
     public componentWillUnmount() {
         manager.unmount(this, {
-            restoreFocus: !this.props.disableAutoFocus
+            restoreFocus: !this.props.disableRestoreFocus
         });
     }
 
     private open() {
         manager.mount(this);
-
-        if (this.focusTrapRef.current) {
-            this.focusTrapRef.current.focus();
-        }
     }
 
     private close() {
         manager.unmount(this, {
-            restoreFocus: !this.props.disableAutoFocus
+            restoreFocus: !this.props.disableRestoreFocus
         });
 
         if (this.props.onClosed) {
@@ -119,8 +130,9 @@ export class Overlay extends React.Component<Props> {
         onClose(OverlayCloseReason.BACKDROP_CLICK, event);
     };
 
-    private handleBackdropTransitionEnd = () => {
+    private handleBackdropExited = () => {
         this.close();
+        this.setState({exited: true});
     };
 
     private handleKeyDown: TargetProps['onKeyDown'] = (event) => {
@@ -142,14 +154,19 @@ export class Overlay extends React.Component<Props> {
             onClosed,
             disableClickHandler,
             disableEscHandler,
-            disableAutoFocus,
+            disableRestoreFocus,
+            invisible,
             backdropProps = {},
             children,
             className,
             ...rest
         } = this.props;
 
-        const {fadeProps = {}} = backdropProps;
+        const {exited} = this.state;
+
+        if (!open && exited) {
+            return null;
+        }
 
         return ReactDOM.createPortal(
             <div
@@ -159,16 +176,12 @@ export class Overlay extends React.Component<Props> {
             >
                 <Backdrop
                     {...backdropProps}
+                    invisible={invisible}
                     open={open}
-                    fadeProps={{
-                        ...fadeProps,
-                        onExited: chain(fadeProps.onExited, this.handleBackdropTransitionEnd)
-                    }}
+                    onExited={chain(backdropProps.onExited, this.handleBackdropExited)}
                     onClick={chain(backdropProps.onClick, this.handleBackdropClick)}
                 />
-                <FocusTrap enableSelfFocus ref={this.focusTrapRef}>
-                    {children}
-                </FocusTrap>
+                {children}
             </div>,
             container
         );

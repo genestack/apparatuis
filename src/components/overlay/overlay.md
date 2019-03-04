@@ -2,6 +2,7 @@
 const {Input} = require('../input');
 const {Button} = require('../button');
 const {Fade} = require('../fade');
+const {FocusTrap} = require('../focus-trap');
 const {Typography} = require('../typography');
 const {Overlay} = require('.');
 
@@ -36,13 +37,19 @@ class SimpleModal extends React.Component {
         this.handleSubModalOpen = this.handleSubModalOpen.bind(this);
         this.handleSubModalClose = this.handleSubModalClose.bind(this);
         this.handleSubModalClosed = this.handleSubModalClosed.bind(this);
+        this.focusTrapRef = React.createRef();
     }
 
     handleSubModalOpen() {
-        this.setState({
-            subModalOpen: true,
-            subModalMounted: true
-        });
+        this.setState(
+            {
+                subModalOpen: true,
+                subModalMounted: true
+            },
+            () => {
+                this.focusTrapRef.current.focus();
+            }
+        );
     }
 
     handleSubModalClose() {
@@ -68,22 +75,24 @@ class SimpleModal extends React.Component {
                         onClose={this.handleSubModalClose}
                         onClosed={this.handleSubModalClosed}
                     >
-                        <Fade appear in={this.state.subModalOpen}>
-                            <div style={this.styles}>
-                                <Typography variant="title" box="paragraph">
-                                    Overlay Example
-                                </Typography>
-                                <Typography variant="body" box="paragraph">
-                                    This some text of overlay
-                                </Typography>
-                                <div>
-                                    <Input placeholder="Focus should be trapped" />
+                        <FocusTrap enableSelfFocus ref={this.focusTrapRef}>
+                            <Fade appear in={this.state.subModalOpen}>
+                                <div style={this.styles}>
+                                    <Typography variant="title" box="paragraph">
+                                        Overlay Example
+                                    </Typography>
+                                    <Typography variant="body" box="paragraph">
+                                        This some text of overlay
+                                    </Typography>
+                                    <div>
+                                        <Input placeholder="Focus should be trapped" />
+                                    </div>
+                                    <div>
+                                        <SimpleModal />
+                                    </div>
                                 </div>
-                                <div>
-                                    <SimpleModal />
-                                </div>
-                            </div>
-                        </Fade>
+                            </Fade>
+                        </FocusTrap>
                     </Overlay>
                 ) : null}
             </React.Fragment>
