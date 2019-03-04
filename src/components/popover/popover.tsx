@@ -24,7 +24,7 @@ type TransitionProps = Omit<GrowProps, 'appear' | 'in' | 'children'>;
 
 const PopoverArrowIcon = createIcon(
     <svg viewBox="0 0 9 10">
-        <path d="M10 10L0 5l10-5v10z" fill="#fff" stroke="rgba(211, 211, 211, 1)" strokeWidth="1" />
+        <path d="M10 10L0 5l10-5v10z" fill="#fff" stroke="#d3d3d3" strokeWidth="1" />
     </svg>
 );
 

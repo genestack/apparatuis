@@ -12,7 +12,7 @@ import {WithClasses, mergeClassesProps} from '../../utils/styles';
 
 import * as styles from './list-item.module.css';
 
-type TargetProps = React.HTMLAttributes<HTMLDivElement>;
+type TargetProps = React.HTMLAttributes<HTMLElement>;
 type ContentProps = React.HTMLAttributes<HTMLDivElement>;
 
 /** ListItem public properties */

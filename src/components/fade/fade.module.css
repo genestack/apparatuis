@@ -8,29 +8,20 @@
 
 .root {
     will-change: opacity;
-    transition: opacity cubic-bezier(0.4, 0, 0.2, 1) 300ms;
-}
-
-.appear {
-    opacity: 0;
-}
-
-.appearActive {
-    opacity: 1;
 }
 
 .enter {
     opacity: 1;
 }
 
-.enterDone {
-    opacity: 1;
+.entering {
+    transition: opacity cubic-bezier(0.4, 0, 0.2, 1) 300ms;
 }
 
 .exit {
     opacity: 0;
 }
 
-.exitDone {
-    opacity: 0;
+.exiting {
+    transition: opacity cubic-bezier(0.4, 0, 0.2, 1) 300ms;
 }

@@ -82,8 +82,8 @@ export class OverlayManager {
             return;
         }
 
-        container.style.overflow = lastContainerStyle.overflow || null;
-        container.style.paddingRight = lastContainerStyle.paddingRight || null;
+        container.style.overflow = lastContainerStyle.overflow || '';
+        container.style.paddingRight = lastContainerStyle.paddingRight || '';
 
         this.lastContainerStyle = null;
     }

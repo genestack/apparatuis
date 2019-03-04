@@ -17,7 +17,6 @@ import {FadeProps, Fade} from '../fade';
 import * as styles from './backdrop.module.css';
 
 type TargetProps = React.HTMLAttributes<HTMLDivElement>;
-type RootProps = Omit<FadeProps, 'in' | 'appear' | 'children'>;
 
 /** Public Backdrop properties */
 export interface Props extends TargetProps, WithClasses<keyof typeof styles> {
@@ -25,11 +24,9 @@ export interface Props extends TargetProps, WithClasses<keyof typeof styles> {
     /** If `true` the backdrop will have transparent background */
     invisible?: boolean;
     /** Properties of the `<Fade />` element */
-    fadeProps?: RootProps;
-}
-
-interface State {
-    mounted: boolean;
+    fadeProps?: Omit<FadeProps, 'in' | 'appear' | 'children' | 'unmountOnExit'>;
+    /** Calls when <Fade /> transition exited. */
+    onExited?: () => void;
 }
 
 /**
@@ -39,39 +36,25 @@ interface State {
  *
  * Can be transparent when rendering a popover or a menu.
  */
-export class Backdrop extends React.Component<Props, State> {
-    public state: State = {mounted: this.props.open};
-
-    /** @HACK */
-    /**
-     * There is a bug in our version of `react-transition-group`.
-     * https://git.io/fh7uq
-     * `unmountOnExit: true` cause to disabled appear animation.
-     * TODO: update `react-transition-group` package and remove the state.
-     */
-    public static getDerivedStateFromProps(props: Props, state: State): State {
-        return {
-            mounted: props.open || state.mounted
-        };
-    }
-
-    private handleFadeExited = () => {
-        this.setState({mounted: this.props.open});
-    };
-
+export class Backdrop extends React.Component<Props> {
     public render() {
-        const {open, invisible, className, fadeProps = {}, classes, ...rest} = mergeClassesProps(
-            this.props,
-            styles
-        );
-        const {mounted} = this.state;
+        const {
+            open,
+            invisible,
+            className,
+            fadeProps = {},
+            classes,
+            onExited,
+            ...rest
+        } = mergeClassesProps(this.props, styles);
 
-        return mounted ? (
+        return (
             <Fade
-                in={open}
                 {...fadeProps}
+                in={open}
                 appear
-                onExited={chain(fadeProps.onExited, this.handleFadeExited)}
+                unmountOnExit
+                onExited={chain(fadeProps.onExited, onExited)}
             >
                 <div
                     {...rest}
@@ -80,6 +63,6 @@ export class Backdrop extends React.Component<Props, State> {
                     })}
                 />
             </Fade>
-        ) : null;
+        );
     }
 }
