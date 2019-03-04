@@ -21,18 +21,18 @@ type TargetProps = React.SVGAttributes<React.ReactSVGElement>;
 export function createIcon<P extends TargetProps = TargetProps>(icon: React.SFC<P> | JSX.Element) {
     class Icon extends React.PureComponent<P> {
         public render() {
-            if (typeof icon === 'function') {
-                const element = icon(this.props);
+            const element = typeof icon === 'function' ? icon(this.props) : icon;
 
-                return element
-                    ? React.cloneElement(element, {
-                          className: classNames(element.props.className, styles.root)
-                      })
-                    : null;
+            if (!element) {
+                return null;
             }
 
-            return React.cloneElement(icon, {
-                className: classNames(icon.props.className, this.props.className, styles.root)
+            const {className} = element.props;
+
+            return React.cloneElement(element, {
+                // prevent IE11 to focus SVG
+                focusable: 'false',
+                className: classNames(className, this.props.className, styles.root)
             });
         }
     }

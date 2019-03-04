@@ -49,7 +49,7 @@
 
 .withArrow[data-placement^="top"] .arrow {
     transform: rotate(-90deg);
-    margin-bottom: -9px;
+    margin-bottom: -8px;
     bottom: 0;
 }
 
@@ -71,7 +71,7 @@
 
 .withArrow[data-placement^="right"] .arrow {
     transform: rotate(0deg);
-    margin-left: -9px;
+    margin-left: -8px;
     left: 0;
 }
 
@@ -93,7 +93,7 @@
 
 .withArrow[data-placement^="bottom"] .arrow {
     transform: rotate(90deg);
-    margin-top: -9px;
+    margin-top: -8px;
     top: 0;
 }
 
@@ -115,7 +115,7 @@
 
 .withArrow[data-placement^="left"] .arrow {
     transform: rotate(180deg);
-    margin-right: -9px;
+    margin-right: -8px;
     right: 0;
 }
 
