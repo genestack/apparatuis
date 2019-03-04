@@ -24,3 +24,4 @@ export * from './components/divider';
 export * from './components/flex-expander';
 export * from './components/list';
 export * from './components/grow';
+export * from './components/popover';

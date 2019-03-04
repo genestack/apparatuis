@@ -4,6 +4,8 @@
   "rules": {
     "property-no-unknown": [true, {
       "ignoreProperties": ["composes"]
-    }]
+    }],
+    "selector-attribute-operator-space-before": null,
+    "selector-attribute-operator-space-after": null
   }
 }
