@@ -6,44 +6,23 @@
  * actual or intended publication of such source code.
  */
 
-.root {
-    will-change: opacity, transform;
-    transition: opacity cubic-bezier(0.4, 0, 0.2, 1) 300ms,
-        transform cubic-bezier(0.4, 0, 0.2, 1) 200ms;
-}
-
-.hidden {
-    opacity: 0;
-    transform: scale(0);
-}
-
-.shown {
+.enter {
     opacity: 1;
     transform: scale(1);
 }
 
-.appear {
-    composes: hidden;
-}
-
-.appearActive {
-    composes: shown;
-}
-
-.enter {
-    composes: shown;
-}
-
-.enterDone {
-    composes: shown;
+.entering {
+    will-change: opacity, transform;
+    transition: opacity 300ms cubic-bezier(0.4, 0, 0.2, 1),
+        transform 200ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .exit {
-    composes: hidden;
-    transition: opacity cubic-bezier(0.4, 0, 0.2, 1) 200ms,
-        transform cubic-bezier(0.4, 0, 0.2, 1) 300ms;
+    opacity: 0;
+    transform: scale(0.75, 0.5625);
 }
 
-.exitDone {
-    composes: hidden;
+.exiting {
+    transition: opacity 300ms cubic-bezier(0.4, 0, 0.2, 1),
+        transform 200ms cubic-bezier(0.4, 0, 0.2, 1) 100ms;
 }

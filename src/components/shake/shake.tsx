@@ -7,13 +7,15 @@
  */
 import classNames from 'classnames';
 import * as React from 'react';
-import CSSTransition from 'react-transition-group/CSSTransition';
+import CSSTransition, {CSSTransitionProps} from 'react-transition-group/CSSTransition';
 
 import {Omit} from '../../utils/omit';
-import {StrictCSSTransitionProps} from '../../utils/react-css-transition-group-strict';
+import {OmitIndexSignature} from '../../utils/omit-index-signature';
 import {WithClasses, mergeClassesProps} from '../../utils/styles';
 
 import * as styles from './shake.module.css';
+
+type StrictCSSTransitionProps = OmitIndexSignature<CSSTransitionProps>;
 
 const TRANSITION_TIMEOUT: StrictCSSTransitionProps['timeout'] = {
     enter: 350,

@@ -5,31 +5,28 @@
  * The copyright notice above does not evidence any
  * actual or intended publication of such source code.
  */
+import {mount} from 'enzyme';
 import * as React from 'react';
-import {create as render} from 'react-test-renderer';
 
 import {Backdrop} from '.';
 
-jest.mock('react-dom');
 jest.useFakeTimers();
 
 describe('Backdrop Component', () => {
     test('should unmount children after close and end transition', () => {
-        const component = render(<Backdrop open />);
-        expect(component.root.findAllByType('div')).toHaveLength(1);
-
-        component.update(<Backdrop open={false} />);
-        expect(component.root.findAllByType('div')).toHaveLength(1);
-
+        const wrapper = mount(<Backdrop open />);
+        expect(wrapper.html()).toBeTruthy();
+        wrapper.setProps({open: false});
+        expect(wrapper.html()).toBeTruthy();
         jest.runAllTimers();
-        expect(component.root.findAllByType('div')).toHaveLength(0);
+        expect(wrapper.html()).toBeFalsy();
     });
 
     test('should pass onExited callback to Fade element', () => {
         const onExited = jest.fn();
 
-        const component = render(<Backdrop open fadeProps={{onExited}} />);
-        component.update(<Backdrop open={false} fadeProps={{onExited}} />);
+        const wrapper = mount(<Backdrop open fadeProps={{onExited}} />);
+        wrapper.setProps({open: false});
         jest.runAllTimers();
         expect(onExited).toBeCalled();
     });

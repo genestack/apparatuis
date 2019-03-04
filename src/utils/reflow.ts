@@ -5,8 +5,6 @@
  * The copyright notice above does not evidence any
  * actual or intended publication of such source code.
  */
-export const root: string;
-export const enter: string;
-export const entering: string;
-export const exit: string;
-export const exiting: string;
+
+/** Force reflow */
+export const reflow = (node: Element) => node.scrollTop;
