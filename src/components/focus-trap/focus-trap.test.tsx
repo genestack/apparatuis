@@ -305,4 +305,56 @@ describe('<FocusTrap />', () => {
         expect(instance).toHaveProperty('focus');
         expect(typeof instance.focus).toBe('function');
     });
+
+    describe('focusSibling method', () => {
+        it('should exists in instance', () => {
+            const wrapper = mount(<FocusTrap />);
+            const instance = wrapper.instance() as FocusTrap;
+
+            expect(instance).toHaveProperty('focusSibling');
+            expect(typeof instance.focusSibling).toBe('function');
+        });
+
+        it('should focus next element but should not loop', () => {
+            app.createActiveElement();
+
+            const instance = app
+                .mount(
+                    <FocusTrap id="trap" focusOnMount>
+                        <input id="trapped" />
+                        <input id="second-trapped" />
+                    </FocusTrap>
+                )
+                .instance() as FocusTrap;
+
+            expect(document.activeElement).toBe(document.getElementById('trapped'));
+            instance.focusSibling('next');
+            expect(document.activeElement).toBe(document.getElementById('second-trapped'));
+            instance.focusSibling('next');
+            expect(document.activeElement).toBe(document.getElementById('second-trapped'));
+            instance.focusSibling('prev');
+            expect(document.activeElement).toBe(document.getElementById('trapped'));
+            instance.focusSibling('prev');
+            expect(document.activeElement).toBe(document.getElementById('trapped'));
+        });
+
+        it('should not change focus when there are no focusable elements', () => {
+            app.createActiveElement();
+
+            const instance = app
+                .mount(
+                    <FocusTrap id="trap" focusOnMount>
+                        <div>a</div>
+                        <div>b</div>
+                    </FocusTrap>
+                )
+                .instance() as FocusTrap;
+
+            expect(document.activeElement).toBe(document.getElementById('trap'));
+            instance.focusSibling('next');
+            expect(document.activeElement).toBe(document.getElementById('trap'));
+            instance.focusSibling('prev');
+            expect(document.activeElement).toBe(document.getElementById('trap'));
+        });
+    });
 });
