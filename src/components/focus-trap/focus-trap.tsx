@@ -26,7 +26,7 @@ export interface Props extends TargetProps {
 }
 
 function getFocusableElements(element: Element) {
-    return element.querySelectorAll(
+    return element.querySelectorAll<HTMLElement>(
         'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
     );
 }
@@ -133,6 +133,44 @@ export class FocusTrap extends React.Component<Props> {
         }
 
         focusElement(nextFocusedElement || trapElement);
+    }
+
+    /**
+     * Focus to the next or previous element in focus trap.
+     * Useful when you want to change focus with some keyboard combination
+     * like Up or Down keys.
+     */
+    public focusSibling(direction: 'next' | 'prev') {
+        const trapElement = this.trapRef.current;
+        const focusedElement = document.activeElement;
+
+        if (!trapElement || !focusedElement) {
+            return;
+        }
+
+        const focusableElements = Array.from(getFocusableElements(trapElement));
+
+        if (!focusableElements.length) {
+            return;
+        }
+
+        const currentIndex = focusableElements.indexOf(focusedElement as HTMLElement);
+
+        let nextIndex = direction === 'next' ? currentIndex + 1 : currentIndex - 1;
+
+        if (nextIndex === -1) {
+            nextIndex = 0;
+        }
+
+        if (nextIndex === focusableElements.length) {
+            nextIndex = focusableElements.length - 1;
+        }
+
+        const element = focusableElements[nextIndex];
+
+        if (element !== focusedElement) {
+            element.focus();
+        }
     }
 
     public render() {
