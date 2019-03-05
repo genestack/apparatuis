@@ -1,0 +1,64 @@
+/*
+ * Copyright (c) 2011-2019 Genestack Limited
+ * All Rights Reserved
+ * THIS IS UNPUBLISHED PROPRIETARY SOURCE CODE OF GENESTACK LIMITED
+ * The copyright notice above does not evidence any
+ * actual or intended publication of such source code.
+ */
+@import "../../variables.css";
+
+.root {
+    border-radius: 6px;
+    max-width: 300px;
+    outline: none;
+    overflow: hidden;
+}
+
+.focusTrap {
+    height: 100%;
+    overflow-y: scroll;
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE 10+ */
+}
+
+.focusTrap::-webkit-scrollbar {
+    /* WebKit */
+    width: 0;
+    height: 0;
+}
+
+.overlay {
+    z-index: var(--gs-z-index-menu);
+}
+
+.popover[data-placement^="top-start"] .root {
+    border-bottom-left-radius: 0;
+}
+
+.popover[data-placement^="top-end"] .root {
+    border-bottom-right-radius: 0;
+}
+
+.popover[data-placement^="right-start"] .root {
+    border-top-left-radius: 0;
+}
+
+.popover[data-placement^="right-end"] .root {
+    border-bottom-left-radius: 0;
+}
+
+.popover[data-placement^="bottom-end"] .root {
+    border-top-right-radius: 0;
+}
+
+.popover[data-placement^="bottom-start"] .root {
+    border-top-left-radius: 0;
+}
+
+.popover[data-placement^="left-end"] .root {
+    border-bottom-right-radius: 0;
+}
+
+.popover[data-placement^="left-start"] .root {
+    border-top-right-radius: 0;
+}

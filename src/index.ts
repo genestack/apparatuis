@@ -25,3 +25,4 @@ export * from './components/flex-expander';
 export * from './components/list';
 export * from './components/grow';
 export * from './components/popover';
+export * from './components/menu';
