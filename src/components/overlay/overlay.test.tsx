@@ -38,29 +38,17 @@ describe('<Overlay />', () => {
         }
     });
 
-    it('should trap focus when mount', () => {
-        const activeElement = document.activeElement;
-        mount(<Overlay open onClose={jest.fn()} />);
-        expect(document.activeElement).toBeTruthy();
-        expect(document.activeElement).not.toBe(activeElement);
-    });
-
-    it('should trap focus when open', () => {
-        const activeElement = document.activeElement;
-        const wrapper = mount(<Overlay open={false} onClose={jest.fn()} />);
-        expect(document.activeElement).toBe(activeElement);
-        wrapper.setProps({open: true});
-        expect(document.activeElement).toBeTruthy();
-        expect(document.activeElement).not.toBe(activeElement);
-    });
-
     describe('on Escape keydown event', () => {
         const dispatchEvent = (event: KeyboardEvent) =>
-            document.activeElement!.dispatchEvent(event);
+            document.getElementById('button')!.dispatchEvent(event);
 
         const setup = (props?: Partial<Props>) => {
             const onClose = jest.fn();
-            const wrapper = mount(<Overlay open onClose={onClose} {...props} />);
+            const wrapper = mount(
+                <Overlay open onClose={onClose} {...props}>
+                    <button id="button" />
+                </Overlay>
+            );
             const event = new KeyboardEvent('keydown', {
                 key: 'Escape',
                 cancelable: true,
@@ -165,5 +153,18 @@ describe('<Overlay />', () => {
         expect(onClosed).not.toBeCalled();
         jest.runAllTimers();
         expect(onClosed).toBeCalled();
+    });
+
+    it('should unmount after close', () => {
+        const wrapper = mount(
+            <Overlay open onClose={jest.fn()}>
+                <div id="test" />
+            </Overlay>
+        );
+
+        wrapper.setProps({open: false});
+        expect(document.getElementById('test')).toBeTruthy();
+        jest.runAllTimers();
+        expect(document.getElementById('test')).toBeFalsy();
     });
 });
