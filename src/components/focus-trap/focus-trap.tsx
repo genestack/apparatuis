@@ -70,7 +70,6 @@ export class FocusTrap extends React.Component<Props> {
     private trapRef = React.createRef<HTMLDivElement>();
     private lastActiveElement: Element | null = document.activeElement;
     private focusDirectionInversed: boolean | null = null;
-    private focusedElement: HTMLElement | null = null;
 
     public componentDidMount() {
         document.addEventListener('keydown', this.handleDocumentKeyDown);
@@ -97,8 +96,6 @@ export class FocusTrap extends React.Component<Props> {
     };
 
     private handleSelfFocus: TargetProps['onFocus'] = (event) => {
-        this.focusedElement = event.target;
-
         if (event.currentTarget !== event.target) {
             return;
         }
@@ -145,7 +142,7 @@ export class FocusTrap extends React.Component<Props> {
      */
     public focusSibling(direction: 'next' | 'prev') {
         const trapElement = this.trapRef.current;
-        const {focusedElement} = this;
+        const focusedElement = document.activeElement;
 
         if (!trapElement || !focusedElement) {
             return;
@@ -157,7 +154,7 @@ export class FocusTrap extends React.Component<Props> {
             return;
         }
 
-        const currentIndex = focusableElements.indexOf(focusedElement);
+        const currentIndex = focusableElements.indexOf(focusedElement as HTMLElement);
 
         let nextIndex = direction === 'next' ? currentIndex + 1 : currentIndex - 1;
 
