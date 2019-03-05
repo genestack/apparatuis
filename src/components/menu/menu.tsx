@@ -52,7 +52,6 @@ const popperProps: PopoverProps['popperProps'] = {
  */
 export class Menu extends React.Component<Props> {
     private focusTrapRef = React.createRef<FocusTrap>();
-    private scrollContainerRef = React.createRef<HTMLDivElement>();
 
     public componentDidMount() {
         const focusTrap = this.focusTrapRef.current;
