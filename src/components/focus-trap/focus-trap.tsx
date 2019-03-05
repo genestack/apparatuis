@@ -137,7 +137,7 @@ export class FocusTrap extends React.Component<Props> {
 
     /**
      * Focus to the next or previous element in focus trap.
-     * Useful when you want to change focus by some keyboard combination
+     * Useful when you want to change focus with some keyboard combination
      * like Up or Down keys.
      */
     public focusSibling(direction: 'next' | 'prev') {
