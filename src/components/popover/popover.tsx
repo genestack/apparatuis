@@ -23,8 +23,9 @@ type TargetProps = Omit<PaperProps, 'classes'>;
 type TransitionProps = Omit<GrowProps, 'appear' | 'in' | 'children'>;
 
 const PopoverArrowIcon = createIcon(
-    <svg viewBox="0 0 9 10">
-        <path d="M10 10L0 5l10-5v10z" fill="#fff" stroke="#d3d3d3" strokeWidth="1" />
+    <svg viewBox="0 0 8 10" fill="none">
+        <path d="M8 10L0 5l8-5v10z" fill="rgba(255, 255, 255, 1)" />
+        <path d="M8 10L0 5l8-5" stroke="rgba(211, 211, 211, 1)" />
     </svg>
 );
 
@@ -45,12 +46,17 @@ export interface Props extends TargetProps, WithClasses<keyof typeof styles> {
      * @see https://popper.js.org/popper-documentation.html#Popper.placements
      */
     placement?: Placement;
+    /** Use position fixed for popper component. Shortcut to ReactPopper.positionFixed */
+    positionFixed?: PopperProps['positionFixed'];
     /** If `true` popover will show arrow */
     withArrow?: boolean;
     /** Nested Grow transition properties */
     transitionProps?: TransitionProps;
     /** Other `<ReactPopper />` properties */
-    popperProps?: Omit<PopperProps, 'referenceElement' | 'children' | 'placement'>;
+    popperProps?: Omit<
+        PopperProps,
+        'referenceElement' | 'children' | 'placement' | 'positionFixed'
+    >;
     /**
      * Always keep the children in the DOM.
      * This property can be useful in SEO situation or
@@ -117,6 +123,7 @@ export class Popover extends React.Component<Props, State> {
             withArrow,
             keepMounted,
             disableTransition,
+            positionFixed,
             ...paperProps
         } = mergeClassesProps(this.props, styles);
 
@@ -144,7 +151,12 @@ export class Popover extends React.Component<Props, State> {
             );
 
         return (
-            <Popper {...popperProps} placement={placement} referenceElement={element}>
+            <Popper
+                {...popperProps}
+                positionFixed={positionFixed}
+                placement={placement}
+                referenceElement={element}
+            >
                 {({
                     ref,
                     style: popperStyle,
@@ -169,7 +181,6 @@ export class Popover extends React.Component<Props, State> {
                                     {...paperProps}
                                     className={classNames(paperProps.className, classes.paper)}
                                 />
-
                                 <div
                                     {...arrowProps}
                                     className={classNames(classes.arrow, {
