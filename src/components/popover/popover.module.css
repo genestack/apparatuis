@@ -9,20 +9,27 @@
 
 .root {
     box-sizing: border-box;
+    display: flex;
     min-width: calc(var(--gs-spacing-unit) * 2);
     min-height: calc(var(--gs-spacing-unit) * 2);
     max-width: calc(100% - calc(var(--gs-spacing-unit) * 4));
     max-height: calc(100% - calc(var(--gs-spacing-unit) * 4));
 }
 
-.paper {
+.popper {
     position: relative;
+    display: flex;
+    max-height: 100%;
+    max-width: 100%;
+}
+
+.paper {
     box-sizing: border-box;
-    overflow-y: auto;
-    overflow-x: hidden;
+    position: relative;
     outline: none;
-    width: 100%;
+    overflow: auto;
     height: 100%;
+    width: 100%;
 }
 
 .arrowIcon {
@@ -31,10 +38,6 @@
     position: absolute;
     top: 0;
     left: 0;
-}
-
-.popper {
-    position: relative;
 }
 
 .arrow {

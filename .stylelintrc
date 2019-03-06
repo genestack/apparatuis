@@ -3,7 +3,7 @@
   "ignoreFiles": ["**/*.ts", "**/*.tsx"],
   "rules": {
     "property-no-unknown": [true, {
-      "ignoreProperties": ["composes"]
+      "ignoreProperties": ["composes", "scrollbar-width"]
     }],
     "selector-attribute-operator-space-before": null,
     "selector-attribute-operator-space-after": null
