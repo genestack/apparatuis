@@ -9,6 +9,7 @@ import * as React from 'react';
 
 import {chain} from '../../utils/chain';
 import {Omit} from '../../utils/omit';
+import {Ref, chainRefs} from '../../utils/set-ref';
 
 type SentinelProps = Omit<React.HTMLAttributes<HTMLDivElement>, 'tabIndex'>;
 type TargetProps = React.HTMLAttributes<HTMLDivElement>;
@@ -21,12 +22,18 @@ export interface Props extends TargetProps {
     enableSelfFocus?: boolean;
     /** Properties of start sentinel */
     startSentinelProps?: SentinelProps;
+    /** Start sentinel React.Ref */
+    startSentinelRef?: Ref<HTMLDivElement>;
     /** Properties of end sentinel */
     endSentinelProps?: SentinelProps;
+    /** End sentinel React.Ref */
+    endSentinelRef?: Ref<HTMLDivElement>;
+    /** React.Ref for the main element */
+    rootRef?: Ref<HTMLDivElement>;
 }
 
 function getFocusableElements(element: Element) {
-    return element.querySelectorAll<HTMLElement>(
+    return element.querySelectorAll(
         'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
     );
 }
@@ -144,7 +151,7 @@ export class FocusTrap extends React.Component<Props> {
         const trapElement = this.trapRef.current;
         const focusedElement = document.activeElement;
 
-        if (!trapElement || !focusedElement) {
+        if (!trapElement || !(focusedElement instanceof HTMLElement)) {
             return;
         }
 
@@ -154,21 +161,25 @@ export class FocusTrap extends React.Component<Props> {
             return;
         }
 
-        const currentIndex = focusableElements.indexOf(focusedElement as HTMLElement);
+        let currentIndex = focusableElements.indexOf(focusedElement);
+
+        if (currentIndex === -1) {
+            currentIndex = direction === 'next' ? -1 : focusableElements.length;
+        }
 
         let nextIndex = direction === 'next' ? currentIndex + 1 : currentIndex - 1;
 
-        if (nextIndex === -1) {
+        if (nextIndex < 0) {
             nextIndex = 0;
         }
 
-        if (nextIndex === focusableElements.length) {
+        if (nextIndex >= focusableElements.length) {
             nextIndex = focusableElements.length - 1;
         }
 
         const element = focusableElements[nextIndex];
 
-        if (element !== focusedElement) {
+        if (element instanceof HTMLElement && element !== focusedElement) {
             element.focus();
         }
     }
@@ -178,9 +189,12 @@ export class FocusTrap extends React.Component<Props> {
             tabIndex = -1,
             focusOnMount,
             startSentinelProps = {},
+            startSentinelRef,
             endSentinelProps = {},
+            endSentinelRef,
             enableSelfFocus,
             onFocus,
+            rootRef,
             ...rest
         } = this.props;
 
@@ -188,6 +202,7 @@ export class FocusTrap extends React.Component<Props> {
             <React.Fragment>
                 <div
                     {...startSentinelProps}
+                    ref={startSentinelRef}
                     tabIndex={0}
                     onFocus={chain(startSentinelProps.onFocus, this.handleStartFocus)}
                 />
@@ -195,10 +210,11 @@ export class FocusTrap extends React.Component<Props> {
                     {...rest}
                     onFocus={chain(onFocus, this.handleSelfFocus)}
                     tabIndex={tabIndex}
-                    ref={this.trapRef}
+                    ref={chainRefs(rootRef, this.trapRef)}
                 />
                 <div
                     {...endSentinelProps}
+                    ref={endSentinelRef}
                     tabIndex={0}
                     onFocus={chain(endSentinelProps.onFocus, this.handleEndFocus)}
                 />
