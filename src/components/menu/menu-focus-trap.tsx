@@ -47,10 +47,10 @@ export interface Props extends TargetProps {
  * but leaves native scroll functions.
  */
 export class MenuFocusTrap extends React.Component<Props> {
-    /** This timer starts when user hover on the edge scroll controls */
+    /** This timer starts when user hovers on the edge scroll controls */
     private scrollIntervalId: number | null = null;
     private focusTrapRef = React.createRef<FocusTrap>();
-    /** Container that have scroll */
+    /** Container that has scroll */
     private scrollContainerRef = React.createRef<HTMLDivElement>();
     /** Scroll controls that initiate scrolling on hover */
     private startScrollElementRef = React.createRef<HTMLDivElement>();
@@ -177,7 +177,7 @@ export class MenuFocusTrap extends React.Component<Props> {
         }
     };
 
-    /** Starts scroll changing interval whe user hovers to the scroll controls */
+    /** Starts scroll changing interval when a user hovers to the scroll controls */
     private handleStartScrollElementMouseEnter = () => {
         this.setScrollInterval(() => {
             const scrollContainer = this.scrollContainerRef.current;
