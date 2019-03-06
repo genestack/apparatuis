@@ -21,6 +21,10 @@ export interface Props extends TargetProps, WithClasses<keyof typeof styles> {
     icon?: React.ReactNode;
 }
 
+/**
+ * Menu item should be a button to support native keyboard shortcuts
+ * for clicking (by Enter or Space keys press)
+ */
 const renderButton = (props: React.HTMLAttributes<HTMLElement>) => (
     <button {...props} type="button" />
 );
@@ -30,7 +34,15 @@ export const MenuItem = (props: Props) => {
     const {classes, className, children, icon, ...rest} = mergeClassesProps(props, styles);
 
     return (
-        <ListItem {...rest} as={renderButton} className={classNames(className, classes.root)}>
+        <ListItem
+            {...rest}
+            as={renderButton}
+            className={classNames(className, classes.root)}
+            classes={{
+                hovered: classes.hovered,
+                focused: classes.focused
+            }}
+        >
             <ListItemCell className={classes.icon}>{icon}</ListItemCell>
             {children}
         </ListItem>

@@ -8,15 +8,18 @@
 import classNames from 'classnames';
 import * as React from 'react';
 
-import {chain} from '../../utils/chain';
 import {Omit} from '../../utils/omit';
 import {WithClasses, mergeClassesProps} from '../../utils/styles';
+import {wrapPureComponent} from '../../utils/wrap-pure-component';
 import {FocusTrap} from '../focus-trap';
 import {List, ListProps} from '../list';
 import {Overlay, OverlayProps} from '../overlay';
 import {Popover, PopoverProps} from '../popover';
 
+import {MenuFocusTrap} from './menu-focus-trap';
 import * as styles from './menu.module.css';
+
+const PureList = wrapPureComponent(List);
 
 type TargetProps = Omit<ListProps, 'classes'>;
 
@@ -69,31 +72,12 @@ export class Menu extends React.Component<Props> {
         }
     }
 
-    private handleKeyDown: TargetProps['onKeyDown'] = (event) => {
-        const focusTrap = this.focusTrapRef.current;
-
-        if (!focusTrap || event.defaultPrevented) {
-            return;
-        }
-
-        if (event.key === 'ArrowDown') {
-            focusTrap.focusSibling('next');
-            event.preventDefault();
-        }
-
-        if (event.key === 'ArrowUp') {
-            focusTrap.focusSibling('prev');
-            event.preventDefault();
-        }
-    };
-
     public render() {
         const {
             open,
             onClose,
             referenceElement,
             placement = 'bottom-start',
-            children,
             popoverProps = {},
             popoverRef,
             // tslint:disable-next-line no-object-literal-type-assertion
@@ -109,7 +93,6 @@ export class Menu extends React.Component<Props> {
                 open={open}
                 onClose={onClose}
                 invisible
-                onKeyDown={chain(overlayProps.onKeyDown, this.handleKeyDown)}
                 className={classNames(overlayProps.className, classes.overlay)}
             >
                 <Popover
@@ -123,13 +106,9 @@ export class Menu extends React.Component<Props> {
                     ref={popoverRef}
                     popperProps={popperProps}
                 >
-                    <FocusTrap
-                        enableSelfFocus
-                        ref={this.focusTrapRef}
-                        className={classes.focusTrap}
-                    >
-                        <List {...listProps}>{children}</List>
-                    </FocusTrap>
+                    <MenuFocusTrap focusTrapRef={this.focusTrapRef}>
+                        <PureList {...listProps} />
+                    </MenuFocusTrap>
                 </Popover>
             </Overlay>
         );

@@ -109,4 +109,22 @@ describe('<Menu />', () => {
         document.activeElement!.dispatchEvent(up);
         expect(document.activeElement).toBe(document.getElementById('first'));
     });
+
+    it('should change focus on mouse move over menu item', () => {
+        const onClose = jest.fn();
+        const referenceElement = document.createElement('div');
+        app.mount(
+            <Menu id="test" open onClose={onClose} referenceElement={referenceElement}>
+                <MenuItem id="first" />
+                <MenuItem id="second" />
+            </Menu>
+        );
+
+        const mouseMoveEvent = new MouseEvent('mousemove', {
+            bubbles: true
+        });
+
+        document.getElementById('second')!.dispatchEvent(mouseMoveEvent);
+        expect(document.activeElement).toBe(document.getElementById('second'));
+    });
 });
