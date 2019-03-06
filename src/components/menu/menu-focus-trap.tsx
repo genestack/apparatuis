@@ -36,11 +36,11 @@ export interface Props extends TargetProps {
 
 /**
  * Menu help wrapper for FocusTrap.
- * It is in accountable to focusing menu items with keyboard control.
+ * It is accountable to focusing menu items by keyboard.
  * Also it regulates inner scroll position by focused items.
  *
  * Menu has two scroll controls on the top and the bottom edges.
- * When use hover to this controls the component start to scroll inner container
+ * When user hovers to this controls the component start to scroll inner container
  * to certain direction.
  *
  * The component customize native scrollbars to fancy look (just hide it)
@@ -67,6 +67,7 @@ export class MenuFocusTrap extends React.Component<Props> {
 
     public componentWillUnmount() {
         this.cancelAnimationFrame();
+        this.clearScrollInterval();
     }
 
     private cancelAnimationFrame() {
