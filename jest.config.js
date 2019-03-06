@@ -22,5 +22,6 @@ module.exports = {
     moduleNameMapper: {
         '^((?!(module)).)*\\.css$': '<rootDir>/test-utils/jest-css-mock.js'
     },
-    setupTestFrameworkScriptFile: '<rootDir>/test-utils/setup-jest.js'
+    setupTestFrameworkScriptFile: '<rootDir>/test-utils/setup-jest.js',
+    testURL: 'http://localhost/'
 };

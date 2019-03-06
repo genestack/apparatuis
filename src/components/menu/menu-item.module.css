@@ -21,3 +21,8 @@
 .icon {
     width: 20px;
 }
+
+.root:hover:not(:focus),
+.root.hovered:not(.focused) {
+    background: transparent;
+}
