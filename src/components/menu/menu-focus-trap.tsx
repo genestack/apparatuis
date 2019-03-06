@@ -43,7 +43,7 @@ export interface Props extends TargetProps {
  * When user hovers to this controls the component starts to scroll the inner container
  * to certain direction.
  *
- * The component customize native scrollbars to fancy look (just hide it)
+ * The component customizes native scrollbars to fancy look (just hide it)
  * but leaves native scroll functions.
  */
 export class MenuFocusTrap extends React.Component<Props> {
