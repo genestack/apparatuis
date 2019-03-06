@@ -56,16 +56,12 @@ export class Fade extends React.Component<Props> {
         node.classList.add(classes.exit);
 
         this.requestAnimationFrame(() => {
+            node.classList.remove(classes.exiting);
             node.classList.add(classes.entering);
             reflow(node);
             node.classList.remove(classes.exit);
             node.classList.add(classes.enter);
         });
-    };
-
-    private handleEntered: Props['onEntered'] = (node) => {
-        const {classes} = mergeClassesProps(this.props, styles);
-        node.classList.remove(classes.entering);
     };
 
     private handleExit: Props['onExit'] = (node) => {
@@ -75,16 +71,12 @@ export class Fade extends React.Component<Props> {
         node.classList.add(classes.enter);
 
         this.requestAnimationFrame(() => {
+            node.classList.remove(classes.entering);
             node.classList.add(classes.exiting);
             reflow(node);
             node.classList.remove(classes.enter);
             node.classList.add(classes.exit);
         });
-    };
-
-    private handleExited: Props['onExited'] = (node) => {
-        const {classes} = mergeClassesProps(this.props, styles);
-        node.classList.remove(classes.exiting);
     };
 
     public render() {
@@ -96,9 +88,7 @@ export class Fade extends React.Component<Props> {
                 {...rest}
                 timeout={DURATION_TIMEOUT}
                 onEnter={chain(rest.onEnter, this.handleEnter)}
-                onEntered={chain(rest.onEntered, this.handleEntered)}
                 onExit={chain(rest.onExit, this.handleExit)}
-                onExited={chain(rest.onExited, this.handleExited)}
             >
                 {React.cloneElement(child, {
                     className: classNames(className, child.props.className, {
