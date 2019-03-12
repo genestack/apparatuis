@@ -10,7 +10,7 @@ import * as React from 'react';
 import {chain} from '../../utils/chain';
 import {getLastFocusableElement, getFirstFocusableElement} from '../../utils/focusable-elements';
 import {Omit} from '../../utils/omit';
-import {Ref, chainRefs} from '../../utils/set-ref';
+import {Ref} from '../../utils/set-ref';
 import {RootRef} from '../root-ref';
 
 type SentinelProps = Omit<React.HTMLAttributes<HTMLDivElement>, 'tabIndex'>;
@@ -135,7 +135,6 @@ export class FocusTrap extends React.Component<Props> {
             startSentinelRef,
             endSentinelProps = {},
             endSentinelRef,
-            rootRef,
             children
         } = this.props;
 
@@ -151,7 +150,7 @@ export class FocusTrap extends React.Component<Props> {
                     tabIndex={0}
                     onFocus={chain(startSentinelProps.onFocus, this.handleStartFocus)}
                 />
-                <RootRef rootRef={chainRefs(rootRef, this.trapRef)}>
+                <RootRef rootRef={this.trapRef}>
                     {React.cloneElement(child, {
                         onFocus: chain(child.props.onFocus, this.handleSelfFocus),
                         tabIndex

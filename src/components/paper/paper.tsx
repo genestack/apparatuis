@@ -8,6 +8,7 @@
 import classNames from 'classnames';
 import * as React from 'react';
 
+import {Ref} from '../../utils/set-ref';
 import {WithClasses, mergeClassesProps} from '../../utils/styles';
 
 import * as styles from './paper.module.css';
@@ -15,14 +16,17 @@ import * as styles from './paper.module.css';
 type TargetProps = React.HTMLAttributes<HTMLDivElement>;
 
 /** Paper public props */
-export interface Props extends TargetProps, WithClasses<keyof typeof styles> {}
+export interface Props extends TargetProps, WithClasses<keyof typeof styles> {
+    /** Reference to root element */
+    rootRef?: Ref<HTMLDivElement>;
+}
 
 /**
  * Paper is a block with background and shadow.
  * Is used for overlay components.
  */
 export function Paper(props: Props) {
-    const {className, classes, ...rest} = mergeClassesProps(props, styles);
+    const {rootRef, className, classes, ...rest} = mergeClassesProps(props, styles);
 
-    return <div {...rest} className={classNames(className, classes.root)} />;
+    return <div {...rest} ref={rootRef} className={classNames(className, classes.root)} />;
 }

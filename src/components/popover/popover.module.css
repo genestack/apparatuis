@@ -10,13 +10,13 @@
 .popper {
     position: relative;
     display: flex;
+    flex-direction: row;
 }
 
 .paper {
     box-sizing: border-box;
     position: relative;
     outline: none;
-    display: flex;
     min-width: calc(var(--gs-spacing-unit) * 2);
     min-height: calc(var(--gs-spacing-unit) * 2);
     max-width: calc(100vw - var(--gs-spacing-unit) * 4);
