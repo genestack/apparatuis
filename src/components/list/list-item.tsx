@@ -32,6 +32,7 @@ export interface Props extends TargetProps, WithClasses<keyof typeof styles> {
     disabled?: boolean;
     /** To right vertical aligning this component uses inside wrapper */
     contentProps?: ContentProps;
+    /** React component that will be used for render the root element */
     as?: React.ReactType;
 }
 

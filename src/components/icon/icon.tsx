@@ -10,7 +10,8 @@ import * as React from 'react';
 
 import * as styles from './icon.module.css';
 
-type TargetProps = React.SVGAttributes<React.ReactSVGElement>;
+/** Common properties for all icons */
+export type Props = React.SVGAttributes<React.ReactSVGElement>;
 
 /**
  * Component adds common styles for `SVG` icons.
@@ -18,7 +19,7 @@ type TargetProps = React.SVGAttributes<React.ReactSVGElement>;
  *
  * @visibleName Icon
  */
-export function createIcon<P extends TargetProps = TargetProps>(icon: React.SFC<P> | JSX.Element) {
+export function createIcon<P extends Props = Props>(icon: React.SFC<P> | JSX.Element) {
     class Icon extends React.PureComponent<P> {
         public render() {
             const element = typeof icon === 'function' ? icon(this.props) : icon;

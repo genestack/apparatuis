@@ -5,7 +5,8 @@
  * The copyright notice above does not evidence any
  * actual or intended publication of such source code.
  */
-import {getScrollbarSize} from '../../utils/get-scrollbar-size';
+import scrollbarSize from 'dom-helpers/util/scrollbarSize';
+
 import {hasVerticalScrollbar} from '../../utils/has-vertical-scrollbar';
 
 type Style = Partial<CSSStyleDeclaration>;
@@ -64,10 +65,10 @@ export class OverlayManager {
         type StyleKeys = keyof typeof appliedStyle;
 
         if (hasVerticalScrollbar(container)) {
-            const scrollbarSize = getScrollbarSize();
+            const size = scrollbarSize();
             const computedStyle = window.getComputedStyle(container);
             const paddingRight = parseInt(computedStyle.paddingRight || '0', 10);
-            appliedStyle.paddingRight = `${paddingRight + scrollbarSize}px`;
+            appliedStyle.paddingRight = `${paddingRight + size}px`;
         }
 
         (Object.keys(appliedStyle) as StyleKeys[]).forEach((key) => {

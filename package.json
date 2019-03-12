@@ -65,6 +65,7 @@
   },
   "dependencies": {
     "@types/classnames": "^2.2.3",
+    "@types/dom-helpers": "^3.4.0",
     "@types/lodash.debounce": "^4.0.3",
     "@types/prop-types": "^15.5.2",
     "@types/rc-tooltip": "^3.4.11",
@@ -72,6 +73,7 @@
     "@types/react-dom": "^16.0.6",
     "@types/react-textarea-autosize": "^4.3.2",
     "classnames": "^2.2.5",
+    "dom-helpers": "^3.4.0",
     "downshift": "^2.1.1",
     "lodash.debounce": "^4.0.8",
     "prop-types": "^15.6.0",

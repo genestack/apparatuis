@@ -7,11 +7,13 @@
  */
 import classNames from 'classnames';
 import * as React from 'react';
+import * as ReactDOM from 'react-dom';
 import {Popper, PopperProps} from 'react-popper';
 
 import {chain} from '../../utils/chain';
 import {Omit} from '../../utils/omit';
 import {WithClasses, mergeClassesProps} from '../../utils/styles';
+import {FocusTrap, FocusTrapProps} from '../focus-trap';
 import {Grow, GrowProps} from '../grow';
 import {createIcon} from '../icon';
 import {Paper, PaperProps} from '../paper';
@@ -65,6 +67,12 @@ export interface Props extends TargetProps, WithClasses<keyof typeof styles> {
     keepMounted?: boolean;
     /** Do not run transition on popover opening and closing */
     disableTransition?: boolean;
+    /** Properties for focus trap */
+    focusTrapProps?: Omit<FocusTrapProps, 'children'>;
+    /** Element that will be used for portal if passed */
+    portalContainer?: Element;
+    /** Properties for element that contains Paper and Arrow elements */
+    popperElementProps?: Omit<React.HTMLAttributes<HTMLDivElement>, 'children'>;
 }
 
 interface State {
@@ -124,6 +132,9 @@ export class Popover extends React.Component<Props, State> {
             keepMounted,
             disableTransition,
             positionFixed,
+            focusTrapProps,
+            portalContainer,
+            popperElementProps = {},
             ...paperProps
         } = mergeClassesProps(this.props, styles);
 
@@ -150,7 +161,7 @@ export class Popover extends React.Component<Props, State> {
                 </Grow>
             );
 
-        return (
+        const popper = (
             <Popper
                 {...popperProps}
                 positionFixed={positionFixed}
@@ -159,13 +170,13 @@ export class Popover extends React.Component<Props, State> {
             >
                 {({
                     ref,
-                    style: popperStyle,
+                    style: popperContainerStyle,
                     scheduleUpdate,
                     arrowProps,
                     placement: popperPlacement
                 }) => (
                     <div
-                        style={popperStyle}
+                        style={popperContainerStyle}
                         className={classNames(classes.root, {
                             [classes.withArrow]: withArrow
                         })}
@@ -176,11 +187,16 @@ export class Popover extends React.Component<Props, State> {
                         }}
                     >
                         {renderTransition(
-                            <div className={classes.popper}>
-                                <Paper
-                                    {...paperProps}
-                                    className={classNames(paperProps.className, classes.paper)}
-                                />
+                            <div
+                                {...popperElementProps}
+                                className={classNames(popperElementProps.className, classes.popper)}
+                            >
+                                <FocusTrap {...focusTrapProps}>
+                                    <Paper
+                                        {...paperProps}
+                                        className={classNames(paperProps.className, classes.paper)}
+                                    />
+                                </FocusTrap>
                                 <div
                                     {...arrowProps}
                                     className={classNames(classes.arrow, {
@@ -195,5 +211,7 @@ export class Popover extends React.Component<Props, State> {
                 )}
             </Popper>
         );
+
+        return portalContainer ? ReactDOM.createPortal(popper, portalContainer) : popper;
     }
 }

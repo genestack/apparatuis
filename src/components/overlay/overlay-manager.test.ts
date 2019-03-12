@@ -6,15 +6,17 @@
  * actual or intended publication of such source code.
  */
 // tslint:disable no-non-null-assertion no-unbound-method max-file-line-count
+// tslint:disable match-default-export-name
 jest.mock('../../utils/has-vertical-scrollbar');
-jest.mock('../../utils/get-scrollbar-size');
+jest.mock('dom-helpers/util/scrollbarSize');
 
-import {getScrollbarSize as _getScrollbarSize} from '../../utils/get-scrollbar-size';
+import _scrollbarSize from 'dom-helpers/util/scrollbarSize';
+
 import {hasVerticalScrollbar as _hasVerticalScrollbar} from '../../utils/has-vertical-scrollbar';
 
 import {OverlayManager, OverlayComponent} from './overlay-manager';
 
-const getScrollbarSize = _getScrollbarSize as (typeof _getScrollbarSize) & jest.MockInstance<any>;
+const getScrollbarSize = _scrollbarSize as (typeof _scrollbarSize) & jest.MockInstance<any>;
 const hasVerticalScrollbar = _hasVerticalScrollbar as (typeof _hasVerticalScrollbar) &
     jest.MockInstance<any>;
 
