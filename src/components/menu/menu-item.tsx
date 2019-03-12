@@ -90,10 +90,8 @@ const selectFocusDirection = (event: React.KeyboardEvent): 'next' | 'prev' | nul
  * Menu item should be a button to support native keyboard shortcuts
  * for clicking (by Enter or Space keys press)
  */
-const renderButton = React.forwardRef<HTMLButtonElement>(
-    (props: React.HTMLAttributes<HTMLElement>, ref) => (
-        <button {...props} ref={ref} key="button" type="button" />
-    )
+const renderButton = (props: React.HTMLAttributes<HTMLElement>) => (
+    <button {...props} key="button" type="button" />
 );
 
 /**
@@ -102,7 +100,7 @@ const renderButton = React.forwardRef<HTMLButtonElement>(
  * It has three cells:
  *   - left icon cell, that could be omitted,
  *   - main content cell, that could have any React.Elements.
- *     Basically it should be <ListItemText />
+ *     Basically it should be `<ListItemText />`
  *   - right icon cell, that is shown when menu item has `subMenu`.
  */
 export class MenuItem extends React.PureComponent<Props, State> {

@@ -12,7 +12,7 @@ import {List, ListProps} from '../list';
 export type Props = ListProps;
 
 /**
- * SubMenu is just shortcut to <List /> component.
+ * SubMenu is just shortcut to `<List />` component.
  * It uses pure version of List to prevent unnecessary updates
  * caused by transition components.
  */
