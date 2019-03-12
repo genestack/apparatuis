@@ -5,7 +5,7 @@
  * The copyright notice above does not evidence any
  * actual or intended publication of such source code.
  */
-// tslint:disable no-unbound-method no-non-null-assertion max-file-line-count
+// tslint:disable no-unbound-method no-non-null-assertion max-file-line-count no-magic-numbers
 import {mount, ReactWrapper} from 'enzyme';
 import * as React from 'react';
 
@@ -104,8 +104,10 @@ describe('<FocusTrap />', () => {
             const activeElement = app.createActiveElement();
 
             app.mount(
-                <FocusTrap id="trap">
-                    <input id="trapped" />
+                <FocusTrap>
+                    <div id="trap">
+                        <input id="trapped" />
+                    </div>
                 </FocusTrap>
             );
 
@@ -116,8 +118,10 @@ describe('<FocusTrap />', () => {
             app.createActiveElement();
 
             app.mount(
-                <FocusTrap id="trap">
-                    <input id="trapped" />
+                <FocusTrap>
+                    <div id="trap">
+                        <input id="trapped" />
+                    </div>
                 </FocusTrap>
             );
 
@@ -130,8 +134,10 @@ describe('<FocusTrap />', () => {
             app.createActiveElement();
 
             app.mount(
-                <FocusTrap id="trap">
-                    <input id="trapped" />
+                <FocusTrap>
+                    <div id="trap">
+                        <input id="trapped" />
+                    </div>
                 </FocusTrap>
             );
 
@@ -145,9 +151,11 @@ describe('<FocusTrap />', () => {
             app.createActiveElement();
 
             app.mount(
-                <FocusTrap id="trap">
-                    <input id="trapped" />
-                    <input id="second-trapped" />
+                <FocusTrap>
+                    <div id="trap">
+                        <input id="trapped" />
+                        <input id="second-trapped" />
+                    </div>
                 </FocusTrap>
             );
 
@@ -163,9 +171,11 @@ describe('<FocusTrap />', () => {
             app.createActiveElement();
 
             app.mount(
-                <FocusTrap id="trap">
-                    <input id="trapped" />
-                    <input id="second-trapped" />
+                <FocusTrap>
+                    <div id="trap">
+                        <input id="trapped" />
+                        <input id="second-trapped" />
+                    </div>
                 </FocusTrap>
             );
 
@@ -181,8 +191,10 @@ describe('<FocusTrap />', () => {
             app.createActiveElement();
 
             app.mount(
-                <FocusTrap id="trap">
-                    <b>Hi bro!</b>
+                <FocusTrap>
+                    <div id="trap">
+                        <b>Hi bro!</b>
+                    </div>
                 </FocusTrap>
             );
 
@@ -198,8 +210,10 @@ describe('<FocusTrap />', () => {
             app.createActiveElement();
 
             app.mount(
-                <FocusTrap id="trap" enableSelfFocus>
-                    <input id="trapped" />
+                <FocusTrap enableSelfFocus>
+                    <div id="trap">
+                        <input id="trapped" />
+                    </div>
                 </FocusTrap>
             );
 
@@ -212,9 +226,11 @@ describe('<FocusTrap />', () => {
             app.createActiveElement();
 
             app.mount(
-                <FocusTrap id="trap" enableSelfFocus>
-                    <input id="trapped" />
-                    <input id="second-trapped" />
+                <FocusTrap enableSelfFocus>
+                    <div id="trap">
+                        <input id="trapped" />
+                        <input id="second-trapped" />
+                    </div>
                 </FocusTrap>
             );
 
@@ -232,9 +248,11 @@ describe('<FocusTrap />', () => {
             app.createActiveElement();
 
             app.mount(
-                <FocusTrap id="trap" enableSelfFocus>
-                    <input id="trapped" />
-                    <input id="second-trapped" />
+                <FocusTrap enableSelfFocus>
+                    <div id="trap">
+                        <input id="trapped" />
+                        <input id="second-trapped" />
+                    </div>
                 </FocusTrap>
             );
 
@@ -254,8 +272,10 @@ describe('<FocusTrap />', () => {
             app.createActiveElement();
 
             app.mount(
-                <FocusTrap id="trap" focusOnMount>
-                    <input id="trapped" />
+                <FocusTrap focusOnMount>
+                    <div id="trap">
+                        <input id="trapped" />
+                    </div>
                 </FocusTrap>
             );
 
@@ -268,7 +288,11 @@ describe('<FocusTrap />', () => {
             app.createActiveElement();
 
             const onFocus = jest.fn();
-            app.mount(<FocusTrap id="trap" onFocus={onFocus} />);
+            app.mount(
+                <FocusTrap>
+                    <div id="trap" onFocus={onFocus} />
+                </FocusTrap>
+            );
 
             simulateTabKeyDown();
 
@@ -279,7 +303,11 @@ describe('<FocusTrap />', () => {
             app.createActiveElement();
 
             const onFocus = jest.fn();
-            app.mount(<FocusTrap id="trap" startSentinelProps={{onFocus}} />);
+            app.mount(
+                <FocusTrap startSentinelProps={{onFocus}}>
+                    <div id="trap" />
+                </FocusTrap>
+            );
 
             simulateTabKeyDown();
 
@@ -290,7 +318,11 @@ describe('<FocusTrap />', () => {
             app.createActiveElement();
 
             const onFocus = jest.fn();
-            app.mount(<FocusTrap id="trap" endSentinelProps={{onFocus}} />);
+            app.mount(
+                <FocusTrap endSentinelProps={{onFocus}}>
+                    <div id="trap" />
+                </FocusTrap>
+            );
 
             simulateTabKeyDown({shiftKey: true});
 
@@ -298,85 +330,15 @@ describe('<FocusTrap />', () => {
         });
     });
 
-    it('should export focus method to instance', () => {
-        const wrapper = mount(<FocusTrap />);
-        const instance = wrapper.instance() as FocusTrap;
+    it('should respect an original tabIndex prop', () => {
+        app.createActiveElement();
 
-        expect(instance).toHaveProperty('focus');
-        expect(typeof instance.focus).toBe('function');
-    });
+        app.mount(
+            <FocusTrap>
+                <div id="trap" tabIndex={10} />
+            </FocusTrap>
+        );
 
-    describe('focusSibling method', () => {
-        const getTestInstance = () => {
-            app.createActiveElement();
-
-            return app
-                .mount(
-                    <FocusTrap id="trap" focusOnMount>
-                        <div>a</div>
-                        <input id="trapped" />
-                        <div tabIndex={-1}>b</div>
-                        <input id="second-trapped" />
-                        <div>c</div>
-                    </FocusTrap>
-                )
-                .instance() as FocusTrap;
-        };
-
-        it('should exist in instance', () => {
-            const instance = getTestInstance();
-
-            expect(instance).toHaveProperty('focusSibling');
-            expect(typeof instance.focusSibling).toBe('function');
-        });
-
-        it('should move focus to the next element', () => {
-            const instance = getTestInstance();
-            expect(document.activeElement).toBe(document.getElementById('trapped'));
-            instance.focusSibling('next');
-            expect(document.activeElement).toBe(document.getElementById('second-trapped'));
-        });
-
-        it('should move focus to the previous element', () => {
-            const instance = getTestInstance();
-            document.getElementById('second-trapped')!.focus();
-            expect(document.activeElement).toBe(document.getElementById('second-trapped'));
-            instance.focusSibling('prev');
-            expect(document.activeElement).toBe(document.getElementById('trapped'));
-        });
-
-        it('should not change focus to the previous when the first element focused', () => {
-            const instance = getTestInstance();
-            expect(document.activeElement).toBe(document.getElementById('trapped'));
-            instance.focusSibling('prev');
-            expect(document.activeElement).toBe(document.getElementById('trapped'));
-        });
-
-        it('should not change focus to the next when the last element focused', () => {
-            const instance = getTestInstance();
-            document.getElementById('second-trapped')!.focus();
-            expect(document.activeElement).toBe(document.getElementById('second-trapped'));
-            instance.focusSibling('next');
-            expect(document.activeElement).toBe(document.getElementById('second-trapped'));
-        });
-
-        it('should not change focus when there are no focusable elements', () => {
-            app.createActiveElement();
-
-            const instance = app
-                .mount(
-                    <FocusTrap id="trap" focusOnMount>
-                        <div>a</div>
-                        <div>b</div>
-                    </FocusTrap>
-                )
-                .instance() as FocusTrap;
-
-            expect(document.activeElement).toBe(document.getElementById('trap'));
-            instance.focusSibling('next');
-            expect(document.activeElement).toBe(document.getElementById('trap'));
-            instance.focusSibling('prev');
-            expect(document.activeElement).toBe(document.getElementById('trap'));
-        });
+        expect(document.getElementById('trap')!.getAttribute('tabIndex')).toBe('10');
     });
 });

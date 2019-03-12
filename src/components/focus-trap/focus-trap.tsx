@@ -8,14 +8,21 @@
 import * as React from 'react';
 
 import {chain} from '../../utils/chain';
+import {getLastFocusableElement, getFirstFocusableElement} from '../../utils/focusable-elements';
 import {Omit} from '../../utils/omit';
 import {Ref, chainRefs} from '../../utils/set-ref';
+import {RootRef} from '../root-ref';
 
 type SentinelProps = Omit<React.HTMLAttributes<HTMLDivElement>, 'tabIndex'>;
-type TargetProps = React.HTMLAttributes<HTMLDivElement>;
+// type TargetProps = React.HTMLAttributes<HTMLDivElement>;
+
+interface ChildProps {
+    onFocus?: React.FocusEventHandler;
+    tabIndex?: number;
+}
 
 /** FocusTrap public properties */
-export interface Props extends TargetProps {
+export interface Props {
     /** Trap focus when component is mounted */
     focusOnMount?: boolean;
     /** Enable to focus root container */
@@ -30,28 +37,8 @@ export interface Props extends TargetProps {
     endSentinelRef?: Ref<HTMLDivElement>;
     /** React.Ref for the main element */
     rootRef?: Ref<HTMLDivElement>;
-}
-
-function getFocusableElements(element: Element) {
-    return element.querySelectorAll(
-        'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
-    );
-}
-
-function getFirstFocusable(element: HTMLElement) {
-    const focusableElements = getFocusableElements(element);
-
-    const firstElement = focusableElements.item(0);
-
-    return firstElement instanceof HTMLElement ? firstElement : null;
-}
-
-function getLastFocusable(element: HTMLElement) {
-    const focusableElements = getFocusableElements(element);
-
-    const lastElement = focusableElements.item(focusableElements.length - 1);
-
-    return lastElement instanceof HTMLElement ? lastElement : null;
+    /** This component clones passed child */
+    children: React.ReactElement<ChildProps>;
 }
 
 function focusElement(element: HTMLElement) {
@@ -102,7 +89,7 @@ export class FocusTrap extends React.Component<Props> {
         this.focusDirectionInversed = event.shiftKey;
     };
 
-    private handleSelfFocus: TargetProps['onFocus'] = (event) => {
+    private handleSelfFocus: ChildProps['onFocus'] = (event) => {
         if (event.currentTarget !== event.target) {
             return;
         }
@@ -118,7 +105,7 @@ export class FocusTrap extends React.Component<Props> {
         this.focus();
     };
 
-    public focus() {
+    private focus() {
         const trapElement = this.trapRef.current;
 
         if (!trapElement) {
@@ -135,68 +122,29 @@ export class FocusTrap extends React.Component<Props> {
 
         if (!enableSelfFocus || focusLooped) {
             nextFocusedElement = focusDirectionInversed
-                ? getLastFocusable(trapElement)
-                : getFirstFocusable(trapElement);
+                ? getLastFocusableElement(trapElement)
+                : getFirstFocusableElement(trapElement);
         }
 
         focusElement(nextFocusedElement || trapElement);
     }
 
-    /**
-     * Focus to the next or previous element in focus trap.
-     * Useful when you want to change focus with some keyboard combination
-     * like Up or Down keys.
-     */
-    public focusSibling(direction: 'next' | 'prev') {
-        const trapElement = this.trapRef.current;
-        const focusedElement = document.activeElement;
-
-        if (!trapElement || !(focusedElement instanceof HTMLElement)) {
-            return;
-        }
-
-        const focusableElements = Array.from(getFocusableElements(trapElement));
-
-        if (!focusableElements.length) {
-            return;
-        }
-
-        let currentIndex = focusableElements.indexOf(focusedElement);
-
-        if (currentIndex === -1) {
-            currentIndex = direction === 'next' ? -1 : focusableElements.length;
-        }
-
-        let nextIndex = direction === 'next' ? currentIndex + 1 : currentIndex - 1;
-
-        if (nextIndex < 0) {
-            nextIndex = 0;
-        }
-
-        if (nextIndex >= focusableElements.length) {
-            nextIndex = focusableElements.length - 1;
-        }
-
-        const element = focusableElements[nextIndex];
-
-        if (element instanceof HTMLElement && element !== focusedElement) {
-            element.focus();
-        }
-    }
-
     public render() {
         const {
-            tabIndex = -1,
             focusOnMount,
             startSentinelProps = {},
             startSentinelRef,
             endSentinelProps = {},
             endSentinelRef,
             enableSelfFocus,
-            onFocus,
             rootRef,
+            children,
             ...rest
         } = this.props;
+
+        const child = React.Children.only(children);
+
+        const {tabIndex = -1} = child.props;
 
         return (
             <React.Fragment>
@@ -206,12 +154,13 @@ export class FocusTrap extends React.Component<Props> {
                     tabIndex={0}
                     onFocus={chain(startSentinelProps.onFocus, this.handleStartFocus)}
                 />
-                <div
-                    {...rest}
-                    onFocus={chain(onFocus, this.handleSelfFocus)}
-                    tabIndex={tabIndex}
-                    ref={chainRefs(rootRef, this.trapRef)}
-                />
+                <RootRef rootRef={chainRefs(rootRef, this.trapRef)}>
+                    {React.cloneElement(child, {
+                        ...rest,
+                        onFocus: chain(child.props.onFocus, this.handleSelfFocus),
+                        tabIndex
+                    })}
+                </RootRef>
                 <div
                     {...endSentinelProps}
                     ref={endSentinelRef}

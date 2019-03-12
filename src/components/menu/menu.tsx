@@ -16,7 +16,6 @@ import {List, ListProps} from '../list';
 import {Overlay, OverlayProps} from '../overlay';
 import {Popover, PopoverProps} from '../popover';
 
-import {MenuFocusTrap} from './menu-focus-trap';
 import * as styles from './menu.module.css';
 
 const PureList = wrapPureComponent(List);
@@ -60,7 +59,7 @@ export class Menu extends React.Component<Props> {
         const focusTrap = this.focusTrapRef.current;
 
         if (this.props.open && focusTrap) {
-            focusTrap.focus();
+            // focusTrap.focus();
         }
     }
 
@@ -68,7 +67,7 @@ export class Menu extends React.Component<Props> {
         const focusTrap = this.focusTrapRef.current;
 
         if (this.props.open && !props.open && focusTrap) {
-            focusTrap.focus();
+            // focusTrap.focus();
         }
     }
 
@@ -106,9 +105,7 @@ export class Menu extends React.Component<Props> {
                     ref={popoverRef}
                     popperProps={popperProps}
                 >
-                    <MenuFocusTrap focusTrapRef={this.focusTrapRef}>
-                        <PureList {...listProps} />
-                    </MenuFocusTrap>
+                    <PureList {...listProps} />
                 </Popover>
             </Overlay>
         );

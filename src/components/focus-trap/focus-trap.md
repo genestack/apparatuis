@@ -8,7 +8,7 @@ const {Input} = require('../input');
 
 const Row = (props) => <div style={{...props.style, marginBottom: 8}} {...props} />;
 
-const trapFocusStyles = {
+const focusTrapStyle = {
     boxSizing: 'border-box',
     margin: '0 -10px 8px',
     border: '2px solid',
@@ -32,16 +32,18 @@ handleCheckboxChange = (enableSelfFocus) => setState({enableSelfFocus});
             <Checkbox checked={state.enableSelfFocus} onValueChange={handleCheckboxChange} />
         </label>
     </Row>
-    <FocusTrap style={trapFocusStyles} enableSelfFocus={state.enableSelfFocus}>
-        <Row>
-            <Input placeholder="First Trapped Input" />
-        </Row>
-        <Row>
-            <Input placeholder="Second Trapped Input" />
-        </Row>
-        <Row>
-            <Input placeholder="Last Trapped Input" />
-        </Row>
+    <FocusTrap style={focusTrapStyle} enableSelfFocus={state.enableSelfFocus}>
+        <div style={focusTrapStyle}>
+            <Row>
+                <Input placeholder="First Trapped Input" />
+            </Row>
+            <Row>
+                <Input placeholder="Second Trapped Input" />
+            </Row>
+            <Row>
+                <Input placeholder="Last Trapped Input" />
+            </Row>
+        </div>
     </FocusTrap>
     <Row>
         <Input placeholder="Last Free Input" />
