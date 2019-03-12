@@ -136,7 +136,7 @@ export class HiddenScrollbar extends React.Component<Props> {
 
             /**
              * @HACK
-             * Sometimes in EDGE `scrollHeight` is grater than `clientHeight` with 1 pixel.
+             * Sometimes in EDGE `scrollHeight` is greater than `clientHeight` with 1 pixel.
              */
             endControl.style.display =
                 scrollTop >= scrollHeight - clientHeight - 1 ? 'none' : 'flex';

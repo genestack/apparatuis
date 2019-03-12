@@ -1,5 +1,4 @@
 ```js
-const {FocusTrap} = require('../focus-trap');
 const {FlexExpander} = require('../flex-expander');
 const {Typography} = require('../typography');
 const {List, ListItem, ListItemText, ListItemCell} = require('../list');
@@ -15,11 +14,9 @@ items = new Array(100).fill(null).map((_, index) => (
     </ListItem>
 ));
 
-<FocusTrap>
-    <div style={{display: 'flex', flexDirection: 'row'}}>
-        <HiddenScrollbar scrollStep={32} style={{maxHeight: 400, border: '1px solid grey'}}>
-            <List>{items}</List>
-        </HiddenScrollbar>
-    </div>
-</FocusTrap>;
+<div style={{display: 'flex', flexDirection: 'row'}}>
+    <HiddenScrollbar scrollStep={32} style={{maxHeight: 400, border: '1px solid grey'}}>
+        <List>{items}</List>
+    </HiddenScrollbar>
+</div>;
 ```
