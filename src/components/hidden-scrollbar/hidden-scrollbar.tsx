@@ -61,8 +61,8 @@ export interface Props extends TargetProps, WithClasses<keyof typeof styles> {
  * to certain direction.
  *
  * @WARNING
- * This component is using flexbox model. If you will use `max-height` to limit
- * height of container wrap it by element with `display: flex; flex-direction: row`
+ * This component is using flexbox model. If you use `max-height` to limit height of container
+ * you should wrap it by element with `display: flex; flex-direction: row`
  * styles. @see https://git.io/fhjPt
  */
 
