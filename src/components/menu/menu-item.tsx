@@ -5,6 +5,7 @@
  * The copyright notice above does not evidence any
  * actual or intended publication of such source code.
  */
+// tslint:disable max-file-line-count
 import classNames from 'classnames';
 import * as React from 'react';
 
@@ -33,10 +34,22 @@ type SubMenuProp = React.ReactElement<SubMenuProps> | (() => React.ReactElement<
 
 /** MenuItem public properties */
 export interface Props extends TargetProps, WithClasses<keyof typeof styles> {
+    /**
+     * Left icon for a menu item.
+     * Anyway If no icon passed a menu item will have empty left margin
+     * for menu items align.
+     */
     icon?: React.ReactNode;
+    /**
+     * SubMenu is shown when user focuses on menu item.
+     * Accepts only `<SubMenu />` elements or functions that returns it.
+     */
     subMenu?: SubMenuProp;
+    /** Properties for the left list item cell that contains icon */
     iconCellProps?: Omit<ListItemCellProps, 'children'>;
+    /** Properties list item cell with main content */
     contentProps?: Omit<FlexExpanderProps, 'children'>;
+    /** Properties for popover that shows SubMenu */
     subMenuPopoverProps?: Omit<
         MenuPopoverProps,
         | 'children'
@@ -46,7 +59,12 @@ export interface Props extends TargetProps, WithClasses<keyof typeof styles> {
         | 'disableTransition'
         | 'placement'
     >;
+    /**
+     * Properties the right list item cell that contains arrow icon
+     * indicated that MenuItem has a SubMenu
+     */
     subMenuArrowIconCellProps?: Omit<ListItemCellProps, 'children'>;
+    /** Properties for arrow icon in the right cell */
     subMenuArrowIconProps?: IconProps;
 }
 
@@ -57,7 +75,15 @@ interface State {
 }
 
 const selectFocusDirection = (event: React.KeyboardEvent): 'next' | 'prev' | null => {
-    return (event.key === 'ArrowDown' && 'next') || (event.key === 'ArrowUp' && 'prev') || null;
+    if (event.key === 'ArrowDown') {
+        return 'next';
+    }
+
+    if (event.key === 'ArrowUp') {
+        return 'prev';
+    }
+
+    return null;
 };
 
 /**
@@ -70,7 +96,15 @@ const renderButton = React.forwardRef<HTMLButtonElement>(
     )
 );
 
-/** Menu Item */
+/**
+ * MenuItem is a ListItem that is used in any Menu elements.
+ *
+ * It has three cells:
+ *   - left icon cell, that could be omitted,
+ *   - main content cell, that could have any React.Elements.
+ *     Basically it should be <ListItemText />
+ *   - right icon cell, that is shown when menu item has `subMenu`.
+ */
 export class MenuItem extends React.PureComponent<Props, State> {
     private itemRef = React.createRef<HTMLElement>();
     private subMenuPaperRef = React.createRef<HTMLDivElement>();

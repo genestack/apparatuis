@@ -11,5 +11,9 @@ import {List, ListProps} from '../list';
 /** SubMenu public properties */
 export type Props = ListProps;
 
-/** Shortcut to List */
+/**
+ * SubMenu is just shortcut to <List /> component.
+ * It uses pure version of List to prevent unnecessary updates
+ * caused by transition components.
+ */
 export const SubMenu = wrapPureComponent(List);
