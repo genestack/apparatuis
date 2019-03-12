@@ -150,11 +150,11 @@ describe('<SubMenu />', () => {
     beforeEach(app.beforeEach);
     afterEach(app.afterEach);
 
-    const setup = (subMenu?: (() => JSX.Element) | JSX.Element) => {
+    const setup = (getSubMenu?: (() => JSX.Element) | JSX.Element) => {
         const referenceElement = document.createElement('div');
         const onClose = jest.fn();
 
-        subMenu = subMenu || (
+        const subMenu = getSubMenu || (
             <SubMenu id="sub-menu">
                 <MenuItem id="sub-menu-first" />
                 <MenuItem id="sub-menu-middle" />
