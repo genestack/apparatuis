@@ -91,7 +91,7 @@ const selectFocusDirection = (event: React.KeyboardEvent): 'next' | 'prev' | nul
  * for clicking (by Enter or Space keys press)
  */
 const renderButton = (props: React.HTMLAttributes<HTMLElement>) => (
-    <button {...props} key="button" type="button" />
+    <button {...props} type="button" />
 );
 
 /**
