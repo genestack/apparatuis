@@ -1,0 +1,59 @@
+/*
+ * Copyright (c) 2011-2019 Genestack Limited
+ * All Rights Reserved
+ * THIS IS UNPUBLISHED PROPRIETARY SOURCE CODE OF GENESTACK LIMITED
+ * The copyright notice above does not evidence any
+ * actual or intended publication of such source code.
+ */
+@import "../../variables.css";
+
+.root {
+    display: flex;
+    position: relative;
+    width: 100%;
+}
+
+.container {
+    width: 100%;
+    overflow-x: hidden;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+.container::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+}
+
+.control {
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 16px;
+    z-index: 1;
+    background: var(--gs-color-bright-white);
+    overflow: hidden;
+    display: none;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.startControl {
+    composes: control;
+    top: 0;
+}
+
+.endControl {
+    composes: control;
+    bottom: 0;
+}
+
+.startControlIcon {
+    width: 16px;
+    height: 16px;
+}
+
+.endControlIcon {
+    composes: startControlIcon;
+    transform: rotate(180deg);
+}
