@@ -30,13 +30,24 @@ type TargetProps = React.HTMLAttributes<HTMLDivElement>;
 
 /** HiddenScrollbar public properties */
 export interface Props extends TargetProps, WithClasses<keyof typeof styles> {
+    /**
+     * How many pixels should be added to or removed from
+     * scroll position when user hovers to scroll controls
+     */
     scrollStep?: number;
+    /** How often scrollStep should be applied */
     scrollStepTimeout?: number;
+    /** Properties of scrollable container */
     containerProps?: React.HTMLAttributes<HTMLDivElement>;
+    /** Reference to scrollable container */
     containerRef?: Ref<HTMLDivElement>;
+    /** Properties of start scroll control */
     startControlProps?: Omit<React.HTMLAttributes<HTMLDivElement>, 'children'>;
+    /** Reference to start scroll control */
     startControlRef?: Ref<HTMLDivElement>;
+    /** Properties of end scroll control */
     endControlProps?: Omit<React.HTMLAttributes<HTMLDivElement>, 'children'>;
+    /** Reference to end scroll control */
     endControlRef?: Ref<HTMLDivElement>;
 }
 
@@ -48,6 +59,11 @@ export interface Props extends TargetProps, WithClasses<keyof typeof styles> {
  * It has two scroll controls on the top and the bottom edges.
  * When user hovers to this controls the component start to scroll inner container
  * to certain direction.
+ *
+ * @WARNING
+ * This component is using flexbox model. If you will use `max-height` to limit
+ * height of container wrap it by element with `display: flex; flex-direction: row`
+ * styles. @see https://git.io/fhjPt
  */
 
 export class HiddenScrollbar extends React.Component<Props> {
