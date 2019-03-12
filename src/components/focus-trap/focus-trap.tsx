@@ -131,15 +131,12 @@ export class FocusTrap extends React.Component<Props> {
 
     public render() {
         const {
-            focusOnMount,
             startSentinelProps = {},
             startSentinelRef,
             endSentinelProps = {},
             endSentinelRef,
-            enableSelfFocus,
             rootRef,
-            children,
-            ...rest
+            children
         } = this.props;
 
         const child = React.Children.only(children);
@@ -156,7 +153,6 @@ export class FocusTrap extends React.Component<Props> {
                 />
                 <RootRef rootRef={chainRefs(rootRef, this.trapRef)}>
                     {React.cloneElement(child, {
-                        ...rest,
                         onFocus: chain(child.props.onFocus, this.handleSelfFocus),
                         tabIndex
                     })}
