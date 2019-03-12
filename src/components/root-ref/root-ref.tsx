@@ -10,13 +10,16 @@ import * as ReactDOM from 'react-dom';
 
 import {setRef, Ref} from '../../utils/set-ref';
 
-/** Root Ref props */
+/** RootRef props */
 export interface Props {
     rootRef: Ref<HTMLElement>;
     children: JSX.Element;
 }
 
-/** Root Ref props */
+/**
+ * Helper component to allow attaching a ref to a
+ * wrapped element to access the underlying DOM element.
+ */
 export class RootRef extends React.Component<Props> {
     private node: HTMLElement | null = null;
 
