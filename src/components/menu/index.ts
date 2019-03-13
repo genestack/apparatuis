@@ -7,4 +7,6 @@
  */
 export {Menu, Props as MenuProps} from './menu';
 export {MenuItem, Props as MenuItemProps} from './menu-item';
+export {MenuItemCell, Props as MenuItemCellProps} from './menu-item-cell';
+export {MenuItemText, Props as MenuItemTextProps} from './menu-item-text';
 export {SubMenu, Props as SubMenuProps} from './sub-menu';

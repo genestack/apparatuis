@@ -219,7 +219,6 @@ describe('<SubMenu />', () => {
         dispatchMouseEvent('middle', 'mousemove');
         jest.runAllTimers();
         dispatchKeyDownEvent('middle', 'ArrowRight');
-        jest.runAllTimers();
         expect(document.getElementById('sub-menu')).toBeTruthy();
     });
 
@@ -228,7 +227,6 @@ describe('<SubMenu />', () => {
         dispatchMouseEvent('middle', 'mousemove');
         jest.runAllTimers();
         dispatchKeyDownEvent('middle', 'ArrowRight');
-        jest.runAllTimers();
         expect(document.activeElement).toBe(document.getElementById('sub-menu-first'));
     });
 
@@ -237,7 +235,6 @@ describe('<SubMenu />', () => {
         dispatchMouseEvent('middle', 'mousemove');
         jest.runAllTimers();
         dispatchKeyDownEvent('middle', 'ArrowRight');
-        jest.runAllTimers();
         dispatchKeyDownEvent('sub-menu-first', 'ArrowLeft');
         expect(document.getElementById('sub-menu')).toBeFalsy();
     });
