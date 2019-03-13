@@ -30,7 +30,7 @@ export function setRef<T>(ref: Ref<T>, value: T) {
  * but also should expose it the parent component.
  */
 export function chainRefs<T>(...refs: Array<Ref<T> | undefined>) {
-    return (value: T) => {
+    return (value: T | null) => {
         refs.forEach((ref) => {
             if (ref) {
                 setRef(ref, value);

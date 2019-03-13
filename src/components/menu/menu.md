@@ -3,10 +3,23 @@ const {Button} = require('../button');
 const {Typography} = require('../typography');
 const {FlexExpander} = require('../flex-expander');
 const {DownloadIcon} = require('../../icons/download-icon');
-const {ListItemCell, ListItemText} = require('../list');
-const {Menu, MenuItem} = require('.');
+const {Menu, MenuItem, MenuItemCell, MenuItemText, SubMenu} = require('.');
 
 const Quiet = (props) => <Typography {...props} variant="caption" quiet box="inline" />;
+
+const getInfiniteSubMenu = () => (
+    <SubMenu>
+        <MenuItem>
+            <MenuItemText>Sub Menu Item 1</MenuItemText>
+        </MenuItem>
+        <MenuItem subMenu={getInfiniteSubMenu}>
+            <MenuItemText>Sub Menu Item 2</MenuItemText>
+        </MenuItem>
+        <MenuItem subMenu={getInfiniteSubMenu}>
+            <MenuItemText>Sub Menu Item 3</MenuItemText>
+        </MenuItem>
+    </SubMenu>
+);
 
 initialState = {
     referenceElement: null,
@@ -28,6 +41,16 @@ createMenuSelectHandler = (index) => () => {
     });
 };
 
+items = new Array(100).fill(null).map((_, index) => (
+    <MenuItem key={index} onClick={handleMenuClose}>
+        <MenuItemText>Menu Item</MenuItemText>
+        <FlexExpander />
+        <MenuItemCell>
+            <Typography quiet>{index}</Typography>
+        </MenuItemCell>
+    </MenuItem>
+));
+
 <React.Fragment>
     <Button onClick={handleButtonClick}>Open Menu</Button>
     <Typography box="inline"> Last selected menu item index: {state.selectedItemIndex}</Typography>
@@ -36,23 +59,27 @@ createMenuSelectHandler = (index) => () => {
         onClose={handleMenuClose}
         referenceElement={state.referenceElement}
     >
-        <MenuItem icon={<DownloadIcon />} onClick={createMenuSelectHandler(0)}>
-            <ListItemText>Download</ListItemText>
-            <ListItemCell>
+        <MenuItem
+            icon={<DownloadIcon />}
+            onClick={createMenuSelectHandler(0)}
+            subMenu={<SubMenu>{items}</SubMenu>}
+        >
+            <MenuItemText>Download</MenuItemText>
+            <MenuItemCell>
                 <Quiet>125 MB</Quiet>
-            </ListItemCell>
+            </MenuItemCell>
         </MenuItem>
 
-        <MenuItem onClick={createMenuSelectHandler(1)}>
-            <ListItemText>Open File...</ListItemText>
+        <MenuItem onClick={createMenuSelectHandler(1)} subMenu={getInfiniteSubMenu}>
+            <MenuItemText>Open File...</MenuItemText>
             <FlexExpander />
-            <ListItemCell>
+            <MenuItemCell>
                 <Quiet>⌘ + O</Quiet>
-            </ListItemCell>
+            </MenuItemCell>
         </MenuItem>
 
-        <MenuItem onClick={createMenuSelectHandler(2)}>
-            <ListItemText>Menu Item With Long Long Name</ListItemText>
+        <MenuItem onClick={createMenuSelectHandler(2)} subMenu={getInfiniteSubMenu}>
+            <MenuItemText>Menu Item With Long Long Name</MenuItemText>
         </MenuItem>
     </Menu>
 </React.Fragment>;
@@ -64,8 +91,7 @@ createMenuSelectHandler = (index) => () => {
 const {Button} = require('../button');
 const {Typography} = require('../typography');
 const {FlexExpander} = require('../flex-expander');
-const {ListItemText, ListItemCell} = require('../list');
-const {Menu, MenuItem} = require('.');
+const {Menu, MenuItem, MenuItemText, MenuItemCell} = require('.');
 
 initialState = {
     referenceElement: null
@@ -81,11 +107,11 @@ handleMenuClose = () => {
 
 items = new Array(100).fill(null).map((_, index) => (
     <MenuItem key={index} onClick={handleMenuClose}>
-        <ListItemText>Menu Item</ListItemText>
+        <MenuItemText>Menu Item</MenuItemText>
         <FlexExpander />
-        <ListItemCell>
+        <MenuItemCell>
             <Typography quiet>{index}</Typography>
-        </ListItemCell>
+        </MenuItemCell>
     </MenuItem>
 ));
 

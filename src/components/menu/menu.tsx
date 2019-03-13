@@ -8,23 +8,22 @@
 import classNames from 'classnames';
 import * as React from 'react';
 
+import {chain} from '../../utils/chain';
+import {getFirstFocusableElement, getLastFocusableElement} from '../../utils/focusable-elements';
 import {Omit} from '../../utils/omit';
+import {chainRefs} from '../../utils/set-ref';
 import {WithClasses, mergeClassesProps} from '../../utils/styles';
-import {wrapPureComponent} from '../../utils/wrap-pure-component';
-import {FocusTrap} from '../focus-trap';
-import {List, ListProps} from '../list';
 import {Overlay, OverlayProps} from '../overlay';
-import {Popover, PopoverProps} from '../popover';
 
+import {MenuPopover, Props as MenuPopoverProps} from './menu-popover';
 import * as styles from './menu.module.css';
-
-const PureList = wrapPureComponent(List);
+import {SubMenu, Props as ListProps} from './sub-menu';
 
 type TargetProps = Omit<ListProps, 'classes'>;
 
 type RestOverlayProps = Omit<OverlayProps, 'invisible' | 'open'>;
 type RestPopoverProps = Omit<
-    PopoverProps,
+    MenuPopoverProps,
     'referenceElement' | 'open' | 'withArrow' | 'positionFixed' | 'placement'
 >;
 
@@ -32,44 +31,57 @@ type RestPopoverProps = Omit<
 export interface Props extends TargetProps, WithClasses<keyof typeof styles> {
     open: boolean;
     onClose: OverlayProps['onClose'];
-    referenceElement: PopoverProps['referenceElement'];
-    placement?: PopoverProps['placement'];
-
+    referenceElement: MenuPopoverProps['referenceElement'];
+    placement?: MenuPopoverProps['placement'];
     overlayProps?: RestOverlayProps;
     popoverProps?: RestPopoverProps;
-    popoverRef?: React.Ref<Popover>;
 }
-
-const popperProps: PopoverProps['popperProps'] = {
-    modifiers: {
-        preventOverflow: {
-            boundariesElement: 'viewport'
-        }
-    }
-};
 
 /**
  * A Menu displays a list of choices on a temporary surface.
  * They appear when users interact with a button, action, or other control.
  */
 export class Menu extends React.Component<Props> {
-    private focusTrapRef = React.createRef<FocusTrap>();
+    private paperRef = React.createRef<HTMLElement>();
 
     public componentDidMount() {
-        const focusTrap = this.focusTrapRef.current;
+        const paper = this.paperRef.current;
 
-        if (this.props.open && focusTrap) {
-            // focusTrap.focus();
+        if (this.props.open && paper) {
+            paper.focus();
         }
     }
 
     public componentDidUpdate(props: Props) {
-        const focusTrap = this.focusTrapRef.current;
+        const paper = this.paperRef.current;
 
-        if (this.props.open && !props.open && focusTrap) {
-            // focusTrap.focus();
+        if (this.props.open && !props.open && paper) {
+            paper.focus();
         }
     }
+
+    private handleKeyDown: MenuPopoverProps['onKeyDown'] = (event) => {
+        const paper = this.paperRef.current;
+
+        if (event.target !== event.currentTarget || !paper) {
+            return;
+        }
+
+        let itemToFocus: HTMLElement | null = null;
+
+        if (event.key === 'ArrowDown') {
+            itemToFocus = getFirstFocusableElement(paper);
+        }
+
+        if (event.key === 'ArrowUp') {
+            itemToFocus = getLastFocusableElement(paper);
+        }
+
+        if (itemToFocus) {
+            event.preventDefault();
+            itemToFocus.focus();
+        }
+    };
 
     public render() {
         const {
@@ -78,12 +90,10 @@ export class Menu extends React.Component<Props> {
             referenceElement,
             placement = 'bottom-start',
             popoverProps = {},
-            popoverRef,
             // tslint:disable-next-line no-object-literal-type-assertion
             overlayProps = {} as RestOverlayProps,
-            className,
             classes,
-            ...listProps
+            ...rest
         } = mergeClassesProps(this.props, styles);
 
         return (
@@ -94,19 +104,17 @@ export class Menu extends React.Component<Props> {
                 invisible
                 className={classNames(overlayProps.className, classes.overlay)}
             >
-                <Popover
+                <MenuPopover
                     {...popoverProps}
                     referenceElement={referenceElement}
                     open={open}
                     placement={placement}
                     positionFixed
-                    className={classNames(className, classes.root)}
-                    classes={{root: classes.popover}}
-                    ref={popoverRef}
-                    popperProps={popperProps}
+                    rootRef={chainRefs(this.paperRef, popoverProps.rootRef)}
+                    onKeyDown={chain(popoverProps.onKeyDown, this.handleKeyDown)}
                 >
-                    <PureList {...listProps} />
-                </Popover>
+                    <SubMenu {...rest} />
+                </MenuPopover>
             </Overlay>
         );
     }

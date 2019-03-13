@@ -5,8 +5,5 @@
  * The copyright notice above does not evidence any
  * actual or intended publication of such source code.
  */
-@import "../../variables.css";
-
-.overlay {
-    z-index: var(--gs-z-index-menu);
-}
+export const root: string;
+export const popover: string;
