@@ -224,6 +224,7 @@ export class MenuItem extends React.PureComponent<Props, State> {
     };
 
     private handleSubMenuLeave = () => {
+        this.setState({focused: false});
         this.scheduleSubMenuClose();
     };
 

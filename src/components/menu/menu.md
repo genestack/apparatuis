@@ -42,7 +42,7 @@ createMenuSelectHandler = (index) => () => {
 };
 
 items = new Array(100).fill(null).map((_, index) => (
-    <MenuItem key={index} onClick={handleMenuClose}>
+    <MenuItem key={index} onClick={handleMenuClose} subMenu={getInfiniteSubMenu}>
         <MenuItemText>Menu Item</MenuItemText>
         <FlexExpander />
         <MenuItemCell>

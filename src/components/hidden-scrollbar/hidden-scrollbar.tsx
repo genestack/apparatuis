@@ -16,6 +16,7 @@ import {WithClasses, mergeClassesProps} from '../../utils/styles';
 import {createIcon} from '../icon';
 
 import * as styles from './hidden-scrollbar.module.css';
+import {scrollIntoContainerView} from './scroll-into-container-view';
 
 const DEFAULT_SCROLL_STEP = 26;
 const DEFAULT_SCROLL_STEP_TIMEOUT = 100;
@@ -155,42 +156,15 @@ export class HiddenScrollbar extends React.Component<Props> {
         const container = this.containerRef.current;
         const startControl = this.startControlRef.current;
         const endControl = this.endControlRef.current;
+        const target = event.target;
 
-        if (!container || !startControl || !endControl) {
-            return;
-        }
-
-        const focusedElement = event.target;
-
-        if (!focusedElement.previousElementSibling) {
-            container.scrollTop = 0;
-
-            return;
-        }
-
-        if (!focusedElement.nextElementSibling) {
-            container.scrollTop = container.scrollHeight - container.clientHeight;
-
-            return;
-        }
-
-        const viewportTop = startControl.getBoundingClientRect().bottom;
-        const viewportBottom = endControl.getBoundingClientRect().top;
-
-        const elementRect = event.target.getBoundingClientRect();
-
-        const {scrollTop} = container;
-
-        if (elementRect.top < viewportTop) {
-            container.scrollTop = scrollTop + elementRect.top - viewportTop;
-
-            return;
-        }
-
-        if (elementRect.bottom > viewportBottom) {
-            container.scrollTop = scrollTop + elementRect.bottom - viewportBottom;
-
-            return;
+        if (container && startControl && endControl && container.contains(target)) {
+            scrollIntoContainerView({
+                container,
+                startControl,
+                endControl,
+                target
+            });
         }
     };
 
