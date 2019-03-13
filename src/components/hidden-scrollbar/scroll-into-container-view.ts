@@ -5,7 +5,7 @@
  * The copyright notice above does not evidence any
  * actual or intended publication of such source code.
  */
-interface CalculateScrollTopArgs {
+interface ScrollIntoContainerViewArgs {
     target: HTMLElement;
     container: HTMLElement;
     startControl: HTMLElement;
@@ -17,7 +17,7 @@ interface CalculateScrollTopArgs {
  * It takes in account start and end absolute elements that could
  * overlap target element.
  */
-export function scrollIntoContainerView(args: CalculateScrollTopArgs) {
+export function scrollIntoContainerView(args: ScrollIntoContainerViewArgs) {
     const {target, container, startControl, endControl} = args;
 
     const scrollTop = container.scrollTop;
