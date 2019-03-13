@@ -192,7 +192,7 @@ describe('<FocusTrap />', () => {
 
             app.mount(
                 <FocusTrap>
-                    <div id="trap">
+                    <div tabIndex={0} id="trap">
                         <b>Hi bro!</b>
                     </div>
                 </FocusTrap>
@@ -201,68 +201,6 @@ describe('<FocusTrap />', () => {
             simulateTabKeyDown();
             expect(document.activeElement).toBe(document.getElementById('trap'));
             simulateTabKeyDown();
-            expect(document.activeElement).toBe(document.getElementById('trap'));
-        });
-    });
-
-    describe('with enableSelfFocus property', () => {
-        it('should focus on trap element with tab key', () => {
-            app.createActiveElement();
-
-            app.mount(
-                <FocusTrap enableSelfFocus>
-                    <div id="trap">
-                        <input id="trapped" />
-                    </div>
-                </FocusTrap>
-            );
-
-            simulateTabKeyDown();
-
-            expect(document.activeElement).toBe(document.getElementById('trap'));
-        });
-
-        it('should loop focus trap', () => {
-            app.createActiveElement();
-
-            app.mount(
-                <FocusTrap enableSelfFocus>
-                    <div id="trap">
-                        <input id="trapped" />
-                        <input id="second-trapped" />
-                    </div>
-                </FocusTrap>
-            );
-
-            simulateTabKeyDown();
-            expect(document.activeElement).toBe(document.getElementById('trap'));
-            simulateTabKeyDown();
-            expect(document.activeElement).toBe(document.getElementById('trapped'));
-            simulateTabKeyDown();
-            expect(document.activeElement).toBe(document.getElementById('second-trapped'));
-            simulateTabKeyDown();
-            expect(document.activeElement).toBe(document.getElementById('trap'));
-        });
-
-        it('should loop focus trap with Shift key', () => {
-            app.createActiveElement();
-
-            app.mount(
-                <FocusTrap enableSelfFocus>
-                    <div id="trap">
-                        <input id="trapped" />
-                        <input id="second-trapped" />
-                    </div>
-                </FocusTrap>
-            );
-
-            simulateTabKeyDown({shiftKey: true});
-            expect(document.activeElement).toBe(document.getElementById('trap'));
-            simulateTabKeyDown({shiftKey: true});
-            expect(document.activeElement).toBe(document.getElementById('second-trapped'));
-            simulateTabKeyDown({shiftKey: true});
-            expect(document.activeElement).toBe(document.getElementById('trapped'));
-            simulateTabKeyDown({shiftKey: true});
             expect(document.activeElement).toBe(document.getElementById('trap'));
         });
     });
@@ -290,7 +228,7 @@ describe('<FocusTrap />', () => {
             const onFocus = jest.fn();
             app.mount(
                 <FocusTrap>
-                    <div id="trap" onFocus={onFocus} />
+                    <div id="trap" tabIndex={0} onFocus={onFocus} />
                 </FocusTrap>
             );
 

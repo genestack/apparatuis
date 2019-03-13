@@ -13,7 +13,6 @@ import {Popper, PopperProps} from 'react-popper';
 import {chain} from '../../utils/chain';
 import {Omit} from '../../utils/omit';
 import {WithClasses, mergeClassesProps} from '../../utils/styles';
-import {FocusTrap, FocusTrapProps} from '../focus-trap';
 import {Grow, GrowProps} from '../grow';
 import {createIcon} from '../icon';
 import {Paper, PaperProps} from '../paper';
@@ -67,8 +66,6 @@ export interface Props extends TargetProps, WithClasses<keyof typeof styles> {
     keepMounted?: boolean;
     /** Do not run transition on popover opening and closing */
     disableTransition?: boolean;
-    /** Properties for focus trap */
-    focusTrapProps?: Omit<FocusTrapProps, 'children'>;
     /** Element that will be used for portal if passed */
     portalContainer?: Element;
     /** Properties for element that contains Paper and Arrow elements */
@@ -132,7 +129,6 @@ export class Popover extends React.Component<Props, State> {
             keepMounted,
             disableTransition,
             positionFixed,
-            focusTrapProps,
             portalContainer,
             popperElementProps = {},
             ...paperProps
@@ -191,12 +187,10 @@ export class Popover extends React.Component<Props, State> {
                                 {...popperElementProps}
                                 className={classNames(popperElementProps.className, classes.popper)}
                             >
-                                <FocusTrap {...focusTrapProps}>
-                                    <Paper
-                                        {...paperProps}
-                                        className={classNames(paperProps.className, classes.paper)}
-                                    />
-                                </FocusTrap>
+                                <Paper
+                                    {...paperProps}
+                                    className={classNames(paperProps.className, classes.paper)}
+                                />
                                 <div
                                     {...arrowProps}
                                     className={classNames(classes.arrow, {

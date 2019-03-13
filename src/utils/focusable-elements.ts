@@ -6,11 +6,17 @@
  * actual or intended publication of such source code.
  */
 
+const FOCUSABLE_SELECTOR =
+    'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])';
+
+/** Returns true if element could be focused */
+export function isElementFocusable(element: Element) {
+    return element.matches(FOCUSABLE_SELECTOR);
+}
+
 /** Returns all focusable elements are contained in target element */
 export function getFocusableElements(element: Element) {
-    return element.querySelectorAll(
-        'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
-    );
+    return element.querySelectorAll(FOCUSABLE_SELECTOR);
 }
 
 /** Returns the first HTMLElement that could be focusable in target element */

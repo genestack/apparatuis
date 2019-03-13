@@ -12,6 +12,7 @@ import * as ReactDOM from 'react-dom';
 import {chain} from '../../utils/chain';
 import {Omit} from '../../utils/omit';
 import {Backdrop, BackdropProps} from '../backdrop';
+import {FocusTrap} from '../focus-trap';
 
 import {OverlayManager} from './overlay-manager';
 import * as styles from './overlay.module.css';
@@ -61,6 +62,7 @@ export interface Props extends TargetProps {
     invisible?: boolean;
     /** Properties of nested Backdrop component */
     backdropProps?: Omit<BackdropProps, 'open' | 'invisible'>;
+    children?: JSX.Element;
 }
 
 interface State {
@@ -181,7 +183,7 @@ export class Overlay extends React.Component<Props, State> {
                     onExited={chain(backdropProps.onExited, this.handleBackdropExited)}
                     onClick={chain(backdropProps.onClick, this.handleBackdropClick)}
                 />
-                {children}
+                {children ? <FocusTrap>{children}</FocusTrap> : null}
             </div>,
             container
         );
