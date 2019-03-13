@@ -93,6 +93,34 @@ describe('<HiddenScrollbar />', () => {
             value: 50
         });
 
+        jest.spyOn(start, 'getBoundingClientRect').mockImplementation(() => {
+            if (start.style.display === 'none') {
+                return {
+                    height: 0,
+                    bottom: 0
+                };
+            } else {
+                return {
+                    height: 10,
+                    bottom: 10
+                };
+            }
+        });
+
+        jest.spyOn(end, 'getBoundingClientRect').mockImplementation(() => {
+            if (end.style.display === 'none') {
+                return {
+                    height: 0,
+                    top: 0
+                };
+            } else {
+                return {
+                    height: 10,
+                    top: 40
+                };
+            }
+        });
+
         let scrollTop = 0;
         const scrollTopSetter = jest.fn();
         Object.defineProperty(container, 'scrollTop', {
@@ -179,7 +207,12 @@ describe('<HiddenScrollbar />', () => {
         app.runRafCallbacks();
         container.scrollTop = 10;
         app.runRafCallbacks();
-        document.getElementById('middle-item')!.focus();
+        const middleItem = document.getElementById('middle-item')!;
+        jest.spyOn(middleItem, 'getBoundingClientRect').mockImplementation(() => ({
+            top: 10,
+            bottom: 20
+        }));
+        middleItem.focus();
         app.runRafCallbacks();
         expect(end.style.display).not.toBe('none');
         expect(start.style.display).not.toBe('none');
