@@ -12,7 +12,8 @@ import {
     getLastFocusableElement,
     getFirstFocusableElement,
     isElementFocusable,
-    getFocusDirection
+    getFocusDirection,
+    getSiblingFocusableElement
 } from '../../utils/focusable-elements';
 import {Omit} from '../../utils/omit';
 import {Ref} from '../../utils/set-ref';
@@ -41,6 +42,19 @@ function focusElement(element: HTMLElement | null) {
     }
 }
 
+function getFocusableElementOrSelfInContainer(container: HTMLElement, direction: 'next' | 'prev') {
+    let element =
+        direction === 'next'
+            ? getFirstFocusableElement(container)
+            : getLastFocusableElement(container);
+
+    if (!element && isElementFocusable(container)) {
+        element = container;
+    }
+
+    return element;
+}
+
 /**
  * Component that trap focus in `children`.
  * When user focuses in some element inside children
@@ -58,13 +72,36 @@ export class FocusTrap extends React.Component<Props> {
     private trapRef = React.createRef<HTMLDivElement>();
 
     public componentDidMount() {
-        if (this.props.focusOnMount) {
-            this.focus('next');
+        const trapElement = this.trapRef.current;
+
+        if (this.props.focusOnMount && trapElement) {
+            focusElement(
+                isElementFocusable(trapElement)
+                    ? trapElement
+                    : getFirstFocusableElement(trapElement)
+            );
         }
     }
 
     private handleStartFocus: SentinelProps['onFocus'] = (event) => {
-        this.focus(getFocusDirection(event) || 'next');
+        const trapElement = this.trapRef.current;
+
+        if (!trapElement) {
+            return;
+        }
+
+        if (isElementFocusable(trapElement) && trapElement !== event.relatedTarget) {
+            focusElement(trapElement);
+
+            return;
+        }
+
+        const direction = getFocusDirection(event) || 'next';
+
+        focusElement(
+            getFocusableElementOrSelfInContainer(trapElement, direction) ||
+                getSiblingFocusableElement(event.currentTarget, direction)
+        );
     };
 
     private handleEndFocus: SentinelProps['onFocus'] = (event) => {
@@ -74,33 +111,19 @@ export class FocusTrap extends React.Component<Props> {
             return;
         }
 
-        const direction = getFocusDirection(event) || 'prev';
-
-        if (direction === 'next' && isElementFocusable(trapElement)) {
+        if (isElementFocusable(trapElement)) {
             focusElement(trapElement);
-        } else {
-            this.focus(direction);
-        }
-    };
 
-    private focus(direction: 'next' | 'prev') {
-        const trapElement = this.trapRef.current;
-
-        if (!trapElement) {
             return;
         }
 
-        let element =
-            direction === 'next'
-                ? getFirstFocusableElement(trapElement)
-                : getLastFocusableElement(trapElement);
+        const direction = getFocusDirection(event) || 'prev';
 
-        if (!element && isElementFocusable(trapElement)) {
-            element = trapElement;
-        }
-
-        focusElement(element);
-    }
+        focusElement(
+            getFocusableElementOrSelfInContainer(trapElement, direction) ||
+                getSiblingFocusableElement(event.currentTarget, direction)
+        );
+    };
 
     public render() {
         const {

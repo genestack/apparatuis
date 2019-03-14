@@ -76,6 +76,8 @@ export function getSiblingFocusableElement(element: HTMLElement, direction: 'pre
     if (nextElement instanceof HTMLElement && nextElement !== element) {
         return nextElement;
     }
+
+    return null;
 }
 
 function getAncestors(startNode: Node | null) {

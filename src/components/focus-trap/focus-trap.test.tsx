@@ -9,7 +9,7 @@
 import {mount, ReactWrapper} from 'enzyme';
 import * as React from 'react';
 
-import {FocusTrap} from './focus-trap';
+import {FocusTrap, Props as FocusTrapProps} from './focus-trap';
 
 function simulateTabKeyDown({shiftKey}: {shiftKey: boolean} = {shiftKey: false}) {
     const element =
@@ -55,7 +55,6 @@ function simulateTabKeyDown({shiftKey}: {shiftKey: boolean} = {shiftKey: false})
 function createTestApp() {
     let appElement: HTMLElement | undefined;
     let wrapper: ReactWrapper<any, any> | null = null;
-    let activeElement: HTMLElement | null = null;
 
     const mountToBody = <P, S = any>(node: React.ReactElement<P>): ReactWrapper<P, S> => {
         wrapper = mount(node, {attachTo: appElement});
@@ -79,20 +78,7 @@ function createTestApp() {
             }
         },
 
-        mount: mountToBody,
-
-        createActiveElement: () => {
-            if (activeElement) {
-                activeElement.remove();
-            }
-
-            activeElement = document.createElement('input');
-            activeElement.id = 'active';
-            document.body.insertBefore(activeElement, document.body.firstElementChild);
-            activeElement.focus();
-
-            return activeElement;
-        }
+        mount: mountToBody
     };
 }
 
@@ -102,186 +88,184 @@ describe('<FocusTrap />', () => {
     beforeEach(app.beforeEach);
     afterEach(app.afterEach);
 
-    describe('by default', () => {
-        it('should not change active element on mount', () => {
-            const activeElement = app.createActiveElement();
-
-            app.mount(
-                <FocusTrap>
-                    <div id="trap">
-                        <input id="trapped" />
+    const setup = (
+        containerProps?: React.HTMLAttributes<HTMLDivElement>,
+        props?: Partial<FocusTrapProps>
+    ) => {
+        const wrapper = app.mount(
+            <React.Fragment>
+                <input id="first" />
+                <FocusTrap {...props}>
+                    <div {...containerProps} id="trap-container">
+                        <input id="trap-first" />
+                        <input id="trap-last" />
                     </div>
                 </FocusTrap>
-            );
-
-            expect(document.activeElement).toBe(activeElement);
-        });
-
-        it('should focus on trapped element with tab key', () => {
-            app.createActiveElement();
-
-            app.mount(
-                <FocusTrap>
-                    <div id="trap">
-                        <input id="trapped" />
-                    </div>
-                </FocusTrap>
-            );
-
-            simulateTabKeyDown();
-
-            expect(document.activeElement).toBe(document.getElementById('trapped'));
-        });
-
-        it('should leave focus on trapped element with tab key when already trapped', () => {
-            app.createActiveElement();
-
-            app.mount(
-                <FocusTrap>
-                    <div id="trap">
-                        <input id="trapped" />
-                    </div>
-                </FocusTrap>
-            );
-
-            simulateTabKeyDown();
-            simulateTabKeyDown();
-
-            expect(document.activeElement).toBe(document.getElementById('trapped'));
-        });
-
-        it('should loop focus trap', () => {
-            app.createActiveElement();
-
-            app.mount(
-                <FocusTrap>
-                    <div id="trap">
-                        <input id="trapped" />
-                        <input id="second-trapped" />
-                    </div>
-                </FocusTrap>
-            );
-
-            simulateTabKeyDown();
-            expect(document.activeElement).toBe(document.getElementById('trapped'));
-            simulateTabKeyDown();
-            expect(document.activeElement).toBe(document.getElementById('second-trapped'));
-            simulateTabKeyDown();
-            expect(document.activeElement).toBe(document.getElementById('trapped'));
-        });
-
-        it('should loop focus trap with Shift key', () => {
-            app.createActiveElement();
-
-            app.mount(
-                <FocusTrap>
-                    <div id="trap">
-                        <input id="trapped" />
-                        <input id="second-trapped" />
-                    </div>
-                </FocusTrap>
-            );
-
-            simulateTabKeyDown({shiftKey: true}); // focus to address bar
-            simulateTabKeyDown({shiftKey: true});
-            expect(document.activeElement).toBe(document.getElementById('second-trapped'));
-            simulateTabKeyDown({shiftKey: true});
-            expect(document.activeElement).toBe(document.getElementById('trapped'));
-            simulateTabKeyDown({shiftKey: true});
-            expect(document.activeElement).toBe(document.getElementById('second-trapped'));
-        });
-
-        it('should focus on container when there are no focusable elements', () => {
-            app.createActiveElement();
-
-            app.mount(
-                <FocusTrap>
-                    <div tabIndex={0} id="trap">
-                        <b>Hi bro!</b>
-                    </div>
-                </FocusTrap>
-            );
-
-            simulateTabKeyDown();
-            expect(document.activeElement).toBe(document.getElementById('trap'));
-            simulateTabKeyDown();
-            expect(document.activeElement).toBe(document.getElementById('trap'));
-        });
-    });
-
-    describe('with focusOnMount property', () => {
-        it('should call focus element on mount', () => {
-            app.createActiveElement();
-
-            app.mount(
-                <FocusTrap focusOnMount>
-                    <div id="trap">
-                        <input id="trapped" />
-                    </div>
-                </FocusTrap>
-            );
-
-            expect(document.activeElement).toBe(document.getElementById('trapped'));
-        });
-    });
-
-    describe('should call original onFocus callbacks', () => {
-        it('for trap container', () => {
-            app.createActiveElement();
-
-            const onFocus = jest.fn();
-            app.mount(
-                <FocusTrap>
-                    <div id="trap" tabIndex={0} onFocus={onFocus} />
-                </FocusTrap>
-            );
-
-            simulateTabKeyDown();
-
-            expect(onFocus).toHaveBeenCalled();
-        });
-
-        it('for start sentinel', () => {
-            app.createActiveElement();
-
-            const onFocus = jest.fn();
-            app.mount(
-                <FocusTrap startSentinelProps={{onFocus}}>
-                    <div id="trap" />
-                </FocusTrap>
-            );
-
-            simulateTabKeyDown();
-
-            expect(onFocus).toHaveBeenCalled();
-        });
-
-        it('for end sentinel', () => {
-            app.createActiveElement();
-
-            const onFocus = jest.fn();
-            app.mount(
-                <FocusTrap endSentinelProps={{onFocus}}>
-                    <div id="trap" />
-                </FocusTrap>
-            );
-
-            simulateTabKeyDown({shiftKey: true}); // focus to address bar
-            simulateTabKeyDown({shiftKey: true});
-
-            expect(onFocus).toHaveBeenCalled();
-        });
-    });
-
-    it('should respect an original tabIndex prop', () => {
-        app.createActiveElement();
-
-        app.mount(
-            <FocusTrap>
-                <div id="trap" tabIndex={10} />
-            </FocusTrap>
+                <input id="last" />
+            </React.Fragment>
         );
 
-        expect(document.getElementById('trap')!.getAttribute('tabIndex')).toBe('10');
+        const firstOuterElement = document.getElementById('first')!;
+        const lastOuterElement = document.getElementById('last')!;
+        const trapContainer = document.getElementById('trap-container')!;
+        const firstTrapElement = document.getElementById('trap-first')!;
+        const lastTrapElement = document.getElementById('trap-last')!;
+
+        return {
+            wrapper,
+            firstOuterElement,
+            lastOuterElement,
+            trapContainer,
+            firstTrapElement,
+            lastTrapElement
+        };
+    };
+
+    describe('with focusable container', () => {
+        describe('on tab keydown', () => {
+            it('should focus container after first outer input', () => {
+                const {firstOuterElement, trapContainer} = setup({tabIndex: 0});
+                firstOuterElement.focus();
+                simulateTabKeyDown();
+                expect(document.activeElement).toBe(trapContainer);
+            });
+
+            it('should focus first trapped input after container', () => {
+                const {firstTrapElement, trapContainer} = setup({tabIndex: 0});
+                trapContainer.focus();
+                simulateTabKeyDown();
+                expect(document.activeElement).toBe(firstTrapElement);
+            });
+
+            it('should focus container after last trapped input', () => {
+                const {lastTrapElement, trapContainer} = setup({tabIndex: 0});
+                lastTrapElement.focus();
+                simulateTabKeyDown();
+                expect(document.activeElement).toBe(trapContainer);
+            });
+        });
+
+        describe('on shift+tab keydown', () => {
+            it('should focus container after last outer input', () => {
+                const {lastOuterElement, trapContainer} = setup({tabIndex: 0});
+                lastOuterElement.focus();
+                simulateTabKeyDown({shiftKey: true});
+                expect(document.activeElement).toBe(trapContainer);
+            });
+
+            it('should focus last trapped input after container', () => {
+                const {lastTrapElement, trapContainer} = setup({tabIndex: 0});
+                trapContainer.focus();
+                simulateTabKeyDown({shiftKey: true});
+                expect(document.activeElement).toBe(lastTrapElement);
+            });
+
+            it('should focus container after first trapped input', () => {
+                const {firstTrapElement, trapContainer} = setup({tabIndex: 0});
+                firstTrapElement.focus();
+                simulateTabKeyDown({shiftKey: true});
+                expect(document.activeElement).toBe(trapContainer);
+            });
+        });
+
+        it('on mount should focus container if focusOnMount passed', () => {
+            const {trapContainer} = setup({tabIndex: 0}, {focusOnMount: true});
+            expect(document.activeElement).toBe(trapContainer);
+        });
+    });
+
+    describe('with non-focusable container', () => {
+        describe('on tab keydown', () => {
+            it('should focus first trapped input after first outer input', () => {
+                const {firstOuterElement, firstTrapElement} = setup();
+                firstOuterElement.focus();
+                simulateTabKeyDown();
+                expect(document.activeElement).toBe(firstTrapElement);
+            });
+
+            it('should focus first trapped input after last trapped input', () => {
+                const {lastTrapElement, firstTrapElement} = setup();
+                lastTrapElement.focus();
+                simulateTabKeyDown();
+                expect(document.activeElement).toBe(firstTrapElement);
+            });
+        });
+
+        describe('on shift+tab keydown', () => {
+            it('should focus last trapped input after last outer input', () => {
+                const {lastOuterElement, lastTrapElement} = setup();
+                lastOuterElement.focus();
+                simulateTabKeyDown({shiftKey: true});
+                expect(document.activeElement).toBe(lastTrapElement);
+            });
+
+            it('should focus last trapped input after first trapped input', () => {
+                const {firstTrapElement, lastTrapElement} = setup();
+                firstTrapElement.focus();
+                simulateTabKeyDown({shiftKey: true});
+                expect(document.activeElement).toBe(lastTrapElement);
+            });
+        });
+
+        it('on mount should focus first trapped input if focusOnMount passed', () => {
+            const {firstTrapElement} = setup({}, {focusOnMount: true});
+            expect(document.activeElement).toBe(firstTrapElement);
+        });
+    });
+
+    describe('without focusable elements', () => {
+        const setupEmptyContainer = (
+            containerProps?: React.HTMLAttributes<HTMLDivElement>,
+            props?: Partial<FocusTrapProps>
+        ) => {
+            const wrapper = app.mount(
+                <React.Fragment>
+                    <input id="first" />
+                    <FocusTrap {...props}>
+                        <div {...containerProps} id="trap-container" />
+                    </FocusTrap>
+                    <input id="last" />
+                </React.Fragment>
+            );
+
+            const firstOuterElement = document.getElementById('first')!;
+            const lastOuterElement = document.getElementById('last')!;
+            const trapContainer = document.getElementById('trap-container')!;
+
+            return {
+                wrapper,
+                firstOuterElement,
+                lastOuterElement,
+                trapContainer
+            };
+        };
+
+        it('and focusable container should save focus on container on tab key down', () => {
+            const {trapContainer} = setupEmptyContainer({tabIndex: 0});
+            trapContainer.focus();
+            simulateTabKeyDown();
+            expect(document.activeElement).toBe(trapContainer);
+        });
+
+        it('and focusable container should save focus on container on shift+tab key down', () => {
+            const {trapContainer} = setupEmptyContainer({tabIndex: 0});
+            trapContainer.focus();
+            simulateTabKeyDown({shiftKey: true});
+            expect(document.activeElement).toBe(trapContainer);
+        });
+
+        it('and non-focusable container should move out of trap on tab key down', () => {
+            const {firstOuterElement, lastOuterElement} = setupEmptyContainer();
+            firstOuterElement.focus();
+            simulateTabKeyDown();
+            expect(document.activeElement).toBe(lastOuterElement);
+        });
+
+        it('and non-focusable container should move out of trap on shift+tab key down', () => {
+            const {firstOuterElement, lastOuterElement} = setupEmptyContainer();
+            lastOuterElement.focus();
+            simulateTabKeyDown({shiftKey: true});
+            expect(document.activeElement).toBe(firstOuterElement);
+        });
     });
 });
