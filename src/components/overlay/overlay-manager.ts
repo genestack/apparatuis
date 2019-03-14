@@ -51,10 +51,10 @@ function createHiddenFocusButton() {
  * After overlay is closed we could restore focus on element that was in focus
  * when overlay was opened.
  *
- * Also to prevent scrolling below the overlays when user change focus
+ * Also to prevent scrolling below the overlays when user changes focus
  * from browser address (aka. URL) bar `OverlayManager` adds two fixed
- * buttons at the top and at the end of body element. So when user focuses
- * to the page this buttons always in viewport and scroll does not affected.
+ * buttons at the top and at the bottom of body element. So when user focuses
+ * to the page these buttons are always in viewport and scroll is not affected.
  *
  * At the moment we should use a singleton of this class.
  */
