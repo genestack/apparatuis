@@ -180,11 +180,11 @@ describe('<Overlay />', () => {
             );
         });
 
-        it('start sentinel button should exists', () => {
+        it('start sentinel button should exist', () => {
             expect(document.querySelectorAll('button').item(0)).toBeTruthy();
         });
 
-        it('end sentinel button should exists', () => {
+        it('end sentinel button should exist', () => {
             expect(
                 document
                     .querySelectorAll('button')

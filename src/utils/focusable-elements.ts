@@ -17,6 +17,11 @@ const FOCUSABLE_SELECTOR = [
 
 /** Returns true if element could be focused */
 export function isElementFocusable(element: Element) {
+    // ie 11
+    if ((element as any).msMatchesSelector) {
+        return (element as any).msMatchesSelector(FOCUSABLE_SELECTOR) as boolean;
+    }
+
     return element.matches(FOCUSABLE_SELECTOR);
 }
 
