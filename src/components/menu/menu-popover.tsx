@@ -17,10 +17,7 @@ import {PopoverProps, Popover} from '../popover';
 
 import * as styles from './menu-popover.module.css';
 
-type TargetProps = Omit<
-    PopoverProps,
-    'classes' | 'popperProps' | 'focusTrapProps' | 'popperElementProps'
->;
+type TargetProps = Omit<PopoverProps, 'classes' | 'popperProps' | 'popperElementProps'>;
 
 /**
  * This data attribute is used to find closest menu container.
@@ -42,10 +39,6 @@ const popperProps: PopoverProps['popperProps'] = {
             boundariesElement: 'viewport'
         }
     }
-};
-
-const focusTrapProps: PopoverProps['focusTrapProps'] = {
-    enableSelfFocus: true
 };
 
 const popperElementProps: PopoverProps['popperElementProps'] = {
@@ -75,7 +68,6 @@ export class MenuPopover extends React.Component<Props> {
                 className={classNames(className, classes.root)}
                 classes={{root: classes.popover}}
                 popperProps={popperProps}
-                focusTrapProps={focusTrapProps}
                 popperElementProps={popperElementProps}
             >
                 <HiddenScrollbar {...hiddenScrollbarProps}>{children}</HiddenScrollbar>

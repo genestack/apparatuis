@@ -32,8 +32,8 @@ handleCheckboxChange = (enableSelfFocus) => setState({enableSelfFocus});
             <Checkbox checked={state.enableSelfFocus} onValueChange={handleCheckboxChange} />
         </label>
     </Row>
-    <FocusTrap enableSelfFocus={state.enableSelfFocus}>
-        <div style={focusTrapStyle}>
+    <FocusTrap>
+        <div style={focusTrapStyle} tabIndex={state.enableSelfFocus ? 0 : -1}>
             <Row>
                 <Input placeholder="First Trapped Input" />
             </Row>

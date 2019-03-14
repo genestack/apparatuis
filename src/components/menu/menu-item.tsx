@@ -17,6 +17,7 @@ import {Omit} from '../../utils/omit';
 import {chainRefs} from '../../utils/set-ref';
 import {WithClasses, mergeClassesProps} from '../../utils/styles';
 import {FlexExpander, FlexExpanderProps} from '../flex-expander';
+import {FocusTrap} from '../focus-trap';
 import {IconProps} from '../icon';
 import {ListItem, ListItemProps, ListItemCell, ListItemCellProps} from '../list';
 import {RootRef} from '../root-ref';
@@ -262,10 +263,8 @@ export class MenuItem extends React.PureComponent<Props, State> {
 
         const {container, item} = this.state;
 
-        const couldShowSubMenu = !!subMenu;
-
         const subMenuPopover =
-            couldShowSubMenu && item && container ? (
+            subMenu && item && container ? (
                 <MenuPopover
                     {...subMenuPopoverProps}
                     open
@@ -280,11 +279,11 @@ export class MenuItem extends React.PureComponent<Props, State> {
                     onMouseEnter={chain(subMenuPopoverProps.onMouseEnter, this.handleSubMenuEnter)}
                     onMouseLeave={chain(subMenuPopoverProps.onMouseLeave, this.handleSubMenuLeave)}
                 >
-                    {typeof subMenu === 'function' ? subMenu() : subMenu}
+                    <FocusTrap>{typeof subMenu === 'function' ? subMenu() : subMenu}</FocusTrap>
                 </MenuPopover>
             ) : null;
 
-        const subMenuArrowIcon = couldShowSubMenu ? (
+        const subMenuArrowIcon = subMenu ? (
             <ListItemCell {...subMenuArrowIconCellProps}>
                 <KeyboardArrowRightIcon {...subMenuArrowIconProps} />
             </ListItemCell>

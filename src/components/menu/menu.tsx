@@ -24,7 +24,7 @@ type TargetProps = Omit<ListProps, 'classes'>;
 type RestOverlayProps = Omit<OverlayProps, 'invisible' | 'open'>;
 type RestPopoverProps = Omit<
     MenuPopoverProps,
-    'referenceElement' | 'open' | 'withArrow' | 'positionFixed' | 'placement'
+    'referenceElement' | 'open' | 'withArrow' | 'positionFixed' | 'placement' | 'tabIndex'
 >;
 
 /** Menu public properties */
@@ -111,6 +111,7 @@ export class Menu extends React.Component<Props> {
                     placement={placement}
                     positionFixed
                     rootRef={chainRefs(this.paperRef, popoverProps.rootRef)}
+                    tabIndex={-1}
                     onKeyDown={chain(popoverProps.onKeyDown, this.handleKeyDown)}
                 >
                     <SubMenu {...rest} />

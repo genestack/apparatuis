@@ -8,25 +8,21 @@
 import * as React from 'react';
 
 import {chain} from '../../utils/chain';
-import {getLastFocusableElement, getFirstFocusableElement} from '../../utils/focusable-elements';
+import {
+    getLastFocusableElement,
+    getFirstFocusableElement,
+    isElementFocusable
+} from '../../utils/focusable-elements';
 import {Omit} from '../../utils/omit';
 import {Ref} from '../../utils/set-ref';
 import {RootRef} from '../root-ref';
 
 type SentinelProps = Omit<React.HTMLAttributes<HTMLDivElement>, 'tabIndex'>;
-// type TargetProps = React.HTMLAttributes<HTMLDivElement>;
-
-interface ChildProps {
-    onFocus?: React.FocusEventHandler;
-    tabIndex?: number;
-}
 
 /** FocusTrap public properties */
 export interface Props {
     /** Trap focus when component is mounted */
     focusOnMount?: boolean;
-    /** Enable to focus root container */
-    enableSelfFocus?: boolean;
     /** Properties of start sentinel */
     startSentinelProps?: SentinelProps;
     /** Start sentinel React.Ref */
@@ -35,16 +31,7 @@ export interface Props {
     endSentinelProps?: SentinelProps;
     /** End sentinel React.Ref */
     endSentinelRef?: Ref<HTMLDivElement>;
-    /** React.Ref for the main element */
-    rootRef?: Ref<HTMLDivElement>;
-    /** This component clones passed child */
-    children: React.ReactElement<ChildProps>;
-}
-
-function focusElement(element: HTMLElement) {
-    if (element !== document.activeElement) {
-        element.focus();
-    }
+    children: JSX.Element;
 }
 
 /**
@@ -74,7 +61,6 @@ export class FocusTrap extends React.Component<Props> {
     }
 
     public componentWillUnmount() {
-        this.lastActiveElement = null;
         document.removeEventListener('keydown', this.handleDocumentKeyDown);
     }
 
@@ -87,14 +73,6 @@ export class FocusTrap extends React.Component<Props> {
 
         this.lastActiveElement = document.activeElement;
         this.focusDirectionInversed = event.shiftKey;
-    };
-
-    private handleSelfFocus: ChildProps['onFocus'] = (event) => {
-        if (event.currentTarget !== event.target) {
-            return;
-        }
-
-        this.focus();
     };
 
     private handleStartFocus = () => {
@@ -112,21 +90,24 @@ export class FocusTrap extends React.Component<Props> {
             return;
         }
 
-        const {enableSelfFocus} = this.props;
-        const {focusDirectionInversed} = this;
+        const isTrapElementFocusable = isElementFocusable(trapElement);
+        let nextElement: HTMLElement | null;
 
-        let nextFocusedElement: HTMLElement | null = null;
-
-        // when trap container focused and Shift + Tab pressed
-        const focusLooped = this.lastActiveElement === trapElement && focusDirectionInversed;
-
-        if (!enableSelfFocus || focusLooped) {
-            nextFocusedElement = focusDirectionInversed
+        if (isTrapElementFocusable && trapElement !== this.lastActiveElement) {
+            nextElement = trapElement;
+        } else {
+            nextElement = this.focusDirectionInversed
                 ? getLastFocusableElement(trapElement)
                 : getFirstFocusableElement(trapElement);
         }
 
-        focusElement(nextFocusedElement || trapElement);
+        if (!nextElement && isTrapElementFocusable) {
+            nextElement = trapElement;
+        }
+
+        if (nextElement && nextElement !== document.activeElement) {
+            nextElement.focus();
+        }
     }
 
     public render() {
@@ -138,10 +119,6 @@ export class FocusTrap extends React.Component<Props> {
             children
         } = this.props;
 
-        const child = React.Children.only(children);
-
-        const {tabIndex = -1} = child.props;
-
         return (
             <React.Fragment>
                 <div
@@ -150,12 +127,7 @@ export class FocusTrap extends React.Component<Props> {
                     tabIndex={0}
                     onFocus={chain(startSentinelProps.onFocus, this.handleStartFocus)}
                 />
-                <RootRef rootRef={this.trapRef}>
-                    {React.cloneElement(child, {
-                        onFocus: chain(child.props.onFocus, this.handleSelfFocus),
-                        tabIndex
-                    })}
-                </RootRef>
+                <RootRef rootRef={this.trapRef}>{children}</RootRef>
                 <div
                     {...endSentinelProps}
                     ref={endSentinelRef}
