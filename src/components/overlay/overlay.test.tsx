@@ -167,4 +167,53 @@ describe('<Overlay />', () => {
         jest.runAllTimers();
         expect(document.getElementById('test')).toBeFalsy();
     });
+
+    describe('when focus to sentinels', () => {
+        beforeEach(() => {
+            mount(
+                <Overlay open onClose={jest.fn()}>
+                    <div>
+                        <input id="first" />
+                        <input id="last" />
+                    </div>
+                </Overlay>
+            );
+        });
+
+        it('start sentinel button should exists', () => {
+            expect(document.querySelectorAll('button').item(0)).toBeTruthy();
+        });
+
+        it('end sentinel button should exists', () => {
+            expect(
+                document
+                    .querySelectorAll('button')
+                    .item(document.querySelectorAll('button').length - 1)
+            ).toBeTruthy();
+        });
+
+        it(
+            'should focus to the first focusable element ' +
+                ' in the overlay after focus the start sentinel',
+            () => {
+                document
+                    .querySelectorAll('button')
+                    .item(0)
+                    .focus();
+                expect(document.activeElement).toBe(document.getElementById('first'));
+            }
+        );
+
+        it(
+            'should focus to the last focusable element ' +
+                ' in the overlay after focus the end sentinel',
+            () => {
+                document
+                    .querySelectorAll('button')
+                    .item(document.querySelectorAll('button').length - 1)
+                    .focus();
+                expect(document.activeElement).toBe(document.getElementById('last'));
+            }
+        );
+    });
 });

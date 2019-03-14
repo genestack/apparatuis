@@ -6,7 +6,9 @@
  * actual or intended publication of such source code.
  */
 import scrollbarSize from 'dom-helpers/util/scrollbarSize';
+import ReactDOM from 'react-dom';
 
+import {getFirstFocusableElement, getLastFocusableElement} from '../../utils/focusable-elements';
 import {hasVerticalScrollbar} from '../../utils/has-vertical-scrollbar';
 
 type Style = Partial<CSSStyleDeclaration>;
@@ -21,8 +23,23 @@ interface OverlayState {
     lastActiveElement: HTMLElement | null;
 }
 
+interface ContainerState {
+    style: Style;
+    startFocusButton: HTMLButtonElement;
+    endFocusButton: HTMLButtonElement;
+}
+
 interface UnmountOpts {
     restoreFocus?: boolean;
+}
+
+function createHiddenFocusButton() {
+    const button = document.createElement('button');
+    button.setAttribute('type', 'button');
+    button.style.opacity = '0';
+    button.style.position = 'fixed';
+
+    return button;
 }
 
 /**
@@ -39,7 +56,7 @@ interface UnmountOpts {
 export class OverlayManager {
     private overlaysStack: OverlayState[] = [];
     private container: HTMLElement;
-    private lastContainerStyle: Style | null = null;
+    private containerState: ContainerState | null = null;
 
     constructor(container: HTMLElement) {
         this.container = container;
@@ -48,13 +65,26 @@ export class OverlayManager {
     private applyContainerStyles() {
         const {container} = this;
 
-        if (this.lastContainerStyle) {
+        if (this.containerState) {
             return;
         }
 
-        this.lastContainerStyle = {
-            overflow: container.style.overflow,
-            paddingRight: container.style.paddingRight
+        const startFocusButton = createHiddenFocusButton();
+        startFocusButton.addEventListener('focus', this.handleStartButtonFocus);
+
+        const endFocusButton = createHiddenFocusButton();
+        endFocusButton.addEventListener('focus', this.handleEndButtonFocus);
+
+        document.body.appendChild(endFocusButton);
+        document.body.insertBefore(startFocusButton, document.body.firstChild);
+
+        this.containerState = {
+            style: {
+                overflow: container.style.overflow,
+                paddingRight: container.style.paddingRight
+            },
+            startFocusButton,
+            endFocusButton
         };
 
         const appliedStyle = {
@@ -77,17 +107,47 @@ export class OverlayManager {
     }
 
     private resetContainerStyles() {
-        const {container, lastContainerStyle} = this;
+        const {container, containerState} = this;
 
-        if (!lastContainerStyle) {
+        if (!containerState) {
             return;
         }
 
-        container.style.overflow = lastContainerStyle.overflow || '';
-        container.style.paddingRight = lastContainerStyle.paddingRight || '';
+        container.style.overflow = containerState.style.overflow || '';
+        container.style.paddingRight = containerState.style.paddingRight || '';
+        containerState.startFocusButton.removeEventListener('focus', this.handleStartButtonFocus);
+        containerState.startFocusButton.remove();
+        containerState.endFocusButton.removeEventListener('focus', this.handleEndButtonFocus);
+        containerState.endFocusButton.remove();
 
-        this.lastContainerStyle = null;
+        this.containerState = null;
     }
+
+    private getLastOverlayNode() {
+        const lastOverlay = this.overlaysStack[this.overlaysStack.length - 1];
+        if (lastOverlay) {
+            const overlay = ReactDOM.findDOMNode(lastOverlay.overlay);
+            if (overlay instanceof HTMLElement) {
+                return overlay;
+            }
+        }
+    }
+
+    private handleStartButtonFocus = () => {
+        const overlay = this.getLastOverlayNode();
+        const element = overlay && getFirstFocusableElement(overlay);
+        if (element) {
+            element.focus();
+        }
+    };
+
+    private handleEndButtonFocus = () => {
+        const overlay = this.getLastOverlayNode();
+        const element = overlay && getLastFocusableElement(overlay);
+        if (element) {
+            element.focus();
+        }
+    };
 
     private getFocusStateIndexByModal(overlay: OverlayComponent) {
         return this.overlaysStack.findIndex((state) => state.overlay === overlay);
@@ -173,5 +233,9 @@ export class OverlayManager {
         }
 
         this.removeState(overlayState);
+    }
+
+    public destroy() {
+        this.resetContainerStyles();
     }
 }

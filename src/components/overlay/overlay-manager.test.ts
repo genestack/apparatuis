@@ -33,11 +33,25 @@ function createElementWithId(tag: string, id: string) {
     return element;
 }
 
+let commonManager: OverlayManager | null = null;
+
+const createManager = () => {
+    commonManager = new OverlayManager(document.body);
+
+    return commonManager;
+};
+
+afterEach(() => {
+    if (commonManager) {
+        commonManager.destroy();
+    }
+});
+
 describe('Overlay Manager', () => {
     describe('isTopOverlay method', () => {
         describe('when overlay is single', () => {
             const setup = () => {
-                const manager = new OverlayManager(document.body);
+                const manager = createManager();
                 const overlay = createOverlayMock();
 
                 manager.mount(overlay);
@@ -55,11 +69,19 @@ describe('Overlay Manager', () => {
                 manager.unmount(overlay);
                 expect(manager.isTopOverlay(overlay)).toBe(null);
             });
+
+            it('should create hidden buttons in body', () => {
+                expect(document.querySelectorAll('button')).toHaveLength(0);
+                const {overlay, manager} = setup();
+                expect(document.querySelectorAll('button')).toHaveLength(2);
+                manager.unmount(overlay);
+                expect(document.querySelectorAll('button')).toHaveLength(0);
+            });
         });
 
         describe('when there are few mounted overlays', () => {
             const setup = () => {
-                const manager = new OverlayManager(document.body);
+                const manager = createManager();
                 const firstOverlay = createOverlayMock();
                 const centralOverlay = createOverlayMock();
                 const lastOverlay = createOverlayMock();
@@ -106,24 +128,28 @@ describe('Overlay Manager', () => {
         });
 
         afterEach(() => {
-            document.body.style.overflow = '';
-            document.body.style.paddingRight = '0px';
+            getScrollbarSize.mockClear();
+            hasVerticalScrollbar.mockClear();
         });
 
         describe('mount method', () => {
             it('should add exists padding to body styles', () => {
                 document.body.style.paddingRight = '10px';
 
-                const manager = new OverlayManager(document.body);
+                const manager = createManager();
                 const overlay = createOverlayMock();
                 manager.mount(overlay);
 
                 expect(document.body.style.overflow).toBe('hidden');
                 expect(document.body.style.paddingRight).toBe('40px');
+
+                manager.unmount(overlay);
+
+                document.body.style.paddingRight = '0px';
             });
 
             it('should set right styles to body', () => {
-                const manager = new OverlayManager(document.body);
+                const manager = createManager();
                 const overlay = createOverlayMock();
                 manager.mount(overlay);
 
@@ -134,7 +160,7 @@ describe('Overlay Manager', () => {
 
         describe('unmount method', () => {
             it('should not reset body styles when there is at least one overlay', () => {
-                const manager = new OverlayManager(document.body);
+                const manager = createManager();
                 const firstOverlay = createOverlayMock();
                 const secondOverlay = createOverlayMock();
 
@@ -172,7 +198,7 @@ describe('Overlay Manager', () => {
 
             const otherElement = document.getElementById('other')!;
 
-            const manager = new OverlayManager(document.body);
+            const manager = createManager();
             const overlay = createOverlayMock();
 
             return {activeElement, manager, overlay, otherElement};
@@ -230,14 +256,14 @@ describe('Overlay Manager', () => {
     });
 
     it('should not throw error on double mount', () => {
-        const manager = new OverlayManager(document.body);
+        const manager = createManager();
         const overlay = createOverlayMock();
         manager.mount(overlay);
         manager.mount(overlay);
     });
 
     it('should not throw error on double unmount', () => {
-        const manager = new OverlayManager(document.body);
+        const manager = createManager();
         const overlay = createOverlayMock();
         manager.mount(overlay);
         manager.unmount(overlay);
@@ -245,7 +271,7 @@ describe('Overlay Manager', () => {
     });
 
     it('should focus first element after remove middle overlay', () => {
-        const manager = new OverlayManager(document.body);
+        const manager = createManager();
 
         const activeElement = createElementWithId('input', 'active');
 

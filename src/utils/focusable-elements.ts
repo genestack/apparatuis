@@ -77,3 +77,60 @@ export function getSiblingFocusableElement(element: HTMLElement, direction: 'pre
         return nextElement;
     }
 }
+
+function getAncestors(startNode: Node | null) {
+    const nodes = [];
+    let node = startNode;
+
+    while (node) {
+        nodes.unshift(node);
+        node = node.parentNode;
+    }
+
+    return nodes;
+}
+
+function getCommonAncestor(firstNode: Node, secondNode: Node) {
+    const firstAncestors = getAncestors(firstNode);
+    const secondAncestors = getAncestors(secondNode);
+
+    if (firstAncestors[0] !== secondAncestors[0]) {
+        return null;
+    }
+    for (let i = 0; i < firstAncestors.length; i++) {
+        if (firstAncestors[i] !== secondAncestors[i]) {
+            return firstAncestors[i - 1];
+        }
+    }
+
+    return null;
+}
+
+/**
+ * Determines the focus direction based on targets of FocusEvent
+ */
+export function getFocusDirection(
+    event: Pick<FocusEvent, 'target' | 'relatedTarget'>
+): 'next' | 'prev' | null {
+    const {target, relatedTarget} = event;
+
+    if (!(target instanceof Element) || !(relatedTarget instanceof Element)) {
+        return null;
+    }
+
+    const ancestor = getCommonAncestor(target, relatedTarget);
+    if (!(ancestor instanceof Element)) {
+        return null;
+    }
+
+    const focusableElements = Array.from(getFocusableElements(ancestor));
+
+    const currentIndex = focusableElements.indexOf(target);
+    const previousIndex = focusableElements.indexOf(relatedTarget);
+
+    if (currentIndex === -1 || previousIndex === -1 || currentIndex === previousIndex) {
+        return null;
+    }
+
+    return currentIndex > previousIndex ? 'next' : 'prev';
+}

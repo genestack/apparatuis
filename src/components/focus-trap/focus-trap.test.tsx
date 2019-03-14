@@ -12,17 +12,16 @@ import * as React from 'react';
 import {FocusTrap} from './focus-trap';
 
 function simulateTabKeyDown({shiftKey}: {shiftKey: boolean} = {shiftKey: false}) {
-    const element = document.activeElement instanceof HTMLElement ? document.activeElement : null;
+    const element =
+        document.activeElement instanceof HTMLElement ? document.activeElement : document.body;
 
-    if (element) {
-        element.dispatchEvent(
-            new KeyboardEvent('keydown', {
-                key: 'Tab',
-                shiftKey,
-                bubbles: true
-            })
-        );
-    }
+    element.dispatchEvent(
+        new KeyboardEvent('keydown', {
+            key: 'Tab',
+            shiftKey,
+            bubbles: true
+        })
+    );
 
     const focusableElements = Array.from(
         document.querySelectorAll<HTMLElement>(
@@ -34,19 +33,23 @@ function simulateTabKeyDown({shiftKey}: {shiftKey: boolean} = {shiftKey: false})
         return;
     }
 
-    const currentIndex = element ? focusableElements.indexOf(element) : 0;
+    const currentIndex =
+        element !== document.body
+            ? focusableElements.indexOf(element)
+            : shiftKey
+                ? focusableElements.length
+                : -1;
 
-    let nextIndex = shiftKey ? currentIndex - 1 : currentIndex + 1;
+    const nextIndex = shiftKey ? currentIndex - 1 : currentIndex + 1;
 
-    if (nextIndex === -1) {
-        nextIndex = focusableElements.length - 1;
+    // simulate URL focus
+    if (nextIndex < 0 || nextIndex > focusableElements.length - 1) {
+        if (element !== document.body) {
+            element.blur();
+        }
+    } else {
+        focusableElements[nextIndex].focus();
     }
-
-    if (nextIndex === focusableElements.length) {
-        nextIndex = 0;
-    }
-
-    focusableElements[nextIndex].focus();
 }
 
 function createTestApp() {
@@ -85,7 +88,7 @@ function createTestApp() {
 
             activeElement = document.createElement('input');
             activeElement.id = 'active';
-            document.body.appendChild(activeElement);
+            document.body.insertBefore(activeElement, document.body.firstElementChild);
             activeElement.focus();
 
             return activeElement;
@@ -179,6 +182,7 @@ describe('<FocusTrap />', () => {
                 </FocusTrap>
             );
 
+            simulateTabKeyDown({shiftKey: true}); // focus to address bar
             simulateTabKeyDown({shiftKey: true});
             expect(document.activeElement).toBe(document.getElementById('second-trapped'));
             simulateTabKeyDown({shiftKey: true});
@@ -262,6 +266,7 @@ describe('<FocusTrap />', () => {
                 </FocusTrap>
             );
 
+            simulateTabKeyDown({shiftKey: true}); // focus to address bar
             simulateTabKeyDown({shiftKey: true});
 
             expect(onFocus).toHaveBeenCalled();

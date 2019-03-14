@@ -11,7 +11,8 @@ import {chain} from '../../utils/chain';
 import {
     getLastFocusableElement,
     getFirstFocusableElement,
-    isElementFocusable
+    isElementFocusable,
+    getFocusDirection
 } from '../../utils/focusable-elements';
 import {Omit} from '../../utils/omit';
 import {Ref} from '../../utils/set-ref';
@@ -34,6 +35,12 @@ export interface Props {
     children: JSX.Element;
 }
 
+function focusElement(element: HTMLElement | null) {
+    if (element && element !== document.activeElement) {
+        element.focus();
+    }
+}
+
 /**
  * Component that trap focus in `children`.
  * When user focuses in some element inside children
@@ -49,65 +56,50 @@ export interface Props {
  */
 export class FocusTrap extends React.Component<Props> {
     private trapRef = React.createRef<HTMLDivElement>();
-    private lastActiveElement: Element | null = document.activeElement;
-    private focusDirectionInversed: boolean | null = null;
 
     public componentDidMount() {
-        document.addEventListener('keydown', this.handleDocumentKeyDown);
-
         if (this.props.focusOnMount) {
-            this.focus();
+            this.focus('next');
         }
     }
 
-    public componentWillUnmount() {
-        document.removeEventListener('keydown', this.handleDocumentKeyDown);
-    }
-
-    private handleDocumentKeyDown = (event: KeyboardEvent) => {
-        const trapElement = this.trapRef.current;
-
-        if (event.key !== 'Tab' || !trapElement) {
-            return;
-        }
-
-        this.lastActiveElement = document.activeElement;
-        this.focusDirectionInversed = event.shiftKey;
+    private handleStartFocus: SentinelProps['onFocus'] = (event) => {
+        this.focus(getFocusDirection(event) || 'next');
     };
 
-    private handleStartFocus = () => {
-        this.focus();
-    };
-
-    private handleEndFocus = () => {
-        this.focus();
-    };
-
-    private focus() {
+    private handleEndFocus: SentinelProps['onFocus'] = (event) => {
         const trapElement = this.trapRef.current;
 
         if (!trapElement) {
             return;
         }
 
-        const isTrapElementFocusable = isElementFocusable(trapElement);
-        let nextElement: HTMLElement | null;
+        const direction = getFocusDirection(event) || 'prev';
 
-        if (isTrapElementFocusable && trapElement !== this.lastActiveElement) {
-            nextElement = trapElement;
+        if (direction === 'next' && isElementFocusable(trapElement)) {
+            focusElement(trapElement);
         } else {
-            nextElement = this.focusDirectionInversed
-                ? getLastFocusableElement(trapElement)
-                : getFirstFocusableElement(trapElement);
+            this.focus(direction);
+        }
+    };
+
+    private focus(direction: 'next' | 'prev') {
+        const trapElement = this.trapRef.current;
+
+        if (!trapElement) {
+            return;
         }
 
-        if (!nextElement && isTrapElementFocusable) {
-            nextElement = trapElement;
+        let element =
+            direction === 'next'
+                ? getFirstFocusableElement(trapElement)
+                : getLastFocusableElement(trapElement);
+
+        if (!element && isElementFocusable(trapElement)) {
+            element = trapElement;
         }
 
-        if (nextElement && nextElement !== document.activeElement) {
-            nextElement.focus();
-        }
+        focusElement(element);
     }
 
     public render() {
