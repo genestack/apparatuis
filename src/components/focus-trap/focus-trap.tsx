@@ -11,7 +11,9 @@ import {chain} from '../../utils/chain';
 import {
     getLastFocusableElement,
     getFirstFocusableElement,
-    isElementFocusable
+    isElementFocusable,
+    getFocusDirection,
+    getSiblingFocusableElement
 } from '../../utils/focusable-elements';
 import {Omit} from '../../utils/omit';
 import {Ref} from '../../utils/set-ref';
@@ -34,6 +36,25 @@ export interface Props {
     children: JSX.Element;
 }
 
+function focusElement(element: HTMLElement | null) {
+    if (element && element !== document.activeElement) {
+        element.focus();
+    }
+}
+
+function getFocusableElementOrSelfInContainer(container: HTMLElement, direction: 'next' | 'prev') {
+    let element =
+        direction === 'next'
+            ? getFirstFocusableElement(container)
+            : getLastFocusableElement(container);
+
+    if (!element && isElementFocusable(container)) {
+        element = container;
+    }
+
+    return element;
+}
+
 /**
  * Component that trap focus in `children`.
  * When user focuses in some element inside children
@@ -49,66 +70,60 @@ export interface Props {
  */
 export class FocusTrap extends React.Component<Props> {
     private trapRef = React.createRef<HTMLDivElement>();
-    private lastActiveElement: Element | null = document.activeElement;
-    private focusDirectionInversed: boolean | null = null;
 
     public componentDidMount() {
-        document.addEventListener('keydown', this.handleDocumentKeyDown);
-
-        if (this.props.focusOnMount) {
-            this.focus();
-        }
-    }
-
-    public componentWillUnmount() {
-        document.removeEventListener('keydown', this.handleDocumentKeyDown);
-    }
-
-    private handleDocumentKeyDown = (event: KeyboardEvent) => {
         const trapElement = this.trapRef.current;
 
-        if (event.key !== 'Tab' || !trapElement) {
-            return;
+        if (this.props.focusOnMount && trapElement) {
+            focusElement(
+                isElementFocusable(trapElement)
+                    ? trapElement
+                    : getFirstFocusableElement(trapElement)
+            );
         }
+    }
 
-        this.lastActiveElement = document.activeElement;
-        this.focusDirectionInversed = event.shiftKey;
-    };
-
-    private handleStartFocus = () => {
-        this.focus();
-    };
-
-    private handleEndFocus = () => {
-        this.focus();
-    };
-
-    private focus() {
+    private handleStartFocus: SentinelProps['onFocus'] = (event) => {
         const trapElement = this.trapRef.current;
 
         if (!trapElement) {
             return;
         }
 
-        const isTrapElementFocusable = isElementFocusable(trapElement);
-        let nextElement: HTMLElement | null;
+        if (isElementFocusable(trapElement) && trapElement !== event.relatedTarget) {
+            focusElement(trapElement);
 
-        if (isTrapElementFocusable && trapElement !== this.lastActiveElement) {
-            nextElement = trapElement;
-        } else {
-            nextElement = this.focusDirectionInversed
-                ? getLastFocusableElement(trapElement)
-                : getFirstFocusableElement(trapElement);
+            return;
         }
 
-        if (!nextElement && isTrapElementFocusable) {
-            nextElement = trapElement;
+        const direction = getFocusDirection(event) || 'next';
+
+        focusElement(
+            getFocusableElementOrSelfInContainer(trapElement, direction) ||
+                getSiblingFocusableElement(event.currentTarget, direction)
+        );
+    };
+
+    private handleEndFocus: SentinelProps['onFocus'] = (event) => {
+        const trapElement = this.trapRef.current;
+
+        if (!trapElement) {
+            return;
         }
 
-        if (nextElement && nextElement !== document.activeElement) {
-            nextElement.focus();
+        if (isElementFocusable(trapElement)) {
+            focusElement(trapElement);
+
+            return;
         }
-    }
+
+        const direction = getFocusDirection(event) || 'prev';
+
+        focusElement(
+            getFocusableElementOrSelfInContainer(trapElement, direction) ||
+                getSiblingFocusableElement(event.currentTarget, direction)
+        );
+    };
 
     public render() {
         const {

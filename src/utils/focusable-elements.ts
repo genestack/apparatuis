@@ -17,6 +17,11 @@ const FOCUSABLE_SELECTOR = [
 
 /** Returns true if element could be focused */
 export function isElementFocusable(element: Element) {
+    // ie 11
+    if ((element as any).msMatchesSelector) {
+        return (element as any).msMatchesSelector(FOCUSABLE_SELECTOR) as boolean;
+    }
+
     return element.matches(FOCUSABLE_SELECTOR);
 }
 
@@ -76,4 +81,63 @@ export function getSiblingFocusableElement(element: HTMLElement, direction: 'pre
     if (nextElement instanceof HTMLElement && nextElement !== element) {
         return nextElement;
     }
+
+    return null;
+}
+
+function getAncestors(startNode: Node | null) {
+    const nodes = [];
+    let node = startNode;
+
+    while (node) {
+        nodes.unshift(node);
+        node = node.parentNode;
+    }
+
+    return nodes;
+}
+
+function getCommonAncestor(firstNode: Node, secondNode: Node) {
+    const firstAncestors = getAncestors(firstNode);
+    const secondAncestors = getAncestors(secondNode);
+
+    if (firstAncestors[0] !== secondAncestors[0]) {
+        return null;
+    }
+    for (let i = 0; i < firstAncestors.length; i++) {
+        if (firstAncestors[i] !== secondAncestors[i]) {
+            return firstAncestors[i - 1];
+        }
+    }
+
+    return null;
+}
+
+/**
+ * Determines the focus direction based on targets of FocusEvent
+ */
+export function getFocusDirection(
+    event: Pick<FocusEvent, 'target' | 'relatedTarget'>
+): 'next' | 'prev' | null {
+    const {target, relatedTarget} = event;
+
+    if (!(target instanceof Element) || !(relatedTarget instanceof Element)) {
+        return null;
+    }
+
+    const ancestor = getCommonAncestor(target, relatedTarget);
+    if (!(ancestor instanceof Element)) {
+        return null;
+    }
+
+    const focusableElements = Array.from(getFocusableElements(ancestor));
+
+    const currentIndex = focusableElements.indexOf(target);
+    const previousIndex = focusableElements.indexOf(relatedTarget);
+
+    if (currentIndex === -1 || previousIndex === -1 || currentIndex === previousIndex) {
+        return null;
+    }
+
+    return currentIndex > previousIndex ? 'next' : 'prev';
 }
