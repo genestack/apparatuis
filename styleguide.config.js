@@ -1,6 +1,6 @@
 const path = require('path');
 
-const camelCase = (str) =>
+const kebabToCamelCase = (str) =>
     str
         .split('-')
         .map((s) => s[0].toUpperCase() + s.slice(1))
@@ -21,7 +21,7 @@ module.exports = {
     getExampleFilename: (componentPath) => componentPath.replace(/\.tsx?$/, '.md'),
     require: ['@babel/polyfill'],
     getComponentPathLine: (componentPath) => {
-        const name = camelCase(path.basename(componentPath, '.tsx'));
+        const name = kebabToCamelCase(path.basename(componentPath, '.tsx'));
         const dir = path.dirname(componentPath).replace(/^src/, 'genestack-ui');
         return `import {${name}} from '${dir}';`;
     }
