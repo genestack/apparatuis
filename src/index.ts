@@ -27,3 +27,4 @@ export * from './components/grow';
 export * from './components/popover';
 export * from './components/menu';
 export * from './components/hidden-scrollbar';
+export * from './components/slide';

@@ -1,0 +1,27 @@
+/*
+ * Copyright (c) 2011-2019 Genestack Limited
+ * All Rights Reserved
+ * THIS IS UNPUBLISHED PROPRIETARY SOURCE CODE OF GENESTACK LIMITED
+ * The copyright notice above does not evidence any
+ * actual or intended publication of such source code.
+ */
+
+.root {
+    will-change: transform;
+}
+
+.enter {
+    transform: translateX(0);
+}
+
+.entering {
+    transition: transform cubic-bezier(0.4, 0, 0.2, 1) 300ms;
+}
+
+.exit {
+    transform: translateX(calc(-100% - 24px));
+}
+
+.exiting {
+    transition: transform cubic-bezier(0.4, 0, 0.2, 1) 300ms;
+}
