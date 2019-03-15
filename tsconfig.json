@@ -3,7 +3,8 @@
   "compilerOptions": {
     "allowJs": false,
     "checkJs": false,
-    "typeRoots": ["./node_modules/@types", "./typings/"]
+    "typeRoots": ["./node_modules/@types", "./typings/"],
+    "esModuleInterop": true
   },
   "exclude": ["./dist", "./coverage", "**.js"]
 }
