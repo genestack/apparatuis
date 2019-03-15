@@ -8,14 +8,9 @@
 @import "../../variables.css";
 
 .root {
-    padding-top: 0;
     padding-left: calc(var(--gs-spacing-unit) / 2);
-    padding-bottom: 0;
     padding-right: calc(var(--gs-spacing-unit) / 2);
     min-height: calc(var(--gs-spacing-unit) * 3.25);
-    background: transparent;
-    border: none;
-    width: 100%;
 }
 
 .root:hover,
