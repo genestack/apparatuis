@@ -14,6 +14,7 @@ import {Omit} from '../../utils/omit';
 import {Backdrop, BackdropProps} from '../backdrop';
 import {FocusTrap} from '../focus-trap';
 
+import {OverlayCloseReason} from './close-reason';
 import {OverlayManager} from './overlay-manager';
 import * as styles from './overlay.module.css';
 
@@ -21,16 +22,6 @@ const container = document.body;
 const manager = new OverlayManager(container);
 
 type TargetProps = React.HTMLAttributes<HTMLDivElement>;
-
-/**
- * Reason of overlay close
- */
-export enum OverlayCloseReason {
-    /** Overlay closed when user clicked to Backdrop */
-    BACKDROP_CLICK = 'BACKDROP_CLICK',
-    /** Overlay closed when user pressed Escape key */
-    ESCAPE_KEYDOWN = 'ESCAPE_KEYDOWN'
-}
 
 type CloseHandler = (reason: OverlayCloseReason, event?: React.SyntheticEvent) => void;
 

@@ -1,6 +1,4 @@
 ```js
-const {AutocompleteDataProvider} = require('.');
-
 initialState = {
     emulateNetworkError: false,
     customRenderSuggestion: false,
