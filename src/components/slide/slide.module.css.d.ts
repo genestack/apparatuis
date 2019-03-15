@@ -8,5 +8,6 @@
 export const root: string;
 export const enter: string;
 export const entering: string;
-export const exit: string;
+export const exitLeft: string;
+export const exitRight: string;
 export const exiting: string;

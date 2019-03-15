@@ -25,6 +25,8 @@ type Children = React.ReactElement<{className?: string}>;
 
 /** Public Slide properties */
 export interface Props extends TargetProps, WithClasses<keyof typeof styles> {
+    /** Slide transition direction */
+    direction?: 'left' | 'right';
     children: Children;
 }
 
@@ -50,24 +52,29 @@ export class Slide extends React.Component<Props> {
     }
 
     private handleEnter: Props['onEnter'] = (node) => {
-        const {classes} = mergeClassesProps(this.props, styles);
+        const {classes, direction = 'left'} = mergeClassesProps(this.props, styles);
 
         node.classList.remove(classes.enter);
-        node.classList.add(classes.exit);
+        node.classList.add(
+            classNames({
+                [classes.exitLeft]: direction === 'left',
+                [classes.exitRight]: direction === 'right'
+            })
+        );
 
         this.requestAnimationFrame(() => {
             node.classList.remove(classes.exiting);
             node.classList.add(classes.entering);
             reflow(node);
-            node.classList.remove(classes.exit);
+            node.classList.remove(classes.exitLeft, classes.exitRight);
             node.classList.add(classes.enter);
         });
     };
 
     private handleExit: Props['onExit'] = (node) => {
-        const {classes} = mergeClassesProps(this.props, styles);
+        const {classes, direction = 'left'} = mergeClassesProps(this.props, styles);
 
-        node.classList.remove(classes.exit);
+        node.classList.remove(classes.exitLeft, classes.exitRight);
         node.classList.add(classes.enter);
 
         this.requestAnimationFrame(() => {
@@ -75,12 +82,20 @@ export class Slide extends React.Component<Props> {
             node.classList.add(classes.exiting);
             reflow(node);
             node.classList.remove(classes.enter);
-            node.classList.add(classes.exit);
+            node.classList.add(
+                classNames({
+                    [classes.exitLeft]: direction === 'left',
+                    [classes.exitRight]: direction === 'right'
+                })
+            );
         });
     };
 
     public render() {
-        const {className, classes, children, ...rest} = mergeClassesProps(this.props, styles);
+        const {className, classes, children, direction = 'left', ...rest} = mergeClassesProps(
+            this.props,
+            styles
+        );
         const child = React.Children.only(children) as Children;
 
         return (
@@ -93,7 +108,8 @@ export class Slide extends React.Component<Props> {
                 {React.cloneElement(child, {
                     className: classNames(className, child.props.className, {
                         [classes.enter]: rest.in,
-                        [classes.exit]: !rest.in
+                        [classes.exitLeft]: !rest.in && direction === 'left',
+                        [classes.exitRight]: !rest.in && direction === 'right'
                     })
                 })}
             </Transition>

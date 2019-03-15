@@ -7,21 +7,30 @@
  */
 
 .root {
-    will-change: transform;
+    will-change: transform opacity;
 }
 
 .enter {
     transform: translateX(0);
+    opacity: 1;
 }
 
 .entering {
-    transition: transform cubic-bezier(0.4, 0, 0.2, 1) 300ms;
+    transition: opacity cubic-bezier(0.4, 0, 0.2, 1) 300ms,
+        transform cubic-bezier(0.4, 0, 0.2, 1) 300ms;
 }
 
-.exit {
+.exitLeft {
+    opacity: 0;
     transform: translateX(calc(-100% - 24px));
 }
 
+.exitRight {
+    opacity: 0;
+    transform: translateX(calc(100% - 24px));
+}
+
 .exiting {
-    transition: transform cubic-bezier(0.4, 0, 0.2, 1) 300ms;
+    transition: opacity cubic-bezier(0.4, 0, 0.2, 1) 300ms,
+        transform cubic-bezier(0.4, 0, 0.2, 1) 300ms;
 }
