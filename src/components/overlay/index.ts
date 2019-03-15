@@ -5,4 +5,5 @@
  * The copyright notice above does not evidence any
  * actual or intended publication of such source code.
  */
-export {Overlay, Props as OverlayProps, OverlayCloseReason as CloseReason} from './overlay';
+export {OverlayCloseReason} from './close-reason';
+export {Overlay, Props as OverlayProps} from './overlay';

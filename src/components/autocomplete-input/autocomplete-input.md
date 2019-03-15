@@ -1,8 +1,4 @@
 ```js
-const {Checkbox} = require('../checkbox');
-
-const {AutocompleteDataProvider, AutocompleteInput} = require('.');
-
 initialState = {
     emulateNetworkError: false,
     customRenderSuggestion: false,

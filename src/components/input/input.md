@@ -1,5 +1,4 @@
 ```js
-const {Input} = require('.');
 initialState = {value: ''};
 <div>
     <Input onChange={(event, value) => setState({value})} value={state.value} />

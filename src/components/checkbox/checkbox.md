@@ -1,5 +1,4 @@
 ```js
-const {Checkbox} = require('.');
 initialState = {value: true};
 <div>
     <Checkbox onValueChange={(value) => setState({value})} checked={state.value} />

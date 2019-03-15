@@ -1,9 +1,4 @@
 ```js
-const {FlexExpander} = require('../flex-expander');
-const {Typography} = require('../typography');
-const {List, ListItem, ListItemText, ListItemCell} = require('../list');
-const {HiddenScrollbar} = require('.');
-
 items = new Array(100).fill(null).map((_, index) => (
     <ListItem key={index}>
         <ListItemText>List Item</ListItemText>

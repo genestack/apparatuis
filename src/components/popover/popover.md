@@ -1,11 +1,4 @@
 ```js
-const {Button} = require('../button');
-const {Paper} = require('../paper');
-const {FlexExpander} = require('../flex-expander');
-const {List, ListItem, ListItemCell, ListItemText} = require('../list');
-const {Typography} = require('../typography');
-const {Popover} = require('.');
-
 initialState = {
     referenceElement: null,
     expanded: false,

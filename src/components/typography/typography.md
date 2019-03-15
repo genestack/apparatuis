@@ -1,7 +1,4 @@
 ```js
-const {Checkbox} = require('../checkbox');
-const {Typography} = require('.');
-
 const Frame = (props) => <div style={{background: '#E5E5E5', padding: '16px 0'}} {...props} />;
 const Row = (props) => <div style={{display: 'flex'}} {...props} />;
 const Paper = ({inverted, useMaxWidth, ...rest}) => (

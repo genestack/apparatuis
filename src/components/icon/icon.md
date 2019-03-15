@@ -1,5 +1,4 @@
 ```js
-const {Typography} = require('../typography');
 const {DownloadIcon} = require('../../icons/download-icon');
 const {HelpIcon} = require('../../icons/help-icon');
 const {KeyboardArrowRightIcon} = require('../../icons/keyboard-arrow-right-icon');

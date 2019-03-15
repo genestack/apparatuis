@@ -18,6 +18,9 @@ type TargetProps = RcTooltip['props'];
 export interface Props extends TargetProps {}
 
 /**
- * RcTooltip wrapper
+ * RcTooltip wrapper.
+ *
+ * Implemented by [rc-tooltip](https://github.com/react-component/tooltip)
+ * with Genestack custom styles
  */
 export const Tooltip = (props: Props) => <RcTooltip prefixCls="genestack-ui-tooltip" {...props} />;

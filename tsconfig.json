@@ -1,7 +1,10 @@
 {
   "extends": "./node_modules/genestack-tsconfig/tsconfig.json",
   "compilerOptions": {
-    "typeRoots": ["./node_modules/@types", "./typings/"]
+    "allowJs": false,
+    "checkJs": false,
+    "typeRoots": ["./node_modules/@types", "./typings/"],
+    "esModuleInterop": true
   },
-  "exclude": ["./dist", "./coverage"]
+  "exclude": ["./dist", "./coverage", "**.js"]
 }

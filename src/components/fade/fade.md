@@ -1,8 +1,4 @@
 ```js
-const {Button} = require('../button');
-const {Typography} = require('../typography');
-const {Fade} = require('.');
-
 initialState = {visible: true};
 
 handleButtonClick = () => setState(({visible}) => ({visible: !visible}));

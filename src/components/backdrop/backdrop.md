@@ -1,9 +1,4 @@
 ```js
-const {Backdrop} = require('.');
-const {Button} = require('../button');
-const {Fade} = require('../fade');
-const {Typography} = require('../typography');
-
 initialState = {
     backdropOpened: false
 };

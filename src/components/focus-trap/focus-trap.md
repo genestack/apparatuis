@@ -1,11 +1,6 @@
 Once user focuses to any trapped input he could not focus out from the trap by `Tab` key.
 
 ```js
-const {Typography} = require('../typography');
-const {Checkbox} = require('../checkbox');
-const {FocusTrap} = require('.');
-const {Input} = require('../input');
-
 const Row = (props) => <div style={{...props.style, marginBottom: 8}} {...props} />;
 
 const focusTrapStyle = {

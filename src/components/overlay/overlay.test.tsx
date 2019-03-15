@@ -9,7 +9,8 @@
 import * as enzyme from 'enzyme';
 import * as React from 'react';
 
-import {Overlay, Props, OverlayCloseReason} from './overlay';
+import {OverlayCloseReason} from './close-reason';
+import {Overlay, Props} from './overlay';
 
 jest.useFakeTimers();
 
