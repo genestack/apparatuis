@@ -1,9 +1,4 @@
 ```js
-const {Button} = require('../button');
-const {Paper} = require('../paper');
-const {Typography} = require('../typography');
-const {Grow} = require('.');
-
 initialState = {visible: true};
 
 handleButtonClick = () => setState(({visible}) => ({visible: !visible}));

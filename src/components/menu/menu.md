@@ -1,9 +1,5 @@
 ```js
-const {Button} = require('../button');
-const {Typography} = require('../typography');
-const {FlexExpander} = require('../flex-expander');
 const {DownloadIcon} = require('../../icons/download-icon');
-const {Menu, MenuItem, MenuItemCell, MenuItemText, SubMenu} = require('.');
 
 const Quiet = (props) => <Typography {...props} variant="caption" quiet box="inline" />;
 

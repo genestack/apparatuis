@@ -1,11 +1,4 @@
 ```js
-const {Input} = require('../input');
-const {Button} = require('../button');
-const {Fade} = require('../fade');
-const {FocusTrap} = require('../focus-trap');
-const {Typography} = require('../typography');
-const {Overlay} = require('.');
-
 function rand() {
     return Math.round(Math.random() * 20) - 10;
 }

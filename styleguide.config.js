@@ -26,6 +26,7 @@ module.exports = {
         'src/components/list/list-item-cell.tsx',
         'src/components/list/list-item-text.tsx',
         'src/components/menu/menu.tsx',
+        'src/components/menu/sub-menu.tsx',
         'src/components/menu/menu-item.tsx',
         'src/components/menu/menu-item-cell.tsx',
         'src/components/menu/menu-item-text.tsx',

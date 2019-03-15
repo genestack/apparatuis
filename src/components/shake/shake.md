@@ -1,7 +1,4 @@
 ```js
-const {Button} = require('../button');
-const {Shake} = require('.');
-
 initialState = {shaking: false};
 
 handleButtonClick = () => { setState({shaking: true}) }

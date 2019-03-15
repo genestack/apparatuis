@@ -1,7 +1,5 @@
 ```js
-const {Checkbox} = require('../checkbox');
-
-const {AutocompleteDataProvider, AutocompleteInput} = require('.');
+const {AutocompleteDataProvider} = require('.');
 
 initialState = {
     emulateNetworkError: false,

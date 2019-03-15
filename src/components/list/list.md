@@ -1,11 +1,6 @@
 ```js
-const {Paper} = require('../paper');
 const {DownloadIcon} = require('../../icons/download-icon');
 const {HelpIcon} = require('../../icons/help-icon');
-const {FlexExpander} = require('../flex-expander');
-const {Divider} = require('../divider');
-const {Typography} = require('../typography');
-const {List, ListItem, ListItemText, ListItemCell} = require('.');
 
 const leftCellStyle = {width: 20, textAlign: 'center'};
 const StateExample = (props) => (
