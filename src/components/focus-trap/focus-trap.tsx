@@ -9,11 +9,14 @@ import * as React from 'react';
 
 import {chain} from '../../utils/chain';
 import {
-    getLastFocusableElement,
-    getFirstFocusableElement,
     isElementFocusable,
     getFocusDirection,
-    getSiblingFocusableElement
+    getSiblingElement,
+    isElementReachable,
+    getReachableElements,
+    getFocusableElements,
+    getFirstReachableElement,
+    getLastReachableElement
 } from '../../utils/focusable-elements';
 import {Omit} from '../../utils/omit';
 import {Ref} from '../../utils/set-ref';
@@ -42,17 +45,29 @@ function focusElement(element: HTMLElement | null) {
     }
 }
 
-function getFocusableElementOrSelfInContainer(container: HTMLElement, direction: 'next' | 'prev') {
+function getReachableElementOrSelfInContainer(container: HTMLElement, direction: 'next' | 'prev') {
     let element =
         direction === 'next'
-            ? getFirstFocusableElement(container)
-            : getLastFocusableElement(container);
+            ? getFirstReachableElement(container)
+            : getLastReachableElement(container);
 
     if (!element && isElementFocusable(container)) {
         element = container;
     }
 
     return element;
+}
+
+function getSiblingReachableElement(element: HTMLElement, direction: 'next' | 'prev') {
+    if (!element.parentElement) {
+        return null;
+    }
+
+    return getSiblingElement(
+        Array.from(getReachableElements(element.parentElement)),
+        element,
+        direction
+    );
 }
 
 /**
@@ -70,16 +85,30 @@ function getFocusableElementOrSelfInContainer(container: HTMLElement, direction:
  */
 export class FocusTrap extends React.Component<Props> {
     private trapRef = React.createRef<HTMLDivElement>();
+    private activeElementOnMount: HTMLElement | null = null;
 
     public componentDidMount() {
         const trapElement = this.trapRef.current;
 
         if (this.props.focusOnMount && trapElement) {
-            focusElement(
-                isElementFocusable(trapElement)
-                    ? trapElement
-                    : getFirstFocusableElement(trapElement)
-            );
+            if (document.activeElement instanceof HTMLElement) {
+                this.activeElementOnMount = document.activeElement;
+            }
+
+            if (isElementFocusable(trapElement)) {
+                focusElement(trapElement);
+            } else {
+                const focusableElements = getFocusableElements(trapElement);
+                focusElement(focusableElements.item(0));
+            }
+        }
+    }
+
+    public componentWillUnmount() {
+        const {activeElementOnMount} = this;
+
+        if (activeElementOnMount && document.contains(activeElementOnMount)) {
+            activeElementOnMount.focus();
         }
     }
 
@@ -90,7 +119,7 @@ export class FocusTrap extends React.Component<Props> {
             return;
         }
 
-        if (isElementFocusable(trapElement) && trapElement !== event.relatedTarget) {
+        if (isElementReachable(trapElement) && trapElement !== event.relatedTarget) {
             focusElement(trapElement);
 
             return;
@@ -99,8 +128,8 @@ export class FocusTrap extends React.Component<Props> {
         const direction = getFocusDirection(event) || 'next';
 
         focusElement(
-            getFocusableElementOrSelfInContainer(trapElement, direction) ||
-                getSiblingFocusableElement(event.currentTarget, direction)
+            getReachableElementOrSelfInContainer(trapElement, direction) ||
+                getSiblingReachableElement(event.currentTarget, direction)
         );
     };
 
@@ -111,7 +140,7 @@ export class FocusTrap extends React.Component<Props> {
             return;
         }
 
-        if (isElementFocusable(trapElement)) {
+        if (isElementReachable(trapElement)) {
             focusElement(trapElement);
 
             return;
@@ -120,8 +149,8 @@ export class FocusTrap extends React.Component<Props> {
         const direction = getFocusDirection(event) || 'prev';
 
         focusElement(
-            getFocusableElementOrSelfInContainer(trapElement, direction) ||
-                getSiblingFocusableElement(event.currentTarget, direction)
+            getReachableElementOrSelfInContainer(trapElement, direction) ||
+                getSiblingReachableElement(event.currentTarget, direction)
         );
     };
 

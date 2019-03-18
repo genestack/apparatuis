@@ -30,19 +30,13 @@ class SimpleModal extends React.Component {
         this.handleSubModalOpen = this.handleSubModalOpen.bind(this);
         this.handleSubModalClose = this.handleSubModalClose.bind(this);
         this.handleSubModalClosed = this.handleSubModalClosed.bind(this);
-        this.inputRef = React.createRef();
     }
 
     handleSubModalOpen() {
-        this.setState(
-            {
-                subModalOpen: true,
-                subModalMounted: true
-            },
-            () => {
-                this.inputRef.current.focus();
-            }
-        );
+        this.setState({
+            subModalOpen: true,
+            subModalMounted: true
+        });
     }
 
     handleSubModalClose() {
@@ -77,10 +71,7 @@ class SimpleModal extends React.Component {
                                     This some text of overlay
                                 </Typography>
                                 <div>
-                                    <Input
-                                        placeholder="Focus should be trapped"
-                                        targetRef={this.inputRef}
-                                    />
+                                    <Input placeholder="Focus should be trapped" />
                                 </div>
                                 <div>
                                     <SimpleModal />

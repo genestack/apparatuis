@@ -195,7 +195,7 @@ describe('<Overlay />', () => {
 
         it(
             'should focus to the first focusable element ' +
-                ' in the overlay after focus the start sentinel',
+                'in the overlay after focus the start sentinel',
             () => {
                 document
                     .querySelectorAll('button')
@@ -207,7 +207,7 @@ describe('<Overlay />', () => {
 
         it(
             'should focus to the last focusable element ' +
-                ' in the overlay after focus the end sentinel',
+                'in the overlay after focus the end sentinel',
             () => {
                 document
                     .querySelectorAll('button')

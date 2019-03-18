@@ -8,7 +8,7 @@
 import scrollbarSize from 'dom-helpers/util/scrollbarSize';
 import ReactDOM from 'react-dom';
 
-import {getFirstFocusableElement, getLastFocusableElement} from '../../utils/focusable-elements';
+import {getFirstReachableElement, getLastReachableElement} from '../../utils/focusable-elements';
 import {hasVerticalScrollbar} from '../../utils/has-vertical-scrollbar';
 
 type Style = Partial<CSSStyleDeclaration>;
@@ -18,19 +18,10 @@ type Style = Partial<CSSStyleDeclaration>;
  */
 export type OverlayComponent = React.ReactInstance;
 
-interface OverlayState {
-    overlay: OverlayComponent;
-    lastActiveElement: HTMLElement | null;
-}
-
 interface ContainerState {
     style: Style;
     startFocusButton: HTMLButtonElement;
     endFocusButton: HTMLButtonElement;
-}
-
-interface UnmountOpts {
-    restoreFocus?: boolean;
 }
 
 function createHiddenFocusButton() {
@@ -59,7 +50,7 @@ function createHiddenFocusButton() {
  * At the moment we should use a singleton of this class.
  */
 export class OverlayManager {
-    private overlaysStack: OverlayState[] = [];
+    private overlays: OverlayComponent[] = [];
     private container: HTMLElement;
     private containerState: ContainerState | null = null;
 
@@ -129,9 +120,9 @@ export class OverlayManager {
     }
 
     private getLastOverlayNode() {
-        const lastOverlay = this.overlaysStack[this.overlaysStack.length - 1];
+        const lastOverlay = this.overlays[this.overlays.length - 1];
         if (lastOverlay) {
-            const overlay = ReactDOM.findDOMNode(lastOverlay.overlay);
+            const overlay = ReactDOM.findDOMNode(lastOverlay);
             if (overlay instanceof HTMLElement) {
                 return overlay;
             }
@@ -140,7 +131,7 @@ export class OverlayManager {
 
     private handleStartButtonFocus = () => {
         const overlay = this.getLastOverlayNode();
-        const element = overlay && getFirstFocusableElement(overlay);
+        const element = overlay && getFirstReachableElement(overlay);
         if (element) {
             element.focus();
         }
@@ -148,96 +139,42 @@ export class OverlayManager {
 
     private handleEndButtonFocus = () => {
         const overlay = this.getLastOverlayNode();
-        const element = overlay && getLastFocusableElement(overlay);
+        const element = overlay && getLastReachableElement(overlay);
         if (element) {
             element.focus();
         }
     };
 
-    private getFocusStateIndexByModal(overlay: OverlayComponent) {
-        return this.overlaysStack.findIndex((state) => state.overlay === overlay);
-    }
-
-    private getStateByOverlay(overlay: OverlayComponent) {
-        return this.overlaysStack.find((state) => state.overlay === overlay) || null;
-    }
-
-    private moveLastActiveFocusToNextOverlay(overlayState: OverlayState) {
-        const currentIndex = this.overlaysStack.indexOf(overlayState);
-
-        const nextIndex = currentIndex + 1;
-
-        const {lastActiveElement} = this.overlaysStack[currentIndex];
-
-        if (lastActiveElement && this.container.contains(lastActiveElement)) {
-            this.overlaysStack[nextIndex].lastActiveElement = lastActiveElement;
-        }
-    }
-
-    private removeState(overlayState: OverlayState) {
-        this.overlaysStack.splice(this.overlaysStack.indexOf(overlayState), 1);
-
-        if (!this.overlaysStack.length) {
-            this.resetContainerStyles();
-        }
-    }
-
-    private restoreLastActiveFocus(overlayState: OverlayState) {
-        const {lastActiveElement} = overlayState;
-
-        if (lastActiveElement && this.container.contains(lastActiveElement)) {
-            if (
-                lastActiveElement instanceof HTMLBodyElement &&
-                document.activeElement instanceof HTMLElement
-            ) {
-                document.activeElement.blur();
-            } else {
-                lastActiveElement.focus();
-            }
-        }
-    }
-
     public isTopOverlay(overlay: OverlayComponent) {
-        const index = this.getFocusStateIndexByModal(overlay);
+        const index = this.overlays.findIndex((item) => item === overlay);
 
         if (index === -1) {
             return null;
         }
 
-        return index + 1 === this.overlaysStack.length;
+        return index + 1 === this.overlays.length;
     }
 
     public mount(overlay: OverlayComponent) {
-        if (this.getStateByOverlay(overlay)) {
+        if (this.overlays.includes(overlay)) {
             return;
         }
 
-        const lastActiveElement =
-            this.container.ownerDocument &&
-            (this.container.ownerDocument.activeElement as HTMLElement);
-
-        this.overlaysStack.push({
-            overlay,
-            lastActiveElement
-        });
+        this.overlays.push(overlay);
 
         this.applyContainerStyles();
     }
 
-    public unmount(overlay: OverlayComponent, opts: UnmountOpts = {}) {
-        const overlayState = this.getStateByOverlay(overlay);
-
-        if (!overlayState) {
+    public unmount(overlay: OverlayComponent) {
+        if (!this.overlays.includes(overlay)) {
             return;
         }
 
-        if (!this.isTopOverlay(overlay)) {
-            this.moveLastActiveFocusToNextOverlay(overlayState);
-        } else if (opts.restoreFocus) {
-            this.restoreLastActiveFocus(overlayState);
-        }
+        this.overlays.splice(this.overlays.indexOf(overlay), 1);
 
-        this.removeState(overlayState);
+        if (!this.overlays.length) {
+            this.resetContainerStyles();
+        }
     }
 
     public destroy() {

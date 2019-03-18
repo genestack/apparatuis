@@ -220,39 +220,6 @@ describe('Overlay Manager', () => {
                 expect(activeElement.focus).toHaveBeenCalledTimes(1);
             }
         );
-
-        it('when unmount is called with focus restoring active element should change', () => {
-            const {activeElement, manager, overlay, otherElement} = setup();
-
-            activeElement.focus();
-
-            manager.mount(overlay);
-            expect(document.activeElement).toBe(activeElement);
-            otherElement.focus();
-            expect(document.activeElement).toBe(otherElement);
-            manager.unmount(overlay, {restoreFocus: true});
-            expect(document.activeElement).toBe(activeElement);
-            expect(activeElement.focus).toHaveBeenCalledTimes(2);
-        });
-
-        it(
-            'when unmount is called with focus restoring active element should not change ' +
-                'if element has gone from container',
-            () => {
-                const {activeElement, manager, overlay, otherElement} = setup();
-
-                activeElement.focus();
-
-                manager.mount(overlay);
-                expect(document.activeElement).toBe(activeElement);
-                otherElement.focus();
-                expect(document.activeElement).toBe(otherElement);
-                activeElement.remove();
-                manager.unmount(overlay, {restoreFocus: true});
-                expect(document.activeElement).toBe(otherElement);
-                expect(activeElement.focus).toHaveBeenCalledTimes(1);
-            }
-        );
     });
 
     it('should not throw error on double mount', () => {
@@ -268,38 +235,5 @@ describe('Overlay Manager', () => {
         manager.mount(overlay);
         manager.unmount(overlay);
         manager.unmount(overlay);
-    });
-
-    it('should focus first element after remove middle overlay', () => {
-        const manager = createManager();
-
-        const activeElement = createElementWithId('input', 'active');
-
-        const firstOverlay = createOverlayMock();
-        const firstElement = createElementWithId('input', 'first');
-        const secondOverlay = createOverlayMock();
-        const secondElement = createElementWithId('input', 'second');
-        const thirdOverlay = createOverlayMock();
-        const thirdElement = createElementWithId('input', 'third');
-
-        activeElement.focus();
-
-        manager.mount(firstOverlay);
-        firstElement.focus();
-
-        manager.mount(secondOverlay);
-        secondElement.focus();
-
-        manager.mount(thirdOverlay);
-        thirdElement.focus();
-
-        manager.unmount(firstOverlay, {restoreFocus: true});
-        expect(document.activeElement).toBe(thirdElement);
-
-        manager.unmount(secondOverlay, {restoreFocus: true});
-        expect(document.activeElement).toBe(thirdElement);
-
-        manager.unmount(thirdOverlay, {restoreFocus: true});
-        expect(document.activeElement).toBe(activeElement);
     });
 });

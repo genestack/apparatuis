@@ -12,7 +12,11 @@ import * as React from 'react';
 import {KeyboardArrowRightIcon} from '../../icons/keyboard-arrow-right-icon';
 import {chain} from '../../utils/chain';
 import {debounce} from '../../utils/debounce';
-import {getSiblingFocusableElement, getFirstFocusableElement} from '../../utils/focusable-elements';
+import {
+    getSiblingElement,
+    getReachableElements,
+    getFirstReachableElement
+} from '../../utils/focusable-elements';
 import {Omit} from '../../utils/omit';
 import {chainRefs} from '../../utils/set-ref';
 import {WithClasses, mergeClassesProps} from '../../utils/styles';
@@ -173,7 +177,7 @@ export class MenuItem extends React.PureComponent<Props, State> {
             event.preventDefault();
             this.openSubMenuImmediately(() => {
                 const subMenuPaper = this.subMenuPaperRef.current;
-                const subMenuItem = subMenuPaper && getFirstFocusableElement(subMenuPaper);
+                const subMenuItem = subMenuPaper && getFirstReachableElement(subMenuPaper);
                 if (subMenuItem) {
                     subMenuItem.focus();
                 }
@@ -186,7 +190,10 @@ export class MenuItem extends React.PureComponent<Props, State> {
         if (item && direction) {
             event.preventDefault();
             this.closeSubMenuImmediately();
-            const nextItem = getSiblingFocusableElement(item, direction);
+            const reachableElements =
+                item.parentElement && Array.from(getReachableElements(item.parentElement));
+            const nextItem =
+                reachableElements && getSiblingElement(reachableElements, item, direction);
             if (nextItem) {
                 nextItem.focus();
             }
@@ -213,11 +220,13 @@ export class MenuItem extends React.PureComponent<Props, State> {
             item.focus();
         }
 
+        this.setState({focused: true});
         this.scheduleSubMenuOpen();
     };
 
     private handleMouseLeave = () => {
         this.scheduleSubMenuClose();
+        this.setState({focused: false});
     };
 
     private handleSubMenuEnter = () => {
