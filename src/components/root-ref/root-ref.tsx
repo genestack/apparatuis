@@ -54,8 +54,6 @@ export class RootRef extends React.Component<Props> {
     }
 
     public render() {
-        const {rootRef, children, ...rest} = this.props;
-
-        return React.cloneElement(children, rest);
+        return this.props.children;
     }
 }

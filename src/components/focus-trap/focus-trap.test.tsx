@@ -78,7 +78,12 @@ function createTestApp() {
             }
         },
 
-        mount: mountToBody
+        mount: mountToBody,
+        unmount: () => {
+            if (wrapper) {
+                wrapper.detach();
+            }
+        }
     };
 }
 
@@ -167,11 +172,6 @@ describe('<FocusTrap />', () => {
                 expect(document.activeElement).toBe(trapContainer);
             });
         });
-
-        it('on mount should focus container if focusOnMount passed', () => {
-            const {trapContainer} = setup({tabIndex: 0}, {focusOnMount: true});
-            expect(document.activeElement).toBe(trapContainer);
-        });
     });
 
     describe('with non-focusable container', () => {
@@ -205,11 +205,6 @@ describe('<FocusTrap />', () => {
                 simulateTabKeyDown({shiftKey: true});
                 expect(document.activeElement).toBe(lastTrapElement);
             });
-        });
-
-        it('on mount should focus first trapped input if focusOnMount passed', () => {
-            const {firstTrapElement} = setup({}, {focusOnMount: true});
-            expect(document.activeElement).toBe(firstTrapElement);
         });
     });
 
@@ -266,6 +261,60 @@ describe('<FocusTrap />', () => {
             lastOuterElement.focus();
             simulateTabKeyDown({shiftKey: true});
             expect(document.activeElement).toBe(firstOuterElement);
+        });
+    });
+
+    describe('when focusOnMount property is passed', () => {
+        beforeEach(() => {
+            const activeElement = document.createElement('button');
+            activeElement.id = 'active-element';
+            document.body.appendChild(activeElement);
+            activeElement.focus();
+        });
+
+        afterEach(() => {
+            document.getElementById('active-element')!.remove();
+        });
+
+        it('should focus children when mount', () => {
+            const activeElement = document.getElementById('active-element')!;
+            expect(document.activeElement).toBe(activeElement);
+            const {firstTrapElement} = setup({}, {focusOnMount: true});
+            expect(document.activeElement).toBe(firstTrapElement);
+        });
+
+        it('should restore focus when unmount', () => {
+            const activeElement = document.getElementById('active-element')!;
+            setup({}, {focusOnMount: true});
+            app.unmount();
+            expect(document.activeElement).toBe(activeElement);
+        });
+    });
+
+    describe('when focusOnMount property is not passed', () => {
+        beforeEach(() => {
+            const activeElement = document.createElement('button');
+            activeElement.id = 'active-element';
+            document.body.appendChild(activeElement);
+            activeElement.focus();
+        });
+
+        afterEach(() => {
+            document.getElementById('active-element')!.remove();
+        });
+
+        it('should not focus children when mount', () => {
+            const activeElement = document.getElementById('active-element')!;
+            expect(document.activeElement).toBe(activeElement);
+            setup();
+            expect(document.activeElement).toBe(activeElement);
+        });
+
+        it('should not restore focus when unmount', () => {
+            const activeElement = document.getElementById('active-element')!;
+            setup();
+            app.unmount();
+            expect(document.activeElement).toBe(activeElement);
         });
     });
 });

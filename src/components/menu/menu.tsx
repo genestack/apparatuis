@@ -9,9 +9,8 @@ import classNames from 'classnames';
 import * as React from 'react';
 
 import {chain} from '../../utils/chain';
-import {getFirstFocusableElement, getLastFocusableElement} from '../../utils/focusable-elements';
+import {getFirstReachableElement, getLastReachableElement} from '../../utils/focusable-elements';
 import {Omit} from '../../utils/omit';
-import {chainRefs} from '../../utils/set-ref';
 import {WithClasses, mergeClassesProps} from '../../utils/styles';
 import {Overlay, OverlayProps} from '../overlay';
 
@@ -42,39 +41,19 @@ export interface Props extends TargetProps, WithClasses<keyof typeof styles> {
  * They appear when users interact with a button, action, or other control.
  */
 export class Menu extends React.Component<Props> {
-    private paperRef = React.createRef<HTMLElement>();
-
-    public componentDidMount() {
-        const paper = this.paperRef.current;
-
-        if (this.props.open && paper) {
-            paper.focus();
-        }
-    }
-
-    public componentDidUpdate(props: Props) {
-        const paper = this.paperRef.current;
-
-        if (this.props.open && !props.open && paper) {
-            paper.focus();
-        }
-    }
-
     private handleKeyDown: MenuPopoverProps['onKeyDown'] = (event) => {
-        const paper = this.paperRef.current;
-
-        if (event.target !== event.currentTarget || !paper) {
+        if (event.target !== event.currentTarget) {
             return;
         }
 
         let itemToFocus: HTMLElement | null = null;
 
         if (event.key === 'ArrowDown') {
-            itemToFocus = getFirstFocusableElement(paper);
+            itemToFocus = getFirstReachableElement(event.currentTarget);
         }
 
         if (event.key === 'ArrowUp') {
-            itemToFocus = getLastFocusableElement(paper);
+            itemToFocus = getLastReachableElement(event.currentTarget);
         }
 
         if (itemToFocus) {
@@ -110,7 +89,6 @@ export class Menu extends React.Component<Props> {
                     open={open}
                     placement={placement}
                     positionFixed
-                    rootRef={chainRefs(this.paperRef, popoverProps.rootRef)}
                     tabIndex={-1}
                     onKeyDown={chain(popoverProps.onKeyDown, this.handleKeyDown)}
                 >

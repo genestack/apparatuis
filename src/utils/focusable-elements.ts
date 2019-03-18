@@ -6,7 +6,20 @@
  * actual or intended publication of such source code.
  */
 
+/**
+ * See difference between focusable and reachable elements at
+ * https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/tabindex
+ */
 const FOCUSABLE_SELECTOR = [
+    'button:not([disabled])',
+    'a[href]:not([disabled])',
+    'input:not([disabled])',
+    'select:not([disabled])',
+    'textarea:not([disabled])',
+    '[tabindex]'
+].join(', ');
+
+const REACHABLE_SELECTOR = [
     'button:not([disabled]):not([tabindex^="-"])',
     'a[href]:not([disabled]):not([tabindex^="-"])',
     'input:not([disabled]):not([tabindex^="-"])',
@@ -15,55 +28,65 @@ const FOCUSABLE_SELECTOR = [
     '[tabindex]:not([tabindex^="-"])'
 ].join(', ');
 
-/** Returns true if element could be focused */
-export function isElementFocusable(element: Element) {
+function matches(element: Element, selector: string) {
     // ie 11
     if ((element as any).msMatchesSelector) {
-        return (element as any).msMatchesSelector(FOCUSABLE_SELECTOR) as boolean;
+        return (element as any).msMatchesSelector(selector) as boolean;
     }
 
-    return element.matches(FOCUSABLE_SELECTOR);
+    return element.matches(selector);
+}
+
+/** Returns true if element could be focused */
+export function isElementFocusable(element: Element) {
+    return matches(element, FOCUSABLE_SELECTOR);
+}
+
+/** Returns true if element could be reached by Tab key */
+export function isElementReachable(element: Element) {
+    return matches(element, REACHABLE_SELECTOR);
 }
 
 /** Returns all focusable elements are contained in target element */
 export function getFocusableElements(element: Element) {
-    return element.querySelectorAll(FOCUSABLE_SELECTOR);
+    return element.querySelectorAll<HTMLElement>(FOCUSABLE_SELECTOR);
 }
 
-/** Returns the first HTMLElement that could be focusable in target element */
-export function getFirstFocusableElement(element: HTMLElement) {
-    const focusableElements = getFocusableElements(element);
-
-    const firstElement = focusableElements.item(0);
-
-    return firstElement instanceof HTMLElement ? firstElement : null;
+/** Returns all focusable elements are contained in target element */
+export function getReachableElements(element: Element) {
+    return element.querySelectorAll<HTMLElement>(REACHABLE_SELECTOR);
 }
 
-/** Returns the last HTMLElement that could be focusable in target element */
-export function getLastFocusableElement(element: HTMLElement) {
-    const focusableElements = getFocusableElements(element);
+/** Returns the first reachable element in container */
+export function getFirstReachableElement(container: Element) {
+    const items = getReachableElements(container);
+    const item = items.item(0);
 
-    const lastElement = focusableElements.item(focusableElements.length - 1);
-
-    return lastElement instanceof HTMLElement ? lastElement : null;
+    return item instanceof HTMLElement ? item : null;
 }
 
-/** Returns sibling element that could be focused according to direction */
-export function getSiblingFocusableElement(element: HTMLElement, direction: 'prev' | 'next') {
-    if (!element.parentElement) {
+/** Returns the last reachable element in container */
+export function getLastReachableElement(container: Element) {
+    const items = getReachableElements(container);
+    const item = items.item(items.length - 1);
+
+    return item instanceof HTMLElement ? item : null;
+}
+
+/** Returns sibling element according to direction */
+export function getSiblingElement(
+    elements: Element[],
+    element: HTMLElement,
+    direction: 'prev' | 'next'
+) {
+    if (!element.parentElement || !elements.length) {
         return null;
     }
 
-    const focusableElements = Array.from(getFocusableElements(element.parentElement));
-
-    if (!focusableElements.length) {
-        return null;
-    }
-
-    let currentIndex = focusableElements.indexOf(element);
+    let currentIndex = elements.indexOf(element);
 
     if (currentIndex === -1) {
-        currentIndex = direction === 'next' ? -1 : focusableElements.length;
+        currentIndex = direction === 'next' ? -1 : elements.length;
     }
 
     let nextIndex = direction === 'next' ? currentIndex + 1 : currentIndex - 1;
@@ -72,11 +95,11 @@ export function getSiblingFocusableElement(element: HTMLElement, direction: 'pre
         nextIndex = 0;
     }
 
-    if (nextIndex >= focusableElements.length) {
-        nextIndex = focusableElements.length - 1;
+    if (nextIndex >= elements.length) {
+        nextIndex = elements.length - 1;
     }
 
-    const nextElement = focusableElements[nextIndex];
+    const nextElement = elements[nextIndex];
 
     if (nextElement instanceof HTMLElement && nextElement !== element) {
         return nextElement;
@@ -121,7 +144,7 @@ export function getFocusDirection(
 ): 'next' | 'prev' | null {
     const {target, relatedTarget} = event;
 
-    if (!(target instanceof Element) || !(relatedTarget instanceof Element)) {
+    if (!(target instanceof HTMLElement) || !(relatedTarget instanceof HTMLElement)) {
         return null;
     }
 

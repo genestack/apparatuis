@@ -13,6 +13,7 @@ import {chain} from '../../utils/chain';
 import {Omit} from '../../utils/omit';
 import {Backdrop, BackdropProps} from '../backdrop';
 import {FocusTrap} from '../focus-trap';
+import {RootRef} from '../root-ref';
 
 import {OverlayCloseReason} from './close-reason';
 import {OverlayManager} from './overlay-manager';
@@ -47,8 +48,6 @@ export interface Props extends TargetProps {
     disableClickHandler?: boolean;
     /** Do not listen `Escape` keypress for closing */
     disableEscHandler?: boolean;
-    /** Do not restore focus on last active element when overlay has hidden */
-    disableRestoreFocus?: boolean;
     /** Makes backdrop invisible. Shortcut to Backdrop.invisible */
     invisible?: boolean;
     /** Properties of nested Backdrop component */
@@ -67,6 +66,8 @@ interface State {
  *   - with `Escape` keydown
  */
 export class Overlay extends React.Component<Props, State> {
+    private childRef = React.createRef<HTMLElement>();
+
     public static getDerivedStateFromProps(props: Props, state: State): State {
         if (props.open) {
             return {
@@ -94,9 +95,7 @@ export class Overlay extends React.Component<Props, State> {
     }
 
     public componentWillUnmount() {
-        manager.unmount(this, {
-            restoreFocus: !this.props.disableRestoreFocus
-        });
+        manager.unmount(this);
     }
 
     private open() {
@@ -104,9 +103,7 @@ export class Overlay extends React.Component<Props, State> {
     }
 
     private close() {
-        manager.unmount(this, {
-            restoreFocus: !this.props.disableRestoreFocus
-        });
+        manager.unmount(this);
 
         if (this.props.onClosed) {
             this.props.onClosed();
@@ -147,7 +144,6 @@ export class Overlay extends React.Component<Props, State> {
             onClosed,
             disableClickHandler,
             disableEscHandler,
-            disableRestoreFocus,
             invisible,
             backdropProps = {},
             children,
@@ -174,7 +170,11 @@ export class Overlay extends React.Component<Props, State> {
                     onExited={chain(backdropProps.onExited, this.handleBackdropExited)}
                     onClick={chain(backdropProps.onClick, this.handleBackdropClick)}
                 />
-                {children ? <FocusTrap>{children}</FocusTrap> : null}
+                {children ? (
+                    <FocusTrap focusOnMount>
+                        <RootRef rootRef={this.childRef}>{children}</RootRef>
+                    </FocusTrap>
+                ) : null}
             </div>,
             container
         );
