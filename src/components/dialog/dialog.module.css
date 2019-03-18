@@ -1,0 +1,65 @@
+/*
+ * Copyright (c) 2011-2019 Genestack Limited
+ * All Rights Reserved
+ * THIS IS UNPUBLISHED PROPRIETARY SOURCE CODE OF GENESTACK LIMITED
+ * The copyright notice above does not evidence any
+ * actual or intended publication of such source code.
+ */
+@import "../../variables.css";
+
+.overlay {
+    align-items: center;
+}
+
+.container {
+    display: flex;
+    width: 100%;
+}
+
+.root {
+    outline: none;
+    position: relative;
+    min-width: calc(var(--gs-spacing-unit) * 40);
+    max-width: calc(var(--gs-spacing-unit) * 80);
+    max-height: calc(100vh - (var(--gs-spacing-unit) * 8));
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.overlayScrollable .container {
+    display: block;
+    height: 100%;
+    overflow-x: hidden;
+    overflow-y: visible;
+    text-align: center;
+}
+
+.overlayScrollable .container:after {
+    content: "";
+    height: 100%;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.overlayScrollable .root {
+    margin-top: calc(var(--gs-spacing-unit) * 4);
+    margin-bottom: calc(var(--gs-spacing-unit) * 4);
+    max-height: none;
+    display: inline-block;
+    vertical-align: middle;
+    text-align: left;
+}
+
+.closeButton {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: calc(var(--gs-spacing-unit) * 5.5);
+    height: calc(var(--gs-spacing-unit) * 5.5);
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
