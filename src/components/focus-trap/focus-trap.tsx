@@ -109,15 +109,6 @@ export class FocusTrap extends React.Component<Props> {
 
         if (activeElementOnMount && document.contains(activeElementOnMount)) {
             activeElementOnMount.focus();
-
-            if (
-                activeElementOnMount instanceof HTMLBodyElement &&
-                document.activeElement instanceof HTMLElement
-            ) {
-                document.activeElement.blur();
-            } else {
-                activeElementOnMount.focus();
-            }
         }
     }
 
