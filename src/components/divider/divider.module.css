@@ -7,12 +7,18 @@
  */
 @import "../../variables.css";
 
+:root {
+    --gs-divider-unit: var(--gs-spacing-unit) / 2;
+}
+
 .root {
+    display: flex;
+    width: 100%;
     box-sizing: border-box;
     background: none;
     height: 1px;
-    margin-top: calc(var(--gs-spacing-unit) / 2);
-    margin-bottom: calc(var(--gs-spacing-unit) / 2);
+    margin-top: 0;
+    margin-bottom: 0;
     border: none;
     border-bottom-color: var(--gs-color-smoke);
     border-bottom-width: 1px;
@@ -21,4 +27,40 @@
 
 .dashed {
     border-bottom-style: dashed;
+}
+
+.transparent {
+    border-bottom-color: transparent;
+}
+
+.startGap1 {
+    margin-top: var(--gs-divider-unit);
+}
+
+.startGap2 {
+    margin-top: calc(var(--gs-divider-unit) * 2);
+}
+
+.startGap3 {
+    margin-top: calc(var(--gs-divider-unit) * 3);
+}
+
+.startGap4 {
+    margin-top: calc(var(--gs-divider-unit) * 4);
+}
+
+.endGap1 {
+    margin-bottom: var(--gs-divider-unit);
+}
+
+.endGap2 {
+    margin-bottom: calc(var(--gs-divider-unit) * 2);
+}
+
+.endGap3 {
+    margin-bottom: calc(var(--gs-divider-unit) * 3);
+}
+
+.endGap4 {
+    margin-bottom: calc(var(--gs-divider-unit) * 4);
 }
