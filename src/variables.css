@@ -29,6 +29,6 @@
     --gs-color-bright-white: rgba(255, 255, 255, 1);
 
     /* z-indexes */
-    --gs-z-index-drawer: 90;
-    --gs-z-index-menu: 100;
+    --gs-z-index-drawer: 900;
+    --gs-z-index-modal: 1000;
 }

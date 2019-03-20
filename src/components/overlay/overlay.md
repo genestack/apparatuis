@@ -57,7 +57,6 @@ class SimpleModal extends React.Component {
                 <Button onClick={this.handleSubModalOpen}>Open Overlay</Button>
                 {this.state.subModalMounted ? (
                     <Overlay
-                        style={{zIndex: 100}}
                         open={this.state.subModalOpen}
                         onClose={this.handleSubModalClose}
                         onClosed={this.handleSubModalClosed}

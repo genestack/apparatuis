@@ -7,6 +7,7 @@
  */
 
 import classNames from 'classnames';
+import contains from 'dom-helpers/query/contains';
 import * as React from 'react';
 
 import {chain} from '../../utils/chain';
@@ -158,7 +159,7 @@ export class HiddenScrollbar extends React.Component<Props> {
         const endControl = this.endControlRef.current;
         const target = event.target;
 
-        if (container && startControl && endControl && container.contains(target)) {
+        if (container && startControl && endControl && contains(container, target)) {
             scrollIntoContainerView({
                 container,
                 startControl,

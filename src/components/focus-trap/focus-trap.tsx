@@ -5,6 +5,7 @@
  * The copyright notice above does not evidence any
  * actual or intended publication of such source code.
  */
+import contains from 'dom-helpers/query/contains';
 import * as React from 'react';
 
 import {chain} from '../../utils/chain';
@@ -107,7 +108,7 @@ export class FocusTrap extends React.Component<Props> {
     public componentWillUnmount() {
         const {activeElementOnMount} = this;
 
-        if (activeElementOnMount && document.contains(activeElementOnMount)) {
+        if (activeElementOnMount && contains(document, activeElementOnMount)) {
             activeElementOnMount.focus();
         }
     }

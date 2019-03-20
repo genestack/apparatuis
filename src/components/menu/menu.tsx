@@ -5,20 +5,17 @@
  * The copyright notice above does not evidence any
  * actual or intended publication of such source code.
  */
-import classNames from 'classnames';
 import * as React from 'react';
 
 import {chain} from '../../utils/chain';
 import {getFirstReachableElement, getLastReachableElement} from '../../utils/focusable-elements';
 import {Omit} from '../../utils/omit';
-import {WithClasses, mergeClassesProps} from '../../utils/styles';
 import {Overlay, OverlayProps} from '../overlay';
 
 import {MenuPopover, Props as MenuPopoverProps} from './menu-popover';
-import * as styles from './menu.module.css';
 import {SubMenu, Props as ListProps} from './sub-menu';
 
-type TargetProps = Omit<ListProps, 'classes'>;
+type TargetProps = ListProps;
 
 type RestOverlayProps = Omit<OverlayProps, 'invisible' | 'open'>;
 type RestPopoverProps = Omit<
@@ -27,7 +24,7 @@ type RestPopoverProps = Omit<
 >;
 
 /** Menu public properties */
-export interface Props extends TargetProps, WithClasses<keyof typeof styles> {
+export interface Props extends TargetProps {
     open: boolean;
     onClose: OverlayProps['onClose'];
     referenceElement: MenuPopoverProps['referenceElement'];
@@ -71,18 +68,11 @@ export class Menu extends React.Component<Props> {
             popoverProps = {},
             // tslint:disable-next-line no-object-literal-type-assertion
             overlayProps = {} as RestOverlayProps,
-            classes,
             ...rest
-        } = mergeClassesProps(this.props, styles);
+        } = this.props;
 
         return (
-            <Overlay
-                {...overlayProps}
-                open={open}
-                onClose={onClose}
-                invisible
-                className={classNames(overlayProps.className, classes.overlay)}
-            >
+            <Overlay {...overlayProps} open={open} onClose={onClose} invisible>
                 <MenuPopover
                     {...popoverProps}
                     referenceElement={referenceElement}

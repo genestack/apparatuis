@@ -76,7 +76,7 @@ export interface Props extends TargetProps, WithClasses<keyof typeof styles> {
 interface State {
     item: HTMLElement | null;
     container: Element | null;
-    focused?: boolean;
+    highlighted?: boolean;
 }
 
 const selectFocusDirection = (event: React.KeyboardEvent): 'next' | 'prev' | null => {
@@ -115,7 +115,7 @@ export class MenuItem extends React.PureComponent<Props, State> {
     public state: State = {
         item: null,
         container: null,
-        focused: false
+        highlighted: false
     };
 
     public componentWillUnmount() {
@@ -131,13 +131,14 @@ export class MenuItem extends React.PureComponent<Props, State> {
         }
 
         const container = MenuPopover.getClosestMenuContainer(item);
-        this.setState({item, container}, callback);
+        this.setState({item, container, highlighted: true}, callback);
     };
 
     private closeSubMenu = (callback?: () => void) => {
         const state = {
             item: null,
-            container: null
+            container: null,
+            highlighted: false
         };
 
         this.setState(state, callback);
@@ -220,13 +221,11 @@ export class MenuItem extends React.PureComponent<Props, State> {
             item.focus();
         }
 
-        this.setState({focused: true});
         this.scheduleSubMenuOpen();
     };
 
     private handleMouseLeave = () => {
         this.scheduleSubMenuClose();
-        this.setState({focused: false});
     };
 
     private handleSubMenuEnter = () => {
@@ -234,12 +233,11 @@ export class MenuItem extends React.PureComponent<Props, State> {
     };
 
     private handleSubMenuLeave = () => {
-        this.setState({focused: false});
         this.scheduleSubMenuClose();
     };
 
     private handleSubMenuFocus = () => {
-        this.setState({focused: true});
+        this.setState({highlighted: true});
         this.scheduleSubMenuOpen();
     };
 
@@ -248,11 +246,11 @@ export class MenuItem extends React.PureComponent<Props, State> {
     };
 
     private handleFocus = () => {
-        this.setState({focused: true});
+        this.setState({highlighted: true});
     };
 
     private handleBlur = () => {
-        this.setState({focused: false});
+        this.setState({highlighted: false});
     };
 
     public render() {
@@ -304,7 +302,7 @@ export class MenuItem extends React.PureComponent<Props, State> {
                     <ListItem
                         {...rest}
                         as={renderButton}
-                        focused={this.state.focused}
+                        focused={this.state.highlighted}
                         onFocus={chain(rest.onFocus, this.handleFocus)}
                         onBlur={chain(rest.onFocus, this.handleBlur)}
                         onKeyDown={chain(rest.onKeyDown, this.handleKeyDown)}
