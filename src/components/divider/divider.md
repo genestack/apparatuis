@@ -10,7 +10,13 @@
         has permitted the identification of changes in the small airway epithelium of chronic
         cigarette smokers who have normal pulmonary function.
     </Typography>
-    <Divider dashed />
+    <Divider variant="dashed" gap={2} />
+    <Typography as="p" box="paragraph">
+        The availability of high throughput, massively parallel RNA sequencing (RNA-Seq) of the
+        entire transcriptome opens the possibility of a higher sensitivity and more detailed
+        characterization of the response of the small airway epithelium to smoking.
+    </Typography>
+    <Divider variant="invisible" endGap={3} />
     <Typography as="p" box="paragraph">
         The availability of high throughput, massively parallel RNA sequencing (RNA-Seq) of the
         entire transcriptome opens the possibility of a higher sensitivity and more detailed

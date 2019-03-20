@@ -7,3 +7,12 @@
  */
 export const root: string;
 export const dashed: string;
+export const transparent: string;
+export const startGap1: string;
+export const startGap2: string;
+export const startGap3: string;
+export const startGap4: string;
+export const endGap1: string;
+export const endGap2: string;
+export const endGap3: string;
+export const endGap4: string;
