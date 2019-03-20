@@ -11,7 +11,7 @@
 }
 
 .enter {
-    transform: translateX(0);
+    transform: translate(0, 0);
     opacity: 1;
 }
 
@@ -23,11 +23,29 @@
 .exitLeft {
     opacity: 0;
     transform: translateX(calc(-100% - 24px));
+    /* stylelint-disable-next-line property-no-vendor-prefix */
+    -ms-transform: translateX(-100%) translateX(-24px);
 }
 
 .exitRight {
     opacity: 0;
     transform: translateX(calc(100% - 24px));
+    /* stylelint-disable-next-line property-no-vendor-prefix */
+    -ms-transform: translateX(100%) translateX(-24px);
+}
+
+.exitTop {
+    opacity: 0;
+    transform: translateY(calc(-100% - 24px));
+    /* stylelint-disable-next-line property-no-vendor-prefix */
+    -ms-transform: translateY(-100%) translateY(-24px);
+}
+
+.exitBottom {
+    opacity: 0;
+    transform: translateY(calc(100% - 24px));
+    /* stylelint-disable-next-line property-no-vendor-prefix */
+    -ms-transform: translateY(100%) translateY(-24px);
 }
 
 .exiting {
