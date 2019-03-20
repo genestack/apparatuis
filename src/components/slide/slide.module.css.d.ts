@@ -10,4 +10,6 @@ export const enter: string;
 export const entering: string;
 export const exitLeft: string;
 export const exitRight: string;
+export const exitTop: string;
+export const exitBottom: string;
 export const exiting: string;
