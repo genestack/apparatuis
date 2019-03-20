@@ -12,17 +12,13 @@ import {createIcon} from '../components/icon';
 // tslint:disable max-line-length
 
 /**
- * Keyboard arrow key icon shows user possible transformation direction
- * after some interaction has applied.
+ * Cross icon indicates that the bound action close or cancel something
  */
-export const KeyboardArrowRightIcon = createIcon(
+export const CrossIcon = createIcon(
     <svg viewBox="0 0 20 20">
         <path
-            d="M9 14l4-4-4-4"
-            fill="none"
-            className="gs-svg-icon-stroke"
-            strokeWidth="1.5"
-            strokeLinecap="round"
+            d="M3.88 5.536L5.38 4.038 10.19 8.85l4.825-4.812 1.536 1.498-4.824 4.824 4.824 4.812-1.536 1.536-4.825-4.811-4.811 4.811-1.498-1.536 4.811-4.812-4.811-4.824z"
+            className="gs-svg-icon-fill"
         />
     </svg>
 );

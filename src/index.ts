@@ -29,3 +29,4 @@ export * from './components/menu';
 export * from './components/hidden-scrollbar';
 export * from './components/slide';
 export * from './components/drawer';
+export * from './components/icon-button';

@@ -5,6 +5,7 @@
  * The copyright notice above does not evidence any
  * actual or intended publication of such source code.
  */
+@import "../../variables.css";
 
 .root {
     align-self: center;
@@ -12,4 +13,13 @@
     display: inline-block;
     width: 20px;
     height: 20px;
+    position: relative;
+}
+
+.root :global(.gs-svg-icon-fill) {
+    fill: var(--gs-color-grey);
+}
+
+.root :global(.gs-svg-icon-stroke) {
+    stroke: var(--gs-color-grey);
 }
