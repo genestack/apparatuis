@@ -5,5 +5,4 @@
  * The copyright notice above does not evidence any
  * actual or intended publication of such source code.
  */
-export {Button, Props as ButtonProps} from './button';
-export {ButtonsGroup, Props as ButtonsGroupProps} from './buttons-group';
+export {IconButton, Props as IconButtonProps} from './icon-button';

@@ -5,7 +5,11 @@
     "property-no-unknown": [true, {
       "ignoreProperties": ["composes", "scrollbar-width"]
     }],
+    "selector-pseudo-class-no-unknown": [true, {
+      "ignorePseudoClasses": ["global"]
+    }],
     "selector-attribute-operator-space-before": null,
-    "selector-attribute-operator-space-after": null
+    "selector-attribute-operator-space-after": null,
+    "rule-empty-line-before": null
   }
 }

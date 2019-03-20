@@ -1,0 +1,27 @@
+/*
+ * Copyright (c) 2011-2019 Genestack Limited
+ * All Rights Reserved
+ * THIS IS UNPUBLISHED PROPRIETARY SOURCE CODE OF GENESTACK LIMITED
+ * The copyright notice above does not evidence any
+ * actual or intended publication of such source code.
+ */
+@import "../../variables.css";
+
+.root {
+    box-sizing: border-box;
+    display: inline-flex;
+    padding: 0;
+    outline: none;
+    align-items: center;
+    cursor: pointer;
+    background: transparent;
+    border: none;
+}
+
+.root:hover :global(.gs-svg-icon-fill) {
+    fill: var(--gs-color-dark);
+}
+
+.root:hover :global(.gs-svg-icon-stroke) {
+    stroke: var(--gs-color-dark);
+}
