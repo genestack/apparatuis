@@ -33,6 +33,9 @@ function createHiddenFocusButton() {
     return button;
 }
 
+const remove = (element: HTMLElement) =>
+    element.parentElement && element.parentElement.removeChild(element);
+
 /**
  * Object that knows about opened overlays (dialogs, popovers) on the page.
  * Any Overlay is modal that blocks page content and scroll.
@@ -112,9 +115,9 @@ export class OverlayManager {
         container.style.overflow = containerState.style.overflow || '';
         container.style.paddingRight = containerState.style.paddingRight || '';
         containerState.startFocusButton.removeEventListener('focus', this.handleStartButtonFocus);
-        containerState.startFocusButton.remove();
+        remove(containerState.startFocusButton);
         containerState.endFocusButton.removeEventListener('focus', this.handleEndButtonFocus);
-        containerState.endFocusButton.remove();
+        remove(containerState.endFocusButton);
 
         this.containerState = null;
     }

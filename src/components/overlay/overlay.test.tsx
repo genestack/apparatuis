@@ -9,7 +9,6 @@
 import * as enzyme from 'enzyme';
 import * as React from 'react';
 
-import {OverlayCloseReason} from './close-reason';
 import {Overlay, Props} from './overlay';
 
 jest.useFakeTimers();
@@ -65,7 +64,7 @@ describe('<Overlay />', () => {
             dispatchEvent(event);
 
             expect(onClose).toBeCalled();
-            expect(onClose).toBeCalledWith(OverlayCloseReason.ESCAPE_KEYDOWN, expect.anything());
+            expect(onClose).toBeCalledWith('escape_keydown', expect.anything());
         });
 
         it('should not call onClose callback when disableEscHandler passed', () => {
@@ -112,7 +111,7 @@ describe('<Overlay />', () => {
             dispatchEvent(event);
 
             expect(onClose).toBeCalled();
-            expect(onClose).toBeCalledWith(OverlayCloseReason.BACKDROP_CLICK, expect.anything());
+            expect(onClose).toBeCalledWith('backdrop_click', expect.anything());
         });
 
         it('should not call onClose callback when disableClickHandler passed', () => {

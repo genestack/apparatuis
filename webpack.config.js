@@ -11,6 +11,18 @@ const postcssCustomProperties = require('postcss-custom-properties');
 const postcssImport = require('postcss-import');
 const autoprefixer = require('autoprefixer');
 
+// Styleguidist has dependencies that are not traspiled and do not work in IE.
+// Force babel-loader to transpile it manually.
+const transpileDependencies = [
+    'react-dev-utils',
+    'ansi-regex',
+    'ansi-styles',
+    'chalk',
+    'strip-ansi'
+];
+
+const babelExcludePattern = new RegExp(`node_modules/(?!(${transpileDependencies.join('|')})/).*`);
+
 module.exports = {
     devtool: false,
     cache: true,
@@ -25,6 +37,14 @@ module.exports = {
     },
     module: {
         rules: [
+            {
+                test: /\.js?$/,
+                loader: 'babel-loader',
+                exclude: babelExcludePattern,
+                options: {
+                    presets: ['es2015']
+                }
+            },
             {
                 test: /\.tsx?$/,
                 loader: 'ts-loader'

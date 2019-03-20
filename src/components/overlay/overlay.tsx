@@ -15,7 +15,6 @@ import {Backdrop, BackdropProps} from '../backdrop';
 import {FocusTrap} from '../focus-trap';
 import {RootRef} from '../root-ref';
 
-import {OverlayCloseReason} from './close-reason';
 import {OverlayManager} from './overlay-manager';
 import * as styles from './overlay.module.css';
 
@@ -23,6 +22,9 @@ const container = document.body;
 const manager = new OverlayManager(container);
 
 type TargetProps = React.HTMLAttributes<HTMLDivElement>;
+
+/** Reason of overlay close */
+export type OverlayCloseReason = 'backdrop_click' | 'escape_keydown';
 
 type CloseHandler = (reason: OverlayCloseReason, event?: React.SyntheticEvent) => void;
 
@@ -38,7 +40,7 @@ export interface Props extends TargetProps {
      * Request to close overlay. It accepts close reason and event.
      * @see CloseReason
      */
-    onClose: CloseHandler;
+    onClose?: CloseHandler;
     /**
      * Calls when the overlay is closed, all transitions are completed
      * and the component is ready for unmount
@@ -117,7 +119,9 @@ export class Overlay extends React.Component<Props, State> {
             return;
         }
 
-        onClose(OverlayCloseReason.BACKDROP_CLICK, event);
+        if (onClose) {
+            onClose('backdrop_click', event);
+        }
     };
 
     private handleBackdropExited = () => {
@@ -132,8 +136,8 @@ export class Overlay extends React.Component<Props, State> {
             return;
         }
 
-        if (event.key === 'Escape') {
-            onClose(OverlayCloseReason.ESCAPE_KEYDOWN, event);
+        if (event.key === 'Escape' && onClose) {
+            onClose('escape_keydown', event);
         }
     };
 
