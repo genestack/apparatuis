@@ -10,11 +10,12 @@ import * as React from 'react';
 
 /** WithSeparator public properties */
 export interface Props {
+    /** Element or string that is used as separator */
     separator?: React.ReactNode;
     children: React.ReactNode;
 }
 
-/** With Separator */
+/** Component that adds separator between children */
 export const WithSeparator = (props: Props) => {
     const children = React.Children.toArray(props.children).reduce<React.ReactNode[]>(
         (result, child, index, arr) => {
