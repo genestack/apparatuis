@@ -5,44 +5,15 @@
  * The copyright notice above does not evidence any
  * actual or intended publication of such source code.
  */
-import {mount, ReactWrapper} from 'enzyme';
+
 import * as React from 'react';
 
+import {createTestApp} from '../../../test-utils/create-test-app';
 import {Grow} from '../grow';
 
 import {Popover} from './popover';
 
 jest.useFakeTimers();
-
-function createTestApp() {
-    let appElement: HTMLElement | undefined;
-    let wrapper: ReactWrapper<any, any> | null = null;
-
-    const mountToBody = <P, S = any>(node: React.ReactElement<P>): ReactWrapper<P, S> => {
-        wrapper = mount(node, {attachTo: appElement});
-
-        return wrapper;
-    };
-
-    return {
-        beforeEach: () => {
-            appElement = document.createElement('div');
-            document.body.appendChild(appElement);
-        },
-
-        afterEach: () => {
-            if (wrapper) {
-                wrapper.detach();
-            }
-
-            if (appElement) {
-                appElement.remove();
-            }
-        },
-
-        mount: mountToBody
-    };
-}
 
 describe('<Popover />', () => {
     const app = createTestApp();
