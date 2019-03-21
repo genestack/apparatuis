@@ -30,3 +30,5 @@ export * from './components/hidden-scrollbar';
 export * from './components/slide';
 export * from './components/drawer';
 export * from './components/icon-button';
+export * from './components/with-separator';
+export * from './components/root-ref';
