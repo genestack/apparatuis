@@ -6,61 +6,24 @@
  * actual or intended publication of such source code.
  */
 // tslint:disable no-non-null-assertion no-magic-numbers
-import {mount, ReactWrapper} from 'enzyme';
 import * as React from 'react';
+
+import {createRafMock} from '../../../test-utils/create-raf-mock';
+import {createTestApp} from '../../../test-utils/create-test-app';
 
 import {HiddenScrollbar} from './hidden-scrollbar';
 
 jest.useFakeTimers();
 
-function createTestApp() {
-    let appElement: HTMLElement | undefined;
-    let wrapper: ReactWrapper<any, any> | null = null;
-    let rafCallbacks: Array<() => void> = [];
-
-    return {
-        beforeEach: () => {
-            rafCallbacks = [];
-            appElement = document.createElement('div');
-            document.body.appendChild(appElement);
-
-            jest.spyOn(window, 'requestAnimationFrame').mockImplementation(
-                (callback: () => void) => {
-                    rafCallbacks.push(callback);
-                }
-            );
-        },
-
-        afterEach: () => {
-            (window.requestAnimationFrame as any).mockRestore();
-
-            if (wrapper) {
-                wrapper.detach();
-            }
-
-            if (appElement) {
-                appElement.remove();
-            }
-        },
-
-        mount: <P, S = any>(node: React.ReactElement<P>): ReactWrapper<P, S> => {
-            wrapper = mount(node, {attachTo: appElement});
-
-            return wrapper;
-        },
-
-        runRafCallbacks: () => {
-            rafCallbacks.forEach((callback) => {
-                callback();
-            });
-        }
-    };
-}
-
 describe('<HiddenScrollbar />', () => {
     const app = createTestApp();
+    const rafMock = createRafMock();
+
     beforeEach(app.beforeEach);
+    beforeEach(rafMock.beforeEach);
+
     afterEach(app.afterEach);
+    afterEach(rafMock.afterEach);
 
     const setup = () => {
         app.mount(
@@ -140,87 +103,87 @@ describe('<HiddenScrollbar />', () => {
 
     it('start control should be hidden on init', () => {
         const {start} = setup();
-        app.runRafCallbacks();
+        rafMock.runAll();
         expect(start.style.display).toBe('none');
     });
 
     it('end control should be visible on init', () => {
         const {end} = setup();
-        app.runRafCallbacks();
+        rafMock.runAll();
         expect(end.style.display).not.toBe('none');
     });
 
     it('start control should be visible after some scroll', () => {
         const {start, container} = setup();
-        app.runRafCallbacks();
+        rafMock.runAll();
         container.scrollTop = 10;
-        app.runRafCallbacks();
+        rafMock.runAll();
         expect(start.style.display).not.toBe('none');
     });
 
     it('end control should be visible after some scroll', () => {
         const {end, container} = setup();
-        app.runRafCallbacks();
+        rafMock.runAll();
         container.scrollTop = 10;
-        app.runRafCallbacks();
+        rafMock.runAll();
         expect(end.style.display).not.toBe('none');
     });
 
     it('start control should be visible after scroll to end', () => {
         const {start, container} = setup();
-        app.runRafCallbacks();
+        rafMock.runAll();
         container.scrollTop = 50;
-        app.runRafCallbacks();
+        rafMock.runAll();
         expect(start.style.display).not.toBe('none');
     });
 
     it('end control should be hidden after scroll to end', () => {
         const {end, container} = setup();
-        app.runRafCallbacks();
+        rafMock.runAll();
         container.scrollTop = 50;
-        app.runRafCallbacks();
+        rafMock.runAll();
         expect(end.style.display).toBe('none');
     });
 
     it('start control should be hidden if focus to the first element', () => {
         const {start, container} = setup();
-        app.runRafCallbacks();
+        rafMock.runAll();
         container.scrollTop = 10;
-        app.runRafCallbacks();
+        rafMock.runAll();
         document.getElementById('first-item')!.focus();
-        app.runRafCallbacks();
+        rafMock.runAll();
         expect(start.style.display).toBe('none');
     });
 
     it('end control should be hidden if focus to the last element', () => {
         const {end, container} = setup();
-        app.runRafCallbacks();
+        rafMock.runAll();
         container.scrollTop = 10;
-        app.runRafCallbacks();
+        rafMock.runAll();
         document.getElementById('last-item')!.focus();
-        app.runRafCallbacks();
+        rafMock.runAll();
         expect(end.style.display).toBe('none');
     });
 
     it('both controls should be visible if focus to the middle element', () => {
         const {end, start, container} = setup();
-        app.runRafCallbacks();
+        rafMock.runAll();
         container.scrollTop = 10;
-        app.runRafCallbacks();
+        rafMock.runAll();
         const middleItem = document.getElementById('middle-item')!;
         jest.spyOn(middleItem, 'getBoundingClientRect').mockImplementation(() => ({
             top: 10,
             bottom: 20
         }));
         middleItem.focus();
-        app.runRafCallbacks();
+        rafMock.runAll();
         expect(end.style.display).not.toBe('none');
         expect(start.style.display).not.toBe('none');
     });
 
     it('should increase scrollTop with default scrollStep when mouse over the end control', () => {
         const {end, scrollTopSetter} = setup();
-        app.runRafCallbacks();
+        rafMock.runAll();
         scrollTopSetter.mockClear();
         end.dispatchEvent(new MouseEvent('mouseover', {bubbles: true}));
         expect(scrollTopSetter).toHaveBeenCalledTimes(1);
@@ -231,9 +194,9 @@ describe('<HiddenScrollbar />', () => {
         'should decrease scrollTop with default ' + 'scrollStep when mouse over the start control',
         () => {
             const {start, container, scrollTopSetter} = setup();
-            app.runRafCallbacks();
+            rafMock.runAll();
             container.scrollTop = 50;
-            app.runRafCallbacks();
+            rafMock.runAll();
             scrollTopSetter.mockClear();
             start.dispatchEvent(new MouseEvent('mouseover', {bubbles: true}));
             expect(scrollTopSetter).toHaveBeenCalledTimes(1);
@@ -243,7 +206,7 @@ describe('<HiddenScrollbar />', () => {
 
     it('should stop change scroll whe mouse leave the end control', () => {
         const {end, scrollTopSetter} = setup();
-        app.runRafCallbacks();
+        rafMock.runAll();
         scrollTopSetter.mockClear();
         end.dispatchEvent(new MouseEvent('mouseover', {bubbles: true}));
         jest.runOnlyPendingTimers();
@@ -254,9 +217,9 @@ describe('<HiddenScrollbar />', () => {
 
     it('should stop change scroll whe mouse leave the start control', () => {
         const {start, container, scrollTopSetter} = setup();
-        app.runRafCallbacks();
+        rafMock.runAll();
         container.scrollTop = 50;
-        app.runRafCallbacks();
+        rafMock.runAll();
         scrollTopSetter.mockClear();
         start.dispatchEvent(new MouseEvent('mouseover', {bubbles: true}));
         jest.runOnlyPendingTimers();

@@ -7,9 +7,9 @@
  */
 // tslint:disable no-unbound-method no-non-null-assertion max-file-line-count
 // tslint:disable no-unnecessary-type-assertion
-import {mount, ReactWrapper} from 'enzyme';
 import * as React from 'react';
 
+import {createTestApp} from '../../../test-utils/create-test-app';
 import {FocusTrap} from '../focus-trap';
 
 import {Menu} from './menu';
@@ -17,34 +17,6 @@ import {MenuItem} from './menu-item';
 import {SubMenu} from './sub-menu';
 
 jest.useFakeTimers();
-
-function createTestApp() {
-    let appElement: HTMLElement | undefined;
-    let wrapper: ReactWrapper<any, any> | null = null;
-
-    return {
-        beforeEach: () => {
-            appElement = document.createElement('div');
-            document.body.appendChild(appElement);
-        },
-
-        afterEach: () => {
-            if (wrapper) {
-                wrapper.detach();
-            }
-
-            if (appElement) {
-                appElement.remove();
-            }
-        },
-
-        mount: <P, S = any>(node: React.ReactElement<P>): ReactWrapper<P, S> => {
-            wrapper = mount(node, {attachTo: appElement});
-
-            return wrapper;
-        }
-    };
-}
 
 describe('<Menu />', () => {
     const app = createTestApp();
