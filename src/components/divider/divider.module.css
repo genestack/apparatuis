@@ -8,7 +8,7 @@
 @import "../../variables.css";
 
 :root {
-    --gs-divider-unit: var(--gs-spacing-unit) / 2;
+    --gs-divider-unit: calc(var(--gs-spacing-unit) / 2);
 }
 
 .root {

@@ -35,7 +35,7 @@ export interface Props extends TargetProps {
      * so in fact it is hidden after some time when transition is completed
      * and `onClosed` callback is called.
      */
-    open: boolean;
+    open?: boolean;
     /**
      * Request to close overlay. It accepts close reason and event.
      * @see CloseReason

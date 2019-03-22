@@ -7,6 +7,7 @@
  */
 // tslint:disable max-file-line-count
 import classNames from 'classnames';
+import contains from 'dom-helpers/query/contains';
 import * as React from 'react';
 
 import {KeyboardArrowRightIcon} from '../../icons/keyboard-arrow-right-icon';
@@ -26,6 +27,7 @@ import {IconProps} from '../icon';
 import {ListItem, ListItemProps, ListItemCell, ListItemCellProps} from '../list';
 import {RootRef} from '../root-ref';
 
+import {MenuContext, MenuContextValue} from './menu-context';
 import * as styles from './menu-item.module.css';
 import {MenuPopover, Props as MenuPopoverProps} from './menu-popover';
 import {Props as SubMenuProps} from './sub-menu';
@@ -50,6 +52,7 @@ export interface Props extends TargetProps, WithClasses<keyof typeof styles> {
      * Accepts only `<SubMenu />` elements or functions that returns it.
      */
     subMenu?: SubMenuProp;
+    value?: any;
     /** Properties for the left list item cell that contains icon */
     iconCellProps?: Omit<ListItemCellProps, 'children'>;
     /** Properties list item cell with main content */
@@ -121,6 +124,7 @@ export class MenuItem extends React.PureComponent<Props, State> {
     public componentWillUnmount() {
         this.closeSubMenuDebounced.cancel();
         this.openSubMenuDebounced.cancel();
+        this.exitKeyboardMode();
     }
 
     private openSubMenu = (callback?: () => void) => {
@@ -173,9 +177,30 @@ export class MenuItem extends React.PureComponent<Props, State> {
         this.openSubMenu(callback);
     }
 
+    private enterKeyboardMode() {
+        window.addEventListener('mousemove', this.handleWindowMouseMove);
+    }
+
+    private exitKeyboardMode() {
+        window.removeEventListener('mousemove', this.handleWindowMouseMove);
+    }
+
+    private handleWindowMouseMove = (event: MouseEvent) => {
+        this.exitKeyboardMode();
+
+        const {target} = event;
+        const item = this.itemRef.current;
+
+        if (target instanceof Node && item && contains(item, target)) {
+            item.focus();
+            this.openSubMenuImmediately();
+        }
+    };
+
     private handleKeyDown: Props['onKeyDown'] = (event) => {
         if (event.key === 'ArrowRight') {
             event.preventDefault();
+            this.enterKeyboardMode();
             this.openSubMenuImmediately(() => {
                 const subMenuPaper = this.subMenuPaperRef.current;
                 const subMenuItem = subMenuPaper && getFirstReachableElement(subMenuPaper);
@@ -190,6 +215,7 @@ export class MenuItem extends React.PureComponent<Props, State> {
 
         if (item && direction) {
             event.preventDefault();
+            this.enterKeyboardMode();
             this.closeSubMenuImmediately();
             const reachableElements =
                 item.parentElement && Array.from(getReachableElements(item.parentElement));
@@ -215,7 +241,7 @@ export class MenuItem extends React.PureComponent<Props, State> {
      * We focus any item under the cursor for following comfortable navigation
      * through keyboard.
      */
-    private handleMouseMove = () => {
+    private handleMouseEnter = () => {
         const item = this.itemRef.current;
         if (item instanceof HTMLElement && document.activeElement !== item) {
             item.focus();
@@ -253,6 +279,14 @@ export class MenuItem extends React.PureComponent<Props, State> {
         this.setState({highlighted: false});
     };
 
+    private createClickHandler = (menuContext: MenuContextValue | null) => (
+        event: React.SyntheticEvent
+    ) => {
+        if (menuContext) {
+            menuContext.onItemSelect(this, event);
+        }
+    };
+
     public render() {
         const {
             classes,
@@ -260,6 +294,7 @@ export class MenuItem extends React.PureComponent<Props, State> {
             children,
             icon,
             subMenu,
+            value,
             iconCellProps = {},
             contentProps = {},
             subMenuPopoverProps = {},
@@ -297,40 +332,48 @@ export class MenuItem extends React.PureComponent<Props, State> {
         ) : null;
 
         return (
-            <React.Fragment>
-                <RootRef rootRef={this.itemRef}>
-                    <ListItem
-                        {...rest}
-                        as={renderButton}
-                        focused={this.state.highlighted}
-                        onFocus={chain(rest.onFocus, this.handleFocus)}
-                        onBlur={chain(rest.onFocus, this.handleBlur)}
-                        onKeyDown={chain(rest.onKeyDown, this.handleKeyDown)}
-                        onMouseMove={chain(rest.onMouseMove, this.handleMouseMove)}
-                        onMouseLeave={chain(rest.onMouseLeave, this.handleMouseLeave)}
-                        className={classNames(className, classes.root)}
-                        classes={{
-                            focused: classes.focused,
-                            hovered: classes.hovered
-                        }}
-                    >
-                        <ListItemCell
-                            {...iconCellProps}
-                            className={classNames(iconCellProps.className, classes.iconCell)}
-                        >
-                            {icon}
-                        </ListItemCell>
-                        <FlexExpander
-                            {...contentProps}
-                            className={classNames(contentProps.className, classes.content)}
-                        >
-                            {children}
-                        </FlexExpander>
-                        {subMenuArrowIcon}
-                    </ListItem>
-                </RootRef>
-                {subMenuPopover}
-            </React.Fragment>
+            <MenuContext.Consumer>
+                {(menuContext) => (
+                    <React.Fragment>
+                        <RootRef rootRef={this.itemRef}>
+                            <ListItem
+                                {...rest}
+                                as={renderButton}
+                                focused={this.state.highlighted}
+                                onClick={chain(rest.onClick, this.createClickHandler(menuContext))}
+                                onFocus={chain(rest.onFocus, this.handleFocus)}
+                                onBlur={chain(rest.onFocus, this.handleBlur)}
+                                onKeyDown={chain(rest.onKeyDown, this.handleKeyDown)}
+                                onMouseEnter={chain(rest.onMouseEnter, this.handleMouseEnter)}
+                                onMouseLeave={chain(rest.onMouseLeave, this.handleMouseLeave)}
+                                className={classNames(className, classes.root)}
+                                classes={{
+                                    focused: classes.focused,
+                                    hovered: classes.hovered
+                                }}
+                            >
+                                <ListItemCell
+                                    {...iconCellProps}
+                                    className={classNames(
+                                        iconCellProps.className,
+                                        classes.iconCell
+                                    )}
+                                >
+                                    {icon}
+                                </ListItemCell>
+                                <FlexExpander
+                                    {...contentProps}
+                                    className={classNames(contentProps.className, classes.content)}
+                                >
+                                    {children}
+                                </FlexExpander>
+                                {subMenuArrowIcon}
+                            </ListItem>
+                        </RootRef>
+                        {subMenuPopover}
+                    </React.Fragment>
+                )}
+            </MenuContext.Consumer>
         );
     }
 }
