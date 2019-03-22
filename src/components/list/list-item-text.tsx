@@ -19,6 +19,7 @@ type TargetProps = Omit<TypographyProps, 'classes'>;
 
 /** ListItemText public properties */
 export interface Props extends TargetProps, WithClasses<keyof typeof styles> {
+    children: React.ReactNode;
     /** Disable ellipsis text */
     wrap?: boolean;
 }

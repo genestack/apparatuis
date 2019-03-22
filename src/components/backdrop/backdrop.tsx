@@ -20,7 +20,7 @@ type TargetProps = React.HTMLAttributes<HTMLDivElement>;
 
 /** Public Backdrop properties */
 export interface Props extends TargetProps, WithClasses<keyof typeof styles> {
-    open: boolean;
+    open?: boolean;
     /** If `true` the backdrop will have transparent background */
     invisible?: boolean;
     /** Properties of the `<Fade />` element */

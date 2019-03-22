@@ -33,7 +33,7 @@ const PopoverArrowIcon = createIcon(
 /** Popover public properties */
 export interface Props extends TargetProps, WithClasses<keyof typeof styles> {
     /** If `true` popover is visible */
-    open: boolean;
+    open?: boolean;
     /**
      * DOM element, or a function that returns the DOM element
      * (or DOM-like object @see PopperJS.ReferenceObject),
@@ -41,7 +41,7 @@ export interface Props extends TargetProps, WithClasses<keyof typeof styles> {
      * The return value will passed as the reference object of the Popper.js
      * instance.
      */
-    referenceElement: PopperProps['referenceElement'] | (() => PopperProps['referenceElement']);
+    referenceElement?: PopperProps['referenceElement'] | (() => PopperProps['referenceElement']);
     /**
      * Popover is going to be placed according to the value of this property.
      * @see https://popper.js.org/popper-documentation.html#Popper.placements

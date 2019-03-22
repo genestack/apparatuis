@@ -10,3 +10,4 @@ export {MenuItem, Props as MenuItemProps} from './menu-item';
 export {MenuItemCell, Props as MenuItemCellProps} from './menu-item-cell';
 export {MenuItemText, Props as MenuItemTextProps} from './menu-item-text';
 export {SubMenu, Props as SubMenuProps} from './sub-menu';
+export {MenuHandler, Props as MenuHandlerProps} from './menu-handler';

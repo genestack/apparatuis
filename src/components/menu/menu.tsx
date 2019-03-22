@@ -12,12 +12,14 @@ import {getFirstReachableElement, getLastReachableElement} from '../../utils/foc
 import {Omit} from '../../utils/omit';
 import {Overlay, OverlayProps} from '../overlay';
 
+import {MenuContext, MenuContextValue} from './menu-context';
+import {MenuItem} from './menu-item';
 import {MenuPopover, Props as MenuPopoverProps} from './menu-popover';
 import {SubMenu, Props as ListProps} from './sub-menu';
 
 type TargetProps = ListProps;
 
-type RestOverlayProps = Omit<OverlayProps, 'invisible' | 'open'>;
+type RestOverlayProps = Omit<OverlayProps, 'invisible' | 'open' | 'onClose' | 'onClosed'>;
 type RestPopoverProps = Omit<
     MenuPopoverProps,
     'referenceElement' | 'open' | 'withArrow' | 'positionFixed' | 'placement' | 'tabIndex'
@@ -25,12 +27,14 @@ type RestPopoverProps = Omit<
 
 /** Menu public properties */
 export interface Props extends TargetProps {
-    open: boolean;
-    onClose: OverlayProps['onClose'];
-    referenceElement: MenuPopoverProps['referenceElement'];
+    open?: boolean;
+    onClose?: OverlayProps['onClose'];
+    onClosed?: OverlayProps['onClosed'];
+    referenceElement?: MenuPopoverProps['referenceElement'];
     placement?: MenuPopoverProps['placement'];
     overlayProps?: RestOverlayProps;
     popoverProps?: RestPopoverProps;
+    onValueSelect?: (value: any, event: React.SyntheticEvent, ref: MenuItem) => void;
 }
 
 /**
@@ -38,6 +42,14 @@ export interface Props extends TargetProps {
  * They appear when users interact with a button, action, or other control.
  */
 export class Menu extends React.Component<Props> {
+    private menuContext: MenuContextValue = {
+        onItemSelect: (item, event) => {
+            if (this.props.onValueSelect) {
+                this.props.onValueSelect(item.props.value, event, item);
+            }
+        }
+    };
+
     private handleKeyDown: MenuPopoverProps['onKeyDown'] = (event) => {
         if (event.target !== event.currentTarget) {
             return;
@@ -63,28 +75,38 @@ export class Menu extends React.Component<Props> {
         const {
             open,
             onClose,
+            onClosed,
             referenceElement,
             placement = 'bottom-start',
             popoverProps = {},
+            onValueSelect,
             // tslint:disable-next-line no-object-literal-type-assertion
             overlayProps = {} as RestOverlayProps,
             ...rest
         } = this.props;
 
         return (
-            <Overlay {...overlayProps} open={open} onClose={onClose} invisible>
-                <MenuPopover
-                    {...popoverProps}
-                    referenceElement={referenceElement}
+            <MenuContext.Provider value={this.menuContext}>
+                <Overlay
+                    {...overlayProps}
                     open={open}
-                    placement={placement}
-                    positionFixed
-                    tabIndex={-1}
-                    onKeyDown={chain(popoverProps.onKeyDown, this.handleKeyDown)}
+                    onClose={onClose}
+                    onClosed={onClosed}
+                    invisible
                 >
-                    <SubMenu {...rest} />
-                </MenuPopover>
-            </Overlay>
+                    <MenuPopover
+                        {...popoverProps}
+                        referenceElement={referenceElement}
+                        open={open}
+                        placement={placement}
+                        positionFixed
+                        tabIndex={-1}
+                        onKeyDown={chain(popoverProps.onKeyDown, this.handleKeyDown)}
+                    >
+                        <SubMenu {...rest} />
+                    </MenuPopover>
+                </Overlay>
+            </MenuContext.Provider>
         );
     }
 }
