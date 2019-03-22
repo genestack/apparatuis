@@ -14,7 +14,7 @@ import _scrollbarSize from 'dom-helpers/util/scrollbarSize';
 
 import {hasVerticalScrollbar as _hasVerticalScrollbar} from '../../utils/has-vertical-scrollbar';
 
-import {OverlayManager, OverlayComponent} from './overlay-manager';
+import {OverlayManager, OverlayComponent, FIXED_BLOCKS_CLASS_NAME} from './overlay-manager';
 
 const getScrollbarSize = _scrollbarSize as (typeof _scrollbarSize) & jest.MockInstance<any>;
 const hasVerticalScrollbar = _hasVerticalScrollbar as (typeof _hasVerticalScrollbar) &
@@ -155,6 +155,21 @@ describe('Overlay Manager', () => {
 
                 expect(document.body.style.overflow).toBe('hidden');
                 expect(document.body.style.paddingRight).toBe('30px');
+            });
+
+            it('should set padding right to fixed element', () => {
+                const fixedElement = document.createElement('div');
+                fixedElement.style.paddingRight = '12px';
+                fixedElement.classList.add(FIXED_BLOCKS_CLASS_NAME);
+                document.body.appendChild(fixedElement);
+
+                const manager = createManager();
+                const overlay = createOverlayMock();
+                manager.mount(overlay);
+
+                expect(fixedElement.style.paddingRight).toBe('42px');
+
+                fixedElement.remove();
             });
         });
 

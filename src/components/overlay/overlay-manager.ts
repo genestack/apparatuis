@@ -11,7 +11,8 @@ import ReactDOM from 'react-dom';
 import {getFirstReachableElement, getLastReachableElement} from '../../utils/focusable-elements';
 import {hasVerticalScrollbar} from '../../utils/has-vertical-scrollbar';
 
-type Style = Partial<CSSStyleDeclaration>;
+/** ClassName to find all fixed element on the page */
+export const FIXED_BLOCKS_CLASS_NAME = 'gs-fixed';
 
 /**
  * Base interface for overlays are used in manager
@@ -19,9 +20,11 @@ type Style = Partial<CSSStyleDeclaration>;
 export type OverlayComponent = React.ReactInstance;
 
 interface ContainerState {
-    style: Style;
     startFocusButton: HTMLButtonElement;
     endFocusButton: HTMLButtonElement;
+    containerOverflow: string | null;
+    containerPaddingRight: string | null;
+    fixedBlocksPaddingsRight: Map<HTMLElement, string | null>;
 }
 
 function createHiddenFocusButton() {
@@ -33,6 +36,9 @@ function createHiddenFocusButton() {
     return button;
 }
 
+const getPaddingRight = (element: HTMLElement) =>
+    parseInt(window.getComputedStyle(element).paddingRight || '0', 10);
+
 const remove = (element: HTMLElement) =>
     element.parentElement && element.parentElement.removeChild(element);
 
@@ -41,9 +47,7 @@ const remove = (element: HTMLElement) =>
  * Any Overlay is modal that blocks page content and scroll.
  *
  * OverlayManager removes scrollbar from container when any overlay is opened.
- * Also it serves focus states of elements when any overlay is closing.
- * After overlay is closed we could restore focus on element that was in focus
- * when overlay was opened.
+ * Also it adds paddings to fixed elements to prevent it chattering.
  *
  * Also to prevent scrolling below the overlays when user changes focus
  * from browser address (aka. URL) bar `OverlayManager` adds two fixed
@@ -77,31 +81,41 @@ export class OverlayManager {
         document.body.appendChild(endFocusButton);
         document.body.insertBefore(startFocusButton, document.body.firstChild);
 
+        const fixedBlocksPaddingsRight = new Map<HTMLElement, string | null>();
+
         this.containerState = {
-            style: {
-                overflow: container.style.overflow,
-                paddingRight: container.style.paddingRight
-            },
+            containerOverflow: container.style.overflow,
+            containerPaddingRight: container.style.paddingRight,
             startFocusButton,
-            endFocusButton
+            endFocusButton,
+            fixedBlocksPaddingsRight
         };
 
-        const appliedStyle = {
-            overflow: 'hidden',
-            paddingRight: '0px'
-        };
+        const containerOverflow = 'hidden';
+        let containerPaddingRight = '0px';
 
-        type StyleKeys = keyof typeof appliedStyle;
+        const appliedFixedBlocksPaddings = new Map<HTMLElement, string | null>();
 
         if (hasVerticalScrollbar(container)) {
             const size = scrollbarSize();
-            const computedStyle = window.getComputedStyle(container);
-            const paddingRight = parseInt(computedStyle.paddingRight || '0', 10);
-            appliedStyle.paddingRight = `${paddingRight + size}px`;
+            containerPaddingRight = `${getPaddingRight(container) + size}px`;
+
+            Array.from(
+                document.querySelectorAll<HTMLElement>(`.${FIXED_BLOCKS_CLASS_NAME}`)
+            ).forEach((fixedElement) => {
+                appliedFixedBlocksPaddings.set(
+                    fixedElement,
+                    `${getPaddingRight(fixedElement) + size}px`
+                );
+            });
         }
 
-        (Object.keys(appliedStyle) as StyleKeys[]).forEach((key) => {
-            container.style[key] = appliedStyle[key];
+        container.style.overflow = containerOverflow;
+        container.style.paddingRight = containerPaddingRight;
+
+        Array.from(appliedFixedBlocksPaddings).forEach(([fixedElement, paddingRight]) => {
+            fixedBlocksPaddingsRight.set(fixedElement, fixedElement.style.paddingRight);
+            fixedElement.style.paddingRight = paddingRight;
         });
     }
 
@@ -112,12 +126,18 @@ export class OverlayManager {
             return;
         }
 
-        container.style.overflow = containerState.style.overflow || '';
-        container.style.paddingRight = containerState.style.paddingRight || '';
+        container.style.overflow = containerState.containerOverflow || '';
+        container.style.paddingRight = containerState.containerPaddingRight || '';
         containerState.startFocusButton.removeEventListener('focus', this.handleStartButtonFocus);
         remove(containerState.startFocusButton);
         containerState.endFocusButton.removeEventListener('focus', this.handleEndButtonFocus);
         remove(containerState.endFocusButton);
+
+        Array.from(containerState.fixedBlocksPaddingsRight).forEach(
+            ([fixedElement, paddingRight]) => {
+                fixedElement.style.paddingRight = paddingRight;
+            }
+        );
 
         this.containerState = null;
     }
