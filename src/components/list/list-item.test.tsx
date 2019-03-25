@@ -13,31 +13,26 @@ import {ListItem} from './list-item';
 describe('<ListItem />', () => {
     test('should render div HTML element', () => {
         const wrapper = mount(<ListItem />);
-        expect(wrapper.children().is('div')).toBe(true);
+        expect(wrapper.find('div')).toHaveLength(1);
     });
 
     test('should be focusable', () => {
         const wrapper = mount(<ListItem />);
-        expect(wrapper.children().props().tabIndex).toBe(0);
+        expect(wrapper.find('div').props().tabIndex).toBe(0);
     });
 
     test('should be not focusable if disabled', () => {
         const wrapper = mount(<ListItem disabled />);
-        expect(wrapper.children().props().tabIndex).toBe(-1);
+        expect(wrapper.find('div').props().tabIndex).toBe(-1);
     });
 
     test('should accept tabIndex', () => {
         const wrapper = mount(<ListItem tabIndex={2} />);
-        expect(wrapper.children().props().tabIndex).toBe(2);
-    });
-
-    test('should spread contentProps to content element', () => {
-        const wrapper = mount(<ListItem contentProps={{id: 'test'}} />);
-        expect(wrapper.find('#test').length).toBeTruthy();
+        expect(wrapper.find('div').props().tabIndex).toBe(2);
     });
 
     test('should render custom elements', () => {
         const wrapper = mount(<ListItem as="button" />);
-        expect(wrapper.children().is('button')).toBe(true);
+        expect(wrapper.find('button')).toHaveLength(1);
     });
 });

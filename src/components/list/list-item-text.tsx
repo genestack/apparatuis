@@ -5,50 +5,38 @@
  * The copyright notice above does not evidence any
  * actual or intended publication of such source code.
  */
-import classNames from 'classnames';
 import * as React from 'react';
 
-import {Omit} from '../../utils/omit';
-import {WithClasses, mergeClassesProps} from '../../utils/styles';
+import {Flex} from '../flex';
 import {Typography, TypographyProps} from '../typography';
 
-import {ListItemCell} from './list-item-cell';
-import * as styles from './list-item-text.module.css';
-
-type TargetProps = Omit<TypographyProps, 'classes'>;
+type TargetProps = TypographyProps;
 
 /** ListItemText public properties */
-export interface Props extends TargetProps, WithClasses<keyof typeof styles> {
-    children: React.ReactNode;
-    /** Disable ellipsis text */
+export interface Props extends TargetProps {
+    noGrow?: boolean;
+    noShrink?: boolean;
     wrap?: boolean;
 }
 
 /**
  * List item main element.
- * It is ellipsis by default, so it should have `title` value.
- * If no `title` is passed it tries to use `children` as `string`,
  */
-export function ListItemText(props: Props) {
-    const {wrap, classes, className, ...rest} = mergeClassesProps(props, styles);
+export const ListItemText = (props: Props) => {
+    const {noGrow, noShrink, wrap, ...rest} = props;
 
-    const title = rest.title || (typeof rest.children === 'string' ? rest.children : undefined);
-
-    if (!title) {
-        console.error(
-            '<ListItemText /> content could be truncated. ' +
-                'Pass non-empty `title` property or use string children'
-        );
-    }
+    const container = typeof props.children !== 'string';
 
     return (
-        <ListItemCell
-            {...rest}
-            as={Typography}
-            title={title}
-            className={classNames(className, classes.root, {
-                [classes.nowrap]: !wrap
-            })}
-        />
+        <Flex
+            cell
+            grow={!noGrow}
+            shrink={!noShrink}
+            ellipsis={!wrap}
+            container={container}
+            baseline={container}
+        >
+            <Typography {...rest} />
+        </Flex>
     );
-}
+};

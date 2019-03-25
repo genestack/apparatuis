@@ -13,7 +13,6 @@ const menu = (
     <Menu onValueSelect={handleValueSelect}>
         <MenuItem value="Menu Item 1">
             <MenuItemText>Menu Item</MenuItemText>
-            <FlexExpander />
             <MenuItemCell>
                 <Typography quiet>1</Typography>
             </MenuItemCell>
@@ -21,7 +20,6 @@ const menu = (
         <Divider />
         <MenuItem value="Menu Item 2">
             <MenuItemText>Menu Item</MenuItemText>
-            <FlexExpander />
             <MenuItemCell>
                 <Typography quiet>2</Typography>
             </MenuItemCell>
@@ -31,7 +29,6 @@ const menu = (
                 <SubMenu>
                     <MenuItem value="Menu Item 3.1">
                         <MenuItemText>Menu Item</MenuItemText>
-                        <FlexExpander />
                         <MenuItemCell>
                             <Typography quiet>3.1</Typography>
                         </MenuItemCell>
@@ -40,7 +37,6 @@ const menu = (
             }
         >
             <MenuItemText>Menu Item</MenuItemText>
-            <FlexExpander />
             <MenuItemCell>
                 <Typography quiet>3</Typography>
             </MenuItemCell>
@@ -62,15 +58,9 @@ const Quiet = (props) => <Typography {...props} variant="caption" quiet box="inl
 
 const getInfiniteSubMenu = () => (
     <SubMenu>
-        <MenuItem>
-            <MenuItemText>Sub Menu Item 1</MenuItemText>
-        </MenuItem>
-        <MenuItem subMenu={getInfiniteSubMenu}>
-            <MenuItemText>Sub Menu Item 2</MenuItemText>
-        </MenuItem>
-        <MenuItem subMenu={getInfiniteSubMenu}>
-            <MenuItemText>Sub Menu Item 3</MenuItemText>
-        </MenuItem>
+        <MenuItem>Sub Menu Item 1</MenuItem>
+        <MenuItem subMenu={getInfiniteSubMenu}>Sub Menu Item 2</MenuItem>
+        <MenuItem subMenu={getInfiniteSubMenu}>Sub Menu Item 3</MenuItem>
     </SubMenu>
 );
 
@@ -97,7 +87,6 @@ handleMenuValueSelect = (value) => {
 items = new Array(100).fill(null).map((_, index) => (
     <MenuItem key={index} onClick={handleMenuClose} subMenu={getInfiniteSubMenu}>
         <MenuItemText>Menu Item</MenuItemText>
-        <FlexExpander />
         <MenuItemCell>
             <Typography quiet>{index}</Typography>
         </MenuItemCell>
@@ -118,9 +107,10 @@ items = new Array(100).fill(null).map((_, index) => (
         onClose={handleMenuClose}
         onValueSelect={handleMenuValueSelect}
         referenceElement={state.referenceElement}
+        style={{maxWidth: 200}}
     >
         <MenuItem value="Download" icon={<DownloadIcon />} subMenu={<SubMenu>{items}</SubMenu>}>
-            <MenuItemText>Download</MenuItemText>
+            <MenuItemText noGrow>Download</MenuItemText>
             <MenuItemCell>
                 <Quiet>125 MB</Quiet>
             </MenuItemCell>
@@ -128,14 +118,13 @@ items = new Array(100).fill(null).map((_, index) => (
 
         <MenuItem value="Open File" subMenu={getInfiniteSubMenu}>
             <MenuItemText>Open File...</MenuItemText>
-            <FlexExpander />
             <MenuItemCell>
                 <Quiet>⌘ + O</Quiet>
             </MenuItemCell>
         </MenuItem>
 
         <MenuItem value="Long Menu" subMenu={getInfiniteSubMenu}>
-            <MenuItemText>Menu Item With Long Long Name</MenuItemText>
+            Menu Item With Long Long Name
         </MenuItem>
     </Menu>
 </React.Fragment>;
@@ -144,11 +133,6 @@ items = new Array(100).fill(null).map((_, index) => (
 ### Extreme
 
 ```js
-const {Button} = require('../button');
-const {Typography} = require('../typography');
-const {FlexExpander} = require('../flex-expander');
-const {Menu, MenuItem, MenuItemText, MenuItemCell} = require('.');
-
 initialState = {
     referenceElement: null
 };
@@ -164,7 +148,6 @@ handleMenuClose = () => {
 items = new Array(100).fill(null).map((_, index) => (
     <MenuItem key={index}>
         <MenuItemText>Menu Item</MenuItemText>
-        <FlexExpander />
         <MenuItemCell>
             <Typography quiet>{index}</Typography>
         </MenuItemCell>

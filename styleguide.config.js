@@ -24,5 +24,12 @@ module.exports = {
         const name = kebabToCamelCase(path.basename(componentPath, '.tsx'));
         const dir = path.dirname(componentPath).replace(/^src/, 'genestack-ui');
         return `import {${name}} from '${dir}';`;
+    },
+    styles: {
+        Playground: {
+            preview: {
+                background: 'rgb(227,227,227)'
+            }
+        }
     }
 };

@@ -18,14 +18,19 @@ interface ChildProps {
     onClick?: React.EventHandler<React.SyntheticEvent>;
 }
 
+type ChildrenProp =
+    | ((state: {open: boolean}) => React.ReactElement<ChildProps>)
+    | React.ReactElement<ChildProps>;
+
 /** MenuHandler public properties */
 export interface Props {
     menu: MenuProp;
-    children: React.ReactElement<ChildProps>;
+    children: ChildrenProp;
 }
 
 interface State {
     open: boolean;
+    exited: boolean;
 }
 
 /**
@@ -37,7 +42,8 @@ export class MenuHandler extends React.Component<Props, State> {
     private childRef = React.createRef<HTMLElement>();
 
     public state: State = {
-        open: false
+        open: false,
+        exited: true
     };
 
     public close() {
@@ -45,7 +51,7 @@ export class MenuHandler extends React.Component<Props, State> {
     }
 
     public open() {
-        this.setState({open: true});
+        this.setState({open: true, exited: false});
     }
 
     private handleMenuValueSelect: MenuProps['onValueSelect'] = (value, event, menuItem) => {
@@ -64,8 +70,14 @@ export class MenuHandler extends React.Component<Props, State> {
         this.close();
     };
 
+    private handleMenuClosed = () => {
+        this.setState({exited: true});
+    };
+
     private renderChild() {
-        const child = React.Children.only(this.props.children) as React.ReactElement<ChildProps>;
+        const child = (typeof this.props.children === 'function'
+            ? this.props.children({open: !this.state.exited})
+            : this.props.children) as React.ReactElement<ChildProps>;
 
         const childProps: ChildProps = {
             onClick: chain(child.props.onClick, this.handleReferenceClick)
@@ -90,6 +102,7 @@ export class MenuHandler extends React.Component<Props, State> {
                       open,
                       referenceElement,
                       onClose: chain(menu.props.onClose, this.handleMenuClose),
+                      onClosed: chain(menu.props.onClosed, this.handleMenuClosed),
                       onValueSelect: chain(menu.props.onValueSelect, this.handleMenuValueSelect)
                   }
                 : null;

@@ -23,11 +23,11 @@
     background: rgba(224, 245, 255, 1);
 }
 
-.iconCell {
-    width: 20px;
+.root:disabled,
+.root.disabled {
+    background: transparent;
 }
 
-.content {
-    display: flex;
-    align-items: baseline;
+.iconCell {
+    width: 20px;
 }

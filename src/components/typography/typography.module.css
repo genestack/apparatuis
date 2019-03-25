@@ -13,7 +13,6 @@
     box-sizing: border-box;
     color: var(--gs-color-dark);
     font-weight: normal;
-    display: block;
     font-family: "Helvetica", "Arial", "Myriad Pro", sans-serif;
 }
 
@@ -27,10 +26,10 @@
 
 .inline {
     display: inline;
-    vertical-align: baseline;
 }
 
 .paragraph {
+    display: block;
     margin-bottom: 14px;
 }
 

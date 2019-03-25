@@ -9,4 +9,5 @@ export const root: string;
 export const iconCell: string;
 export const hovered: string;
 export const focused: string;
+export const disabled: string;
 export const content: string;

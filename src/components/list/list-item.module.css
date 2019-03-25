@@ -8,27 +8,11 @@
 @import "../../variables.css";
 
 .root {
-    box-sizing: border-box;
-    display: flex;
-    min-height: calc(var(--gs-spacing-unit) * 4);
-    padding-top: 0;
+    composes: resetButton from "../../variables.css";
     padding-right: calc(var(--gs-spacing-unit) * 2);
-    padding-bottom: 0;
     padding-left: calc(var(--gs-spacing-unit) * 2);
-    outline: none;
-    align-items: center;
-    cursor: pointer;
-    background: transparent;
-    border: none;
+    min-height: calc(var(--gs-spacing-unit) * 4);
     width: 100%;
-}
-
-.root:after {
-    /* IE11 align-items: center fix */
-    content: "";
-    display: block;
-    min-height: inherit;
-    font-size: 0;
 }
 
 .root:focus,
@@ -51,15 +35,5 @@
     background: none;
     box-shadow: none;
     cursor: not-allowed;
-}
-
-.content {
-    display: flex;
-    align-items: baseline;
-    width: 100%;
-    position: relative;
-}
-
-.disabled .content {
     pointer-events: none;
 }
