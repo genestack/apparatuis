@@ -1,6 +1,5 @@
 ```js
 const {MenuIcon} = require('../../icons/menu-icon.tsx');
-const {OpenFolderIcon} = require('../../icons/open-folder-icon.tsx');
 const {KeyboardArrowRightIcon} = require('../../icons/keyboard-arrow-right-icon.tsx');
 const flexStyles = require('./flex.module.css');
 
