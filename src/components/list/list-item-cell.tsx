@@ -5,25 +5,29 @@
  * The copyright notice above does not evidence any
  * actual or intended publication of such source code.
  */
-import classNames from 'classnames';
 import * as React from 'react';
 
-import {WithClasses, mergeClassesProps} from '../../utils/styles';
+import {Flex} from '../flex';
 
-import * as styles from './list-item-cell.module.css';
-
-type TargetProps = React.HTMLAttributes<HTMLElement>;
+type TargetProps = React.HTMLAttributes<HTMLDivElement>;
 
 /** ListItemCell public properties */
-export interface Props extends TargetProps, WithClasses<keyof typeof styles> {
-    as?: React.ReactType;
+export interface Props extends TargetProps {
+    grow?: boolean;
+    shrink?: boolean;
 }
 
 /**
  * Single unit of list item. It is needed for harmonic look list item parts.
  */
-export function ListItemCell(props: Props) {
-    const {as: Component = 'div', classes, className, ...rest} = mergeClassesProps(props, styles);
+export const ListItemCell = (props: Props) => {
+    const {grow, shrink, ...rest} = props;
 
-    return <Component {...rest} className={classNames(className, classes.root)} />;
-}
+    const container = typeof rest.children !== 'string';
+
+    return (
+        <Flex cell container={container} grow={grow} shrink={shrink}>
+            <div {...rest} />
+        </Flex>
+    );
+};

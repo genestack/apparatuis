@@ -29,6 +29,16 @@
     --gs-color-bright-white: rgba(255, 255, 255, 1);
 
     /* z-indexes */
+    --gs-z-index-header: 800;
     --gs-z-index-drawer: 900;
     --gs-z-index-modal: 1000;
+}
+
+.resetButton {
+    outline: none;
+    cursor: pointer;
+    background: transparent;
+    border: none;
+    padding: 0;
+    text-align: left;
 }

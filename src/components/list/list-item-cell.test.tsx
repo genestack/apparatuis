@@ -12,10 +12,6 @@ import {ListItemCell} from './list-item-cell';
 
 describe('<ListItemCell />', () => {
     test('should render div HTML element', () => {
-        expect(
-            mount(<ListItemCell />)
-                .children()
-                .is('div')
-        ).toBe(true);
+        expect(mount(<ListItemCell />).find('div')).toHaveLength(1);
     });
 });

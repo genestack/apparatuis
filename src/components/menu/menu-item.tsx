@@ -21,10 +21,16 @@ import {
 import {Omit} from '../../utils/omit';
 import {chainRefs} from '../../utils/set-ref';
 import {WithClasses, mergeClassesProps} from '../../utils/styles';
-import {FlexExpander, FlexExpanderProps} from '../flex-expander';
 import {FocusTrap} from '../focus-trap';
 import {IconProps} from '../icon';
-import {ListItem, ListItemProps, ListItemCell, ListItemCellProps} from '../list';
+import {
+    ListItem,
+    ListItemProps,
+    ListItemCell,
+    ListItemCellProps,
+    ListItemTextProps,
+    ListItemText
+} from '../list';
 import {RootRef} from '../root-ref';
 
 import {MenuContext, MenuContextValue} from './menu-context';
@@ -54,9 +60,9 @@ export interface Props extends TargetProps, WithClasses<keyof typeof styles> {
     subMenu?: SubMenuProp;
     value?: any;
     /** Properties for the left list item cell that contains icon */
-    iconCellProps?: Omit<ListItemCellProps, 'children'>;
+    iconCellProps?: ListItemCellProps;
     /** Properties list item cell with main content */
-    contentProps?: Omit<FlexExpanderProps, 'children'>;
+    contentCellProps?: ListItemTextProps;
     /** Properties for popover that shows SubMenu */
     subMenuPopoverProps?: Omit<
         MenuPopoverProps,
@@ -71,7 +77,7 @@ export interface Props extends TargetProps, WithClasses<keyof typeof styles> {
      * Properties the right list item cell that contains arrow icon
      * indicated that MenuItem has a SubMenu
      */
-    subMenuArrowIconCellProps?: Omit<ListItemCellProps, 'children'>;
+    subMenuArrowIconCellProps?: ListItemCellProps;
     /** Properties for arrow icon in the right cell */
     subMenuArrowIconProps?: IconProps;
 }
@@ -296,7 +302,7 @@ export class MenuItem extends React.PureComponent<Props, State> {
             subMenu,
             value,
             iconCellProps = {},
-            contentProps = {},
+            contentCellProps = {},
             subMenuPopoverProps = {},
             subMenuArrowIconCellProps = {},
             subMenuArrowIconProps = {},
@@ -306,7 +312,7 @@ export class MenuItem extends React.PureComponent<Props, State> {
         const {container, item} = this.state;
 
         const subMenuPopover =
-            subMenu && item && container ? (
+            subMenu && item && container && !rest.disabled ? (
                 <MenuPopover
                     {...subMenuPopoverProps}
                     open
@@ -349,7 +355,8 @@ export class MenuItem extends React.PureComponent<Props, State> {
                                 className={classNames(className, classes.root)}
                                 classes={{
                                     focused: classes.focused,
-                                    hovered: classes.hovered
+                                    hovered: classes.hovered,
+                                    disabled: classes.disabled
                                 }}
                             >
                                 <ListItemCell
@@ -361,12 +368,7 @@ export class MenuItem extends React.PureComponent<Props, State> {
                                 >
                                     {icon}
                                 </ListItemCell>
-                                <FlexExpander
-                                    {...contentProps}
-                                    className={classNames(contentProps.className, classes.content)}
-                                >
-                                    {children}
-                                </FlexExpander>
+                                <ListItemText {...contentCellProps}>{children}</ListItemText>
                                 {subMenuArrowIcon}
                             </ListItem>
                         </RootRef>

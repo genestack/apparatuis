@@ -8,12 +8,14 @@
 import classNames from 'classnames';
 import * as React from 'react';
 
+import {Omit} from '../../utils/omit';
 import {WithClasses, mergeClassesProps} from '../../utils/styles';
+import {Flex} from '../flex';
+import {Typography, TypographyProps} from '../typography';
 
 import * as styles from './list-item.module.css';
 
-type TargetProps = React.HTMLAttributes<HTMLElement>;
-type ContentProps = React.HTMLAttributes<HTMLDivElement>;
+type TargetProps = Omit<TypographyProps, 'classes'>;
 
 /** ListItem public properties */
 export interface Props extends TargetProps, WithClasses<keyof typeof styles> {
@@ -30,10 +32,6 @@ export interface Props extends TargetProps, WithClasses<keyof typeof styles> {
      * you should pass `disabled` property certain to contained elements.
      */
     disabled?: boolean;
-    /** To right vertical aligning this component uses inside wrapper */
-    contentProps?: ContentProps;
-    /** React component that will be used for render the root element */
-    as?: React.ReactType;
 }
 
 /**
@@ -41,7 +39,6 @@ export interface Props extends TargetProps, WithClasses<keyof typeof styles> {
  */
 export function ListItem(props: Props) {
     const {
-        as: Component = 'div',
         classes,
         active,
         hovered,
@@ -49,25 +46,32 @@ export function ListItem(props: Props) {
         disabled,
         tabIndex = 0,
         className,
-        contentProps = {},
-        children,
         ...rest
     } = mergeClassesProps(props, styles);
 
+    const children =
+        typeof props.children === 'string' ? (
+            <Flex grow shrink ellipsis>
+                <div>{props.children}</div>
+            </Flex>
+        ) : (
+            props.children
+        );
+
     return (
-        <Component
-            tabIndex={disabled ? -1 : tabIndex}
-            {...rest}
-            className={classNames(className, classes.root, {
-                [classes.active]: active,
-                [classes.hovered]: hovered,
-                [classes.focused]: focused,
-                [classes.disabled]: disabled
-            })}
-        >
-            <div {...contentProps} className={classNames(contentProps.className, classes.content)}>
+        <Flex ellipsis container>
+            <Typography
+                tabIndex={disabled ? -1 : tabIndex}
+                {...rest}
+                className={classNames(className, classes.root, {
+                    [classes.active]: active,
+                    [classes.hovered]: hovered,
+                    [classes.focused]: focused,
+                    [classes.disabled]: disabled
+                })}
+            >
                 {children}
-            </div>
-        </Component>
+            </Typography>
+        </Flex>
     );
 }

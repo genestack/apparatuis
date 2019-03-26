@@ -8,6 +8,8 @@ const items = new Array(10).fill(null).map((_, i) => (
     </Typography>
 ));
 
+const someFlag = true;
+
 <React.Fragment>
     <WithSeparator
         separator={
@@ -17,6 +19,7 @@ const items = new Array(10).fill(null).map((_, i) => (
         }
     >
         {items}
+        {someFlag ? <Typography box="inline">Some value by flag</Typography> : null}
     </WithSeparator>
 </React.Fragment>;
 ```

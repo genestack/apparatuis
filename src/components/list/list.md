@@ -8,8 +8,8 @@ const StateExample = (props) => (
 );
 const Quiet = (props) => <Typography {...props} variant="caption" quiet box="inline" />;
 
-<div style={{display: 'flex'}}>
-    <Paper style={{display: 'flex', flexDirection: 'column', width: 200}}>
+<div style={{display: 'inline-flex', background: '#fff'}}>
+    <div style={{display: 'flex', flexDirection: 'column', width: 200}}>
         <Typography variant="section" box="paragraph" style={{padding: '0 16px'}}>
             Tissue:
         </Typography>
@@ -18,30 +18,35 @@ const Quiet = (props) => <Typography {...props} variant="caption" quiet box="inl
                 <ListItemCell style={leftCellStyle}>
                     <input type="checkbox" />
                 </ListItemCell>
-                <ListItemText>Liver</ListItemText>
+                <ListItemText>
+                    <ListItemText noGrow>Liver</ListItemText>
+                    <ListItemText noGrow quiet variant="caption">
+                        12
+                    </ListItemText>
+                </ListItemText>
                 <ListItemCell>
-                    <Quiet>12</Quiet>
+                    <HelpIcon />
                 </ListItemCell>
-                <FlexExpander />
-                <HelpIcon />
             </ListItem>
             <ListItem as="label">
                 <ListItemCell style={leftCellStyle}>
                     <input type="checkbox" />
                 </ListItemCell>
-                <ListItemText>Very long name of tissue</ListItemText>
-                <ListItemCell>
-                    <Quiet>99999</Quiet>
-                </ListItemCell>
+                <ListItemText>
+                    <ListItemText>Very long name of tissue</ListItemText>
+                    <ListItemText noShrink quiet variant="caption">
+                        99999
+                    </ListItemText>
+                </ListItemText>
             </ListItem>
             <ListItem as="label">
                 <ListItemCell style={leftCellStyle}>
                     <input type="checkbox" />
                 </ListItemCell>
                 <ListItemText wrap>Very long name of tissue. Few lines</ListItemText>
-                <ListItemCell>
-                    <Quiet>3</Quiet>
-                </ListItemCell>
+                <ListItemText quiet variant="caption" noShrink>
+                    3
+                </ListItemText>
             </ListItem>
             <ListItem disabled>
                 <ListItemCell style={leftCellStyle}>
@@ -75,42 +80,34 @@ const Quiet = (props) => <Typography {...props} variant="caption" quiet box="inl
                 <ListItemCell style={leftCellStyle}>
                     <DownloadIcon />
                 </ListItemCell>
-                <ListItemText>Download</ListItemText>
-                <ListItemCell>
-                    <Quiet>145 MB</Quiet>
-                </ListItemCell>
+                <ListItemText>
+                    <ListItemText noGrow>Download</ListItemText>
+                    <ListItemText quiet variant="caption">
+                        145 MB
+                    </ListItemText>
+                </ListItemText>
             </ListItem>
         </List>
-    </Paper>
-    <div style={{marginLeft: 16}}>
+    </div>
+    <div style={{margin: '0 16px'}}>
         <Typography variant="section" box="paragraph">
             List Item States:
         </Typography>
         <StateExample>
-            <ListItem>
-                <ListItemText>Normal</ListItemText>
-            </ListItem>
+            <ListItem>Normal</ListItem>
         </StateExample>
         <StateExample>
-            <ListItem focused>
-                <ListItemText>Focused</ListItemText>
-            </ListItem>
+            <ListItem focused>Focused</ListItem>
         </StateExample>
         <StateExample>
-            <ListItem hovered>
-                <ListItemText>Hovered</ListItemText>
-            </ListItem>
+            <ListItem hovered>Hovered</ListItem>
         </StateExample>
         <StateExample>
-            <ListItem active>
-                <ListItemText>Active</ListItemText>
-            </ListItem>
+            <ListItem active>Active</ListItem>
         </StateExample>
 
         <StateExample>
-            <ListItem disabled>
-                <ListItemText>Disabled</ListItemText>
-            </ListItem>
+            <ListItem disabled>Disabled</ListItem>
         </StateExample>
     </div>
 </div>;
