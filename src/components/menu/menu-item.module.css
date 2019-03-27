@@ -20,7 +20,7 @@
 
 .root:focus,
 .root.focused {
-    background: rgba(224, 245, 255, 1);
+    background: var(--gs-color-action-item-focused);
 }
 
 .root:disabled,
@@ -29,5 +29,5 @@
 }
 
 .iconCell {
-    width: 20px;
+    width: calc(var(--gs-spacing-unit) * 2.5);
 }

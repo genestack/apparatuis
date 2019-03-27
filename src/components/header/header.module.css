@@ -1,0 +1,33 @@
+/*
+ * Copyright (c) 2011-2019 Genestack Limited
+ * All Rights Reserved
+ * THIS IS UNPUBLISHED PROPRIETARY SOURCE CODE OF GENESTACK LIMITED
+ * The copyright notice above does not evidence any
+ * actual or intended publication of such source code.
+ */
+@import "../../variables.css";
+
+.spacer {
+    box-sizing: border-box;
+    height: calc(var(--gs-spacing-unit) * 5);
+}
+
+.root {
+    composes: spacer;
+    display: flex;
+    background: var(--gs-color-bright-white);
+    overflow: hidden;
+    padding: 0 calc(var(--gs-spacing-unit) * 2);
+}
+
+.fixed {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: var(--gs-z-index-header);
+}
+
+.withBorder {
+    box-shadow: 0 1px 0 0 var(--gs-color-smoke);
+}

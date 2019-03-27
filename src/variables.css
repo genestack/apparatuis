@@ -18,6 +18,9 @@
     /* actions */
     --gs-color-action-primary: rgba(34, 129, 241, 1);
     --gs-color-action-primary-dark: rgba(4, 100, 189, 1);
+    --gs-color-action-item-focused: rgba(224, 245, 255, 1);
+    --gs-color-action-item-hovered: rgba(224, 245, 255, 1);
+    --gs-color-action-item-active: rgba(194, 233, 253, 1);
 
     /* greys */
     --gs-color-dark: rgba(51, 51, 51, 1);
