@@ -22,10 +22,53 @@ const DURATION_TIMEOUT = 300;
 type StrictTransitionProps = OmitIndexSignature<TransitionProps>;
 type TargetProps = Omit<StrictTransitionProps, 'timeout' | 'children'>;
 type Children = React.ReactElement<{className?: string}>;
+type GrowTransformOrigin =
+    | 'center center'
+    | 'center left'
+    | 'center right'
+    | 'top center'
+    | 'top left'
+    | 'top right'
+    | 'bottom center'
+    | 'bottom left'
+    | 'bottom right';
+
+const getTransformOriginClassName = (
+    transformOrigin?: GrowTransformOrigin
+): keyof typeof styles => {
+    if (transformOrigin === 'center left') {
+        return 'centerLeft';
+    }
+    if (transformOrigin === 'center right') {
+        return 'centerRight';
+    }
+    if (transformOrigin === 'top center') {
+        return 'topCenter';
+    }
+    if (transformOrigin === 'top left') {
+        return 'topLeft';
+    }
+    if (transformOrigin === 'top right') {
+        return 'topRight';
+    }
+    if (transformOrigin === 'bottom center') {
+        return 'bottomCenter';
+    }
+    if (transformOrigin === 'bottom left') {
+        return 'bottomLeft';
+    }
+    if (transformOrigin === 'bottom right') {
+        return 'bottomRight';
+    }
+
+    return 'centerCenter';
+};
 
 /** Public Grow properties */
 export interface Props extends TargetProps, WithClasses<keyof typeof styles> {
     children: Children;
+    /** Defines which origin is used for transform */
+    transformOrigin?: GrowTransformOrigin;
 }
 
 /**
@@ -80,8 +123,13 @@ export class Grow extends React.Component<Props> {
     };
 
     public render() {
-        const {className, classes, ...rest} = mergeClassesProps(this.props, styles);
+        const {className, classes, transformOrigin = 'center center', ...rest} = mergeClassesProps(
+            this.props,
+            styles
+        );
         const child = React.Children.only(this.props.children) as Children;
+
+        const transformOriginClassName = classes[getTransformOriginClassName(transformOrigin)];
 
         return (
             <Transition
@@ -91,10 +139,15 @@ export class Grow extends React.Component<Props> {
                 onExit={chain(rest.onExit, this.handleExit)}
             >
                 {React.cloneElement(child, {
-                    className: classNames(className, child.props.className, {
-                        [classes.enter]: rest.in,
-                        [classes.exit]: !rest.in
-                    })
+                    className: classNames(
+                        className,
+                        child.props.className,
+                        transformOriginClassName,
+                        {
+                            [classes.enter]: rest.in,
+                            [classes.exit]: !rest.in
+                        }
+                    )
                 })}
             </Transition>
         );
