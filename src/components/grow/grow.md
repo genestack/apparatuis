@@ -1,16 +1,60 @@
 ```js
-initialState = {visible: true};
+const transformOrigins = [
+    'center center',
+    'center left',
+    'center right',
+    'top center',
+    'top left',
+    'top right',
+    'bottom center',
+    'bottom left',
+    'bottom right'
+];
+
+initialState = {visible: true, transformOrigin: transformOrigins[0]};
 
 handleButtonClick = () => setState(({visible}) => ({visible: !visible}));
 
-<div>
-    <Grow in={state.visible}>
-        <Paper style={{width: 100, padding: 16}}>
-            <Typography>Hi! I am could be hidden.</Typography>
-        </Paper>
-    </Grow>
-    <Button style={{width: 100, marginTop: 8}} onClick={handleButtonClick}>
-        {state.visible ? 'Hide' : 'Show'}
-    </Button>{' '}
-</div>;
+handleTransformOriginChange = (event) => setState({transformOrigin: event.target.value});
+
+<Flex container>
+    <div>
+        <FlexExpander />
+        <Flex cell>
+            <div>
+                <Grow in={state.visible} transformOrigin={state.transformOrigin}>
+                    <Paper style={{width: 100, padding: 16}}>
+                        <Typography>Hi! I am could be hidden.</Typography>
+                    </Paper>
+                </Grow>
+                <Button style={{width: 100, marginTop: 8}} onClick={handleButtonClick}>
+                    {state.visible ? 'Hide' : 'Show'}
+                </Button>{' '}
+            </div>
+        </Flex>
+        <FlexExpander />
+        <Flex cell>
+            <Paper>
+                <Typography style={{padding: '0 16px'}} box="paragraph" variant="section">
+                    Transform origin:
+                </Typography>
+                <List onChange={handleTransformOriginChange}>
+                    {transformOrigins.map((transformOrigin) => (
+                        <ListItem as="label" key={transformOrigin}>
+                            <ListItemCell>
+                                <input
+                                    type="radio"
+                                    checked={transformOrigin === state.transformOrigin}
+                                    value={transformOrigin}
+                                    name="transformOrigin"
+                                />
+                            </ListItemCell>
+                            <ListItemText>{transformOrigin}</ListItemText>
+                        </ListItem>
+                    ))}
+                </List>
+            </Paper>
+        </Flex>
+    </div>
+</Flex>;
 ```

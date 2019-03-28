@@ -26,3 +26,39 @@
     transition: opacity 300ms cubic-bezier(0.4, 0, 0.2, 1),
         transform 200ms cubic-bezier(0.4, 0, 0.2, 1) 100ms;
 }
+
+.centerCenter {
+    transform-origin: center center;
+}
+
+.centerLeft {
+    transform-origin: center left;
+}
+
+.centerRight {
+    transform-origin: center right;
+}
+
+.topCenter {
+    transform-origin: top center;
+}
+
+.topLeft {
+    transform-origin: top left;
+}
+
+.topRight {
+    transform-origin: top right;
+}
+
+.bottomCenter {
+    transform-origin: bottom center;
+}
+
+.bottomLeft {
+    transform-origin: bottom left;
+}
+
+.bottomRight {
+    transform-origin: bottom right;
+}
