@@ -22,7 +22,9 @@ const DURATION_TIMEOUT = 300;
 type StrictTransitionProps = OmitIndexSignature<TransitionProps>;
 type TargetProps = Omit<StrictTransitionProps, 'timeout' | 'children'>;
 type Children = React.ReactElement<{className?: string}>;
-type GrowTransformOrigin =
+
+/** Transform origin of Grow transition */
+export type GrowTransformOrigin =
     | 'center center'
     | 'center left'
     | 'center right'

@@ -8,5 +8,6 @@
 export {
     TransitionPopper,
     Props as TransitionPopperProps,
-    TransitionPopperChildrenProps
+    TransitionPopperChildrenProps,
+    TransitionPopperPlacement
 } from './transition-popper';

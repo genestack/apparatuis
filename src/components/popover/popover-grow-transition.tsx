@@ -7,51 +7,22 @@
  */
 import * as React from 'react';
 
-import {GrowProps, Grow} from '../grow';
-import {TransitionPopperChildrenProps} from '../transition-popper';
+import {GrowProps, Grow, GrowTransformOrigin} from '../grow';
+import {TransitionPopperChildrenProps, TransitionPopperPlacement} from '../transition-popper';
 
-// tslint:disable-next-line: cyclomatic-complexity
-const getGrowTransformOrigin = (
-    placement: TransitionPopperChildrenProps['placement']
-): GrowProps['transformOrigin'] => {
-    if (placement === 'top') {
-        return 'bottom center';
-    }
-    if (placement === 'top-start') {
-        return 'bottom left';
-    }
-    if (placement === 'top-end') {
-        return 'bottom right';
-    }
-    if (placement === 'right') {
-        return 'center left';
-    }
-    if (placement === 'right-start') {
-        return 'top left';
-    }
-    if (placement === 'right-end') {
-        return 'bottom left';
-    }
-    if (placement === 'bottom') {
-        return 'top center';
-    }
-    if (placement === 'bottom-start') {
-        return 'top left';
-    }
-    if (placement === 'bottom-end') {
-        return 'top right';
-    }
-    if (placement === 'left') {
-        return 'center right';
-    }
-    if (placement === 'left-start') {
-        return 'top right';
-    }
-    if (placement === 'left-end') {
-        return 'bottom right';
-    }
-
-    return 'center center';
+const transformByPlacement: {[key in TransitionPopperPlacement]?: GrowTransformOrigin} = {
+    top: 'bottom center',
+    'top-start': 'bottom left',
+    'top-end': 'bottom right',
+    right: 'center left',
+    'right-start': 'top left',
+    'right-end': 'bottom left',
+    bottom: 'top center',
+    'bottom-start': 'top left',
+    'bottom-end': 'top right',
+    left: 'center right',
+    'left-start': 'top right',
+    'left-end': 'bottom right'
 };
 
 /** PopperGrow public properties */
@@ -73,7 +44,11 @@ export const PopoverGrow = (props: Props) => {
             {...rest}
             in={open}
             appear
-            transformOrigin={rest.transformOrigin || getGrowTransformOrigin(placement)}
+            transformOrigin={
+                rest.transformOrigin ||
+                (placement && transformByPlacement[placement]) ||
+                'center center'
+            }
         >
             {children}
         </Grow>

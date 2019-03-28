@@ -13,11 +13,14 @@ import {Omit} from '../../utils/omit';
 
 type TargetProps = Omit<PopperProps, 'referenceElement' | 'children'>;
 
+/** Alias for popper reference */
+export type TransitionPopperPlacement = PopperChildrenProps['placement'];
+
 /** TransitionPopperChildrenProps  */
 export type TransitionPopperChildrenProps<T = any> = Omit<PopperChildrenProps, 'placement'> & {
     targetProps: T;
     onTransitionExited: () => void;
-    placement?: PopperChildrenProps['placement'];
+    placement?: TransitionPopperPlacement;
 };
 
 type ReferenceElement = PopperProps['referenceElement'] | (() => PopperProps['referenceElement']);

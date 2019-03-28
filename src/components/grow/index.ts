@@ -5,4 +5,4 @@
  * The copyright notice above does not evidence any
  * actual or intended publication of such source code.
  */
-export {Grow, Props as GrowProps} from './grow';
+export {Grow, Props as GrowProps, GrowTransformOrigin} from './grow';
