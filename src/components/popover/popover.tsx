@@ -8,6 +8,7 @@
 import classNames from 'classnames';
 import * as React from 'react';
 
+import {chain} from '../../utils/chain';
 import {Omit} from '../../utils/omit';
 import {Ref} from '../../utils/set-ref';
 import {WithClasses, mergeClassesProps} from '../../utils/styles';
@@ -17,7 +18,6 @@ import {TransitionPopper, TransitionPopperProps} from '../transition-popper';
 
 import {PopoverGrow, Props as PopperGrowProps} from './popover-grow-transition';
 import * as styles from './popover.module.css';
-import {chain} from '../../utils/chain';
 
 type TargetProps = Omit<TransitionPopperProps<PaperProps>, 'classes' | 'children'>;
 type ContainerProps = Omit<React.HTMLAttributes<HTMLDivElement>, 'style'>;

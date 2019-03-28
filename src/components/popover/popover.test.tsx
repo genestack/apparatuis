@@ -5,14 +5,14 @@
  * The copyright notice above does not evidence any
  * actual or intended publication of such source code.
  */
-
+// tslint:disable jsx-no-lambda no-non-null-assertion
 import * as React from 'react';
 
 import {createTestApp} from '../../../test-utils/create-test-app';
 import {Grow} from '../grow';
-
-import {Popover, Props as PopoverProps} from './popover';
 import {TransitionPopper} from '../transition-popper';
+
+import {Popover} from './popover';
 
 jest.useFakeTimers();
 
