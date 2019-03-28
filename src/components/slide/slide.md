@@ -1,79 +1,71 @@
 ```js
-initialState = {visible: true, direction: 'left'};
+initialState = {visible: true, direction: 'left', fast: false};
 
+const directions = ['left', 'right', 'top', 'bottom'];
+
+handleFastChange = (event) => setState({fast: event.currentTarget.checked});
 handleButtonClick = () => setState(({visible}) => ({visible: !visible}));
 handleDirectionChange = (event) =>
     setState({
-        direction: event.currentTarget.value
+        direction: event.target.value
     });
 
-<div style={{overflow: 'hidden', display: 'flex'}}>
+<Flex container>
     <div>
-        <Slide in={state.visible} direction={state.direction}>
-            <Paper style={{width: 100, padding: 16}}>
-                <Typography>Hi! I am could be hidden.</Typography>
+        <FlexExpander />
+        <Flex cell>
+            <div>
+                <Slide in={state.visible} direction={state.direction} fast={state.fast}>
+                    <Paper style={{width: 100, padding: 16}}>
+                        <Typography>Hi! I am could be hidden.</Typography>
+                    </Paper>
+                </Slide>
+                <Button
+                    style={{width: 100, marginTop: 8, position: 'relative'}}
+                    onClick={handleButtonClick}
+                >
+                    {state.visible ? 'Hide' : 'Show'}
+                </Button>
+            </div>
+        </Flex>
+        <FlexExpander />
+        <Flex cell>
+            <Paper style={{padding: '16px 0'}}>
+                <Typography style={{padding: '0 16px'}} variant="section">
+                    Direction:
+                </Typography>
+                <List>
+                    <ListItem as="label">
+                        <ListItemCell>
+                            <input
+                                type="checkbox"
+                                onChange={handleFastChange}
+                                checked={state.fast}
+                            />
+                        </ListItemCell>
+                        <ListItemText>Fast transition</ListItemText>
+                    </ListItem>
+                </List>
+                <Typography style={{padding: '0 16px'}} variant="section">
+                    Direction:
+                </Typography>
+                <List onChange={handleDirectionChange}>
+                    {directions.map((direction) => (
+                        <ListItem as="label" key={direction}>
+                            <ListItemCell>
+                                <input
+                                    type="radio"
+                                    name="direction"
+                                    value={direction}
+                                    defaultChecked={state.direction === direction}
+                                />
+                            </ListItemCell>
+                            <ListItemText>{direction}</ListItemText>
+                        </ListItem>
+                    ))}
+                </List>
             </Paper>
-        </Slide>
-        <Button
-            style={{width: 100, marginTop: 8, position: 'relative'}}
-            onClick={handleButtonClick}
-        >
-            {state.visible ? 'Hide' : 'Show'}
-        </Button>
+        </Flex>
     </div>
-
-    <div style={{marginLeft: 16}}>
-        <Typography variant="section">Direction:</Typography>
-        <List>
-            <ListItem as="label">
-                <ListItemCell>
-                    <input
-                        type="radio"
-                        name="direction"
-                        value="left"
-                        checked={state.direction === 'left'}
-                        onChange={handleDirectionChange}
-                    />
-                </ListItemCell>
-                <ListItemText>Left</ListItemText>
-            </ListItem>
-            <ListItem as="label">
-                <ListItemCell>
-                    <input
-                        type="radio"
-                        name="direction"
-                        value="right"
-                        checked={state.direction === 'right'}
-                        onChange={handleDirectionChange}
-                    />
-                </ListItemCell>
-                <ListItemText>Right</ListItemText>
-            </ListItem>
-            <ListItem as="label">
-                <ListItemCell>
-                    <input
-                        type="radio"
-                        name="direction"
-                        value="top"
-                        checked={state.direction === 'top'}
-                        onChange={handleDirectionChange}
-                    />
-                </ListItemCell>
-                <ListItemText>Top</ListItemText>
-            </ListItem>
-            <ListItem as="label">
-                <ListItemCell>
-                    <input
-                        type="radio"
-                        name="direction"
-                        value="bottom"
-                        checked={state.direction === 'bottom'}
-                        onChange={handleDirectionChange}
-                    />
-                </ListItemCell>
-                <ListItemText>Bottom</ListItemText>
-            </ListItem>
-        </List>
-    </div>
-</div>;
+</Flex>;
 ```
