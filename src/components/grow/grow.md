@@ -44,7 +44,7 @@ handleTransformOriginChange = (event) => setState({transformOrigin: event.target
                             <ListItemCell>
                                 <input
                                     type="radio"
-                                    checked={transformOrigin === state.transformOrigin}
+                                    defaultChecked={transformOrigin === state.transformOrigin}
                                     value={transformOrigin}
                                     name="transformOrigin"
                                 />
