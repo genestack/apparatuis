@@ -46,12 +46,14 @@ export const Flex = (props: Props) => {
         children,
         baseline,
         className,
-        classes
+        classes,
+        ...rest
     } = mergeClassesProps(props, styles);
 
     const child = React.Children.only(children) as React.ReactElement<{className?: string}>;
 
     return React.cloneElement(child, {
+        ...rest,
         className: classNames(className, child.props.className, classes.root, {
             [classes.container]: container,
             [classes.baseline]: baseline,

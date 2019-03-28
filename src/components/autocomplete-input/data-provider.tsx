@@ -6,8 +6,9 @@
  * actual or intended publication of such source code.
  */
 
-import debounce from 'lodash.debounce';
 import React from 'react';
+
+import {debounce} from '../../utils/debounce';
 
 const FETCH_DEBOUNCE_DURATION = 100;
 

@@ -21,8 +21,8 @@
 }
 
 .fast.entering {
-    transition: opacity cubic-bezier(0.4, 0, 0.2, 1) 150ms,
-        transform cubic-bezier(0.4, 0, 0.2, 1) 150ms;
+    transition: opacity cubic-bezier(0.4, 0, 0.2, 1) 160ms,
+        transform cubic-bezier(0.4, 0, 0.2, 1) 160ms;
 }
 
 .exiting {
@@ -31,8 +31,8 @@
 }
 
 .fast.exiting {
-    transition: opacity cubic-bezier(0.4, 0, 0.2, 1) 150ms,
-        transform cubic-bezier(0.4, 0, 0.2, 1) 150ms;
+    transition: opacity cubic-bezier(0.4, 0, 0.2, 1) 160ms,
+        transform cubic-bezier(0.4, 0, 0.2, 1) 160ms;
 }
 
 .exitLeft {
@@ -45,28 +45,28 @@
 }
 
 .fast.exitLeft {
-    transform: translateX(calc(-30% - 12px));
+    transform: translateX(calc(-10% - 6px));
 
     /* IE does not support calc in transforms */
     /* stylelint-disable-next-line property-no-vendor-prefix */
-    -ms-transform: translateX(-30%) translateX(-12px);
+    -ms-transform: translateX(-10%) translateX(-6px);
 }
 
 .exitRight {
     opacity: 0;
-    transform: translateX(calc(100% - 24px));
+    transform: translateX(calc(100% + 24px));
 
     /* IE does not support calc in transforms */
     /* stylelint-disable-next-line property-no-vendor-prefix */
-    -ms-transform: translateX(100%) translateX(-24px);
+    -ms-transform: translateX(100%) translateX(24px);
 }
 
 .fast.exitRight {
-    transform: translateX(calc(30% - 12px));
+    transform: translateX(calc(10% + 6px));
 
     /* IE does not support calc in transforms */
     /* stylelint-disable-next-line property-no-vendor-prefix */
-    -ms-transform: translateX(30%) translateX(-12px);
+    -ms-transform: translateX(10%) translateX(6px);
 }
 
 .exitTop {
@@ -79,26 +79,26 @@
 }
 
 .fast.exitTop {
-    transform: translateY(calc(-30% - 12px));
+    transform: translateY(calc(-10% - 6px));
 
     /* IE does not support calc in transforms */
     /* stylelint-disable-next-line property-no-vendor-prefix */
-    -ms-transform: translateY(-30%) translateY(-12px);
+    -ms-transform: translateY(-10%) translateY(-6px);
 }
 
 .exitBottom {
     opacity: 0;
-    transform: translateY(calc(100% - 24px));
+    transform: translateY(calc(100% + 24px));
 
     /* IE does not support calc in transforms */
     /* stylelint-disable-next-line property-no-vendor-prefix */
-    -ms-transform: translateY(100%) translateY(-24px);
+    -ms-transform: translateY(100%) translateY(24px);
 }
 
 .fast.exitBottom {
-    transform: translateY(calc(30% - 12px));
+    transform: translateY(calc(10% + 6px));
 
     /* IE does not support calc in transforms */
     /* stylelint-disable-next-line property-no-vendor-prefix */
-    -ms-transform: translateY(30%) translateY(-12px);
+    -ms-transform: translateY(10%) translateY(6px);
 }

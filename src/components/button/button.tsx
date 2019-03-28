@@ -8,8 +8,6 @@
 import classNames from 'classnames';
 import React from 'react';
 
-import {TooltipProps, Tooltip} from '../tooltip';
-
 import styles from './button.module.css';
 // tslint:disable-next-line:ordered-imports
 import defaultStyles from './button-default.module.css';
@@ -21,7 +19,6 @@ type TargetProps = React.ButtonHTMLAttributes<HTMLButtonElement>;
 export interface Props extends TargetProps {
     kind?: 'default' | 'primary';
     size?: 'small' | 'medium';
-    tooltipProps?: TooltipProps;
 }
 
 /** Button */
@@ -31,7 +28,6 @@ export const Button = (props: Props) => {
         className = '',
         disabled,
         size = 'medium',
-        tooltipProps = null,
         onClick,
         ...otherProps
     } = props;
@@ -51,14 +47,6 @@ export const Button = (props: Props) => {
             {...otherProps}
         />
     );
-
-    if (tooltipProps) {
-        return (
-            <Tooltip placement="top" mouseLeaveDelay={0} {...tooltipProps}>
-                {button}
-            </Tooltip>
-        );
-    }
 
     return button;
 };

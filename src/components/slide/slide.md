@@ -31,9 +31,6 @@ handleDirectionChange = (event) =>
         <FlexExpander />
         <Flex cell>
             <Paper style={{padding: '16px 0'}}>
-                <Typography style={{padding: '0 16px'}} variant="section">
-                    Direction:
-                </Typography>
                 <List>
                     <ListItem as="label">
                         <ListItemCell>

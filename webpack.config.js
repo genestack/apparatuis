@@ -99,5 +99,5 @@ module.exports = {
             }
         ]
     },
-    externals: ['classnames', 'react', 'react-dom', 'prop-types']
+    externals: ['classnames', 'react', 'react-dom']
 };

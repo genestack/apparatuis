@@ -4,6 +4,7 @@
     "allowJs": false,
     "checkJs": false,
     "typeRoots": ["./node_modules/@types", "./typings/"],
+    "types": ["jest"],
     "esModuleInterop": true
   },
   "exclude": ["./dist", "./coverage", "**.js"]

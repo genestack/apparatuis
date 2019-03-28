@@ -122,6 +122,10 @@ export class TransitionPopper<T> extends React.Component<Props<T>, State> {
         const element =
             typeof referenceElement === 'function' ? referenceElement() : referenceElement;
 
+        if (!element) {
+            return null;
+        }
+
         const popper = (
             <Popper
                 positionFixed={positionFixed}
