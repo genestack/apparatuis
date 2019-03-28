@@ -6,15 +6,6 @@
  * actual or intended publication of such source code.
  */
 
-:root {
-    --duration: 300ms;
-    --duration-fast: 150ms;
-    --translate-base: 100%;
-    --translate-base-fast: 30%;
-    --translate-shift: 24px;
-    --translate-shift-fast: 12px;
-}
-
 .root {
     will-change: transform opacity;
 }
@@ -25,79 +16,73 @@
 }
 
 .entering {
-    transition: opacity cubic-bezier(0.4, 0, 0.2, 1) var(--duration),
-        transform cubic-bezier(0.4, 0, 0.2, 1) var(--duration);
+    transition: opacity cubic-bezier(0.4, 0, 0.2, 1) 300ms,
+        transform cubic-bezier(0.4, 0, 0.2, 1) 300ms;
 }
 
 .fast.entering {
-    transition: opacity cubic-bezier(0.4, 0, 0.2, 1) var(--duration-fast),
-        transform cubic-bezier(0.4, 0, 0.2, 1) var(--duration-fast);
+    transition: opacity cubic-bezier(0.4, 0, 0.2, 1) 150ms,
+        transform cubic-bezier(0.4, 0, 0.2, 1) 150ms;
 }
 
 .exiting {
-    transition: opacity cubic-bezier(0.4, 0, 0.2, 1) var(--duration),
-        transform cubic-bezier(0.4, 0, 0.2, 1) var(--duration);
+    transition: opacity cubic-bezier(0.4, 0, 0.2, 1) 300ms,
+        transform cubic-bezier(0.4, 0, 0.2, 1) 300ms;
 }
 
 .fast.exiting {
-    transition: opacity cubic-bezier(0.4, 0, 0.2, 1) var(--duration-fast),
-        transform cubic-bezier(0.4, 0, 0.2, 1) var(--duration-fast);
+    transition: opacity cubic-bezier(0.4, 0, 0.2, 1) 150ms,
+        transform cubic-bezier(0.4, 0, 0.2, 1) 150ms;
 }
 
 .exitLeft {
     opacity: 0;
-    transform: translateX(calc(-1 * var(--translate-base) - var(--translate-shift)));
+    transform: translateX(calc(-100% - 24px));
     /* stylelint-disable-next-line property-no-vendor-prefix */
-    -ms-transform: translateX(calc(-1 * var(--translate-base)))
-        translateX(calc(-1 * var(--translate-shift)));
+    -ms-transform: translateX(-100%) translateX(-24px);
 }
 
 .fast.exitLeft {
-    transform: translateX(calc(-1 * var(--translate-base-fast) - var(--translate-shift-fast)));
+    transform: translateX(calc(-30% - 12px));
     /* stylelint-disable-next-line property-no-vendor-prefix */
-    -ms-transform: translateX(calc(-1 * var(--translate-base-fast)))
-        translateX(calc(-1 * var(--translate-shift-fast)));
+    -ms-transform: translateX(-30%) translateX(-12px);
 }
 
 .exitRight {
     opacity: 0;
-    transform: translateX(calc(var(--translate-base) - var(--translate-shift)));
+    transform: translateX(calc(100% - 24px));
     /* stylelint-disable-next-line property-no-vendor-prefix */
-    -ms-transform: translateX(var(--translate-base)) translateX(calc(-1 * var(--translate-shift)));
+    -ms-transform: translateX(100%) translateX(-24px);
 }
 
 .fast.exitRight {
-    transform: translateX(calc(var(--translate-base-fast) - var(--translate-shift-fast)));
+    transform: translateX(calc(30% - 12px));
     /* stylelint-disable-next-line property-no-vendor-prefix */
-    -ms-transform: translateX(var(--translate-base-fast))
-        translateX(calc(-1 * var(--translate-shift-fast)));
+    -ms-transform: translateX(30%) translateX(-12px);
 }
 
 .exitTop {
     opacity: 0;
-    transform: translateY(calc(-1 * var(--translate-base) - var(--translate-shift)));
+    transform: translateY(calc(-100% - 24px));
     /* stylelint-disable-next-line property-no-vendor-prefix */
-    -ms-transform: translateY(calc(-1 * var(--translate-base)))
-        translateY(calc(-1 * var(--translate-shift)));
+    -ms-transform: translateY(-100%) translateY(-24px);
 }
 
 .fast.exitTop {
-    transform: translateY(calc(-1 * var(--translate-base-fast) - var(--translate-shift-fast)));
+    transform: translateY(calc(-30% - 12px));
     /* stylelint-disable-next-line property-no-vendor-prefix */
-    -ms-transform: translateY(calc(-1 * var(--translate-base-fast)))
-        translateY(calc(-1 * var(--translate-shift-fast)));
+    -ms-transform: translateY(-30%) translateY(-12px);
 }
 
 .exitBottom {
     opacity: 0;
-    transform: translateY(calc(var(--translate-base) - var(--translate-shift)));
+    transform: translateY(calc(100% - 24px));
     /* stylelint-disable-next-line property-no-vendor-prefix */
-    -ms-transform: translateY(var(--translate-base)) translateY(calc(-1 * var(--translate-shift)));
+    -ms-transform: translateY(100%) translateY(-24px);
 }
 
 .fast.exitBottom {
-    transform: translateY(calc(var(--translate-base-fast) - var(--translate-shift-fast)));
+    transform: translateY(calc(30% - 12px));
     /* stylelint-disable-next-line property-no-vendor-prefix */
-    -ms-transform: translateY(var(--translate-base-fast))
-        translateY(calc(-1 * var(--translate-shift-fast)));
+    -ms-transform: translateY(30%) translateY(-12px);
 }
