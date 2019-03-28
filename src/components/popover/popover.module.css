@@ -47,18 +47,6 @@
     bottom: 0;
 }
 
-.root[data-placement^="top"] .popper {
-    transform-origin: bottom center;
-}
-
-.root[data-placement^="top-start"] .popper {
-    transform-origin: bottom left;
-}
-
-.root[data-placement^="top-end"] .popper {
-    transform-origin: bottom right;
-}
-
 .withArrow[data-placement^="right"] {
     margin-left: 9px;
 }
@@ -67,18 +55,6 @@
     transform: rotate(0deg);
     margin-left: -8px;
     left: 0;
-}
-
-.root[data-placement^="right"] .popper {
-    transform-origin: center left;
-}
-
-.root[data-placement^="right-start"] .popper {
-    transform-origin: top left;
-}
-
-.root[data-placement^="right-end"] .popper {
-    transform-origin: bottom left;
 }
 
 .withArrow[data-placement^="bottom"] {
@@ -91,18 +67,6 @@
     top: 0;
 }
 
-.root[data-placement^="bottom"] .popper {
-    transform-origin: top center;
-}
-
-.root[data-placement^="bottom-start"] .popper {
-    transform-origin: top left;
-}
-
-.root[data-placement^="bottom-end"] .popper {
-    transform-origin: top right;
-}
-
 .withArrow[data-placement^="left"] {
     margin-right: 9px;
 }
@@ -111,18 +75,6 @@
     transform: rotate(180deg);
     margin-right: -8px;
     right: 0;
-}
-
-.root[data-placement^="left"] .popper {
-    transform-origin: center right;
-}
-
-.root[data-placement^="left-start"] .popper {
-    transform-origin: top right;
-}
-
-.root[data-placement^="left-end"] .popper {
-    transform-origin: bottom right;
 }
 
 .arrowHidden {

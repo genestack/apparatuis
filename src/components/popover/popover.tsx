@@ -76,6 +76,48 @@ interface State {
     exited: boolean;
 }
 
+// tslint:disable-next-line: cyclomatic-complexity
+const getGrowTransformOrigin = (placement: Placement): GrowProps['transformOrigin'] => {
+    if (placement === 'top') {
+        return 'bottom center';
+    }
+    if (placement === 'top-start') {
+        return 'bottom left';
+    }
+    if (placement === 'top-end') {
+        return 'bottom right';
+    }
+    if (placement === 'right') {
+        return 'center left';
+    }
+    if (placement === 'right-start') {
+        return 'top left';
+    }
+    if (placement === 'right-end') {
+        return 'bottom left';
+    }
+    if (placement === 'bottom') {
+        return 'top center';
+    }
+    if (placement === 'bottom-start') {
+        return 'top left';
+    }
+    if (placement === 'bottom-end') {
+        return 'top right';
+    }
+    if (placement === 'left') {
+        return 'center right';
+    }
+    if (placement === 'left-start') {
+        return 'top right';
+    }
+    if (placement === 'left-end') {
+        return 'bottom right';
+    }
+
+    return 'center center';
+};
+
 /**
  * Popover is a element that is shown near reference element
  * to show some context information or actions.
@@ -143,14 +185,17 @@ export class Popover extends React.Component<Props, State> {
         const element =
             typeof referenceElement === 'function' ? referenceElement() : referenceElement;
 
-        const renderTransition = (children: JSX.Element) =>
+        const renderTransition = (children: JSX.Element, popperPlacement: Placement) =>
             disableTransition ? (
                 children
             ) : (
                 <Grow
                     {...transitionProps}
-                    in={open}
+                    in={!!popperPlacement && open}
                     appear
+                    transformOrigin={
+                        transitionProps.transformOrigin || getGrowTransformOrigin(popperPlacement)
+                    }
                     onExited={chain(transitionProps.onExited, this.handleTransitionExited)}
                 >
                     {children}
@@ -199,7 +244,8 @@ export class Popover extends React.Component<Props, State> {
                                 >
                                     <PopoverArrowIcon className={classes.arrowIcon} />
                                 </div>
-                            </div>
+                            </div>,
+                            popperPlacement
                         )}
                     </div>
                 )}
