@@ -53,7 +53,14 @@ interface State {
     exited: boolean;
 }
 
-/** TransitionPopper */
+/**
+ * It is a wrapper around react-popper
+ * with portal support, transitions and unmounting on close.
+ *
+ * It is generic to handy API. This component omit popper's properties
+ * and left target's `T` properties for handy API.
+ * @ATTENTION Be careful. Targets properties must not conflict with TransitionPopperProps
+ */
 export class TransitionPopper<T> extends React.Component<Props<T>, State> {
     public static getDerivedStateFromProps(props: Props, state: State): State {
         if (props.open) {
@@ -99,6 +106,7 @@ export class TransitionPopper<T> extends React.Component<Props<T>, State> {
             modifiers,
             placement,
             positionFixed,
+            // omit all popper's properties
             ...targetProps
         } = this.props as InnerProps<T>;
 
