@@ -5,11 +5,12 @@
  * The copyright notice above does not evidence any
  * actual or intended publication of such source code.
  */
-
+// tslint:disable jsx-no-lambda no-non-null-assertion
 import * as React from 'react';
 
 import {createTestApp} from '../../../test-utils/create-test-app';
 import {Grow} from '../grow';
+import {TransitionPopper} from '../transition-popper';
 
 import {Popover} from './popover';
 
@@ -119,16 +120,24 @@ describe('<Popover />', () => {
     });
 
     it('should expose scheduleUpdate method', () => {
-        const wrapper = app.mount(
-            <Popover referenceElement={document.createElement('div')} open>
+        let instance: TransitionPopper<any> | null = null;
+
+        app.mount(
+            <Popover
+                referenceElement={document.createElement('div')}
+                open
+                popperRef={(node) => {
+                    instance = node;
+                }}
+            >
                 <div id="test" />
             </Popover>
         );
 
-        const instance = wrapper.instance() as Popover;
+        expect(instance).toBeTruthy();
 
         expect(() => {
-            instance.scheduleUpdate();
+            instance!.scheduleUpdate();
         }).not.toThrow();
     });
 

@@ -16,14 +16,14 @@ handleButtonClick = (event) => {
 };
 
 handleToggleExpandButtonClick = () =>
-    setState(({expanded}) => ({expanded: !expanded}), () => this.popover.scheduleUpdate());
+    setState(({expanded}) => ({expanded: !expanded}), () => this.popper.scheduleUpdate());
 
 handlePlacementChange = (event) => {
     setState({placement: event.target.value});
 };
 
 handleWithArrowChange = (event) =>
-    setState({withArrow: event.currentTarget.checked}, () => this.popover.scheduleUpdate());
+    setState({withArrow: event.currentTarget.checked}, () => this.popper.scheduleUpdate());
 
 handleDisableTransitionChange = (event) =>
     setState({disableTransition: event.currentTarget.checked});
@@ -95,7 +95,7 @@ const placements = [
         open={!!state.referenceElement}
         referenceElement={state.referenceElement}
         style={{padding: 16, textAlign: 'center'}}
-        ref={(popover) => (this.popover = popover)}
+        popperRef={(popper) => (this.popper = popper)}
         placement={state.placement}
         withArrow={state.withArrow}
         disableTransition={state.disableTransition}

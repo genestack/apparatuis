@@ -5,4 +5,9 @@
  * The copyright notice above does not evidence any
  * actual or intended publication of such source code.
  */
-export {Grow, Props as GrowProps, GrowTransformOrigin} from './grow';
+export {
+    TransitionPopper,
+    Props as TransitionPopperProps,
+    TransitionPopperChildrenProps,
+    TransitionPopperPlacement
+} from './transition-popper';
