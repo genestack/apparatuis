@@ -13,3 +13,4 @@ export const exitRight: string;
 export const exitTop: string;
 export const exitBottom: string;
 export const exiting: string;
+export const fast: string;

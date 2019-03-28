@@ -28,6 +28,8 @@ export interface Props extends TargetProps, WithClasses<keyof typeof styles> {
     /** Slide transition direction */
     direction?: 'left' | 'right' | 'top' | 'bottom';
     children: Children;
+    /** If `true` transition will be faster. */
+    fast?: boolean;
 }
 
 /**
@@ -103,7 +105,7 @@ export class Slide extends React.Component<Props> {
     };
 
     public render() {
-        const {className, classes, children, direction = 'left', ...rest} = mergeClassesProps(
+        const {className, classes, children, direction = 'left', fast, ...rest} = mergeClassesProps(
             this.props,
             styles
         );
@@ -119,6 +121,7 @@ export class Slide extends React.Component<Props> {
                 {React.cloneElement(child, {
                     className: classNames(className, child.props.className, {
                         [classes.enter]: rest.in,
+                        [classes.fast]: fast,
                         [classes.exitLeft]: !rest.in && direction === 'left',
                         [classes.exitRight]: !rest.in && direction === 'right',
                         [classes.exitTop]: !rest.in && direction === 'top',
