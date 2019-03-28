@@ -7,21 +7,24 @@
  */
 import classNames from 'classnames';
 import * as React from 'react';
-import * as ReactDOM from 'react-dom';
-import {Popper, PopperProps} from 'react-popper';
 
-import {chain} from '../../utils/chain';
 import {Omit} from '../../utils/omit';
+import {Ref} from '../../utils/set-ref';
 import {WithClasses, mergeClassesProps} from '../../utils/styles';
-import {Grow, GrowProps} from '../grow';
 import {createIcon} from '../icon';
 import {Paper, PaperProps} from '../paper';
+import {TransitionPopper, TransitionPopperProps} from '../transition-popper';
 
+import {PopoverGrow, Props as PopperGrowProps} from './popover-grow-transition';
 import * as styles from './popover.module.css';
+import {chain} from '../../utils/chain';
 
-type Placement = PopperProps['placement'];
-type TargetProps = Omit<PaperProps, 'classes'>;
-type TransitionProps = Omit<GrowProps, 'appear' | 'in' | 'children'>;
+type TargetProps = Omit<TransitionPopperProps<PaperProps>, 'classes' | 'children'>;
+type ContainerProps = Omit<React.HTMLAttributes<HTMLDivElement>, 'style'>;
+type TransitionProps = Omit<
+    PopperGrowProps,
+    'appear' | 'disableTransition' | 'placement' | 'exit' | 'children'
+>;
 
 const PopoverArrowIcon = createIcon(
     <svg viewBox="0 0 8 10" fill="none">
@@ -32,91 +35,14 @@ const PopoverArrowIcon = createIcon(
 
 /** Popover public properties */
 export interface Props extends TargetProps, WithClasses<keyof typeof styles> {
-    /** If `true` popover is visible */
-    open?: boolean;
-    /**
-     * DOM element, or a function that returns the DOM element
-     * (or DOM-like object @see PopperJS.ReferenceObject),
-     * that will be used to set the position of the popover.
-     * The return value will passed as the reference object of the Popper.js
-     * instance.
-     */
-    referenceElement?: PopperProps['referenceElement'] | (() => PopperProps['referenceElement']);
-    /**
-     * Popover is going to be placed according to the value of this property.
-     * @see https://popper.js.org/popper-documentation.html#Popper.placements
-     */
-    placement?: Placement;
-    /** Use position fixed for popper component. Shortcut to ReactPopper.positionFixed */
-    positionFixed?: PopperProps['positionFixed'];
     /** If `true` popover will show arrow */
     withArrow?: boolean;
-    /** Nested Grow transition properties */
+    popperRef?: Ref<TransitionPopper<PaperProps>>;
+    popperElementProps?: React.HTMLAttributes<HTMLDivElement>;
+    containerProps?: ContainerProps;
     transitionProps?: TransitionProps;
-    /** Other `<ReactPopper />` properties */
-    popperProps?: Omit<
-        PopperProps,
-        'referenceElement' | 'children' | 'placement' | 'positionFixed'
-    >;
-    /**
-     * Always keep the children in the DOM.
-     * This property can be useful in SEO situation or
-     * when you want to maximize the responsiveness of the Popper.
-     */
-    keepMounted?: boolean;
-    /** Do not run transition on popover opening and closing */
-    disableTransition?: boolean;
-    /** Element that will be used for portal if passed */
-    portalContainer?: Element;
-    /** Properties for element that contains Paper and Arrow elements */
-    popperElementProps?: Omit<React.HTMLAttributes<HTMLDivElement>, 'children'>;
+    children?: React.ReactNode;
 }
-
-interface State {
-    exited: boolean;
-}
-
-// tslint:disable-next-line: cyclomatic-complexity
-const getGrowTransformOrigin = (placement: Placement): GrowProps['transformOrigin'] => {
-    if (placement === 'top') {
-        return 'bottom center';
-    }
-    if (placement === 'top-start') {
-        return 'bottom left';
-    }
-    if (placement === 'top-end') {
-        return 'bottom right';
-    }
-    if (placement === 'right') {
-        return 'center left';
-    }
-    if (placement === 'right-start') {
-        return 'top left';
-    }
-    if (placement === 'right-end') {
-        return 'bottom left';
-    }
-    if (placement === 'bottom') {
-        return 'top center';
-    }
-    if (placement === 'bottom-start') {
-        return 'top left';
-    }
-    if (placement === 'bottom-end') {
-        return 'top right';
-    }
-    if (placement === 'left') {
-        return 'center right';
-    }
-    if (placement === 'left-start') {
-        return 'top right';
-    }
-    if (placement === 'left-end') {
-        return 'bottom right';
-    }
-
-    return 'center center';
-};
 
 /**
  * Popover is a element that is shown near reference element
@@ -126,132 +52,62 @@ const getGrowTransformOrigin = (placement: Placement): GrowProps['transformOrigi
  * It uses [react-popper](https://github.com/FezVrasta/react-popper)
  * under the hood.
  */
-export class Popover extends React.Component<Props, State> {
-    public static getDerivedStateFromProps(props: Props, state: State): State {
-        if (props.open) {
-            return {
-                exited: false
-            };
-        }
+export const Popover = (props: Props) => {
+    const {
+        classes,
+        withArrow,
+        popperRef,
+        containerProps = {},
+        transitionProps = {},
+        popperElementProps = {},
+        children,
+        ...rest
+    } = mergeClassesProps(props, styles);
 
-        return state;
-    }
-
-    private popperScheduleUpdate: (() => void) | null = null;
-
-    public state: State = {
-        exited: true
-    };
-
-    private handleTransitionExited = () => {
-        this.setState({exited: true});
-    };
-
-    /**
-     * Recalculate position of popper.
-     * Call it when any user action changes reference element position.
-     * By default `popper.js` subscribes to window scroll event.
-     */
-    public scheduleUpdate() {
-        if (this.popperScheduleUpdate) {
-            this.popperScheduleUpdate();
-        }
-    }
-
-    public render() {
-        const {
-            referenceElement,
-            popperProps = {},
-            open,
-            // tslint:disable-next-line no-object-literal-type-assertion
-            transitionProps = {} as TransitionProps,
-            placement,
-            classes,
-            withArrow,
-            keepMounted,
-            disableTransition,
-            positionFixed,
-            portalContainer,
-            popperElementProps = {},
-            ...paperProps
-        } = mergeClassesProps(this.props, styles);
-
-        const {exited} = this.state;
-
-        if (!keepMounted && !open && (exited || disableTransition)) {
-            return null;
-        }
-
-        const element =
-            typeof referenceElement === 'function' ? referenceElement() : referenceElement;
-
-        const renderTransition = (children: JSX.Element, popperPlacement: Placement) =>
-            disableTransition ? (
-                children
-            ) : (
-                <Grow
-                    {...transitionProps}
-                    in={!!popperPlacement && open}
-                    appear
-                    transformOrigin={
-                        transitionProps.transformOrigin || getGrowTransformOrigin(popperPlacement)
-                    }
-                    onExited={chain(transitionProps.onExited, this.handleTransitionExited)}
+    return (
+        <TransitionPopper<PaperProps> {...rest} ref={popperRef}>
+            {({ref, style, arrowProps, placement, targetProps, onTransitionExited}) => (
+                <div
+                    {...containerProps}
+                    ref={ref}
+                    style={style}
+                    className={classNames(containerProps.className, {
+                        [classes.withArrow]: withArrow
+                    })}
+                    data-placement={placement}
                 >
-                    {children}
-                </Grow>
-            );
-
-        const popper = (
-            <Popper
-                {...popperProps}
-                positionFixed={positionFixed}
-                placement={placement}
-                referenceElement={element}
-            >
-                {({
-                    ref,
-                    style: popperContainerStyle,
-                    scheduleUpdate,
-                    arrowProps,
-                    placement: popperPlacement
-                }) => (
-                    <div
-                        style={popperContainerStyle}
-                        className={classNames(classes.root, {
-                            [classes.withArrow]: withArrow
-                        })}
-                        data-placement={popperPlacement}
-                        ref={(node) => {
-                            ref(node);
-                            this.popperScheduleUpdate = scheduleUpdate;
-                        }}
+                    <PopoverGrow
+                        {...transitionProps}
+                        appear
+                        disableTransition={rest.disableTransition}
+                        placement={placement}
+                        open={!!placement && rest.open}
+                        onExited={chain(transitionProps.onExited, onTransitionExited)}
                     >
-                        {renderTransition(
-                            <div
-                                {...popperElementProps}
-                                className={classNames(popperElementProps.className, classes.popper)}
+                        <div
+                            {...popperElementProps}
+                            className={classNames(popperElementProps.className, classes.popper)}
+                            data-placement={placement}
+                        >
+                            <Paper
+                                {...targetProps}
+                                className={classNames(targetProps.className, classes.paper)}
                             >
-                                <Paper
-                                    {...paperProps}
-                                    className={classNames(paperProps.className, classes.paper)}
-                                />
-                                <div
-                                    {...arrowProps}
-                                    className={classNames(classes.arrow, {
-                                        [classes.arrowHidden]: !withArrow
-                                    })}
-                                >
-                                    <PopoverArrowIcon className={classes.arrowIcon} />
-                                </div>
-                            </div>,
-                            popperPlacement
-                        )}
-                    </div>
-                )}
-            </Popper>
-        );
-
-        return portalContainer ? ReactDOM.createPortal(popper, portalContainer) : popper;
-    }
-}
+                                {children}
+                            </Paper>
+                            <div
+                                {...arrowProps}
+                                data-placement={placement}
+                                className={classNames(classes.arrow, {
+                                    [classes.arrowHidden]: !withArrow
+                                })}
+                            >
+                                <PopoverArrowIcon className={classes.arrow} />
+                            </div>
+                        </div>
+                    </PopoverGrow>
+                </div>
+            )}
+        </TransitionPopper>
+    );
+};

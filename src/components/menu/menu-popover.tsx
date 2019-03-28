@@ -10,14 +10,13 @@ import closest from 'dom-helpers/query/closest';
 import * as React from 'react';
 
 import {Omit} from '../../utils/omit';
-import {Ref} from '../../utils/set-ref';
 import {WithClasses, mergeClassesProps} from '../../utils/styles';
 import {HiddenScrollbar, HiddenScrollbarProps} from '../hidden-scrollbar';
 import {PopoverProps, Popover} from '../popover';
 
 import * as styles from './menu-popover.module.css';
 
-type TargetProps = Omit<PopoverProps, 'classes' | 'popperProps' | 'popperElementProps'>;
+type TargetProps = Omit<PopoverProps, 'classes' | 'modifiers' | 'popperElementProps'>;
 
 /**
  * This data attribute is used to find closest menu container.
@@ -29,15 +28,12 @@ const MENU_POPOVER_DATA_ATTRIBUTE = 'data-menu-popover';
 
 /** MenuPopover Public properties */
 export interface Props extends TargetProps, WithClasses<keyof typeof styles> {
-    popoverRef?: Ref<Popover>;
     hiddenScrollbarProps?: Omit<HiddenScrollbarProps, 'children'>;
 }
 
-const popperProps: PopoverProps['popperProps'] = {
-    modifiers: {
-        preventOverflow: {
-            boundariesElement: 'viewport'
-        }
+const modifiers: PopoverProps['modifiers'] = {
+    preventOverflow: {
+        boundariesElement: 'viewport'
     }
 };
 
@@ -52,22 +48,19 @@ export class MenuPopover extends React.Component<Props> {
     }
 
     public render() {
-        const {
-            className,
-            popoverRef,
-            classes,
-            children,
-            hiddenScrollbarProps,
-            ...rest
-        } = mergeClassesProps(this.props, styles);
+        const {className, classes, children, hiddenScrollbarProps, ...rest} = mergeClassesProps(
+            this.props,
+            styles
+        );
 
         return (
             <Popover
                 {...rest}
-                ref={popoverRef}
                 className={classNames(className, classes.root)}
-                classes={{root: classes.popover}}
-                popperProps={popperProps}
+                containerProps={{
+                    className: classes.popover
+                }}
+                modifiers={modifiers}
                 popperElementProps={popperElementProps}
             >
                 <HiddenScrollbar {...hiddenScrollbarProps}>{children}</HiddenScrollbar>
