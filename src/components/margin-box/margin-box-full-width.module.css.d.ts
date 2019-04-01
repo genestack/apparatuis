@@ -5,8 +5,5 @@
  * The copyright notice above does not evidence any
  * actual or intended publication of such source code.
  */
-@import "../../variables.css";
-
-.root {
-    margin: 0 calc(var(--gs-spacing-unit) * -2);
-}
+export const root: string;
+export const dense: string;

@@ -9,7 +9,6 @@
 
 .root {
     min-height: 0;
-    padding: 0 calc(var(--gs-spacing-unit) * 2);
 }
 
 .scrollable {

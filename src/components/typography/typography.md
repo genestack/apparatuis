@@ -7,8 +7,6 @@ const Paper = ({inverted, useMaxWidth, ...rest}) => (
         style={{
             boxSizing: 'border-box',
             background: inverted ? '#333333' : '#FFFFFF',
-            padding: '0 24px',
-            margin: '0 16px',
             maxWidth: useMaxWidth ? 264 : null,
             flexGrow: 1,
             ...rest.style
@@ -16,9 +14,8 @@ const Paper = ({inverted, useMaxWidth, ...rest}) => (
     />
 );
 const Controls = (props) => (
-    <div style={{flexShrink: 0, flexGrow: 0, marginLeft: 16, textAlign: 'right'}} {...props} />
+    <div style={{flexShrink: 0, flexGrow: 0, margin: '0 16px', textAlign: 'right'}} {...props} />
 );
-const Spacer = () => <div style={{marginTop: 32}} />;
 
 initialState = {
     inverted: false,
@@ -28,7 +25,7 @@ initialState = {
 
 <Frame>
     <Row>
-        <Paper style={{padding: '0 20px 40px 40px'}}>
+        <PageContent as={Paper}>
             <Typography as="h1" variant="header" box="paragraph">
                 Small Airways Smoking Hackett 2012 SRP005411 (SRA)
             </Typography>
@@ -68,9 +65,9 @@ initialState = {
                 the entire transcriptome opens the possibility of a higher sensitivity and more
                 detailed characterization of the response of the small airway epithelium to smoking.
             </Typography>
-        </Paper>
+        </PageContent>
     </Row>
-    <Spacer />
+    <Divider gap={4} variant="transparent" />
     <Row>
         <Controls>
             <Typography as="label" box="paragraph">
@@ -92,7 +89,7 @@ initialState = {
                 />
             </Typography>
         </Controls>
-        <Paper inverted={state.inverted} useMaxWidth={state.useMaxWidth}>
+        <PageContent as={Paper} inverted={state.inverted} useMaxWidth={state.useMaxWidth}>
             <Typography as="h1" variant="header" box="paragraph" inverted={state.inverted}>
                 <Typography
                     as="span"
@@ -191,7 +188,7 @@ initialState = {
                 </Typography>{' '}
                 Epithelium of Bronchiole
             </Typography>
-            <Spacer />
+            <Divider gap={4} variant="transparent" />
             <Typography box="paragraph" inverted={state.inverted}>
                 A &lt;STRONG&gt; tag{' '}
                 <strong>
@@ -203,7 +200,7 @@ initialState = {
                     Quiet is useful for secondary information
                 </Typography>, while <em>Italic</em> is done with &lt;EM&gt; tag.
             </Typography>
-        </Paper>
+        </PageContent>
     </Row>
 </Frame>;
 ```

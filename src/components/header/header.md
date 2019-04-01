@@ -10,8 +10,6 @@ togglePositionFixed = () => {
     setState(({disablePositionFixed}) => ({disablePositionFixed: !disablePositionFixed}));
 };
 
-const PageContent = (props) => <div {...props} style={{padding: '0 16px', display: 'flex'}} />;
-
 const applicationMenu = (
     <Menu>
         <MenuItem onClick={togglePositionFixed}>Toggle header fixed position</MenuItem>
@@ -91,9 +89,11 @@ const exportMenu = (
         </MenuHandler>
     </Header>
     <PageContent>
-        <Typography box="paragraph">Left Page Side</Typography>
-        <FlexExpander />
-        <Typography box="paragraph">Right Page Side</Typography>
+        <div style={{display: 'flex'}}>
+            <Typography box="paragraph">Left Page Side</Typography>
+            <FlexExpander />
+            <Typography box="paragraph">Right Page Side</Typography>
+        </div>
     </PageContent>
 </div>;
 ```

@@ -8,14 +8,12 @@
 import classNames from 'classnames';
 import * as React from 'react';
 
-import {WithClasses, mergeClassesProps} from '../../utils/styles';
-
 import * as styles from './list.module.css';
 
 type TargetProps = React.HTMLAttributes<HTMLDivElement>;
 
 /** List public properties */
-export interface Props extends TargetProps, WithClasses<keyof typeof styles> {}
+export interface Props extends TargetProps {}
 
 /**
  * Lists are a continuous group of text.
@@ -23,7 +21,7 @@ export interface Props extends TargetProps, WithClasses<keyof typeof styles> {}
  * which are represented by icons, radios, checkboxes or other text.
  */
 export const List = (props: Props) => {
-    const {className, classes, ...rest} = mergeClassesProps(props, styles);
+    const {className, ...rest} = props;
 
-    return <div {...rest} className={classNames(className, classes.root)} />;
+    return <div {...rest} className={classNames(className, styles.root)} />;
 };

@@ -9,9 +9,9 @@ items = new Array(100).fill(null).map((_, index) => (
     </ListItem>
 ));
 
-<div style={{display: 'flex', flexDirection: 'row', background: '#fff'}}>
+<Paper style={{display: 'flex', flexDirection: 'row'}}>
     <HiddenScrollbar scrollStep={32} style={{maxHeight: 400}}>
         <List>{items}</List>
     </HiddenScrollbar>
-</div>;
+</Paper>;
 ```

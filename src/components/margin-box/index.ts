@@ -5,4 +5,5 @@
  * The copyright notice above does not evidence any
  * actual or intended publication of such source code.
  */
-export {Form, Props as FormProps} from './form';
+export {MarginBox, Props as MarginBoxProps} from './margin-box';
+export {MarginBoxFullWidth, Props as MarginBoxFullWidthProps} from './margin-box-full-width';

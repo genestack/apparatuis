@@ -6,3 +6,6 @@
  * actual or intended publication of such source code.
  */
 export const root: string;
+export const dense: string;
+export const divider: string;
+export const denseDivider: string;

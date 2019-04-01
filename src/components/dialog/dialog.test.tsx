@@ -116,7 +116,7 @@ describe('<Dialog />', () => {
             setup()
                 .find('#dialog-footer')
                 .find(Divider)
-                .filterWhere((component) => component.prop('variant') === undefined)
+                .filterWhere((component) => component.prop('variant') === 'stroke')
         ).toHaveLength(1);
     });
 
@@ -125,7 +125,7 @@ describe('<Dialog />', () => {
             setup({compact: true})
                 .find('#dialog-footer')
                 .find(Divider)
-                .filterWhere((component) => component.prop('variant') === undefined)
+                .filterWhere((component) => component.prop('variant') === 'stroke')
         ).toHaveLength(0);
     });
 
@@ -134,7 +134,7 @@ describe('<Dialog />', () => {
             setup()
                 .find('#dialog-header')
                 .find(Divider)
-                .filterWhere((component) => component.prop('variant') === undefined)
+                .filterWhere((component) => component.prop('variant') === 'stroke')
         ).toHaveLength(1);
     });
 
@@ -143,7 +143,7 @@ describe('<Dialog />', () => {
             setup({compact: true})
                 .find('#dialog-header')
                 .find(Divider)
-                .filterWhere((component) => component.prop('variant') === undefined)
+                .filterWhere((component) => component.prop('variant') === 'stroke')
         ).toHaveLength(0);
     });
 });

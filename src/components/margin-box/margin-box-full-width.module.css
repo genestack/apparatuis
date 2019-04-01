@@ -8,5 +8,11 @@
 @import "../../variables.css";
 
 .root {
-    padding: var(--gs-spacing-unit) calc(var(--gs-spacing-unit) * 2);
+    margin-left: calc(-1 * var(--gs-spacing-unit) * 3);
+    margin-right: calc(-1 * var(--gs-spacing-unit) * 3);
+}
+
+.dense {
+    margin-left: calc(-1 * var(--gs-spacing-unit) * 2);
+    margin-right: calc(-1 * var(--gs-spacing-unit) * 2);
 }

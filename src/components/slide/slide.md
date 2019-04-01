@@ -30,38 +30,42 @@ handleDirectionChange = (event) =>
         </Flex>
         <FlexExpander />
         <Flex cell>
-            <Paper style={{padding: '16px 0'}}>
-                <List>
-                    <ListItem as="label">
-                        <ListItemCell>
-                            <input
-                                type="checkbox"
-                                onChange={handleFastChange}
-                                checked={state.fast}
-                            />
-                        </ListItemCell>
-                        <ListItemText>Fast transition</ListItemText>
-                    </ListItem>
-                </List>
-                <Typography style={{padding: '0 16px'}} variant="section">
-                    Direction:
-                </Typography>
-                <List onChange={handleDirectionChange}>
-                    {directions.map((direction) => (
-                        <ListItem as="label" key={direction}>
+            <PageContent as={Paper}>
+                <PageFullWidth>
+                    <List>
+                        <ListItem as="label">
                             <ListItemCell>
                                 <input
-                                    type="radio"
-                                    name="direction"
-                                    value={direction}
-                                    defaultChecked={state.direction === direction}
+                                    type="checkbox"
+                                    onChange={handleFastChange}
+                                    checked={state.fast}
                                 />
                             </ListItemCell>
-                            <ListItemText>{direction}</ListItemText>
+                            <ListItemText>Fast transition</ListItemText>
                         </ListItem>
-                    ))}
-                </List>
-            </Paper>
+                    </List>
+                </PageFullWidth>
+                <Typography box="paragraph" variant="section">
+                    Direction:
+                </Typography>
+                <PageFullWidth>
+                    <List onChange={handleDirectionChange}>
+                        {directions.map((direction) => (
+                            <ListItem as="label" key={direction}>
+                                <ListItemCell>
+                                    <input
+                                        type="radio"
+                                        name="direction"
+                                        value={direction}
+                                        defaultChecked={state.direction === direction}
+                                    />
+                                </ListItemCell>
+                                <ListItemText>{direction}</ListItemText>
+                            </ListItem>
+                        ))}
+                    </List>
+                </PageFullWidth>
+            </PageContent>
         </Flex>
     </div>
 </Flex>;
