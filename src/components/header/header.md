@@ -82,7 +82,11 @@ const exportMenu = (
         </HeaderButton>
         <MenuHandler menu={userMenu}>
             {({open}) => (
-                <HeaderButton shrink focused={open} title="konstantin.vasiliev@genestack.com">
+                <HeaderButton
+                    focused={open}
+                    title="konstantin.vasiliev@genestack.com"
+                    style={{maxWidth: 200}}
+                >
                     konstantin.vasiliev@genestack.com
                 </HeaderButton>
             )}

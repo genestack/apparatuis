@@ -8,7 +8,15 @@
 @import "../../variables.css";
 
 .root {
-    padding-left: var(--gs-spacing-unit);
-    padding-right: var(--gs-spacing-unit);
+    padding-left: calc(var(--gs-spacing-unit) * 1.5);
+    padding-right: calc(var(--gs-spacing-unit) * 1.5);
     height: 100%;
+}
+
+.root:first-child {
+    margin-left: calc(var(--gs-spacing-unit) * -1.5);
+}
+
+.root:last-child {
+    margin-right: calc(var(--gs-spacing-unit) * -1.5);
 }

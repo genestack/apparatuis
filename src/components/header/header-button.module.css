@@ -9,10 +9,7 @@
 
 .root {
     composes: resetButton from "../../variables.css";
-    display: flex;
-    padding-left: var(--gs-spacing-unit);
-    padding-right: var(--gs-spacing-unit);
-    height: 100%;
+    position: relative;
 }
 
 .root:focus,
@@ -38,12 +35,22 @@
     pointer-events: none;
 }
 
-.root:first-of-type {
-    margin-left: calc(var(--gs-spacing-unit) * -2);
-    padding-left: calc(var(--gs-spacing-unit) * 2);
+.root:first-child:before {
+    content: "";
+    position: absolute;
+    left: calc(var(--gs-spacing-unit) * -1.5);
+    top: 0;
+    right: 0;
+    bottom: 0;
+    cursor: pointer;
 }
 
-.root:last-of-type:not(:first-of-type) {
-    margin-right: calc(var(--gs-spacing-unit) * -2);
-    padding-right: calc(var(--gs-spacing-unit) * 2);
+.root:last-child:before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: calc(var(--gs-spacing-unit) * -1.5);
+    bottom: 0;
+    cursor: pointer;
 }
