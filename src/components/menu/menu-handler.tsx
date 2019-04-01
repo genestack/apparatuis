@@ -15,7 +15,8 @@ import {Props as MenuProps} from './menu';
 type MenuProp = (() => React.ReactElement<MenuProps>) | React.ReactElement<MenuProps>;
 
 interface ChildProps {
-    onClick?: React.EventHandler<React.SyntheticEvent>;
+    onClick?: React.MouseEventHandler;
+    onKeyDown?: React.KeyboardEventHandler;
 }
 
 type ChildrenProp =
@@ -60,8 +61,15 @@ export class MenuHandler extends React.Component<Props, State> {
         }
     };
 
-    private handleReferenceClick: React.EventHandler<React.SyntheticEvent> = (event) => {
+    private handleReferenceClick: ChildProps['onClick'] = (event) => {
         if (!event.defaultPrevented) {
+            this.open();
+        }
+    };
+
+    private handleReferenceKeyDown: ChildProps['onKeyDown'] = (event) => {
+        if (!event.defaultPrevented && event.key === 'ArrowDown') {
+            event.preventDefault();
             this.open();
         }
     };
@@ -80,7 +88,8 @@ export class MenuHandler extends React.Component<Props, State> {
             : this.props.children) as React.ReactElement<ChildProps>;
 
         const childProps: ChildProps = {
-            onClick: chain(child.props.onClick, this.handleReferenceClick)
+            onClick: chain(child.props.onClick, this.handleReferenceClick),
+            onKeyDown: chain(child.props.onKeyDown, this.handleReferenceKeyDown)
         };
 
         return React.cloneElement(child, childProps);

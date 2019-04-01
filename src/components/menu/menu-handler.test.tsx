@@ -71,4 +71,10 @@ describe('<MenuHandler />', () => {
     it('should expose close method', () => {
         expect(setup().instance()).toHaveProperty('close', expect.any(Function));
     });
+
+    it('should open menu on ArrowDown keypress', () => {
+        const wrapper = setup();
+        wrapper.find('#button').simulate('keydown', {key: 'ArrowDown'});
+        expect(document.getElementById('menu')).toBeTruthy();
+    });
 });

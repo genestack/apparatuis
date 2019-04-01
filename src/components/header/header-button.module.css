@@ -40,7 +40,7 @@
     position: absolute;
     left: calc(var(--gs-spacing-unit) * -1.5);
     top: 0;
-    right: 0;
+    right: 100%;
     bottom: 0;
     cursor: pointer;
 }
@@ -48,7 +48,7 @@
 .root:last-child:before {
     content: "";
     position: absolute;
-    left: 0;
+    left: 100%;
     top: 0;
     right: calc(var(--gs-spacing-unit) * -1.5);
     bottom: 0;
