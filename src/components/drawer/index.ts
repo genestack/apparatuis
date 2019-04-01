@@ -6,4 +6,4 @@
  * actual or intended publication of such source code.
  */
 export {Drawer, Props as DrawerProps} from './drawer';
-export {DrawerContent, Props as DrawerContentProps} from './drawer-content';
+export {DrawerFullWidth, Props as DrawerFullWidthProps} from './drawer-full-width';

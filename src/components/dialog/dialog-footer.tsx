@@ -9,20 +9,17 @@ import classNames from 'classnames';
 import * as React from 'react';
 
 import {WithClasses, mergeClassesProps} from '../../utils/styles';
-import {DividerProps, Divider} from '../divider';
+import {MarginBox, MarginBoxProps} from '../margin-box';
 
 import {DialogContext} from './dialog-context';
 import * as styles from './dialog-footer.module.css';
 
-const DEFAULT_DIVIDER_GAP = 4;
-
-type TargetProps = React.HTMLAttributes<HTMLDivElement>;
+type TargetProps = React.HTMLAttributes<HTMLDivElement> &
+    Pick<MarginBoxProps, 'startDividerProps' | 'endDividerProps'>;
 
 /** DialogFooter public properties */
 export interface Props extends TargetProps, WithClasses<keyof typeof styles> {
     contentProps?: React.HTMLAttributes<HTMLDivElement>;
-    startDividerProps?: DividerProps;
-    endDividerProps?: DividerProps;
 }
 
 /**
@@ -34,31 +31,31 @@ export const DialogFooter = (props: Props) => {
         children,
         contentProps = {},
         startDividerProps,
-        endDividerProps,
+
         classes,
         ...rest
     } = mergeClassesProps(props, styles);
 
     return (
-        <div {...rest} className={classNames(rest.className, classes.root)}>
-            <DialogContext.Consumer>
-                {(dialogContext) =>
-                    !dialogContext.compact ? (
-                        <Divider startGap={0} endGap={DEFAULT_DIVIDER_GAP} {...startDividerProps} />
-                    ) : null
-                }
-            </DialogContext.Consumer>
-
-            <div {...contentProps} className={classNames(contentProps.className, classes.content)}>
-                {children}
-            </div>
-
-            <Divider
-                variant="transparent"
-                startGap={DEFAULT_DIVIDER_GAP}
-                endGap={0}
-                {...endDividerProps}
-            />
-        </div>
+        <DialogContext.Consumer>
+            {(dialogContext) => (
+                <MarginBox
+                    {...rest}
+                    className={classNames(rest.className, classes.root)}
+                    noStartDivider={dialogContext.compact}
+                    startDividerProps={{
+                        variant: 'stroke',
+                        ...startDividerProps
+                    }}
+                >
+                    <div
+                        {...contentProps}
+                        className={classNames(contentProps.className, classes.content)}
+                    >
+                        {children}
+                    </div>
+                </MarginBox>
+            )}
+        </DialogContext.Consumer>
     );
 };

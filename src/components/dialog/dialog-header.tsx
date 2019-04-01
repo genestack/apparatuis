@@ -9,20 +9,17 @@ import classNames from 'classnames';
 import * as React from 'react';
 
 import {mergeClassesProps, WithClasses} from '../../utils/styles';
-import {Divider, DividerProps} from '../divider';
+import {MarginBox, MarginBoxProps} from '../margin-box';
 
 import {DialogContext} from './dialog-context';
 import * as styles from './dialog-header.module.css';
 
-const DEFAULT_DIVIDER_GAP = 4;
-
-type TargetProps = React.HTMLAttributes<HTMLDivElement>;
+type TargetProps = React.HTMLAttributes<HTMLDivElement> &
+    Pick<MarginBoxProps, 'startDividerProps' | 'endDividerProps'>;
 
 /** DialogHeader public properties */
 export interface Props extends TargetProps, WithClasses<keyof typeof styles> {
     contentProps?: React.HTMLAttributes<HTMLDivElement>;
-    startDividerProps?: DividerProps;
-    endDividerProps?: DividerProps;
 }
 
 /**
@@ -42,13 +39,15 @@ export const DialogHeader = (props: Props) => {
     return (
         <DialogContext.Consumer>
             {(dialogContext) => (
-                <div {...rest} className={classNames(classes.root)}>
-                    <Divider
-                        variant="transparent"
-                        startGap={0}
-                        endGap={DEFAULT_DIVIDER_GAP}
-                        {...startDividerProps}
-                    />
+                <MarginBox
+                    {...rest}
+                    className={classNames(rest.className, classes.root)}
+                    noEndDivider={dialogContext.compact}
+                    endDividerProps={{
+                        variant: 'stroke',
+                        ...endDividerProps
+                    }}
+                >
                     <div
                         {...contentProps}
                         className={classNames(contentProps.className, classes.content, {
@@ -57,10 +56,7 @@ export const DialogHeader = (props: Props) => {
                     >
                         {children}
                     </div>
-                    {!dialogContext.compact ? (
-                        <Divider startGap={DEFAULT_DIVIDER_GAP} endGap={0} {...startDividerProps} />
-                    ) : null}
-                </div>
+                </MarginBox>
             )}
         </DialogContext.Consumer>
     );

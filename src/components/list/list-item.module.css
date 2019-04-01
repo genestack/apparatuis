@@ -9,8 +9,8 @@
 
 .root {
     composes: resetButton from "../../variables.css";
-    padding-right: calc(var(--gs-spacing-unit) * 2);
-    padding-left: calc(var(--gs-spacing-unit) * 2);
+    padding-right: calc(var(--gs-spacing-unit) * 3);
+    padding-left: calc(var(--gs-spacing-unit) * 3);
     min-height: calc(var(--gs-spacing-unit) * 4);
     width: 100%;
 }

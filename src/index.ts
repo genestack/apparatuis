@@ -8,7 +8,6 @@
 export * from './components/button';
 export * from './components/checkbox';
 export * from './components/input';
-export * from './components/form';
 export * from './components/paginator';
 export * from './components/select';
 export * from './components/tooltip';
@@ -33,3 +32,4 @@ export * from './components/icon-button';
 export * from './components/with-separator';
 export * from './components/root-ref';
 export * from './components/dialog';
+export * from './components/page-content';

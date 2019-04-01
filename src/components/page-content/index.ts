@@ -5,4 +5,5 @@
  * The copyright notice above does not evidence any
  * actual or intended publication of such source code.
  */
-export const root: string;
+export {PageContent, Props as PageContentProps} from './page-content';
+export {PageFullWidth, Props as PageFullWidthWidthProps} from './page-full-width';

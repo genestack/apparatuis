@@ -9,20 +9,16 @@ import classNames from 'classnames';
 import * as React from 'react';
 
 import {WithClasses, mergeClassesProps} from '../../utils/styles';
-import {Divider, DividerProps} from '../divider';
+import {MarginBoxProps, MarginBox} from '../margin-box';
 
 import * as styles from './dialog-body.module.css';
 import {DialogContext} from './dialog-context';
 
-const DEFAULT_DIVIDER_GAP = 4;
-
-type TargetProps = React.HTMLAttributes<HTMLDivElement>;
+type TargetProps = React.HTMLAttributes<HTMLDivElement> &
+    Pick<MarginBoxProps, 'startDividerProps' | 'endDividerProps'>;
 
 /** DialogBody public properties */
-export interface Props extends TargetProps, WithClasses<keyof typeof styles> {
-    startDividerProps?: DividerProps;
-    endDividerProps?: DividerProps;
-}
+export interface Props extends TargetProps, WithClasses<keyof typeof styles> {}
 
 /**
  * DialogBody element includes main content of Dialog.
@@ -31,34 +27,17 @@ export interface Props extends TargetProps, WithClasses<keyof typeof styles> {
  * This scroll could be disabled by compact dialog mode.
  */
 export const DialogBody = (props: Props) => {
-    const {classes, children, startDividerProps, endDividerProps, ...rest} = mergeClassesProps(
-        props,
-        styles
-    );
+    const {classes, ...rest} = mergeClassesProps(props, styles);
 
     return (
         <DialogContext.Consumer>
             {(dialogContext) => (
-                <div
+                <MarginBox
                     {...rest}
                     className={classNames(rest.className, classes.root, {
                         [classes.scrollable]: !dialogContext.compact
                     })}
-                >
-                    <Divider
-                        variant="transparent"
-                        startGap={0}
-                        endGap={DEFAULT_DIVIDER_GAP}
-                        {...startDividerProps}
-                    />
-                    {children}
-                    <Divider
-                        variant="transparent"
-                        startGap={DEFAULT_DIVIDER_GAP}
-                        endGap={0}
-                        {...endDividerProps}
-                    />
-                </div>
+                />
             )}
         </DialogContext.Consumer>
     );

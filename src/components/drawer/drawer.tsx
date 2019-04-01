@@ -10,6 +10,7 @@ import * as React from 'react';
 
 import {Omit} from '../../utils/omit';
 import {WithClasses, mergeClassesProps} from '../../utils/styles';
+import {MarginBox} from '../margin-box';
 import {Overlay, OverlayProps} from '../overlay';
 import {PaperProps, Paper} from '../paper';
 import {Slide, SlideProps} from '../slide';
@@ -55,9 +56,10 @@ export const Drawer = (props: Props) => {
             className={classNames(overlayProps.className, classes.overlay)}
         >
             <Slide {...slideProps} appear in={open} direction={side}>
-                <Paper
+                <MarginBox
                     tabIndex={-1}
                     {...rest}
+                    as={Paper}
                     className={classNames(rest.className, classes.root, {
                         [classes.leftSided]: side === 'left',
                         [classes.rightSided]: side === 'right'

@@ -34,26 +34,28 @@ handleTransformOriginChange = (event) => setState({transformOrigin: event.target
         </Flex>
         <FlexExpander />
         <Flex cell>
-            <Paper>
-                <Typography style={{padding: '0 16px'}} box="paragraph" variant="section">
+            <PageContent as={Paper}>
+                <Typography box="paragraph" variant="section">
                     Transform origin:
                 </Typography>
-                <List onChange={handleTransformOriginChange}>
-                    {transformOrigins.map((transformOrigin) => (
-                        <ListItem as="label" key={transformOrigin}>
-                            <ListItemCell>
-                                <input
-                                    type="radio"
-                                    defaultChecked={transformOrigin === state.transformOrigin}
-                                    value={transformOrigin}
-                                    name="transformOrigin"
-                                />
-                            </ListItemCell>
-                            <ListItemText>{transformOrigin}</ListItemText>
-                        </ListItem>
-                    ))}
-                </List>
-            </Paper>
+                <PageFullWidth>
+                    <List onChange={handleTransformOriginChange}>
+                        {transformOrigins.map((transformOrigin) => (
+                            <ListItem as="label" key={transformOrigin}>
+                                <ListItemCell>
+                                    <input
+                                        type="radio"
+                                        defaultChecked={transformOrigin === state.transformOrigin}
+                                        value={transformOrigin}
+                                        name="transformOrigin"
+                                    />
+                                </ListItemCell>
+                                <ListItemText>{transformOrigin}</ListItemText>
+                            </ListItem>
+                        ))}
+                    </List>
+                </PageFullWidth>
+            </PageContent>
         </Flex>
     </div>
 </Flex>;

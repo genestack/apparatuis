@@ -9,11 +9,11 @@ import * as React from 'react';
 
 import {MarginBoxFullWidth} from '../margin-box';
 
-/** DialogFullWidth public properties */
+/** DrawerFullWidth public properties */
 export interface Props extends React.HTMLAttributes<HTMLDivElement> {}
 
 /**
- * Use this element to remove side paddings from Dialog elements.
- * It add negative margins to compensate dialog side paddings.
+ * Use this element to remove side paddings from Drawer elements.
+ * It add negative margins to compensate drawer side paddings.
  */
-export const DialogFullWidth = (props: Props) => <MarginBoxFullWidth {...props} />;
+export const DrawerFullWidth = (props: Props) => <MarginBoxFullWidth {...props} />;

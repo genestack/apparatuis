@@ -11,10 +11,7 @@ function getModalStyle() {
         left: `${left}%`,
         transform: `translate(-50%, -50%, 0)`,
         position: 'absolute',
-        width: 200,
-        backgroundColor: '#fff',
-        boxShadow: '0 0 8px rgba(0,0,0,0.4)',
-        padding: 32
+        width: 240
     };
 }
 
@@ -62,7 +59,7 @@ class SimpleModal extends React.Component {
                         onClosed={this.handleSubModalClosed}
                     >
                         <Fade appear in={this.state.subModalOpen}>
-                            <div style={this.styles}>
+                            <PageContent as={Paper} style={this.styles} tabIndex={-1}>
                                 <Typography variant="title" box="paragraph">
                                     Overlay Example
                                 </Typography>
@@ -72,10 +69,13 @@ class SimpleModal extends React.Component {
                                 <div>
                                     <Input placeholder="Focus should be trapped" />
                                 </div>
+                                <PageFullWidth>
+                                    <Divider gap={4} />
+                                </PageFullWidth>
                                 <div>
                                     <SimpleModal />
                                 </div>
-                            </div>
+                            </PageContent>
                         </Fade>
                     </Overlay>
                 ) : null}

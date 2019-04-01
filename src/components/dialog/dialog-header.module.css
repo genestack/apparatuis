@@ -12,10 +12,6 @@
     flex-grow: 0;
 }
 
-.content {
-    padding: 0 calc(var(--gs-spacing-unit) * 2);
-}
-
 .shiftedContent {
     padding-right: calc(var(--gs-spacing-unit) * 5.5);
 }

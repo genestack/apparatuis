@@ -16,7 +16,7 @@ initialState = {
 
 handleCheckboxChange = (enableSelfFocus) => setState({enableSelfFocus});
 
-<React.Fragment>
+<PageContent as={Paper}>
     <Row>
         <Input placeholder="First Free Input" />
     </Row>
@@ -43,5 +43,5 @@ handleCheckboxChange = (enableSelfFocus) => setState({enableSelfFocus});
     <Row>
         <Input placeholder="Last Free Input" />
     </Row>
-</React.Fragment>;
+</PageContent>;
 ```

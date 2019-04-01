@@ -66,7 +66,7 @@ initialState = {
             </div>
         </Flex>
         <Flex cell>
-            <label for="tooltip-handler-async-duration">
+            <label htmlFor="tooltip-handler-async-duration">
                 <Typography>Async timeout duration:</Typography>
             </label>
         </Flex>

@@ -1,5 +1,5 @@
 ```js
-<React.Fragment>
+<PageContent as={Paper}>
     <Typography variant="section" box="paragraph">
         Divider example
     </Typography>
@@ -22,5 +22,5 @@
         entire transcriptome opens the possibility of a higher sensitivity and more detailed
         characterization of the response of the small airway epithelium to smoking.
     </Typography>
-</React.Fragment>
+</PageContent>
 ```

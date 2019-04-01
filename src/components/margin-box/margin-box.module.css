@@ -1,0 +1,30 @@
+/*
+ * Copyright (c) 2011-2019 Genestack Limited
+ * All Rights Reserved
+ * THIS IS UNPUBLISHED PROPRIETARY SOURCE CODE OF GENESTACK LIMITED
+ * The copyright notice above does not evidence any
+ * actual or intended publication of such source code.
+ */
+@import "../../variables.css";
+
+.root {
+    padding-left: calc(var(--gs-spacing-unit) * 3);
+    padding-right: calc(var(--gs-spacing-unit) * 3);
+}
+
+.dense {
+    padding-left: calc(var(--gs-spacing-unit) * 2);
+    padding-right: calc(var(--gs-spacing-unit) * 2);
+}
+
+.divider {
+    margin-left: calc(var(--gs-spacing-unit) * -3);
+    margin-right: calc(var(--gs-spacing-unit) * -3);
+    width: calc(100% + var(--gs-spacing-unit) * 6);
+}
+
+.denseDivider {
+    margin-left: calc(var(--gs-spacing-unit) * -2);
+    margin-right: calc(var(--gs-spacing-unit) * -2);
+    width: calc(100% + var(--gs-spacing-unit) * 4);
+}
