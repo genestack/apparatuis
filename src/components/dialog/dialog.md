@@ -99,7 +99,7 @@ handleFormSubmit = (event) => {
                     window.
                 </Typography>
                 <Typography box="paragraph">
-                    To continue as <b>konstantin.vasiliev@genestack.com</b>, please enter your password:
+                    To continue as <b>user.name@genestack.com</b>, please enter your password:
                 </Typography>
                 <Input
                     type="password"
