@@ -10,6 +10,7 @@ const path = require('path');
 const postcssCustomProperties = require('postcss-custom-properties');
 const postcssImport = require('postcss-import');
 const autoprefixer = require('autoprefixer');
+const calc = require('postcss-calc');
 
 // Styleguidist has dependencies that are not traspiled and do not work in IE.
 // Force babel-loader to transpile it manually.
@@ -68,6 +69,7 @@ module.exports = {
                             plugins: [
                                 postcssImport,
                                 postcssCustomProperties({preserve: false}),
+                                calc(),
                                 autoprefixer
                             ]
                         }
@@ -91,6 +93,7 @@ module.exports = {
                             plugins: [
                                 postcssImport,
                                 postcssCustomProperties({preserve: false}),
+                                calc(),
                                 autoprefixer
                             ]
                         }
@@ -99,5 +102,5 @@ module.exports = {
             }
         ]
     },
-    externals: ['classnames', 'react', 'react-dom', 'prop-types']
+    externals: ['classnames', 'react', 'react-dom']
 };

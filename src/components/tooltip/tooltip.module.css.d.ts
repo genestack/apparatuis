@@ -5,5 +5,8 @@
  * The copyright notice above does not evidence any
  * actual or intended publication of such source code.
  */
-export {Tooltip, Props as TooltipProps} from './tooltip';
-export {TooltipHandler, Props as TooltipHandlerProps} from './tooltip-handler';
+export const root: string;
+export const popperContainer: string;
+export const tooltipContainer: string;
+export const arrow: string;
+export const withGaps: string;

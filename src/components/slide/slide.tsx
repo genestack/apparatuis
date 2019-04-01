@@ -18,6 +18,7 @@ import {WithClasses, mergeClassesProps} from '../../utils/styles';
 import * as styles from './slide.module.css';
 
 const DURATION_TIMEOUT = 300;
+const FAST_DURATION_TIMEOUT = 160;
 
 type StrictCSSTransitionProps = OmitIndexSignature<TransitionProps>;
 type TargetProps = Omit<StrictCSSTransitionProps, 'timeout' | 'children'>;
@@ -79,7 +80,7 @@ export class Slide extends React.Component<Props> {
     };
 
     private handleExit: Props['onExit'] = (node) => {
-        const {classes, direction = 'left'} = mergeClassesProps(this.props, styles);
+        const {classes} = mergeClassesProps(this.props, styles);
 
         node.classList.remove(classes.exitLeft);
         node.classList.remove(classes.exitRight);
@@ -89,6 +90,7 @@ export class Slide extends React.Component<Props> {
         node.classList.add(classes.enter);
 
         this.requestAnimationFrame(() => {
+            const {direction = 'left'} = this.props;
             node.classList.remove(classes.entering);
             node.classList.add(classes.exiting);
             reflow(node);
@@ -114,7 +116,7 @@ export class Slide extends React.Component<Props> {
         return (
             <Transition
                 {...rest}
-                timeout={DURATION_TIMEOUT}
+                timeout={fast ? FAST_DURATION_TIMEOUT : DURATION_TIMEOUT}
                 onEnter={chain(rest.onEnter, this.handleEnter)}
                 onExit={chain(rest.onExit, this.handleExit)}
             >

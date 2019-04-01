@@ -1,16 +1,26 @@
 ```js
-<div id="tooltip-container" style={{position: 'relative'}}>
+initialState = {
+    referenceElement: null
+};
+
+handleTooltipToggle = (event) => {
+    const {currentTarget} = event;
+    setState(({referenceElement}) => ({
+        referenceElement: referenceElement ? null : currentTarget
+    }));
+};
+
+handleTooltipClose = () => setState({referenceElement: null});
+
+<div>
+    <Button onClick={handleTooltipToggle}>Toggle Tooltip</Button>
     <Tooltip
-        overlay="This field is required"
-        visible={true}
-        getTooltipContainer={() => document.getElementById('tooltip-container')}
+        open={!!state.referenceElement}
+        referenceElement={state.referenceElement}
+        onClose={handleTooltipClose}
+        keepMounted
     >
-        <Input style={{width: '300px'}} hasError />
+        I am a tooltip
     </Tooltip>
-    <br />
-    <br />
-    <Tooltip overlay="I'm tooltip" placement="bottom">
-        <Button onClick={() => alert('clicked on default button')}>Hover me!</Button>
-    </Tooltip>
-</div>
+</div>;
 ```

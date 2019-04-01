@@ -26,7 +26,7 @@ type TargetProps = React.HTMLAttributes<HTMLDivElement>;
 /** Reason of overlay close */
 export type OverlayCloseReason = 'backdrop_click' | 'escape_keydown';
 
-type CloseHandler = (reason: OverlayCloseReason, event?: React.SyntheticEvent) => void;
+type OverlayCloseHandler = (reason: OverlayCloseReason, event?: React.SyntheticEvent) => void;
 
 /** Overlay public properties */
 export interface Props extends TargetProps {
@@ -38,9 +38,9 @@ export interface Props extends TargetProps {
     open?: boolean;
     /**
      * Request to close overlay. It accepts close reason and event.
-     * @see CloseReason
+     * @see OverlayCloseReason
      */
-    onClose?: CloseHandler;
+    onClose?: OverlayCloseHandler;
     /**
      * Calls when the overlay is closed, all transitions are completed
      * and the component is ready for unmount

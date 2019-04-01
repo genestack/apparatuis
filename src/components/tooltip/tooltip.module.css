@@ -1,0 +1,68 @@
+/*
+ * Copyright (c) 2011-2019 Genestack Limited
+ * All Rights Reserved
+ * THIS IS UNPUBLISHED PROPRIETARY SOURCE CODE OF GENESTACK LIMITED
+ * The copyright notice above does not evidence any
+ * actual or intended publication of such source code.
+ */
+@import "../../variables.css";
+
+.root {
+    background: var(--gs-color-dark);
+    border-radius: calc(var(--gs-spacing-unit) / 2);
+    max-width: 300px;
+}
+
+.withGaps {
+    padding: calc(var(--gs-spacing-unit) / 2) var(--gs-spacing-unit);
+}
+
+.popperContainer {
+    pointer-events: none;
+}
+
+.tooltipContainer[data-placement^="top"] {
+    margin-bottom: 9px;
+}
+
+.tooltipContainer[data-placement^="right"] {
+    margin-left: 9px;
+}
+
+.tooltipContainer[data-placement^="bottom"] {
+    margin-top: 9px;
+}
+
+.tooltipContainer[data-placement^="left"] {
+    margin-right: 9px;
+}
+
+.arrow {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+}
+
+.arrow[data-placement^="top"] {
+    transform: rotate(-90deg);
+    margin-bottom: -8px;
+    bottom: 0;
+}
+
+.arrow[data-placement^="right"] {
+    transform: rotate(0deg);
+    margin-left: -8px;
+    left: 0;
+}
+
+.arrow[data-placement^="bottom"] {
+    transform: rotate(90deg);
+    margin-top: -8px;
+    top: 0;
+}
+
+.arrow[data-placement^="left"] {
+    transform: rotate(180deg);
+    margin-right: -8px;
+    right: 0;
+}
