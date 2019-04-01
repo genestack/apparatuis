@@ -9,13 +9,13 @@ import {mount} from 'enzyme';
 import * as React from 'react';
 
 import {Drawer} from './drawer';
-import {DrawerContent} from './drawer-content';
+import {DrawerFullWidth} from './drawer-full-width';
 
 describe('<Drawer />', () => {
     it('should be focused on mount', () => {
         mount(
             <Drawer open onClose={jest.fn()} id="test">
-                <DrawerContent />
+                <DrawerFullWidth />
             </Drawer>
         );
 
