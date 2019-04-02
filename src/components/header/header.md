@@ -26,7 +26,7 @@ const applicationMenu = (
 );
 
 const userMenu = (
-    <Menu>
+    <Menu placement="bottom-end">
         <MenuItem>Profile</MenuItem>
         <MenuItem>Sign out</MenuItem>
     </Menu>
@@ -82,8 +82,12 @@ const exportMenu = (
         </HeaderButton>
         <MenuHandler menu={userMenu}>
             {({open}) => (
-                <HeaderButton shrink focused={open} title="konstantin.vasiliev@genestack.com">
-                    konstantin.vasiliev@genestack.com
+                <HeaderButton
+                    focused={open}
+                    title="user.name@genestack.com"
+                    style={{maxWidth: 200}}
+                >
+                    user.name@genestack.com
                 </HeaderButton>
             )}
         </MenuHandler>

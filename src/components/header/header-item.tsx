@@ -38,7 +38,14 @@ export const HeaderItem = (props: Props) => {
         );
 
     return (
-        <Flex ellipsis cell container noGap grow={grow} shrink={shrink}>
+        <Flex
+            ellipsis={props.children === 'string'}
+            cell
+            container
+            noGap
+            grow={grow}
+            shrink={shrink}
+        >
             <Typography {...rest} className={classNames(rest.className, styles.root)}>
                 {children}
             </Typography>

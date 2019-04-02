@@ -30,6 +30,7 @@ const setup = (props?: Partial<HeaderProps>) =>
                 <HeaderItemText />
             </HeaderItem>
             <HeaderButton id="button" />
+            <HeaderButton id="button-2" />
         </Header>
     );
 
@@ -49,6 +50,50 @@ describe('<HeaderButton />', () => {
     it('should render a button', () => {
         setup();
         expect(document.getElementById('button')!.tagName).toBe('BUTTON');
+    });
+
+    it('should focus to the next button on ArrowRight keydown', () => {
+        const wrapper = setup();
+        const button = document.getElementById('button')!;
+        button.focus();
+        wrapper
+            .find('#button')
+            .hostNodes()
+            .simulate('keydown', {key: 'ArrowRight'});
+        expect(document.getElementById('button-2')).toBe(document.activeElement);
+    });
+
+    it('should not change focus if there are no focusable elements after active element', () => {
+        const wrapper = setup();
+        const button = document.getElementById('button-2')!;
+        button.focus();
+        wrapper
+            .find('#button-2')
+            .hostNodes()
+            .simulate('keydown', {key: 'ArrowRight'});
+        expect(document.getElementById('button-2')).toBe(document.activeElement);
+    });
+
+    it('should focus to the previous button on ArrowLeft keydown', () => {
+        const wrapper = setup();
+        const button = document.getElementById('button-2')!;
+        button.focus();
+        wrapper
+            .find('#button-2')
+            .hostNodes()
+            .simulate('keydown', {key: 'ArrowLeft'});
+        expect(document.getElementById('button')).toBe(document.activeElement);
+    });
+
+    it('should not change focus if there are no focusable elements before active element', () => {
+        const wrapper = setup();
+        const button = document.getElementById('button')!;
+        button.focus();
+        wrapper
+            .find('#button')
+            .hostNodes()
+            .simulate('keydown', {key: 'ArrowLeft'});
+        expect(document.getElementById('button')).toBe(document.activeElement);
     });
 });
 

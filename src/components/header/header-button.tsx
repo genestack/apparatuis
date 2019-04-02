@@ -8,6 +8,8 @@
 import classNames from 'classnames';
 import * as React from 'react';
 
+import {chain} from '../../utils/chain';
+import {getReachableElements, getSiblingElement} from '../../utils/focusable-elements';
 import {Omit} from '../../utils/omit';
 import {mergeClassesProps, WithClasses} from '../../utils/styles';
 
@@ -29,19 +31,48 @@ const renderButton = (props: React.HTMLAttributes<HTMLElement>) => (
 );
 
 /** Header button is a main element of the header */
-export const HeaderButton = (props: Props) => {
-    const {active, hovered, focused, disabled, classes, ...rest} = mergeClassesProps(props, styles);
+export class HeaderButton extends React.Component<Props> {
+    private handleKeyDown: Props['onKeyDown'] = (event) => {
+        if (event.defaultPrevented) {
+            return;
+        }
 
-    return (
-        <HeaderItem
-            {...rest}
-            as={renderButton}
-            className={classNames(rest.className, classes.root, {
-                [classes.active]: active,
-                [classes.hovered]: hovered,
-                [classes.focused]: focused,
-                [classes.disabled]: disabled
-            })}
-        />
-    );
-};
+        const item = event.currentTarget;
+
+        if (event.key === 'ArrowRight' || event.key === 'ArrowLeft') {
+            const direction = event.key === 'ArrowRight' ? 'next' : 'prev';
+
+            event.preventDefault();
+
+            const reachableElements =
+                item.parentElement && Array.from(getReachableElements(item.parentElement));
+            const nextItem =
+                reachableElements && getSiblingElement(reachableElements, item, direction);
+
+            if (nextItem) {
+                nextItem.focus();
+            }
+        }
+    };
+
+    public render() {
+        const {active, hovered, focused, disabled, classes, ...rest} = mergeClassesProps(
+            this.props,
+            styles
+        );
+
+        return (
+            <HeaderItem
+                {...rest}
+                as={renderButton}
+                onKeyDown={chain(rest.onKeyDown, this.handleKeyDown)}
+                className={classNames(rest.className, classes.root, {
+                    [classes.active]: active,
+                    [classes.hovered]: hovered,
+                    [classes.focused]: focused,
+                    [classes.disabled]: disabled
+                })}
+            />
+        );
+    }
+}
