@@ -1,0 +1,35 @@
+/*
+ * Copyright (c) 2011-2019 Genestack Limited
+ * All Rights Reserved
+ * THIS IS UNPUBLISHED PROPRIETARY SOURCE CODE OF GENESTACK LIMITED
+ * The copyright notice above does not evidence any
+ * actual or intended publication of such source code.
+ */
+.button:focus {
+    z-index: 1;
+}
+
+.button:hover {
+    z-index: 2;
+}
+
+.button:first-child,
+.button.button:first-child:after {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+.button:last-child,
+.button.button:last-child:after {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+}
+
+.button:not(:last-child) {
+    margin-right: 1px;
+}
+
+.button:not(:first-child):not(:last-child),
+.button:not(:first-child):not(:last-child):after {
+    border-radius: 0;
+}
