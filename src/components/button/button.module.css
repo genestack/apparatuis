@@ -1,79 +1,386 @@
 /*
- * Copyright (c) 2011-2018 Genestack Limited
+ * Copyright (c) 2011-2019 Genestack Limited
  * All Rights Reserved
  * THIS IS UNPUBLISHED PROPRIETARY SOURCE CODE OF GENESTACK LIMITED
  * The copyright notice above does not evidence any
  * actual or intended publication of such source code.
  */
-@import "./../../variables.css";
 
-.btn {
-    display: inline-block;
-    margin-bottom: 0;
-    font-family: var(--gs-font-family);
-    color: rgb(51, 51, 51);
-    text-align: center;
-    vertical-align: middle;
-    cursor: pointer;
-    border-radius: 4px;
+/* stylelint-disable no-descending-specificity */
+
+@import "../../variables.css";
+
+.root {
+    composes: resetButton from "../../variables.css";
     box-sizing: border-box;
+    display: inline-flex;
+    vertical-align: middle;
+    align-items: center;
+    border-radius: calc(var(--gs-spacing-unit) / 2);
+    cursor: pointer;
+    position: relative;
+    max-width: 100%;
+    text-align: left;
 }
 
-.medium {
-    font-size: 14px;
-    line-height: 20px;
-    padding: 0 15px;
-    height: 30px;
+:root {
+    --gs-button-box-shadow-active: inset 0 2px 4px rgba(0, 0, 0, 0.25);
+    --gs-outlined-box-shadow: 0 0 0 1px var(--gs-color-grey-outline);
 }
 
-.small {
-    font-size: 12px;
-    line-height: 15px;
-    padding: 0 10px;
-    height: 25px;
-}
-
-.btn + .btn {
-    margin-left: 10px;
-}
-
-.btn:focus,
-.btn:hover:not([disabled]) {
-    z-index: 1;
-    text-decoration: none;
+.root.disabled,
+.root:disabled {
+    cursor: not-allowed;
     outline: none;
 }
 
-.btn.disabled {
-    cursor: default;
-    opacity: 0.65;
+.root.focused:after,
+.root:focus:after {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    border-radius: calc(var(--gs-spacing-unit) / 2);
+    box-shadow: 0 0 0 2px var(--gs-color-action-25);
+}
+
+.root.disabled:after,
+.root:disabled:after {
+    display: none;
+}
+
+.defaultSize {
+    padding-top: calc(var(--gs-spacing-unit) * 0.75);
+    padding-bottom: calc(var(--gs-spacing-unit) * 0.75);
+}
+
+.withText {
+    padding-left: calc(var(--gs-spacing-unit) * 2);
+    padding-right: calc(var(--gs-spacing-unit) * 2);
+}
+
+.withIcon {
+    padding-left: calc(var(--gs-spacing-unit) / 2);
+    padding-right: calc(var(--gs-spacing-unit) / 2);
+}
+
+.withIconAndText {
+    padding-left: var(--gs-spacing-unit);
+    padding-right: calc(var(--gs-spacing-unit) * 2);
+}
+
+.tiny {
+    padding-top: calc(var(--gs-spacing-unit) / 4);
+    padding-bottom: calc(var(--gs-spacing-unit) / 4);
+}
+
+.tiny.withIcon {
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.icon {
+    margin: 0 2px;
+    flex-grow: 0;
+    flex-shrink: 0;
+    display: inline-flex;
+}
+
+.content {
+    flex-grow: 1;
+    flex-shrink: 1;
+}
+
+.ellipsis {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    min-width: 0;
+    text-align: center;
+}
+
+/* Default variant */
+
+.defaultVariant {
+    background-color: var(--gs-color-grey-background);
+    color: var(--gs-color-action-text);
+}
+
+.defaultVariant :global(.gs-svg-icon-fill) {
+    fill: var(--gs-color-action-text-60);
+}
+
+.defaultVariant :global(.gs-svg-icon-stroke) {
+    stroke: var(--gs-color-action-text-60);
+}
+
+/* hover */
+
+.defaultVariant.hovered,
+.defaultVariant:hover {
+    background-color: var(--gs-color-action-hover);
+    color: var(--gs-color-white);
+}
+
+.defaultVariant.hovered :global(.gs-svg-icon-fill),
+.defaultVariant:hover :global(.gs-svg-icon-fill) {
+    fill: var(--gs-color-white);
+}
+
+.defaultVariant.hovered :global(.gs-svg-icon-stroke),
+.defaultVariant:hover :global(.gs-svg-icon-stroke) {
+    stroke: var(--gs-color-white);
+}
+
+/* active */
+
+.defaultVariant.active,
+.defaultVariant:active {
+    background: var(--gs-color-action-text);
+    color: var(--gs-color-grey-background);
+    box-shadow: var(--gs-button-box-shadow-active);
+}
+
+.defaultVariant.active :global(.gs-svg-icon-fill),
+.defaultVariant:active :global(.gs-svg-icon-fill) {
+    fill: var(--gs-color-grey-background);
+}
+
+.defaultVariant.active :global(.gs-svg-icon-stroke),
+.defaultVariant:active :global(.gs-svg-icon-stroke) {
+    stroke: var(--gs-color-grey-background);
+}
+
+/* disabled */
+
+.defaultVariant.disabled,
+.defaultVariant:disabled {
+    background-color: var(--gs-color-grey-background);
+    color: var(--gs-color-grey-50);
     box-shadow: none;
-    background-position: 0;
 }
 
-.btnGroup {
-    display: flex;
-    align-items: center;
+.defaultVariant.disabled :global(.gs-svg-icon-fill),
+.defaultVariant:disabled :global(.gs-svg-icon-fill) {
+    fill: var(--gs-color-grey-50);
 }
 
-.btnGroup > .btn:not(:first-child) {
-    margin-left: -1px;
+.defaultVariant.disabled :global(.gs-svg-icon-stroke),
+.defaultVariant:disabled :global(.gs-svg-icon-stroke) {
+    stroke: var(--gs-color-grey-50);
 }
 
-.btnGroup > .btn + .btn {
-    margin-left: -1px;
+/* Primary variant */
+
+.primary {
+    background-color: var(--gs-color-action);
+    color: var(--gs-color-grey-background);
 }
 
-.btnGroup > .btn:first-child {
-    border-top-right-radius: 0;
-    border-bottom-right-radius: 0;
+.primary :global(.gs-svg-icon-fill) {
+    fill: var(--gs-color-grey-background);
 }
 
-.btnGroup > .btn:last-child {
-    border-top-left-radius: 0;
-    border-bottom-left-radius: 0;
+.primary :global(.gs-svg-icon-stroke) {
+    stroke: var(--gs-color-grey-background);
 }
 
-.btnGroup > .btn:not(:first-child):not(:last-child) {
-    border-radius: 0;
+/* hover */
+
+.primary.hovered,
+.primary:hover {
+    background-color: var(--gs-color-action-hover);
+    color: var(--gs-color-white);
+}
+
+.primary.hovered :global(.gs-svg-icon-fill),
+.primary:hover :global(.gs-svg-icon-fill) {
+    fill: var(--gs-color-white);
+}
+
+.primary.hovered :global(.gs-svg-icon-stroke),
+.primary:hover :global(.gs-svg-icon-stroke) {
+    stroke: var(--gs-color-white);
+}
+
+/* active */
+
+.primary.active,
+.primary:active {
+    background: var(--gs-color-action-text);
+    color: var(--gs-color-grey-background);
+}
+
+.primary.active :global(.gs-svg-icon-fill),
+.primary:active :global(.gs-svg-icon-fill) {
+    fill: var(--gs-color-grey-background);
+}
+
+.primary.active :global(.gs-svg-icon-stroke),
+.primary:active :global(.gs-svg-icon-stroke) {
+    stroke: var(--gs-color-grey-background);
+}
+
+.primary.active:after,
+.defaultVariant:active:after {
+    box-shadow: var(--gs-button-box-shadow-active);
+}
+
+/* disabled */
+
+.primary.disabled,
+.primary:disabled {
+    background-color: var(--gs-color-grey-50);
+    color: var(--gs-color-grey-background);
+}
+
+.primary.disabled :global(.gs-svg-icon-fill),
+.primary:disabled :global(.gs-svg-icon-fill) {
+    fill: var(--gs-color-grey-background);
+}
+
+.primary.disabled :global(.gs-svg-icon-stroke),
+.primary:disabled :global(.gs-svg-icon-stroke) {
+    stroke: var(--gs-color-grey-background);
+}
+
+/* Outlined variant */
+
+.outlined {
+    color: var(--gs-color-action-text);
+    box-shadow: var(--gs-outlined-box-shadow);
+}
+
+.outlined :global(.gs-svg-icon-fill) {
+    fill: var(--gs-color-action-text-60);
+}
+
+.outlined :global(.gs-svg-icon-stroke) {
+    stroke: var(--gs-color-action-text-60);
+}
+
+/* hover */
+
+.outlined.hovered,
+.outlined:hover {
+    background-color: var(--gs-color-grey-background);
+}
+
+.outlined.hovered :global(.gs-svg-icon-fill),
+.outlined:hover :global(.gs-svg-icon-fill) {
+    fill: var(--gs-color-action-text);
+}
+
+.outlined.hovered :global(.gs-svg-icon-stroke),
+.outlined:hover :global(.gs-svg-icon-stroke) {
+    stroke: var(--gs-color-action-text);
+}
+
+/* active */
+
+.outlined.active,
+.outlined:active {
+    background: var(--gs-color-action-text);
+    color: var(--gs-color-grey-background);
+    box-shadow: var(--gs-outlined-box-shadow), var(--gs-button-box-shadow-active);
+}
+
+.outlined.active :global(.gs-svg-icon-fill),
+.outlined:active :global(.gs-svg-icon-fill) {
+    fill: var(--gs-color-grey-background);
+}
+
+.outlined.active :global(.gs-svg-icon-stroke),
+.outlined:active :global(.gs-svg-icon-stroke) {
+    stroke: var(--gs-color-grey-background);
+}
+
+/* disabled */
+
+.outlined.disabled,
+.outlined:disabled {
+    background-color: transparent;
+    box-shadow: var(--gs-outlined-box-shadow);
+    color: var(--gs-color-grey-50);
+}
+
+.outlined.disabled :global(.gs-svg-icon-fill),
+.outlined:disabled :global(.gs-svg-icon-fill) {
+    fill: var(--gs-color-grey-50);
+}
+
+.outlined.disabled :global(.gs-svg-icon-stroke),
+.outlined:disabled :global(.gs-svg-icon-stroke) {
+    stroke: var(--gs-color-grey-50);
+}
+
+/* Ghost variant */
+
+.ghost {
+    background-color: transparent;
+    color: var(--gs-color-action-text);
+}
+
+.ghost :global(.gs-svg-icon-fill) {
+    fill: var(--gs-color-action-text-60);
+}
+
+.ghost :global(.gs-svg-icon-stroke) {
+    stroke: var(--gs-color-action-text-60);
+}
+
+/* hover */
+
+.ghost.hovered,
+.ghost:hover {
+    background-color: var(--gs-color-grey-background-50);
+}
+
+.ghost.hovered :global(.gs-svg-icon-fill),
+.ghost:hover :global(.gs-svg-icon-fill) {
+    fill: var(--gs-color-action-text);
+}
+
+.ghost.hovered :global(.gs-svg-icon-stroke),
+.ghost:hover :global(.gs-svg-icon-stroke) {
+    stroke: var(--gs-color-action-text);
+}
+
+/* active */
+
+.ghost.active,
+.ghost:active {
+    background: var(--gs-color-grey-background);
+    color: var(--gs-color-black);
+}
+
+.ghost.active :global(.gs-svg-icon-fill),
+.ghost:active :global(.gs-svg-icon-fill) {
+    fill: var(--gs-color-black);
+}
+
+.ghost.active :global(.gs-svg-icon-stroke),
+.ghost:active :global(.gs-svg-icon-stroke) {
+    stroke: var(--gs-color-black);
+}
+
+/* disabled */
+
+.ghost.disabled,
+.ghost:disabled {
+    background-color: transparent;
+    box-shadow: none;
+    color: var(--gs-color-grey-50);
+}
+
+.ghost.disabled :global(.gs-svg-icon-fill),
+.ghost:disabled :global(.gs-svg-icon-fill) {
+    fill: var(--gs-color-grey-50);
+}
+
+.ghost.disabled :global(.gs-svg-icon-stroke),
+.ghost:disabled :global(.gs-svg-icon-stroke) {
+    stroke: var(--gs-color-grey-50);
 }

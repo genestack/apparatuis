@@ -109,10 +109,14 @@ handleFormSubmit = (event) => {
                 />
             </DialogBody>
             <DialogFooter>
-                <Button kind="primary" type="submit">
-                    Sign in
-                </Button>
-                <Button type="button">Sign in as another user</Button>
+                <FlexItem>
+                    <Button variant="primary" type="submit">
+                        Sign in
+                    </Button>
+                </FlexItem>
+                <FlexItem>
+                    <Button>Sign in as another user</Button>
+                </FlexItem>
             </DialogFooter>
         </form>
     </Dialog>
