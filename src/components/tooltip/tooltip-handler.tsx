@@ -5,6 +5,7 @@
  * The copyright notice above does not evidence any
  * actual or intended publication of such source code.
  */
+import contains from 'dom-helpers/query/contains';
 import * as React from 'react';
 
 import {chain} from '../../utils/chain';
@@ -59,10 +60,12 @@ export class TooltipHandler extends React.Component<Props, State> {
     };
 
     public componentWillUnmount() {
+        window.removeEventListener('mousemove', this.handleWindowMouseMove);
         this.openDebounced.cancel();
     }
 
     public close() {
+        window.removeEventListener('mousemove', this.handleWindowMouseMove);
         this.openDebounced.cancel();
         this.setState({open: false});
     }
@@ -75,6 +78,18 @@ export class TooltipHandler extends React.Component<Props, State> {
         this.open();
     }, OPEN_DEBOUNCE_DURATION);
 
+    private handleWindowMouseMove = (event: MouseEvent) => {
+        window.removeEventListener('mousemove', this.handleWindowMouseMove);
+
+        if (
+            this.childRef.current &&
+            event.target instanceof Node &&
+            !contains(this.childRef.current, event.target)
+        ) {
+            this.close();
+        }
+    };
+
     private handleReferenceMouseEnter = () => {
         if (
             this.openDebounced.active ||
@@ -85,12 +100,13 @@ export class TooltipHandler extends React.Component<Props, State> {
         }
 
         this.openDebounced();
+        window.addEventListener('mousemove', this.handleWindowMouseMove);
     };
 
     private handleReferenceMouseLeave: ChildProps['onMouseLeave'] = (event) => {
         if (
             (event.relatedTarget instanceof Node &&
-                event.currentTarget.contains(event.relatedTarget)) ||
+                contains(event.currentTarget, event.relatedTarget)) ||
             this.props.disableListeners ||
             this.props.disableHoverListener
         ) {
@@ -100,7 +116,7 @@ export class TooltipHandler extends React.Component<Props, State> {
         this.close();
     };
 
-    private handleReferenceFocus: ChildProps['onFocus'] = (event) => {
+    private handleReferenceFocus: ChildProps['onFocus'] = () => {
         if (
             this.openDebounced.active ||
             this.props.disableListeners ||
@@ -115,7 +131,7 @@ export class TooltipHandler extends React.Component<Props, State> {
     private handleReferenceBlur: ChildProps['onBlur'] = (event) => {
         if (
             (event.relatedTarget instanceof Node &&
-                event.currentTarget.contains(event.relatedTarget)) ||
+                contains(event.currentTarget, event.relatedTarget)) ||
             this.props.disableListeners ||
             this.props.disableFocusListener
         ) {
