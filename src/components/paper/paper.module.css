@@ -9,7 +9,7 @@
 
 .root {
     box-sizing: border-box;
-    background: var(--gs-color-bright-white);
+    background: var(--gs-color-white);
     box-shadow: 0 0 8px rgba(0, 0, 0, 0.15);
-    border: 1px solid var(--gs-color-smoke);
+    border: 1px solid var(--gs-color-grey-outline);
 }

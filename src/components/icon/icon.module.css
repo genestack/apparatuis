@@ -11,8 +11,8 @@
     align-self: center;
     vertical-align: middle;
     display: inline-block;
-    width: 20px;
-    height: 20px;
+    width: calc(var(--gs-spacing-unit) * 2.5);
+    height: calc(var(--gs-spacing-unit) * 2.5);
     position: relative;
     user-select: none;
 }
