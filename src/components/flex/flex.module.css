@@ -10,6 +10,9 @@
 .root {
     box-sizing: border-box;
     white-space: normal;
+    flex-grow: 0;
+    flex-shrink: 0;
+    min-width: 0;
 }
 
 .container {
@@ -29,14 +32,20 @@
     align-items: baseline;
 }
 
-.cell {
-    flex-grow: 0;
-    flex-shrink: 0;
-    min-width: 0;
+.gap1:not(:last-child) {
+    margin-right: calc(var(--gs-spacing-unit) * 0.5);
 }
 
-.gap:not(:first-child) {
-    margin-left: calc(var(--gs-spacing-unit) / 2);
+.gap2:not(:last-child) {
+    margin-right: calc(var(--gs-spacing-unit) * 1);
+}
+
+.gap3:not(:last-child) {
+    margin-right: calc(var(--gs-spacing-unit) * 1.5);
+}
+
+.gap4:not(:last-child) {
+    margin-right: calc(var(--gs-spacing-unit) * 2);
 }
 
 .shrink {

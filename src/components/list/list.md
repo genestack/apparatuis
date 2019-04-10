@@ -10,7 +10,7 @@ const Quiet = (props) => <Typography {...props} variant="caption" quiet box="inl
 
 <Flex container>
     <div style={{alignItems: 'flex-start'}}>
-        <Flex cell>
+        <Flex>
             <PageContent as={Paper} style={{width: 200}}>
                 <Typography variant="section" box="paragraph">
                     Tissue:
@@ -94,7 +94,7 @@ const Quiet = (props) => <Typography {...props} variant="caption" quiet box="inl
                 </PageFullWidth>
             </PageContent>
         </Flex>
-        <Flex cell>
+        <Flex>
             <PageContent as={Paper}>
                 <Typography variant="section" box="paragraph">
                     List Item States:

@@ -6,13 +6,13 @@ const flexStyles = require('./flex.module.css');
 <div style={{background: '#fff', maxWidth: 640}}>
     <Flex container>
         <div style={{padding: '0 16px'}}>
-            <Flex cell>
+            <Flex>
                 <MenuIcon />
             </Flex>
-            <Flex cell grow shrink>
+            <Flex grow shrink>
                 <Typography variant="section">Input Label</Typography>
             </Flex>
-            <Flex cell>
+            <Flex>
                 <Input style={{width: 200, alignSelf: 'baseline'}} placeholder="Input" />
             </Flex>
         </div>

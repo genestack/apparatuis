@@ -10,63 +10,59 @@ handleDirectionChange = (event) =>
         direction: event.target.value
     });
 
-<Flex container>
-    <div>
-        <FlexExpander />
-        <Flex cell>
-            <div>
-                <Slide in={state.visible} direction={state.direction} fast={state.fast}>
-                    <Paper style={{width: 100, padding: 16}}>
-                        <Typography>Hi! I am could be hidden.</Typography>
-                    </Paper>
-                </Slide>
-                <Button
-                    style={{width: 100, marginTop: 8, position: 'relative'}}
-                    onClick={handleButtonClick}
-                >
-                    {state.visible ? 'Hide' : 'Show'}
-                </Button>
-            </div>
-        </Flex>
-        <FlexExpander />
-        <Flex cell>
-            <PageContent as={Paper}>
-                <PageFullWidth>
-                    <List>
-                        <ListItem as="label">
+<FlexItem container>
+    <FlexExpander />
+    <FlexItem>
+        <Slide in={state.visible} direction={state.direction} fast={state.fast}>
+            <Paper style={{width: 100, padding: 16}}>
+                <Typography>Hi! I am could be hidden.</Typography>
+            </Paper>
+        </Slide>
+        <Button
+            style={{width: 100, marginTop: 8, position: 'relative'}}
+            onClick={handleButtonClick}
+        >
+            {state.visible ? 'Hide' : 'Show'}
+        </Button>
+    </FlexItem>
+    <FlexExpander />
+    <Flex>
+        <PageContent as={Paper}>
+            <PageFullWidth>
+                <List>
+                    <ListItem as="label">
+                        <ListItemCell>
+                            <input
+                                type="checkbox"
+                                onChange={handleFastChange}
+                                checked={state.fast}
+                            />
+                        </ListItemCell>
+                        <ListItemText>Fast transition</ListItemText>
+                    </ListItem>
+                </List>
+            </PageFullWidth>
+            <Typography box="paragraph" variant="section">
+                Direction:
+            </Typography>
+            <PageFullWidth>
+                <List onChange={handleDirectionChange}>
+                    {directions.map((direction) => (
+                        <ListItem as="label" key={direction}>
                             <ListItemCell>
                                 <input
-                                    type="checkbox"
-                                    onChange={handleFastChange}
-                                    checked={state.fast}
+                                    type="radio"
+                                    name="direction"
+                                    value={direction}
+                                    defaultChecked={state.direction === direction}
                                 />
                             </ListItemCell>
-                            <ListItemText>Fast transition</ListItemText>
+                            <ListItemText>{direction}</ListItemText>
                         </ListItem>
-                    </List>
-                </PageFullWidth>
-                <Typography box="paragraph" variant="section">
-                    Direction:
-                </Typography>
-                <PageFullWidth>
-                    <List onChange={handleDirectionChange}>
-                        {directions.map((direction) => (
-                            <ListItem as="label" key={direction}>
-                                <ListItemCell>
-                                    <input
-                                        type="radio"
-                                        name="direction"
-                                        value={direction}
-                                        defaultChecked={state.direction === direction}
-                                    />
-                                </ListItemCell>
-                                <ListItemText>{direction}</ListItemText>
-                            </ListItem>
-                        ))}
-                    </List>
-                </PageFullWidth>
-            </PageContent>
-        </Flex>
-    </div>
-</Flex>;
+                    ))}
+                </List>
+            </PageFullWidth>
+        </PageContent>
+    </Flex>
+</FlexItem>;
 ```

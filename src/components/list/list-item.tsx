@@ -10,7 +10,7 @@ import * as React from 'react';
 
 import {Omit} from '../../utils/omit';
 import {WithClasses, mergeClassesProps} from '../../utils/styles';
-import {Flex} from '../flex';
+import {Flex, FlexItem} from '../flex';
 import {Typography, TypographyProps} from '../typography';
 
 import * as styles from './list-item.module.css';
@@ -51,15 +51,15 @@ export function ListItem(props: Props) {
 
     const children =
         typeof props.children === 'string' ? (
-            <Flex grow shrink ellipsis>
-                <div>{props.children}</div>
-            </Flex>
+            <FlexItem grow shrink ellipsis gap={1}>
+                {props.children}
+            </FlexItem>
         ) : (
             props.children
         );
 
     return (
-        <Flex ellipsis container>
+        <Flex ellipsis container gap={0}>
             <Typography
                 tabIndex={disabled ? -1 : tabIndex}
                 {...rest}

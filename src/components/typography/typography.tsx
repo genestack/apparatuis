@@ -12,12 +12,14 @@ import {mergeClassesProps, WithClasses} from '../../utils/styles';
 
 import * as styles from './typography.module.css';
 
-type TargetProps = React.HTMLAttributes<HTMLElement>;
+interface TargetProps {
+    className?: string;
+    children?: React.ReactNode;
+}
 
-/**
- * Typography Props
- */
-export interface Props extends TargetProps, WithClasses<keyof typeof styles> {
+type DefaultTargetProps = React.HTMLAttributes<HTMLElement>;
+
+interface TypographyProps extends WithClasses<keyof typeof styles> {
     /**
      * Corresponds to main role and style of the text block
      * (font-size, font-weight, line-height etc.)
@@ -60,13 +62,16 @@ export interface Props extends TargetProps, WithClasses<keyof typeof styles> {
     as?: React.ReactType;
 }
 
+/** Typography public properties */
+export type Props<T extends TargetProps = DefaultTargetProps> = T & TypographyProps;
+
 /**
  * Component that renders text with specific preset.
  * Its purpose is to reduce amount of custom CSS text styles.
  * It is one of the base components of whole UI Kit.
  * Will be moved to UI Kit.
  */
-export function Typography(props: Props) {
+export function Typography<T extends TargetProps = DefaultTargetProps>(props: Props<T>) {
     const {
         as: Component = 'div',
         variant = 'body',
@@ -76,7 +81,7 @@ export function Typography(props: Props) {
         classes,
         className,
         ...rest
-    } = mergeClassesProps(props, styles);
+    } = mergeClassesProps(props as Props<TargetProps>, styles);
 
     return (
         <Component

@@ -7,27 +7,16 @@
  */
 import * as React from 'react';
 
-import {Flex} from '../flex';
-
-type TargetProps = React.HTMLAttributes<HTMLDivElement>;
+import {FlexItem, FlexItemProps} from '../flex';
 
 /** ListItemCell public properties */
-export interface Props extends TargetProps {
-    grow?: boolean;
-    shrink?: boolean;
-}
+export interface Props extends FlexItemProps {}
 
 /**
  * Single unit of list item. It is needed for harmonic look list item parts.
  */
 export const ListItemCell = (props: Props) => {
-    const {grow, shrink, ...rest} = props;
+    const container = typeof props.children !== 'string';
 
-    const container = typeof rest.children !== 'string';
-
-    return (
-        <Flex cell container={container} grow={grow} shrink={shrink}>
-            <div {...rest} />
-        </Flex>
-    );
+    return <FlexItem container={container} gap={1} {...props} />;
 };
