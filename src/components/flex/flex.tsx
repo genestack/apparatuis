@@ -5,6 +5,7 @@
  * The copyright notice above does not evidence any
  * actual or intended publication of such source code.
  */
+// tslint:disable no-magic-numbers
 import classNames from 'classnames';
 import * as React from 'react';
 
@@ -20,14 +21,11 @@ export interface Props extends WithClasses<keyof typeof styles> {
     container?: boolean;
     /** Makes items baseline aligned */
     baseline?: boolean;
-    /** Makes element flex item */
-    cell?: boolean;
     /** Makes element to shrink */
     shrink?: boolean;
     /** Makes element to grow */
     grow?: boolean;
-    /** Removes default flex item left margin */
-    noGap?: boolean;
+    gap?: 0 | 1 | 2 | 3 | 4;
     /** Makes item to overflow its content with ellipsis */
     ellipsis?: boolean;
 }
@@ -38,10 +36,9 @@ export interface Props extends WithClasses<keyof typeof styles> {
 export const Flex = (props: Props) => {
     const {
         container,
-        cell,
         shrink,
         grow,
-        noGap,
+        gap = 2,
         ellipsis,
         children,
         baseline,
@@ -57,10 +54,12 @@ export const Flex = (props: Props) => {
         className: classNames(className, child.props.className, classes.root, {
             [classes.container]: container,
             [classes.baseline]: baseline,
-            [classes.cell]: cell,
             [classes.shrink]: shrink,
             [classes.grow]: grow,
-            [classes.gap]: cell && !noGap,
+            [classes.gap1]: gap === 1,
+            [classes.gap2]: gap === 2,
+            [classes.gap3]: gap === 3,
+            [classes.gap4]: gap === 4,
             [classes.ellipsis]: ellipsis
         })
     });

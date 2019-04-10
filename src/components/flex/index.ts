@@ -6,3 +6,4 @@
  * actual or intended publication of such source code.
  */
 export {Flex, Props as FlexProps} from './flex';
+export {FlexItem, Props as FlexItemProps} from './flex-item';

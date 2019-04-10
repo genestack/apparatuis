@@ -29,12 +29,12 @@ export const ListItemText = (props: Props) => {
 
     return (
         <Flex
-            cell
             grow={!noGrow}
             shrink={!noShrink}
             ellipsis={!wrap}
             container={container}
             baseline={container}
+            gap={1}
         >
             <Typography {...rest} />
         </Flex>

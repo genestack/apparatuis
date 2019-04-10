@@ -56,7 +56,7 @@ export const Header = (props: Props) => {
     return (
         <React.Fragment>
             {spacer}
-            <Flex container>
+            <Flex container gap={0}>
                 <div
                     {...rest}
                     className={classNames(classes.root, {
