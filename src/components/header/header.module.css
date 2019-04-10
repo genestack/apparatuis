@@ -15,7 +15,7 @@
 .root {
     composes: spacer;
     display: flex;
-    background: var(--gs-color-bright-white);
+    background: var(--gs-color-white);
     overflow: hidden;
     padding: 0 calc(var(--gs-spacing-unit) * 3);
 }
@@ -29,5 +29,5 @@
 }
 
 .withBorder {
-    box-shadow: 0 1px 0 0 var(--gs-color-smoke);
+    box-shadow: 0 1px 0 0 var(--gs-color-grey-outline);
 }

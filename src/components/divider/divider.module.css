@@ -20,7 +20,7 @@
     margin-top: 0;
     margin-bottom: 0;
     border: none;
-    border-bottom-color: var(--gs-color-smoke);
+    border-bottom-color: var(--gs-color-grey-outline);
     border-bottom-width: 1px;
     border-bottom-style: solid;
 }

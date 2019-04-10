@@ -8,7 +8,7 @@
 @import "../../variables.css";
 
 .root {
-    background: var(--gs-color-dark);
+    background: var(--gs-color-black);
     border-radius: calc(var(--gs-spacing-unit) / 2);
     max-width: 300px;
 }

@@ -28,12 +28,12 @@
     width: 16px;
     height: 16px;
     border-radius: 3px;
-    border: 1px solid var(--gs-color-grey-light);
+    border: 1px solid var(--gs-color-grey-outline);
     box-sizing: border-box;
 }
 
 .input:focus + .iconBorder {
-    box-shadow: 0 0 3px 1px var(--gs-color-action-primary);
+    box-shadow: 0 0 3px 1px var(--gs-color-action);
 }
 
 .iconSvg {
@@ -43,18 +43,18 @@
 }
 
 .iconBorderChecked {
-    background-color: var(--gs-color-action-primary);
-    border-color: var(--gs-color-action-primary);
+    background-color: var(--gs-color-action);
+    border-color: var(--gs-color-action);
 }
 
 .iconBorderDisabled,
 .iconBorderChecked.iconBorderDisabled {
-    background-color: var(--gs-color-white-snow);
-    border-color: var(--gs-color-grey-light);
+    background-color: var(--gs-color-white);
+    border-color: var(--gs-color-grey-outline);
 }
 
 .checkmark {
-    fill: rgb(255, 255, 255);
+    fill: var(--gs-color-white);
 }
 
 .checkmarkDisabled {

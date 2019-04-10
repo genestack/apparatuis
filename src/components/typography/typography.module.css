@@ -11,7 +11,7 @@
 
 .root {
     box-sizing: border-box;
-    color: var(--gs-color-dark);
+    color: var(--gs-color-black);
     font-weight: normal;
     font-family: "Helvetica", "Arial", "Myriad Pro", sans-serif;
 }
@@ -36,17 +36,11 @@
 /** inverted */
 
 .inverted {
-    color: var(--gs-color-bright-white);
+    color: var(--gs-color-white);
 }
 
 .inverted.quiet {
-    /**
-     * This color should be got from functions.
-     * TODO: remove variable
-     */
-    --gs-color-bright-white-6: rgba(255, 255, 255, 0.6);
-
-    color: var(--gs-color-bright-white-6);
+    color: var(--gs-color-white-60);
 }
 
 /** header variant */
