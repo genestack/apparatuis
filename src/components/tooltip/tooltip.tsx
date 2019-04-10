@@ -13,7 +13,6 @@ import {Omit} from '../../utils/omit';
 import {Ref} from '../../utils/set-ref';
 import {WithClasses, mergeClassesProps} from '../../utils/styles';
 import {createIcon} from '../icon';
-import {Paper} from '../paper';
 import {TransitionPopperProps, TransitionPopper} from '../transition-popper';
 import {Typography} from '../typography';
 
@@ -92,7 +91,12 @@ export class Tooltip extends React.Component<Props> {
         } = mergeClassesProps(this.props, styles);
 
         return (
-            <TransitionPopper<TargetElementProps> {...rest} ref={popperRef} placement={placement}>
+            <TransitionPopper<TargetElementProps>
+                portalContainer={document.body}
+                {...rest}
+                ref={popperRef}
+                placement={placement}
+            >
                 {({
                     ref,
                     style,
@@ -120,7 +124,6 @@ export class Tooltip extends React.Component<Props> {
                             >
                                 <Typography
                                     {...targetProps}
-                                    as={Paper}
                                     className={classNames(targetProps.className, classes.root, {
                                         [classes.withGaps]: !noGaps
                                     })}
