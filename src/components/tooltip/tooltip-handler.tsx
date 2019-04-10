@@ -90,8 +90,7 @@ export class TooltipHandler extends React.Component<Props, State> {
         }
     };
 
-    private handleReferenceMouseEnter = (event: any) => {
-        // console.log('onMouseEnter', event.target);
+    private handleReferenceMouseEnter = () => {
         if (
             this.openDebounced.active ||
             this.props.disableListeners ||
