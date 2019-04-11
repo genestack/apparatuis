@@ -10,7 +10,6 @@ import * as React from 'react';
 
 import {chain} from '../../utils/chain';
 import {Omit} from '../../utils/omit';
-import {Ref} from '../../utils/set-ref';
 import {WithClasses, mergeClassesProps} from '../../utils/styles';
 import {createIcon} from '../icon';
 import {Paper, PaperProps} from '../paper';
@@ -37,7 +36,7 @@ const PopoverArrowIcon = createIcon(
 export interface Props extends TargetProps, WithClasses<keyof typeof styles> {
     /** If `true` popover will show arrow */
     withArrow?: boolean;
-    popperRef?: Ref<TransitionPopper<PaperProps>>;
+    popperRef?: React.Ref<TransitionPopper<PaperProps>>;
     popperElementProps?: React.HTMLAttributes<HTMLDivElement>;
     containerProps?: ContainerProps;
     transitionProps?: TransitionProps;

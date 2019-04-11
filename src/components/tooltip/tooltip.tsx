@@ -10,7 +10,6 @@ import React from 'react';
 
 import {chain} from '../../utils/chain';
 import {Omit} from '../../utils/omit';
-import {Ref} from '../../utils/set-ref';
 import {WithClasses, mergeClassesProps} from '../../utils/styles';
 import {createIcon} from '../icon';
 import {TransitionPopperProps, TransitionPopper} from '../transition-popper';
@@ -50,7 +49,7 @@ export interface Props extends TargetProps, WithClasses<keyof typeof styles> {
     /** Do not listen `Escape` keypress for closing */
     disableEscHandler?: boolean;
     /** Reference to react-popper instance */
-    popperRef?: Ref<TransitionPopper<TargetElementProps>>;
+    popperRef?: React.Ref<TransitionPopper<TargetElementProps>>;
     children?: React.ReactNode;
 }
 

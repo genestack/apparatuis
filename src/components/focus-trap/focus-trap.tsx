@@ -20,7 +20,6 @@ import {
     getLastReachableElement
 } from '../../utils/focusable-elements';
 import {Omit} from '../../utils/omit';
-import {Ref} from '../../utils/set-ref';
 import {RootRef} from '../root-ref';
 
 type SentinelProps = Omit<React.HTMLAttributes<HTMLDivElement>, 'tabIndex'>;
@@ -32,11 +31,11 @@ export interface Props {
     /** Properties of start sentinel */
     startSentinelProps?: SentinelProps;
     /** Start sentinel React.Ref */
-    startSentinelRef?: Ref<HTMLDivElement>;
+    startSentinelRef?: React.Ref<HTMLDivElement>;
     /** Properties of end sentinel */
     endSentinelProps?: SentinelProps;
     /** End sentinel React.Ref */
-    endSentinelRef?: Ref<HTMLDivElement>;
+    endSentinelRef?: React.Ref<HTMLDivElement>;
     children: JSX.Element;
 }
 

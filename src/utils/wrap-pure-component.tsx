@@ -8,7 +8,7 @@
 import * as React from 'react';
 
 /** Purify any react component */
-export function wrapPureComponent<P>(Component: React.ReactType<P>) {
+export function wrapPureComponent<P>(Component: React.ComponentType<P>) {
     class PureComponent extends React.PureComponent<P> {
         public render() {
             return <Component {...this.props} />;

@@ -8,11 +8,11 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 
-import {setRef, Ref} from '../../utils/set-ref';
+import {setRef} from '../../utils/set-ref';
 
 /** RootRef props */
 export interface Props {
-    rootRef: Ref<HTMLElement>;
+    rootRef: React.Ref<HTMLElement>;
     children: JSX.Element;
 }
 

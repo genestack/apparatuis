@@ -20,7 +20,7 @@ type TargetProps = React.HTMLAttributes<HTMLElement>;
 /** MarginBox public properties */
 export interface Props extends TargetProps, WithClasses<keyof typeof styles> {
     dense?: boolean;
-    as?: React.ReactType<{className?: string}>;
+    as?: React.ReactType;
     startDividerProps?: DividerProps;
     endDividerProps?: DividerProps;
     noStartDivider?: boolean;

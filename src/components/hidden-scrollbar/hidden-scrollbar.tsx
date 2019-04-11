@@ -12,7 +12,7 @@ import * as React from 'react';
 
 import {chain} from '../../utils/chain';
 import {Omit} from '../../utils/omit';
-import {Ref, chainRefs} from '../../utils/set-ref';
+import {chainRefs} from '../../utils/set-ref';
 import {WithClasses, mergeClassesProps} from '../../utils/styles';
 import {createIcon} from '../icon';
 
@@ -42,15 +42,15 @@ export interface Props extends TargetProps, WithClasses<keyof typeof styles> {
     /** Properties of scrollable container */
     containerProps?: React.HTMLAttributes<HTMLDivElement>;
     /** Reference to scrollable container */
-    containerRef?: Ref<HTMLDivElement>;
+    containerRef?: React.Ref<HTMLDivElement>;
     /** Properties of start scroll control */
     startControlProps?: Omit<React.HTMLAttributes<HTMLDivElement>, 'children'>;
     /** Reference to start scroll control */
-    startControlRef?: Ref<HTMLDivElement>;
+    startControlRef?: React.Ref<HTMLDivElement>;
     /** Properties of end scroll control */
     endControlProps?: Omit<React.HTMLAttributes<HTMLDivElement>, 'children'>;
     /** Reference to end scroll control */
-    endControlRef?: Ref<HTMLDivElement>;
+    endControlRef?: React.Ref<HTMLDivElement>;
 }
 
 /**
