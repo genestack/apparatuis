@@ -65,16 +65,7 @@ const exportMenu = (
             iPSC derived Pancreatic Beta Cell Def-PANC
         </HeaderButton>
         <HeaderItem>
-            <Typography
-                style={{
-                    lineHeight: '26px',
-                    padding: '0 8px',
-                    background: '#EBEDF3',
-                    borderRadius: 2
-                }}
-            >
-                Trial version
-            </Typography>
+            <Button tiny>Trial version</Button>
         </HeaderItem>
         <HeaderButton>
             <HeaderItemText>Tasks</HeaderItemText>

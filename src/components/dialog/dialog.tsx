@@ -13,8 +13,8 @@ import {CrossIcon} from '../../icons/cross-icon';
 import {chain} from '../../utils/chain';
 import {Omit} from '../../utils/omit';
 import {WithClasses, mergeClassesProps} from '../../utils/styles';
+import {Button, ButtonProps} from '../button';
 import {Fade} from '../fade';
-import {IconButton, IconButtonProps} from '../icon-button';
 import {Overlay, OverlayProps, OverlayCloseReason} from '../overlay';
 import {PaperProps, Paper} from '../paper';
 
@@ -41,7 +41,7 @@ export interface Props extends TargetProps, WithClasses<keyof typeof styles> {
     /** Hides close button */
     hideCloseButton?: boolean;
     /** Properties passed to close button */
-    closeButtonProps?: Omit<IconButtonProps, 'children'>;
+    closeButtonProps?: ButtonProps;
     /** Calls when dialog closes by user action */
     onClose?: CloseHandler;
     /** You can use any transition component to display Dialog */
@@ -59,7 +59,7 @@ export interface Props extends TargetProps, WithClasses<keyof typeof styles> {
  * `<DialogHeader />`, `<DialogBody />` and `<DialogFooter />` elements.
  */
 export class Dialog extends React.Component<Props> {
-    private handleCloseButtonClick: IconButtonProps['onClick'] = (event) => {
+    private handleCloseButtonClick: ButtonProps['onClick'] = (event) => {
         if (this.props.onClose) {
             this.props.onClose('header_close_button_click', event);
         }
@@ -114,7 +114,9 @@ export class Dialog extends React.Component<Props> {
                                 {children}
 
                                 {!hideCloseButton ? (
-                                    <IconButton
+                                    <Button
+                                        icon={<CrossIcon />}
+                                        variant="ghost"
                                         {...closeButtonProps}
                                         className={classNames(
                                             closeButtonProps.className,
@@ -124,9 +126,7 @@ export class Dialog extends React.Component<Props> {
                                             closeButtonProps.onClick,
                                             this.handleCloseButtonClick
                                         )}
-                                    >
-                                        <CrossIcon />
-                                    </IconButton>
+                                    />
                                 ) : null}
                             </Paper>
                         </Transition>

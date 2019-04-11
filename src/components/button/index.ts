@@ -6,4 +6,3 @@
  * actual or intended publication of such source code.
  */
 export {Button, Props as ButtonProps} from './button';
-export {ButtonsGroup, Props as ButtonsGroupProps} from './buttons-group';
