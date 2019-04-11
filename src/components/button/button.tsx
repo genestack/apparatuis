@@ -20,9 +20,13 @@ type TargetProps = React.ButtonHTMLAttributes<HTMLButtonElement>;
 
 /** Button public properties */
 export interface Props extends TargetProps, WithClasses<keyof typeof styles> {
+    /** Style variant of the button */
     variant?: 'primary' | 'outlined' | 'ghost';
+    /** Component that is inserted in the left side of the button. */
     icon?: React.ReactNode;
+    /** If `true` text in the button is wrapped */
     wrap?: boolean;
+    /** Small version of the button */
     tiny?: boolean;
     /** If `true` element has `pressed` style. */
     active?: boolean;
@@ -30,6 +34,10 @@ export interface Props extends TargetProps, WithClasses<keyof typeof styles> {
     hovered?: boolean;
     /** If `true` element has `focused` style. */
     focused?: boolean;
+    /** Properties that is be spread to icon element container */
+    iconProps?: React.HTMLAttributes<HTMLDivElement>;
+    /** Properties that is be spread to the button children container */
+    contentProps?: React.HTMLAttributes<HTMLDivElement>;
 }
 
 /** Button component */
@@ -48,14 +56,21 @@ export const Button = (props: Props) => {
                     disabled,
                     classes,
                     children,
+                    iconProps = {},
+                    contentProps = {},
                     ...rest
                 } = mergeClassesProps(props, styles);
 
-                const iconElement = icon ? <div className={classes.icon}>{icon}</div> : null;
+                const iconElement = icon ? (
+                    <div {...iconProps} className={classNames(iconProps.className, classes.icon)}>
+                        {icon}
+                    </div>
+                ) : null;
 
                 const childElement = children ? (
                     <div
-                        className={classNames(classes.content, {
+                        {...contentProps}
+                        className={classNames(contentProps.className, classes.content, {
                             [classes.ellipsis]: !wrap
                         })}
                     >
