@@ -34,7 +34,6 @@
     outline: none;
 }
 
-.root.focused:after,
 .root:focus:after {
     content: "";
     position: absolute;
@@ -118,18 +117,15 @@
 
 /* hover */
 
-.defaultVariant.hovered,
 .defaultVariant:hover {
     background-color: var(--gs-color-action-hover);
     color: var(--gs-color-white);
 }
 
-.defaultVariant.hovered :global(.gs-svg-icon-fill),
 .defaultVariant:hover :global(.gs-svg-icon-fill) {
     fill: var(--gs-color-white);
 }
 
-.defaultVariant.hovered :global(.gs-svg-icon-stroke),
 .defaultVariant:hover :global(.gs-svg-icon-stroke) {
     stroke: var(--gs-color-white);
 }
@@ -189,18 +185,15 @@
 
 /* hover */
 
-.primary.hovered,
 .primary:hover {
     background-color: var(--gs-color-action-hover);
     color: var(--gs-color-white);
 }
 
-.primary.hovered :global(.gs-svg-icon-fill),
 .primary:hover :global(.gs-svg-icon-fill) {
     fill: var(--gs-color-white);
 }
 
-.primary.hovered :global(.gs-svg-icon-stroke),
 .primary:hover :global(.gs-svg-icon-stroke) {
     stroke: var(--gs-color-white);
 }
@@ -263,17 +256,14 @@
 
 /* hover */
 
-.outlined.hovered,
 .outlined:hover {
     background-color: var(--gs-color-grey-background);
 }
 
-.outlined.hovered :global(.gs-svg-icon-fill),
 .outlined:hover :global(.gs-svg-icon-fill) {
     fill: var(--gs-color-action-text);
 }
 
-.outlined.hovered :global(.gs-svg-icon-stroke),
 .outlined:hover :global(.gs-svg-icon-stroke) {
     stroke: var(--gs-color-action-text);
 }
@@ -333,17 +323,14 @@
 
 /* hover */
 
-.ghost.hovered,
 .ghost:hover {
     background-color: var(--gs-color-grey-background-50);
 }
 
-.ghost.hovered :global(.gs-svg-icon-fill),
 .ghost:hover :global(.gs-svg-icon-fill) {
     fill: var(--gs-color-action-text);
 }
 
-.ghost.hovered :global(.gs-svg-icon-stroke),
 .ghost:hover :global(.gs-svg-icon-stroke) {
     stroke: var(--gs-color-action-text);
 }

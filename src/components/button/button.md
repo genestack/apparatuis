@@ -49,20 +49,6 @@ const ButtonSamples = (props) => (
         <ButtonSamples variant="ghost" />
     </Pane>
     <Pane>
-        <Typography box="paragraph">Hover</Typography>
-        <ButtonSamples variant="primary" hovered />
-        <ButtonSamples hovered />
-        <ButtonSamples variant="outlined" hovered />
-        <ButtonSamples variant="ghost" hovered />
-    </Pane>
-    <Pane>
-        <Typography box="paragraph">Focus</Typography>
-        <ButtonSamples variant="primary" focused />
-        <ButtonSamples focused />
-        <ButtonSamples variant="outlined" focused />
-        <ButtonSamples variant="ghost" focused />
-    </Pane>
-    <Pane>
         <Typography box="paragraph">Active</Typography>
         <ButtonSamples variant="primary" active />
         <ButtonSamples active />

@@ -31,10 +31,6 @@ export interface Props extends TargetProps, WithClasses<keyof typeof styles> {
     /** If `true` element has `pressed` style. */
     active?: boolean;
     /** If `true` element has `hover` style. */
-    hovered?: boolean;
-    /** If `true` element has `focused` style. */
-    focused?: boolean;
-    /** Properties that is be spread to icon element container */
     iconProps?: React.HTMLAttributes<HTMLDivElement>;
     /** Properties that is be spread to the button children container */
     contentProps?: React.HTMLAttributes<HTMLDivElement>;
@@ -51,8 +47,6 @@ export const Button = (props: Props) => {
                     icon,
                     tiny,
                     wrap,
-                    hovered,
-                    focused,
                     disabled,
                     classes,
                     children,
@@ -95,8 +89,6 @@ export const Button = (props: Props) => {
                             [classes.outlined]: variant === 'outlined',
                             [classes.ghost]: variant === 'ghost',
                             [classes.active]: active,
-                            [classes.hovered]: hovered,
-                            [classes.focused]: focused,
                             [classes.disabled]: disabled
                         })}
                     >

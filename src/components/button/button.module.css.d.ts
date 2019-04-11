@@ -23,6 +23,4 @@ export const outlined: string;
 export const ghost: string;
 
 export const active: string;
-export const hovered: string;
-export const focused: string;
 export const disabled: string;
