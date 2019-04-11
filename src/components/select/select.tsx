@@ -8,7 +8,7 @@
 import classNames from 'classnames';
 import React, {PureComponent} from 'react';
 
-import styles from './select.module.css';
+import * as styles from './select.module.css';
 
 const emptyValue = '';
 

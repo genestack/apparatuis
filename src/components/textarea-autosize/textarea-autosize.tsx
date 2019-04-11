@@ -13,7 +13,7 @@ import ReactTextareaAutosize from 'react-textarea-autosize';
 
 import {Omit} from '../../utils/omit';
 
-import styles from './textarea-autosize.module.css';
+import * as styles from './textarea-autosize.module.css';
 
 type OnValueChanger = (value: number | string | string[]) => any;
 

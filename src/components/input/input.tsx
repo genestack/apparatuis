@@ -11,7 +11,7 @@ import React from 'react';
 
 import {Omit} from '../../utils/omit';
 
-import styles from './input.module.css';
+import * as styles from './input.module.css';
 
 type TargetProps = React.InputHTMLAttributes<HTMLInputElement>;
 

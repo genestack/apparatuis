@@ -14,7 +14,7 @@ import {Omit} from '../../utils/omit';
 import {Input, InputProps} from '../input';
 
 import {Downshift} from './downshift-issue-512-fix';
-import styles from './styles.module.css';
+import * as styles from './styles.module.css';
 
 interface RenderSuggestionProps {
     item: string;
