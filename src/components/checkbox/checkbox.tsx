@@ -11,7 +11,7 @@ import React from 'react';
 import {Omit} from '../../utils/omit';
 
 import {CheckboxIcon} from './checkbox-icon';
-import styles from './checkbox.module.css';
+import * as styles from './checkbox.module.css';
 
 type TargetProps = React.InputHTMLAttributes<HTMLInputElement>;
 

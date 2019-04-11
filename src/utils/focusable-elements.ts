@@ -127,7 +127,7 @@ function getCommonAncestor(firstNode: Node, secondNode: Node) {
     if (firstAncestors[0] !== secondAncestors[0]) {
         return null;
     }
-    for (let i = 0; i < firstAncestors.length; i++) {
+    for (let i = 0; i < firstAncestors.length; i += 1) {
         if (firstAncestors[i] !== secondAncestors[i]) {
             return firstAncestors[i - 1];
         }

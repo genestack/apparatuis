@@ -11,7 +11,7 @@ import React from 'react';
 import {Omit} from '../../utils/omit';
 import {Button} from '../button';
 
-import styles from './paginator.module.css';
+import * as styles from './paginator.module.css';
 
 type TargetProps = React.HTMLAttributes<HTMLDivElement>;
 

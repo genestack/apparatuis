@@ -8,7 +8,7 @@
 
 import React from 'react';
 
-import styles from './checkbox.module.css';
+import * as styles from './checkbox.module.css';
 
 interface Props {
     disabled?: boolean;
