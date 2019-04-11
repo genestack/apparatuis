@@ -8,7 +8,6 @@
 import classNames from 'classnames';
 import * as React from 'react';
 
-import {Ref} from '../../utils/set-ref';
 import {WithClasses, mergeClassesProps} from '../../utils/styles';
 
 import * as styles from './paper.module.css';
@@ -18,7 +17,7 @@ type TargetProps = React.HTMLAttributes<HTMLDivElement>;
 /** Paper public props */
 export interface Props extends TargetProps, WithClasses<keyof typeof styles> {
     /** Reference to root element */
-    rootRef?: Ref<HTMLDivElement>;
+    rootRef?: React.Ref<HTMLDivElement>;
 }
 
 /**

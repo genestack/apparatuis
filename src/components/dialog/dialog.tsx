@@ -45,7 +45,7 @@ export interface Props extends TargetProps, WithClasses<keyof typeof styles> {
     /** Calls when dialog closes by user action */
     onClose?: CloseHandler;
     /** You can use any transition component to display Dialog */
-    transitionComponent?: React.ReactType<Omit<TransitionProps, 'timeout'>>;
+    transitionComponent?: React.ComponentType<Omit<TransitionProps, 'timeout'>>;
     /** Properties passed to Overlay component */
     overlayProps?: Omit<OverlayProps, 'open' | 'onClose'>;
     /** Properties passed to container element */

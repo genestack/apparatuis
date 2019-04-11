@@ -5,17 +5,12 @@
  * The copyright notice above does not evidence any
  * actual or intended publication of such source code.
  */
-
-/**
- * React.Ref without deprecated string value.
- * TODO: Remove after react update.
- */
-export type Ref<T> = Exclude<React.Ref<T>, string>;
+import * as React from 'react';
 
 /**
  * Manually update value of React.Ref.
  */
-export function setRef<T>(ref: Ref<T>, value: T) {
+export function setRef<T>(ref: React.Ref<T>, value: T) {
     if (typeof ref === 'function') {
         ref(value);
     } else if (ref) {
@@ -29,7 +24,7 @@ export function setRef<T>(ref: Ref<T>, value: T) {
  * It is useful when some component needs child's ref
  * but also should expose it the parent component.
  */
-export function chainRefs<T>(...refs: Array<Ref<T> | undefined>) {
+export function chainRefs<T>(...refs: Array<React.Ref<T> | undefined>) {
     return (value: T | null) => {
         refs.forEach((ref) => {
             if (ref) {

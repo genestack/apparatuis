@@ -24,11 +24,9 @@ const TRANSITION_TIMEOUT: StrictCSSTransitionProps['timeout'] = {
 
 type TargetProps = Omit<StrictCSSTransitionProps, 'classNames' | 'timeout' | 'children'>;
 
-type Children = React.ReactElement<{className?: string}>;
-
 /** Public Shake properties */
 export interface Props extends TargetProps, WithClasses<keyof typeof styles> {
-    children: Children;
+    children: React.ReactElement<{className?: string}>;
 }
 
 /**
@@ -42,7 +40,7 @@ export interface Props extends TargetProps, WithClasses<keyof typeof styles> {
  */
 export const Shake = (props: Props) => {
     const {className, classes, ...rest} = mergeClassesProps(props, styles);
-    const child = React.Children.only(props.children) as Children;
+    const child = React.Children.only(props.children);
 
     return (
         <CSSTransition
