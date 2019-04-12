@@ -55,6 +55,11 @@
     padding-bottom: calc(var(--gs-spacing-unit) * 0.75);
 }
 
+.tiny {
+    padding-top: calc(var(--gs-spacing-unit) / 4);
+    padding-bottom: calc(var(--gs-spacing-unit) / 4);
+}
+
 .withText {
     padding-left: calc(var(--gs-spacing-unit) * 2);
     padding-right: calc(var(--gs-spacing-unit) * 2);
@@ -68,11 +73,6 @@
 .withIconAndText {
     padding-left: var(--gs-spacing-unit);
     padding-right: calc(var(--gs-spacing-unit) * 2);
-}
-
-.tiny {
-    padding-top: calc(var(--gs-spacing-unit) / 4);
-    padding-bottom: calc(var(--gs-spacing-unit) / 4);
 }
 
 .tiny.withIcon {
@@ -252,6 +252,16 @@
 
 .outlined :global(.gs-svg-icon-stroke) {
     stroke: var(--gs-color-action-text-60);
+}
+
+.outlined.defaultSize {
+    padding-top: calc(var(--gs-spacing-unit) * 0.75 - 1px);
+    padding-bottom: calc(var(--gs-spacing-unit) * 0.75 - 1px);
+}
+
+.outlined.tiny {
+    padding-top: calc(var(--gs-spacing-unit) / 4 - 1px);
+    padding-bottom: calc(var(--gs-spacing-unit) / 4 - 1px);
 }
 
 /* hover */
