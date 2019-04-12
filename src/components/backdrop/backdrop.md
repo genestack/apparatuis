@@ -12,7 +12,7 @@ handleBackdropClose = () => {
     setState({backdropOpened: false});
 };
 
-<div>
+<PageContent as={Paper}>
     <Button onClick={handleBackdropOpen}>Open Backdrop</Button>
 
     <div
@@ -24,5 +24,5 @@ handleBackdropClose = () => {
     >
         <Backdrop open={state.backdropOpened} onClick={handleBackdropClose} />
     </div>
-</div>;
+</PageContent>;
 ```

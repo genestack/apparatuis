@@ -12,7 +12,7 @@ handleTooltipToggle = (event) => {
 
 handleTooltipClose = () => setState({referenceElement: null});
 
-<div>
+<PageContent as={Paper}>
     <Button onClick={handleTooltipToggle}>Toggle Tooltip</Button>
     <Tooltip
         open={!!state.referenceElement}
@@ -22,5 +22,5 @@ handleTooltipClose = () => setState({referenceElement: null});
     >
         I am a tooltip
     </Tooltip>
-</div>;
+</PageContent>;
 ```

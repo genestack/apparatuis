@@ -20,12 +20,21 @@ handleCheckboxChange = (enableSelfFocus) => setState({enableSelfFocus});
     <Row>
         <Input placeholder="First Free Input" />
     </Row>
-    <Row style={{display: 'flex', justifyContent: 'space-between', margin: '16px 0'}}>
-        <Typography>Focus for the next inputs is trapped:</Typography>
-        <label>
-            <Typography box="inline">Enable container focus: </Typography>
-            <Checkbox checked={state.enableSelfFocus} onValueChange={handleCheckboxChange} />
-        </label>
+    <Row>
+        <Controls justify="space-between">
+            <ControlsItem>
+                <Typography>Focus for the next inputs is trapped:</Typography>
+            </ControlsItem>
+            <ControlsItem>
+                <label>
+                    <Typography box="inline">Enable container focus: </Typography>
+                    <Checkbox
+                        checked={state.enableSelfFocus}
+                        onValueChange={handleCheckboxChange}
+                    />
+                </label>
+            </ControlsItem>
+        </Controls>
     </Row>
     <FocusTrap>
         <div style={focusTrapStyle} tabIndex={state.enableSelfFocus ? 0 : -1}>

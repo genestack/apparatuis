@@ -4,7 +4,7 @@ initialState = {shaking: false};
 handleButtonClick = () => { setState({shaking: true}) }
 handleShakeComplete = () => { setState({shaking: false}) }
 
-<div>
+<PageContent as={Paper}>
     <Shake in={state.shaking} onEntered={handleShakeComplete}>
         <Button
             style={{width: 100}}
@@ -13,5 +13,5 @@ handleShakeComplete = () => { setState({shaking: false}) }
             {state.shaking ? 'Shaking...' : 'Shake Me'}
         </Button>
     </Shake>
-</div>;
+</PageContent>;
 ```

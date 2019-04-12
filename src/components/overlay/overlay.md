@@ -84,5 +84,7 @@ class SimpleModal extends React.Component {
     }
 }
 
-<SimpleModal />;
+<PageContent as={Paper}>
+    <SimpleModal />
+</PageContent>;
 ```

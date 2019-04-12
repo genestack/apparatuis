@@ -40,7 +40,7 @@ const exportMenu = (
     </Menu>
 );
 
-<div style={{background: '#fff'}}>
+<Paper>
     <Header disablePositionFixed={state.disablePositionFixed}>
         <HeaderButton>
             <MenuIcon />
@@ -77,6 +77,7 @@ const exportMenu = (
                     focused={open}
                     title="user.name@genestack.com"
                     style={{maxWidth: 200}}
+                    shrink
                 >
                     user.name@genestack.com
                 </HeaderButton>
@@ -84,11 +85,14 @@ const exportMenu = (
         </MenuHandler>
     </Header>
     <PageContent>
-        <div style={{display: 'flex'}}>
-            <Typography box="paragraph">Left Page Side</Typography>
-            <FlexExpander />
-            <Typography box="paragraph">Right Page Side</Typography>
-        </div>
+        <Controls justify="space-between">
+            <ControlsItem>
+                <Typography box="paragraph">Left Page Side</Typography>
+            </ControlsItem>
+            <ControlsItem>
+                <Typography box="paragraph">Right Page Side</Typography>
+            </ControlsItem>
+        </Controls>
     </PageContent>
-</div>;
+</Paper>;
 ```

@@ -17,20 +17,20 @@ handleButtonClick = () => setState(({visible}) => ({visible: !visible}));
 
 handleTransformOriginChange = (event) => setState({transformOrigin: event.target.value});
 
-<FlexItem container>
+<Controls justify="space-between">
     <FlexExpander />
-    <FlexItem>
+    <ControlsItem>
         <Grow in={state.visible} transformOrigin={state.transformOrigin}>
             <Paper style={{width: 100, padding: 16}}>
                 <Typography>Hi! I am could be hidden.</Typography>
             </Paper>
         </Grow>
-        <Button style={{width: 100, marginTop: 8}} onClick={handleButtonClick}>
+        <Button variant="primary" style={{width: 100, marginTop: 8}} onClick={handleButtonClick}>
             {state.visible ? 'Hide' : 'Show'}
         </Button>{' '}
-    </FlexItem>
+    </ControlsItem>
     <FlexExpander />
-    <Flex>
+    <ControlsItem>
         <PageContent as={Paper}>
             <Typography box="paragraph" variant="section">
                 Transform origin:
@@ -53,6 +53,6 @@ handleTransformOriginChange = (event) => setState({transformOrigin: event.target
                 </List>
             </PageFullWidth>
         </PageContent>
-    </Flex>
-</FlexItem>;
+    </ControlsItem>
+</Controls>;
 ```

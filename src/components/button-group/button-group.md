@@ -1,40 +1,40 @@
 ```js
 <PageContent as={Paper}>
-    <FlexItem container>
-        <FlexItem>
+    <Controls>
+        <ControlsItem>
             <ButtonGroup>
                 <Button>First</Button>
                 <Button>Second</Button>
                 <Button>Third</Button>
             </ButtonGroup>
-        </FlexItem>
+        </ControlsItem>
 
-        <FlexItem>
+        <ControlsItem>
             <ButtonGroup variant="primary">
                 <Button>First</Button>
                 <Button>Second</Button>
                 <Button>Third</Button>
             </ButtonGroup>
-        </FlexItem>
-    </FlexItem>
-    <Divider variant="transparent" />
-    <FlexItem container>
-        <FlexItem>
+        </ControlsItem>
+    </Controls>
+    <Divider gap={2} variant="transparent" />
+    <Controls>
+        <ControlsItem>
             <ButtonGroup variant="outlined">
                 <Button>First</Button>
                 <Button>Second</Button>
                 <Button>Third</Button>
             </ButtonGroup>
-        </FlexItem>
+        </ControlsItem>
 
-        <FlexItem>
+        <ControlsItem>
             <ButtonGroup variant="ghost">
                 <Button>First</Button>
                 <Button>Second</Button>
                 <Button>Third</Button>
             </ButtonGroup>
-        </FlexItem>
-    </FlexItem>
+        </ControlsItem>
+    </Controls>
 </PageContent>
 ```
 
@@ -77,7 +77,7 @@ const {KeyboardArrowBottomIcon} = require('../../icons/keyboard-arrow-bottom-ico
                 </Menu>
             }
         >
-            <Button icon={<KeyboardArrowBottomIcon />} />
+            {({open}) => <Button active={open} icon={<KeyboardArrowBottomIcon />} />}
         </MenuHandler>
     </ButtonGroup>
 </PageContent>;

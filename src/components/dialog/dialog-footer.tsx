@@ -8,7 +8,6 @@
 import classNames from 'classnames';
 import * as React from 'react';
 
-import {WithClasses, mergeClassesProps} from '../../utils/styles';
 import {MarginBox, MarginBoxProps} from '../margin-box';
 
 import {DialogContext} from './dialog-context';
@@ -18,7 +17,7 @@ type TargetProps = React.HTMLAttributes<HTMLDivElement> &
     Pick<MarginBoxProps, 'startDividerProps' | 'endDividerProps'>;
 
 /** DialogFooter public properties */
-export interface Props extends TargetProps, WithClasses<keyof typeof styles> {
+export interface Props extends TargetProps {
     contentProps?: React.HTMLAttributes<HTMLDivElement>;
 }
 
@@ -32,28 +31,22 @@ export const DialogFooter = (props: Props) => {
         contentProps = {},
         startDividerProps,
 
-        classes,
         ...rest
-    } = mergeClassesProps(props, styles);
+    } = props;
 
     return (
         <DialogContext.Consumer>
             {(dialogContext) => (
                 <MarginBox
                     {...rest}
-                    className={classNames(rest.className, classes.root)}
+                    className={classNames(rest.className, styles.root)}
                     noStartDivider={dialogContext.compact}
                     startDividerProps={{
                         variant: 'stroke',
                         ...startDividerProps
                     }}
                 >
-                    <div
-                        {...contentProps}
-                        className={classNames(contentProps.className, classes.content)}
-                    >
-                        {children}
-                    </div>
+                    {children}
                 </MarginBox>
             )}
         </DialogContext.Consumer>

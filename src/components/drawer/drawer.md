@@ -21,9 +21,15 @@ handleDrawerClose = () =>
         drawerOpen: false
     });
 
-<React.Fragment>
-    <Button onClick={handleLeftDrawerOpen}>Open Left Drawer</Button>{' '}
-    <Button onClick={handleRightDrawerOpen}>Open Right Drawer</Button>
+<PageContent as={Paper}>
+    <Controls justify="space-between">
+        <ControlsItem>
+            <Button onClick={handleLeftDrawerOpen}>Open Left Drawer</Button>
+        </ControlsItem>
+        <ControlsItem>
+            <Button onClick={handleRightDrawerOpen}>Open Right Drawer</Button>
+        </ControlsItem>
+    </Controls>
     <Drawer open={state.drawerOpen} onClose={handleDrawerClose} side={state.drawerSide}>
         <Typography variant="title">Shortcuts</Typography>
 
@@ -68,5 +74,5 @@ handleDrawerClose = () =>
             Copyright (c) 2011-{new Date().getFullYear()}
         </Typography>
     </Drawer>
-</React.Fragment>;
+</PageContent>;
 ```

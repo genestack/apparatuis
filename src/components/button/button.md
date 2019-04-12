@@ -19,10 +19,14 @@ const Pane = (props) => (
 
 const ButtonSamples = (props) => (
     <React.Fragment>
-        <div>
-            <Button {...props}>{capitalize(props.variant || 'default')}</Button>{' '}
-            <Button {...props} icon={<ShareIcon />} />
-        </div>
+        <Controls>
+            <ControlsItem>
+                <Button {...props}>{capitalize(props.variant || 'default')}</Button>
+            </ControlsItem>
+            <ControlsItem>
+                <Button {...props} icon={<ShareIcon />} />
+            </ControlsItem>
+        </Controls>
         <Divider variant="transparent" />
         <div>
             <Button {...props} icon={<PlayIcon />}>
@@ -63,26 +67,26 @@ const {PlayIcon} = require('../../icons/play-icon');
 const {ShareIcon} = require('../../icons/share-icon');
 
 <PageContent as={Paper} style={{width: 500}}>
-    <FlexItem container>
-        <FlexItem>
+    <Controls>
+        <ControlsItem>
             <Button icon={<ShareIcon />} tiny />
-        </FlexItem>
-        <FlexItem>
+        </ControlsItem>
+        <ControlsItem>
             <Button tiny>Tiny</Button>
-        </FlexItem>
-        <FlexItem>
+        </ControlsItem>
+        <ControlsItem>
             <Button tiny icon={<PlayIcon />}>
                 Tiny
             </Button>
-        </FlexItem>
-        <FlexItem shrink>
+        </ControlsItem>
+        <ControlsItem shrink>
             <Button icon={<ShareIcon />}>Button with long text</Button>
-        </FlexItem>
-        <FlexItem shrink>
+        </ControlsItem>
+        <ControlsItem shrink>
             <Button icon={<ShareIcon />} wrap>
                 Button with long text
             </Button>
-        </FlexItem>
-    </FlexItem>
+        </ControlsItem>
+    </Controls>
 </PageContent>;
 ```

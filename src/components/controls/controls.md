@@ -35,7 +35,13 @@ const regulationButtons = (
 );
 
 <PageContent as={Paper}>
-    <WithSeparator separator={<Divider gap={4} />}>
+    <WithSeparator
+        separator={
+            <PageFullWidth>
+                <Divider gap={4} />
+            </PageFullWidth>
+        }
+    >
         <Controls>
             <ControlsItem>
                 <Button variant="primary">Sign in</Button>
@@ -137,12 +143,12 @@ const regulationButtons = (
 
         <Controls justify="space-between">
             <ControlsItem>
-                <Controls container as="label">
+                <Controls as="label">
                     <ControlsItem>
                         <Typography>Filter</Typography>
                     </ControlsItem>
                     <ControlsItem>
-                        <Input placeholder="Compound, biological conditions" style={{width: 160}} />
+                        <Input placeholder="Compound, biological conditions" style={{width: 240}} />
                     </ControlsItem>
                 </Controls>
             </ControlsItem>
@@ -153,7 +159,7 @@ const regulationButtons = (
 
         <Controls gap={6}>
             <ControlsItem>
-                <Controls container gap={1}>
+                <Controls gap={1}>
                     <ControlsItem>
                         <Button>Open</Button>
                     </ControlsItem>
