@@ -6,3 +6,4 @@
  * actual or intended publication of such source code.
  */
 export {Controls, Props as ControlsProps} from './controls';
+export {ControlsItem, Props as ControlsItemProps} from './controls-item';

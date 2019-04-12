@@ -37,143 +37,146 @@ const regulationButtons = (
 <PageContent as={Paper}>
     <WithSeparator separator={<Divider gap={4} />}>
         <Controls>
-            <Controls item>
+            <ControlsItem>
                 <Button variant="primary">Sign in</Button>
-            </Controls>
-            <Controls item>
+            </ControlsItem>
+            <ControlsItem>
                 <Button>Sign in as another user</Button>
-            </Controls>
+            </ControlsItem>
         </Controls>
 
         <Controls>
-            <Controls item>
+            <ControlsItem>
                 <Button>Show Selected</Button>
-            </Controls>
-            <Controls item>
+            </ControlsItem>
+            <ControlsItem>
                 <Button>Cancel</Button>
-            </Controls>
+            </ControlsItem>
         </Controls>
 
         <Controls>
-            <Controls item>
+            <ControlsItem>
                 <ButtonGroup>{regulationButtons}</ButtonGroup>
-            </Controls>
-            <Controls item>
+            </ControlsItem>
+            <ControlsItem>
                 <ButtonGroup>
                     <Button icon={<ArrowLeftIcon />} />
                     <Button icon={<ArrowRightIcon />} />
                 </ButtonGroup>
-            </Controls>
-            <Controls item>
+            </ControlsItem>
+            <ControlsItem>
                 <ButtonGroup>
                     <Button>Create new</Button>
                     <Button icon={<KeyboardArrowBottomIcon />} />
                 </ButtonGroup>
-            </Controls>
+            </ControlsItem>
         </Controls>
 
         <Controls>
-            <Controls item>
+            <ControlsItem>
                 <ButtonGroup variant="outlined">{regulationButtons}</ButtonGroup>
-            </Controls>
-            <Controls item>
+            </ControlsItem>
+            <ControlsItem>
                 <ButtonGroup variant="outlined">
                     <Button icon={<ArrowLeftIcon />} />
                     <Button icon={<ArrowRightIcon />} />
                 </ButtonGroup>
-            </Controls>
-            <Controls item>
+            </ControlsItem>
+            <ControlsItem>
                 <ButtonGroup variant="outlined">
                     <Button>Create new</Button>
                     <Button icon={<MoreIcon />} />
                 </ButtonGroup>
-            </Controls>
+            </ControlsItem>
+            <ControlsItem shrink>
+                <Button variant="outlined">Very very very long button text</Button>
+            </ControlsItem>
         </Controls>
 
         <Controls gap={1}>
-            <Controls item>
+            <ControlsItem>
                 <Button>Open</Button>
-            </Controls>
-            <Controls item>
+            </ControlsItem>
+            <ControlsItem>
                 <Button>Import</Button>
-            </Controls>
-            <Controls item>
+            </ControlsItem>
+            <ControlsItem>
                 <Button>Create new</Button>
-            </Controls>
+            </ControlsItem>
         </Controls>
 
         <Controls gap={8}>
-            <Controls item>
+            <ControlsItem>
                 <Controls gap={1}>
-                    <Controls item>
+                    <ControlsItem>
                         <Button variant="ghost" icon={<PlayIcon />} disabled />
-                    </Controls>
-                    <Controls item>
+                    </ControlsItem>
+                    <ControlsItem>
                         <Button variant="ghost" icon={<PauseIcon />} />
-                    </Controls>
-                    <Controls item>
+                    </ControlsItem>
+                    <ControlsItem>
                         <Button variant="ghost" icon={<StopIcon />} />
-                    </Controls>
+                    </ControlsItem>
                 </Controls>
-            </Controls>
+            </ControlsItem>
 
-            <Controls item>
+            <ControlsItem>
                 <Controls gap={1}>
-                    <Controls item>
+                    <ControlsItem>
                         <Button icon={<PlayIcon />} disabled />
-                    </Controls>
-                    <Controls item>
+                    </ControlsItem>
+                    <ControlsItem>
                         <Button icon={<PauseIcon />} />
-                    </Controls>
-                    <Controls item>
+                    </ControlsItem>
+                    <ControlsItem>
                         <Button icon={<StopIcon />} />
-                    </Controls>
+                    </ControlsItem>
                 </Controls>
-            </Controls>
+            </ControlsItem>
         </Controls>
 
         <Controls justify="space-between">
-            <Controls item>
-                <Controls container gap={1} as="label">
-                    <Controls item>
+            <ControlsItem>
+                <Controls container as="label">
+                    <ControlsItem>
                         <Typography>Filter</Typography>
-                    </Controls>
-                    <Controls item>
+                    </ControlsItem>
+                    <ControlsItem>
                         <Input placeholder="Compound, biological conditions" style={{width: 160}} />
-                    </Controls>
+                    </ControlsItem>
                 </Controls>
-            </Controls>
-            <Controls item>
+            </ControlsItem>
+            <ControlsItem>
                 <Button>Export as TSV</Button>
-            </Controls>
+            </ControlsItem>
         </Controls>
 
         <Controls gap={6}>
-            <Controls item>
+            <ControlsItem>
                 <Controls container gap={1}>
-                    <Controls item>
+                    <ControlsItem>
                         <Button>Open</Button>
-                    </Controls>
-                    <Controls item>
+                    </ControlsItem>
+                    <ControlsItem>
                         <Button>Import</Button>
-                    </Controls>
+                    </ControlsItem>
                 </Controls>
-            </Controls>
-            <Controls item>
+            </ControlsItem>
+            <ControlsItem>
                 <Button>Export as TSV</Button>
-            </Controls>
+            </ControlsItem>
         </Controls>
 
         <Controls gap={8}>
-            <Controls item>
+            <ControlsItem>
                 <ButtonGroup variant="outlined">{regulationButtons}</ButtonGroup>
-            </Controls>
-            <Controls item>
+            </ControlsItem>
+            <ControlsItem>
                 <ButtonGroup variant="outlined">
                     <Button icon={<ArrowLeftIcon />} />
                     <Button icon={<ArrowRightIcon />} />
                 </ButtonGroup>
-            </Controls>
+            </ControlsItem>
         </Controls>
     </WithSeparator>
 </PageContent>;

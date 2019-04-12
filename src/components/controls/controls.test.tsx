@@ -10,6 +10,7 @@ import * as React from 'react';
 import {createTestApp} from '../../../test-utils/create-test-app';
 
 import {Controls} from './controls';
+import {ControlsItem} from './controls-item';
 
 const app = createTestApp();
 
@@ -20,9 +21,9 @@ describe('<Controls />', () => {
     it('should render children', () => {
         app.mount(
             <Controls>
-                <Controls item>
+                <ControlsItem>
                     <div id="test" />
-                </Controls>
+                </ControlsItem>
             </Controls>
         );
         expect(document.getElementById('test')).toBeTruthy();
