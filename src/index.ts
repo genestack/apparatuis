@@ -32,3 +32,4 @@ export * from './components/with-separator';
 export * from './components/root-ref';
 export * from './components/dialog';
 export * from './components/page-content';
+export * from './components/controls';
