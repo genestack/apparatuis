@@ -25,7 +25,6 @@
 
 :root {
     --gs-button-box-shadow-active: inset 0 2px 4px rgba(0, 0, 0, 0.25);
-    --gs-outlined-box-shadow: 0 0 0 1px var(--gs-color-grey-outline);
 }
 
 .root.disabled,
@@ -204,6 +203,7 @@
 .primary:active {
     background: var(--gs-color-action-text);
     color: var(--gs-color-grey-background);
+    box-shadow: var(--gs-button-box-shadow-active);
 }
 
 .primary.active :global(.gs-svg-icon-fill),
@@ -214,11 +214,6 @@
 .primary.active :global(.gs-svg-icon-stroke),
 .primary:active :global(.gs-svg-icon-stroke) {
     stroke: var(--gs-color-grey-background);
-}
-
-.primary.active:after,
-.defaultVariant:active:after {
-    box-shadow: var(--gs-button-box-shadow-active);
 }
 
 /* disabled */
@@ -243,7 +238,7 @@
 
 .outlined {
     color: var(--gs-color-action-text);
-    box-shadow: var(--gs-outlined-box-shadow);
+    border: 1px solid var(--gs-color-grey-outline);
 }
 
 .outlined :global(.gs-svg-icon-fill) {
@@ -284,7 +279,7 @@
 .outlined:active {
     background: var(--gs-color-action-text);
     color: var(--gs-color-grey-background);
-    box-shadow: var(--gs-outlined-box-shadow), var(--gs-button-box-shadow-active);
+    box-shadow: var(--gs-button-box-shadow-active);
 }
 
 .outlined.active :global(.gs-svg-icon-fill),
@@ -302,7 +297,7 @@
 .outlined.disabled,
 .outlined:disabled {
     background-color: transparent;
-    box-shadow: var(--gs-outlined-box-shadow);
+    box-shadow: none;
     color: var(--gs-color-grey-50);
 }
 
