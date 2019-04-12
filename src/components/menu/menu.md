@@ -44,9 +44,11 @@ const menu = (
     </Menu>
 );
 
-<MenuHandler menu={() => menu}>
-    <Button>Open Stateful Menu {state.value ? `(${state.value})` : null}</Button>
-</MenuHandler>;
+<PageContent as={Paper}>
+    <MenuHandler menu={() => menu}>
+        <Button>Open Stateful Menu {state.value ? `(${state.value})` : null}</Button>
+    </MenuHandler>
+</PageContent>;
 ```
 
 ### Stateless
@@ -93,15 +95,21 @@ items = new Array(100).fill(null).map((_, index) => (
     </MenuItem>
 ));
 
-<React.Fragment>
-    <Button onClick={handleButtonClick}>Open Menu</Button>
-    <Typography box="inline">
-        {' '}
-        Last selected menu item value:{' '}
-        {typeof state.selectedItemValue === 'undefined'
-            ? 'undefined'
-            : JSON.stringify(state.selectedItemValue)}
-    </Typography>
+<PageContent as={Paper}>
+    <Controls>
+        <ControlsItem>
+            <Button onClick={handleButtonClick}>Open Menu</Button>
+        </ControlsItem>
+        <ControlsItem>
+            <Typography box="inline">
+                {' '}
+                Last selected menu item value:{' '}
+                {typeof state.selectedItemValue === 'undefined'
+                    ? 'undefined'
+                    : JSON.stringify(state.selectedItemValue)}
+            </Typography>
+        </ControlsItem>
+    </Controls>
     <Menu
         open={!!state.referenceElement}
         onClose={handleMenuClose}
@@ -127,7 +135,7 @@ items = new Array(100).fill(null).map((_, index) => (
             Menu Item With Long Long Name
         </MenuItem>
     </Menu>
-</React.Fragment>;
+</PageContent>;
 ```
 
 ### Extreme
@@ -154,7 +162,7 @@ items = new Array(100).fill(null).map((_, index) => (
     </MenuItem>
 ));
 
-<React.Fragment>
+<PageContent as={Paper}>
     <Button onClick={handleButtonClick}>Open Extreme Menu</Button>
     <Menu
         open={!!state.referenceElement}
@@ -164,5 +172,5 @@ items = new Array(100).fill(null).map((_, index) => (
     >
         {items}
     </Menu>
-</React.Fragment>;
+</PageContent>;
 ```

@@ -1,16 +1,16 @@
 ```js
 const buttons = new Array(10).fill(null).map((_, i) => (
-    <FlexItem key={i}>
+    <ControlsItem key={i}>
         <TooltipHandler tooltip={<Tooltip>I am a tooltip {i}</Tooltip>}>
             <Button>
                 <div>{i}</div>
             </Button>
         </TooltipHandler>
-    </FlexItem>
+    </ControlsItem>
 ));
 
 <PageContent as={Paper}>
-    <FlexItem container>{buttons}</FlexItem>
+    <Controls>{buttons}</Controls>
 </PageContent>;
 ```
 
@@ -54,36 +54,40 @@ initialState = {
     asyncDuration: 600
 };
 
-<FlexItem container>
-    <FlexItem>
-        <TooltipHandler tooltip={<AsyncTooltip asyncDuration={state.asyncDuration} />}>
-            <Button>Hover for tooltip</Button>
-        </TooltipHandler>
-    </FlexItem>
-    <Flex>
-        <label htmlFor="tooltip-handler-async-duration">
-            <Typography>Async timeout duration:</Typography>
-        </label>
-    </Flex>
-    <Flex>
-        <Input
-            id="tooltip-handler-async-duration"
-            style={{width: 60}}
-            value={state.asyncDuration}
-            onChange={(event) => {
-                let value = parseInt(event.currentTarget.value, 10);
-                value = isNaN(value) ? 0 : value;
-                setState({asyncDuration: value});
-            }}
-        />
-    </Flex>
-</FlexItem>;
+<PageContent as={Paper}>
+    <Controls>
+        <ControlsItem>
+            <TooltipHandler tooltip={<AsyncTooltip asyncDuration={state.asyncDuration} />}>
+                <Button>Hover for tooltip</Button>
+            </TooltipHandler>
+        </ControlsItem>
+        <ControlsItem>
+            <label htmlFor="tooltip-handler-async-duration">
+                <Typography>Async timeout duration:</Typography>
+            </label>
+        </ControlsItem>
+        <ControlsItem>
+            <Input
+                id="tooltip-handler-async-duration"
+                style={{width: 60}}
+                value={state.asyncDuration}
+                onChange={(event) => {
+                    let value = parseInt(event.currentTarget.value, 10);
+                    value = isNaN(value) ? 0 : value;
+                    setState({asyncDuration: value});
+                }}
+            />
+        </ControlsItem>
+    </Controls>
+</PageContent>;
 ```
 
 #### Disabled button
 
 ```js
-<TooltipHandler tooltip={<Tooltip>I am tooltip!</Tooltip>}>
-    <Button disabled>Hover me</Button>
-</TooltipHandler>
+<PageContent as={Paper}>
+    <TooltipHandler tooltip={<Tooltip>I am tooltip!</Tooltip>}>
+        <Button disabled>Hover me</Button>
+    </TooltipHandler>
+</PageContent>
 ```

@@ -13,7 +13,7 @@ handleDialogClose = () => {
     setState({open: false});
 };
 
-<React.Fragment>
+<PageContent as={Paper}>
     <Button onClick={handleDialogOpen}>Open simple dialog</Button>
 
     <Dialog open={state.open} onClose={handleDialogClose}>
@@ -50,13 +50,24 @@ handleDialogClose = () => {
         </DialogBody>
 
         <DialogFooter>
-            <Button kind="primary">Main Action</Button>
-            <Button onClick={handleDialogClose}>Close</Button>
-            <FlexExpander />
-            <Typography quiet>Helper text</Typography>
+            <Controls justify="space-between">
+                <ControlsItem>
+                    <Controls>
+                        <ControlsItem>
+                            <Button variant="primary">Main Action</Button>
+                        </ControlsItem>
+                        <ControlsItem>
+                            <Button onClick={handleDialogClose}>Close</Button>
+                        </ControlsItem>
+                    </Controls>
+                </ControlsItem>
+                <ControlsItem>
+                    <Typography quiet>Helper text</Typography>
+                </ControlsItem>
+            </Controls>
         </DialogFooter>
     </Dialog>
-</React.Fragment>;
+</PageContent>;
 ```
 
 #### Form Dialog
@@ -80,7 +91,7 @@ handleFormSubmit = (event) => {
     setState({dialogOpen: false});
 };
 
-<React.Fragment>
+<PageContent as={Paper}>
     <Button onClick={handleDialogOpen}>Open Form Dialog</Button>
     <Dialog
         open={state.dialogOpen}
@@ -109,18 +120,20 @@ handleFormSubmit = (event) => {
                 />
             </DialogBody>
             <DialogFooter>
-                <FlexItem>
-                    <Button variant="primary" type="submit">
-                        Sign in
-                    </Button>
-                </FlexItem>
-                <FlexItem>
-                    <Button>Sign in as another user</Button>
-                </FlexItem>
+                <Controls>
+                    <ControlsItem>
+                        <Button variant="primary" type="submit">
+                            Sign in
+                        </Button>
+                    </ControlsItem>
+                    <ControlsItem>
+                        <Button>Sign in as another user</Button>
+                    </ControlsItem>
+                </Controls>
             </DialogFooter>
         </form>
     </Dialog>
-</React.Fragment>;
+</PageContent>;
 ```
 
 ```js
@@ -172,7 +185,7 @@ const samples = [
     }
 ];
 
-<React.Fragment>
+<PageContent as={Paper}>
     <Button onClick={handleDialogOpen}>Open configurable dialog</Button>
     <Dialog
         open={state.dialogOpen}
@@ -247,10 +260,21 @@ const samples = [
 
         {state.showFooter ? (
             <DialogFooter>
-                <Button kind="primary">Main Action</Button>
-                <Button onClick={handleDialogClose}>Close</Button>
-                <FlexExpander />
-                <Typography quiet>Helper text</Typography>
+                <Controls justify="space-between">
+                    <ControlsItem>
+                        <Controls>
+                            <ControlsItem>
+                                <Button variant="primary">Main Action</Button>
+                            </ControlsItem>
+                            <ControlsItem>
+                                <Button onClick={handleDialogClose}>Close</Button>
+                            </ControlsItem>
+                        </Controls>
+                    </ControlsItem>
+                    <ControlsItem>
+                        <Typography quiet>Helper text</Typography>
+                    </ControlsItem>
+                </Controls>
             </DialogFooter>
         ) : null}
 
@@ -291,5 +315,5 @@ const samples = [
             </List>
         </Paper>
     </Dialog>
-</React.Fragment>;
+</PageContent>;
 ```

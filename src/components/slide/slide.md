@@ -10,9 +10,9 @@ handleDirectionChange = (event) =>
         direction: event.target.value
     });
 
-<FlexItem container>
+<Controls>
     <FlexExpander />
-    <FlexItem>
+    <ControlsItem>
         <Slide in={state.visible} direction={state.direction} fast={state.fast}>
             <Paper style={{width: 100, padding: 16}}>
                 <Typography>Hi! I am could be hidden.</Typography>
@@ -21,12 +21,13 @@ handleDirectionChange = (event) =>
         <Button
             style={{width: 100, marginTop: 8, position: 'relative'}}
             onClick={handleButtonClick}
+            variant="primary"
         >
             {state.visible ? 'Hide' : 'Show'}
         </Button>
-    </FlexItem>
+    </ControlsItem>
     <FlexExpander />
-    <Flex>
+    <ControlsItem>
         <PageContent as={Paper}>
             <PageFullWidth>
                 <List>
@@ -63,6 +64,6 @@ handleDirectionChange = (event) =>
                 </List>
             </PageFullWidth>
         </PageContent>
-    </Flex>
-</FlexItem>;
+    </ControlsItem>
+</Controls>;
 ```

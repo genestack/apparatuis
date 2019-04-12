@@ -3,12 +3,18 @@ initialState = {visible: true};
 
 handleButtonClick = () => setState(({visible}) => ({visible: !visible}));
 
-<div>
-    <Button style={{width: 80}} onClick={handleButtonClick}>
-        {state.visible ? 'Hide' : 'Show'}
-    </Button>{' '}
-    <Fade in={state.visible}>
-        <Typography box="inline">Hi! I am could be hidden.</Typography>
-    </Fade>
-</div>;
+<PageContent as={Paper}>
+    <Controls>
+        <ControlsItem>
+            <Button style={{width: 80}} onClick={handleButtonClick}>
+                {state.visible ? 'Hide' : 'Show'}
+            </Button>
+        </ControlsItem>
+        <ControlsItem>
+            <Fade in={state.visible}>
+                <Typography box="inline">Hi! I am could be hidden.</Typography>
+            </Fade>
+        </ControlsItem>
+    </Controls>
+</PageContent>;
 ```
