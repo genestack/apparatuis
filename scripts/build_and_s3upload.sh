@@ -25,11 +25,12 @@ DEV_PATH_INFIX="dev"
 AWS_S3_UIKIT_BUCKET="${AWS_S3_UIKIT_BUCKET:-gs-public-resources}"
 AWS_S3_UIKIT_PATH="${AWS_S3_UIKIT_PATH:-ui_kit}"
 
-if [[ -n "${BRANCH:-}" ]]; then
-    TARGET_PATH="$AWS_S3_UIKIT_PATH/$DEV_PATH_INFIX/$BRANCH"
-else
-    # if $BRANCH isn't defined, default to "master"
+# if $BRANCH isn't defined, default to "refs/heads/master"
+BRANCH="${BRANCH:-refs/heads/master}"
+if [[ "$BRANCH" == "refs/heads/master" ]]; then
     TARGET_PATH="$AWS_S3_UIKIT_PATH/master"
+else
+    TARGET_PATH="$AWS_S3_UIKIT_PATH/$DEV_PATH_INFIX/$BRANCH"
 fi
 
 TARGET_S3_URL="s3://$AWS_S3_UIKIT_BUCKET/$TARGET_PATH"
