@@ -1,6 +1,7 @@
 ```js
 const {MenuIcon} = require('../../icons/menu-icon');
 const {OpenFolderIcon} = require('../../icons/open-folder-icon');
+const {ShareIcon} = require('../../icons/share-icon');
 
 initialState = {
     disablePositionFixed: true
@@ -43,43 +44,49 @@ const exportMenu = (
 <Paper>
     <Header disablePositionFixed={state.disablePositionFixed}>
         <HeaderButton>
-            <MenuIcon />
+            <HeaderItemIcon>
+                <MenuIcon />
+            </HeaderItemIcon>
         </HeaderButton>
         <MenuHandler menu={applicationMenu}>
             {({open}) => (
-                <HeaderButton focused={open} variant="section" style={{color: '#024DA1'}}>
-                    Import Template Editor
+                <HeaderButton active={open}>
+                    <HeaderItemText variant="section" style={{color: '#024DA1'}}>
+                        Import Template Editor
+                    </HeaderItemText>
                 </HeaderButton>
             )}
         </MenuHandler>
         <HeaderButton>
-            <HeaderItemCell>
+            <HeaderItemIcon>
                 <OpenFolderIcon />
-            </HeaderItemCell>
+            </HeaderItemIcon>
             <HeaderItemText>Open</HeaderItemText>
         </HeaderButton>
         <MenuHandler menu={exportMenu}>
-            {({open}) => <HeaderButton focused={open}>Export</HeaderButton>}
+            {({open}) => <HeaderButton active={open}>Export</HeaderButton>}
         </MenuHandler>
-        <HeaderButton shrink grow variant="section">
-            iPSC derived Pancreatic Beta Cell Def-PANC
+        <HeaderButton shrink grow>
+            <HeaderButtonSecondaryActions>
+                <Button tiny variant="ghost" icon={<ShareIcon />} />
+            </HeaderButtonSecondaryActions>
+            <HeaderItemText variant="section">
+                iPSC derived Pancreatic Beta Cell Def-PANC
+            </HeaderItemText>
         </HeaderButton>
         <HeaderItem>
-            <Button tiny>Trial version</Button>
+            <HeaderItemCell>
+                <Button tiny>Trial version</Button>
+            </HeaderItemCell>
         </HeaderItem>
         <HeaderButton>
             <HeaderItemText>Tasks</HeaderItemText>
-            <HeaderItemCell style={{color: '#D45E18'}}>5</HeaderItemCell>
+            <HeaderItemText style={{color: '#D45E18'}}>5</HeaderItemText>
         </HeaderButton>
         <MenuHandler menu={userMenu}>
             {({open}) => (
-                <HeaderButton
-                    focused={open}
-                    title="user.name@genestack.com"
-                    style={{maxWidth: 200}}
-                    shrink
-                >
-                    user.name@genestack.com
+                <HeaderButton active={open} title="user.name@genestack.com" style={{maxWidth: 200}}>
+                    user.name.user@genestack.com
                 </HeaderButton>
             )}
         </MenuHandler>

@@ -16,8 +16,7 @@
     composes: spacer;
     display: flex;
     background: var(--gs-color-white);
-    overflow: hidden;
-    padding: 0 calc(var(--gs-spacing-unit) * 3);
+    padding: 0 calc(var(--gs-spacing-unit) * 1.5);
 }
 
 .fixed {

@@ -8,17 +8,22 @@
 import classNames from 'classnames';
 import * as React from 'react';
 
-import {Flex} from '../flex';
-import {TypographyProps, Typography} from '../typography';
-
+import {HeaderItemText} from './header-item-text';
 import * as styles from './header-item.module.css';
 
-type TargetProps = TypographyProps;
+type TargetProps = React.HTMLAttributes<HTMLElement>;
 
 /** HeaderItem public properties */
 export interface Props extends TargetProps {
+    /** If `true` flex item will grow */
     grow?: boolean;
+    /** If `true` flex item will shrink */
     shrink?: boolean;
+    /**
+     * Target element that will be rendered.
+     * `div` by default
+     */
+    as?: React.ReactType;
 }
 
 /**
@@ -26,22 +31,24 @@ export interface Props extends TargetProps {
  * in the Header.
  */
 export const HeaderItem = (props: Props) => {
-    const {grow, shrink, ...rest} = props;
+    const {as: Component = 'div', grow, shrink, ...rest} = props;
 
     const children =
         typeof props.children === 'string' ? (
-            <Flex grow shrink ellipsis>
-                <div>{props.children}</div>
-            </Flex>
+            <HeaderItemText>{props.children}</HeaderItemText>
         ) : (
             props.children
         );
 
     return (
-        <Flex ellipsis={props.children === 'string'} container gap={0} grow={grow} shrink={shrink}>
-            <Typography {...rest} className={classNames(rest.className, styles.root)}>
-                {children}
-            </Typography>
-        </Flex>
+        <Component
+            {...rest}
+            className={classNames(rest.className, styles.root, {
+                [styles.grow]: grow,
+                [styles.shrink]: shrink
+            })}
+        >
+            {children}
+        </Component>
     );
 };

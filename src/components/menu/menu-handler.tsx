@@ -15,7 +15,7 @@ import {Props as MenuProps} from './menu';
 type MenuProp = (() => React.ReactElement<MenuProps>) | React.ReactElement<MenuProps>;
 
 interface ChildProps {
-    onClick?: React.MouseEventHandler;
+    onClick?: React.ReactEventHandler;
     onKeyDown?: React.KeyboardEventHandler;
 }
 
@@ -62,6 +62,20 @@ export class MenuHandler extends React.Component<Props, State> {
     };
 
     private handleReferenceClick: ChildProps['onClick'] = (event) => {
+        /**
+         * `<BaseButton />` could call `onClick` callback caused by `keyup` event
+         * to simulate `<button />` behaviour on non-button elements.
+         * And to prevent scrolling the ButtonBase handler prevents default
+         * event behaviour. It is exception just for this case.
+         * Of course this workaround has rare edge-cases.
+         * @see BaseButton
+         */
+        if (event.nativeEvent instanceof KeyboardEvent) {
+            this.open();
+
+            return;
+        }
+
         if (!event.defaultPrevented) {
             this.open();
         }

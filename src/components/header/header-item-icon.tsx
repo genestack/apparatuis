@@ -8,14 +8,17 @@
 import classNames from 'classnames';
 import * as React from 'react';
 
-import * as styles from './header-item-cell.module.css';
+import * as styles from './header-item-icon.module.css';
 
 type TargetProps = React.HTMLAttributes<HTMLDivElement>;
 
-/** HeaderItemCell public properties */
+/** HeaderItemIcon public properties */
 export interface Props extends TargetProps {}
 
-/** Shortcut to ListItemCell */
-export const HeaderItemCell = (props: Props) => (
+/**
+ * Icon that could be placed in header item or button.
+ * It has different margins from header item cell or text.
+ */
+export const HeaderItemIcon = (props: Props) => (
     <div {...props} className={classNames(props.className, styles.root)} />
 );

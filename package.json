@@ -22,7 +22,7 @@
     "stylelint": "stylelint src/**/*.css",
     "tscheck": "tsc --noEmit -p .",
     "jest": "jest -c ./jest.config.js",
-    "test": "npm run tslint && npm run stylelint && npm run tscheck && npm run jest"
+    "test": "npm run tscheck && npm run tslint && npm run stylelint && npm run jest"
   },
   "devDependencies": {
     "@babel/polyfill": "^7.2.5",
@@ -35,7 +35,7 @@
     "@types/react-test-renderer": "^16.0.1",
     "@types/react-transition-group": "^2.0.15",
     "autoprefixer": "^8.6.4",
-    "css-loader": "^0.28.9",
+    "css-loader": "^2.1.0",
     "enzyme": "^3.8.0",
     "enzyme-adapter-react-16": "^1.7.1",
     "genestack-frontend-builder": "^0.8.2",

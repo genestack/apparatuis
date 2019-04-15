@@ -8,49 +8,89 @@
 @import "../../variables.css";
 
 .root {
-    composes: resetButton from "../../variables.css";
-    position: relative;
+    cursor: pointer;
+    z-index: 0;
 }
 
-.root:focus,
-.root.focused {
-    background: var(--gs-color-action-item-focused);
+.root:focus {
+    box-shadow: 0 0 0 2px var(--gs-color-action-25);
 }
 
-.root:hover,
-.root.hovered {
-    background: var(--gs-color-action-item-hovered);
-}
-
-.root:active,
-.root.active {
-    background: var(--gs-color-action-item-active);
-}
-
+.root:disabled,
 .root.disabled {
-    opacity: 0.6;
-    background: none;
     box-shadow: none;
+    opacity: 0.5;
     cursor: not-allowed;
+}
+
+/**
+ *  When header button includes secondary actions element
+ * and user hover on it the button should remove its hover state.
+ * It is possible to create "fake" element that is used as background
+ * and hide it by general sibling CSS combinator "~".
+ * @see `.secondaryActionsCell` selector
+ */
+.fakeHover {
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    right: 0;
     pointer-events: none;
 }
 
-.root:first-child:before {
-    content: "";
-    position: absolute;
-    left: calc(var(--gs-spacing-unit) * -1.5);
-    top: 0;
-    right: 100%;
-    bottom: 0;
-    cursor: pointer;
+.root:hover .fakeHover {
+    background: var(--gs-color-grey-background-50);
 }
 
-.root:last-child:before {
-    content: "";
-    position: absolute;
-    left: 100%;
-    top: 0;
-    right: calc(var(--gs-spacing-unit) * -1.5);
-    bottom: 0;
-    cursor: pointer;
+.root:active .fakeHover,
+.root.active .fakeHover {
+    background: var(--gs-color-grey-background);
+}
+
+.root:disabled .fakeHover,
+.root.disabled .fakeHover {
+    display: none;
+}
+
+.secondaryActionsCell:hover ~ .fakeHover {
+    display: none;
+}
+
+/**
+ * Fake hover element is the last element in header button
+ * so selectors for cells take it in account.
+ */
+.root .cell:nth-last-of-type(2) {
+    margin-right: calc(var(--gs-spacing-unit) * 1.5);
+}
+
+.root .iconCell:nth-last-of-type(2) {
+    margin-right: var(--gs-spacing-unit);
+}
+
+.root .iconCell:first-of-type:nth-last-of-type(2) {
+    margin-left: calc(var(--gs-spacing-unit) * 1.5);
+    margin-right: calc(var(--gs-spacing-unit) * 1.5);
+}
+
+/**
+ * In IE 11 `:active` selector does not work
+ * for elements that have nested elements.
+ */
+@media all and (-ms-high-contrast: none) {
+    *::-ms-backdrop,
+    .root .cell {
+        pointer-events: none;
+    }
+
+    *::-ms-backdrop,
+    .root .iconCell {
+        pointer-events: none;
+    }
+
+    *::-ms-backdrop,
+    .root .secondaryActionsCell {
+        pointer-events: all;
+    }
 }
