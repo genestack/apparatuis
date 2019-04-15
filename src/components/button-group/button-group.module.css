@@ -29,6 +29,10 @@
     margin-right: 1px;
 }
 
+.outlined:not(:last-child) {
+    margin-right: -1px;
+}
+
 .button:not(:first-child):not(:last-child),
 .button:not(:first-child):not(:last-child):after {
     border-radius: 0;

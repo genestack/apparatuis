@@ -5,6 +5,7 @@
  * The copyright notice above does not evidence any
  * actual or intended publication of such source code.
  */
+import classNames from 'classnames';
 import * as React from 'react';
 
 import {ButtonProps} from '../button';
@@ -26,7 +27,9 @@ export const ButtonGroup = (props: Props) => {
 
     const contextValue: ButtonContextValue = {
         variant,
-        className: styles.button
+        className: classNames(styles.button, {
+            [styles.outlined]: variant === 'outlined'
+        })
     };
 
     return (
