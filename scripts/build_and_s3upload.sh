@@ -21,6 +21,10 @@ set -eu
 BUNDLE_SUBDIR="styleguide"
 DEV_PATH_INFIX="dev"
 
+# deploy to s3://gs-public-resources/ui_kit/ by default
+AWS_S3_UIKIT_BUCKET="${AWS_S3_UIKIT_BUCKET:-gs-public-resources}"
+AWS_S3_UIKIT_PATH="${AWS_S3_UIKIT_PATH:-ui_kit}"
+
 if [[ -n "${BRANCH:-}" ]]; then
     TARGET_PATH="$AWS_S3_UIKIT_PATH/$DEV_PATH_INFIX/$BRANCH"
 else
