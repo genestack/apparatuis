@@ -54,8 +54,12 @@ export class ButtonBase<T extends TargetProps = DefaultTargetProps> extends Reac
         return props !== this.props || state.active !== this.state.active;
     }
 
-    private handleClick: TargetProps['onClick'] = () => {
+    private handleClick: TargetProps['onClick'] = (event) => {
         this.setState({active: false});
+
+        if (!this.props.disabled && this.props.onClick) {
+            this.props.onClick(event);
+        }
     };
 
     private handleKeyDown: TargetProps['onKeyDown'] = (event) => {
@@ -93,8 +97,9 @@ export class ButtonBase<T extends TargetProps = DefaultTargetProps> extends Reac
             buttonProps.disabled = disabled;
             buttonProps.type = type;
         } else {
+            buttonLikeProps.onClick = this.handleClick;
+
             if (!disabled) {
-                buttonLikeProps.onClick = chain(rest.onClick, this.handleClick);
                 buttonLikeProps.onKeyDown = chain(rest.onKeyDown, this.handleKeyDown);
                 buttonLikeProps.onKeyUp = chain(rest.onKeyUp, this.handleKeyUp);
             }

@@ -23,6 +23,20 @@ describe('<ButtonBase/>', () => {
         expect(document.getElementById('test')).toHaveProperty('tagName', 'DIV');
     });
 
+    it('should call onClick callback', () => {
+        const onClick = jest.fn();
+        const wrapper = app.mount(<ButtonBase id="test" onClick={onClick} />);
+        wrapper.simulate('click');
+        expect(onClick).toBeCalled();
+    });
+
+    it('should not call onClick when disabled', () => {
+        const onClick = jest.fn();
+        const wrapper = app.mount(<ButtonBase id="test" onClick={onClick} disabled />);
+        wrapper.simulate('click');
+        expect(onClick).not.toBeCalled();
+    });
+
     describe('when as="button" and disabled passed', () => {
         beforeEach(() => app.mount(<ButtonBase id="test" as="button" disabled />));
 
