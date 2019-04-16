@@ -64,14 +64,14 @@
     padding-right: calc(var(--gs-spacing-unit) * 2);
 }
 
+.tiny.withText {
+    padding-left: var(--gs-spacing-unit);
+    padding-right: var(--gs-spacing-unit);
+}
+
 .withIcon {
     padding-left: calc(var(--gs-spacing-unit) / 2);
     padding-right: calc(var(--gs-spacing-unit) / 2);
-}
-
-.withIconAndText {
-    padding-left: var(--gs-spacing-unit);
-    padding-right: calc(var(--gs-spacing-unit) * 2);
 }
 
 .tiny.withIcon {
@@ -79,16 +79,44 @@
     padding-right: 0;
 }
 
+.withIconAndText {
+    padding-left: var(--gs-spacing-unit);
+    padding-right: calc(var(--gs-spacing-unit) * 2);
+}
+
+.tiny.withIconAndText {
+    padding-left: 0;
+    padding-right: var(--gs-spacing-unit);
+}
+
 .icon {
     margin: 0 2px;
     flex-grow: 0;
     flex-shrink: 0;
     display: inline-flex;
+    position: relative; /* IE11 inner padding fix */
 }
 
 .content {
     flex-grow: 1;
     flex-shrink: 1;
+    position: relative; /* IE11 inner padding fix */
+}
+
+/**
+ * In IE 11 `:active` selector does not work
+ * for elements that have nested elements.
+ */
+@media all and (-ms-high-contrast: none) {
+    *::-ms-backdrop,
+    .icon {
+        pointer-events: none;
+    }
+
+    *::-ms-backdrop,
+    .content {
+        pointer-events: none;
+    }
 }
 
 .ellipsis {

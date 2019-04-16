@@ -50,6 +50,7 @@ export const Button = (props: Props) => {
                     disabled,
                     classes,
                     children,
+                    tabIndex = 0,
                     iconProps = {},
                     contentProps = {},
                     ...rest
@@ -77,6 +78,7 @@ export const Button = (props: Props) => {
                         type="button"
                         {...rest}
                         as="button"
+                        tabIndex={disabled ? -1 : tabIndex}
                         disabled={disabled}
                         className={classNames(rest.className, classes.root, context.className, {
                             [classes.defaultSize]: !tiny,

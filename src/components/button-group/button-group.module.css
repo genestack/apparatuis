@@ -5,6 +5,11 @@
  * The copyright notice above does not evidence any
  * actual or intended publication of such source code.
  */
+.root {
+    display: flex;
+    align-items: center;
+}
+
 .button:focus {
     z-index: 1;
 }
@@ -13,27 +18,27 @@
     z-index: 2;
 }
 
-.button:first-child,
-.button.button:first-child:after {
+.button:first-of-type,
+.button.button:first-of-type:after {
     border-top-right-radius: 0;
     border-bottom-right-radius: 0;
 }
 
-.button:last-child,
-.button.button:last-child:after {
+.button:last-of-type,
+.button.button:last-of-type:after {
     border-top-left-radius: 0;
     border-bottom-left-radius: 0;
 }
 
-.button:not(:last-child) {
+.button:not(:last-of-type) {
     margin-right: 1px;
 }
 
-.outlined:not(:last-child) {
+.outlined:not(:last-of-type) {
     margin-right: -1px;
 }
 
-.button:not(:first-child):not(:last-child),
-.button:not(:first-child):not(:last-child):after {
+.button:not(:first-of-type):not(:last-of-type),
+.button:not(:first-of-type):not(:last-of-type):after {
     border-radius: 0;
 }

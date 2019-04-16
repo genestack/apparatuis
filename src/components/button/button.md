@@ -66,6 +66,8 @@ const ButtonSamples = (props) => (
 const {PlayIcon} = require('../../icons/play-icon');
 const {ShareIcon} = require('../../icons/share-icon');
 
+const ieFixStyle = {display: 'flex'};
+
 <PageContent as={Paper} style={{width: 500}}>
     <Controls>
         <ControlsItem>
@@ -79,7 +81,7 @@ const {ShareIcon} = require('../../icons/share-icon');
                 Tiny
             </Button>
         </ControlsItem>
-        <ControlsItem shrink>
+        <ControlsItem shrink style={ieFixStyle}>
             <Button icon={<ShareIcon />}>Button with long text</Button>
         </ControlsItem>
         <ControlsItem shrink>

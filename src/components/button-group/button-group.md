@@ -47,15 +47,25 @@ initialState = {
 
 <PageContent as={Paper}>
     <ButtonGroup>
-        <Button active={state.value === 'First'} onClick={() => setState({value: 'First'})}>
-            First
-        </Button>
-        <Button active={state.value === 'Second'} onClick={() => setState({value: 'Second'})}>
-            Second
-        </Button>
-        <Button active={state.value === 'Third'} onClick={() => setState({value: 'Third'})}>
-            Third
-        </Button>
+        <TooltipHandler tooltip={<Tooltip>First</Tooltip>}>
+            <Button active={state.value === 'First'} onClick={() => setState({value: 'First'})}>
+                First
+            </Button>
+        </TooltipHandler>
+        <TooltipHandler tooltip={<Tooltip>Second</Tooltip>}>
+            <Button
+                disabled
+                active={state.value === 'Second'}
+                onClick={() => setState({value: 'Second'})}
+            >
+                Second
+            </Button>
+        </TooltipHandler>
+        <TooltipHandler tooltip={<Tooltip>Third</Tooltip>}>
+            <Button active={state.value === 'Third'} onClick={() => setState({value: 'Third'})}>
+                Third
+            </Button>
+        </TooltipHandler>
     </ButtonGroup>
 </PageContent>;
 ```
