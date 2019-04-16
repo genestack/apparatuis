@@ -5,6 +5,17 @@
  * The copyright notice above does not evidence any
  * actual or intended publication of such source code.
  */
-export const root: string;
-export const button: string;
-export const outlined: string;
+.root {
+    composes: item from "./controls.module.css";
+    flex-shrink: 0;
+    flex-grow: 0;
+    min-width: 0;
+}
+
+.shrink {
+    flex-shrink: 1;
+}
+
+.grow {
+    flex-grow: 1;
+}

@@ -8,7 +8,7 @@
 import classNames from 'classnames';
 import * as React from 'react';
 
-import * as styles from './controls.module.css';
+import * as styles from './controls-item.module.css';
 
 type TargetProps = React.HTMLAttributes<HTMLElement>;
 
@@ -29,7 +29,7 @@ export const ControlsItem = (props: Props) => {
     return (
         <Component
             {...rest}
-            className={classNames(rest.className, styles.item, {
+            className={classNames(rest.className, styles.root, {
                 [styles.shrink]: shrink,
                 [styles.grow]: grow
             })}

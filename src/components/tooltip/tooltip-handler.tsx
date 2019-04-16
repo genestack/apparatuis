@@ -79,8 +79,6 @@ export class TooltipHandler extends React.Component<Props, State> {
     }, OPEN_DEBOUNCE_DURATION);
 
     private handleWindowMouseMove = (event: MouseEvent) => {
-        window.removeEventListener('mousemove', this.handleWindowMouseMove);
-
         if (
             this.childRef.current &&
             event.target instanceof Node &&
