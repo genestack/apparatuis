@@ -127,7 +127,9 @@ handleFormSubmit = (event) => {
                         </Button>
                     </ControlsItem>
                     <ControlsItem>
-                        <Button>Sign in as another user</Button>
+                        <TooltipHandler tooltip={<Tooltip>We will miss you</Tooltip>}>
+                            <Button>Sign in as another user</Button>
+                        </TooltipHandler>
                     </ControlsItem>
                 </Controls>
             </DialogFooter>

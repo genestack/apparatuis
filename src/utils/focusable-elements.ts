@@ -76,7 +76,7 @@ export function getLastReachableElement(container: Element) {
 /** Returns sibling element according to direction */
 export function getSiblingElement(
     elements: Element[],
-    element: HTMLElement,
+    element: Element,
     direction: 'prev' | 'next'
 ) {
     if (!element.parentElement || !elements.length) {

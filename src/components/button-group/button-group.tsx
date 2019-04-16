@@ -8,33 +8,33 @@
 import classNames from 'classnames';
 import * as React from 'react';
 
+import {WithClasses, mergeClassesProps} from '../../utils/styles';
 import {ButtonProps} from '../button';
 import {ButtonContextValue, ButtonContext} from '../button/button-context';
-import {FlexItem} from '../flex';
 
 import * as styles from './button-group.module.css';
 
 type TargetProps = React.HTMLAttributes<HTMLDivElement>;
 
 /** ButtonGroup public properties */
-export interface Props extends TargetProps {
+export interface Props extends TargetProps, WithClasses<keyof typeof styles> {
     variant?: ButtonProps['variant'];
 }
 
 /** Joined group of buttons */
 export const ButtonGroup = (props: Props) => {
-    const {variant, ...rest} = props;
+    const {variant, classes, ...rest} = mergeClassesProps(props, styles);
 
     const contextValue: ButtonContextValue = {
         variant,
-        className: classNames(styles.button, {
-            [styles.outlined]: variant === 'outlined'
+        className: classNames(classes.button, {
+            [classes.outlined]: variant === 'outlined'
         })
     };
 
     return (
         <ButtonContext.Provider value={contextValue}>
-            <FlexItem {...rest} container gap={0} />
+            <div {...rest} className={classNames(rest.className, classes.root)} />
         </ButtonContext.Provider>
     );
 };

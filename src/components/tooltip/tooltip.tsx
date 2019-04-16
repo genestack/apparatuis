@@ -90,12 +90,7 @@ export class Tooltip extends React.Component<Props> {
         } = mergeClassesProps(this.props, styles);
 
         return (
-            <TransitionPopper<TargetElementProps>
-                portalContainer={document.body}
-                {...rest}
-                ref={popperRef}
-                placement={placement}
-            >
+            <TransitionPopper<TargetElementProps> {...rest} ref={popperRef} placement={placement}>
                 {({
                     ref,
                     style,

@@ -32,19 +32,19 @@
     align-items: baseline;
 }
 
-.gap1:not(:last-child) {
+.gap1:not(:last-of-type) {
     margin-right: calc(var(--gs-spacing-unit) * 0.5);
 }
 
-.gap2:not(:last-child) {
+.gap2:not(:last-of-type) {
     margin-right: calc(var(--gs-spacing-unit) * 1);
 }
 
-.gap3:not(:last-child) {
+.gap3:not(:last-of-type) {
     margin-right: calc(var(--gs-spacing-unit) * 1.5);
 }
 
-.gap4:not(:last-child) {
+.gap4:not(:last-of-type) {
     margin-right: calc(var(--gs-spacing-unit) * 2);
 }
 
