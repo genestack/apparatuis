@@ -9,5 +9,6 @@
 
 .root {
     composes: iconCell from "./header-item.module.css";
+    composes: iconCell from "./header-button.module.css";
     composes: secondaryActionsCell from "./header-button.module.css";
 }
