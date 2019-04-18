@@ -115,7 +115,7 @@ export class Overlay extends React.Component<Props, State> {
     private handleBackdropClick: BackdropProps['onClick'] = (event) => {
         const {onClose, disableClickHandler} = this.props;
 
-        if (disableClickHandler || event.defaultPrevented) {
+        if (disableClickHandler) {
             return;
         }
 
@@ -132,7 +132,7 @@ export class Overlay extends React.Component<Props, State> {
     private handleKeyDown: TargetProps['onKeyDown'] = (event) => {
         const {disableEscHandler, onClose} = this.props;
 
-        if (disableEscHandler || event.defaultPrevented || !manager.isTopOverlay(this)) {
+        if (disableEscHandler || !manager.isTopOverlay(this)) {
             return;
         }
 

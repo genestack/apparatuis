@@ -67,7 +67,7 @@ export class Tooltip extends React.Component<Props> {
     }
 
     private handleWindowKeyDown = (event: KeyboardEvent) => {
-        if (event.defaultPrevented || this.props.disableEscHandler) {
+        if (this.props.disableEscHandler) {
             return;
         }
 

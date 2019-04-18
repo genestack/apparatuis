@@ -38,10 +38,6 @@ export interface Props extends TargetProps, WithClasses<keyof typeof styles> {
  */
 export class HeaderButton extends React.Component<Props> {
     private handleKeyDown: Props['onKeyDown'] = (event) => {
-        if (event.defaultPrevented) {
-            return;
-        }
-
         const item = event.currentTarget;
 
         if (event.key === 'ArrowRight' || event.key === 'ArrowLeft') {

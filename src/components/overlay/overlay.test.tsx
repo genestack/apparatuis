@@ -76,15 +76,6 @@ describe('<Overlay />', () => {
 
             expect(onClose).not.toBeCalled();
         });
-
-        it('should not call onClose callback when event is prevented', () => {
-            const {onClose, event} = setup();
-
-            event.preventDefault();
-            dispatchEvent(event);
-
-            expect(onClose).not.toBeCalled();
-        });
     });
 
     describe('on Backdrop click', () => {
@@ -117,15 +108,6 @@ describe('<Overlay />', () => {
         it('should not call onClose callback when disableClickHandler passed', () => {
             const {onClose, event} = setup({disableClickHandler: true});
 
-            dispatchEvent(event);
-
-            expect(onClose).not.toBeCalled();
-        });
-
-        it('should not call onClose callback when event is prevented', () => {
-            const {onClose, event} = setup();
-
-            event.preventDefault();
             dispatchEvent(event);
 
             expect(onClose).not.toBeCalled();

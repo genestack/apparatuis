@@ -25,7 +25,7 @@
 
 /**
  *  When header button includes secondary actions element
- * and user hover on it the button should remove its hover state.
+ * and user hover on it, the button should remove its hover state.
  * It is possible to create "fake" element that is used as background
  * and hide it by general sibling CSS combinator "~".
  * @see `.secondaryActionsCell` selector
