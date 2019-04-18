@@ -67,9 +67,9 @@ describe('<Overlay />', () => {
             expect(onClose).toBeCalledWith('escape_keydown', expect.anything());
         });
 
-        it('should not call onClose callback when disableEscHandler passed', () => {
+        it('should not call onClose callback when disableEscListener passed', () => {
             const {onClose, event} = setup({
-                disableEscHandler: true
+                disableEscListener: true
             });
 
             dispatchEvent(event);
@@ -105,8 +105,8 @@ describe('<Overlay />', () => {
             expect(onClose).toBeCalledWith('backdrop_click', expect.anything());
         });
 
-        it('should not call onClose callback when disableClickHandler passed', () => {
-            const {onClose, event} = setup({disableClickHandler: true});
+        it('should not call onClose callback when disableClickListener passed', () => {
+            const {onClose, event} = setup({disableClickListener: true});
 
             dispatchEvent(event);
 

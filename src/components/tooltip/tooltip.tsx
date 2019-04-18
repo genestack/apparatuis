@@ -47,7 +47,7 @@ export interface Props extends TargetProps, WithClasses<keyof typeof styles> {
      */
     onClosed?: () => void;
     /** Do not listen `Escape` keypress for closing */
-    disableEscHandler?: boolean;
+    disableEscListener?: boolean;
     /** Reference to react-popper instance */
     popperRef?: React.Ref<TransitionPopper<TargetElementProps>>;
     children?: React.ReactNode;
@@ -67,7 +67,7 @@ export class Tooltip extends React.Component<Props> {
     }
 
     private handleWindowKeyDown = (event: KeyboardEvent) => {
-        if (this.props.disableEscHandler) {
+        if (this.props.disableEscListener) {
             return;
         }
 
@@ -85,7 +85,7 @@ export class Tooltip extends React.Component<Props> {
             noGaps,
             onClose,
             onClosed,
-            disableEscHandler,
+            disableEscListener,
             ...rest
         } = mergeClassesProps(this.props, styles);
 
