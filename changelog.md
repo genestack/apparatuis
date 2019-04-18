@@ -16,7 +16,7 @@ All notable changes to this project will be documented in this file.
 
 -   no fixes
 
-## [8.0.0-alpha.2] - 2018-04-18
+## [8.0.0-alpha.2] - 2019-04-18
 
 ### Components Added
 
