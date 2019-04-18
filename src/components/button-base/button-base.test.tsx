@@ -70,6 +70,14 @@ describe('<ButtonBase/>', () => {
             expect(onClick).toHaveBeenCalledTimes(0);
         });
 
+        it('should not call onClick on "Space" key press when listeners are disabled', () => {
+            const onClick = jest.fn();
+            const wrapper = app.mount(<ButtonBase id="test" onClick={onClick} disableListeners />);
+            wrapper.simulate('keydown', {key: ' '});
+            wrapper.simulate('keyup', {key: ' '});
+            expect(onClick).not.toBeCalled();
+        });
+
         it('should not call onClick on "Space" key press when it is native button', () => {
             const onClick = jest.fn();
             const wrapper = app.mount(<ButtonBase id="test" as="button" onClick={onClick} />);

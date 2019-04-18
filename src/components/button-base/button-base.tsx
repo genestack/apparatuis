@@ -24,8 +24,13 @@ interface TargetProps {
 type DefaultTargetProps = React.HTMLAttributes<HTMLElement>;
 
 interface ButtonBaseProps {
+    /** It `true` button does not react on clicks */
     disabled?: boolean;
+    /** Class name which is added when user activates button by "Space" key */
     activeClassName?: string;
+    /** Disable all listeners which could make button to be active */
+    disableListeners?: boolean;
+    /** Target React element. "div" by default */
     as?: React.ReactType;
 }
 
@@ -85,6 +90,7 @@ export class ButtonBase<T extends TargetProps = DefaultTargetProps> extends Reac
             as: Component = 'div',
             activeClassName,
             disabled,
+            disableListeners,
             tabIndex = 0,
             type = 'button',
             ...rest
@@ -99,7 +105,7 @@ export class ButtonBase<T extends TargetProps = DefaultTargetProps> extends Reac
         } else {
             buttonLikeProps.onClick = this.handleClick;
 
-            if (!disabled) {
+            if (!disabled && !disableListeners) {
                 buttonLikeProps.onKeyDown = chain(rest.onKeyDown, this.handleKeyDown);
                 buttonLikeProps.onKeyUp = chain(rest.onKeyUp, this.handleKeyUp);
             }
