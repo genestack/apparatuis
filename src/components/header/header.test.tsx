@@ -14,10 +14,10 @@ import {Typography} from '../typography';
 
 import {Header, Props as HeaderProps} from './header';
 import {HeaderBlock} from './header-block';
-import {HeaderButton} from './header-button';
-import {HeaderButtonSecondaryActions} from './header-button-secondary-actions';
+import {HeaderItem} from './header-item';
 import {HeaderItemCell} from './header-item-cell';
 import {HeaderItemIcon} from './header-item-icon';
+import {HeaderItemSecondaryActions} from './header-item-secondary-actions';
 import {HeaderItemText} from './header-item-text';
 
 const app = createTestApp();
@@ -33,8 +33,8 @@ const setup = (props?: Partial<HeaderProps>) =>
                 <HeaderItemCell />
                 <HeaderItemText />
             </HeaderBlock>
-            <HeaderButton id="button" />
-            <HeaderButton id="button-2" as="button" />
+            <HeaderItem id="button" />
+            <HeaderItem id="button-2" as="button" />
         </Header>
     );
 
@@ -101,7 +101,7 @@ describe('<HeaderButton />', () => {
     });
 
     it('should render a Typography if children is a string', () => {
-        const wrapper = app.mount(<HeaderButton>string</HeaderButton>);
+        const wrapper = app.mount(<HeaderItem>string</HeaderItem>);
         expect(wrapper.find(Typography)).toHaveLength(1);
     });
 });
@@ -122,12 +122,12 @@ describe('<HeaderItemSecondaryActions />', () => {
     const clickSetup = () => {
         const onClick = jest.fn();
         const wrapper = app.mount(
-            <HeaderButton onClick={onClick}>
+            <HeaderItem onClick={onClick}>
                 <HeaderItemText id="text">text</HeaderItemText>
-                <HeaderButtonSecondaryActions>
+                <HeaderItemSecondaryActions>
                     <Button id="button" />
-                </HeaderButtonSecondaryActions>
-            </HeaderButton>
+                </HeaderItemSecondaryActions>
+            </HeaderItem>
         );
 
         return {onClick, wrapper};

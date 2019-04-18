@@ -10,8 +10,8 @@ export {HeaderBlock, Props as HeaderBlockProps} from './header-block';
 export {HeaderItemCell, Props as HeaderItemCellProps} from './header-item-cell';
 export {HeaderItemIcon, Props as HeaderItemIconProps} from './header-item-icon';
 export {HeaderItemText, Props as HeaderItemTextProps} from './header-item-text';
-export {HeaderButton, Props as HeaderButtonProps} from './header-button';
+export {HeaderItem, Props as HeaderItemProps} from './header-item';
 export {
-    HeaderButtonSecondaryActions,
-    Props as HeaderButtonSecondaryActionsProps
-} from './header-button-secondary-actions';
+    HeaderItemSecondaryActions,
+    Props as HeaderItemSecondaryActionsProps
+} from './header-item-secondary-actions';

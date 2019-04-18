@@ -15,12 +15,12 @@ import {mergeClassesProps, WithClasses} from '../../utils/styles';
 import {ButtonBase, ButtonBaseProps} from '../button-base';
 
 import {HeaderBlock, Props as HeaderBlockProps} from './header-block';
-import * as styles from './header-button.module.css';
 import {HeaderItemText} from './header-item-text';
+import * as styles from './header-item.module.css';
 
 type TargetProps = Omit<ButtonBaseProps<HeaderBlockProps>, 'activeClassName'>;
 
-/** HeaderButton public properties */
+/** HeaderItem public properties */
 export interface Props extends TargetProps, WithClasses<keyof typeof styles> {
     /** Element has pressed styles if `true` is passed */
     active?: boolean;
@@ -32,11 +32,11 @@ export interface Props extends TargetProps, WithClasses<keyof typeof styles> {
 }
 
 /**
- * `HeaderButton` is interactive element of `Header`.
+ * `HeaderItem` is interactive element of `Header`.
  * By default it is not a native button because it could have nested buttons.
- * For add nested buttons use `HeaderButtonSecondaryActions`.
+ * For add nested buttons use `HeaderItemSecondaryActions`.
  */
-export class HeaderButton extends React.Component<Props> {
+export class HeaderItem extends React.Component<Props> {
     private handleKeyDown: Props['onKeyDown'] = (event) => {
         const item = event.currentTarget;
 

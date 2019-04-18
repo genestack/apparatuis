@@ -24,8 +24,8 @@
 }
 
 /**
- *  When header button includes secondary actions element
- * and user hover on it, the button should remove its hover state.
+ * When header item includes secondary actions element
+ * and user hover on it, the item should remove its hover state.
  * It is possible to create "fake" element that is used as background
  * and hide it by general sibling CSS combinator "~".
  * @see `.secondaryActionsCell` selector
@@ -58,7 +58,7 @@
 }
 
 /**
- * Fake hover element is the last element in header button
+ * Fake hover element is the last element in header item
  * so selectors for cells take it in account.
  */
 .root .cell:nth-last-of-type(2) {

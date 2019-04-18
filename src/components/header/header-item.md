@@ -12,20 +12,20 @@ const WhiteControlsItem = (props) => <ControlsItem style={{background: '#fff'}} 
     <WithSeparator separator={<Divider variant="transparent" />}>
         <Controls>
             <WhiteControlsItem>
-                <HeaderButton>Label</HeaderButton>
+                <HeaderItem>Label</HeaderItem>
             </WhiteControlsItem>
         </Controls>
         <Controls>
             <WhiteControlsItem>
-                <HeaderButton>
+                <HeaderItem>
                     <HeaderItemText>Tasks</HeaderItemText>
                     <HeaderItemText style={{color: '#D45E18'}}>5</HeaderItemText>
-                </HeaderButton>
+                </HeaderItem>
             </WhiteControlsItem>
         </Controls>
         <Controls>
             <WhiteControlsItem>
-                <HeaderButton>
+                <HeaderItem>
                     <HeaderItemText>Label</HeaderItemText>
                     <HeaderItemCell>
                         <Typography style={{color: '#D45E18'}}>5</Typography>
@@ -33,61 +33,61 @@ const WhiteControlsItem = (props) => <ControlsItem style={{background: '#fff'}} 
                     <HeaderItemCell>
                         <Typography style={{color: '#34AF7C'}}>24</Typography>
                     </HeaderItemCell>
-                </HeaderButton>
+                </HeaderItem>
             </WhiteControlsItem>
         </Controls>
         <Controls>
             <WhiteControlsItem>
-                <HeaderButton>
+                <HeaderItem>
                     <HeaderItemText variant="section" style={{color: '#024DA1'}}>
                         Application Title
                     </HeaderItemText>
-                </HeaderButton>
+                </HeaderItem>
             </WhiteControlsItem>
         </Controls>
         <Controls>
             <WhiteControlsItem>
-                <HeaderButton>
+                <HeaderItem>
                     <HeaderItemIcon>
                         <OpenFolderIcon />
                     </HeaderItemIcon>
                     <HeaderItemText>Label</HeaderItemText>
-                </HeaderButton>
+                </HeaderItem>
             </WhiteControlsItem>
             <WhiteControlsItem>
-                <HeaderButton>
+                <HeaderItem>
                     <HeaderItemText>Label</HeaderItemText>
                     <HeaderItemIcon>
                         <OpenFolderIcon />
                     </HeaderItemIcon>
-                </HeaderButton>
+                </HeaderItem>
             </WhiteControlsItem>
         </Controls>
         <Controls>
             <WhiteControlsItem>
-                <HeaderButton>
+                <HeaderItem>
                     <HeaderItemIcon>
                         <FileIcon />
                     </HeaderItemIcon>
                     <HeaderItemText>File link name</HeaderItemText>
-                </HeaderButton>
+                </HeaderItem>
             </WhiteControlsItem>
         </Controls>
         <Controls>
             <WhiteControlsItem>
-                <HeaderButton>
-                    <HeaderButtonSecondaryActions>
+                <HeaderItem>
+                    <HeaderItemSecondaryActions>
                         <Button tiny variant="ghost" icon={<LockIcon />} />
-                    </HeaderButtonSecondaryActions>
+                    </HeaderItemSecondaryActions>
                     <HeaderItemIcon>
                         <FileIcon />
                     </HeaderItemIcon>
                     <HeaderItemText>File link name</HeaderItemText>
-                </HeaderButton>
+                </HeaderItem>
             </WhiteControlsItem>
             <WhiteControlsItem>
-                <HeaderButton>
-                    <HeaderButtonSecondaryActions>
+                <HeaderItem>
+                    <HeaderItemSecondaryActions>
                         <TooltipHandler
                             tooltip={
                                 <Tooltip open style={{whiteSpace: 'nowrap'}}>
@@ -97,78 +97,78 @@ const WhiteControlsItem = (props) => <ControlsItem style={{background: '#fff'}} 
                         >
                             <Button disabled tiny variant="ghost" icon={<LockIcon />} />
                         </TooltipHandler>
-                    </HeaderButtonSecondaryActions>
+                    </HeaderItemSecondaryActions>
                     <HeaderItemIcon>
                         <FileIcon />
                     </HeaderItemIcon>
                     <HeaderItemText>File link name</HeaderItemText>
-                </HeaderButton>
+                </HeaderItem>
             </WhiteControlsItem>
             <WhiteControlsItem>
-                <HeaderButton>
+                <HeaderItem>
                     <HeaderItemIcon>
                         <FileIcon />
                     </HeaderItemIcon>
-                    <HeaderButtonSecondaryActions>
+                    <HeaderItemSecondaryActions>
                         <Button tiny variant="ghost" icon={<LockIcon />} />
-                    </HeaderButtonSecondaryActions>
+                    </HeaderItemSecondaryActions>
                     <HeaderItemText>File link name</HeaderItemText>
-                </HeaderButton>
+                </HeaderItem>
             </WhiteControlsItem>
             <WhiteControlsItem>
-                <HeaderButton>
+                <HeaderItem>
                     <HeaderItemIcon>
                         <FileIcon />
                     </HeaderItemIcon>
                     <HeaderItemText>File link name</HeaderItemText>
-                    <HeaderButtonSecondaryActions>
+                    <HeaderItemSecondaryActions>
                         <Button tiny variant="ghost" icon={<MoreIcon />} />
-                    </HeaderButtonSecondaryActions>
-                </HeaderButton>
+                    </HeaderItemSecondaryActions>
+                </HeaderItem>
             </WhiteControlsItem>
         </Controls>
         <Controls>
             <WhiteControlsItem>
-                <HeaderButton>
-                    <HeaderButtonSecondaryActions>
+                <HeaderItem>
+                    <HeaderItemSecondaryActions>
                         <Button tiny variant="ghost" icon={<ShareIcon />} />
                         <Button tiny variant="ghost" icon={<LockIcon />} />
-                    </HeaderButtonSecondaryActions>
+                    </HeaderItemSecondaryActions>
                     <HeaderItemIcon>
                         <FileIcon />
                     </HeaderItemIcon>
                     <HeaderItemText>File link name</HeaderItemText>
-                </HeaderButton>
+                </HeaderItem>
             </WhiteControlsItem>
             <WhiteControlsItem>
                 <TooltipHandler tooltip={<Tooltip>Did not expect to see me here?</Tooltip>}>
-                    <HeaderButton disabled>
-                        <HeaderButtonSecondaryActions>
+                    <HeaderItem disabled>
+                        <HeaderItemSecondaryActions>
                             <Button disabled tiny variant="ghost" icon={<ShareIcon />} />
                             <Button disabled tiny variant="ghost" icon={<LockIcon />} />
-                        </HeaderButtonSecondaryActions>
+                        </HeaderItemSecondaryActions>
                         <HeaderItemIcon>
                             <FileIcon />
                         </HeaderItemIcon>
                         <HeaderItemText>File link name</HeaderItemText>
-                    </HeaderButton>
+                    </HeaderItem>
                 </TooltipHandler>
             </WhiteControlsItem>
         </Controls>
         <Controls>
             <WhiteControlsItem>
-                <HeaderButton>
+                <HeaderItem>
                     <HeaderItemIcon>
                         <MenuIcon />
                     </HeaderItemIcon>
-                </HeaderButton>
+                </HeaderItem>
             </WhiteControlsItem>
             <WhiteControlsItem>
-                <HeaderButton>
+                <HeaderItem>
                     <HeaderItemIcon>
                         <OpenFolderIcon />
                     </HeaderItemIcon>
-                </HeaderButton>
+                </HeaderItem>
             </WhiteControlsItem>
         </Controls>
         <Controls>

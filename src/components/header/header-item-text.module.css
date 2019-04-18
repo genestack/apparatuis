@@ -9,7 +9,7 @@
 
 .root {
     composes: cell from "./header-block.module.css";
-    composes: cell from "./header-button.module.css";
+    composes: cell from "./header-item.module.css";
     display: block;
     flex-grow: 1;
     flex-shrink: 1;

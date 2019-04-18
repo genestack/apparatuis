@@ -43,51 +43,51 @@ const exportMenu = (
 
 <Paper>
     <Header disablePositionFixed={state.disablePositionFixed}>
-        <HeaderButton>
+        <HeaderItem>
             <HeaderItemIcon>
                 <MenuIcon />
             </HeaderItemIcon>
-        </HeaderButton>
+        </HeaderItem>
         <MenuHandler menu={applicationMenu}>
             {({open}) => (
-                <HeaderButton active={open}>
+                <HeaderItem active={open}>
                     <HeaderItemText variant="section" style={{color: '#024DA1'}}>
                         Import Template Editor
                     </HeaderItemText>
-                </HeaderButton>
+                </HeaderItem>
             )}
         </MenuHandler>
-        <HeaderButton>
+        <HeaderItem>
             <HeaderItemIcon>
                 <OpenFolderIcon />
             </HeaderItemIcon>
             <HeaderItemText>Open</HeaderItemText>
-        </HeaderButton>
+        </HeaderItem>
         <MenuHandler menu={exportMenu}>
-            {({open}) => <HeaderButton active={open}>Export</HeaderButton>}
+            {({open}) => <HeaderItem active={open}>Export</HeaderItem>}
         </MenuHandler>
-        <HeaderButton shrink grow>
-            <HeaderButtonSecondaryActions>
+        <HeaderItem shrink grow>
+            <HeaderItemSecondaryActions>
                 <Button tiny variant="ghost" icon={<ShareIcon />} />
-            </HeaderButtonSecondaryActions>
+            </HeaderItemSecondaryActions>
             <HeaderItemText variant="section">
                 iPSC derived Pancreatic Beta Cell Def-PANC
             </HeaderItemText>
-        </HeaderButton>
+        </HeaderItem>
         <HeaderBlock>
             <HeaderItemCell>
                 <Button tiny>Trial version</Button>
             </HeaderItemCell>
         </HeaderBlock>
-        <HeaderButton>
+        <HeaderItem>
             <HeaderItemText>Tasks</HeaderItemText>
             <HeaderItemText style={{color: '#D45E18'}}>5</HeaderItemText>
-        </HeaderButton>
+        </HeaderItem>
         <MenuHandler menu={userMenu}>
             {({open}) => (
-                <HeaderButton active={open} title="user.name@genestack.com" style={{maxWidth: 200}}>
+                <HeaderItem active={open} title="user.name@genestack.com" style={{maxWidth: 200}}>
                     user.name.user@genestack.com
-                </HeaderButton>
+                </HeaderItem>
             )}
         </MenuHandler>
     </Header>

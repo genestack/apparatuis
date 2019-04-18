@@ -9,7 +9,7 @@
 
 .root {
     composes: iconCell from "./header-block.module.css";
-    composes: iconCell from "./header-button.module.css";
+    composes: iconCell from "./header-item.module.css";
     justify-content: space-around;
     flex-grow: 0;
     flex-shrink: 0;

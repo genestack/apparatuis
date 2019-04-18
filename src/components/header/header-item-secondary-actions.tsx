@@ -10,16 +10,16 @@ import * as React from 'react';
 
 import {chain} from '../../utils/chain';
 
-import * as styles from './header-button-secondary-actions.module.css';
+import * as styles from './header-item-secondary-actions.module.css';
 
-/** HeaderButtonSecondaryActions public properties */
+/** HeaderItemSecondaryActions public properties */
 export type Props = React.HTMLAttributes<HTMLElement>;
 
 /**
- * Header button could include other buttons.
- * Wrap this buttons with HeaderButtonSecondaryActions to avoid click conflicts.
+ * Header item could include other buttons.
+ * Wrap this buttons with HeaderItemSecondaryActions to avoid click conflicts.
  */
-export class HeaderButtonSecondaryActions extends React.Component<Props> {
+export class HeaderItemSecondaryActions extends React.Component<Props> {
     private handleClick: Props['onClick'] = (event) => {
         event.stopPropagation();
     };
