@@ -8,12 +8,12 @@
 import classNames from 'classnames';
 import * as React from 'react';
 
+import * as styles from './header-block.module.css';
 import {HeaderItemText} from './header-item-text';
-import * as styles from './header-item.module.css';
 
 type TargetProps = React.HTMLAttributes<HTMLElement>;
 
-/** HeaderItem public properties */
+/** HeaderBlock public properties */
 export interface Props extends TargetProps {
     /** If `true` flex item will grow */
     grow?: boolean;
@@ -27,10 +27,10 @@ export interface Props extends TargetProps {
 }
 
 /**
- * Use HeaderItem if you want to show some non-interactive information
+ * Use HeaderBlock if you want to show some non-interactive information
  * in the Header.
  */
-export const HeaderItem = (props: Props) => {
+export const HeaderBlock = (props: Props) => {
     const {as: Component = 'div', grow, shrink, ...rest} = props;
 
     const children =

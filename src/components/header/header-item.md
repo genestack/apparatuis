@@ -173,20 +173,20 @@ const WhiteControlsItem = (props) => <ControlsItem style={{background: '#fff'}} 
         </Controls>
         <Controls>
             <WhiteControlsItem>
-                <HeaderItem>
+                <HeaderBlock>
                     <HeaderItemCell>
                         <Button tiny>Trial version</Button>
                     </HeaderItemCell>
-                </HeaderItem>
+                </HeaderBlock>
             </WhiteControlsItem>
             <WhiteControlsItem>
-                <HeaderItem>
+                <HeaderBlock>
                     <HeaderItemCell>
                         <Button tiny icon={<ShareIcon />}>
                             Trial version
                         </Button>
                     </HeaderItemCell>
-                </HeaderItem>
+                </HeaderBlock>
             </WhiteControlsItem>
         </Controls>
     </WithSeparator>

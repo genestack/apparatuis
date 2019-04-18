@@ -6,7 +6,7 @@
  * actual or intended publication of such source code.
  */
 export {Header, Props as HeaderProps} from './header';
-export {HeaderItem, Props as HeaderItemProps} from './header-item';
+export {HeaderBlock, Props as HeaderBlockProps} from './header-block';
 export {HeaderItemCell, Props as HeaderItemCellProps} from './header-item-cell';
 export {HeaderItemIcon, Props as HeaderItemIconProps} from './header-item-icon';
 export {HeaderItemText, Props as HeaderItemTextProps} from './header-item-text';

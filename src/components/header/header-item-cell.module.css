@@ -8,7 +8,7 @@
 @import "../../variables.css";
 
 .root {
-    composes: cell from "./header-item.module.css";
+    composes: cell from "./header-block.module.css";
     composes: cell from "./header-button.module.css";
     display: inline-flex;
     align-items: center;

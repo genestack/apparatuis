@@ -14,11 +14,11 @@ import {Omit} from '../../utils/omit';
 import {mergeClassesProps, WithClasses} from '../../utils/styles';
 import {ButtonBase, ButtonBaseProps} from '../button-base';
 
+import {HeaderBlock, Props as HeaderBlockProps} from './header-block';
 import * as styles from './header-button.module.css';
-import {HeaderItem, Props as HeaderItemProps} from './header-item';
 import {HeaderItemText} from './header-item-text';
 
-type TargetProps = Omit<ButtonBaseProps<HeaderItemProps>, 'activeClassName'>;
+type TargetProps = Omit<ButtonBaseProps<HeaderBlockProps>, 'activeClassName'>;
 
 /** HeaderButton public properties */
 export interface Props extends TargetProps, WithClasses<keyof typeof styles> {
@@ -82,7 +82,7 @@ export class HeaderButton extends React.Component<Props> {
         );
 
         return (
-            <HeaderItem
+            <HeaderBlock
                 {...rest}
                 as={ButtonBase}
                 {...buttonBaseProps}
@@ -94,7 +94,7 @@ export class HeaderButton extends React.Component<Props> {
             >
                 {children}
                 {fakeHoverElement}
-            </HeaderItem>
+            </HeaderBlock>
         );
     }
 }

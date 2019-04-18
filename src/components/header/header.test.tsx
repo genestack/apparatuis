@@ -13,9 +13,9 @@ import {Button} from '../button';
 import {Typography} from '../typography';
 
 import {Header, Props as HeaderProps} from './header';
+import {HeaderBlock} from './header-block';
 import {HeaderButton} from './header-button';
 import {HeaderButtonSecondaryActions} from './header-button-secondary-actions';
-import {HeaderItem} from './header-item';
 import {HeaderItemCell} from './header-item-cell';
 import {HeaderItemIcon} from './header-item-icon';
 import {HeaderItemText} from './header-item-text';
@@ -28,11 +28,11 @@ afterEach(app.afterEach);
 const setup = (props?: Partial<HeaderProps>) =>
     app.mount(
         <Header {...props}>
-            <HeaderItem>
+            <HeaderBlock>
                 <HeaderItemIcon />
                 <HeaderItemCell />
                 <HeaderItemText />
-            </HeaderItem>
+            </HeaderBlock>
             <HeaderButton id="button" />
             <HeaderButton id="button-2" as="button" />
         </Header>
@@ -108,12 +108,12 @@ describe('<HeaderButton />', () => {
 
 describe('<HeaderItem />', () => {
     it('should render a Typography if children is a string', () => {
-        const wrapper = app.mount(<HeaderItem>string</HeaderItem>);
+        const wrapper = app.mount(<HeaderBlock>string</HeaderBlock>);
         expect(wrapper.find(Typography)).toHaveLength(1);
     });
 
     it('should render an additional element if children is string', () => {
-        const wrapper = app.mount(<HeaderItem>string</HeaderItem>);
+        const wrapper = app.mount(<HeaderBlock>string</HeaderBlock>);
         expect(wrapper.find('div')).toHaveLength(2);
     });
 });

@@ -74,11 +74,11 @@ const exportMenu = (
                 iPSC derived Pancreatic Beta Cell Def-PANC
             </HeaderItemText>
         </HeaderButton>
-        <HeaderItem>
+        <HeaderBlock>
             <HeaderItemCell>
                 <Button tiny>Trial version</Button>
             </HeaderItemCell>
-        </HeaderItem>
+        </HeaderBlock>
         <HeaderButton>
             <HeaderItemText>Tasks</HeaderItemText>
             <HeaderItemText style={{color: '#D45E18'}}>5</HeaderItemText>
