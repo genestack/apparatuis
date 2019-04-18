@@ -1,20 +1,10 @@
 # Changelog
 
-All notable changes to this project will be documented in this file.
-
 ## [Unreleased]
 
-### Changed
+### Components Added
 
--   no changes
-
-### Added
-
--   no addings
-
-### Fixed
-
--   no fixes
+-   Header, HeaderItem, HeaderItemCell, HeaderItemIcon, HeaderItemText, HeaderItemSecondaryActions
 
 ## [8.0.0-alpha.1] - 2019-04-18
 
