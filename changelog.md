@@ -2,9 +2,15 @@
 
 ## [Unreleased]
 
+## [8.0.0-alpha.2] - 2019-04-19
+
 ### Components Added
 
 -   Header, HeaderItem, HeaderItemCell, HeaderItemIcon, HeaderItemText, HeaderItemSecondaryActions
+
+### Updated
+
+-   Peer `genestack-frontend-builder` to `>= 0.9.0`
 
 ## [8.0.0-alpha.1] - 2019-04-18
 
