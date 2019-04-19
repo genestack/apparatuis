@@ -5,9 +5,10 @@
  * The copyright notice above does not evidence any
  * actual or intended publication of such source code.
  */
-export const root: string;
-export const focused: string;
-export const hovered: string;
-export const active: string;
-export const disabled: string;
-export const content: string;
+@import "../../variables.css";
+
+.root {
+    composes: iconCell from "./header-block.module.css";
+    composes: iconCell from "./header-item.module.css";
+    composes: secondaryActionsCell from "./header-item.module.css";
+}

@@ -10,7 +10,7 @@ import * as React from 'react';
 import {createTestApp} from '../../../test-utils/create-test-app';
 
 import {Menu} from './menu';
-import {MenuHandler} from './menu-handler';
+import {MenuHandler, Props as MenuHandlerProps} from './menu-handler';
 import {MenuItem} from './menu-item';
 import {SubMenu} from './sub-menu';
 
@@ -21,7 +21,7 @@ beforeEach(app.beforeEach);
 afterEach(app.afterEach);
 
 describe('<MenuHandler />', () => {
-    const setup = () => {
+    const setup = (props?: Partial<MenuHandlerProps>) => {
         const subMenu = () => <SubMenu />;
 
         return app.mount(
@@ -32,6 +32,7 @@ describe('<MenuHandler />', () => {
                         <MenuItem id="with-sub-menu" subMenu={subMenu} />
                     </Menu>
                 }
+                {...props}
             >
                 <button id="button" />
             </MenuHandler>
@@ -47,6 +48,12 @@ describe('<MenuHandler />', () => {
         const wrapper = setup();
         wrapper.find('#button').simulate('click');
         expect(document.getElementById('menu')).toBeTruthy();
+    });
+
+    it('should open menu on child click', () => {
+        const wrapper = setup({disableListeners: true});
+        wrapper.find('#button').simulate('click');
+        expect(document.getElementById('menu')).toBeFalsy();
     });
 
     it('should close menu on menu item without sub menu', () => {
@@ -76,5 +83,11 @@ describe('<MenuHandler />', () => {
         const wrapper = setup();
         wrapper.find('#button').simulate('keydown', {key: 'ArrowDown'});
         expect(document.getElementById('menu')).toBeTruthy();
+    });
+
+    it('should not open menu on ArrowDown keypress if `disabledListeners` is passed', () => {
+        const wrapper = setup({disableListeners: true});
+        wrapper.find('#button').simulate('keydown', {key: 'ArrowDown'});
+        expect(document.getElementById('menu')).toBeFalsy();
     });
 });

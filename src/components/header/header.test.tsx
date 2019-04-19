@@ -9,12 +9,15 @@
 import * as React from 'react';
 
 import {createTestApp} from '../../../test-utils/create-test-app';
+import {Button} from '../button';
 import {Typography} from '../typography';
 
 import {Header, Props as HeaderProps} from './header';
-import {HeaderButton} from './header-button';
+import {HeaderBlock} from './header-block';
 import {HeaderItem} from './header-item';
 import {HeaderItemCell} from './header-item-cell';
+import {HeaderItemIcon} from './header-item-icon';
+import {HeaderItemSecondaryActions} from './header-item-secondary-actions';
 import {HeaderItemText} from './header-item-text';
 
 const app = createTestApp();
@@ -25,12 +28,13 @@ afterEach(app.afterEach);
 const setup = (props?: Partial<HeaderProps>) =>
     app.mount(
         <Header {...props}>
-            <HeaderItem>
+            <HeaderBlock>
+                <HeaderItemIcon />
                 <HeaderItemCell />
                 <HeaderItemText />
-            </HeaderItem>
-            <HeaderButton id="button" />
-            <HeaderButton id="button-2" />
+            </HeaderBlock>
+            <HeaderItem id="button" />
+            <HeaderItem id="button-2" as="button" />
         </Header>
     );
 
@@ -47,9 +51,9 @@ describe('<Header />', () => {
 });
 
 describe('<HeaderButton />', () => {
-    it('should render a button', () => {
+    it('should render a div by default', () => {
         setup();
-        expect(document.getElementById('button')!.tagName).toBe('BUTTON');
+        expect(document.getElementById('button')!.tagName).toBe('DIV');
     });
 
     it('should focus to the next button on ArrowRight keydown', () => {
@@ -95,16 +99,57 @@ describe('<HeaderButton />', () => {
             .simulate('keydown', {key: 'ArrowLeft'});
         expect(document.getElementById('button')).toBe(document.activeElement);
     });
+
+    it('should render a Typography if children is a string', () => {
+        const wrapper = app.mount(<HeaderItem>string</HeaderItem>);
+        expect(wrapper.find(Typography)).toHaveLength(1);
+    });
 });
 
 describe('<HeaderItem />', () => {
-    it('should render a Typography', () => {
-        const wrapper = app.mount(<HeaderItem />);
+    it('should render a Typography if children is a string', () => {
+        const wrapper = app.mount(<HeaderBlock>string</HeaderBlock>);
         expect(wrapper.find(Typography)).toHaveLength(1);
     });
 
     it('should render an additional element if children is string', () => {
-        const wrapper = app.mount(<HeaderItem>string</HeaderItem>);
+        const wrapper = app.mount(<HeaderBlock>string</HeaderBlock>);
         expect(wrapper.find('div')).toHaveLength(2);
+    });
+});
+
+describe('<HeaderItemSecondaryActions />', () => {
+    const clickSetup = () => {
+        const onClick = jest.fn();
+        const wrapper = app.mount(
+            <HeaderItem onClick={onClick}>
+                <HeaderItemText id="text">text</HeaderItemText>
+                <HeaderItemSecondaryActions>
+                    <Button id="button" />
+                </HeaderItemSecondaryActions>
+            </HeaderItem>
+        );
+
+        return {onClick, wrapper};
+    };
+
+    it('should not propagate click from inner button to HeaderButton', () => {
+        const {wrapper, onClick} = clickSetup();
+
+        wrapper
+            .find('#button')
+            .hostNodes()
+            .simulate('click');
+        expect(onClick).not.toBeCalled();
+    });
+
+    it('should propagate click from inner text to HeaderButton', () => {
+        const {wrapper, onClick} = clickSetup();
+
+        wrapper
+            .find('#text')
+            .hostNodes()
+            .simulate('click');
+        expect(onClick).toBeCalled();
     });
 });

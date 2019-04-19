@@ -60,7 +60,7 @@ describe('<Tooltip />', () => {
         expect(onClose).toHaveBeenCalledWith('escape_keydown', expect.anything());
     });
 
-    it('should call onClose on window escape keydown when handler disabled', () => {
+    it('should call onClose on window escape keydown when listener is disabled', () => {
         const onClose = jest.fn();
 
         app.mount(
@@ -68,7 +68,7 @@ describe('<Tooltip />', () => {
                 referenceElement={document.createElement('div')}
                 open
                 onClose={onClose}
-                disableEscHandler
+                disableEscListener
             >
                 <div id="test" />
             </Tooltip>

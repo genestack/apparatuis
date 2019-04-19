@@ -1,6 +1,7 @@
 ```js
 const {MenuIcon} = require('../../icons/menu-icon');
 const {OpenFolderIcon} = require('../../icons/open-folder-icon');
+const {ShareIcon} = require('../../icons/share-icon');
 
 initialState = {
     disablePositionFixed: true
@@ -42,45 +43,51 @@ const exportMenu = (
 
 <Paper>
     <Header disablePositionFixed={state.disablePositionFixed}>
-        <HeaderButton>
-            <MenuIcon />
-        </HeaderButton>
+        <HeaderItem>
+            <HeaderItemIcon>
+                <MenuIcon />
+            </HeaderItemIcon>
+        </HeaderItem>
         <MenuHandler menu={applicationMenu}>
             {({open}) => (
-                <HeaderButton focused={open} variant="section" style={{color: '#024DA1'}}>
-                    Import Template Editor
-                </HeaderButton>
+                <HeaderItem active={open}>
+                    <HeaderItemText variant="section" style={{color: '#024DA1'}}>
+                        Import Template Editor
+                    </HeaderItemText>
+                </HeaderItem>
             )}
         </MenuHandler>
-        <HeaderButton>
-            <HeaderItemCell>
-                <OpenFolderIcon />
-            </HeaderItemCell>
-            <HeaderItemText>Open</HeaderItemText>
-        </HeaderButton>
-        <MenuHandler menu={exportMenu}>
-            {({open}) => <HeaderButton focused={open}>Export</HeaderButton>}
-        </MenuHandler>
-        <HeaderButton shrink grow variant="section">
-            iPSC derived Pancreatic Beta Cell Def-PANC
-        </HeaderButton>
         <HeaderItem>
-            <Button tiny>Trial version</Button>
+            <HeaderItemIcon>
+                <OpenFolderIcon />
+            </HeaderItemIcon>
+            <HeaderItemText>Open</HeaderItemText>
         </HeaderItem>
-        <HeaderButton>
+        <MenuHandler menu={exportMenu}>
+            {({open}) => <HeaderItem active={open}>Export</HeaderItem>}
+        </MenuHandler>
+        <HeaderItem shrink grow>
+            <HeaderItemSecondaryActions>
+                <Button tiny variant="ghost" icon={<ShareIcon />} />
+            </HeaderItemSecondaryActions>
+            <HeaderItemText variant="section">
+                iPSC derived Pancreatic Beta Cell Def-PANC
+            </HeaderItemText>
+        </HeaderItem>
+        <HeaderBlock>
+            <HeaderItemCell>
+                <Button tiny>Trial version</Button>
+            </HeaderItemCell>
+        </HeaderBlock>
+        <HeaderItem>
             <HeaderItemText>Tasks</HeaderItemText>
-            <HeaderItemCell style={{color: '#D45E18'}}>5</HeaderItemCell>
-        </HeaderButton>
+            <HeaderItemText style={{color: '#D45E18'}}>5</HeaderItemText>
+        </HeaderItem>
         <MenuHandler menu={userMenu}>
             {({open}) => (
-                <HeaderButton
-                    focused={open}
-                    title="user.name@genestack.com"
-                    style={{maxWidth: 200}}
-                    shrink
-                >
-                    user.name@genestack.com
-                </HeaderButton>
+                <HeaderItem active={open} title="user.name@genestack.com" style={{maxWidth: 200}}>
+                    user.name.user@genestack.com
+                </HeaderItem>
             )}
         </MenuHandler>
     </Header>

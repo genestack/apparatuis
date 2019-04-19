@@ -236,7 +236,7 @@ export class MenuItem extends React.PureComponent<Props, State> {
     private handleSubMenuKeyDown: Props['onKeyDown'] = (event) => {
         const item = this.itemRef.current;
 
-        if (event.key === 'ArrowLeft' && item && !event.defaultPrevented) {
+        if (event.key === 'ArrowLeft' && item) {
             event.preventDefault();
             this.closeSubMenuImmediately();
             item.focus();

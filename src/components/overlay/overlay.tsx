@@ -47,9 +47,9 @@ export interface Props extends TargetProps {
      */
     onClosed?: () => void;
     /** Do not listen clicks on Backdrop for closing */
-    disableClickHandler?: boolean;
+    disableClickListener?: boolean;
     /** Do not listen `Escape` keypress for closing */
-    disableEscHandler?: boolean;
+    disableEscListener?: boolean;
     /** Makes backdrop invisible. Shortcut to Backdrop.invisible */
     invisible?: boolean;
     /** Properties of nested Backdrop component */
@@ -113,9 +113,9 @@ export class Overlay extends React.Component<Props, State> {
     }
 
     private handleBackdropClick: BackdropProps['onClick'] = (event) => {
-        const {onClose, disableClickHandler} = this.props;
+        const {onClose, disableClickListener} = this.props;
 
-        if (disableClickHandler || event.defaultPrevented) {
+        if (disableClickListener) {
             return;
         }
 
@@ -130,9 +130,9 @@ export class Overlay extends React.Component<Props, State> {
     };
 
     private handleKeyDown: TargetProps['onKeyDown'] = (event) => {
-        const {disableEscHandler, onClose} = this.props;
+        const {disableEscListener, onClose} = this.props;
 
-        if (disableEscHandler || event.defaultPrevented || !manager.isTopOverlay(this)) {
+        if (disableEscListener || !manager.isTopOverlay(this)) {
             return;
         }
 
@@ -146,8 +146,8 @@ export class Overlay extends React.Component<Props, State> {
             open,
             onClose,
             onClosed,
-            disableClickHandler,
-            disableEscHandler,
+            disableClickListener,
+            disableEscListener,
             invisible,
             backdropProps = {},
             children,

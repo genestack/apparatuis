@@ -6,6 +6,10 @@
  * actual or intended publication of such source code.
  */
 export const root: string;
-export const fakeHover: string;
-export const disabled: string;
+export const shrink: string;
+export const grow: string;
+export const button: string;
+export const content: string;
 export const active: string;
+export const disabled: string;
+export const hoverBlock: string;

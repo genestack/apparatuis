@@ -15,7 +15,7 @@ import {Props as MenuProps} from './menu';
 type MenuProp = (() => React.ReactElement<MenuProps>) | React.ReactElement<MenuProps>;
 
 interface ChildProps {
-    onClick?: React.MouseEventHandler;
+    onClick?: React.ReactEventHandler;
     onKeyDown?: React.KeyboardEventHandler;
 }
 
@@ -25,8 +25,18 @@ type ChildrenProp =
 
 /** MenuHandler public properties */
 export interface Props {
+    /** React element or function that returns React element that is used as menu. */
     menu: MenuProp;
+    /**
+     * Element that is used as reference node.
+     * Could be a function that accepts open state.
+     */
     children: ChildrenProp;
+    /**
+     * If `true` the handler stops listen any events onto reference element
+     * that could affect menu opening.
+     */
+    disableListeners?: boolean;
 }
 
 interface State {
@@ -56,19 +66,17 @@ export class MenuHandler extends React.Component<Props, State> {
     }
 
     private handleMenuValueSelect: MenuProps['onValueSelect'] = (value, event, menuItem) => {
-        if (!event.defaultPrevented && !menuItem.props.subMenu) {
+        if (!menuItem.props.subMenu) {
             this.close();
         }
     };
 
-    private handleReferenceClick: ChildProps['onClick'] = (event) => {
-        if (!event.defaultPrevented) {
-            this.open();
-        }
+    private handleReferenceClick = () => {
+        this.open();
     };
 
     private handleReferenceKeyDown: ChildProps['onKeyDown'] = (event) => {
-        if (!event.defaultPrevented && event.key === 'ArrowDown') {
+        if (event.key === 'ArrowDown') {
             event.preventDefault();
             this.open();
         }
@@ -83,14 +91,18 @@ export class MenuHandler extends React.Component<Props, State> {
     };
 
     private renderChild() {
-        const child = (typeof this.props.children === 'function'
-            ? this.props.children({open: !this.state.exited})
-            : this.props.children) as React.ReactElement<ChildProps>;
+        const {children, disableListeners} = this.props;
 
-        const childProps: ChildProps = {
-            onClick: chain(child.props.onClick, this.handleReferenceClick),
-            onKeyDown: chain(child.props.onKeyDown, this.handleReferenceKeyDown)
-        };
+        const child = (typeof children === 'function'
+            ? children({open: !this.state.exited})
+            : children) as React.ReactElement<ChildProps>;
+
+        const childProps: ChildProps = !disableListeners
+            ? {
+                  onClick: chain(child.props.onClick, this.handleReferenceClick),
+                  onKeyDown: chain(child.props.onKeyDown, this.handleReferenceKeyDown)
+              }
+            : {};
 
         return React.cloneElement(child, childProps);
     }
