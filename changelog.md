@@ -2,9 +2,16 @@
 
 ## [Unreleased]
 
-### Components Added
+### Added
 
--   Input
+-   [Input] Add new property `fullWidth`.
+-   [Input] Add new property `inputRef`.
+
+### Changed
+
+-   [Input] Rename `hasError` property to `invalid`.
+-   [Input] Remove `event` argument from `onValueChange` callback.
+-   [Input] Make `onChange` callback as original `input.onChange`.
 
 ## [8.0.0-alpha.2] - 2019-04-19
 

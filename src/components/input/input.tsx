@@ -18,9 +18,13 @@ type TargetProps = React.InputHTMLAttributes<HTMLInputElement>;
 
 /** Input public properties */
 export interface Props extends TargetProps, WithClasses<keyof typeof styles> {
+    /** If `true` input has invalid styles */
     invalid?: boolean;
+    /** If `true` input has width: 100% */
     fullWidth?: boolean;
+    /** Custom change event handler */
     onValueChange?: (value: string) => void;
+    /** React reference to native input */
     inputRef?: React.Ref<HTMLInputElement>;
 }
 
