@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2011-2018 Genestack Limited
+ * Copyright (c) 2011-2019 Genestack Limited
  * All Rights Reserved
  * THIS IS UNPUBLISHED PROPRIETARY SOURCE CODE OF GENESTACK LIMITED
  * The copyright notice above does not evidence any
@@ -34,3 +34,4 @@ export * from './components/dialog';
 export * from './components/page-content';
 export * from './components/controls';
 export * from './components/header';
+export * from './components/typography';
