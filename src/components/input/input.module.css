@@ -7,35 +7,37 @@
  */
 @import "./../../variables.css";
 
-.input {
-    width: 100%;
-    background-color: rgb(255, 255, 255);
-    border: 1px solid var(--gs-color-grey-outline);
-    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.15);
-    transition: border linear 0.2s, box-shadow linear 0.2s;
-    display: block;
+.root {
+    display: inline-block;
     box-sizing: border-box;
-    height: 30px;
-    padding: 0 10px;
-    margin-bottom: 0;
     font-family: var(--gs-font-family);
     font-size: 14px;
-    line-height: 30px;
-    color: rgb(85, 85, 85);
-    border-radius: 4px;
+    line-height: 20px;
+    width: auto;
+    color: var(--gs-color-black);
+    background: var(--gs-color-white);
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.15);
+    border: 1px solid var(--gs-color-grey-outline);
+    padding: calc(var(--gs-spacing-unit) * 0.75 - 1px) calc(var(--gs-spacing-unit) * 2);
+    border-radius: calc(var(--gs-spacing-unit) / 2);
+    outline: none;
 }
 
-.input:focus {
+.root:focus {
     border-color: rgba(82, 168, 236, 0.8);
-    outline: 0;
-    outline: thin dotted \9;
-    box-shadow: 0 0 8px rgba(82, 168, 236, 0.6), inset 0 2px 4px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 0 0 2px var(--gs-color-action-25), inset 0 2px 4px rgba(0, 0, 0, 0.15);
 }
 
-.input.hasError {
+.root.invalid,
+.root:invalid {
     border-color: rgb(185, 74, 72);
 }
 
-.input.hasError:focus {
-    box-shadow: 0 0 4px rgba(233, 50, 60, 0.4), inset 0 2px 4px rgba(0, 0, 0, 0.15);
+.root.invalid:focus,
+.root:invalid:focus {
+    box-shadow: 0 0 0 2px rgba(233, 50, 60, 0.25), inset 0 2px 4px rgba(0, 0, 0, 0.15);
+}
+
+.fullWidth {
+    width: 100%;
 }

@@ -7,8 +7,7 @@
  */
 
 :root {
-    /* TODO: remove this variable. All component should use typography component */
-    --gs-font-family: Helvetica, Arial, "Myriad Pro", sans-serif;
+    --gs-font-family: "Helvetica", "Arial", "Myriad Pro", sans-serif;
 
     /* Spacing unit is used for margins and paddings as basic unit */
     --gs-spacing-unit: 8px;

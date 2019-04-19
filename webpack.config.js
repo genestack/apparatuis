@@ -43,7 +43,7 @@ module.exports = {
                 loader: 'babel-loader',
                 exclude: babelExcludePattern,
                 options: {
-                    presets: ['es2015']
+                    presets: ['@babel/preset-env']
                 }
             },
             {
