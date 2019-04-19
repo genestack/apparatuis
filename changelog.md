@@ -6,6 +6,7 @@
 
 -   [Input] Add new property `fullWidth`.
 -   [Input] Add new property `inputRef`.
+-   [Typography] Add export from index.ts.
 
 ### Changed
 
