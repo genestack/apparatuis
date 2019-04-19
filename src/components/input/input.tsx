@@ -9,40 +9,30 @@
 import classNames from 'classnames';
 import React from 'react';
 
-import {Omit} from '../../utils/omit';
+import {chain} from '../../utils/chain';
+import {WithClasses, mergeClassesProps} from '../../utils/styles';
 
 import * as styles from './input.module.css';
 
 type TargetProps = React.InputHTMLAttributes<HTMLInputElement>;
 
-type OnValueChanger = (value: string | null | undefined) => any;
-
 /** Input public properties */
-export interface Props extends Omit<TargetProps, 'onChange'> {
-    onChange?: (event: React.ChangeEvent<HTMLInputElement>, value: any) => void;
-    hasError?: boolean;
-    onValueChange?: OnValueChanger;
-    targetRef?: React.Ref<HTMLInputElement>;
+export interface Props extends TargetProps, WithClasses<keyof typeof styles> {
+    invalid?: boolean;
+    fullWidth?: boolean;
+    onValueChange?: (value: string) => void;
+    inputRef?: React.Ref<HTMLInputElement>;
 }
 
 /** Input wrapper */
 export const Input = (props: Props) => {
-    const {
-        className = '',
-        hasError = false,
-        onChange,
-        onValueChange,
-        name,
-        targetRef,
-        ...restProps
-    } = props;
+    const {invalid, fullWidth, onValueChange, inputRef, classes, ...rest} = mergeClassesProps(
+        props,
+        styles
+    );
 
-    const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const handleChange: React.ChangeEventHandler<HTMLInputElement> = (event) => {
         const {value} = event.currentTarget;
-
-        if (onChange) {
-            onChange(event, name ? {[name]: value} : value);
-        }
 
         if (onValueChange) {
             onValueChange(value);
@@ -51,11 +41,13 @@ export const Input = (props: Props) => {
 
     return (
         <input
-            {...restProps}
-            ref={targetRef}
-            name={name}
-            className={classNames(className, styles.input, {[styles.hasError]: hasError})}
-            onChange={handleChange}
+            {...rest}
+            ref={inputRef}
+            className={classNames(rest.className, classes.root, {
+                [classes.fullWidth]: fullWidth,
+                [classes.invalid]: invalid
+            })}
+            onChange={chain(rest.onChange, handleChange)}
         />
     );
 };

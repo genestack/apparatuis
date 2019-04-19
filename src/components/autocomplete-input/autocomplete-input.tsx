@@ -11,6 +11,7 @@ import React, {Fragment} from 'react';
 import ReactDOM from 'react-dom';
 
 import {Omit} from '../../utils/omit';
+import {chainRefs} from '../../utils/set-ref';
 import {Input, InputProps} from '../input';
 
 import {Downshift} from './downshift-issue-512-fix';
@@ -28,7 +29,7 @@ interface RenderSuggestionProps {
 type RenderSuggestion = (props: RenderSuggestionProps) => JSX.Element;
 
 /** AutocompleteInput public properties */
-export interface Props extends Omit<InputProps, 'targetRef'> {
+export interface Props extends Omit<InputProps, 'onValueChange'> {
     items: any[];
     isLoading: boolean;
     error: any;
@@ -36,6 +37,7 @@ export interface Props extends Omit<InputProps, 'targetRef'> {
     renderLoading?: () => JSX.Element;
     renderNoMatches?: () => JSX.Element;
     renderError?: (error: any) => JSX.Element;
+    onValueChange?: (value: string | null | undefined) => void;
 }
 
 function calcMenuStyles(inputDOMNode: HTMLInputElement | null) {
@@ -211,7 +213,10 @@ export class AutocompleteInput extends React.Component<Props> {
 
                     return (
                         <div>
-                            <Input targetRef={this.inputRef} {...inputComponentProps} />
+                            <Input
+                                {...inputComponentProps}
+                                inputRef={chainRefs(inputComponentProps.inputRef, this.inputRef)}
+                            />
                             <Menu {...getMenuProps({isOpen: isMenuVisible, style: menuStyle})}>
                                 {this.renderMenuContent({
                                     getItemProps,

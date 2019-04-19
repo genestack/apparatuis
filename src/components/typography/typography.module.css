@@ -13,7 +13,7 @@
     box-sizing: border-box;
     color: var(--gs-color-black);
     font-weight: normal;
-    font-family: "Helvetica", "Arial", "Myriad Pro", sans-serif;
+    font-family: var(--gs-font-family);
 }
 
 /** quiet */

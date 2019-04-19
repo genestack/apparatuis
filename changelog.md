@@ -2,6 +2,10 @@
 
 ## [Unreleased]
 
+### Components Added
+
+-   Input
+
 ## [8.0.0-alpha.2] - 2019-04-19
 
 ### Components Added
