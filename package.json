@@ -1,6 +1,6 @@
 {
   "name": "genestack-ui",
-  "version": "8.0.0-alpha.1",
+  "version": "8.0.0-alpha.2",
   "description": "UI library",
   "main": "src/",
   "types": "src/",
@@ -41,7 +41,7 @@
     "css-loader": "^2.1.0",
     "enzyme": "^3.8.0",
     "enzyme-adapter-react-16": "^1.7.1",
-    "genestack-frontend-builder": "^0.8.3",
+    "genestack-frontend-builder": "^0.9.0",
     "genestack-stylelint-config": "^2.0.0",
     "genestack-tsconfig": "^2.0.0",
     "genestack-tslint-config": "^7.0.0",
@@ -82,7 +82,7 @@
     "react-transition-group": "^2.5.2"
   },
   "peerDependencies": {
-    "genestack-frontend-builder": ">= 0.8.3 < 2.0.0",
+    "genestack-frontend-builder": ">= 0.9.0 < 2.0.0",
     "react": ">= 16.7 < 17",
     "react-dom": ">= 16.7 < 17",
     "typescript": ">= 3"
