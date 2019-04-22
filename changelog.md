@@ -2,6 +2,8 @@
 
 ## [Unreleased]
 
+## [8.0.0-alpha.3] - 2019-04-19
+
 ### Added
 
 -   [Input] Add new property `fullWidth`.
