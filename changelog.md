@@ -6,7 +6,7 @@
 
 ### Fixed
 
--  Move `@types/react-transition-group` dependency from `dev`.
+-   Move `@types/react-transition-group` dependency from `dev`.
 
 ## [8.0.0-alpha.4] - 2019-04-22
 
