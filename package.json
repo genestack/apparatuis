@@ -1,6 +1,6 @@
 {
   "name": "genestack-ui",
-  "version": "8.0.0-alpha.4",
+  "version": "8.0.0-alpha.5",
   "description": "UI library",
   "main": "src/",
   "types": "src/",
@@ -36,7 +36,6 @@
     "@types/jest": "^23.1.5",
     "@types/node": "^10.5.2",
     "@types/react-test-renderer": "^16.0.1",
-    "@types/react-transition-group": "^2.0.15",
     "autoprefixer": "^8.6.4",
     "css-loader": "^2.1.0",
     "enzyme": "^3.8.0",
@@ -74,6 +73,7 @@
     "@types/react": "^16.7.22",
     "@types/react-dom": "^16.0.11",
     "@types/react-textarea-autosize": "^4.3.2",
+    "@types/react-transition-group": "^2.0.15",
     "classnames": "^2.2.5",
     "dom-helpers": "^3.4.0",
     "downshift": "^2.1.1",
