@@ -2,6 +2,12 @@
 
 ## [Unreleased]
 
+## [8.0.0-alpha.4] - 2019-04-22
+
+### Fixed
+
+-   [Dialog] Fix width in non-compact mode
+
 ## [8.0.0-alpha.3] - 2019-04-19
 
 ### Added
