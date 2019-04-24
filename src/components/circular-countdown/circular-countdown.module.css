@@ -1,0 +1,23 @@
+/*
+ * Copyright (c) 2011-2019 Genestack Limited
+ * All Rights Reserved
+ * THIS IS UNPUBLISHED PROPRIETARY SOURCE CODE OF GENESTACK LIMITED
+ * The copyright notice above does not evidence any
+ * actual or intended publication of such source code.
+ */
+@import "../../variables.css";
+
+.root {
+    align-self: center;
+    vertical-align: middle;
+    display: inline-block;
+    width: calc(var(--gs-spacing-unit) * 3);
+    height: calc(var(--gs-spacing-unit) * 3);
+    position: relative;
+    user-select: none;
+    transform: rotate(-90deg);
+}
+
+.progressCircle {
+    stroke: var(--gs-color-success);
+}

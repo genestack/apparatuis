@@ -2,6 +2,8 @@
 
 ## [Unreleased]
 
+-   Add private CircularCountdown component
+
 ## [8.0.0-alpha.5] - 2019-04-22
 
 ### Fixed
