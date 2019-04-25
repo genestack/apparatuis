@@ -35,3 +35,4 @@ export * from './components/page-content';
 export * from './components/controls';
 export * from './components/header';
 export * from './components/typography';
+export * from './components/notification';

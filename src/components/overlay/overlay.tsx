@@ -24,7 +24,7 @@ const manager = new OverlayManager(container);
 type TargetProps = React.HTMLAttributes<HTMLDivElement>;
 
 /** Reason of overlay close */
-export type OverlayCloseReason = 'backdrop_click' | 'escape_keydown';
+export type OverlayCloseReason = 'backdrop-click' | 'escape-keydown';
 
 type OverlayCloseHandler = (reason: OverlayCloseReason, event?: React.SyntheticEvent) => void;
 
@@ -120,7 +120,7 @@ export class Overlay extends React.Component<Props, State> {
         }
 
         if (onClose) {
-            onClose('backdrop_click', event);
+            onClose('backdrop-click', event);
         }
     };
 
@@ -137,7 +137,7 @@ export class Overlay extends React.Component<Props, State> {
         }
 
         if (event.key === 'Escape' && onClose) {
-            onClose('escape_keydown', event);
+            onClose('escape-keydown', event);
         }
     };
 

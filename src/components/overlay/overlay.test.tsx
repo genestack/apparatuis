@@ -64,7 +64,7 @@ describe('<Overlay />', () => {
             dispatchEvent(event);
 
             expect(onClose).toBeCalled();
-            expect(onClose).toBeCalledWith('escape_keydown', expect.anything());
+            expect(onClose).toBeCalledWith('escape-keydown', expect.anything());
         });
 
         it('should not call onClose callback when disableEscListener passed', () => {
@@ -102,7 +102,7 @@ describe('<Overlay />', () => {
             dispatchEvent(event);
 
             expect(onClose).toBeCalled();
-            expect(onClose).toBeCalledWith('backdrop_click', expect.anything());
+            expect(onClose).toBeCalledWith('backdrop-click', expect.anything());
         });
 
         it('should not call onClose callback when disableClickListener passed', () => {

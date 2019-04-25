@@ -1,0 +1,44 @@
+/*
+ * Copyright (c) 2011-2019 Genestack Limited
+ * All Rights Reserved
+ * THIS IS UNPUBLISHED PROPRIETARY SOURCE CODE OF GENESTACK LIMITED
+ * The copyright notice above does not evidence any
+ * actual or intended publication of such source code.
+ */
+@import "../../variables.css";
+
+.root {
+    position: relative;
+    width: calc(var(--gs-spacing-unit) * 40);
+    padding-left: 16px;
+    padding-right: 36px;
+    border-radius: 4px;
+}
+
+.closeButton {
+    position: absolute;
+    top: 6px;
+    right: 6px;
+    border-radius: 100%;
+    padding: 0;
+    width: 24px;
+    height: 24px;
+}
+
+.closeButton:focus:after {
+    border-radius: 100%;
+}
+
+.closeButtonContent {
+    display: flex;
+    position: relative;
+    width: 24px;
+    height: 24px;
+    justify-content: center;
+}
+
+.circularProgress {
+    position: absolute;
+    left: 0;
+    top: 0;
+}

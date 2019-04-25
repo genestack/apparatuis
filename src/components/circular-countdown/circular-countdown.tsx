@@ -6,6 +6,7 @@
  * actual or intended publication of such source code.
  */
 import classNames from 'classnames';
+import style from 'dom-helpers/style';
 import * as React from 'react';
 import Transition, {TransitionProps, TransitionStatus} from 'react-transition-group/Transition';
 
@@ -51,13 +52,28 @@ export interface Props extends TargetProps, WithClasses<keyof typeof styles> {
  * [Transition Component](https://github.com/reactjs/react-transition-group)
  * and indicates how much time is left by contrast circle.
  */
-export class CircularCountdown extends React.Component<Props> {
+export class CircularCountdown extends React.PureComponent<Props> {
+    private requestId: number | null = null;
+
+    public componentWillUnmount() {
+        if (this.requestId) {
+            cancelAnimationFrame(this.requestId);
+        }
+    }
+
+    private requestAnimationFrame(callback: () => void) {
+        if (this.requestId) {
+            cancelAnimationFrame(this.requestId);
+        }
+        this.requestId = requestAnimationFrame(callback);
+    }
+
     private getCircleStyles(status: TransitionStatus): React.CSSProperties {
         const {duration = DEFAULT_ENTER_DURATION} = this.props;
 
         const defaultStyle: React.CSSProperties = {
             strokeDasharray: CIRCLE_PERIMETER,
-            strokeDashoffset: 0,
+            strokeDashoffset: '0',
             transition: `stroke-dashoffset ${duration}ms linear`
         };
 
@@ -70,12 +86,12 @@ export class CircularCountdown extends React.Component<Props> {
         };
 
         const exitingStyle: React.CSSProperties = {
-            strokeDashoffset: 0,
+            strokeDashoffset: '0',
             transition: `stroke-dashoffset ${EXIT_DURATION}ms linear`
         };
 
         const exitedStyle: React.CSSProperties = {
-            strokeDashoffset: 0
+            strokeDashoffset: '0'
         };
 
         return {
@@ -86,6 +102,37 @@ export class CircularCountdown extends React.Component<Props> {
             ...(status === 'exited' && exitedStyle)
         };
     }
+
+    private setCircleStyles(node: Element, status: TransitionStatus) {
+        (style as any)(node, this.getCircleStyles(status));
+    }
+
+    private handleEnter: TransitionProps['onEnter'] = (node) => {
+        this.setCircleStyles(node, 'exited');
+
+        this.requestAnimationFrame(() => {
+            reflow(node);
+            this.setCircleStyles(node, 'entering');
+
+            this.requestAnimationFrame(() => {
+                this.setCircleStyles(node, 'entered');
+            });
+        });
+    };
+
+    private handleExit: TransitionProps['onExit'] = (node) => {
+        this.setCircleStyles(node, 'entered');
+
+        this.requestAnimationFrame(() => {
+            reflow(node);
+            this.setCircleStyles(node, 'exiting');
+
+            this.requestAnimationFrame(() => {
+                this.setCircleStyles(node, 'exited');
+            });
+        });
+    };
+
     public render() {
         const {
             in: transitionIn,
@@ -112,21 +159,20 @@ export class CircularCountdown extends React.Component<Props> {
                     {...transitionProps}
                     timeout={timeout}
                     in={transitionIn}
-                    onEnter={chain(transitionProps.onEnter, reflow)}
+                    onEnter={chain(transitionProps.onEnter, this.handleEnter)}
                     onEntered={chain(transitionProps.onEntered, onComplete)}
+                    onExit={chain(transitionProps.onExit, this.handleExit)}
                 >
-                    {(status) => (
-                        <circle
-                            style={this.getCircleStyles(status)}
-                            cx={DIAMETER / 2}
-                            cy={DIAMETER / 2}
-                            r={CIRCLE_RADIUS}
-                            fill="none"
-                            strokeWidth={STROKE_WIDTH}
-                            {...circleProps}
-                            className={classNames(circleProps.className, classes.progressCircle)}
-                        />
-                    )}
+                    <circle
+                        style={this.getCircleStyles(transitionIn ? 'entered' : 'exited')}
+                        cx={DIAMETER / 2}
+                        cy={DIAMETER / 2}
+                        r={CIRCLE_RADIUS}
+                        fill="none"
+                        strokeWidth={STROKE_WIDTH}
+                        {...circleProps}
+                        className={classNames(circleProps.className, classes.progressCircle)}
+                    />
                 </Transition>
             </svg>
         );

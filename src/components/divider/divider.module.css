@@ -30,6 +30,8 @@
 }
 
 .transparent {
+    border-bottom-width: 0;
+    height: 0;
     border-bottom-color: transparent;
 }
 

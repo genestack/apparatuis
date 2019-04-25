@@ -2,7 +2,14 @@
 
 ## [Unreleased]
 
--   Add private CircularCountdown component
+### Added
+
+-   Private `CircularCountdown` component
+-   `Notification` component
+
+### Changed
+
+-   Use kebab case for close reasons (Overlay, Dialog)
 
 ## [8.0.0-alpha.5] - 2019-04-22
 
