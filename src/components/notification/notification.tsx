@@ -23,7 +23,7 @@ const DEFAULT_AUTO_CLOSE_DURATION = 6000;
 type TargetProps = React.HTMLAttributes<HTMLDivElement>;
 
 /** Notification close reason */
-export type NotificationCloseReason = 'auto_close_timeout' | 'close_button_click';
+export type NotificationCloseReason = 'countdown-timeout' | 'close-button-click';
 
 /** Notification public properties */
 export interface Props extends TargetProps, WithClasses<keyof typeof styles> {
@@ -50,13 +50,13 @@ interface State {
 export class Notification extends React.Component<Props, State> {
     private handleCloseButtonClick = () => {
         if (this.props.onClose) {
-            this.props.onClose('close_button_click');
+            this.props.onClose('close-button-click');
         }
     };
 
     private handleCountdownComplete = () => {
         if (this.props.onClose) {
-            this.props.onClose('auto_close_timeout');
+            this.props.onClose('countdown-timeout');
         }
     };
 

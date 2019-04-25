@@ -39,7 +39,7 @@ describe('<Notification />', () => {
         );
 
         jest.runAllTimers();
-        expect(onClose).toBeCalledWith('auto_close_timeout');
+        expect(onClose).toBeCalledWith('countdown-timeout');
     });
 
     it('should call onClose callback with reason on close button click', () => {
@@ -55,7 +55,7 @@ describe('<Notification />', () => {
             .find('#button')
             .hostNodes()
             .simulate('click');
-        expect(onClose).toBeCalledWith('close_button_click');
+        expect(onClose).toBeCalledWith('close-button-click');
     });
 
     it('should not call onClose callback if countdown is disabled', () => {

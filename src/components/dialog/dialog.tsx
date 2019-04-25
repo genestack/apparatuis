@@ -27,7 +27,7 @@ type ContainerProps = React.HTMLAttributes<HTMLDivElement>;
 type CloseHandler = (reason: DialogCloseReason, event?: React.SyntheticEvent) => void;
 
 /** Dialog Close Reason  */
-export type DialogCloseReason = OverlayCloseReason | 'header_close_button_click';
+export type DialogCloseReason = OverlayCloseReason | 'header-close-button-click';
 
 /** Dialog public properties */
 export interface Props extends TargetProps, WithClasses<keyof typeof styles> {
@@ -61,7 +61,7 @@ export interface Props extends TargetProps, WithClasses<keyof typeof styles> {
 export class Dialog extends React.Component<Props> {
     private handleCloseButtonClick: ButtonProps['onClick'] = (event) => {
         if (this.props.onClose) {
-            this.props.onClose('header_close_button_click', event);
+            this.props.onClose('header-close-button-click', event);
         }
     };
 
@@ -71,7 +71,7 @@ export class Dialog extends React.Component<Props> {
         }
 
         if (this.props.onClose) {
-            this.props.onClose('backdrop_click', event);
+            this.props.onClose('backdrop-click', event);
         }
     };
 
