@@ -17,8 +17,10 @@ import {createIcon} from '../components/icon';
 export const CrossIcon = createIcon(
     <svg viewBox="0 0 20 20">
         <path
-            d="M3.88 5.536L5.38 4.038 10.19 8.85l4.825-4.812 1.536 1.498-4.824 4.824 4.824 4.812-1.536 1.536-4.825-4.811-4.811 4.811-1.498-1.536 4.811-4.812-4.811-4.824z"
-            className="gs-svg-icon-fill"
+            className="gs-svg-icon-stroke"
+            strokeWidth="1.5"
+            strokeLinecap="round"
+            d="M6 13.939L13.939 6M6.061 6L14 13.939"
         />
     </svg>
 );
