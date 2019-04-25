@@ -10,7 +10,7 @@ import {create as render} from 'react-test-renderer';
 
 import {sortClassNames} from '../../../test-utils/sort-class-names';
 
-import {Typography} from '.';
+import {Typography} from './typography';
 
 describe('Typography Component', () => {
     describe('by default', () => {
