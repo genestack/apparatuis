@@ -8,7 +8,7 @@
 import * as React from 'react';
 import {create as render} from 'react-test-renderer';
 
-import {Shake} from '.';
+import {Shake} from './shake';
 
 describe('Shake Component', () => {
     test('should pass className to children', () => {
