@@ -18,7 +18,7 @@ import {TransitionPopper, TransitionPopperProps} from '../transition-popper';
 import {PopoverGrow, Props as PopperGrowProps} from './popover-grow-transition';
 import * as styles from './popover.module.css';
 
-type TargetProps = Omit<TransitionPopperProps<PaperProps>, 'classes' | 'children'>;
+type TargetProps = Omit<TransitionPopperProps<PaperProps>, 'children'>;
 type ContainerProps = Omit<React.HTMLAttributes<HTMLDivElement>, 'style'>;
 type TransitionProps = Omit<
     PopperGrowProps,

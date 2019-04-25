@@ -17,7 +17,7 @@ import {Slide, SlideProps} from '../slide';
 
 import * as styles from './drawer.module.css';
 
-type TargetProps = Omit<PaperProps, 'classes'>;
+type TargetProps = PaperProps;
 type TargetPropsFromOverlay = Pick<OverlayProps, 'open' | 'onClose' | 'onClosed'>;
 
 /** Drawer public properties */

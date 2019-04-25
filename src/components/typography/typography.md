@@ -1,4 +1,6 @@
 ```js
+const {DarkContext} = require('../../utils/dark-context');
+
 initialState = {
     inverted: false,
     quiet: true
@@ -82,121 +84,65 @@ initialState = {
                 as={Paper}
                 style={{background: state.inverted ? 'rgb(51, 51, 51)' : 'rgb(255, 255, 255)'}}
             >
-                <Typography as="h1" variant="header" box="paragraph" inverted={state.inverted}>
-                    <Typography
-                        as="span"
-                        variant="header"
-                        box="inline"
-                        quiet={state.quiet}
-                        inverted={state.inverted}
-                    >
-                        Quiet Header
-                    </Typography>{' '}
-                    Helvetica Bold{' '}
-                    <Typography
-                        as="span"
-                        variant="title"
-                        box="inline"
-                        quiet={state.quiet}
-                        inverted={state.inverted}
-                    >
-                        24/32
+                <DarkContext.Provider value={state.inverted}>
+                    <Typography as="h1" variant="header" box="paragraph">
+                        <Typography as="span" variant="header" box="inline" quiet={state.quiet}>
+                            Quiet Header
+                        </Typography>{' '}
+                        Helvetica Bold{' '}
+                        <Typography as="span" variant="title" box="inline" quiet={state.quiet}>
+                            24/32
+                        </Typography>
                     </Typography>
-                </Typography>
-                <Typography as="h2" variant="title" box="paragraph" inverted={state.inverted}>
-                    <Typography
-                        as="span"
-                        variant="title"
-                        box="inline"
-                        quiet={state.quiet}
-                        inverted={state.inverted}
-                    >
-                        Quiet Title
-                    </Typography>{' '}
-                    Helvetica Bold{' '}
-                    <Typography
-                        as="span"
-                        variant="title"
-                        box="inline"
-                        quiet={state.quiet}
-                        inverted={state.inverted}
-                    >
-                        20/28
+                    <Typography as="h2" variant="title" box="paragraph">
+                        <Typography as="span" variant="title" box="inline" quiet={state.quiet}>
+                            Quiet Title
+                        </Typography>{' '}
+                        Helvetica Bold{' '}
+                        <Typography as="span" variant="title" box="inline" quiet={state.quiet}>
+                            20/28
+                        </Typography>
                     </Typography>
-                </Typography>
-                <Typography as="h3" variant="section" box="paragraph" inverted={state.inverted}>
-                    <Typography
-                        as="span"
-                        variant="section"
-                        box="inline"
-                        quiet={state.quiet}
-                        inverted={state.inverted}
-                    >
-                        Quiet Section
-                    </Typography>{' '}
-                    Helvetica Bold
-                    <Typography
-                        as="span"
-                        variant="body"
-                        box="inline"
-                        quiet={state.quiet}
-                        inverted={state.inverted}
-                    >
-                        20/28
+                    <Typography as="h3" variant="section" box="paragraph">
+                        <Typography as="span" variant="section" box="inline" quiet={state.quiet}>
+                            Quiet Section
+                        </Typography>{' '}
+                        Helvetica Bold
+                        <Typography as="span" variant="body" box="inline" quiet={state.quiet}>
+                            20/28
+                        </Typography>
                     </Typography>
-                </Typography>
-                <Typography as="p" box="paragraph" inverted={state.inverted}>
-                    <Typography
-                        as="span"
-                        box="inline"
-                        quiet={state.quiet}
-                        inverted={state.inverted}
-                    >
-                        Quiet body text
-                    </Typography>{' '}
-                    Helvetica Normal
-                    <Typography
-                        as="span"
-                        variant="caption"
-                        box="inline"
-                        quiet={state.quiet}
-                        inverted={state.inverted}
-                    >
-                        14/20
+                    <Typography as="p" box="paragraph">
+                        <Typography as="span" box="inline" quiet={state.quiet}>
+                            Quiet body text
+                        </Typography>{' '}
+                        Helvetica Normal
+                        <Typography as="span" variant="caption" box="inline" quiet={state.quiet}>
+                            14/20
+                        </Typography>
                     </Typography>
-                </Typography>
-                <Typography
-                    variant="caption"
-                    box="paragraph"
-                    quiet={state.quiet}
-                    inverted={state.inverted}
-                >
-                    Quiet caption text – small body text Helvetica Normal 12/18
-                </Typography>
-                <Typography variant="caption" box="paragraph" inverted={state.inverted}>
-                    <Typography
-                        as="span"
-                        variant="caption"
-                        box="inline"
-                        quiet
-                        inverted={state.inverted}
-                    >
-                        Tissue:
-                    </Typography>{' '}
-                    Epithelium of Bronchiole
-                </Typography>
-                <Divider gap={4} variant="transparent" />
-                <Typography box="paragraph" inverted={state.inverted}>
-                    A &lt;STRONG&gt; tag{' '}
-                    <strong>
-                        is working well with <em>texts</em> and <em>captions</em>
-                    </strong>
-                </Typography>
-                <Typography box="paragraph" inverted={state.inverted}>
-                    <Typography quiet as="span" box="inline" inverted={state.inverted}>
-                        Quiet is useful for secondary information
-                    </Typography>, while <em>Italic</em> is done with &lt;EM&gt; tag.
-                </Typography>
+                    <Typography variant="caption" box="paragraph" quiet={state.quiet}>
+                        Quiet caption text – small body text Helvetica Normal 12/18
+                    </Typography>
+                    <Typography variant="caption" box="paragraph">
+                        <Typography as="span" variant="caption" box="inline" quiet>
+                            Tissue:
+                        </Typography>{' '}
+                        Epithelium of Bronchiole
+                    </Typography>
+                    <Divider gap={4} variant="transparent" />
+                    <Typography box="paragraph">
+                        A &lt;STRONG&gt; tag{' '}
+                        <strong>
+                            is working well with <em>texts</em> and <em>captions</em>
+                        </strong>
+                    </Typography>
+                    <Typography box="paragraph">
+                        <Typography quiet as="span" box="inline">
+                            Quiet is useful for secondary information
+                        </Typography>, while <em>Italic</em> is done with &lt;EM&gt; tag.
+                    </Typography>
+                </DarkContext.Provider>
             </PageContent>
         </ControlsItem>
     </Controls>

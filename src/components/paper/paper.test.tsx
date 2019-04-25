@@ -21,7 +21,7 @@ describe('<Paper />', () => {
         });
 
         test('should render div HTML element', () => {
-            expect(getComponent().is('div')).toBe(true);
+            expect(getComponent().find('div')).toHaveLength(1);
         });
     });
 

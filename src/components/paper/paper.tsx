@@ -8,14 +8,12 @@
 import classNames from 'classnames';
 import * as React from 'react';
 
-import {WithClasses, mergeClassesProps} from '../../utils/styles';
-
 import * as styles from './paper.module.css';
 
 type TargetProps = React.HTMLAttributes<HTMLDivElement>;
 
 /** Paper public props */
-export interface Props extends TargetProps, WithClasses<keyof typeof styles> {
+export interface Props extends TargetProps {
     /** Reference to root element */
     rootRef?: React.Ref<HTMLDivElement>;
 }
@@ -25,7 +23,7 @@ export interface Props extends TargetProps, WithClasses<keyof typeof styles> {
  * Is used for overlay components.
  */
 export function Paper(props: Props) {
-    const {rootRef, className, classes, ...rest} = mergeClassesProps(props, styles);
+    const {rootRef, className, ...rest} = props;
 
-    return <div {...rest} ref={rootRef} className={classNames(className, classes.root)} />;
+    return <div {...rest} ref={rootRef} className={classNames(className, styles.root)} />;
 }

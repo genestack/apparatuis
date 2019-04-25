@@ -13,6 +13,8 @@
     padding-left: 16px;
     padding-right: 36px;
     border-radius: 4px;
+    background: rgba(36, 46, 66, 1);
+    border: none;
 }
 
 .closeButton {

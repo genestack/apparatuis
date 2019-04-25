@@ -9,6 +9,7 @@ import classNames from 'classnames';
 import React from 'react';
 
 import {chain} from '../../utils/chain';
+import {DarkContext} from '../../utils/dark-context';
 import {Omit} from '../../utils/omit';
 import {WithClasses, mergeClassesProps} from '../../utils/styles';
 import {createIcon} from '../icon';
@@ -116,16 +117,17 @@ export class Tooltip extends React.Component<Props> {
                                 data-placement={actualPlacement}
                                 className={classes.tooltipContainer}
                             >
-                                <Typography
-                                    {...targetProps}
-                                    className={classNames(targetProps.className, classes.root, {
-                                        [classes.withGaps]: !noGaps
-                                    })}
-                                    variant="caption"
-                                    inverted
-                                >
-                                    {children}
-                                </Typography>
+                                <DarkContext.Provider value>
+                                    <Typography
+                                        {...targetProps}
+                                        className={classNames(targetProps.className, classes.root, {
+                                            [classes.withGaps]: !noGaps
+                                        })}
+                                        variant="caption"
+                                    >
+                                        {children}
+                                    </Typography>
+                                </DarkContext.Provider>
                                 <div
                                     {...arrowProps}
                                     data-placement={actualPlacement}
