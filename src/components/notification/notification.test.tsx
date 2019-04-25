@@ -58,11 +58,11 @@ describe('<Notification />', () => {
         expect(onClose).toBeCalledWith('close_button_click');
     });
 
-    it('should not call onClose callback if auto closing disabled', () => {
+    it('should not call onClose callback if countdown is disabled', () => {
         const onClose = jest.fn();
 
         app.mount(
-            <Notification onClose={onClose} disableAutoClose>
+            <Notification onClose={onClose} countdown="none">
                 <div id="test" />
             </Notification>
         );
@@ -71,31 +71,16 @@ describe('<Notification />', () => {
         expect(onClose).not.toBeCalled();
     });
 
-    describe('closing management', () => {
-        const setup = () => {
-            const onClose = jest.fn();
+    it('should not call onClose callback if countdown is stopped', () => {
+        const onClose = jest.fn();
 
-            const wrapper = app.mount(<Notification onClose={onClose} />);
+        app.mount(
+            <Notification onClose={onClose} countdown="stopped">
+                <div id="test" />
+            </Notification>
+        );
 
-            const instance = wrapper.instance() as Notification;
-
-            return {onClose, wrapper, instance};
-        };
-
-        it('should expose startClosing method', () => {
-            expect(setup().instance.startClosing).toBeInstanceOf(Function);
-        });
-
-        it('should expose stopClosing method', () => {
-            expect(setup().instance.stopClosing).toBeInstanceOf(Function);
-        });
-
-        it('should stop closing after stopClosing method is called', () => {
-            const {instance, onClose} = setup();
-            jest.runOnlyPendingTimers();
-            instance.stopClosing();
-            jest.runAllTimers();
-            expect(onClose).not.toBeCalled();
-        });
+        jest.runAllTimers();
+        expect(onClose).not.toBeCalled();
     });
 });

@@ -8,17 +8,16 @@ notificationStyle = {
 initialState = {
     open: false,
     exited: true,
-    autoClose: true
+    countdown: 'active',
+    disableCountdown: false
 };
 
-notificationRef = React.createRef();
-
-handleShowNotificationClick = () => setState({open: true, exited: false});
+handleShowNotificationClick = () => setState({open: true, exited: false, countdown: 'active'});
 handleNotificationExited = () => setState({exited: true});
 handleNotificationClose = () => setState({open: false});
-handleNotificationMouseEnter = (event) => notificationRef.current.stopClosing();
-handleNotificationMouseLeave = (event) => notificationRef.current.startClosing();
-handleAutoCloseChange = (event) => setState({autoClose: event.currentTarget.checked});
+handleNotificationMouseEnter = () => setState({countdown: 'stopped'});
+handleNotificationMouseLeave = () => setState({countdown: 'active'});
+handleDisableCountdownChange = (event) => setState({disableCountdown: event.currentTarget.checked});
 
 <PageContent as={Paper}>
     <Controls>
@@ -27,20 +26,23 @@ handleAutoCloseChange = (event) => setState({autoClose: event.currentTarget.chec
         </ControlsItem>
         <ControlsItem>
             <Typography as="label">
-                <input type="checkbox" onChange={handleAutoCloseChange} checked={state.autoClose} />
-                Auto-close
+                <input
+                    type="checkbox"
+                    onChange={handleDisableCountdownChange}
+                    checked={state.disableCountdown}
+                />
+                Disable countdown
             </Typography>
         </ControlsItem>
     </Controls>
     {!state.exited ? (
         <Slide in={state.open} onExited={handleNotificationExited} appear direction="top">
             <Notification
-                ref={notificationRef}
                 style={notificationStyle}
                 onClose={handleNotificationClose}
                 onMouseEnter={handleNotificationMouseEnter}
                 onMouseLeave={handleNotificationMouseLeave}
-                disableAutoClose={!state.autoClose}
+                countdown={state.disableCountdown ? 'none' : state.countdown}
             >
                 <Typography box="paragraph">Hi! I am notification.</Typography>
             </Notification>

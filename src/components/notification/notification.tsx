@@ -30,9 +30,9 @@ export interface Props extends TargetProps, WithClasses<keyof typeof styles> {
     /** Is called when notification is closed */
     onClose?: (reason: NotificationCloseReason) => void;
     /** Notification closes after this timeout duration */
-    autoCloseDuration?: number;
-    /** If `true` notification does not close automatically after timeout */
-    disableAutoClose?: boolean;
+    countdownDuration?: number;
+    /** State of countdown */
+    countdown?: 'active' | 'stopped' | 'none';
     /** Close button properties */
     closeButtonProps?: ButtonProps;
 }
@@ -48,32 +48,6 @@ interface State {
  * succinct messages and could provide optional action.
  */
 export class Notification extends React.Component<Props, State> {
-    private timeoutId: number | null = null;
-
-    public state: State = {
-        closing: false
-    };
-
-    public componentDidMount() {
-        this.timeoutId = setTimeout(() => {
-            this.startClosing();
-        });
-    }
-
-    public componentWillUnmount() {
-        if (this.timeoutId) {
-            clearTimeout(this.timeoutId);
-        }
-    }
-
-    public startClosing() {
-        this.setState({closing: true});
-    }
-
-    public stopClosing() {
-        this.setState({closing: false});
-    }
-
     private handleCloseButtonClick = () => {
         if (this.props.onClose) {
             this.props.onClose('close_button_click');
@@ -89,11 +63,11 @@ export class Notification extends React.Component<Props, State> {
     public render() {
         const {
             closeButtonProps = {},
-            autoCloseDuration: duration = DEFAULT_AUTO_CLOSE_DURATION,
+            countdownDuration = DEFAULT_AUTO_CLOSE_DURATION,
             onClose,
             classes,
             children,
-            disableAutoClose,
+            countdown = 'active',
             ...rest
         } = mergeClassesProps(this.props, styles);
 
@@ -115,12 +89,13 @@ export class Notification extends React.Component<Props, State> {
                 onClick={chain(closeButtonProps.onClick, this.handleCloseButtonClick)}
             >
                 <CrossIcon />
-                {!disableAutoClose ? (
+                {countdown !== 'none' ? (
                     <CircularCountdown
-                        in={this.state.closing}
+                        in={countdown === 'active'}
                         className={styles.circularProgress}
                         onComplete={this.handleCountdownComplete}
-                        duration={duration}
+                        duration={countdownDuration}
+                        transitionProps={{appear: true}}
                     />
                 ) : null}
             </Button>
