@@ -8,6 +8,7 @@
 import classNames from 'classnames';
 import * as React from 'react';
 
+import {DarkContext} from '../../utils/dark-context';
 import {mergeClassesProps, WithClasses} from '../../utils/styles';
 
 import * as styles from './typography.module.css';
@@ -72,35 +73,41 @@ export type Props<T extends TargetProps = DefaultTargetProps> = T & TypographyPr
  * Will be moved to UI Kit.
  */
 export function Typography<T extends TargetProps = DefaultTargetProps>(props: Props<T>) {
-    const {
-        as: Component = 'div',
-        variant = 'body',
-        quiet,
-        box = 'block',
-        inverted,
-        classes,
-        className,
-        ...rest
-    } = mergeClassesProps(props as Props<TargetProps>, styles);
-
     return (
-        <Component
-            {...rest}
-            className={classNames(className, classes.root, {
-                [classes.header]: variant === 'header',
-                [classes.title]: variant === 'title',
-                [classes.section]: variant === 'section',
-                [classes.body]: variant === 'body',
-                [classes.caption]: variant === 'caption',
+        <DarkContext.Consumer>
+            {(darkContext) => {
+                const {
+                    as: Component = 'div',
+                    variant = 'body',
+                    quiet,
+                    box = 'block',
+                    inverted = darkContext,
+                    classes,
+                    className,
+                    ...rest
+                } = mergeClassesProps(props as Props<TargetProps>, styles);
 
-                [classes.quiet]: quiet,
+                return (
+                    <Component
+                        {...rest}
+                        className={classNames(className, classes.root, {
+                            [classes.header]: variant === 'header',
+                            [classes.title]: variant === 'title',
+                            [classes.section]: variant === 'section',
+                            [classes.body]: variant === 'body',
+                            [classes.caption]: variant === 'caption',
 
-                [classes.inverted]: inverted,
+                            [classes.quiet]: quiet,
 
-                [classes.inline]: box === 'inline',
+                            [classes.inverted]: inverted,
 
-                [classes.paragraph]: box === 'paragraph'
-            })}
-        />
+                            [classes.inline]: box === 'inline',
+
+                            [classes.paragraph]: box === 'paragraph'
+                        })}
+                    />
+                );
+            }}
+        </DarkContext.Consumer>
     );
 }

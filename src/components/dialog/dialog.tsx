@@ -21,7 +21,7 @@ import {PaperProps, Paper} from '../paper';
 import {DialogContext} from './dialog-context';
 import * as styles from './dialog.module.css';
 
-type TargetProps = Omit<PaperProps, 'classes'> & Pick<OverlayProps, 'open'>;
+type TargetProps = PaperProps & Pick<OverlayProps, 'open'>;
 type ContainerProps = React.HTMLAttributes<HTMLDivElement>;
 
 type CloseHandler = (reason: DialogCloseReason, event?: React.SyntheticEvent) => void;

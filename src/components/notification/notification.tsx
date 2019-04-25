@@ -10,6 +10,7 @@ import * as React from 'react';
 
 import {CrossIcon} from '../../icons/cross-icon';
 import {chain} from '../../utils/chain';
+import {DarkContext} from '../../utils/dark-context';
 import {WithClasses, mergeClassesProps} from '../../utils/styles';
 import {ButtonProps, Button} from '../button';
 import {CircularCountdown} from '../circular-countdown';
@@ -102,14 +103,16 @@ export class Notification extends React.Component<Props, State> {
         );
 
         return (
-            <Paper {...rest} className={classNames(rest.className, classes.root)}>
-                <Divider variant="transparent" startGap={0} endGap={2} />
+            <DarkContext.Provider value>
+                <Paper {...rest} className={classNames(rest.className, classes.root)}>
+                    <Divider variant="transparent" startGap={0} endGap={2} />
 
-                {children}
-                {closeButton}
+                    {children}
+                    {closeButton}
 
-                <Divider variant="transparent" startGap={2} endGap={0} />
-            </Paper>
+                    <Divider variant="transparent" startGap={2} endGap={0} />
+                </Paper>
+            </DarkContext.Provider>
         );
     }
 }

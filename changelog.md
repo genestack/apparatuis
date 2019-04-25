@@ -6,6 +6,7 @@
 
 -   Private `CircularCountdown` component
 -   `Notification` component
+-   Dark context for components that could be inverted
 
 ### Changed
 
