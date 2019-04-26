@@ -16,3 +16,4 @@ export const endGap1: string;
 export const endGap2: string;
 export const endGap3: string;
 export const endGap4: string;
+export const inverted: string;

@@ -6,7 +6,10 @@
 
 -   Private `CircularCountdown` component
 -   `Notification` component
--   Dark context for components that could be inverted
+-   Dark context for colors inverting
+-   [Button] Inverted colors
+-   [Divider] Inverted colors
+-   [Typography] Inverted colors
 
 ### Changed
 

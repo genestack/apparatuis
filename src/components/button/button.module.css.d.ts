@@ -12,6 +12,7 @@ export const tiny: string;
 export const icon: string;
 export const content: string;
 export const ellipsis: string;
+export const inverted: string;
 
 export const withText: string;
 export const withIcon: string;
