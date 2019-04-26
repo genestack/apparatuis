@@ -16,12 +16,6 @@
     font-family: var(--gs-font-family);
 }
 
-/** quiet */
-
-.quiet {
-    color: var(--gs-color-grey);
-}
-
 /** box */
 
 .inline {
@@ -31,16 +25,6 @@
 .paragraph {
     display: block;
     margin-bottom: 14px;
-}
-
-/** inverted */
-
-.inverted {
-    color: var(--gs-color-white);
-}
-
-.inverted.quiet {
-    color: var(--gs-color-white-60);
 }
 
 /** header variant */
@@ -104,4 +88,40 @@
 .caption.paragraph {
     margin-top: calc(var(--gs-spacing-unit) * 0.5);
     margin-bottom: calc(var(--gs-spacing-unit) * 0.5);
+}
+
+/** quiet */
+
+.quiet {
+    color: var(--gs-color-grey);
+}
+
+/** inverted */
+
+.inverted {
+    color: var(--gs-color-white);
+}
+
+.inverted.quiet {
+    color: var(--gs-color-white-60);
+}
+
+/** statuses */
+
+.success,
+.success.inverted,
+.success.inverted.quiet {
+    color: var(--gs-color-success);
+}
+
+.error,
+.error.inverted,
+.error.inverted.quiet {
+    color: var(--gs-color-error);
+}
+
+.warning,
+.warning.inverted,
+.warning.inverted.quiet {
+    color: var(--gs-color-warning);
 }

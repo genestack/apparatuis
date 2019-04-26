@@ -10,6 +10,7 @@
 -   [Button] Inverted colors
 -   [Divider] Inverted colors
 -   [Typography] Inverted colors
+-   [Typography] Add status colors (`success`, `error`, `warning`)
 
 ### Changed
 
