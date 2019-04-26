@@ -13,7 +13,11 @@ import {Divider} from '../divider';
 import {Overlay} from '../overlay';
 import {Paper} from '../paper';
 
-import {Dialog, DialogBody, DialogFooter, DialogFullWidth, DialogHeader, DialogProps} from '.';
+import {Dialog, Props as DialogProps} from './dialog';
+import {DialogBody} from './dialog-body';
+import {DialogFooter} from './dialog-footer';
+import {DialogFullWidth} from './dialog-full-width';
+import {DialogHeader} from './dialog-header';
 
 const app = createTestApp();
 

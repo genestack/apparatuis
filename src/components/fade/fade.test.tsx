@@ -8,7 +8,7 @@
 import * as React from 'react';
 import {create as render} from 'react-test-renderer';
 
-import {Fade} from '.';
+import {Fade} from './fade';
 
 describe('Fade Component', () => {
     test('should pass className to children', () => {

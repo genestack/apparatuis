@@ -8,7 +8,7 @@
 import {mount} from 'enzyme';
 import * as React from 'react';
 
-import {Backdrop} from '.';
+import {Backdrop} from './backdrop';
 
 jest.useFakeTimers();
 
