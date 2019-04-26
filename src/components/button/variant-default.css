@@ -1,0 +1,124 @@
+/*
+ * Copyright (c) 2011-2019 Genestack Limited
+ * All Rights Reserved
+ * THIS IS UNPUBLISHED PROPRIETARY SOURCE CODE OF GENESTACK LIMITED
+ * The copyright notice above does not evidence any
+ * actual or intended publication of such source code.
+ */
+
+/* stylelint-disable no-descending-specificity */
+
+/* Default variant */
+
+.defaultVariant {
+    background-color: var(--gs-color-grey-background);
+    color: var(--gs-color-action-text);
+}
+
+.defaultVariant :global(.gs-svg-icon-fill) {
+    fill: var(--gs-color-action-text-60);
+}
+
+.defaultVariant :global(.gs-svg-icon-stroke) {
+    stroke: var(--gs-color-action-text-60);
+}
+
+.defaultVariant.inverted {
+    background-color: var(--gs-color-action-25);
+    color: var(--gs-color-grey-outline);
+}
+
+.defaultVariant.inverted :global(.gs-svg-icon-fill) {
+    fill: var(--gs-color-grey-outline);
+}
+
+.defaultVariant.inverted :global(.gs-svg-icon-stroke) {
+    stroke: var(--gs-color-grey-outline);
+}
+
+/* hover */
+
+.defaultVariant:hover {
+    background-color: var(--gs-color-action-hover);
+    color: var(--gs-color-white);
+}
+
+.defaultVariant:hover :global(.gs-svg-icon-fill) {
+    fill: var(--gs-color-white);
+}
+
+.defaultVariant:hover :global(.gs-svg-icon-stroke) {
+    stroke: var(--gs-color-white);
+}
+
+/* active */
+
+.defaultVariant.active,
+.defaultVariant:active {
+    background: var(--gs-color-action-text);
+    color: var(--gs-color-grey-background);
+    box-shadow: var(--gs-button-box-shadow-active);
+}
+
+.defaultVariant.active :global(.gs-svg-icon-fill),
+.defaultVariant:active :global(.gs-svg-icon-fill) {
+    fill: var(--gs-color-grey-background);
+}
+
+.defaultVariant.active :global(.gs-svg-icon-stroke),
+.defaultVariant:active :global(.gs-svg-icon-stroke) {
+    stroke: var(--gs-color-grey-background);
+}
+
+.defaultVariant.inverted.active,
+.defaultVariant.inverted:active {
+    background: var(--gs-color-action-text);
+    color: var(--gs-color-grey-background);
+    box-shadow: var(--gs-button-box-shadow-active);
+}
+
+.defaultVariant.inverted.active :global(.gs-svg-icon-fill),
+.defaultVariant.inverted:active :global(.gs-svg-icon-fill) {
+    fill: var(--gs-color-grey-background);
+}
+
+.defaultVariant.inverted.active :global(.gs-svg-icon-stroke),
+.defaultVariant.inverted:active :global(.gs-svg-icon-stroke) {
+    stroke: var(--gs-color-grey-background);
+}
+
+/* disabled */
+
+.defaultVariant.disabled,
+.defaultVariant:disabled {
+    background-color: var(--gs-color-grey-background);
+    color: var(--gs-color-grey-50);
+    box-shadow: none;
+}
+
+.defaultVariant.disabled :global(.gs-svg-icon-fill),
+.defaultVariant:disabled :global(.gs-svg-icon-fill) {
+    fill: var(--gs-color-grey-50);
+}
+
+.defaultVariant.disabled :global(.gs-svg-icon-stroke),
+.defaultVariant:disabled :global(.gs-svg-icon-stroke) {
+    stroke: var(--gs-color-grey-50);
+}
+
+.defaultVariant.inverted.disabled,
+.defaultVariant.inverted:disabled {
+    background-color: var(--gs-color-grey-50);
+    color: var(--gs-color-grey);
+    box-shadow: none;
+}
+
+.defaultVariant.inverted.disabled :global(.gs-svg-icon-fill),
+.defaultVariant.inverted:disabled :global(.gs-svg-icon-fill) {
+    fill: var(--gs-color-grey);
+}
+
+.defaultVariant.inverted.disabled :global(.gs-svg-icon-stroke),
+.defaultVariant.inverted:disabled :global(.gs-svg-icon-stroke) {
+    stroke: var(--gs-color-grey);
+}

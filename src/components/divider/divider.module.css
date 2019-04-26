@@ -25,6 +25,10 @@
     border-bottom-style: solid;
 }
 
+.inverted {
+    border-bottom-color: var(--gs-color-grey-50);
+}
+
 .dashed {
     border-bottom-style: dashed;
 }

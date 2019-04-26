@@ -1,4 +1,5 @@
 ```js
+const {DarkContext} = require('../../utils/dark-context');
 const {PlayIcon} = require('../../icons/play-icon');
 const {ShareIcon} = require('../../icons/share-icon');
 
@@ -6,7 +7,14 @@ const capitalize = (str) => str[0].toUpperCase() + str.slice(1);
 
 const BackgroundPane = () => (
     <div
-        style={{position: 'absolute', background: '#F5F5F5', width: 50, left: 0, top: 0, bottom: 0}}
+        style={{
+            position: 'absolute',
+            background: state.inverted ? '#1C1717' : '#F5F5F5',
+            width: 50,
+            left: 0,
+            top: 0,
+            bottom: 0
+        }}
     />
 );
 
@@ -37,29 +45,49 @@ const ButtonSamples = (props) => (
     </React.Fragment>
 );
 
-<Paper style={{display: 'flex'}}>
-    <Pane>
-        <Typography box="paragraph">Disabled</Typography>
-        <ButtonSamples variant="primary" disabled />
-        <ButtonSamples disabled />
-        <ButtonSamples variant="outlined" disabled />
-        <ButtonSamples variant="ghost" disabled />
-    </Pane>
-    <Pane>
-        <Typography box="paragraph">Normal</Typography>
-        <ButtonSamples variant="primary" />
-        <ButtonSamples />
-        <ButtonSamples variant="outlined" />
-        <ButtonSamples variant="ghost" />
-    </Pane>
-    <Pane>
-        <Typography box="paragraph">Active</Typography>
-        <ButtonSamples variant="primary" active />
-        <ButtonSamples active />
-        <ButtonSamples variant="outlined" active />
-        <ButtonSamples variant="ghost" active />
-    </Pane>
-</Paper>;
+initialState = {
+    inverted: false
+};
+
+handleInvertedChange = (event) => setState({inverted: event.currentTarget.checked});
+
+<React.Fragment>
+    <PageContent>
+        <Controls as="label">
+            <ControlsItem>
+                <input type="checkbox" checked={state.inverted} onChange={handleInvertedChange} />
+            </ControlsItem>
+            <ControlsItem>
+                <Typography>Inverted</Typography>
+            </ControlsItem>
+        </Controls>
+    </PageContent>
+    <DarkContext.Provider value={state.inverted}>
+        <Paper style={{display: 'flex', background: state.inverted ? '#252E42' : '#FFF'}}>
+            <Pane>
+                <Typography box="paragraph">Disabled</Typography>
+                <ButtonSamples variant="primary" disabled />
+                <ButtonSamples disabled />
+                <ButtonSamples variant="outlined" disabled />
+                <ButtonSamples variant="ghost" disabled />
+            </Pane>
+            <Pane>
+                <Typography box="paragraph">Normal</Typography>
+                <ButtonSamples variant="primary" />
+                <ButtonSamples />
+                <ButtonSamples variant="outlined" />
+                <ButtonSamples variant="ghost" />
+            </Pane>
+            <Pane>
+                <Typography box="paragraph">Active</Typography>
+                <ButtonSamples variant="primary" active />
+                <ButtonSamples active />
+                <ButtonSamples variant="outlined" active />
+                <ButtonSamples variant="ghost" active />
+            </Pane>
+        </Paper>
+    </DarkContext.Provider>
+</React.Fragment>;
 ```
 
 ```js

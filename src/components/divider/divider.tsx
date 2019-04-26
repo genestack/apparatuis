@@ -9,6 +9,7 @@
 import classNames from 'classnames';
 import * as React from 'react';
 
+import {DarkContext} from '../../utils/dark-context';
 import {mergeClassesProps, WithClasses} from '../../utils/styles';
 
 import * as styles from './divider.module.css';
@@ -31,37 +32,47 @@ export interface Props extends TargetProps, WithClasses<keyof typeof styles> {
     startGap?: DividerGap;
     /** Overrides end gap */
     endGap?: DividerGap;
+    /** Inverses colors on dark backgrounds */
+    inverted?: boolean;
 }
 
 /** A divider is a thin line that groups content in lists and layouts. */
 export function Divider(props: Props) {
-    const {gap = 1} = props;
-
-    const {
-        className,
-        variant = 'stroke',
-        gap: omittedGap,
-        startGap = gap,
-        endGap = gap,
-        classes,
-        ...rest
-    } = mergeClassesProps(props, styles);
-
     return (
-        <hr
-            {...rest}
-            className={classNames(className, classes.root, {
-                [classes.dashed]: variant === 'dashed',
-                [classes.transparent]: variant === 'transparent',
-                [classes.startGap1]: startGap === 1,
-                [classes.startGap2]: startGap === 2,
-                [classes.startGap3]: startGap === 3,
-                [classes.startGap4]: startGap === 4,
-                [classes.endGap1]: endGap === 1,
-                [classes.endGap2]: endGap === 2,
-                [classes.endGap3]: endGap === 3,
-                [classes.endGap4]: endGap === 4
-            })}
-        />
+        <DarkContext.Consumer>
+            {(darkContext) => {
+                const {gap = 1} = props;
+
+                const {
+                    className,
+                    variant = 'stroke',
+                    gap: omittedGap,
+                    startGap = gap,
+                    endGap = gap,
+                    classes,
+                    inverted = darkContext,
+                    ...rest
+                } = mergeClassesProps(props, styles);
+
+                return (
+                    <hr
+                        {...rest}
+                        className={classNames(className, classes.root, {
+                            [classes.dashed]: variant === 'dashed',
+                            [classes.transparent]: variant === 'transparent',
+                            [classes.startGap1]: startGap === 1,
+                            [classes.startGap2]: startGap === 2,
+                            [classes.startGap3]: startGap === 3,
+                            [classes.startGap4]: startGap === 4,
+                            [classes.endGap1]: endGap === 1,
+                            [classes.endGap2]: endGap === 2,
+                            [classes.endGap3]: endGap === 3,
+                            [classes.endGap4]: endGap === 4,
+                            [classes.inverted]: inverted
+                        })}
+                    />
+                );
+            }}
+        </DarkContext.Consumer>
     );
 }

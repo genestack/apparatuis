@@ -22,8 +22,8 @@ module.exports = {
     require: ['@babel/polyfill'],
     getComponentPathLine: (componentPath) => {
         const name = kebabToCamelCase(path.basename(componentPath, '.tsx'));
-        const dir = path.dirname(componentPath).replace(/^src/, 'genestack-ui');
-        return `import {${name}} from '${dir}';`;
+        // const dir = path.dirname(componentPath).replace(/^src/, 'genestack-ui');
+        return `import {${name}} from 'genestack-ui';`;
     },
     styles: {
         Playground: {
