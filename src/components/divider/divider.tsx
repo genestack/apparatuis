@@ -9,10 +9,10 @@
 import classNames from 'classnames';
 import * as React from 'react';
 
+import {DarkContext} from '../../utils/dark-context';
 import {mergeClassesProps, WithClasses} from '../../utils/styles';
 
 import * as styles from './divider.module.css';
-import {DarkContext} from '../../utils/dark-context';
 
 type TargetProps = React.HTMLAttributes<HTMLHRElement>;
 
