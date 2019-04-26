@@ -24,3 +24,8 @@ export const title: string;
 export const section: string;
 export const body: string;
 export const caption: string;
+
+/** statuses */
+export const success: string;
+export const warning: string;
+export const error: string;

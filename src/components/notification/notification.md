@@ -70,21 +70,30 @@ class NotificationManager extends React.Component {
         };
 
         this.lastNotificationIndex = -1;
-        this.handleCreateNotification = this.handleCreateNotification.bind(this);
     }
 
-    handleCreateNotification() {
-        this.setState(({notifications}) => {
-            this.lastNotificationIndex += 1;
+    createNotificationHandler(status) {
+        return () => {
+            this.setState(({notifications}) => {
+                this.lastNotificationIndex += 1;
 
-            return {notifications: [...notifications, this.lastNotificationIndex]};
-        });
+                return {
+                    notifications: [
+                        ...notifications,
+                        {
+                            key: this.lastNotificationIndex,
+                            status
+                        }
+                    ]
+                };
+            });
+        };
     }
 
-    createCloseHandler(key) {
+    createCloseHandler(notification) {
         return () =>
             this.setState(({notifications}) => ({
-                notifications: notifications.filter((k) => k !== key)
+                notifications: notifications.filter((n) => n !== notification)
             }));
     }
 
@@ -93,16 +102,28 @@ class NotificationManager extends React.Component {
             <React.Fragment>
                 <Controls>
                     <ControlsItem>
-                        <Button onClick={this.handleCreateNotification}>
-                            Add Notification To Queue
-                        </Button>
+                        <Typography>Add Notification To Queue:</Typography>
                     </ControlsItem>
+                    <ControlsItem>
+                        <ButtonGroup>
+                            <Button onClick={this.createNotificationHandler()}>Normal</Button>
+                            <Button onClick={this.createNotificationHandler('success')}>
+                                Success
+                            </Button>
+                            <Button onClick={this.createNotificationHandler('warning')}>
+                                Warning
+                            </Button>
+                            <Button onClick={this.createNotificationHandler('error')}>Error</Button>
+                        </ButtonGroup>
+                    </ControlsItem>
+                </Controls>
+                <Divider gap={4} />
+                <Controls>
                     <ControlsItem>
                         <Typography>
                             Notifications in queue: {this.state.notifications.length}
                         </Typography>
                     </ControlsItem>
-
                     <ControlsItem>
                         <Typography>
                             Last notification index: {this.lastNotificationIndex}
@@ -110,16 +131,17 @@ class NotificationManager extends React.Component {
                     </ControlsItem>
                 </Controls>
                 <div style={{position: 'fixed', right: 16, top: 16}}>
-                    {this.state.notifications.slice(0, 3).map((key, index) => (
+                    {this.state.notifications.slice(0, 3).map((notification, index) => (
                         <div
-                            key={key}
-                            style={{...this.wrapperStyle, transform: `translateY(${index * 46}px)`}}
+                            key={notification.key}
+                            style={{...this.wrapperStyle, transform: `translateY(${index * 68}px)`}}
                         >
                             <Slide in appear direction="right">
-                                <Notification onClose={this.createCloseHandler(key)}>
-                                    <Typography box="paragraph">
-                                        Hi! I am notification. #{key}
+                                <Notification onClose={this.createCloseHandler(notification)}>
+                                    <Typography status={notification.status}>
+                                        Notification #{notification.key}
                                     </Typography>
+                                    <Typography>Hi! I am notification.</Typography>
                                 </Notification>
                             </Slide>
                         </div>

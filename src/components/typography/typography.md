@@ -142,6 +142,15 @@ initialState = {
                             Quiet is useful for secondary information
                         </Typography>, while <em>Italic</em> is done with &lt;EM&gt; tag.
                     </Typography>
+                    <Typography box="paragraph" variant="section" status="error">
+                        Error has occurred
+                    </Typography>
+                    <Typography box="paragraph" status="warning">
+                        You shall not pass! (c) Gandalf
+                    </Typography>
+                    <Typography box="paragraph" status="success">
+                        Download is complete.
+                    </Typography>
                 </DarkContext.Provider>
             </PageContent>
         </ControlsItem>

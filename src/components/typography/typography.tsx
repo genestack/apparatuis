@@ -48,6 +48,8 @@ interface TypographyProps extends WithClasses<keyof typeof styles> {
      * Default: `"false"`
      */
     inverted?: boolean;
+    /** Defines a color of the text */
+    status?: 'success' | 'warning' | 'error';
     /**
      * You could redefine the target component by passing ReactType.
      *
@@ -84,6 +86,7 @@ export function Typography<T extends TargetProps = DefaultTargetProps>(props: Pr
                     inverted = darkContext,
                     classes,
                     className,
+                    status,
                     ...rest
                 } = mergeClassesProps(props as Props<TargetProps>, styles);
 
@@ -103,7 +106,11 @@ export function Typography<T extends TargetProps = DefaultTargetProps>(props: Pr
 
                             [classes.inline]: box === 'inline',
 
-                            [classes.paragraph]: box === 'paragraph'
+                            [classes.paragraph]: box === 'paragraph',
+
+                            [classes.success]: status === 'success',
+                            [classes.warning]: status === 'warning',
+                            [classes.error]: status === 'error'
                         })}
                     />
                 );
