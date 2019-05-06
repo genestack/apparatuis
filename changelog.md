@@ -2,6 +2,8 @@
 
 ## [Unreleased]
 
+## [8.0.0-alpha.6] - 2019-05-04
+
 ### Added
 
 -   Private `CircularCountdown` component
@@ -15,6 +17,10 @@
 ### Changed
 
 -   Use kebab case for close reasons (Overlay, Dialog)
+
+### Fixed
+
+-   Types in `focusable-elements`
 
 ## [8.0.0-alpha.5] - 2019-04-22
 

@@ -109,7 +109,7 @@ export function getSiblingElement(
 }
 
 function getAncestors(startNode: Node | null) {
-    const nodes = [];
+    const nodes: Node[] = [];
     let node = startNode;
 
     while (node) {
