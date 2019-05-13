@@ -101,14 +101,6 @@ const selectFocusDirection = (event: React.KeyboardEvent): 'next' | 'prev' | nul
 };
 
 /**
- * Menu item should be a button to support native keyboard shortcuts
- * for clicking (by Enter or Space keys press)
- */
-const renderButton = (props: React.HTMLAttributes<HTMLElement>) => (
-    <button {...props} type="button" />
-);
-
-/**
  * MenuItem is a ListItem that is used in any Menu elements.
  *
  * It has three cells:
@@ -344,7 +336,6 @@ export class MenuItem extends React.PureComponent<Props, State> {
                         <RootRef rootRef={this.itemRef}>
                             <ListItem
                                 {...rest}
-                                as={renderButton}
                                 focused={this.state.highlighted}
                                 onClick={chain(rest.onClick, this.createClickHandler(menuContext))}
                                 onFocus={chain(rest.onFocus, this.handleFocus)}

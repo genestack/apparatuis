@@ -181,4 +181,10 @@ describe('<Menu />', () => {
             );
         });
     });
+
+    it('MenuItem should render anchor element if href property is passed', () => {
+        app.mount(<MenuItem id="test" href="foo" />);
+        expect(document.getElementById('test')).toBeInstanceOf(HTMLAnchorElement);
+        expect(document.getElementById('test')).toHaveProperty('href', 'http://localhost/foo');
+    });
 });

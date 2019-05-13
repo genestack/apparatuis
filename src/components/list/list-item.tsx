@@ -10,12 +10,13 @@ import * as React from 'react';
 
 import {Omit} from '../../utils/omit';
 import {WithClasses, mergeClassesProps} from '../../utils/styles';
-import {Flex, FlexItem} from '../flex';
-import {Typography, TypographyProps} from '../typography';
+import {ButtonBase, ButtonBaseProps} from '../button-base';
+import {Flex} from '../flex';
 
+import {ListItemText} from './list-item-text';
 import * as styles from './list-item.module.css';
 
-type TargetProps = Omit<TypographyProps, 'classes'>;
+type TargetProps = Omit<ButtonBaseProps, 'activeClassName'>;
 
 /** ListItem public properties */
 export interface Props extends TargetProps, WithClasses<keyof typeof styles> {
@@ -38,31 +39,24 @@ export interface Props extends TargetProps, WithClasses<keyof typeof styles> {
  * Single item of List component
  */
 export function ListItem(props: Props) {
-    const {
-        classes,
-        active,
-        hovered,
-        focused,
-        disabled,
-        tabIndex = 0,
-        className,
-        ...rest
-    } = mergeClassesProps(props, styles);
+    const {classes, active, hovered, focused, disabled, className, ...rest} = mergeClassesProps(
+        props,
+        styles
+    );
 
     const children =
         typeof props.children === 'string' ? (
-            <FlexItem grow shrink ellipsis gap={1}>
-                {props.children}
-            </FlexItem>
+            <ListItemText>{props.children}</ListItemText>
         ) : (
             props.children
         );
 
     return (
         <Flex ellipsis container gap={0}>
-            <Typography
-                tabIndex={disabled ? -1 : tabIndex}
+            <ButtonBase
+                disabled={disabled}
                 {...rest}
+                activeClassName={classes.active}
                 className={classNames(className, classes.root, {
                     [classes.active]: active,
                     [classes.hovered]: hovered,
@@ -71,7 +65,7 @@ export function ListItem(props: Props) {
                 })}
             >
                 {children}
-            </Typography>
+            </ButtonBase>
         </Flex>
     );
 }

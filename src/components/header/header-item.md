@@ -189,6 +189,16 @@ const WhiteControlsItem = (props) => <ControlsItem style={{background: '#fff'}} 
                 </HeaderBlock>
             </WhiteControlsItem>
         </Controls>
+        <Controls>
+            <WhiteControlsItem>
+                <HeaderItem href="#">
+                    <HeaderItemSecondaryActions>
+                        <Button tiny variant="ghost" icon={<ShareIcon />} />
+                    </HeaderItemSecondaryActions>
+                    <HeaderItemText>Button inside an anchor</HeaderItemText>
+                </HeaderItem>
+            </WhiteControlsItem>
+        </Controls>
     </WithSeparator>
 </PageContent>;
 ```

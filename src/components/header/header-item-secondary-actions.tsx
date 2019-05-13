@@ -22,6 +22,7 @@ export type Props = React.HTMLAttributes<HTMLElement>;
 export class HeaderItemSecondaryActions extends React.Component<Props> {
     private handleClick: Props['onClick'] = (event) => {
         event.stopPropagation();
+        event.preventDefault();
     };
 
     public render() {

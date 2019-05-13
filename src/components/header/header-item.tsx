@@ -18,7 +18,14 @@ import {HeaderBlock, Props as HeaderBlockProps} from './header-block';
 import {HeaderItemText} from './header-item-text';
 import * as styles from './header-item.module.css';
 
-type TargetProps = Omit<ButtonBaseProps<HeaderBlockProps>, 'activeClassName'>;
+type TargetProps = Omit<
+    ButtonBaseProps<
+        React.AnchorHTMLAttributes<HTMLElement> &
+            React.ButtonHTMLAttributes<HTMLElement> &
+            HeaderBlockProps
+    >,
+    'activeClassName'
+>;
 
 /** HeaderItem public properties */
 export interface Props extends TargetProps, WithClasses<keyof typeof styles> {
