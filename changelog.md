@@ -2,6 +2,13 @@
 
 ## [Unreleased]
 
+## [8.0.0-alpha.7] - 2019-05-13
+
+### Added
+
+-   Add `href` property to `HeaderItem`, `ListItem` and `MenuItem`
+    to make they render as anchor element
+
 ## [8.0.0-alpha.6] - 2019-05-04
 
 ### Added
