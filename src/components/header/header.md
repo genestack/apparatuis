@@ -29,7 +29,7 @@ const applicationMenu = (
 const userMenu = (
     <Menu placement="bottom-end">
         <MenuItem>Profile</MenuItem>
-        <MenuItem>Sign out</MenuItem>
+        <MenuItem href="#">Sign out</MenuItem>
     </Menu>
 );
 

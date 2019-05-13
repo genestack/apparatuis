@@ -66,6 +66,9 @@ const Quiet = (props) => <Typography {...props} variant="caption" quiet box="inl
                         <ListItemText>Leaf</ListItemText>
                     </ListItem>
                     <Divider />
+                    <ListItem href="#">
+                        <ListItemText>I am a link</ListItemText>
+                    </ListItem>
                     <ListItem as="label">
                         <ListItemCell style={leftCellStyle}>
                             <input type="radio" name="foo" />
