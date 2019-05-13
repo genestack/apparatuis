@@ -230,6 +230,7 @@ export class MenuItem extends React.PureComponent<Props, State> {
 
         if (event.key === 'ArrowLeft' && item) {
             event.preventDefault();
+            event.stopPropagation();
             this.closeSubMenuImmediately();
             item.focus();
         }
