@@ -40,7 +40,7 @@ export const DialogFooter = (props: Props) => {
                 <MarginBox
                     {...rest}
                     className={classNames(rest.className, styles.root)}
-                    noStartDivider={dialogContext.compact}
+                    noStartDivider={!dialogContext.scrollable}
                     startDividerProps={{
                         variant: 'stroke',
                         ...startDividerProps

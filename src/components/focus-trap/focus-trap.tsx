@@ -87,20 +87,20 @@ export class FocusTrap extends React.Component<Props> {
     private trapRef = React.createRef<HTMLDivElement>();
     private activeElementOnMount: HTMLElement | null = null;
 
+    constructor(props: Props) {
+        super(props);
+
+        // remember active element before mounting because
+        // focus trap could contains inputs with `autoFocus`
+        // which will steal focus on mount
+        if (props.focusOnMount && document.activeElement instanceof HTMLElement) {
+            this.activeElementOnMount = document.activeElement;
+        }
+    }
+
     public componentDidMount() {
-        const trapElement = this.trapRef.current;
-
-        if (this.props.focusOnMount && trapElement) {
-            if (document.activeElement instanceof HTMLElement) {
-                this.activeElementOnMount = document.activeElement;
-            }
-
-            if (isElementFocusable(trapElement)) {
-                focusElement(trapElement);
-            } else {
-                const focusableElements = getFocusableElements(trapElement);
-                focusElement(focusableElements.item(0));
-            }
+        if (this.props.focusOnMount) {
+            this.trapFocus();
         }
     }
 
@@ -109,6 +109,26 @@ export class FocusTrap extends React.Component<Props> {
 
         if (activeElementOnMount && contains(document, activeElementOnMount)) {
             activeElementOnMount.focus();
+        }
+    }
+
+    private trapFocus() {
+        const trapElement = this.trapRef.current;
+
+        if (!trapElement) {
+            return;
+        }
+
+        // do not change focus if active element is already inside the trap element
+        if (document.activeElement && contains(trapElement, document.activeElement)) {
+            return;
+        }
+
+        if (isElementFocusable(trapElement)) {
+            focusElement(trapElement);
+        } else {
+            const focusableElements = getFocusableElements(trapElement);
+            focusElement(focusableElements.item(0));
         }
     }
 

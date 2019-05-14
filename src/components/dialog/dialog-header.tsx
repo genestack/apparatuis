@@ -42,7 +42,7 @@ export const DialogHeader = (props: Props) => {
                 <MarginBox
                     {...rest}
                     className={classNames(rest.className, classes.root)}
-                    noEndDivider={dialogContext.compact}
+                    noEndDivider={!dialogContext.scrollable}
                     endDividerProps={{
                         variant: 'stroke',
                         ...endDividerProps

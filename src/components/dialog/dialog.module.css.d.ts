@@ -6,6 +6,9 @@
  * actual or intended publication of such source code.
  */
 export const root: string;
+export const small: string;
+export const medium: string;
+export const large: string;
 export const overlay: string;
 export const overlayScrollable: string;
 export const container: string;

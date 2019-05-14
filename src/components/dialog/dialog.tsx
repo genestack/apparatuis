@@ -32,24 +32,25 @@ export type DialogCloseReason = OverlayCloseReason | 'header-close-button-click'
 /** Dialog public properties */
 export interface Props extends TargetProps, WithClasses<keyof typeof styles> {
     /**
-     * By default Dialog could not be more than viewport.
-     * When dialog content is more than dialog DialogBody is being scrollable.
-     * In compact mode scroll appears for whole viewport.
-     * Also in compact view DialogFooter and DialogBody do not have dividers.
+     * Allows scrolling the `DialogBody` instead of the entire `Dialog` when overflowing.
      */
-    compact?: boolean;
+    scrollable?: boolean;
     /** Hides close button */
     hideCloseButton?: boolean;
     /** Properties passed to close button */
     closeButtonProps?: ButtonProps;
     /** Calls when dialog closes by user action */
     onClose?: CloseHandler;
+    /** Calls when dialog close transition is completed */
+    onClosed?: () => void;
     /** You can use any transition component to display Dialog */
     transitionComponent?: React.ComponentType<Omit<TransitionProps, 'timeout'>>;
     /** Properties passed to Overlay component */
-    overlayProps?: Omit<OverlayProps, 'open' | 'onClose'>;
+    overlayProps?: Omit<OverlayProps, 'open'>;
     /** Properties passed to container element */
     containerProps?: ContainerProps;
+    /** Fixes width of dialog */
+    size?: 'small' | 'medium' | 'large' | 'auto';
 }
 
 /**
@@ -78,8 +79,9 @@ export class Dialog extends React.Component<Props> {
     public render() {
         const {
             open,
-            compact = false,
+            scrollable = false,
             onClose,
+            onClosed,
             overlayProps = {},
             transitionComponent: Transition = Fade,
             classes,
@@ -87,19 +89,21 @@ export class Dialog extends React.Component<Props> {
             hideCloseButton = false,
             closeButtonProps = {},
             containerProps = {},
+            size = 'auto',
             ...rest
         } = mergeClassesProps(this.props, styles);
 
         return (
-            <DialogContext.Provider value={{compact, hideCloseButton}}>
-                <Overlay
-                    {...overlayProps}
-                    open={open}
-                    onClose={onClose}
-                    className={classNames(overlayProps.className, classes.overlay, {
-                        [classes.overlayScrollable]: compact
-                    })}
-                >
+            <Overlay
+                {...overlayProps}
+                open={open}
+                onClose={chain(overlayProps.onClose, onClose)}
+                onClosed={chain(overlayProps.onClosed, onClosed)}
+                className={classNames(overlayProps.className, classes.overlay, {
+                    [classes.overlayScrollable]: !scrollable
+                })}
+            >
+                <DialogContext.Provider value={{scrollable, hideCloseButton}}>
                     <div
                         {...containerProps}
                         onClick={chain(containerProps.onClick, this.handleContainerClick)}
@@ -109,7 +113,11 @@ export class Dialog extends React.Component<Props> {
                             <Paper
                                 {...rest}
                                 tabIndex={-1}
-                                className={classNames(rest.className, classes.root)}
+                                className={classNames(rest.className, classes.root, {
+                                    [classes.small]: size === 'small',
+                                    [classes.medium]: size === 'medium',
+                                    [classes.large]: size === 'large'
+                                })}
                             >
                                 {children}
 
@@ -131,8 +139,8 @@ export class Dialog extends React.Component<Props> {
                             </Paper>
                         </Transition>
                     </div>
-                </Overlay>
-            </DialogContext.Provider>
+                </DialogContext.Provider>
+            </Overlay>
         );
     }
 }

@@ -28,6 +28,18 @@
     margin-right: auto;
 }
 
+.small {
+    width: calc(var(--gs-spacing-unit) * 40);
+}
+
+.medium {
+    width: calc(var(--gs-spacing-unit) * 60);
+}
+
+.large {
+    width: calc(var(--gs-spacing-unit) * 80);
+}
+
 .overlayScrollable .container {
     display: block;
     height: 100%;

@@ -35,7 +35,7 @@ export const DialogBody = (props: Props) => {
                 <MarginBox
                     {...rest}
                     className={classNames(rest.className, classes.root, {
-                        [classes.scrollable]: !dialogContext.compact
+                        [classes.scrollable]: dialogContext.scrollable
                     })}
                 />
             )}
