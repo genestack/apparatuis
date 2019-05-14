@@ -9,12 +9,12 @@ import contains from 'dom-helpers/query/contains';
 import * as React from 'react';
 
 import {chain} from '../../utils/chain';
-import {debounce} from '../../utils/debounce';
+import {debounce, Debounced} from '../../utils/debounce';
 import {RootRef} from '../root-ref';
 
 import {Props as TooltipProps} from './tooltip';
 
-const OPEN_DEBOUNCE_DURATION = 160;
+const DEFAULT_OPEN_DELAY = 500;
 
 interface ChildProps {
     onMouseEnter?: React.MouseEventHandler;
@@ -40,6 +40,8 @@ export interface Props {
     disableFocusListener?: boolean;
     /** Disable mouse events listener */
     disableHoverListener?: boolean;
+    /** Delay before tooltip will be shown (default 500ms) */
+    openDelay?: number;
 }
 
 interface State {
@@ -59,6 +61,18 @@ export class TooltipHandler extends React.Component<Props, State> {
         exited: true
     };
 
+    private openDebounced: Debounced<() => void>;
+
+    constructor(props: Props) {
+        super(props);
+
+        const {openDelay = DEFAULT_OPEN_DELAY} = props;
+
+        this.openDebounced = debounce(() => {
+            this.open();
+        }, openDelay);
+    }
+
     public componentWillUnmount() {
         window.removeEventListener('mousemove', this.handleWindowMouseMove);
         this.openDebounced.cancel();
@@ -73,10 +87,6 @@ export class TooltipHandler extends React.Component<Props, State> {
     public open() {
         this.setState({open: true, exited: false});
     }
-
-    private openDebounced = debounce(() => {
-        this.open();
-    }, OPEN_DEBOUNCE_DURATION);
 
     private handleWindowMouseMove = (event: MouseEvent) => {
         if (

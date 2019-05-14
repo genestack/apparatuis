@@ -7,7 +7,8 @@
 ### Added
 
 -   Add `href` property to `Button`, `HeaderItem`, `ListItem` and `MenuItem`
-    to make they render as anchor element
+    to make they render as anchor element.
+-   [TooltipHandler] Add `openDelay` property.
 
 ## [8.0.0-alpha.6] - 2019-05-04
 
