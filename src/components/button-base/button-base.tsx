@@ -19,9 +19,11 @@ interface TargetProps {
     onKeyDown?: React.KeyboardEventHandler;
     onKeyUp?: React.KeyboardEventHandler;
     tabIndex?: number;
+    href?: string;
 }
 
-type DefaultTargetProps = React.HTMLAttributes<HTMLElement>;
+type DefaultTargetProps = React.AnchorHTMLAttributes<HTMLElement> &
+    React.ButtonHTMLAttributes<HTMLElement>;
 
 interface ButtonBaseProps {
     /** It `true` button does not react on clicks */
@@ -86,15 +88,17 @@ export class ButtonBase<T extends TargetProps = DefaultTargetProps> extends Reac
     };
 
     public render() {
+        const props = this.props as Props;
+
         const {
-            as: Component = 'div',
+            as: Component = typeof props.href === 'string' ? 'a' : 'div',
             activeClassName,
             disabled,
             disableListeners,
             tabIndex = 0,
             type = 'button',
             ...rest
-        } = this.props as Props<React.ButtonHTMLAttributes<HTMLButtonElement>>;
+        } = props;
 
         const buttonProps: React.ButtonHTMLAttributes<HTMLButtonElement> = {};
         const buttonLikeProps: TargetProps = {};
@@ -102,7 +106,9 @@ export class ButtonBase<T extends TargetProps = DefaultTargetProps> extends Reac
         if (Component === 'button') {
             buttonProps.disabled = disabled;
             buttonProps.type = type;
-        } else {
+        }
+
+        if (Component !== 'a' && Component !== 'button') {
             buttonLikeProps.onClick = this.handleClick;
 
             if (!disabled && !disableListeners) {

@@ -10,6 +10,7 @@
 .root {
     cursor: pointer;
     z-index: 0;
+    text-decoration: none;
 }
 
 .root:focus {

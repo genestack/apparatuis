@@ -17,7 +17,10 @@ import {Typography} from '../typography';
 import {ButtonContext} from './button-context';
 import * as styles from './button.module.css';
 
-type TargetProps = React.ButtonHTMLAttributes<HTMLButtonElement>;
+type ButtonProps = React.ButtonHTMLAttributes<HTMLElement>;
+type AnchorProps = React.AnchorHTMLAttributes<HTMLElement>;
+
+type TargetProps = ButtonProps & AnchorProps;
 
 /** Button public properties */
 export interface Props extends TargetProps, WithClasses<keyof typeof styles> {
@@ -82,11 +85,13 @@ export const Button = (props: Props) => {
                             </div>
                         ) : null;
 
+                        const Component = typeof rest.href === 'string' ? 'a' : 'button';
+
                         return (
                             <Typography<TargetProps>
-                                type="button"
+                                type={Component === 'button' ? 'button' : undefined}
                                 {...rest}
-                                as="button"
+                                as={Component}
                                 tabIndex={disabled ? -1 : tabIndex}
                                 disabled={disabled}
                                 className={classNames(

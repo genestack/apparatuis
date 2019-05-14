@@ -30,4 +30,15 @@ describe('<Button />', () => {
         app.mount(<Button icon={<div id="icon" />} />);
         expect(document.getElementById('icon')).toBeTruthy();
     });
+
+    it('should render button element by default', () => {
+        app.mount(<Button id="test" />);
+        expect(document.getElementById('test')).toBeInstanceOf(HTMLButtonElement);
+    });
+
+    it('should render anchor element if href is passed', () => {
+        app.mount(<Button id="test" href="foo" />);
+        expect(document.getElementById('test')).toBeInstanceOf(HTMLAnchorElement);
+        expect(document.getElementById('test')).toHaveProperty('href', 'http://localhost/foo');
+    });
 });

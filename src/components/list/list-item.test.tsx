@@ -5,34 +5,46 @@
  * The copyright notice above does not evidence any
  * actual or intended publication of such source code.
  */
-import {mount} from 'enzyme';
 import * as React from 'react';
+
+import {createTestApp} from '../../../test-utils/create-test-app';
 
 import {ListItem} from './list-item';
 
+const app = createTestApp();
+
+beforeEach(app.beforeEach);
+afterEach(app.afterEach);
+
 describe('<ListItem />', () => {
-    test('should render div HTML element', () => {
-        const wrapper = mount(<ListItem />);
+    it('should render div HTML element', () => {
+        const wrapper = app.mount(<ListItem />);
         expect(wrapper.find('div')).toHaveLength(1);
     });
 
-    test('should be focusable', () => {
-        const wrapper = mount(<ListItem />);
+    it('should be focusable', () => {
+        const wrapper = app.mount(<ListItem />);
         expect(wrapper.find('div').props().tabIndex).toBe(0);
     });
 
-    test('should be not focusable if disabled', () => {
-        const wrapper = mount(<ListItem disabled />);
+    it('should be not focusable if disabled', () => {
+        const wrapper = app.mount(<ListItem disabled />);
         expect(wrapper.find('div').props().tabIndex).toBe(-1);
     });
 
-    test('should accept tabIndex', () => {
-        const wrapper = mount(<ListItem tabIndex={2} />);
+    it('should accept tabIndex', () => {
+        const wrapper = app.mount(<ListItem tabIndex={2} />);
         expect(wrapper.find('div').props().tabIndex).toBe(2);
     });
 
-    test('should render custom elements', () => {
-        const wrapper = mount(<ListItem as="button" />);
+    it('should render custom elements', () => {
+        const wrapper = app.mount(<ListItem as="button" />);
         expect(wrapper.find('button')).toHaveLength(1);
+    });
+
+    it('should render anchor if href property passed', () => {
+        app.mount(<ListItem id="test" href="foo" />);
+        expect(document.getElementById('test')).toBeInstanceOf(HTMLAnchorElement);
+        expect(document.getElementById('test')).toHaveProperty('href', 'http://localhost/foo');
     });
 });

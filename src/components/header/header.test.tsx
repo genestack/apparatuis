@@ -50,10 +50,10 @@ describe('<Header />', () => {
     });
 });
 
-describe('<HeaderButton />', () => {
+describe('<HeaderItem />', () => {
     it('should render a div by default', () => {
         setup();
-        expect(document.getElementById('button')!.tagName).toBe('DIV');
+        expect(document.getElementById('button')).toBeInstanceOf(HTMLDivElement);
     });
 
     it('should focus to the next button on ArrowRight keydown', () => {
@@ -104,9 +104,15 @@ describe('<HeaderButton />', () => {
         const wrapper = app.mount(<HeaderItem>string</HeaderItem>);
         expect(wrapper.find(Typography)).toHaveLength(1);
     });
+
+    it('should render anchor element if `href` is passed', () => {
+        app.mount(<HeaderItem id="test" href="foo" />);
+        expect(document.getElementById('test')).toBeInstanceOf(HTMLAnchorElement);
+        expect(document.getElementById('test')).toHaveProperty('href', 'http://localhost/foo');
+    });
 });
 
-describe('<HeaderItem />', () => {
+describe('<HeaderBlock />', () => {
     it('should render a Typography if children is a string', () => {
         const wrapper = app.mount(<HeaderBlock>string</HeaderBlock>);
         expect(wrapper.find(Typography)).toHaveLength(1);
