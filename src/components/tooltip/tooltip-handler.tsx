@@ -14,7 +14,7 @@ import {RootRef} from '../root-ref';
 
 import {Props as TooltipProps} from './tooltip';
 
-const OPEN_DEBOUNCE_DURATION = 160;
+const DEFAULT_OPEN_DELAY = 500;
 
 interface ChildProps {
     onMouseEnter?: React.MouseEventHandler;
@@ -40,8 +40,8 @@ export interface Props {
     disableFocusListener?: boolean;
     /** Disable mouse events listener */
     disableHoverListener?: boolean;
-    /** Timeout duration before tooltip will shown */
-    openDuration?: number;
+    /** Delay before tooltip will shown */
+    openDelay?: number;
 }
 
 interface State {
@@ -66,11 +66,11 @@ export class TooltipHandler extends React.Component<Props, State> {
     constructor(props: Props) {
         super(props);
 
-        const {openDuration = OPEN_DEBOUNCE_DURATION} = props;
+        const {openDelay = DEFAULT_OPEN_DELAY} = props;
 
         this.openDebounced = debounce(() => {
             this.open();
-        }, openDuration);
+        }, openDelay);
     }
 
     public componentWillUnmount() {
