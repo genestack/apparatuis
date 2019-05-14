@@ -95,7 +95,6 @@ handleFormSubmit = (event) => {
     <Button onClick={handleDialogOpen}>Open Form Dialog</Button>
     <Dialog
         open={state.dialogOpen}
-        compact
         hideCloseButton
         transitionComponent={FormExampleTransition}
         style={{width: 400}}
@@ -116,7 +115,8 @@ handleFormSubmit = (event) => {
                     type="password"
                     name="password"
                     autoComplete="off"
-                    style={{margin: '4px 0', width: '100%'}}
+                    fullWidth
+                    style={{margin: '4px 0'}}
                 />
             </DialogBody>
             <DialogFooter>
@@ -141,14 +141,15 @@ handleFormSubmit = (event) => {
 ```js
 initialState = {
     dialogOpen: false,
-    compactDialog: false,
+    scrollableDialog: false,
     showCloseButton: true,
     showLongBody: false,
     showTitle: true,
     showSubtitle: true,
     showBody: true,
     showList: true,
-    showFooter: true
+    showFooter: true,
+    size: 'auto'
 };
 
 renderStateCheckbox = (name) => (
@@ -156,6 +157,15 @@ renderStateCheckbox = (name) => (
         type="checkbox"
         checked={state[name]}
         onChange={(event) => setState({[name]: event.target.checked})}
+    />
+);
+
+renderSizeRadio = (value) => (
+    <input
+        name="size"
+        type="radio"
+        checked={state.size === value}
+        onChange={(event) => setState({size: value})}
     />
 );
 
@@ -192,8 +202,9 @@ const samples = [
     <Dialog
         open={state.dialogOpen}
         onClose={handleDialogClose}
-        compact={state.compactDialog}
+        scrollable={state.scrollableDialog}
         hideCloseButton={!state.showCloseButton}
+        size={state.size}
     >
         {state.showTitle || state.showSubtitle ? (
             <DialogHeader>
@@ -280,42 +291,68 @@ const samples = [
             </DialogFooter>
         ) : null}
 
-        <Paper style={{position: 'absolute', right: -16, top: 0, transform: 'translateX(100%)'}}>
-            <List>
+        <PageContent
+            as={Paper}
+            style={{position: 'absolute', right: -16, top: 0, transform: 'translateX(100%)'}}
+        >
+            <PageFullWidth>
+                <List>
+                    <ListItem as="label">
+                        <ListItemCell>{renderStateCheckbox('showCloseButton')}</ListItemCell>
+                        <ListItemText>Close Button</ListItemText>
+                    </ListItem>
+                    <ListItem as="label">
+                        <ListItemCell>{renderStateCheckbox('scrollableDialog')}</ListItemCell>
+                        <ListItemText>Scrollable</ListItemText>
+                    </ListItem>
+                    <ListItem as="label">
+                        <ListItemCell>{renderStateCheckbox('showLongBody')}</ListItemCell>
+                        <ListItemText>Long Body</ListItemText>
+                    </ListItem>
+                    <ListItem as="label">
+                        <ListItemCell>{renderStateCheckbox('showTitle')}</ListItemCell>
+                        <ListItemText>Title</ListItemText>
+                    </ListItem>
+                    <ListItem as="label">
+                        <ListItemCell>{renderStateCheckbox('showSubtitle')}</ListItemCell>
+                        <ListItemText>Subtitle</ListItemText>
+                    </ListItem>
+                    <ListItem as="label">
+                        <ListItemCell>{renderStateCheckbox('showBody')}</ListItemCell>
+                        <ListItemText>Body</ListItemText>
+                    </ListItem>
+                    <ListItem as="label">
+                        <ListItemCell>{renderStateCheckbox('showList')}</ListItemCell>
+                        <ListItemText>List</ListItemText>
+                    </ListItem>
+                    <ListItem as="label">
+                        <ListItemCell>{renderStateCheckbox('showFooter')}</ListItemCell>
+                        <ListItemText>Footer</ListItemText>
+                    </ListItem>
+                </List>
+            </PageFullWidth>
+            <Typography variant="section" box="paragraph">
+                Size:
+            </Typography>
+            <PageFullWidth>
                 <ListItem as="label">
-                    <ListItemCell>{renderStateCheckbox('showCloseButton')}</ListItemCell>
-                    <ListItemText>Close Button</ListItemText>
+                    <ListItemCell>{renderSizeRadio('auto')}</ListItemCell>
+                    <ListItemText>Auto</ListItemText>
                 </ListItem>
                 <ListItem as="label">
-                    <ListItemCell>{renderStateCheckbox('compactDialog')}</ListItemCell>
-                    <ListItemText>Compact</ListItemText>
+                    <ListItemCell>{renderSizeRadio('small')}</ListItemCell>
+                    <ListItemText>Small</ListItemText>
                 </ListItem>
                 <ListItem as="label">
-                    <ListItemCell>{renderStateCheckbox('showLongBody')}</ListItemCell>
-                    <ListItemText>Long Body</ListItemText>
+                    <ListItemCell>{renderSizeRadio('medium')}</ListItemCell>
+                    <ListItemText>Medium</ListItemText>
                 </ListItem>
                 <ListItem as="label">
-                    <ListItemCell>{renderStateCheckbox('showTitle')}</ListItemCell>
-                    <ListItemText>Title</ListItemText>
+                    <ListItemCell>{renderSizeRadio('large')}</ListItemCell>
+                    <ListItemText>Large</ListItemText>
                 </ListItem>
-                <ListItem as="label">
-                    <ListItemCell>{renderStateCheckbox('showSubtitle')}</ListItemCell>
-                    <ListItemText>Subtitle</ListItemText>
-                </ListItem>
-                <ListItem as="label">
-                    <ListItemCell>{renderStateCheckbox('showBody')}</ListItemCell>
-                    <ListItemText>Body</ListItemText>
-                </ListItem>
-                <ListItem as="label">
-                    <ListItemCell>{renderStateCheckbox('showList')}</ListItemCell>
-                    <ListItemText>List</ListItemText>
-                </ListItem>
-                <ListItem as="label">
-                    <ListItemCell>{renderStateCheckbox('showFooter')}</ListItemCell>
-                    <ListItemText>Footer</ListItemText>
-                </ListItem>
-            </List>
-        </Paper>
+            </PageFullWidth>
+        </PageContent>
     </Dialog>
 </PageContent>;
 ```

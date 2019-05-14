@@ -8,7 +8,7 @@
 import * as React from 'react';
 
 interface DialogContextValue {
-    compact: boolean;
+    scrollable: boolean;
     hideCloseButton: boolean;
 }
 
@@ -17,6 +17,6 @@ interface DialogContextValue {
  * It is used to inform nested dialog elements about dialog settings.
  */
 export const DialogContext = React.createContext<DialogContextValue>({
-    compact: false,
+    scrollable: false,
     hideCloseButton: false
 });

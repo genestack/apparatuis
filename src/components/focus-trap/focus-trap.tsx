@@ -88,19 +88,12 @@ export class FocusTrap extends React.Component<Props> {
     private activeElementOnMount: HTMLElement | null = null;
 
     public componentDidMount() {
-        const trapElement = this.trapRef.current;
+        if (document.activeElement instanceof HTMLElement) {
+            this.activeElementOnMount = document.activeElement;
+        }
 
-        if (this.props.focusOnMount && trapElement) {
-            if (document.activeElement instanceof HTMLElement) {
-                this.activeElementOnMount = document.activeElement;
-            }
-
-            if (isElementFocusable(trapElement)) {
-                focusElement(trapElement);
-            } else {
-                const focusableElements = getFocusableElements(trapElement);
-                focusElement(focusableElements.item(0));
-            }
+        if (this.props.focusOnMount) {
+            this.trapFocus();
         }
     }
 
@@ -109,6 +102,26 @@ export class FocusTrap extends React.Component<Props> {
 
         if (activeElementOnMount && contains(document, activeElementOnMount)) {
             activeElementOnMount.focus();
+        }
+    }
+
+    private trapFocus() {
+        const trapElement = this.trapRef.current;
+
+        if (!trapElement) {
+            return;
+        }
+
+        // do not change focus if active element already inside trap element
+        if (document.activeElement && contains(trapElement, document.activeElement)) {
+            return;
+        }
+
+        if (isElementFocusable(trapElement)) {
+            focusElement(trapElement);
+        } else {
+            const focusableElements = getFocusableElements(trapElement);
+            focusElement(focusableElements.item(0));
         }
     }
 

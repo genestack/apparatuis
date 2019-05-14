@@ -9,6 +9,15 @@
 -   Add `href` property to `Button`, `HeaderItem`, `ListItem` and `MenuItem`
     to make they render as anchor element.
 -   [TooltipHandler] Add `openDelay` property.
+-   [Dialog] Add `size`, `scrollable` properties.
+
+### Removed
+
+-   [Dialog] Remove `compact` property.
+
+### Fixed
+
+-   [Dialog] Fix `autoFocus` inputs on open.
 
 ## [8.0.0-alpha.6] - 2019-05-04
 

@@ -121,16 +121,16 @@ describe('<Dialog />', () => {
                 .find('#dialog-footer')
                 .find(Divider)
                 .filterWhere((component) => component.prop('variant') === 'stroke')
-        ).toHaveLength(1);
+        ).toHaveLength(0);
     });
 
-    it('should not render footer divider in compact mode', () => {
+    it('should not render footer divider in scrollable mode', () => {
         expect(
-            setup({compact: true})
+            setup({scrollable: true})
                 .find('#dialog-footer')
                 .find(Divider)
                 .filterWhere((component) => component.prop('variant') === 'stroke')
-        ).toHaveLength(0);
+        ).toHaveLength(1);
     });
 
     it('should render header divider', () => {
@@ -139,15 +139,15 @@ describe('<Dialog />', () => {
                 .find('#dialog-header')
                 .find(Divider)
                 .filterWhere((component) => component.prop('variant') === 'stroke')
-        ).toHaveLength(1);
+        ).toHaveLength(0);
     });
 
-    it('should not render header divider in compact mode', () => {
+    it('should not render header divider in scrollable mode', () => {
         expect(
-            setup({compact: true})
+            setup({scrollable: true})
                 .find('#dialog-header')
                 .find(Divider)
                 .filterWhere((component) => component.prop('variant') === 'stroke')
-        ).toHaveLength(0);
+        ).toHaveLength(1);
     });
 });
