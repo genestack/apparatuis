@@ -356,3 +356,40 @@ const samples = [
     </Dialog>
 </PageContent>;
 ```
+
+#### Dialog with auto focusable input
+
+```js
+initialState = {
+    open: false
+};
+
+handleDialogOpen = () => {
+    setState({open: true});
+};
+
+handleDialogClose = () => {
+    setState({open: false});
+};
+
+<PageContent as={Paper}>
+    <Button onClick={handleDialogOpen}>Open dialog</Button>
+
+    <Dialog open={state.open} onClose={handleDialogClose}>
+        <DialogHeader>
+            <Typography variant="title">Dialog with autoFocus</Typography>
+        </DialogHeader>
+
+        <DialogBody>
+            <Typography box="paragraph">
+                This input should be in focus when dialog opens:
+            </Typography>
+            <Input autoFocus fullWidth />
+        </DialogBody>
+
+        <DialogFooter>
+            <Button onClick={handleDialogClose}>Close</Button>
+        </DialogFooter>
+    </Dialog>
+</PageContent>;
+```

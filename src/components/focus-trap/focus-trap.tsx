@@ -87,11 +87,18 @@ export class FocusTrap extends React.Component<Props> {
     private trapRef = React.createRef<HTMLDivElement>();
     private activeElementOnMount: HTMLElement | null = null;
 
-    public componentDidMount() {
-        if (document.activeElement instanceof HTMLElement) {
+    constructor(props: Props) {
+        super(props);
+
+        // remember active element before mounting because
+        // focus trap could contains inputs with `autoFocus`
+        // which will steal focus on mount
+        if (props.focusOnMount && document.activeElement instanceof HTMLElement) {
             this.activeElementOnMount = document.activeElement;
         }
+    }
 
+    public componentDidMount() {
         if (this.props.focusOnMount) {
             this.trapFocus();
         }
@@ -112,7 +119,7 @@ export class FocusTrap extends React.Component<Props> {
             return;
         }
 
-        // do not change focus if active element already inside trap element
+        // do not change focus if active element is already inside the trap element
         if (document.activeElement && contains(trapElement, document.activeElement)) {
             return;
         }
