@@ -40,7 +40,7 @@ export interface Props {
     disableFocusListener?: boolean;
     /** Disable mouse events listener */
     disableHoverListener?: boolean;
-    /** Delay before tooltip will shown */
+    /** Delay before tooltip will be shown (default 500ms) */
     openDelay?: number;
 }
 
