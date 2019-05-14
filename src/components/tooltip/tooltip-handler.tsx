@@ -9,7 +9,7 @@ import contains from 'dom-helpers/query/contains';
 import * as React from 'react';
 
 import {chain} from '../../utils/chain';
-import {debounce} from '../../utils/debounce';
+import {debounce, Debounced} from '../../utils/debounce';
 import {RootRef} from '../root-ref';
 
 import {Props as TooltipProps} from './tooltip';
@@ -40,6 +40,8 @@ export interface Props {
     disableFocusListener?: boolean;
     /** Disable mouse events listener */
     disableHoverListener?: boolean;
+    /** Timeout duration before tooltip will shown */
+    openDuration?: number;
 }
 
 interface State {
@@ -59,6 +61,18 @@ export class TooltipHandler extends React.Component<Props, State> {
         exited: true
     };
 
+    private openDebounced: Debounced<() => void>;
+
+    constructor(props: Props) {
+        super(props);
+
+        const {openDuration = OPEN_DEBOUNCE_DURATION} = props;
+
+        this.openDebounced = debounce(() => {
+            this.open();
+        }, openDuration);
+    }
+
     public componentWillUnmount() {
         window.removeEventListener('mousemove', this.handleWindowMouseMove);
         this.openDebounced.cancel();
@@ -73,10 +87,6 @@ export class TooltipHandler extends React.Component<Props, State> {
     public open() {
         this.setState({open: true, exited: false});
     }
-
-    private openDebounced = debounce(() => {
-        this.open();
-    }, OPEN_DEBOUNCE_DURATION);
 
     private handleWindowMouseMove = (event: MouseEvent) => {
         if (
