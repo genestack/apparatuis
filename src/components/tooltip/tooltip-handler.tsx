@@ -23,7 +23,9 @@ interface ChildProps {
     onBlur?: React.FocusEventHandler;
 }
 
-type TooltipProp = React.ReactElement<TooltipProps> | (() => React.ReactElement<TooltipProps>);
+type TooltipElement = React.ReactElement<TooltipProps> | null | undefined;
+type TooltipProp = TooltipElement | (() => TooltipElement);
+
 type ChildrenRenderProp =
     | ((state: {open: boolean}) => React.ReactElement<ChildProps>)
     | React.ReactElement<ChildProps>;
@@ -31,7 +33,7 @@ type ChildrenRenderProp =
 /** TooltipHandler public properties */
 export interface Props {
     /** Tooltip React element that will be shown on tooltip open */
-    tooltip: TooltipProp;
+    tooltip?: TooltipProp;
     /** Tooltip will be shown near reference element passed as children */
     children: ChildrenRenderProp;
     /** Disable all listeners that could open a tooltip */

@@ -18,6 +18,7 @@
 ### Fixed
 
 -   [Dialog] Fix `autoFocus` inputs on open.
+-   [TooltipHandler] Fix typings for `tooltip` property.
 
 ## [8.0.0-alpha.6] - 2019-05-04
 
