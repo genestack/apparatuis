@@ -2,6 +2,12 @@
 
 ## [Unreleased]
 
+## [8.0.0-alpha.8] - 2019-05-17
+
+### Fixed
+
+-   Fixed typings for missed css modules
+
 ## [8.0.0-alpha.7] - 2019-05-14
 
 ### Added
