@@ -47,7 +47,7 @@ export class TextareaAutosize extends React.Component<Props> {
 
         return (
             <ReactTextareaAutosize
-                className={classNames(styles['textarea-autosize'], className)}
+                className={classNames(styles.textareaAutosize, className)}
                 {...omited}
                 onChange={this.onChange}
             />
