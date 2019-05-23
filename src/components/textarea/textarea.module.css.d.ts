@@ -5,4 +5,7 @@
  * The copyright notice above does not evidence any
  * actual or intended publication of such source code.
  */
-export {TextareaAutosize, Props as TextareaAutosizeProps} from './textarea-autosize';
+
+export const root: string;
+export const fullWidth: string;
+export const invalid: string;
