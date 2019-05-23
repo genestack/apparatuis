@@ -5,52 +5,54 @@
  * The copyright notice above does not evidence any
  * actual or intended publication of such source code.
  */
-
 import classNames from 'classnames';
 import React from 'react';
-// tslint:disable-next-line:match-default-export-name
-import ReactTextareaAutosize from 'react-textarea-autosize';
+import TextareaAutosize, {TextareaAutosizeProps} from 'react-textarea-autosize';
 
+import {chain} from '../../utils/chain';
 import {Omit} from '../../utils/omit';
+import {mergeClassesProps, WithClasses} from '../../utils/styles';
 
-import * as styles from './textarea-autosize.module.css';
-
-type OnValueChanger = (value: number | string | string[]) => any;
-
-type TargetProps = ReactTextareaAutosize['props'];
+import * as styles from './textarea.module.css';
+type TargetProps = Omit<TextareaAutosizeProps, 'ref' | 'inputRef'>;
 
 /** Textarea Autosize public properties */
-export interface Props extends Omit<TargetProps, 'onChange'> {
-    onChange?: (event: React.ChangeEvent<HTMLTextAreaElement>, value?: any) => void;
-    onValueChange?: OnValueChanger;
+export interface Props extends TargetProps, WithClasses<keyof typeof styles> {
+    /** If `true` input has invalid styles */
+    invalid?: boolean;
+    /** If `true` input has width: 100% */
+    fullWidth?: boolean;
+    /** Custom change event handler */
+    onValueChange?: (value: string) => void;
+    inputRef?: React.Ref<HTMLTextAreaElement>;
 }
 
 /**
  * React Textarea Autosize wrapper
  */
-export class TextareaAutosize extends React.Component<Props> {
-    private onChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
-        const {onChange, onValueChange, name} = this.props;
-        const {value} = event.currentTarget;
+export const Textarea = (props: Props) => {
+    const {invalid, fullWidth, onValueChange, classes, inputRef, ...rest} = mergeClassesProps(
+        props,
+        styles
+    );
 
-        if (onChange) {
-            onChange(event, name ? {[name]: value} : value);
-        }
+    const handleChange: React.ChangeEventHandler<HTMLTextAreaElement> = (event) => {
+        const {value} = event.currentTarget;
 
         if (onValueChange) {
             onValueChange(value);
         }
     };
 
-    public render() {
-        const {onChange, onValueChange, className, ...omited} = this.props as any;
-
-        return (
-            <ReactTextareaAutosize
-                className={classNames(styles.textareaAutosize, className)}
-                {...omited}
-                onChange={this.onChange}
-            />
-        );
-    }
-}
+    return (
+        <TextareaAutosize
+            {...rest}
+            inputRef={inputRef as any}
+            onChange={chain(rest.onChange, handleChange)}
+            className={classNames(rest.className, classes.root, {
+                [classes.fullWidth]: fullWidth,
+                [classes.invalid]: invalid
+            })}
+        />
+    );
+};

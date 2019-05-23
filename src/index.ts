@@ -11,7 +11,7 @@ export * from './components/input';
 export * from './components/paginator';
 export * from './components/select';
 export * from './components/tooltip';
-export * from './components/textarea-autosize';
+export * from './components/textarea';
 export * from './components/autocomplete-input';
 export * from './components/fade';
 export * from './components/shake';

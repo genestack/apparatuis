@@ -2,6 +2,16 @@
 
 ## [Unreleased]
 
+## [8.0.0-alpha.9] - 2019-05-23
+
+### Changed
+
+-   Rename `<TextareaAutosize />` to `<Textarea />`
+
+### Added
+
+-   `fullWidth` and `invalid` properties to `<Textarea />`
+
 ## [8.0.0-alpha.8] - 2019-05-17
 
 ### Fixed

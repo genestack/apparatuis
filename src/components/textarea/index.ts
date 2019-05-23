@@ -5,4 +5,4 @@
  * The copyright notice above does not evidence any
  * actual or intended publication of such source code.
  */
-export {TextareaAutosize, Props as TextareaAutosizeProps} from './textarea-autosize';
+export {Textarea, Props as TextareaProps} from './textarea';

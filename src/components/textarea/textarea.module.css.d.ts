@@ -6,4 +6,6 @@
  * actual or intended publication of such source code.
  */
 
-export const textareaAutosize: string;
+export const root: string;
+export const fullWidth: string;
+export const invalid: string;
