@@ -1,0 +1,73 @@
+/*
+ * Copyright (c) 2011-2019 Genestack Limited
+ * All Rights Reserved
+ * THIS IS UNPUBLISHED PROPRIETARY SOURCE CODE OF GENESTACK LIMITED
+ * The copyright notice above does not evidence any
+ * actual or intended publication of such source code.
+ */
+@import "../../variables.css";
+
+.root {
+    color: var(--gs-color-action-text);
+    text-decoration: none;
+    position: relative;
+    cursor: pointer;
+    outline: none;
+}
+
+.root:after {
+    content: "";
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    right: 0;
+    display: none;
+}
+
+.root:hover {
+    color: var(--gs-color-action-hover);
+}
+
+.root:active,
+.root.active {
+    color: var(--gs-color-action-text);
+}
+
+.root:focus:after {
+    display: block;
+    border-top: 3px solid var(--gs-color-action-25);
+}
+
+.root:disabled,
+.root.disabled {
+    color: var(--gs-color-grey-50);
+    cursor: not-allowed;
+}
+
+.pseudo:after {
+    display: block;
+    bottom: -1px;
+    border-top: 1px dotted var(--gs-color-action);
+}
+
+.pseudo:focus:after {
+    border-top: 2px dotted var(--gs-color-action-25);
+}
+
+.external {
+    color: var(--gs-color-action);
+}
+
+.external:after {
+    display: block;
+    bottom: -1px;
+    border-top: 1px solid rgba(102, 153, 255, 0.5);
+}
+
+.external:hover:after {
+    border-top: 1px solid var(--gs-color-action-hover);
+}
+
+.external:focus:after {
+    border-top: 2px solid var(--gs-color-action-25);
+}
