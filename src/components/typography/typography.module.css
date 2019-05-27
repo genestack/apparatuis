@@ -16,6 +16,12 @@
     font-family: var(--gs-font-family);
 }
 
+.ellipsis {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
 /** box */
 
 .inline {

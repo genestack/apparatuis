@@ -51,6 +51,10 @@ interface TypographyProps extends WithClasses<keyof typeof styles> {
     /** Defines a color of the text */
     status?: 'success' | 'warning' | 'error';
     /**
+     * Adds ellipsis style to element
+     */
+    ellipsis?: boolean;
+    /**
      * You could redefine the target component by passing ReactType.
      *
      * Default: `"div"`
@@ -87,6 +91,7 @@ export function Typography<T extends TargetProps = DefaultTargetProps>(props: Pr
                     classes,
                     className,
                     status,
+                    ellipsis,
                     ...rest
                 } = mergeClassesProps(props as Props<TargetProps>, styles);
 
@@ -110,7 +115,9 @@ export function Typography<T extends TargetProps = DefaultTargetProps>(props: Pr
 
                             [classes.success]: status === 'success',
                             [classes.warning]: status === 'warning',
-                            [classes.error]: status === 'error'
+                            [classes.error]: status === 'error',
+
+                            [classes.ellipsis]: ellipsis
                         })}
                     />
                 );

@@ -2,6 +2,12 @@
 
 ## [Unreleased]
 
+## [8.0.0-alpha.10] - 2019-05-27
+
+### Added
+
+-   [Typography] Add `ellipsis` property
+
 ## [8.0.0-alpha.9] - 2019-05-23
 
 ### Changed

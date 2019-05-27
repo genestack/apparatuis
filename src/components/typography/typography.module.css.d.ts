@@ -7,6 +7,7 @@
  */
 /** default body block variant */
 export const root: string;
+export const ellipsis: string;
 
 /** quiet */
 export const quiet: string;
