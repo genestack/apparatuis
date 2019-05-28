@@ -6,8 +6,3 @@
  * actual or intended publication of such source code.
  */
 export const root: string;
-export const disabled: string;
-export const active: string;
-export const focus: string;
-export const pseudo: string;
-export const external: string;

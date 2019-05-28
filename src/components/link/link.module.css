@@ -13,29 +13,22 @@
     position: relative;
     cursor: pointer;
     outline: none;
-}
-
-.root:after {
-    content: "";
-    position: absolute;
-    bottom: -2px;
-    left: 0;
-    right: 0;
-    display: none;
+    font-size: inherit;
+    font-weight: inherit;
 }
 
 .root:hover {
     color: var(--gs-color-action-hover);
 }
 
+.root:focus,
+.root.focus {
+    border-bottom: 3px solid var(--gs-color-action-25);
+}
+
 .root:active,
 .root.active {
     color: var(--gs-color-action-text);
-}
-
-.root:focus:after {
-    display: block;
-    border-top: 3px solid var(--gs-color-action-25);
 }
 
 .root:disabled,
@@ -44,30 +37,21 @@
     cursor: not-allowed;
 }
 
-.pseudo:after {
-    display: block;
-    bottom: -1px;
-    border-top: 1px dotted var(--gs-color-action);
+.pseudo {
+    border-bottom: 2px dotted var(--gs-color-action-25);
 }
 
-.pseudo:focus:after {
-    border-top: 2px dotted var(--gs-color-action-25);
+.pseudo:focus,
+.pseudo.focus {
+    border-bottom: 3px solid var(--gs-color-action-25);
 }
 
 .external {
     color: var(--gs-color-action);
+    border-bottom: 2px solid var(--gs-color-action-25);
 }
 
-.external:after {
-    display: block;
-    bottom: -1px;
-    border-top: 1px solid rgba(102, 153, 255, 0.5);
-}
-
-.external:hover:after {
-    border-top: 1px solid var(--gs-color-action-hover);
-}
-
-.external:focus:after {
-    border-top: 2px solid var(--gs-color-action-25);
+.external:focus,
+.external.focus {
+    border-bottom: 3px solid var(--gs-color-action-25);
 }

@@ -8,6 +8,15 @@
 
 # Genestack Frontend UI Kit
 
+## Usage
+
+Import `genestack-ui/src/index.css` once at the application entry point
+to apply required global styles:
+
+```ts
+import 'genestack-ui/src/index.css';
+```
+
 ## Development
 
 To see UI kit demo run `npm start`.

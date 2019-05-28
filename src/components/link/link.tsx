@@ -20,6 +20,7 @@ export interface Props extends TargetProps, WithClasses<keyof typeof styles> {
     ellipsis?: boolean;
     active?: boolean;
     disabled?: boolean;
+    focus?: boolean;
     as?: React.ReactType<TargetProps>;
 }
 
@@ -30,15 +31,17 @@ export const Link = (props: Props) => {
         disabled,
         active,
         classes,
+        focus,
         ...rest
     } = mergeClassesProps(props, styles);
 
-    let {tabIndex} = rest;
+    let {tabIndex, href} = rest;
 
     if (disabled) {
-        tabIndex = -1;
+        href = undefined;
+        tabIndex = undefined;
     } else {
-        if (tabIndex === undefined && rest.href === undefined) {
+        if (tabIndex === undefined && href === undefined) {
             tabIndex = 0;
         }
     }
@@ -46,6 +49,7 @@ export const Link = (props: Props) => {
     return (
         <Typography<TargetProps>
             {...rest}
+            href={href}
             tabIndex={tabIndex}
             as={Component}
             box="inline"
@@ -53,7 +57,8 @@ export const Link = (props: Props) => {
                 [classes.pseudo]: variant === 'pseudo',
                 [classes.external]: variant === 'external',
                 [classes.disabled]: disabled,
-                [classes.active]: active
+                [classes.active]: active,
+                [classes.focus]: focus
             })}
         />
     );

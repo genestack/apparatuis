@@ -5,9 +5,12 @@
  * The copyright notice above does not evidence any
  * actual or intended publication of such source code.
  */
-export const root: string;
-export const disabled: string;
-export const active: string;
-export const focus: string;
-export const pseudo: string;
-export const external: string;
+@import "../../variables.css";
+
+.root {
+    color: var(--gs-color-black);
+    font-weight: normal;
+    font-family: var(--gs-font-family);
+    font-size: 14px;
+    line-height: 20px;
+}
