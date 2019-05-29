@@ -65,6 +65,13 @@
     border-bottom: 3px solid var(--gs-color-action-25);
 }
 
+.pseudo.disabled,
+.pseudo:disabled {
+    color: var(--gs-color-grey-50);
+    cursor: not-allowed;
+    border-bottom: 2px dotted var(--gs-color-grey-50);
+}
+
 .pseudo.inverted {
     color: var(--gs-color-action-inverted);
     border-bottom: 2px dotted var(--gs-color-action-inverted-50);
@@ -80,11 +87,11 @@
     border-bottom: 3px solid var(--gs-color-action-inverted-50);
 }
 
-.pseudo.inverted.root:disabled,
-.pseudo.inverted.root.disabled {
+.pseudo.inverted:disabled,
+.pseudo.inverted.disabled {
     color: var(--gs-color-grey);
     cursor: not-allowed;
-    border-bottom: 2px dotted var(--gs-color-action-inverted-50);
+    border-bottom: 2px dotted var(--gs-color-grey);
 }
 
 .external {
@@ -95,6 +102,13 @@
 .external:focus,
 .external.focus {
     border-bottom: 3px solid var(--gs-color-action-25);
+}
+
+.external:disabled,
+.external.disabled {
+    color: var(--gs-color-grey-50);
+    cursor: not-allowed;
+    border-bottom: 2px solid var(--gs-color-grey-50);
 }
 
 .external.inverted {
@@ -116,5 +130,5 @@
 .external.inverted.disabled {
     color: var(--gs-color-grey);
     cursor: not-allowed;
-    border-bottom: none;
+    border-bottom: 2px solid var(--gs-color-grey);
 }
