@@ -2,6 +2,15 @@
 
 ## [Unreleased]
 
+### Changed
+
+-   Update peer to `react@16.8`
+
+### Added
+
+-   Add `RootElement` component
+-   Add `Link` component
+
 ## [8.0.0-alpha.10] - 2019-05-27
 
 ### Added

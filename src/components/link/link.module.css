@@ -1,0 +1,120 @@
+/*
+ * Copyright (c) 2011-2019 Genestack Limited
+ * All Rights Reserved
+ * THIS IS UNPUBLISHED PROPRIETARY SOURCE CODE OF GENESTACK LIMITED
+ * The copyright notice above does not evidence any
+ * actual or intended publication of such source code.
+ */
+@import "../../variables.css";
+
+.root {
+    color: var(--gs-color-action-text);
+    text-decoration: none;
+    position: relative;
+    cursor: pointer;
+    outline: none;
+    font-size: inherit;
+    font-weight: inherit;
+}
+
+.root:hover {
+    color: var(--gs-color-action-hover);
+}
+
+.root:focus,
+.root.focus {
+    border-bottom: 3px solid var(--gs-color-action-25);
+}
+
+.root:active,
+.root.active {
+    color: var(--gs-color-action-text);
+}
+
+.root:disabled,
+.root.disabled {
+    color: var(--gs-color-grey-50);
+    cursor: not-allowed;
+}
+
+.inverted.root {
+    color: var(--gs-color-action-inverted);
+}
+
+.inverted.root:hover {
+    color: var(--gs-color-grey-background);
+}
+
+.inverted.root:focus,
+.inverted.root.focus {
+    border-bottom: 3px solid var(--gs-color-action-inverted-50);
+}
+
+.inverted.root:disabled,
+.inverted.root.disabled {
+    color: var(--gs-color-grey);
+    cursor: not-allowed;
+}
+
+.pseudo {
+    border-bottom: 2px dotted var(--gs-color-action-25);
+}
+
+.pseudo:focus,
+.pseudo.focus {
+    border-bottom: 3px solid var(--gs-color-action-25);
+}
+
+.pseudo.inverted {
+    color: var(--gs-color-action-inverted);
+    border-bottom: 2px dotted var(--gs-color-action-inverted-50);
+}
+
+.pseudo.inverted:hover {
+    color: var(--gs-color-action-inverted);
+    border-bottom: 2px dotted var(--gs-color-action-inverted);
+}
+
+.pseudo.inverted:focus,
+.pseudo.inverted.focus {
+    border-bottom: 3px solid var(--gs-color-action-inverted-50);
+}
+
+.pseudo.inverted.root:disabled,
+.pseudo.inverted.root.disabled {
+    color: var(--gs-color-grey);
+    cursor: not-allowed;
+    border-bottom: 2px dotted var(--gs-color-action-inverted-50);
+}
+
+.external {
+    color: var(--gs-color-action);
+    border-bottom: 2px solid var(--gs-color-action-25);
+}
+
+.external:focus,
+.external.focus {
+    border-bottom: 3px solid var(--gs-color-action-25);
+}
+
+.external.inverted {
+    color: var(--gs-color-action-inverted);
+    border-bottom: 2px solid var(--gs-color-action-inverted-50);
+}
+
+.external.inverted:hover {
+    color: var(--gs-color-action-inverted);
+    border-bottom: 2px solid var(--gs-color-action-inverted);
+}
+
+.external.inverted:focus,
+.external.inverted.focus {
+    border-bottom: 3px solid var(--gs-color-action-inverted-50);
+}
+
+.external.inverted:disabled,
+.external.inverted.disabled {
+    color: var(--gs-color-grey);
+    cursor: not-allowed;
+    border-bottom: none;
+}

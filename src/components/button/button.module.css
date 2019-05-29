@@ -49,7 +49,7 @@
 }
 
 .root.inverted:focus:after {
-    box-shadow: 0 0 0 2px rgba(102, 153, 255, 0.5);
+    box-shadow: 0 0 0 2px var(--gs-color-action-inverted-50);
 }
 
 .root.disabled:after,
