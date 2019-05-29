@@ -25,71 +25,71 @@ handleInvertedChange = (event) => setState({inverted: event.currentTarget.checke
                     <Controls>
                         <ControlsItem>
                             <Link disabled tabIndex={0}>
-                                Common Link (p)
+                                Common Disabled
                             </Link>
                         </ControlsItem>
                         <ControlsItem>
-                            <Link tabIndex={0}>Common Link (p)</Link>
+                            <Link tabIndex={0}>Common Link (qp)</Link>
                         </ControlsItem>
                         <ControlsItem focus>
-                            <Link focus>Common Link (p)</Link>
+                            <Link focus>Common Focused</Link>
                         </ControlsItem>
                     </Controls>
                     <Controls>
                         <ControlsItem>
                             <Link variant="pseudo" disabled tabIndex={0}>
-                                Pseudo Link (p)
+                                Pseudo Disabled
                             </Link>
                         </ControlsItem>
                         <ControlsItem>
                             <Link variant="pseudo" tabIndex={0}>
-                                Pseudo Link (p)
+                                Pseudo Link (qp)
                             </Link>
                         </ControlsItem>
                         <ControlsItem focus>
                             <Link variant="pseudo" focus>
-                                Pseudo Link (p)
+                                Pseudo focused
                             </Link>
                         </ControlsItem>
                     </Controls>
                     <Controls>
                         <ControlsItem>
                             <Link variant="external" disabled tabIndex={0}>
-                                External Link (p)
+                                External Disabled
                             </Link>
                         </ControlsItem>
                         <ControlsItem>
                             <Link variant="external" tabIndex={0}>
-                                External Link (p)
+                                External Link (qp)
                             </Link>
                         </ControlsItem>
                         <ControlsItem focus>
                             <Link variant="external" focus>
-                                External Link (p)
+                                External Focused
                             </Link>
                         </ControlsItem>
                     </Controls>
                     <React.Fragment>
                         <Typography variant="title" box="paragraph">
-                            Super{' '}
+                            41 letters:{' '}
                             <Link variant="pseudo" tabIndex={0}>
-                                Pseudo Link (p)
+                                By Jove, my quick study of lexicography won a prize
                             </Link>{' '}
-                            in title
+                            (Includes proper noun)
                         </Typography>
                         <Typography variant="caption" box="paragraph" style={{width: 200}}>
-                            Caption{' '}
+                            Public junk dwarves quiz mighty fox.{' '}
                             <Link variant="external" tabIndex={0}>
-                                External Link (p)
+                                Amazingly few discotheques provide jukeboxes.
                             </Link>{' '}
-                            in caption. Break lines at this caption.
+                            Break lines at this caption.
                         </Typography>
                         <Typography variant="section" box="paragraph" style={{width: 200}}>
-                            Try to break{' '}
+                            Six big devils from Japan quickly forgot how to waltz.{' '}
                             <Link variant="pseudo" tabIndex={0}>
-                                Pseudo Link (p) with long content
+                                Then a cop quizzed Mick Jagger’s ex-wives briefly.
                             </Link>{' '}
-                            to see how it works on many lines
+                            “Who am taking the ebonics quiz?”, the prof jovially axed.
                         </Typography>
                     </React.Fragment>
                 </WithSeparator>
