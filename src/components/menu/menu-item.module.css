@@ -9,7 +9,7 @@
 
 .root {
     padding-left: calc(var(--gs-spacing-unit) / 2);
-    padding-right: calc(var(--gs-spacing-unit) / 2);
+    padding-right: calc(var(--gs-spacing-unit) + 20px);
     min-height: calc(var(--gs-spacing-unit) * 3.25);
 }
 
@@ -29,5 +29,8 @@
 }
 
 .iconCell {
-    width: calc(var(--gs-spacing-unit) * 2.5);
+    width: 20px;
+}
+.withSubMenu {
+    padding-right: calc(var(--gs-spacing-unit) / 2);
 }

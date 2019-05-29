@@ -11,6 +11,10 @@
 -   Add `RootElement` component
 -   Add `Link` component
 
+### Fixed
+
+-   Increase right padding for menu items
+
 ## [8.0.0-alpha.10] - 2019-05-27
 
 ### Added

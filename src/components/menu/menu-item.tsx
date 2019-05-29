@@ -344,7 +344,9 @@ export class MenuItem extends React.PureComponent<Props, State> {
                                 onKeyDown={chain(rest.onKeyDown, this.handleKeyDown)}
                                 onMouseEnter={chain(rest.onMouseEnter, this.handleMouseEnter)}
                                 onMouseLeave={chain(rest.onMouseLeave, this.handleMouseLeave)}
-                                className={classNames(className, classes.root)}
+                                className={classNames(className, classes.root, {
+                                    [classes.withSubMenu]: !!subMenuArrowIcon
+                                })}
                                 classes={{
                                     focused: classes.focused,
                                     hovered: classes.hovered,
