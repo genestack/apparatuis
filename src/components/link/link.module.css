@@ -37,6 +37,25 @@
     cursor: not-allowed;
 }
 
+.inverted.root {
+    color: var(--gs-color-action-inverted);
+}
+
+.inverted.root:hover {
+    color: var(--gs-color-grey-background);
+}
+
+.inverted.root:focus,
+.inverted.root.focus {
+    border-bottom: 3px solid var(--gs-color-action-inverted-50);
+}
+
+.inverted.root:disabled,
+.inverted.root.disabled {
+    color: var(--gs-color-grey);
+    cursor: not-allowed;
+}
+
 .pseudo {
     border-bottom: 2px dotted var(--gs-color-action-25);
 }
@@ -44,6 +63,28 @@
 .pseudo:focus,
 .pseudo.focus {
     border-bottom: 3px solid var(--gs-color-action-25);
+}
+
+.pseudo.inverted {
+    color: var(--gs-color-action-inverted);
+    border-bottom: 2px dotted var(--gs-color-action-inverted-50);
+}
+
+.pseudo.inverted:hover {
+    color: var(--gs-color-action-inverted);
+    border-bottom: 2px dotted var(--gs-color-action-inverted);
+}
+
+.pseudo.inverted:focus,
+.pseudo.inverted.focus {
+    border-bottom: 3px solid var(--gs-color-action-inverted-50);
+}
+
+.pseudo.inverted.root:disabled,
+.pseudo.inverted.root.disabled {
+    color: var(--gs-color-grey);
+    cursor: not-allowed;
+    border-bottom: 2px dotted var(--gs-color-action-inverted-50);
 }
 
 .external {
@@ -54,4 +95,26 @@
 .external:focus,
 .external.focus {
     border-bottom: 3px solid var(--gs-color-action-25);
+}
+
+.external.inverted {
+    color: var(--gs-color-action-inverted);
+    border-bottom: 2px solid var(--gs-color-action-inverted-50);
+}
+
+.external.inverted:hover {
+    color: var(--gs-color-action-inverted);
+    border-bottom: 2px solid var(--gs-color-action-inverted);
+}
+
+.external.inverted:focus,
+.external.inverted.focus {
+    border-bottom: 3px solid var(--gs-color-action-inverted-50);
+}
+
+.external.inverted:disabled,
+.external.inverted.disabled {
+    color: var(--gs-color-grey);
+    cursor: not-allowed;
+    border-bottom: none;
 }

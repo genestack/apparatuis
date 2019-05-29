@@ -8,6 +8,7 @@
 import classNames from 'classnames';
 import * as React from 'react';
 
+import {DarkContext} from '../../utils/dark-context';
 import {mergeClassesProps, WithClasses} from '../../utils/styles';
 import {Typography} from '../typography';
 
@@ -15,35 +16,44 @@ import * as styles from './link.module.css';
 
 type TargetProps = React.AnchorHTMLAttributes<HTMLAnchorElement>;
 
+/** Link public properties */
 export interface Props extends TargetProps, WithClasses<keyof typeof styles> {
-    variant?: 'common' | 'pseudo' | 'external';
+    /** Defines a resource that anchor is linked */
+    variant?: 'internal' | 'pseudo' | 'external';
+    /** Adds ellipsis for text overflowing */
     ellipsis?: boolean;
+    /** Adds styles for pressed state */
     active?: boolean;
+    /** Disables click handlers */
     disabled?: boolean;
+    /** Adds styles for focused state */
     focus?: boolean;
-    as?: React.ReactType<TargetProps>;
+    /** Adds styles for dark backgrounds */
+    inverted?: boolean;
 }
 
+/**
+ * Link component presents an styled anchor.
+ */
 export const Link = (props: Props) => {
+    const invertedContext = React.useContext(DarkContext);
+
     const {
-        as: Component = 'a',
-        variant = 'common',
+        variant = 'internal',
         disabled,
         active,
         classes,
         focus,
+        inverted = invertedContext,
         ...rest
     } = mergeClassesProps(props, styles);
 
-    let {tabIndex, href} = rest;
+    let {tabIndex, href, onClick} = rest;
 
     if (disabled) {
         href = undefined;
         tabIndex = undefined;
-    } else {
-        if (tabIndex === undefined && href === undefined) {
-            tabIndex = 0;
-        }
+        onClick = undefined;
     }
 
     return (
@@ -51,14 +61,16 @@ export const Link = (props: Props) => {
             {...rest}
             href={href}
             tabIndex={tabIndex}
-            as={Component}
+            as="a"
             box="inline"
+            onClick={onClick}
             className={classNames(classes.root, {
                 [classes.pseudo]: variant === 'pseudo',
                 [classes.external]: variant === 'external',
                 [classes.disabled]: disabled,
                 [classes.active]: active,
-                [classes.focus]: focus
+                [classes.focus]: focus,
+                [classes.inverted]: inverted
             })}
         />
     );

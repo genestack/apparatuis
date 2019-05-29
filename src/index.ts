@@ -36,3 +36,5 @@ export * from './components/controls';
 export * from './components/header';
 export * from './components/typography';
 export * from './components/notification';
+export * from './components/link';
+export * from './components/root-element';
