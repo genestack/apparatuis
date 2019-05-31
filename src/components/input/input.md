@@ -14,7 +14,6 @@ initialState = {
     invalid: false,
     required: false,
     readOnly: false,
-    type: 'text',
     spinner: 'none',
     value: '',
     loading: false
@@ -72,7 +71,6 @@ handleClearButtonClick = () => setState({value: ''});
                             Input
                         </Typography>
                         <Input
-                            type={state.type}
                             value={state.value}
                             invalid={state.invalid || undefined}
                             required={state.required}
@@ -106,12 +104,6 @@ handleClearButtonClick = () => setState({value: ''});
                                 {renderCheckbox('invalid', 'Invalid')}
                                 {renderCheckbox('required', 'Required')}
                                 {renderCheckbox('readOnly', 'Read Only')}
-                                <Divider />
-                                <ListLabel>
-                                    <ListItemText variant="section">Type:</ListItemText>
-                                </ListLabel>
-                                {renderRadio('type', 'Text', 'text')}
-                                {renderRadio('type', 'Number', 'number')}
                                 <Divider />
                                 <ListLabel>
                                     <ListItemText variant="section">Spinner:</ListItemText>
