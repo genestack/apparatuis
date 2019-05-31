@@ -122,7 +122,7 @@
     align-items: center;
     justify-content: space-around;
     background: var(--gs-color-white);
-    transition-property: background-color;
+    transition-property: background-color, opacity;
     transition-duration: 0.2s;
     transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 }
