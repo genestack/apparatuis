@@ -34,9 +34,9 @@ export interface Props extends TargetProps, WithClasses<keyof typeof styles> {
     onValueChange?: (value: string) => void;
     /** React reference to native input */
     inputRef?: React.Ref<HTMLInputElement>;
-    /** React elements that are inserter before text field */
+    /** React elements that are prepended before text field */
     prepend?: React.ReactNode;
-    /** React elements that are inserter after text field */
+    /** React elements that are appended after text field */
     append?: React.ReactNode;
     /** Shows spinner */
     loading?: boolean;

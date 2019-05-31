@@ -52,11 +52,13 @@
 .input {
     flex-grow: 1;
     flex-shrink: 1;
+    flex-basis: 0;
     min-width: 0;
+    position: relative;
     box-sizing: border-box;
     font-family: var(--gs-font-family);
     font-size: 14px;
-    line-height: 20px;
+    line-height: 14px;
     color: var(--gs-color-black);
     background: transparent;
     border: none;
@@ -64,6 +66,10 @@
     border-radius: 0;
     outline: none;
     margin: calc(var(--gs-spacing-unit) * 0.75 - 1px) 0;
+}
+
+.input::-ms-clear {
+    display: none;
 }
 
 .input:disabled {
