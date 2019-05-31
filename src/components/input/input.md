@@ -1,6 +1,7 @@
 ```js
 const {DarkContext} = require('../../utils/dark-context.ts');
 const {SearchIcon} = require('../../icons/search-icon.tsx');
+const {HelpIcon} = require('../../icons/help-icon.tsx');
 
 timeout = null;
 
@@ -9,6 +10,7 @@ initialState = {
     showPlaceholder: false,
     fullWidth: false,
     showSearchIcon: false,
+    showHelpIcon: false,
     disabled: false,
     showClearButton: false,
     invalid: false,
@@ -82,8 +84,8 @@ handleClearButtonClick = () => setState({value: ''});
                                 state.spinner === 'permanent' ||
                                 (state.spinner === 'on-change' && state.loading)
                             }
-                            style={!state.fullWidth ? {width: 200} : null}
                             prepend={state.showSearchIcon ? <SearchIcon /> : null}
+                            append={state.showHelpIcon ? <HelpIcon /> : null}
                             placeholder={state.showPlaceholder ? 'Placeholder' : null}
                             disabled={state.disabled}
                             fullWidth={state.fullWidth}
@@ -99,6 +101,7 @@ handleClearButtonClick = () => setState({value: ''});
                                 {renderCheckbox('showPlaceholder', 'Show Placeholder')}
                                 {renderCheckbox('fullWidth', 'Full Width')}
                                 {renderCheckbox('showSearchIcon', 'Show Search Icon')}
+                                {renderCheckbox('showHelpIcon', 'Show Help Icon')}
                                 {renderCheckbox('disabled', 'Disabled')}
                                 {renderCheckbox('showClearButton', 'Show Clear Button')}
                                 {renderCheckbox('invalid', 'Invalid')}

@@ -34,20 +34,38 @@ export interface Props extends TargetProps, WithClasses<keyof typeof styles> {
     onValueChange?: (value: string) => void;
     /** React reference to native input */
     inputRef?: React.Ref<HTMLInputElement>;
+    /** React elements that are inserter before text field */
     prepend?: React.ReactNode;
+    /** React elements that are inserter after text field */
     append?: React.ReactNode;
+    /** Shows spinner */
     loading?: boolean;
+    /** Shows clear button and calls on its click */
     onClearButtonClick?: React.MouseEventHandler;
+    /** Value of input */
     value?: string;
-    spinnerWrapperProps?: React.HTMLAttributes<HTMLDivElement>;
+    /** Properties of the spinner element */
     spinnerProps?: SpinnerProps;
-    closeButtonProps?: ButtonProps;
+    /** Properties of the spinner wrapper element */
+    spinnerWrapperProps?: React.HTMLAttributes<HTMLDivElement>;
+    /** Properties of the clear button */
+    clearButtonProps?: ButtonProps;
+    /** Standard `append` element contains spinner and clear button */
     standardAppendProps?: React.HTMLAttributes<HTMLDivElement>;
+    /**
+     * Properties of the root element that contains
+     * the target input element.
+     */
     rootProps?: React.HTMLAttributes<HTMLLabelElement>;
+    /** Ref to the root element */
     rootRef?: React.Ref<HTMLLabelElement>;
-    inputClassName?: string;
+    /** Properties of the prepend elements wrapper */
     prependProps?: React.HTMLAttributes<HTMLDivElement>;
+    /** Properties of the append elements wrapper */
     appendProps?: React.HTMLAttributes<HTMLDivElement>;
+    /** ClassName that is passed to the target input */
+    inputClassName?: string;
+    /** Style that is passed to the target input */
     inputStyle?: React.CSSProperties;
 }
 
@@ -66,7 +84,6 @@ const useShownState = () => {
 };
 
 /** Input wrapper */
-// tslint:disable-next-line: cyclomatic-complexity
 export const Input = (props: Props) => {
     const {
         invalid,
@@ -85,7 +102,7 @@ export const Input = (props: Props) => {
         onClearButtonClick,
         spinnerWrapperProps = {},
         spinnerProps = {},
-        closeButtonProps = {},
+        clearButtonProps: closeButtonProps = {},
         rootProps = {},
         standardAppendProps = {},
         prependProps = {},
@@ -97,8 +114,6 @@ export const Input = (props: Props) => {
     } = mergeClassesProps(props, styles);
 
     const inputRef = useRef<HTMLInputElement>(null);
-    const spinnerState = useShownState();
-    const closeButtonState = useShownState();
     const [invalidState, setInvalidState] = useState(invalid);
 
     useLayoutEffect(() => {
@@ -107,28 +122,43 @@ export const Input = (props: Props) => {
         }
     });
 
-    const spinner =
-        loading || spinnerState.isShown ? (
+    const handleChange: React.ChangeEventHandler<HTMLInputElement> = (event) => {
+        if (inputRef.current) {
+            setInvalidState(!inputRef.current.validity.valid);
+        }
+
+        if (onValueChange) {
+            onValueChange(event.currentTarget.value);
+        }
+    };
+
+    const renderSpinner = () => {
+        const spinnerState = useShownState();
+
+        return loading || spinnerState.isShown ? (
             <Fade in={loading} appear onEnter={spinnerState.onShow} onExited={spinnerState.onHide}>
                 <div
                     {...spinnerWrapperProps}
                     className={classNames(spinnerWrapperProps.className, classes.spinnerWrapper)}
                 >
-                    <Spinner size={SPINNER_SIZE} />
+                    <Spinner size={SPINNER_SIZE} {...spinnerProps} />
                 </div>
             </Fade>
         ) : null;
-
-    const handleCloseButtonClick = () => {
-        if (inputRef.current) {
-            inputRef.current.focus();
-        }
     };
 
-    const showClearButton = value && onClearButtonClick && !disabled && !readOnly;
+    const renderClearButton = () => {
+        const closeButtonState = useShownState();
 
-    const clearButton =
-        showClearButton || closeButtonState.isShown ? (
+        const handleCloseButtonClick = () => {
+            if (inputRef.current) {
+                inputRef.current.focus();
+            }
+        };
+
+        const showClearButton = value && onClearButtonClick && !disabled && !readOnly && !loading;
+
+        return showClearButton || closeButtonState.isShown ? (
             <Fade
                 in={!!showClearButton}
                 appear
@@ -150,15 +180,10 @@ export const Input = (props: Props) => {
                 />
             </Fade>
         ) : null;
-    const handleChange: React.ChangeEventHandler<HTMLInputElement> = (event) => {
-        if (inputRef.current) {
-            setInvalidState(!inputRef.current.validity.valid);
-        }
-
-        if (onValueChange) {
-            onValueChange(event.currentTarget.value);
-        }
     };
+
+    const spinner = renderSpinner();
+    const clearButton = renderClearButton();
 
     const standardAppend =
         spinner || clearButton ? (
@@ -168,26 +193,6 @@ export const Input = (props: Props) => {
             >
                 {clearButton}
                 {spinner}
-            </div>
-        ) : null;
-
-    const renderPrepend = () =>
-        prepend ? (
-            <div
-                {...prependProps}
-                className={classNames(prependProps.className, classes.prependWrapper)}
-            >
-                {prepend}
-            </div>
-        ) : null;
-
-    const renderAppend = () =>
-        append ? (
-            <div
-                {...appendProps}
-                className={classNames(appendProps.className, classes.appendWrapper)}
-            >
-                {append}
             </div>
         ) : null;
 
@@ -205,7 +210,14 @@ export const Input = (props: Props) => {
                     [classes.disabled]: disabled
                 })}
             >
-                {renderPrepend()}
+                {prepend ? (
+                    <div
+                        {...prependProps}
+                        className={classNames(prependProps.className, classes.prependWrapper)}
+                    >
+                        {prepend}
+                    </div>
+                ) : null}
                 <input
                     {...rest}
                     value={value}
@@ -216,8 +228,15 @@ export const Input = (props: Props) => {
                     className={classNames(inputClassName, classes.input)}
                     onChange={chain(rest.onChange, handleChange)}
                 />
-                {renderAppend()}
                 {standardAppend}
+                {append ? (
+                    <div
+                        {...appendProps}
+                        className={classNames(appendProps.className, classes.appendWrapper)}
+                    >
+                        {append}
+                    </div>
+                ) : null}
             </label>
         </DarkContext.Provider>
     );
