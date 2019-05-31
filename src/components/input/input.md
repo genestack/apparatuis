@@ -100,13 +100,17 @@ handleClearButtonClick = () => setState({value: ''});
                                 {renderCheckbox('inverted', 'Inverted')}
                                 {renderCheckbox('showPlaceholder', 'Show Placeholder')}
                                 {renderCheckbox('fullWidth', 'Full Width')}
-                                {renderCheckbox('showSearchIcon', 'Show Search Icon')}
-                                {renderCheckbox('showHelpIcon', 'Show Help Icon')}
                                 {renderCheckbox('disabled', 'Disabled')}
-                                {renderCheckbox('showClearButton', 'Show Clear Button')}
                                 {renderCheckbox('invalid', 'Invalid')}
                                 {renderCheckbox('required', 'Required')}
                                 {renderCheckbox('readOnly', 'Read Only')}
+                                <Divider />
+                                <ListLabel>
+                                    <ListItemText variant="section">Inner elements:</ListItemText>
+                                </ListLabel>
+                                {renderCheckbox('showSearchIcon', 'Show Search Icon')}
+                                {renderCheckbox('showHelpIcon', 'Show Help Icon')}
+                                {renderCheckbox('showClearButton', 'Show Clear Button')}
                                 <Divider />
                                 <ListLabel>
                                     <ListItemText variant="section">Spinner:</ListItemText>
