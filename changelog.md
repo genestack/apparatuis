@@ -10,6 +10,7 @@
 
 -   Add `RootElement` component
 -   Add `Link` component
+-   Add `Spinner` component
 
 ### Fixed
 

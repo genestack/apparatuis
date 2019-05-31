@@ -1,0 +1,35 @@
+/*
+ * Copyright (c) 2011-2019 Genestack Limited
+ * All Rights Reserved
+ * THIS IS UNPUBLISHED PROPRIETARY SOURCE CODE OF GENESTACK LIMITED
+ * The copyright notice above does not evidence any
+ * actual or intended publication of such source code.
+ */
+@import "../../variables.css";
+
+.root {
+    align-self: center;
+    vertical-align: middle;
+    display: inline-block;
+    position: relative;
+    user-select: none;
+    animation: spinner-rotate 3s cubic-bezier(0.4, 0.3, 0.7, 0.75) infinite;
+}
+
+.circle {
+    stroke: var(--gs-color-action-text-60);
+}
+
+.backgroundCircle {
+    stroke: var(--gs-color-grey-background);
+}
+
+@keyframes spinner-rotate {
+    0% {
+        transform: rotate(0);
+    }
+
+    100% {
+        transform: rotate(1440deg);
+    }
+}
