@@ -21,12 +21,12 @@
     border: 1px solid var(--gs-color-grey-outline);
     padding: 0 calc(var(--gs-spacing-unit) - 1px);
     border-radius: calc(var(--gs-spacing-unit) / 2);
-    transition-property: border-color, box-shadow;
+    transition-property: border-color, box-shadow, background-color;
     transition-duration: 0.2s;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .root:focus-within {
-    transition: none;
     border-color: var(--gs-color-action);
     box-shadow: 0 0 0 2px var(--gs-color-action-25);
 }
@@ -122,6 +122,9 @@
     align-items: center;
     justify-content: space-around;
     background: var(--gs-color-white);
+    transition-property: background-color;
+    transition-duration: 0.2s;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .invalid .spinnerWrapper {
