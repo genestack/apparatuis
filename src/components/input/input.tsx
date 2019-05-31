@@ -7,12 +7,20 @@
  */
 
 import classNames from 'classnames';
-import React from 'react';
+import React, {useState, useRef, useLayoutEffect} from 'react';
 
+import {ClearIcon} from '../../icons/clear-icon';
 import {chain} from '../../utils/chain';
+import {DarkContext} from '../../utils/dark-context';
+import {chainRefs} from '../../utils/set-ref';
 import {WithClasses, mergeClassesProps} from '../../utils/styles';
+import {Button, ButtonProps} from '../button';
+import {Fade} from '../fade';
+import {Spinner, SpinnerProps} from '../spinner';
 
 import * as styles from './input.module.css';
+
+const SPINNER_SIZE = 16;
 
 type TargetProps = React.InputHTMLAttributes<HTMLInputElement>;
 
@@ -26,32 +34,190 @@ export interface Props extends TargetProps, WithClasses<keyof typeof styles> {
     onValueChange?: (value: string) => void;
     /** React reference to native input */
     inputRef?: React.Ref<HTMLInputElement>;
+    prepend?: React.ReactNode;
+    append?: React.ReactNode;
+    loading?: boolean;
+    onClearButtonClick?: React.MouseEventHandler;
+    value?: string;
+    spinnerWrapperProps?: React.HTMLAttributes<HTMLDivElement>;
+    spinnerProps?: SpinnerProps;
+    closeButtonProps?: ButtonProps;
+    standardAppendProps?: React.HTMLAttributes<HTMLDivElement>;
+    rootProps?: React.HTMLAttributes<HTMLLabelElement>;
+    rootRef?: React.Ref<HTMLLabelElement>;
+    inputClassName?: string;
+    prependProps?: React.HTMLAttributes<HTMLDivElement>;
+    appendProps?: React.HTMLAttributes<HTMLDivElement>;
+    inputStyle?: React.CSSProperties;
 }
 
+const useShownState = () => {
+    const [isShown, setShown] = React.useState(false);
+
+    return {
+        isShown,
+        onShow: () => {
+            setShown(true);
+        },
+        onHide: () => {
+            setShown(false);
+        }
+    };
+};
+
 /** Input wrapper */
+// tslint:disable-next-line: cyclomatic-complexity
 export const Input = (props: Props) => {
-    const {invalid, fullWidth, onValueChange, inputRef, classes, ...rest} = mergeClassesProps(
-        props,
-        styles
-    );
+    const {
+        invalid,
+        disabled,
+        readOnly,
+        fullWidth,
+        onValueChange,
+        inputRef: propInputRef,
+        className,
+        classes,
+        style,
+        prepend,
+        append,
+        loading,
+        value,
+        onClearButtonClick,
+        spinnerWrapperProps = {},
+        spinnerProps = {},
+        closeButtonProps = {},
+        rootProps = {},
+        standardAppendProps = {},
+        prependProps = {},
+        appendProps = {},
+        rootRef,
+        inputClassName,
+        inputStyle,
+        ...rest
+    } = mergeClassesProps(props, styles);
 
-    const handleChange: React.ChangeEventHandler<HTMLInputElement> = (event) => {
-        const {value} = event.currentTarget;
+    const inputRef = useRef<HTMLInputElement>(null);
+    const spinnerState = useShownState();
+    const closeButtonState = useShownState();
+    const [invalidState, setInvalidState] = useState(invalid);
 
-        if (onValueChange) {
-            onValueChange(value);
+    useLayoutEffect(() => {
+        if (inputRef.current) {
+            setInvalidState(!inputRef.current.validity.valid);
+        }
+    });
+
+    const spinner =
+        loading || spinnerState.isShown ? (
+            <Fade in={loading} appear onEnter={spinnerState.onShow} onExited={spinnerState.onHide}>
+                <div
+                    {...spinnerWrapperProps}
+                    className={classNames(spinnerWrapperProps.className, classes.spinnerWrapper)}
+                >
+                    <Spinner size={SPINNER_SIZE} />
+                </div>
+            </Fade>
+        ) : null;
+
+    const handleCloseButtonClick = () => {
+        if (inputRef.current) {
+            inputRef.current.focus();
         }
     };
 
+    const showClearButton = value && onClearButtonClick && !disabled && !readOnly;
+
+    const clearButton =
+        showClearButton || closeButtonState.isShown ? (
+            <Fade
+                in={!!showClearButton}
+                appear
+                onEnter={closeButtonState.onShow}
+                onExited={closeButtonState.onHide}
+            >
+                <Button
+                    tiny
+                    variant="ghost"
+                    icon={<ClearIcon />}
+                    classes={{icon: classes.clearButtonIcon}}
+                    {...closeButtonProps}
+                    className={classNames(closeButtonProps.className, classes.clearButton)}
+                    onClick={chain(
+                        closeButtonProps.onClick,
+                        handleCloseButtonClick,
+                        onClearButtonClick
+                    )}
+                />
+            </Fade>
+        ) : null;
+    const handleChange: React.ChangeEventHandler<HTMLInputElement> = (event) => {
+        if (inputRef.current) {
+            setInvalidState(!inputRef.current.validity.valid);
+        }
+
+        if (onValueChange) {
+            onValueChange(event.currentTarget.value);
+        }
+    };
+
+    const standardAppend =
+        spinner || clearButton ? (
+            <div
+                {...standardAppendProps}
+                className={classNames(standardAppendProps.className, classes.standardAppend)}
+            >
+                {clearButton}
+                {spinner}
+            </div>
+        ) : null;
+
+    const renderPrepend = () =>
+        prepend ? (
+            <div
+                {...prependProps}
+                className={classNames(prependProps.className, classes.prependWrapper)}
+            >
+                {prepend}
+            </div>
+        ) : null;
+
+    const renderAppend = () =>
+        append ? (
+            <div
+                {...appendProps}
+                className={classNames(appendProps.className, classes.appendWrapper)}
+            >
+                {append}
+            </div>
+        ) : null;
+
     return (
-        <input
-            {...rest}
-            ref={inputRef}
-            className={classNames(rest.className, classes.root, {
-                [classes.fullWidth]: fullWidth,
-                [classes.invalid]: invalid
-            })}
-            onChange={chain(rest.onChange, handleChange)}
-        />
+        <DarkContext.Provider value={false}>
+            <label
+                ref={rootRef}
+                style={style}
+                {...rootProps}
+                className={classNames(classes.root, rootProps.className, className, {
+                    [classes.fullWidth]: fullWidth,
+                    [classes.withPrepend]: !!prepend,
+                    [classes.withAppend]: !!standardAppend || !!append,
+                    [classes.invalid]: invalid !== undefined ? invalid : invalidState,
+                    [classes.disabled]: disabled
+                })}
+            >
+                {renderPrepend()}
+                <input
+                    {...rest}
+                    value={value}
+                    disabled={disabled}
+                    ref={chainRefs(propInputRef, inputRef)}
+                    style={inputStyle}
+                    className={classNames(inputClassName, classes.input)}
+                    onChange={chain(rest.onChange, handleChange)}
+                />
+                {renderAppend()}
+                {standardAppend}
+            </label>
+        </DarkContext.Provider>
     );
 };
