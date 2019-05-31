@@ -27,7 +27,7 @@
     width: 200px;
 }
 
-.root:focus-within {
+.focused {
     transition-property: background-color;
     border-color: var(--gs-color-action);
     box-shadow: 0 0 0 2px var(--gs-color-action-25);
@@ -38,7 +38,7 @@
     background: var(--gs-color-input-invalid-background);
 }
 
-.invalid:focus-within {
+.invalid.focused {
     border-color: var(--gs-color-error);
     box-shadow: 0 0 0 2px var(--gs-color-input-invalid-box-shadow);
 }

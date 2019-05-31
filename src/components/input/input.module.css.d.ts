@@ -18,3 +18,4 @@ export const spinnerWrapper: string;
 export const disabled: string;
 export const appendWrapper: string;
 export const prependWrapper: string;
+export const focused: string;

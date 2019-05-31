@@ -16,6 +16,7 @@ import {chainRefs} from '../../utils/set-ref';
 import {WithClasses, mergeClassesProps} from '../../utils/styles';
 import {Button, ButtonProps} from '../button';
 import {Fade} from '../fade';
+import {focused} from '../list/list-item.module.css';
 import {Spinner, SpinnerProps} from '../spinner';
 
 import * as styles from './input.module.css';
@@ -69,16 +70,16 @@ export interface Props extends TargetProps, WithClasses<keyof typeof styles> {
     inputStyle?: React.CSSProperties;
 }
 
-const useShownState = () => {
-    const [isShown, setShown] = React.useState(false);
+const useBooleanState = () => {
+    const [value, change] = React.useState(false);
 
     return {
-        isShown,
-        onShow: () => {
-            setShown(true);
+        value,
+        on: () => {
+            change(true);
         },
-        onHide: () => {
-            setShown(false);
+        off: () => {
+            change(false);
         }
     };
 };
@@ -87,8 +88,6 @@ const useShownState = () => {
 export const Input = (props: Props) => {
     const {
         invalid,
-        disabled,
-        readOnly,
         fullWidth,
         onValueChange,
         inputRef: propInputRef,
@@ -98,7 +97,6 @@ export const Input = (props: Props) => {
         prepend,
         append,
         loading,
-        value,
         onClearButtonClick,
         spinnerWrapperProps = {},
         spinnerProps = {},
@@ -114,8 +112,13 @@ export const Input = (props: Props) => {
     } = mergeClassesProps(props, styles);
 
     const inputRef = useRef<HTMLInputElement>(null);
+
+    // Simulate `:focus-within` because Edge does not support it
+    const focusedState = useBooleanState();
+
     const [invalidState, setInvalidState] = useState(invalid);
 
+    // Use native input validation before browser paint
     useLayoutEffect(() => {
         if (inputRef.current) {
             setInvalidState(!inputRef.current.validity.valid);
@@ -133,10 +136,15 @@ export const Input = (props: Props) => {
     };
 
     const renderSpinner = () => {
-        const spinnerState = useShownState();
+        const spinnerShownState = useBooleanState();
 
-        return loading || spinnerState.isShown ? (
-            <Fade in={loading} appear onEnter={spinnerState.onShow} onExited={spinnerState.onHide}>
+        return loading || spinnerShownState.value ? (
+            <Fade
+                in={loading}
+                appear
+                onEnter={spinnerShownState.on}
+                onExited={spinnerShownState.off}
+            >
                 <div
                     {...spinnerWrapperProps}
                     className={classNames(spinnerWrapperProps.className, classes.spinnerWrapper)}
@@ -148,7 +156,7 @@ export const Input = (props: Props) => {
     };
 
     const renderClearButton = () => {
-        const closeButtonState = useShownState();
+        const closeButtonShownState = useBooleanState();
 
         const handleCloseButtonClick = () => {
             if (inputRef.current) {
@@ -156,14 +164,15 @@ export const Input = (props: Props) => {
             }
         };
 
-        const showClearButton = value && onClearButtonClick && !disabled && !readOnly && !loading;
+        const showClearButton =
+            rest.value && onClearButtonClick && !rest.disabled && !rest.readOnly && !loading;
 
-        return showClearButton || closeButtonState.isShown ? (
+        return showClearButton || closeButtonShownState.value ? (
             <Fade
                 in={!!showClearButton}
                 appear
-                onEnter={closeButtonState.onShow}
-                onExited={closeButtonState.onHide}
+                onEnter={closeButtonShownState.on}
+                onExited={closeButtonShownState.off}
             >
                 <Button
                     tiny
@@ -202,12 +211,15 @@ export const Input = (props: Props) => {
                 ref={rootRef}
                 style={style}
                 {...rootProps}
+                onFocus={focusedState.on}
+                onBlur={focusedState.off}
                 className={classNames(classes.root, rootProps.className, className, {
                     [classes.fullWidth]: fullWidth,
                     [classes.withPrepend]: !!prepend,
                     [classes.withAppend]: !!standardAppend || !!append,
                     [classes.invalid]: invalid !== undefined ? invalid : invalidState,
-                    [classes.disabled]: disabled
+                    [classes.disabled]: rest.disabled,
+                    [classes.focused]: focusedState.value
                 })}
             >
                 {prepend ? (
@@ -220,9 +232,6 @@ export const Input = (props: Props) => {
                 ) : null}
                 <input
                     {...rest}
-                    value={value}
-                    disabled={disabled}
-                    readOnly={readOnly}
                     ref={chainRefs(propInputRef, inputRef)}
                     style={inputStyle}
                     className={classNames(inputClassName, classes.input)}
