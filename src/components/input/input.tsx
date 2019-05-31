@@ -210,6 +210,7 @@ export const Input = (props: Props) => {
                     {...rest}
                     value={value}
                     disabled={disabled}
+                    readOnly={readOnly}
                     ref={chainRefs(propInputRef, inputRef)}
                     style={inputStyle}
                     className={classNames(inputClassName, classes.input)}
