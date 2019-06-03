@@ -21,7 +21,7 @@ type TargetProps = React.SVGAttributes<SVGSVGElement>;
 export interface Props extends TargetProps, WithClasses<keyof typeof styles> {
     /** Diameter of spinner in pixels */
     size?: number;
-    /** With of spinner stroke */
+    /** Width of spinner stroke */
     strokeWidth?: number;
     /** Do not show background spinner circle */
     hideBackgroundCircle?: boolean;
