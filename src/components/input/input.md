@@ -12,7 +12,7 @@ initialState = {
     showSearchIcon: false,
     showHelpIcon: false,
     disabled: false,
-    showClearButton: false,
+    clearable: false,
     invalid: false,
     required: false,
     readOnly: false,
@@ -50,9 +50,14 @@ renderRadio = (name, label, value) => (
 );
 
 handleValueChange = (value) => {
-    clearTimeout(timeout);
-    setState({value, loading: true}, () => {
-        timeout = setTimeout(() => setState({loading: false}), 2000);
+    if (value) {
+        clearTimeout(timeout);
+    }
+
+    setState({value, loading: !!value}, () => {
+        if (value) {
+            timeout = setTimeout(() => setState({loading: false}), 2000);
+        }
     });
 };
 
@@ -77,9 +82,7 @@ handleClearButtonClick = () => setState({value: ''});
                             invalid={state.invalid || undefined}
                             required={state.required}
                             onValueChange={handleValueChange}
-                            onClearButtonClick={
-                                state.showClearButton ? handleClearButtonClick : null
-                            }
+                            clearable={state.clearable}
                             loading={
                                 state.spinner === 'permanent' ||
                                 (state.spinner === 'on-change' && state.loading)
@@ -110,7 +113,7 @@ handleClearButtonClick = () => setState({value: ''});
                                 </ListLabel>
                                 {renderCheckbox('showSearchIcon', 'Show Search Icon')}
                                 {renderCheckbox('showHelpIcon', 'Show Help Icon')}
-                                {renderCheckbox('showClearButton', 'Show Clear Button')}
+                                {renderCheckbox('clearable', 'Show Clear Button')}
                                 <Divider />
                                 <ListLabel>
                                     <ListItemText variant="section">Spinner:</ListItemText>

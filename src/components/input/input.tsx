@@ -16,12 +16,45 @@ import {chainRefs} from '../../utils/set-ref';
 import {WithClasses, mergeClassesProps} from '../../utils/styles';
 import {Button, ButtonProps} from '../button';
 import {Fade} from '../fade';
-import {focused} from '../list/list-item.module.css';
 import {Spinner, SpinnerProps} from '../spinner';
 
 import * as styles from './input.module.css';
 
 const SPINNER_SIZE = 16;
+
+function useUncontrolledProp<T>(
+    value: T | undefined,
+    onValueChange: ((value: T) => void) | undefined,
+    defaultValue: T | undefined
+) {
+    const [state, setState] = useState(value === undefined ? defaultValue : value);
+
+    const handleChange = (updatedValue: T) => {
+        setState(updatedValue);
+        if (onValueChange) {
+            onValueChange(updatedValue);
+        }
+    };
+
+    return {value: value === undefined ? state : value, onChange: handleChange};
+}
+
+function useInputInvalidity(
+    inputRef: React.RefObject<HTMLInputElement>,
+    invalid: boolean | undefined
+) {
+    // Input is valid by default
+    const [invalidState, setInvalidState] = useState(invalid || false);
+
+    // Use native input validation before browser paint
+    useLayoutEffect(() => {
+        if (inputRef.current) {
+            setInvalidState(!inputRef.current.validity.valid);
+        }
+    });
+
+    return invalid === undefined ? invalidState : invalid;
+}
 
 type TargetProps = React.InputHTMLAttributes<HTMLInputElement>;
 
@@ -31,6 +64,10 @@ export interface Props extends TargetProps, WithClasses<keyof typeof styles> {
     invalid?: boolean;
     /** If `true` input has width: 100% */
     fullWidth?: boolean;
+    /** Value of input */
+    value?: string;
+    /** Default value of uncontrolled input */
+    defaultValue?: string;
     /** Custom change event handler */
     onValueChange?: (value: string) => void;
     /** React reference to native input */
@@ -41,10 +78,10 @@ export interface Props extends TargetProps, WithClasses<keyof typeof styles> {
     append?: React.ReactNode;
     /** Shows spinner */
     loading?: boolean;
+    /** Shows clear button */
+    clearable?: boolean;
     /** Shows clear button and calls on its click */
     onClearButtonClick?: React.MouseEventHandler;
-    /** Value of input */
-    value?: string;
     /** Properties of the spinner element */
     spinnerProps?: SpinnerProps;
     /** Properties of the spinner wrapper element */
@@ -70,21 +107,7 @@ export interface Props extends TargetProps, WithClasses<keyof typeof styles> {
     inputStyle?: React.CSSProperties;
 }
 
-const useBooleanState = () => {
-    const [value, change] = React.useState(false);
-
-    return {
-        value,
-        on: () => {
-            change(true);
-        },
-        off: () => {
-            change(false);
-        }
-    };
-};
-
-/** Input wrapper */
+/** Text field wrapped around input */
 export const Input = (props: Props) => {
     const {
         invalid,
@@ -100,7 +123,7 @@ export const Input = (props: Props) => {
         onClearButtonClick,
         spinnerWrapperProps = {},
         spinnerProps = {},
-        clearButtonProps: closeButtonProps = {},
+        clearButtonProps = {},
         rootProps = {},
         standardAppendProps = {},
         prependProps = {},
@@ -108,42 +131,31 @@ export const Input = (props: Props) => {
         rootRef,
         inputClassName,
         inputStyle,
+        value,
+        defaultValue,
+        clearable,
         ...rest
     } = mergeClassesProps(props, styles);
 
     const inputRef = useRef<HTMLInputElement>(null);
-
     // Simulate `:focus-within` because Edge does not support it
-    const focusedState = useBooleanState();
-
-    const [invalidState, setInvalidState] = useState(invalid);
-
-    // Use native input validation before browser paint
-    useLayoutEffect(() => {
-        if (inputRef.current) {
-            setInvalidState(!inputRef.current.validity.valid);
-        }
-    });
-
-    const handleChange: React.ChangeEventHandler<HTMLInputElement> = (event) => {
-        if (inputRef.current) {
-            setInvalidState(!inputRef.current.validity.valid);
-        }
-
-        if (onValueChange) {
-            onValueChange(event.currentTarget.value);
-        }
-    };
+    const [focused, setFocused] = useState();
+    const invalidState = useInputInvalidity(inputRef, invalid);
+    const valueState = useUncontrolledProp(value, onValueChange, defaultValue || '');
 
     const renderSpinner = () => {
-        const spinnerShownState = useBooleanState();
+        const [isSpinnerExited, setSpinnerExited] = useState(true);
 
-        return loading || spinnerShownState.value ? (
+        return loading || !isSpinnerExited ? (
             <Fade
                 in={loading}
                 appear
-                onEnter={spinnerShownState.on}
-                onExited={spinnerShownState.off}
+                onEnter={() => {
+                    setSpinnerExited(false);
+                }}
+                onExited={() => {
+                    setSpinnerExited(true);
+                }}
             >
                 <div
                     {...spinnerWrapperProps}
@@ -156,36 +168,38 @@ export const Input = (props: Props) => {
     };
 
     const renderClearButton = () => {
-        const closeButtonShownState = useBooleanState();
-
-        const handleCloseButtonClick = () => {
-            if (inputRef.current) {
-                inputRef.current.focus();
-            }
-        };
+        const [isClearButtonExited, setClearButtonExited] = useState(true);
 
         const showClearButton =
-            rest.value && onClearButtonClick && !rest.disabled && !rest.readOnly && !loading;
+            valueState.value && clearable && !rest.disabled && !rest.readOnly && !loading;
 
-        return showClearButton || closeButtonShownState.value ? (
+        return showClearButton || !isClearButtonExited ? (
             <Fade
                 in={!!showClearButton}
                 appear
-                onEnter={closeButtonShownState.on}
-                onExited={closeButtonShownState.off}
+                onEnter={() => {
+                    setClearButtonExited(false);
+                }}
+                onExited={() => {
+                    setClearButtonExited(true);
+                }}
             >
                 <Button
                     tiny
                     variant="ghost"
                     icon={<ClearIcon />}
                     classes={{icon: classes.clearButtonIcon}}
-                    {...closeButtonProps}
-                    className={classNames(closeButtonProps.className, classes.clearButton)}
-                    onClick={chain(
-                        closeButtonProps.onClick,
-                        handleCloseButtonClick,
-                        onClearButtonClick
-                    )}
+                    {...clearButtonProps}
+                    className={classNames(clearButtonProps.className, classes.clearButton)}
+                    onClick={chain(clearButtonProps.onClick, onClearButtonClick, () => {
+                        if (value === undefined || onClearButtonClick === undefined) {
+                            valueState.onChange('');
+                        }
+
+                        if (inputRef.current) {
+                            inputRef.current.focus();
+                        }
+                    })}
                 />
             </Fade>
         ) : null;
@@ -211,15 +225,19 @@ export const Input = (props: Props) => {
                 ref={rootRef}
                 style={style}
                 {...rootProps}
-                onFocus={focusedState.on}
-                onBlur={focusedState.off}
+                onFocus={chain(rootProps.onFocus, () => {
+                    setFocused(true);
+                })}
+                onBlur={chain(rootProps.onBlur, () => {
+                    setFocused(false);
+                })}
                 className={classNames(classes.root, rootProps.className, className, {
                     [classes.fullWidth]: fullWidth,
                     [classes.withPrepend]: !!prepend,
                     [classes.withAppend]: !!standardAppend || !!append,
-                    [classes.invalid]: invalid !== undefined ? invalid : invalidState,
+                    [classes.invalid]: invalidState,
                     [classes.disabled]: rest.disabled,
-                    [classes.focused]: focusedState.value
+                    [classes.focused]: focused
                 })}
             >
                 {prepend ? (
@@ -235,7 +253,10 @@ export const Input = (props: Props) => {
                     ref={chainRefs(propInputRef, inputRef)}
                     style={inputStyle}
                     className={classNames(inputClassName, classes.input)}
-                    onChange={chain(rest.onChange, handleChange)}
+                    value={valueState.value}
+                    onChange={chain(rest.onChange, (event) => {
+                        valueState.onChange(event.target.value);
+                    })}
                 />
                 {standardAppend}
                 {append ? (
