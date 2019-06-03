@@ -31,7 +31,7 @@ handleInvertedChange = (event) => setState({inverted: event.currentTarget.checke
                         <ControlsItem>
                             <Link tabIndex={0}>Common Link (qp)</Link>
                         </ControlsItem>
-                        <ControlsItem focus>
+                        <ControlsItem>
                             <Link focus>Common Focused</Link>
                         </ControlsItem>
                     </Controls>
@@ -46,7 +46,7 @@ handleInvertedChange = (event) => setState({inverted: event.currentTarget.checke
                                 Pseudo Link (qp)
                             </Link>
                         </ControlsItem>
-                        <ControlsItem focus>
+                        <ControlsItem>
                             <Link variant="pseudo" focus>
                                 Pseudo focused
                             </Link>
@@ -63,7 +63,7 @@ handleInvertedChange = (event) => setState({inverted: event.currentTarget.checke
                                 External Link (qp)
                             </Link>
                         </ControlsItem>
-                        <ControlsItem focus>
+                        <ControlsItem>
                             <Link variant="external" focus>
                                 External Focused
                             </Link>
