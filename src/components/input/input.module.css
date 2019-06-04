@@ -58,7 +58,7 @@
     box-sizing: border-box;
     font-family: var(--gs-font-family);
     font-size: 14px;
-    line-height: 14px;
+    line-height: 20px;
     color: var(--gs-color-black);
     background: transparent;
     border: none;
