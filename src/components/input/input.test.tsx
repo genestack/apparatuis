@@ -9,6 +9,7 @@
 import * as React from 'react';
 
 import {createTestApp} from '../../../test-utils/create-test-app';
+import {Spinner} from '../spinner';
 
 import {Input} from './input';
 
@@ -29,5 +30,95 @@ describe('<Input />', () => {
         (document.getElementById('input')! as HTMLInputElement).value = 'foo';
         wrapper.find('input').simulate('change');
         expect(onValueChange).toBeCalledWith('foo');
+    });
+
+    it('should render label element as root', () => {
+        const wrapper = app.mount(<Input />);
+        expect(wrapper.getDOMNode()).toBeInstanceOf(HTMLLabelElement);
+    });
+
+    describe('when "clearable" prop is passed', () => {
+        it('should not render clear button when input value is empty', () => {
+            const wrapper = app.mount(<Input clearable clearButtonProps={{id: 'clear-button'}} />);
+            wrapper.find('input').simulate('change', {target: {value: ''}});
+            expect(document.getElementById('clear-button')).toBeFalsy();
+        });
+
+        it('should not render clear button when empty "value" prop is passed', () => {
+            app.mount(<Input clearable value="" clearButtonProps={{id: 'clear-button'}} />);
+            expect(document.getElementById('clear-button')).toBeFalsy();
+        });
+
+        it('should render clear button when input value is not empty', () => {
+            const wrapper = app.mount(<Input clearable clearButtonProps={{id: 'clear-button'}} />);
+            wrapper.find('input').simulate('change', {target: {value: 'foo'}});
+            expect(document.getElementById('clear-button')).toBeTruthy();
+        });
+
+        it('should render clear button when "value" prop is passed', () => {
+            app.mount(<Input clearable value="foo" clearButtonProps={{id: 'clear-button'}} />);
+            expect(document.getElementById('clear-button')).toBeTruthy();
+        });
+
+        it('should clear input value on "clear" button click', () => {
+            const wrapper = app.mount(
+                <Input clearable id="input" clearButtonProps={{id: 'clear-button'}} />
+            );
+            wrapper.find('input').simulate('change', {target: {value: 'foo'}});
+            wrapper
+                .find('#clear-button')
+                .hostNodes()
+                .simulate('click');
+
+            expect((document.getElementById('input') as HTMLInputElement).value).toBe('');
+        });
+
+        it('should call "onValueChange" with empty value when input is controlled', () => {
+            const onValueChange = jest.fn();
+
+            const wrapper = app.mount(
+                <Input
+                    clearable
+                    id="input"
+                    value="foo"
+                    onValueChange={onValueChange}
+                    clearButtonProps={{id: 'clear-button'}}
+                />
+            );
+
+            wrapper
+                .find('#clear-button')
+                .hostNodes()
+                .simulate('click');
+
+            expect(onValueChange).toHaveBeenCalledTimes(1);
+            expect(onValueChange).toBeCalledWith('');
+        });
+    });
+
+    it('should render spinner when "loading" prop is passed', () => {
+        const wrapper = app.mount(<Input loading />);
+        expect(wrapper.find(Spinner)).toHaveLength(1);
+    });
+
+    describe('when "required" prop is passed', () => {
+        it('should have "invalid" class name when input is empty', () => {
+            app.mount(
+                <Input rootProps={{id: 'test'}} classes={{invalid: 'invalid-test'}} required />
+            );
+            expect(document.getElementById('test')!.classList.contains('invalid-test')).toBe(true);
+        });
+
+        it('should remove invalid className when input is not empty', () => {
+            app.mount(
+                <Input
+                    rootProps={{id: 'test'}}
+                    classes={{invalid: 'invalid-test'}}
+                    required
+                    value="foo"
+                />
+            );
+            expect(document.getElementById('test')!.classList.contains('invalid-test')).toBe(false);
+        });
     });
 });

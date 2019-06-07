@@ -21,7 +21,7 @@
 }
 
 .backgroundCircle {
-    stroke: var(--gs-color-grey-background);
+    stroke: rgba(0, 25, 51, 0.08);
 }
 
 @keyframes spinner-rotate {
