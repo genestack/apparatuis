@@ -2,6 +2,8 @@
 
 ## [Unreleased]
 
+## [8.0.0-alpha.11] - 2019-06-07
+
 ### Changed
 
 -   Update peer to `react@16.8`
