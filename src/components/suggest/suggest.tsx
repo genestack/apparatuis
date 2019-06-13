@@ -1,0 +1,89 @@
+/*
+ * Copyright (c) 2011-2019 Genestack Limited
+ * All Rights Reserved
+ * THIS IS UNPUBLISHED PROPRIETARY SOURCE CODE OF GENESTACK LIMITED
+ * The copyright notice above does not evidence any
+ * actual or intended publication of such source code.
+ */
+import classNames from 'classnames';
+import * as React from 'react';
+
+import {chain} from '../../utils/chain';
+import {Omit} from '../../utils/omit';
+import {chainRefs} from '../../utils/set-ref';
+import {InputProps, Input} from '../input';
+import {PopoverProps, Popover} from '../popover';
+
+import * as styles from './suggest.module.css';
+
+function useElementWidth(element: HTMLElement | null) {
+    const [width, setWidth] = React.useState<number | null>(null);
+
+    React.useEffect(() => {
+        if (element) {
+            const nextWidth = element.getBoundingClientRect().width;
+            if (nextWidth !== width) {
+                setWidth(nextWidth);
+            }
+        }
+    });
+
+    return width;
+}
+
+/** Suggest public properties */
+export interface Props extends InputProps {
+    /** if `true` popover is shown */
+    open?: boolean;
+    /** properties passed to the `Popover` element */
+    popoverProps?: Omit<PopoverProps, 'referenceElement' | 'open'>;
+    /** children of the `Popover` element */
+    children?: React.ReactNode;
+}
+
+/**
+ * Just a wrapper component over `Input` and `Popover` that takes the responsibility
+ * over styles and transitions. It is useless in common cases without any control components
+ * like [downshift](https://github.com/downshift-js/downshift).
+ *
+ * Wrap it your controller yourself or use some predefined components
+ * like `SuggestInput` or `SuggestSelect`.
+ */
+export function Suggest(props: Props) {
+    const {rootRef, open, popoverProps = {}, children, ...rest} = props;
+    const {transitionProps = {}} = popoverProps;
+
+    const inputRootRef = React.useRef<HTMLLabelElement>(null);
+    const inputRootWidth = useElementWidth(inputRootRef.current);
+
+    // show previous children while popover transition is exiting
+    const [prevChildren, setPrevChildren] = React.useState<React.ReactNode>(null);
+    const childrenToRender = prevChildren || children;
+
+    return (
+        <Input {...rest} rootRef={chainRefs(rootRef, inputRootRef)}>
+            <Popover
+                placement="bottom-start"
+                {...popoverProps}
+                open={open}
+                referenceElement={inputRootRef.current}
+                style={{...popoverProps.style, minWidth: `${inputRootWidth || 0}px`}}
+                className={classNames(popoverProps.className, styles.popover)}
+                transitionProps={{
+                    ...transitionProps,
+                    onEntered: chain(transitionProps.onEntered, () => {
+                        setPrevChildren(null);
+                    }),
+                    onExit: chain(transitionProps.onExit, () => {
+                        setPrevChildren(children);
+                    }),
+                    onExited: chain(transitionProps.onExited, () => {
+                        setPrevChildren(null);
+                    })
+                }}
+            >
+                {childrenToRender}
+            </Popover>
+        </Input>
+    );
+}

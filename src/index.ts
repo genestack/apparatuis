@@ -39,3 +39,4 @@ export * from './components/notification';
 export * from './components/link';
 export * from './components/root-element';
 export * from './components/spinner';
+export * from './components/suggest';

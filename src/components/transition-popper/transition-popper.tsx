@@ -23,7 +23,8 @@ export type TransitionPopperChildrenProps<T = any> = Omit<PopperChildrenProps, '
     placement?: TransitionPopperPlacement;
 };
 
-type ReferenceElement = PopperProps['referenceElement'] | (() => PopperProps['referenceElement']);
+type PopperReferenceElement = PopperProps['referenceElement'] | null;
+type ReferenceElement = PopperReferenceElement | (() => PopperReferenceElement);
 
 interface InnerProps<T> extends TargetProps {
     /** If `true` popover is visible */
@@ -120,7 +121,8 @@ export class TransitionPopper<T> extends React.Component<Props<T>, State> {
         }
 
         const element =
-            typeof referenceElement === 'function' ? referenceElement() : referenceElement;
+            (typeof referenceElement === 'function' ? referenceElement() : referenceElement) ||
+            undefined;
 
         const popper = (
             <Popper
