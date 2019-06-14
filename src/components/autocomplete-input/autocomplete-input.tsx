@@ -68,7 +68,11 @@ const MenuPortal = ({children}: {children: React.ReactNode}) => (
     <Fragment>{ReactDOM.createPortal(children, document.body)}</Fragment>
 );
 
-const Menu = React.forwardRef<HTMLUListElement, any>((props, ref) => {
+interface MenuProps extends React.HTMLAttributes<HTMLUListElement> {
+    isOpen?: boolean;
+}
+
+const Menu = React.forwardRef<HTMLUListElement, MenuProps>((props, ref) => {
     const {children, isOpen, ...rest} = props;
     const style = {
         ...props.style,
@@ -205,9 +209,7 @@ export class AutocompleteInput extends React.Component<Props> {
                     isOpen,
                     selectedItem
                 }) => {
-                    const inputComponentProps: InputProps = getInputProps(
-                        inputProps as React.InputHTMLAttributes<HTMLInputElement>
-                    );
+                    const inputComponentProps = getInputProps(inputProps);
                     const menuStyle = calcMenuStyles(this.inputRef.current); // todo: memoize
                     const isMenuVisible = isOpen && Boolean(inputValue);
 
@@ -217,7 +219,7 @@ export class AutocompleteInput extends React.Component<Props> {
                                 {...inputComponentProps}
                                 inputRef={chainRefs(inputComponentProps.inputRef, this.inputRef)}
                             />
-                            <Menu {...getMenuProps({isOpen: isMenuVisible, style: menuStyle})}>
+                            <Menu {...getMenuProps()} isOpen={isMenuVisible} style={menuStyle}>
                                 {this.renderMenuContent({
                                     getItemProps,
                                     highlightedIndex,

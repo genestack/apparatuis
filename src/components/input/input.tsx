@@ -134,6 +134,7 @@ export const Input = (props: Props) => {
         value,
         defaultValue,
         clearable,
+        children,
         ...rest
     } = mergeClassesProps(props, styles);
 
@@ -267,6 +268,7 @@ export const Input = (props: Props) => {
                         {append}
                     </div>
                 ) : null}
+                {children}
             </label>
         </DarkContext.Provider>
     );
