@@ -5,5 +5,5 @@
  * The copyright notice above does not evidence any
  * actual or intended publication of such source code.
  */
-export {AutocompleteInput, Props as AutocompleteInputProps} from './autocomplete-input';
-export {AutocompleteDataProvider, Props as AutocompleteDataProviderProps} from './data-provider';
+export {SuggestInput, Props as SuggestInputProps} from './suggest-input';
+export {SuggestInputItem, Props as SuggestInputItemProps} from './suggest-input-item';
