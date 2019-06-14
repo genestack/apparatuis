@@ -4,6 +4,7 @@
 
 ### Added
 
+-   Add `align` property to `Controls` component
 -   Add `Highlight` component
 -   Add `SuggestInput` component
 

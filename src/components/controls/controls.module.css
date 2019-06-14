@@ -9,11 +9,18 @@
 
 .container {
     display: flex;
-    align-items: center;
     flex-shrink: 1;
     flex-grow: 1;
     flex-wrap: nowrap;
     min-width: 0;
+}
+
+.alignCenter {
+    align-items: center;
+}
+
+.alignBaseline {
+    align-items: baseline;
 }
 
 .gap1 {

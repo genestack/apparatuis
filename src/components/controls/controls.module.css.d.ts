@@ -14,3 +14,5 @@ export const justifyStart: string;
 export const justifyEnd: string;
 export const justifyCenter: string;
 export const justifySpaceBetween: string;
+export const alignCenter: string;
+export const alignBaseline: string;
