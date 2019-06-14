@@ -2,6 +2,10 @@
 
 ## [Unreleased]
 
+### Added
+
+-   Add `Highlight` component
+
 ## [8.0.0-alpha.11] - 2019-06-07
 
 ### Changed
