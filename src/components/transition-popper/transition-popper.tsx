@@ -128,7 +128,7 @@ export class TransitionPopper<T> extends React.Component<Props<T>, State> {
             <Popper
                 positionFixed={positionFixed}
                 placement={placement}
-                referenceElement={element}
+                referenceElement={element || undefined}
                 eventsEnabled={eventsEnabled}
                 innerRef={innerRef}
                 modifiers={modifiers}

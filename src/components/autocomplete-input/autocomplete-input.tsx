@@ -209,7 +209,7 @@ export class AutocompleteInput extends React.Component<Props> {
                     isOpen,
                     selectedItem
                 }) => {
-                    const inputComponentProps: InputProps = getInputProps(inputProps);
+                    const inputComponentProps = getInputProps(inputProps);
                     const menuStyle = calcMenuStyles(this.inputRef.current); // todo: memoize
                     const isMenuVisible = isOpen && Boolean(inputValue);
 

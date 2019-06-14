@@ -46,12 +46,11 @@ export interface Props extends InputProps {
  * over styles and transitions. It is useless in common cases without any control components
  * like [downshift](https://github.com/downshift-js/downshift).
  *
- * Wrap it your controller yourself or use some predefined components
- * like `SuggestInput` or `SuggestSelect`.
+ * Wrap it with your controller or use some predefined components like `SuggestInput`.
  */
 export function Suggest(props: Props) {
     const {rootRef, open, popoverProps = {}, children, ...rest} = props;
-    const {transitionProps = {}} = popoverProps;
+    const {transitionProps = {}, containerProps = {}} = popoverProps;
 
     const inputRootRef = React.useRef<HTMLLabelElement>(null);
     const inputRootWidth = useElementWidth(inputRootRef.current);
@@ -61,7 +60,11 @@ export function Suggest(props: Props) {
     const childrenToRender = prevChildren || children;
 
     return (
-        <Input {...rest} rootRef={chainRefs(rootRef, inputRootRef)}>
+        <Input
+            {...rest}
+            rootRef={chainRefs(rootRef, inputRootRef)}
+            className={classNames(rest.className, styles.root)}
+        >
             <Popover
                 placement="bottom-start"
                 {...popoverProps}
@@ -69,6 +72,10 @@ export function Suggest(props: Props) {
                 referenceElement={inputRootRef.current}
                 style={{...popoverProps.style, minWidth: `${inputRootWidth || 0}px`}}
                 className={classNames(popoverProps.className, styles.popover)}
+                containerProps={{
+                    ...containerProps,
+                    className: classNames(containerProps.className, styles.popoverContainer)
+                }}
                 transitionProps={{
                     ...transitionProps,
                     onEntered: chain(transitionProps.onEntered, () => {

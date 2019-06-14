@@ -5,4 +5,6 @@
  * The copyright notice above does not evidence any
  * actual or intended publication of such source code.
  */
+export const root: string;
 export const popover: string;
+export const popoverContainer: string;
