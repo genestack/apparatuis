@@ -12,6 +12,7 @@ import {Omit} from '../../utils/omit';
 import {WithClasses, mergeClassesProps} from '../../utils/styles';
 import {ButtonBase, ButtonBaseProps} from '../button-base';
 import {Flex} from '../flex';
+import {MarginBoxContext} from '../margin-box/margin-box-context';
 
 import {ListItemText} from './list-item-text';
 import * as styles from './list-item.module.css';
@@ -44,6 +45,8 @@ export function ListItem(props: Props) {
         styles
     );
 
+    const contained = React.useContext(MarginBoxContext);
+
     const children =
         typeof props.children === 'string' ? (
             <ListItemText>{props.children}</ListItemText>
@@ -61,7 +64,9 @@ export function ListItem(props: Props) {
                     [classes.active]: active,
                     [classes.hovered]: hovered,
                     [classes.focused]: focused,
-                    [classes.disabled]: disabled
+                    [classes.disabled]: disabled,
+                    [classes.inPage]: contained === 'in-page',
+                    [classes.inDialog]: contained === 'in-dialog'
                 })}
             >
                 {children}

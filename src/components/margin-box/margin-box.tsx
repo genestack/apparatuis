@@ -11,6 +11,7 @@ import * as React from 'react';
 import {WithClasses, mergeClassesProps} from '../../utils/styles';
 import {Divider, DividerProps} from '../divider';
 
+import {Contained, MarginBoxContext} from './margin-box-context';
 import * as styles from './margin-box.module.css';
 
 const DEFAULT_DIVIDER_GAP = 4;
@@ -19,7 +20,7 @@ type TargetProps = React.HTMLAttributes<HTMLElement>;
 
 /** MarginBox public properties */
 export interface Props extends TargetProps, WithClasses<keyof typeof styles> {
-    dense?: boolean;
+    contained?: Contained;
     as?: React.ReactType;
     startDividerProps?: DividerProps;
     endDividerProps?: DividerProps;
@@ -36,7 +37,7 @@ export interface Props extends TargetProps, WithClasses<keyof typeof styles> {
 export const MarginBox = (props: Props) => {
     const {
         as: Component = 'div',
-        dense,
+        contained = 'in-page',
         children,
         startDividerProps = {},
         noStartDivider,
@@ -47,35 +48,34 @@ export const MarginBox = (props: Props) => {
     } = mergeClassesProps(props, styles);
 
     return (
-        <Component
-            {...rest}
-            className={classNames(rest.className, classes.root, {
-                [classes.dense]: dense
-            })}
-        >
-            {!noStartDivider ? (
-                <Divider
-                    variant="transparent"
-                    startGap={0}
-                    endGap={DEFAULT_DIVIDER_GAP}
-                    {...startDividerProps}
-                    className={classNames(startDividerProps.className, classes.divider, {
-                        [classes.denseDivider]: dense
-                    })}
-                />
-            ) : null}
-            {children}
-            {!noEndDivider ? (
-                <Divider
-                    variant="transparent"
-                    startGap={DEFAULT_DIVIDER_GAP}
-                    endGap={0}
-                    {...endDividerProps}
-                    className={classNames(endDividerProps.className, classes.divider, {
-                        [classes.denseDivider]: dense
-                    })}
-                />
-            ) : null}
-        </Component>
+        <MarginBoxContext.Provider value={contained}>
+            <Component
+                {...rest}
+                className={classNames(rest.className, {
+                    [classes.inPage]: contained === 'in-page',
+                    [classes.inDialog]: contained === 'in-dialog'
+                })}
+            >
+                {!noStartDivider ? (
+                    <Divider
+                        variant="transparent"
+                        startGap={0}
+                        endGap={DEFAULT_DIVIDER_GAP}
+                        {...startDividerProps}
+                        className={classNames(startDividerProps.className, classes.divider)}
+                    />
+                ) : null}
+                {children}
+                {!noEndDivider ? (
+                    <Divider
+                        variant="transparent"
+                        startGap={DEFAULT_DIVIDER_GAP}
+                        endGap={0}
+                        {...endDividerProps}
+                        className={classNames(endDividerProps.className, classes.divider)}
+                    />
+                ) : null}
+            </Component>
+        </MarginBoxContext.Provider>
     );
 };

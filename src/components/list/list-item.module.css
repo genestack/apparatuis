@@ -9,8 +9,6 @@
 
 .root {
     composes: resetButton from "../../variables.css";
-    padding-right: calc(var(--gs-spacing-unit) * 3);
-    padding-left: calc(var(--gs-spacing-unit) * 3);
     min-height: calc(var(--gs-spacing-unit) * 4);
     width: 100%;
 }
@@ -36,4 +34,14 @@
     box-shadow: none;
     cursor: not-allowed;
     pointer-events: none;
+}
+
+.inPage {
+    padding-left: calc(var(--gs-spacing-unit) * 3);
+    padding-right: calc(var(--gs-spacing-unit) * 3);
+}
+
+.inDialog {
+    padding-left: calc(var(--gs-spacing-unit) * 3);
+    padding-right: calc(var(--gs-spacing-unit) * 4);
 }

@@ -33,6 +33,7 @@ export const DialogBody = (props: Props) => {
         <DialogContext.Consumer>
             {(dialogContext) => (
                 <MarginBox
+                    contained="in-dialog"
                     {...rest}
                     className={classNames(rest.className, classes.root, {
                         [classes.scrollable]: dialogContext.scrollable

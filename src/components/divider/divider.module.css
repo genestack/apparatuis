@@ -55,6 +55,10 @@
     margin-top: calc(var(--gs-divider-unit) * 4);
 }
 
+.startGap5 {
+    margin-top: calc(var(--gs-divider-unit) * 5);
+}
+
 .endGap1 {
     margin-bottom: var(--gs-divider-unit);
 }
@@ -69,4 +73,8 @@
 
 .endGap4 {
     margin-bottom: calc(var(--gs-divider-unit) * 4);
+}
+
+.endGap5 {
+    margin-bottom: calc(var(--gs-divider-unit) * 5);
 }

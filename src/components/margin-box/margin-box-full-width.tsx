@@ -10,13 +10,13 @@ import * as React from 'react';
 
 import {WithClasses, mergeClassesProps} from '../../utils/styles';
 
+import {MarginBoxContext} from './margin-box-context';
 import * as styles from './margin-box-full-width.module.css';
 
 type TargetProps = React.HTMLAttributes<HTMLElement>;
 
 /** MarginBoxFullWidth public properties */
 export interface Props extends TargetProps, WithClasses<keyof typeof styles> {
-    dense?: boolean;
     as?: React.ReactType;
 }
 
@@ -27,13 +27,16 @@ export interface Props extends TargetProps, WithClasses<keyof typeof styles> {
  * as `PageFullWidth`, `DialogFullWidth`, `DrawerFullWidth`, etc.
  */
 export const MarginBoxFullWidth = (props: Props) => {
-    const {as: Component = 'div', dense, classes, ...rest} = mergeClassesProps(props, styles);
+    const {as: Component = 'div', classes, ...rest} = mergeClassesProps(props, styles);
+
+    const contained = React.useContext(MarginBoxContext);
 
     return (
         <Component
             {...rest}
-            className={classNames(rest.className, classes.root, {
-                [classes.dense]: dense
+            className={classNames(rest.className, {
+                [classes.inPage]: contained === 'in-page',
+                [classes.inDialog]: contained === 'in-dialog'
             })}
         />
     );

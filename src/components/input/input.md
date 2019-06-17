@@ -161,7 +161,7 @@ handleClearButtonClick = () => setState({value: ''});
             <ControlsItem>
                 <Controls justify="space-between" align="baseline">
                     <ControlsItem>
-                        <label for="password-input">
+                        <label htmlFor="password-input">
                             <Typography box="paragraph">Password</Typography>
                         </label>
                     </ControlsItem>

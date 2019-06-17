@@ -12,7 +12,7 @@
     right: 0;
     bottom: 0;
     left: 0;
-    background: rgba(0, 0, 0, 0.5);
+    background: rgba(11, 21, 40, 0.7);
 
     /**
       * Use negative `z-index` because Backdrop always should be behind

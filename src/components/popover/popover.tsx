@@ -12,6 +12,7 @@ import {chain} from '../../utils/chain';
 import {Omit} from '../../utils/omit';
 import {WithClasses, mergeClassesProps} from '../../utils/styles';
 import {createIcon} from '../icon';
+import {MarginBoxContext} from '../margin-box/margin-box-context';
 import {Paper, PaperProps} from '../paper';
 import {TransitionPopper, TransitionPopperProps} from '../transition-popper';
 
@@ -92,7 +93,9 @@ export const Popover = (props: Props) => {
                                 {...targetProps}
                                 className={classNames(targetProps.className, classes.paper)}
                             >
-                                {children}
+                                <MarginBoxContext.Provider value="in-page">
+                                    {children}
+                                </MarginBoxContext.Provider>
                             </Paper>
                             <div
                                 {...arrowProps}

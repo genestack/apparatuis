@@ -26,6 +26,8 @@
     flex-direction: column;
     margin-left: auto;
     margin-right: auto;
+    border: none;
+    border-radius: calc(var(--gs-spacing-unit) / 2);
 }
 
 .small {
