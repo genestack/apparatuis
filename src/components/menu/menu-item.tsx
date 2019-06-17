@@ -48,21 +48,29 @@ type SubMenuProp = React.ReactElement<SubMenuProps> | (() => React.ReactElement<
 /** MenuItem public properties */
 export interface Props extends TargetProps, WithClasses<keyof typeof styles> {
     /**
-     * Left icon for a menu item.
-     * Anyway If no icon passed a menu item will have empty left margin
+     * Left element for a menu item.
+     * Anyway If no prepend passed a menu item will have empty left margin
      * for menu items align.
      */
-    icon?: React.ReactNode;
+    prepend?: React.ReactNode;
+    /** Right element for a menu item. */
+    append?: React.ReactNode;
     /**
      * SubMenu is shown when user focuses on menu item.
      * Accepts only `<SubMenu />` elements or functions that returns it.
      */
     subMenu?: SubMenuProp;
+    /** Value that is used for `Menu.onValueSelect` callback */
     value?: any;
     /** Properties for the left list item cell that contains icon */
-    iconCellProps?: ListItemCellProps;
+    prependCellProps?: ListItemCellProps;
     /** Properties list item cell with main content */
     contentCellProps?: ListItemTextProps;
+    /**
+     * Properties for the right list item cell that contains
+     * append elements and arrow icon indicated that MenuItem has a SubMenu
+     */
+    appendCellProps?: ListItemCellProps;
     /** Properties for popover that shows SubMenu */
     subMenuPopoverProps?: Omit<
         MenuPopoverProps,
@@ -73,11 +81,6 @@ export interface Props extends TargetProps, WithClasses<keyof typeof styles> {
         | 'disableTransition'
         | 'placement'
     >;
-    /**
-     * Properties the right list item cell that contains arrow icon
-     * indicated that MenuItem has a SubMenu
-     */
-    subMenuArrowIconCellProps?: ListItemCellProps;
     /** Properties for arrow icon in the right cell */
     subMenuArrowIconProps?: IconProps;
 }
@@ -291,13 +294,14 @@ export class MenuItem extends React.PureComponent<Props, State> {
             classes,
             className,
             children,
-            icon,
+            prepend,
+            append,
             subMenu,
             value,
-            iconCellProps = {},
-            contentCellProps = {},
+            prependCellProps = {},
+            contentCellProps,
+            appendCellProps = {},
             subMenuPopoverProps = {},
-            subMenuArrowIconCellProps = {},
             subMenuArrowIconProps = {},
             ...rest
         } = mergeClassesProps(this.props, styles);
@@ -324,12 +328,6 @@ export class MenuItem extends React.PureComponent<Props, State> {
                 </MenuPopover>
             ) : null;
 
-        const subMenuArrowIcon = subMenu ? (
-            <ListItemCell {...subMenuArrowIconCellProps}>
-                <KeyboardArrowRightIcon {...subMenuArrowIconProps} />
-            </ListItemCell>
-        ) : null;
-
         return (
             <MenuContext.Consumer>
                 {(menuContext) => (
@@ -344,9 +342,7 @@ export class MenuItem extends React.PureComponent<Props, State> {
                                 onKeyDown={chain(rest.onKeyDown, this.handleKeyDown)}
                                 onMouseEnter={chain(rest.onMouseEnter, this.handleMouseEnter)}
                                 onMouseLeave={chain(rest.onMouseLeave, this.handleMouseLeave)}
-                                className={classNames(className, classes.root, {
-                                    [classes.withSubMenu]: !!subMenuArrowIcon
-                                })}
+                                className={classNames(className, classes.root)}
                                 classes={{
                                     focused: classes.focused,
                                     hovered: classes.hovered,
@@ -354,16 +350,33 @@ export class MenuItem extends React.PureComponent<Props, State> {
                                 }}
                             >
                                 <ListItemCell
-                                    {...iconCellProps}
+                                    {...prependCellProps}
                                     className={classNames(
-                                        iconCellProps.className,
-                                        classes.iconCell
+                                        prependCellProps.className,
+                                        classes.prependCell
                                     )}
                                 >
-                                    {icon}
+                                    {prepend}
                                 </ListItemCell>
                                 <ListItemText {...contentCellProps}>{children}</ListItemText>
-                                {subMenuArrowIcon}
+                                {subMenu || append ? (
+                                    <ListItemCell
+                                        {...appendCellProps}
+                                        className={classNames(
+                                            appendCellProps.className,
+                                            classes.appendCell
+                                        )}
+                                    >
+                                        {append}
+                                        {subMenu ? (
+                                            <KeyboardArrowRightIcon
+                                                {...subMenuArrowIconProps}
+                                                className="foo"
+                                                style={{marginLeft: 4}}
+                                            />
+                                        ) : null}
+                                    </ListItemCell>
+                                ) : null}
                             </ListItem>
                         </RootRef>
                         {subMenuPopover}

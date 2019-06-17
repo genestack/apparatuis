@@ -8,9 +8,8 @@
 @import "../../variables.css";
 
 .root {
-    padding-left: calc(var(--gs-spacing-unit) / 2);
-    padding-right: calc(var(--gs-spacing-unit) + 20px);
-    min-height: calc(var(--gs-spacing-unit) * 3.25);
+    padding-left: var(--gs-spacing-unit);
+    padding-right: var(--gs-spacing-unit);
 }
 
 .root:hover,
@@ -20,7 +19,7 @@
 
 .root:focus,
 .root.focused {
-    background: var(--gs-color-action-item-focused);
+    background: var(--gs-color-action-inverted-25);
 }
 
 .root:disabled,
@@ -28,9 +27,10 @@
     background: transparent;
 }
 
-.iconCell {
-    width: 20px;
+.prependCell {
+    min-width: 20px;
 }
-.withSubMenu {
-    padding-right: calc(var(--gs-spacing-unit) / 2);
+
+.appendCell {
+    margin-left: calc(var(--gs-spacing-unit) * 2);
 }

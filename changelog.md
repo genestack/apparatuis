@@ -7,10 +7,12 @@
 -   Add `align` property to `Controls` component
 -   Add `Highlight` component
 -   Add `SuggestInput` component
+-   Add `append` element to `MenuItem`
 
 ### Removed
 
 -   Remove `Autocomplete` component
+-   Replace `icon` property with `prepend` in `MenuItem`
 
 ## [8.0.0-alpha.11] - 2019-06-07
 

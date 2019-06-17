@@ -19,7 +19,7 @@ import {createIcon} from '../icon';
 import * as styles from './hidden-scrollbar.module.css';
 import {scrollIntoContainerView} from './scroll-into-container-view';
 
-const DEFAULT_SCROLL_STEP = 26;
+const DEFAULT_SCROLL_STEP = 32;
 const DEFAULT_SCROLL_STEP_TIMEOUT = 100;
 
 const ScrollDirectionIcon = createIcon(
