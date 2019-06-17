@@ -123,7 +123,7 @@ items = new Array(100).fill(null).map((_, index) => (
             Create File...
         </MenuItem>
 
-        <MenuItem value="Delete File" append={<Quiet>⌘ + S</Quiet>} subMenu={getInfiniteSubMenu}>
+        <MenuItem value="Save File" append={<Quiet>⌘ + S</Quiet>} subMenu={getInfiniteSubMenu}>
             <MenuItemText noGrow>Save File</MenuItemText>
             <MenuItemCell>
                 <Quiet>(5 min ago)</Quiet>
