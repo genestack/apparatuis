@@ -7,24 +7,24 @@
  */
 @import "../../variables.css";
 
-.root {
+.inPage {
     padding-left: calc(var(--gs-spacing-unit) * 3);
     padding-right: calc(var(--gs-spacing-unit) * 3);
 }
 
-.dense {
-    padding-left: calc(var(--gs-spacing-unit) * 2);
-    padding-right: calc(var(--gs-spacing-unit) * 2);
+.inDialog {
+    padding-left: calc(var(--gs-spacing-unit) * 3);
+    padding-right: calc(var(--gs-spacing-unit) * 4);
 }
 
-.divider {
+.inPage .divider {
     margin-left: calc(var(--gs-spacing-unit) * -3);
     margin-right: calc(var(--gs-spacing-unit) * -3);
     width: calc(100% + var(--gs-spacing-unit) * 6);
 }
 
-.denseDivider {
-    margin-left: calc(var(--gs-spacing-unit) * -2);
-    margin-right: calc(var(--gs-spacing-unit) * -2);
+.inDialog .divider {
+    margin-left: calc(var(--gs-spacing-unit) * -3);
+    margin-right: calc(var(--gs-spacing-unit) * -4);
     width: calc(100% + var(--gs-spacing-unit) * 4);
 }

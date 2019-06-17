@@ -16,7 +16,7 @@ import * as styles from './divider.module.css';
 
 type TargetProps = React.HTMLAttributes<HTMLHRElement>;
 
-type DividerGap = 0 | 1 | 2 | 3 | 4;
+type DividerGap = 0 | 1 | 2 | 3 | 4 | 5;
 
 /** Public Divider properties */
 export interface Props extends TargetProps, WithClasses<keyof typeof styles> {
@@ -64,10 +64,12 @@ export function Divider(props: Props) {
                             [classes.startGap2]: startGap === 2,
                             [classes.startGap3]: startGap === 3,
                             [classes.startGap4]: startGap === 4,
+                            [classes.startGap5]: startGap === 5,
                             [classes.endGap1]: endGap === 1,
                             [classes.endGap2]: endGap === 2,
                             [classes.endGap3]: endGap === 3,
                             [classes.endGap4]: endGap === 4,
+                            [classes.endGap5]: endGap === 5,
                             [classes.inverted]: inverted
                         })}
                     />

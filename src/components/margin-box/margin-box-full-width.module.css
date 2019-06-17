@@ -7,12 +7,12 @@
  */
 @import "../../variables.css";
 
-.root {
+.inPage {
     margin-left: calc(-1 * var(--gs-spacing-unit) * 3);
     margin-right: calc(-1 * var(--gs-spacing-unit) * 3);
 }
 
-.dense {
-    margin-left: calc(-1 * var(--gs-spacing-unit) * 2);
-    margin-right: calc(-1 * var(--gs-spacing-unit) * 2);
+.inDialog {
+    margin-left: calc(-1 * var(--gs-spacing-unit) * 3);
+    margin-right: calc(-1 * var(--gs-spacing-unit) * 4);
 }

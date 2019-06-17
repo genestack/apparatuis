@@ -38,6 +38,7 @@ export const DialogFooter = (props: Props) => {
         <DialogContext.Consumer>
             {(dialogContext) => (
                 <MarginBox
+                    contained="in-dialog"
                     {...rest}
                     className={classNames(rest.className, styles.root)}
                     noStartDivider={!dialogContext.scrollable}

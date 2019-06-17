@@ -11,3 +11,5 @@ export const hovered: string;
 export const active: string;
 export const disabled: string;
 export const content: string;
+export const inPage: string;
+export const inDialog: string;

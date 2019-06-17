@@ -30,34 +30,37 @@ export const DialogHeader = (props: Props) => {
     const {
         children,
         contentProps = {},
-        startDividerProps,
         endDividerProps,
+        startDividerProps,
         classes,
         ...rest
     } = mergeClassesProps(props, styles);
 
+    const dialogContext = React.useContext(DialogContext);
+
     return (
-        <DialogContext.Consumer>
-            {(dialogContext) => (
-                <MarginBox
-                    {...rest}
-                    className={classNames(rest.className, classes.root)}
-                    noEndDivider={!dialogContext.scrollable}
-                    endDividerProps={{
-                        variant: 'stroke',
-                        ...endDividerProps
-                    }}
-                >
-                    <div
-                        {...contentProps}
-                        className={classNames(contentProps.className, classes.content, {
-                            [classes.shiftedContent]: !dialogContext.hideCloseButton
-                        })}
-                    >
-                        {children}
-                    </div>
-                </MarginBox>
-            )}
-        </DialogContext.Consumer>
+        <MarginBox
+            contained="in-dialog"
+            {...rest}
+            className={classNames(rest.className, classes.root)}
+            startDividerProps={{
+                endGap: 5,
+                ...startDividerProps
+            }}
+            noEndDivider={!dialogContext.scrollable}
+            endDividerProps={{
+                variant: 'stroke',
+                ...endDividerProps
+            }}
+        >
+            <div
+                {...contentProps}
+                className={classNames(contentProps.className, classes.content, {
+                    [classes.shiftedContent]: !dialogContext.hideCloseButton
+                })}
+            >
+                {children}
+            </div>
+        </MarginBox>
     );
 };

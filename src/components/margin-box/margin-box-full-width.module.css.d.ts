@@ -5,5 +5,5 @@
  * The copyright notice above does not evidence any
  * actual or intended publication of such source code.
  */
-export const root: string;
-export const dense: string;
+export const inPage: string;
+export const inDialog: string;
