@@ -21,6 +21,8 @@ export interface Props extends TargetProps {
     justify?: 'start' | 'end' | 'center' | 'space-between';
     /** Redefines the target element */
     as?: React.ReactType;
+    /** Vertical align */
+    align?: 'center' | 'baseline';
 }
 
 /**
@@ -29,7 +31,7 @@ export interface Props extends TargetProps {
  * that are defined by `gap` property of controls container.
  */
 export const Controls = (props: Props) => {
-    const {as: Component = 'div', gap = 2, justify = 'start', ...rest} = props;
+    const {as: Component = 'div', gap = 2, justify = 'start', align = 'center', ...rest} = props;
 
     return (
         <Component
@@ -42,7 +44,9 @@ export const Controls = (props: Props) => {
                 [styles.justifyCenter]: justify === 'center',
                 [styles.justifyEnd]: justify === 'end',
                 [styles.justifyStart]: justify === 'start',
-                [styles.justifySpaceBetween]: justify === 'space-between'
+                [styles.justifySpaceBetween]: justify === 'space-between',
+                [styles.alignCenter]: align === 'center',
+                [styles.alignBaseline]: align === 'baseline'
             })}
         />
     );

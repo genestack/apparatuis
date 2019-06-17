@@ -130,3 +130,95 @@ handleClearButtonClick = () => setState({value: ''});
     </Paper>
 </DarkContext.Provider>;
 ```
+
+### Usage examples
+
+```js
+<Paper>
+    <PageContent>
+        <Controls>
+            <ControlsItem as="label">
+                <Typography box="paragraph">Label</Typography>
+                <Input placeholder="Text" />
+            </ControlsItem>
+            <ControlsItem as="label">
+                <Typography box="paragraph" variant="caption">
+                    Label
+                </Typography>
+                <Input placeholder="Text" />
+            </ControlsItem>
+
+            <ControlsItem as="label">
+                <Typography box="paragraph">
+                    Label{' '}
+                    <Typography box="inline" variant="caption" quiet>
+                        optional
+                    </Typography>
+                </Typography>
+                <Input placeholder="Text" />
+            </ControlsItem>
+
+            <ControlsItem>
+                <Controls justify="space-between" align="baseline">
+                    <ControlsItem>
+                        <label for="password-input">
+                            <Typography box="paragraph">Password</Typography>
+                        </label>
+                    </ControlsItem>
+                    <ControlsItem>
+                        <Typography variant="caption">
+                            <Link>Restore</Link>
+                        </Typography>
+                    </ControlsItem>
+                </Controls>
+
+                <Input id="password-input" placeholder="Text" />
+            </ControlsItem>
+        </Controls>
+        <Divider gap={2} variant="transparent" />
+        <Controls gap={6}>
+            <ControlsItem>
+                <Controls as="label">
+                    <ControlsItem>
+                        <Typography>Label</Typography>
+                    </ControlsItem>
+                    <ControlsItem>
+                        <Input placeholder="Text" />
+                    </ControlsItem>
+                </Controls>
+            </ControlsItem>
+            <ControlsItem>
+                <Controls as="label">
+                    <ControlsItem>
+                        <Typography variant="caption">Label</Typography>
+                    </ControlsItem>
+                    <ControlsItem>
+                        <Input placeholder="Text" />
+                    </ControlsItem>
+                </Controls>
+            </ControlsItem>
+        </Controls>
+        <Divider gap={2} variant="transparent" />
+        <Controls gap={6} as="form">
+            <ControlsItem>
+                <Input placeholder="Email" defaultValue="qwerty" type="email" />
+                <Typography status="error" variant="caption" box="paragraph">
+                    Enter correct email
+                </Typography>
+            </ControlsItem>
+            <ControlsItem>
+                <Input placeholder="Password" defaultValue="qwerty" type="password" />
+                <Typography quiet variant="caption" box="paragraph">
+                    Password must contain digits
+                </Typography>
+            </ControlsItem>
+        </Controls>
+        <Divider gap={2} variant="transparent" />
+        <TooltipHandler tooltip={<Tooltip placement="right">Explanation text</Tooltip>}>
+            <span>
+                <Input invalid placeholder="Text" />
+            </span>
+        </TooltipHandler>
+    </PageContent>
+</Paper>
+```
