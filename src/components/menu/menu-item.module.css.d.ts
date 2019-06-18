@@ -12,3 +12,4 @@ export const hovered: string;
 export const focused: string;
 export const disabled: string;
 export const content: string;
+export const subMenuArrowIcon: string;

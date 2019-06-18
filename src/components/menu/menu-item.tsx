@@ -371,8 +371,10 @@ export class MenuItem extends React.PureComponent<Props, State> {
                                         {subMenu ? (
                                             <KeyboardArrowRightIcon
                                                 {...subMenuArrowIconProps}
-                                                className="foo"
-                                                style={{marginLeft: 4}}
+                                                className={classNames(
+                                                    subMenuArrowIconProps.className,
+                                                    classes.subMenuArrowIcon
+                                                )}
                                             />
                                         ) : null}
                                     </ListItemCell>

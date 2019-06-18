@@ -34,3 +34,7 @@
 .appendCell {
     margin-left: calc(var(--gs-spacing-unit) * 2);
 }
+
+.subMenuArrowIcon {
+    margin-left: calc(var(--gs-spacing-unit) / 2);
+}
