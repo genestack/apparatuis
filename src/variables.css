@@ -19,12 +19,10 @@
     --gs-color-action-25: rgba(0, 68, 204, 0.25);
     --gs-color-action-inverted: rgba(102, 153, 255, 1);
     --gs-color-action-inverted-50: rgba(102, 153, 255, 0.5);
+    --gs-color-action-inverted-25: rgba(102, 153, 255, 0.25);
     --gs-color-action-hover: rgba(40, 93, 217, 1);
     --gs-color-action-text: rgba(28, 60, 125, 1);
     --gs-color-action-text-60: rgba(28, 60, 125, 0.6);
-    --gs-color-action-item-focused: rgba(224, 245, 255, 1);
-    --gs-color-action-item-hovered: rgba(224, 245, 255, 1);
-    --gs-color-action-item-active: rgba(194, 233, 253, 1);
 
     /* statuses */
     --gs-color-success: rgba(119, 171, 48, 1);

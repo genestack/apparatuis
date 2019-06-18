@@ -6,9 +6,10 @@
  * actual or intended publication of such source code.
  */
 export const root: string;
-export const iconCell: string;
+export const prependCell: string;
+export const appendCell: string;
 export const hovered: string;
 export const focused: string;
 export const disabled: string;
 export const content: string;
-export const withSubMenu: string;
+export const subMenuArrowIcon: string;

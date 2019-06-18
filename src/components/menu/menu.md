@@ -11,35 +11,24 @@ handleValueSelect = (value) => {
 
 const menu = (
     <Menu onValueSelect={handleValueSelect}>
-        <MenuItem value="Menu Item 1">
-            <MenuItemText>Menu Item</MenuItemText>
-            <MenuItemCell>
-                <Typography quiet>1</Typography>
-            </MenuItemCell>
+        <MenuItem value="Menu Item 1" append={<Typography quiet>1</Typography>}>
+            Menu Item
         </MenuItem>
         <Divider />
-        <MenuItem value="Menu Item 2">
-            <MenuItemText>Menu Item</MenuItemText>
-            <MenuItemCell>
-                <Typography quiet>2</Typography>
-            </MenuItemCell>
+        <MenuItem value="Menu Item 2" append={<Typography quiet>2</Typography>}>
+            Menu Item
         </MenuItem>
         <MenuItem
             subMenu={
                 <SubMenu>
-                    <MenuItem value="Menu Item 3.1">
-                        <MenuItemText>Menu Item</MenuItemText>
-                        <MenuItemCell>
-                            <Typography quiet>3.1</Typography>
-                        </MenuItemCell>
+                    <MenuItem value="Menu Item 3.1" append={<Typography quiet>3.1</Typography>}>
+                        Menu Item
                     </MenuItem>
                 </SubMenu>
             }
+            append={<Typography quiet>3</Typography>}
         >
-            <MenuItemText>Menu Item</MenuItemText>
-            <MenuItemCell>
-                <Typography quiet>3</Typography>
-            </MenuItemCell>
+            Menu Item
         </MenuItem>
     </Menu>
 );
@@ -87,11 +76,13 @@ handleMenuValueSelect = (value) => {
 };
 
 items = new Array(100).fill(null).map((_, index) => (
-    <MenuItem key={index} onClick={handleMenuClose} subMenu={getInfiniteSubMenu}>
-        <MenuItemText>Menu Item</MenuItemText>
-        <MenuItemCell>
-            <Typography quiet>{index}</Typography>
-        </MenuItemCell>
+    <MenuItem
+        key={index}
+        onClick={handleMenuClose}
+        subMenu={getInfiniteSubMenu}
+        append={<Typography quiet>{index}</Typography>}
+    >
+        Menu Item
     </MenuItem>
 ));
 
@@ -115,19 +106,27 @@ items = new Array(100).fill(null).map((_, index) => (
         onClose={handleMenuClose}
         onValueSelect={handleMenuValueSelect}
         referenceElement={state.referenceElement}
-        style={{maxWidth: 200}}
+        style={{maxWidth: 250}}
     >
-        <MenuItem value="Download" icon={<DownloadIcon />} subMenu={<SubMenu>{items}</SubMenu>}>
+        <MenuItem value="Download" prepend={<DownloadIcon />} subMenu={<SubMenu>{items}</SubMenu>}>
             <MenuItemText noGrow>Download</MenuItemText>
             <MenuItemCell>
                 <Quiet>125 MB</Quiet>
             </MenuItemCell>
         </MenuItem>
 
-        <MenuItem value="Open File" subMenu={getInfiniteSubMenu}>
-            <MenuItemText>Open File...</MenuItemText>
+        <MenuItem value="Open File" append={<Quiet>⌘ + O</Quiet>}>
+            Open File...
+        </MenuItem>
+
+        <MenuItem value="Create File" append={<Quiet>⌘ + N</Quiet>} subMenu={getInfiniteSubMenu}>
+            Create File...
+        </MenuItem>
+
+        <MenuItem value="Save File" append={<Quiet>⌘ + S</Quiet>} subMenu={getInfiniteSubMenu}>
+            <MenuItemText noGrow>Save File</MenuItemText>
             <MenuItemCell>
-                <Quiet>⌘ + O</Quiet>
+                <Quiet>(5 min ago)</Quiet>
             </MenuItemCell>
         </MenuItem>
 
@@ -154,11 +153,8 @@ handleMenuClose = () => {
 };
 
 items = new Array(100).fill(null).map((_, index) => (
-    <MenuItem key={index}>
-        <MenuItemText>Menu Item</MenuItemText>
-        <MenuItemCell>
-            <Typography quiet>{index}</Typography>
-        </MenuItemCell>
+    <MenuItem key={index} append={<Typography quiet>{index}</Typography>}>
+        Menu Item
     </MenuItem>
 ));
 

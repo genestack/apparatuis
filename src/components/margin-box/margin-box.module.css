@@ -26,5 +26,5 @@
 .inDialog .divider {
     margin-left: calc(var(--gs-spacing-unit) * -3);
     margin-right: calc(var(--gs-spacing-unit) * -4);
-    width: calc(100% + var(--gs-spacing-unit) * 4);
+    width: calc(100% + var(--gs-spacing-unit) * 7);
 }

@@ -187,7 +187,7 @@ describe('<HiddenScrollbar />', () => {
         scrollTopSetter.mockClear();
         end.dispatchEvent(new MouseEvent('mouseover', {bubbles: true}));
         expect(scrollTopSetter).toHaveBeenCalledTimes(1);
-        expect(scrollTopSetter).toBeCalledWith(26);
+        expect(scrollTopSetter).toBeCalledWith(32);
     });
 
     it(
@@ -200,7 +200,7 @@ describe('<HiddenScrollbar />', () => {
             scrollTopSetter.mockClear();
             start.dispatchEvent(new MouseEvent('mouseover', {bubbles: true}));
             expect(scrollTopSetter).toHaveBeenCalledTimes(1);
-            expect(scrollTopSetter).toBeCalledWith(50 - 26);
+            expect(scrollTopSetter).toBeCalledWith(50 - 32);
         }
     );
 

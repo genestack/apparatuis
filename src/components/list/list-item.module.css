@@ -15,17 +15,17 @@
 
 .root:focus,
 .root.focused {
-    background: var(--gs-color-action-item-focused);
+    background: var(--gs-color-action-inverted-25);
 }
 
 .root:hover,
 .root.hovered {
-    background: var(--gs-color-action-item-hovered);
+    background: var(--gs-color-action-inverted-25);
 }
 
 .root:active,
 .root.active {
-    background: var(--gs-color-action-item-active);
+    background: var(--gs-color-action-inverted-50);
 }
 
 .root.disabled {

@@ -5,17 +5,20 @@
  * The copyright notice above does not evidence any
  * actual or intended publication of such source code.
  */
+@import "../../variables.css";
 
 .root {
     border-radius: 6px;
     max-width: 300px;
+    min-width: 160px;
     outline: none;
     display: flex;
     overflow: hidden;
+    border: none;
 }
 
 .root:focus {
-    box-shadow: 0 0 3px rgb(73, 197, 255);
+    box-shadow: 0 0 0 2px var(--gs-color-action-25);
 }
 
 .popover[data-placement^="top-start"] .root {

@@ -49,7 +49,8 @@ export function createIcon<P extends Props = Props>(
 
             return React.cloneElement(element, {
                 // prevent IE11 to focus SVG
-                focusable: 'false',
+                focusable: 'true',
+                ...this.props,
                 className: classNames(className, this.props.className, styles.root)
             });
         }
