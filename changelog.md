@@ -2,6 +2,8 @@
 
 ## [Unreleased]
 
+## [8.0.0-alpha.15] - 2019-06-21
+
 ### Added
 
 -   Add `TextLabel` component
@@ -9,6 +11,7 @@
 ### Changed
 
 -   Use `p` for `body` and `caption` variants in Typography
+-   Set default icon `vertical-align` to `bottom`
 
 ## [8.0.0-alpha.14] - 2019-06-20
 

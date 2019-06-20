@@ -9,7 +9,7 @@
 
 .root {
     align-self: center;
-    vertical-align: middle;
+    vertical-align: bottom;
     display: inline-block;
     width: calc(var(--gs-spacing-unit) * 2.5);
     height: calc(var(--gs-spacing-unit) * 2.5);
