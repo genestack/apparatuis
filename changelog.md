@@ -12,6 +12,14 @@
 
 -   Fix missed `className` for `Header` component
 
+### Removed
+
+-   Remove `Paper` border
+
+### Changed
+
+-   Change default `Paper` shadow
+
 ## [8.0.0-alpha.12] - 2019-06-20
 
 ### Added

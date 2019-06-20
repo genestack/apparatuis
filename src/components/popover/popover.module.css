@@ -21,6 +21,7 @@
     min-height: calc(var(--gs-spacing-unit) * 2);
     max-width: calc(100vw - var(--gs-spacing-unit) * 4);
     max-height: calc(100vh - var(--gs-spacing-unit) * 4);
+    box-shadow: 0 0 8px rgba(51, 51, 51, 0.25);
 }
 
 .arrow {
@@ -47,25 +48,25 @@
 
 .arrow[data-placement^="top"] {
     transform: rotate(-90deg);
-    margin-bottom: -8px;
+    margin-bottom: -9px;
     bottom: 0;
 }
 
 .arrow[data-placement^="right"] {
     transform: rotate(0deg);
-    margin-left: -8px;
+    margin-left: -9px;
     left: 0;
 }
 
 .arrow[data-placement^="bottom"] {
     transform: rotate(90deg);
-    margin-top: -8px;
+    margin-top: -9px;
     top: 0;
 }
 
 .arrow[data-placement^="left"] {
     transform: rotate(180deg);
-    margin-right: -8px;
+    margin-right: -9px;
     right: 0;
 }
 
