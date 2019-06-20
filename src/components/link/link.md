@@ -1,5 +1,6 @@
 ```js
 const {DarkContext} = require('../../utils/dark-context');
+const {DownloadIcon} = require('../../icons/download-icon');
 
 initialState = {
     inverted: false
@@ -92,6 +93,15 @@ handleInvertedChange = (event) => setState({inverted: event.currentTarget.checke
                             “Who am taking the ebonics quiz?”, the prof jovially axed.
                         </Typography>
                     </React.Fragment>
+                    <Link tabIndex={0} variant="pseudo" prepend={<DownloadIcon />}>
+                        Download
+                    </Link>
+                    <Link tabIndex={0} variant="pseudo" prepend={<DownloadIcon />} disabled>
+                        Download
+                    </Link>
+                    <Link tabIndex={0} variant="pseudo" append={<DownloadIcon />}>
+                        Download
+                    </Link>
                 </WithSeparator>
             </DarkContext.Provider>
         </PageContent>

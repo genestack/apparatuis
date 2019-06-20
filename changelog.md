@@ -4,7 +4,7 @@
 
 ### Added
 
-### Removed
+-   Add `prepend` and `append` properties to `Link`
 
 ## [8.0.0-alpha.12] - 2019-06-20
 
@@ -14,7 +14,7 @@
 -   Add `Highlight` component
 -   Add `SuggestInput` component
 -   Add `append` element to `MenuItem`
--   Add automatic determirmination of tag name based on `variant` props
+-   Add automatic determination of tag name based on `variant` props
 
 ### Removed
 
