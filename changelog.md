@@ -2,6 +2,11 @@
 
 ## [Unreleased]
 
+### Changed
+
+-   Change default highlighter to `<b/>` in `Highlight` component
+-   Rename `renderMark` to `renderHighlighter` property for `Highlight` component
+
 ## [8.0.0-alpha.13] - 2019-06-20
 
 ### Added

@@ -17,32 +17,32 @@ beforeEach(app.beforeEach);
 afterEach(app.afterEach);
 
 describe('<Highlight />', () => {
-    it('should wrap word with <mark> element', () => {
+    it('should wrap word with <b> element', () => {
         const wrapper = app.mount(
             <div>
                 <Highlight words="str">test string</Highlight>
             </div>
         );
 
-        expect(wrapper.html()).toBe('<div>test <mark>str</mark>ing</div>');
+        expect(wrapper.html()).toBe('<div>test <b>str</b>ing</div>');
     });
 
-    it('should wrap words with <mark> element', () => {
+    it('should wrap words with <b> element', () => {
         const wrapper = app.mount(
             <div>
                 <Highlight words={['str', 'n']}>test string</Highlight>
             </div>
         );
 
-        expect(wrapper.html()).toBe('<div>test <mark>str</mark>i<mark>n</mark>g</div>');
+        expect(wrapper.html()).toBe('<div>test <b>str</b>i<b>n</b>g</div>');
     });
 
     it('should accept custom wrapper', () => {
-        const renderMark: Props['renderMark'] = (props) => <a {...props} />;
+        const renderHighlighter: Props['renderHighlighter'] = (props) => <a {...props} />;
 
         const wrapper = app.mount(
             <div>
-                <Highlight words={['str', 'n']} renderMark={renderMark}>
+                <Highlight words={['str', 'n']} renderHighlighter={renderHighlighter}>
                     test string
                 </Highlight>
             </div>

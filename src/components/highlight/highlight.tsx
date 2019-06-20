@@ -9,7 +9,7 @@ import * as React from 'react';
 
 import {escapeRegExp} from '../../utils/escape-reg-exp';
 
-interface MarkProps {
+interface HighlighterProps {
     key: number;
     children: string;
 }
@@ -18,16 +18,16 @@ interface MarkProps {
 export interface Props {
     /** Word or words to mark */
     words: string | string[];
-    /** Custom mark renderer */
-    renderMark?: (props: MarkProps) => React.ReactNode;
+    /** Custom highlighter */
+    renderHighlighter?: (props: HighlighterProps) => React.ReactNode;
     children: string;
 }
 
-const DEFAULT_RENDER_MARK = (props: MarkProps) => <mark {...props} />;
+const DEFAULT_RENDER_HIGHLIGHTER = (props: HighlighterProps) => <b {...props} />;
 
 /** Highlights words in children string */
 export const Highlight = (props: Props) => {
-    const {renderMark = DEFAULT_RENDER_MARK} = props;
+    const {renderHighlighter = DEFAULT_RENDER_HIGHLIGHTER} = props;
 
     const words = (typeof props.words === 'string' ? [props.words] : props.words)
         .map((word) => word.trim())
@@ -49,7 +49,7 @@ export const Highlight = (props: Props) => {
                 );
 
                 if (matchedWord) {
-                    return renderMark({key: index, children: part});
+                    return renderHighlighter({key: index, children: part});
                 }
 
                 return part;
