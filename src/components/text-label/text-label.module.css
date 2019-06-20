@@ -1,0 +1,41 @@
+/*
+ * Copyright (c) 2011-2019 Genestack Limited
+ * All Rights Reserved
+ * THIS IS UNPUBLISHED PROPRIETARY SOURCE CODE OF GENESTACK LIMITED
+ * The copyright notice above does not evidence any
+ * actual or intended publication of such source code.
+ */
+@import "../../variables.css";
+
+.root {
+    display: flex;
+    align-items: baseline;
+    box-sizing: border-box;
+}
+
+.inline {
+    display: inline-flex;
+}
+
+.label {
+    min-width: 0;
+    flex-grow: 0;
+    flex-shrink: 1;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.grow {
+    flex-grow: 1;
+}
+
+.wrap {
+    white-space: normal;
+}
+
+.caption {
+    flex-grow: 0;
+    flex-shrink: 0;
+    margin-left: calc(var(--gs-spacing-unit) / 2);
+}

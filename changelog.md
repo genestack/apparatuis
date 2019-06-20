@@ -2,6 +2,8 @@
 
 ## [Unreleased]
 
+-   Add `TextLabel` component
+
 ## [8.0.0-alpha.14] - 2019-06-20
 
 ### Fixed
