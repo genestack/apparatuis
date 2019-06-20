@@ -82,8 +82,9 @@ export function Typography<T extends TargetProps = DefaultTargetProps>(props: Pr
     return (
         <DarkContext.Consumer>
             {(darkContext) => {
+                const mergedProps = mergeClassesProps(props as Props<TargetProps>, styles);
                 const {
-                    as: Component = 'div',
+                    as,
                     variant = 'body',
                     quiet,
                     box = 'block',
@@ -93,7 +94,30 @@ export function Typography<T extends TargetProps = DefaultTargetProps>(props: Pr
                     status,
                     ellipsis,
                     ...rest
-                } = mergeClassesProps(props as Props<TargetProps>, styles);
+                } = mergedProps;
+                let {as: Component} = mergedProps;
+
+                if (!Component) {
+                    switch (variant) {
+                        case 'body':
+                            Component = 'div';
+                            break;
+                        case 'caption':
+                            Component = 'div';
+                            break;
+                        case 'header':
+                            Component = 'h2';
+                            break;
+                        case 'section':
+                            Component = 'h3';
+                            break;
+                        case 'title':
+                            Component = 'h1';
+                            break;
+                        default:
+                            Component = 'div';
+                    }
+                }
 
                 return (
                     <Component

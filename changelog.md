@@ -4,14 +4,22 @@
 
 ### Added
 
+### Removed
+
+## [8.0.0-alpha.11] - 2019-06-20
+
+### Added
+
 -   Add `align` property to `Controls` component
 -   Add `Highlight` component
 -   Add `SuggestInput` component
 -   Add `append` element to `MenuItem`
+-   Add automatic determirmination of tag name based on `variant` props
 
 ### Removed
 
 -   Remove `Autocomplete` component
+-   Remove default margins for `Typography` with `as`
 -   Replace `icon` property with `prepend` in `MenuItem`
 
 ## [8.0.0-alpha.11] - 2019-06-07

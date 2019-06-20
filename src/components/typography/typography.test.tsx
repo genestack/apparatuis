@@ -114,4 +114,52 @@ describe('Typography Component', () => {
             sortClassNames('root caption test-caption')
         );
     });
+
+    describe('should use default tagnames depending on "variant" prop', () => {
+        it('no variant provided', () => {
+            const component = render(<Typography>Foo</Typography>).toJSON();
+
+            expect(component).toMatchSnapshot();
+        });
+
+        it('"body" variant provided', () => {
+            const component = render(<Typography variant="body">Foo</Typography>).toJSON();
+
+            expect(component).toMatchSnapshot();
+        });
+
+        it('"header" variant provided', () => {
+            const component = render(<Typography variant="header">Foo</Typography>).toJSON();
+
+            expect(component).toMatchSnapshot();
+        });
+
+        it('"title" variant provided', () => {
+            const component = render(<Typography variant="title">Foo</Typography>).toJSON();
+
+            expect(component).toMatchSnapshot();
+        });
+
+        it('"section" variant provided', () => {
+            const component = render(<Typography variant="section">Foo</Typography>).toJSON();
+
+            expect(component).toMatchSnapshot();
+        });
+
+        it('"caption" variant provided', () => {
+            const component = render(<Typography variant="caption">Foo</Typography>).toJSON();
+
+            expect(component).toMatchSnapshot();
+        });
+
+        it('"as" prop provided as well as "variant" prop', () => {
+            const component = render(
+                <Typography variant="section" as="h1">
+                    Foo
+                </Typography>
+            ).toJSON();
+
+            expect(component).toMatchSnapshot();
+        });
+    });
 });

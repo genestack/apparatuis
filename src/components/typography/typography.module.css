@@ -14,6 +14,7 @@
     color: var(--gs-color-black);
     font-weight: normal;
     font-family: var(--gs-font-family);
+    margin: 0;
 }
 
 .ellipsis {
