@@ -14,8 +14,6 @@ import {FocusTrap} from '../focus-trap';
 
 import {Menu} from './menu';
 import {MenuItem} from './menu-item';
-import {MenuItemCell} from './menu-item-cell';
-import {MenuItemText} from './menu-item-text';
 
 describe('<Menu />', () => {
     const app = createTestApp();
@@ -146,8 +144,7 @@ describe('<Menu />', () => {
             const wrapper = app.mount(
                 <Menu open referenceElement={referenceElement} onValueSelect={onValueSelect}>
                     <MenuItem id="first" value="first">
-                        <MenuItemText>First</MenuItemText>
-                        <MenuItemCell />
+                        First
                     </MenuItem>
                 </Menu>
             );

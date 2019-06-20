@@ -21,17 +21,11 @@ import {
 import {Omit} from '../../utils/omit';
 import {chainRefs} from '../../utils/set-ref';
 import {WithClasses, mergeClassesProps} from '../../utils/styles';
+import {ButtonBase, ButtonBaseProps} from '../button-base';
 import {FocusTrap} from '../focus-trap';
 import {IconProps} from '../icon';
-import {
-    ListItem,
-    ListItemProps,
-    ListItemCell,
-    ListItemCellProps,
-    ListItemTextProps,
-    ListItemText
-} from '../list';
 import {RootRef} from '../root-ref';
+import {Typography, TypographyProps} from '../typography';
 
 import {MenuContext, MenuContextValue} from './menu-context';
 import * as styles from './menu-item.module.css';
@@ -41,7 +35,7 @@ import {Props as SubMenuProps} from './sub-menu';
 const OPEN_TIMEOUT = 200;
 const CLOSE_TIMEOUT = 150;
 
-type TargetProps = Omit<ListItemProps, 'classes' | 'as' | 'focused'>;
+type TargetProps = ButtonBaseProps;
 
 type SubMenuProp = React.ReactElement<SubMenuProps> | (() => React.ReactElement<SubMenuProps>);
 
@@ -55,6 +49,10 @@ export interface Props extends TargetProps, WithClasses<keyof typeof styles> {
     prepend?: React.ReactNode;
     /** Right element for a menu item. */
     append?: React.ReactNode;
+    /** Small caption below the main title */
+    subtitle?: React.ReactNode;
+    /** Toggle title wrapping */
+    wrap?: boolean;
     /**
      * SubMenu is shown when user focuses on menu item.
      * Accepts only `<SubMenu />` elements or functions that returns it.
@@ -62,15 +60,18 @@ export interface Props extends TargetProps, WithClasses<keyof typeof styles> {
     subMenu?: SubMenuProp;
     /** Value that is used for `Menu.onValueSelect` callback */
     value?: any;
-    /** Properties for the left list item cell that contains icon */
-    prependCellProps?: ListItemCellProps;
-    /** Properties list item cell with main content */
-    contentCellProps?: ListItemTextProps;
-    /**
-     * Properties for the right list item cell that contains
-     * append elements and arrow icon indicated that MenuItem has a SubMenu
-     */
-    appendCellProps?: ListItemCellProps;
+    /** Properties for wrapper of prepend element */
+    prependProps?: React.HTMLAttributes<HTMLDivElement>;
+    /** Properties for wrapper of append element */
+    appendProps?: React.HTMLAttributes<HTMLDivElement>;
+    /** Properties for wrapper of content element */
+    contentProps?: React.HTMLAttributes<HTMLDivElement>;
+    /** Properties for wrapper of title element */
+    titleProps?: React.HTMLAttributes<HTMLDivElement>;
+    /** Properties for wrapper of children */
+    titleContentProps?: TypographyProps;
+    /** Properties for wrapper of subtitle element */
+    subtitleProps?: React.HTMLAttributes<HTMLDivElement>;
     /** Properties for popover that shows SubMenu */
     subMenuPopoverProps?: Omit<
         MenuPopoverProps,
@@ -81,7 +82,7 @@ export interface Props extends TargetProps, WithClasses<keyof typeof styles> {
         | 'disableTransition'
         | 'placement'
     >;
-    /** Properties for arrow icon in the right cell */
+    /** Properties for right arrow icon */
     subMenuArrowIconProps?: IconProps;
 }
 
@@ -298,11 +299,16 @@ export class MenuItem extends React.PureComponent<Props, State> {
             append,
             subMenu,
             value,
-            prependCellProps = {},
-            contentCellProps,
-            appendCellProps = {},
+            wrap,
+            subtitle,
+            subtitleProps = {},
             subMenuPopoverProps = {},
-            subMenuArrowIconProps = {},
+            prependProps = {},
+            appendProps = {},
+            contentProps = {},
+            titleContentProps = {},
+            subMenuArrowIconProps,
+            titleProps = {},
             ...rest
         } = mergeClassesProps(this.props, styles);
 
@@ -323,6 +329,7 @@ export class MenuItem extends React.PureComponent<Props, State> {
                     onFocus={chain(subMenuPopoverProps.onFocus, this.handleSubMenuFocus)}
                     onMouseEnter={chain(subMenuPopoverProps.onMouseEnter, this.handleSubMenuEnter)}
                     onMouseLeave={chain(subMenuPopoverProps.onMouseLeave, this.handleSubMenuLeave)}
+                    className={classes.subMenu}
                 >
                     <FocusTrap>{typeof subMenu === 'function' ? subMenu() : subMenu}</FocusTrap>
                 </MenuPopover>
@@ -333,53 +340,76 @@ export class MenuItem extends React.PureComponent<Props, State> {
                 {(menuContext) => (
                     <React.Fragment>
                         <RootRef rootRef={this.itemRef}>
-                            <ListItem
+                            <ButtonBase
                                 {...rest}
-                                focused={this.state.highlighted}
+                                className={classNames(className, classes.root, {
+                                    [classes.focused]: this.state.highlighted
+                                })}
                                 onClick={chain(rest.onClick, this.createClickHandler(menuContext))}
                                 onFocus={chain(rest.onFocus, this.handleFocus)}
                                 onBlur={chain(rest.onFocus, this.handleBlur)}
                                 onKeyDown={chain(rest.onKeyDown, this.handleKeyDown)}
                                 onMouseEnter={chain(rest.onMouseEnter, this.handleMouseEnter)}
                                 onMouseLeave={chain(rest.onMouseLeave, this.handleMouseLeave)}
-                                className={classNames(className, classes.root)}
-                                classes={{
-                                    focused: classes.focused,
-                                    hovered: classes.hovered,
-                                    disabled: classes.disabled
-                                }}
                             >
-                                <ListItemCell
-                                    {...prependCellProps}
-                                    className={classNames(
-                                        prependCellProps.className,
-                                        classes.prependCell
-                                    )}
+                                <div
+                                    {...prependProps}
+                                    className={classNames(prependProps.className, classes.prepend)}
                                 >
                                     {prepend}
-                                </ListItemCell>
-                                <ListItemText {...contentCellProps}>{children}</ListItemText>
-                                {subMenu || append ? (
-                                    <ListItemCell
-                                        {...appendCellProps}
-                                        className={classNames(
-                                            appendCellProps.className,
-                                            classes.appendCell
-                                        )}
+                                </div>
+                                <div
+                                    {...contentProps}
+                                    className={classNames(contentProps.className, classes.content)}
+                                >
+                                    <div
+                                        {...titleProps}
+                                        className={classNames(titleProps.className, classes.title)}
                                     >
-                                        {append}
-                                        {subMenu ? (
-                                            <KeyboardArrowRightIcon
-                                                {...subMenuArrowIconProps}
+                                        <Typography
+                                            ellipsis={!wrap}
+                                            as="div"
+                                            {...titleContentProps}
+                                            className={classNames(
+                                                titleContentProps.className,
+                                                classes.titleContent
+                                            )}
+                                        >
+                                            {children}
+                                        </Typography>
+                                        {append || subMenu ? (
+                                            <div
+                                                {...appendProps}
                                                 className={classNames(
-                                                    subMenuArrowIconProps.className,
-                                                    classes.subMenuArrowIcon
+                                                    appendProps.className,
+                                                    classes.append
                                                 )}
-                                            />
+                                            >
+                                                {append}
+                                                {subMenu ? (
+                                                    <KeyboardArrowRightIcon
+                                                        {...subMenuArrowIconProps}
+                                                    />
+                                                ) : null}
+                                            </div>
                                         ) : null}
-                                    </ListItemCell>
-                                ) : null}
-                            </ListItem>
+                                    </div>
+                                    {subtitle ? (
+                                        <Typography
+                                            variant="caption"
+                                            quiet
+                                            as="div"
+                                            {...subtitleProps}
+                                            className={classNames(
+                                                subtitleProps.className,
+                                                classes.subtitle
+                                            )}
+                                        >
+                                            {subtitle}
+                                        </Typography>
+                                    ) : null}
+                                </div>
+                            </ButtonBase>
                         </RootRef>
                         {subMenuPopover}
                     </React.Fragment>

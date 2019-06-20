@@ -7,6 +7,10 @@
  */
 @import "../../variables.css";
 
+.root {
+    box-sizing: border-box;
+}
+
 .inPage {
     padding-left: calc(var(--gs-spacing-unit) * 3);
     padding-right: calc(var(--gs-spacing-unit) * 3);

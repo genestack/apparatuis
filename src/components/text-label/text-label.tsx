@@ -25,7 +25,7 @@ export interface Props extends RootProps, WithClasses<keyof typeof styles> {
     /** Makes label to grow */
     grow?: boolean;
     /** Properties for children wrapper */
-    labelProps?: React.HTMLAttributes<HTMLDivElement>;
+    labelProps?: React.HTMLAttributes<HTMLSpanElement>;
     /** Properties for caption wrapper */
     captionProps?: TypographyProps;
 }
@@ -67,7 +67,7 @@ export const TextLabel = (props: Props) => {
                 [classes.inline]: box === 'inline'
             })}
         >
-            <div
+            <span
                 {...labelProps}
                 className={classNames(labelProps.className, classes.label, {
                     [classes.wrap]: wrap,
@@ -75,7 +75,7 @@ export const TextLabel = (props: Props) => {
                 })}
             >
                 {children}
-            </div>
+            </span>
 
             {caption ? (
                 <Typography
