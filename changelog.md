@@ -2,6 +2,12 @@
 
 ## [Unreleased]
 
+## [8.0.0-alpha.14] - 2019-06-20
+
+### Fixed
+
+-   Fixed missed `className` for `Link`
+
 ### Changed
 
 -   Change default highlighter to `<b/>` in `Highlight` component

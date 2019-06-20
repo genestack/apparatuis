@@ -74,7 +74,7 @@ export const Link = (props: Props) => {
             as="a"
             box="inline"
             onClick={onClick}
-            className={classNames(classes.root, {
+            className={classNames(classes.root, rest.className, {
                 [classes.pseudo]: variant === 'pseudo',
                 [classes.external]: variant === 'external',
                 [classes.disabled]: disabled,
