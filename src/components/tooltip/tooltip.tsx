@@ -119,6 +119,7 @@ export class Tooltip extends React.Component<Props> {
                             >
                                 <DarkContext.Provider value>
                                     <Typography
+                                        as="div"
                                         {...targetProps}
                                         className={classNames(targetProps.className, classes.root, {
                                             [classes.withGaps]: !noGaps

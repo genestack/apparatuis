@@ -8,41 +8,41 @@ initialState = {
 
 <React.Fragment>
     <PageContent as={Paper}>
-        <Typography as="h1" variant="header" box="paragraph">
+        <Typography variant="header" box="paragraph">
             Small Airways Smoking Hackett 2012 SRP005411 (SRA)
         </Typography>
-        <Typography as="p" box="paragraph">
+        <Typography box="paragraph">
             I&R, Homo sapiens,{' '}
             <Typography as="span" quiet box="inline">
                 Tissue:
             </Typography>{' '}
             Epithelium of Bronchiole
         </Typography>
-        <Typography as="h2" variant="title" box="paragraph">
+        <Typography variant="title" box="paragraph">
             Description and Background
         </Typography>
-        <Typography as="p" box="paragraph">
+        <Typography box="paragraph">
             Morphological changes in the small airway epithelium are the first histopathological
             manifestations of smoking-induced lung disease. Gene expression profiling using
             microarrays has permitted the identification of changes in the small airway epithelium
             of chronic cigarette smokers who have normal pulmonary function.
         </Typography>
-        <Typography as="p" box="paragraph">
+        <Typography box="paragraph">
             The availability of high throughput, massively parallel RNA sequencing (RNA-Seq) of the
             entire transcriptome opens the possibility of a higher sensitivity and more detailed
             characterization of the response of the small airway epithelium to smoking.
         </Typography>
-        <Typography as="h3" variant="section" box="paragraph">
+        <Typography variant="section" box="paragraph">
             Epithelium of Bronchiole Basic information
         </Typography>
-        <Typography as="p" box="paragraph">
+        <Typography box="paragraph">
             Epithelial cells were obtained by fiberoptic bronchoscopy and brushing of healthy
             smokers (n=6) and n=5 healthy nonsmokers, all with normal lung function and chest
             x-rays. RNA was extracted and used for massively parallel sequencing of PolyA selected
             transcripts using the Illumina Genome Snalyzer II.
         </Typography>
 
-        <Typography as="p" variant="caption" box="paragraph">
+        <Typography variant="caption" box="paragraph">
             The availability of high throughput, massively parallel RNA sequencing (RNA-Seq) of the
             entire transcriptome opens the possibility of a higher sensitivity and more detailed
             characterization of the response of the small airway epithelium to smoking.
@@ -85,7 +85,7 @@ initialState = {
                 style={{background: state.inverted ? 'rgb(51, 51, 51)' : 'rgb(255, 255, 255)'}}
             >
                 <DarkContext.Provider value={state.inverted}>
-                    <Typography as="h1" variant="header" box="paragraph">
+                    <Typography variant="header" box="paragraph">
                         <Typography as="span" variant="header" box="inline" quiet={state.quiet}>
                             Quiet Header
                         </Typography>{' '}
@@ -94,7 +94,7 @@ initialState = {
                             24/32
                         </Typography>
                     </Typography>
-                    <Typography as="h2" variant="title" box="paragraph">
+                    <Typography variant="title" box="paragraph">
                         <Typography as="span" variant="title" box="inline" quiet={state.quiet}>
                             Quiet Title
                         </Typography>{' '}
@@ -103,7 +103,7 @@ initialState = {
                             20/28
                         </Typography>
                     </Typography>
-                    <Typography as="h3" variant="section" box="paragraph">
+                    <Typography variant="section" box="paragraph">
                         <Typography as="span" variant="section" box="inline" quiet={state.quiet}>
                             Quiet Section
                         </Typography>{' '}
@@ -112,7 +112,7 @@ initialState = {
                             20/28
                         </Typography>
                     </Typography>
-                    <Typography as="p" box="paragraph">
+                    <Typography box="paragraph">
                         <Typography as="span" box="inline" quiet={state.quiet}>
                             Quiet body text
                         </Typography>{' '}

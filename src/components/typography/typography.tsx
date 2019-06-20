@@ -100,10 +100,10 @@ export function Typography<T extends TargetProps = DefaultTargetProps>(props: Pr
                 if (!Component) {
                     switch (variant) {
                         case 'body':
-                            Component = 'div';
+                            Component = 'p';
                             break;
                         case 'caption':
-                            Component = 'div';
+                            Component = 'p';
                             break;
                         case 'header':
                             Component = 'h2';

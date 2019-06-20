@@ -1,11 +1,11 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Typography Component by default should match snapshot 1`] = `
-<div
+<p
   className="root body"
 >
   Test String
-</div>
+</p>
 `;
 
 exports[`Typography Component should use default tagnames depending on "variant" prop "as" prop provided as well as "variant" prop 1`] = `
@@ -17,19 +17,19 @@ exports[`Typography Component should use default tagnames depending on "variant"
 `;
 
 exports[`Typography Component should use default tagnames depending on "variant" prop "body" variant provided 1`] = `
-<div
+<p
   className="root body"
 >
   Foo
-</div>
+</p>
 `;
 
 exports[`Typography Component should use default tagnames depending on "variant" prop "caption" variant provided 1`] = `
-<div
+<p
   className="root caption"
 >
   Foo
-</div>
+</p>
 `;
 
 exports[`Typography Component should use default tagnames depending on "variant" prop "header" variant provided 1`] = `
@@ -57,11 +57,11 @@ exports[`Typography Component should use default tagnames depending on "variant"
 `;
 
 exports[`Typography Component should use default tagnames depending on "variant" prop no variant provided 1`] = `
-<div
+<p
   className="root body"
 >
   Foo
-</div>
+</p>
 `;
 
 exports[`Typography Component when pass "button" string to \`as\` property should match snapshot 1`] = `

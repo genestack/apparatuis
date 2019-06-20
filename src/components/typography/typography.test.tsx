@@ -24,12 +24,12 @@ describe('Typography Component', () => {
             expect(getComponent().root.children).toHaveLength(1);
         });
 
-        test('should render div HTML element', () => {
-            expect(getComponent().root.findAllByType('div')).toHaveLength(1);
+        test('should render p HTML element', () => {
+            expect(getComponent().root.findAllByType('p')).toHaveLength(1);
         });
 
         test('should render string children', () => {
-            expect(getComponent().root.findByType('div').children).toEqual(['Test String']);
+            expect(getComponent().root.findByType('p').children).toEqual(['Test String']);
         });
     });
 
@@ -89,7 +89,7 @@ describe('Typography Component', () => {
     it('should merge class name with own', () => {
         const component = render(<Typography className="test-class-name">Test String</Typography>);
 
-        const root = component.root.findByType('div');
+        const root = component.root.findByType('p');
 
         expect(sortClassNames(root.props.className)).toEqual(
             sortClassNames('root body test-class-name')
@@ -108,7 +108,7 @@ describe('Typography Component', () => {
             </Typography>
         );
 
-        const root = component.root.findByType('div');
+        const root = component.root.findByType('p');
 
         expect(sortClassNames(root.props.className)).toEqual(
             sortClassNames('root caption test-caption')

@@ -17,5 +17,5 @@ export type Props = TypographyProps;
 
 /** Shortcut to ListItemText */
 export const HeaderItemText = (props: Props) => (
-    <Typography {...props} className={classNames(props.className, styles.root)} />
+    <Typography as="span" {...props} className={classNames(props.className, styles.root)} />
 );

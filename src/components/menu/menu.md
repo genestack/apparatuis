@@ -11,22 +11,47 @@ handleValueSelect = (value) => {
 
 const menu = (
     <Menu onValueSelect={handleValueSelect}>
-        <MenuItem value="Menu Item 1" append={<Typography quiet>1</Typography>}>
+        <MenuItem
+            value="Menu Item 1"
+            append={
+                <Typography quiet as="span">
+                    1
+                </Typography>
+            }
+        >
             Menu Item
         </MenuItem>
         <Divider />
-        <MenuItem value="Menu Item 2" append={<Typography quiet>2</Typography>}>
+        <MenuItem
+            value="Menu Item 2"
+            append={
+                <Typography quiet as="span">
+                    2
+                </Typography>
+            }
+        >
             Menu Item
         </MenuItem>
         <MenuItem
             subMenu={
                 <SubMenu>
-                    <MenuItem value="Menu Item 3.1" append={<Typography quiet>3.1</Typography>}>
+                    <MenuItem
+                        value="Menu Item 3.1"
+                        append={
+                            <Typography quiet as="span">
+                                3.1
+                            </Typography>
+                        }
+                    >
                         Menu Item
                     </MenuItem>
                 </SubMenu>
             }
-            append={<Typography quiet>3</Typography>}
+            append={
+                <Typography quiet as="span">
+                    3
+                </Typography>
+            }
         >
             Menu Item
         </MenuItem>
@@ -45,7 +70,7 @@ const menu = (
 ```js
 const {DownloadIcon} = require('../../icons/download-icon');
 
-const Quiet = (props) => <Typography {...props} variant="caption" quiet box="inline" />;
+const Quiet = (props) => <Typography {...props} variant="caption" quiet box="inline" as="span" />;
 
 const getInfiniteSubMenu = () => (
     <SubMenu>
@@ -80,7 +105,11 @@ items = new Array(100).fill(null).map((_, index) => (
         key={index}
         onClick={handleMenuClose}
         subMenu={getInfiniteSubMenu}
-        append={<Typography quiet>{index}</Typography>}
+        append={
+            <Typography quiet as="span">
+                {index}
+            </Typography>
+        }
     >
         Menu Item
     </MenuItem>
@@ -92,10 +121,9 @@ items = new Array(100).fill(null).map((_, index) => (
             <Button onClick={handleButtonClick}>Open Menu</Button>
         </ControlsItem>
         <ControlsItem>
-            <Typography box="inline">
+            <Typography box="inline" as="span">
                 {' '}
-                Last selected menu item value:{' '}
-                {typeof state.selectedItemValue === 'undefined'
+                Last selected menu item value: {typeof state.selectedItemValue === 'undefined'
                     ? 'undefined'
                     : JSON.stringify(state.selectedItemValue)}
             </Typography>
@@ -153,7 +181,14 @@ handleMenuClose = () => {
 };
 
 items = new Array(100).fill(null).map((_, index) => (
-    <MenuItem key={index} append={<Typography quiet>{index}</Typography>}>
+    <MenuItem
+        key={index}
+        append={
+            <Typography quiet as="span">
+                {index}
+            </Typography>
+        }
+    >
         Menu Item
     </MenuItem>
 ));
