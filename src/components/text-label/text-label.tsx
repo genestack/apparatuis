@@ -20,9 +20,14 @@ type RootProps = Omit<TypographyProps, 'classes' | 'ellipsis'>;
 export interface Props extends RootProps, WithClasses<keyof typeof styles> {
     /** Node that is added after children */
     caption?: React.ReactNode;
-    labelProps?: React.HTMLAttributes<HTMLDivElement>;
-    captionProps?: TypographyProps;
+    /** Disables ellipsis */
     wrap?: boolean;
+    /** Makes label to grow */
+    grow?: boolean;
+    /** Properties for children wrapper */
+    labelProps?: React.HTMLAttributes<HTMLDivElement>;
+    /** Properties for caption wrapper */
+    captionProps?: TypographyProps;
 }
 
 type TypographyVariant = Exclude<TypographyProps['variant'], undefined>;
@@ -47,6 +52,7 @@ export const TextLabel = (props: Props) => {
         children,
         classes,
         box,
+        grow,
         ...rest
     } = mergeClassesProps(props, styles);
 
@@ -64,7 +70,8 @@ export const TextLabel = (props: Props) => {
             <div
                 {...labelProps}
                 className={classNames(labelProps.className, classes.label, {
-                    [classes.wrap]: wrap
+                    [classes.wrap]: wrap,
+                    [classes.wrap]: grow
                 })}
             >
                 {children}

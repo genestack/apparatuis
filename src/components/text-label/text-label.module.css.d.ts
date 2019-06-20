@@ -9,4 +9,5 @@ export const root: string;
 export const inline: string;
 export const label: string;
 export const wrap: string;
+export const grow: string;
 export const caption: string;
