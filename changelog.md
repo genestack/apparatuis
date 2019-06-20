@@ -2,9 +2,15 @@
 
 ## [Unreleased]
 
+## [8.0.0-alpha.13] - 2019-06-20
+
 ### Added
 
 -   Add `prepend` and `append` properties to `Link`
+
+### Fixed
+
+-   Fix missed `className` for `Header` component
 
 ## [8.0.0-alpha.12] - 2019-06-20
 
