@@ -1,5 +1,6 @@
 ```js
 const {DarkContext} = require('../../utils/dark-context');
+const {DownloadIcon} = require('../../icons/download-icon');
 
 initialState = {
     inverted: false
@@ -92,40 +93,18 @@ handleInvertedChange = (event) => setState({inverted: event.currentTarget.checke
                             “Who am taking the ebonics quiz?”, the prof jovially axed.
                         </Typography>
                     </React.Fragment>
+                    <Link tabIndex={0} variant="pseudo" prepend={<DownloadIcon />}>
+                        Download
+                    </Link>
+                    <Link tabIndex={0} variant="pseudo" prepend={<DownloadIcon />} disabled>
+                        Download
+                    </Link>
+                    <Link tabIndex={0} variant="pseudo" append={<DownloadIcon />}>
+                        Download
+                    </Link>
                 </WithSeparator>
             </DarkContext.Provider>
         </PageContent>
     </Paper>
 </RootElement>;
-```
-
-### Ellipsis links
-
-To support text overflowing link requires to be some kind of block element
-instead of inline. So when link is a block element its auto height equals its `line-height` value
-and bottom border (aka. underline) shifts to wrong position.
-To fix this you must add real height to link in place:
-
-```js
-<RootElement>
-    <Paper>
-        <PageContent>
-            <div style={{width: 200}}>
-                <Link
-                    variant="pseudo"
-                    ellipsis
-                    style={{
-                        width: 100,
-                        display: 'inline-block',
-                        height: 20,
-                        verticalAlign: 'bottom'
-                    }}
-                >
-                    Ellipsis link (p) with long content
-                </Link>{' '}
-                that is near inline elements
-            </div>
-        </PageContent>
-    </Paper>
-</RootElement>
 ```

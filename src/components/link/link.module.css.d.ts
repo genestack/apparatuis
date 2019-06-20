@@ -6,6 +6,7 @@
  * actual or intended publication of such source code.
  */
 export const root: string;
+export const label: string;
 export const disabled: string;
 export const active: string;
 export const inverted: string;

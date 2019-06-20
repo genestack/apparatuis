@@ -5,6 +5,7 @@
  * The copyright notice above does not evidence any
  * actual or intended publication of such source code.
  */
+/* stylelint-disable no-descending-specificity */
 @import "../../variables.css";
 
 .root {
@@ -21,114 +22,128 @@
     color: var(--gs-color-action-hover);
 }
 
-.root:focus,
-.root.focus {
+.label {
+    margin-left: calc(var(--gs-spacing-unit) / 2);
+    margin-right: calc(var(--gs-spacing-unit) / 2);
+}
+
+.label:first-child {
+    margin-left: 0;
+}
+
+.label:last-child {
+    margin-right: 0;
+}
+
+.root:focus .label,
+.root.focus .label {
     border-bottom: 3px solid var(--gs-color-action-25);
 }
 
-.root:active,
-.root.active {
+.root:active .label,
+.root.active .label {
     color: var(--gs-color-action-text);
 }
 
 .root:disabled,
 .root.disabled {
-    color: var(--gs-color-grey-50);
     cursor: not-allowed;
 }
 
-.inverted.root {
+.root:disabled .label,
+.root.disabled .label {
+    color: var(--gs-color-grey-50);
+}
+
+.inverted.root .label {
     color: var(--gs-color-action-inverted);
 }
 
-.inverted.root:hover {
+.inverted.root:hover .label {
     color: var(--gs-color-grey-background);
 }
 
-.inverted.root:focus,
-.inverted.root.focus {
+.inverted.root:focus .label,
+.inverted.root.focus .label {
     border-bottom: 3px solid var(--gs-color-action-inverted-50);
 }
 
-.inverted.root:disabled,
-.inverted.root.disabled {
+.inverted.root:disabled .label,
+.inverted.root.disabled .label {
     color: var(--gs-color-grey);
-    cursor: not-allowed;
 }
 
-.pseudo {
+.pseudo .label {
     border-bottom: 2px dotted var(--gs-color-action-25);
 }
 
-.pseudo:focus,
-.pseudo.focus {
+.pseudo:focus .label,
+.pseudo.focus .label {
     border-bottom: 3px solid var(--gs-color-action-25);
 }
 
-.pseudo.disabled,
-.pseudo:disabled {
+.pseudo.disabled .label,
+.pseudo:disabled .label {
     color: var(--gs-color-grey-50);
-    cursor: not-allowed;
     border-bottom: 2px dotted var(--gs-color-grey-50);
 }
 
-.pseudo.inverted {
+.pseudo.inverted .label {
     color: var(--gs-color-action-inverted);
     border-bottom: 2px dotted var(--gs-color-action-inverted-50);
 }
 
-.pseudo.inverted:hover {
+.pseudo.inverted:hover .label {
     color: var(--gs-color-action-inverted);
     border-bottom: 2px dotted var(--gs-color-action-inverted);
 }
 
-.pseudo.inverted:focus,
-.pseudo.inverted.focus {
+.pseudo.inverted:focus .label,
+.pseudo.inverted.focus .label {
     border-bottom: 3px solid var(--gs-color-action-inverted-50);
 }
 
-.pseudo.inverted:disabled,
-.pseudo.inverted.disabled {
+.pseudo.inverted:disabled .label,
+.pseudo.inverted.disabled .label {
     color: var(--gs-color-grey);
     cursor: not-allowed;
     border-bottom: 2px dotted var(--gs-color-grey);
 }
 
-.external {
+.external .label {
     color: var(--gs-color-action);
     border-bottom: 2px solid var(--gs-color-action-25);
 }
 
-.external:focus,
-.external.focus {
+.external:focus .label,
+.external.focus .label {
     border-bottom: 3px solid var(--gs-color-action-25);
 }
 
-.external:disabled,
-.external.disabled {
+.external:disabled .label,
+.external.disabled .label {
     color: var(--gs-color-grey-50);
     cursor: not-allowed;
     border-bottom: 2px solid var(--gs-color-grey-50);
 }
 
-.external.inverted {
+.external.inverted .label {
     color: var(--gs-color-action-inverted);
     border-bottom: 2px solid var(--gs-color-action-inverted-50);
 }
 
-.external.inverted:hover {
+.external.inverted:hover .label {
     color: var(--gs-color-action-inverted);
     border-bottom: 2px solid var(--gs-color-action-inverted);
 }
 
-.external.inverted:focus,
-.external.inverted.focus {
+.external.inverted:focus .label,
+.external.inverted.focus .label {
     border-bottom: 3px solid var(--gs-color-action-inverted-50);
 }
 
-.external.inverted:disabled,
-.external.inverted.disabled {
+.external.inverted:disabled .label,
+.external.inverted.disabled .label {
     color: var(--gs-color-grey);
-    cursor: not-allowed;
     border-bottom: 2px solid var(--gs-color-grey);
 }

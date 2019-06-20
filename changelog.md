@@ -2,9 +2,36 @@
 
 ## [Unreleased]
 
+-   Add `TextLabel` component
+
+## [8.0.0-alpha.14] - 2019-06-20
+
+### Fixed
+
+-   Fixed missed `className` for `Link`
+
+### Changed
+
+-   Change default highlighter to `<b/>` in `Highlight` component
+-   Rename `renderMark` to `renderHighlighter` property for `Highlight` component
+
+## [8.0.0-alpha.13] - 2019-06-20
+
 ### Added
 
--   Add `TextLabel` component
+-   Add `prepend` and `append` properties to `Link`
+
+### Fixed
+
+-   Fix missed `className` for `Header` component
+
+### Removed
+
+-   Remove `Paper` border
+
+### Changed
+
+-   Change default `Paper` shadow
 
 ## [8.0.0-alpha.12] - 2019-06-20
 
@@ -14,7 +41,7 @@
 -   Add `Highlight` component
 -   Add `SuggestInput` component
 -   Add `append` element to `MenuItem`
--   Add automatic determirmination of tag name based on `variant` props
+-   Add automatic determination of tag name based on `variant` props
 
 ### Removed
 

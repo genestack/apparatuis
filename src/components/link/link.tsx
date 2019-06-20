@@ -30,6 +30,12 @@ export interface Props extends TargetProps, WithClasses<keyof typeof styles> {
     focus?: boolean;
     /** Adds styles for dark backgrounds */
     inverted?: boolean;
+    /** Node that is placed before link label */
+    prepend?: React.ReactNode;
+    /** Node that is placed after link label */
+    append?: React.ReactNode;
+    /** Properties for label wrapper element */
+    labelProps?: React.HTMLAttributes<HTMLSpanElement>;
 }
 
 /**
@@ -45,6 +51,10 @@ export const Link = (props: Props) => {
         classes,
         focus,
         inverted = invertedContext,
+        children,
+        prepend,
+        append,
+        labelProps = {},
         ...rest
     } = mergeClassesProps(props, styles);
 
@@ -64,7 +74,7 @@ export const Link = (props: Props) => {
             as="a"
             box="inline"
             onClick={onClick}
-            className={classNames(classes.root, {
+            className={classNames(classes.root, rest.className, {
                 [classes.pseudo]: variant === 'pseudo',
                 [classes.external]: variant === 'external',
                 [classes.disabled]: disabled,
@@ -72,6 +82,12 @@ export const Link = (props: Props) => {
                 [classes.focus]: focus,
                 [classes.inverted]: inverted
             })}
-        />
+        >
+            {prepend}
+            <span {...labelProps} className={classNames(labelProps.className, classes.label)}>
+                {children}
+            </span>
+            {append}
+        </Typography>
     );
 };
