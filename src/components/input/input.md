@@ -151,7 +151,7 @@ handleClearButtonClick = () => setState({value: ''});
             <ControlsItem as="label">
                 <Typography box="paragraph">
                     Label{' '}
-                    <Typography box="inline" variant="caption" quiet>
+                    <Typography box="inline" variant="caption" as="span" quiet>
                         optional
                     </Typography>
                 </Typography>
@@ -167,7 +167,7 @@ handleClearButtonClick = () => setState({value: ''});
                     </ControlsItem>
                     <ControlsItem>
                         <Typography variant="caption">
-                            <Link>Restore</Link>
+                            <Link tabIndex={0}>Restore</Link>
                         </Typography>
                     </ControlsItem>
                 </Controls>

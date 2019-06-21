@@ -35,7 +35,7 @@ const renderItem = (value, item) => {
     return (
         <SuggestInputItem key={fullName} value={fullName}>
             <ListItemText>
-                <Typography box="inline" variant="caption" quiet style={{marginRight: 4}}>
+                <Typography box="inline" variant="caption" quiet style={{marginRight: 4}} as="span">
                     <Highlight words={wordsToHighlight}>{item.name}</Highlight>
                 </Typography>
                 <Highlight words={wordsToHighlight}>{item.surname}</Highlight>

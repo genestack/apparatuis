@@ -14,6 +14,7 @@
     padding-right: 36px;
     border-radius: 4px;
     background: rgba(36, 46, 66, 1);
+    color: var(--gs-color-white);
     border: none;
 }
 

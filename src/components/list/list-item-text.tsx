@@ -36,7 +36,7 @@ export const ListItemText = (props: Props) => {
             baseline={container}
             gap={1}
         >
-            <Typography {...rest} />
+            <Typography as="div" {...rest} />
         </Flex>
     );
 };

@@ -2,7 +2,13 @@
 
 ## [Unreleased]
 
+### Added
+
 -   Add `TextLabel` component
+
+### Changed
+
+-   Use `p` for `body` and `caption` variants in Typography
 
 ## [8.0.0-alpha.14] - 2019-06-20
 
