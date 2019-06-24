@@ -8,7 +8,6 @@
 @import "../../variables.css";
 
 .root {
-    composes: resetButton from "../../variables.css";
     min-height: calc(var(--gs-spacing-unit) * 4);
     width: 100%;
 }

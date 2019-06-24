@@ -2,6 +2,14 @@
 
 ## [Unreleased]
 
+### Added
+
+-   `subtitle` property for `MenuItem`
+
+### Removed
+
+-   `MenuItemText`, `MenuItemCell` components
+
 ## [8.0.0-alpha.15] - 2019-06-21
 
 ### Added

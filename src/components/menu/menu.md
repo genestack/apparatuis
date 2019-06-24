@@ -69,8 +69,9 @@ const menu = (
 
 ```js
 const {DownloadIcon} = require('../../icons/download-icon');
+const {LockIcon} = require('../../icons/lock-icon.tsx');
 
-const Quiet = (props) => <Typography {...props} variant="caption" quiet box="inline" as="span" />;
+const Quiet = (props) => <Typography {...props} quiet box="inline" as="span" />;
 
 const getInfiniteSubMenu = () => (
     <SubMenu>
@@ -137,10 +138,7 @@ items = new Array(100).fill(null).map((_, index) => (
         style={{maxWidth: 250}}
     >
         <MenuItem value="Download" prepend={<DownloadIcon />} subMenu={<SubMenu>{items}</SubMenu>}>
-            <MenuItemText noGrow>Download</MenuItemText>
-            <MenuItemCell>
-                <Quiet>125 MB</Quiet>
-            </MenuItemCell>
+            <TextLabel caption="125 MB">Download</TextLabel>
         </MenuItem>
 
         <MenuItem value="Open File" append={<Quiet>⌘ + O</Quiet>}>
@@ -151,14 +149,19 @@ items = new Array(100).fill(null).map((_, index) => (
             Create File...
         </MenuItem>
 
-        <MenuItem value="Save File" append={<Quiet>⌘ + S</Quiet>} subMenu={getInfiniteSubMenu}>
-            <MenuItemText noGrow>Save File</MenuItemText>
-            <MenuItemCell>
-                <Quiet>(5 min ago)</Quiet>
-            </MenuItemCell>
+        <MenuItem
+            value="Save File"
+            append={
+                <React.Fragment>
+                    <Quiet>⌘ + S</Quiet> <LockIcon />
+                </React.Fragment>
+            }
+            subMenu={getInfiniteSubMenu}
+        >
+            <TextLabel caption="(5 min ago)">Save File</TextLabel>
         </MenuItem>
 
-        <MenuItem value="Long Menu" subMenu={getInfiniteSubMenu}>
+        <MenuItem value="Long Menu" subMenu={getInfiniteSubMenu} subtitle="Subtitle">
             Menu Item With Long Long Name
         </MenuItem>
     </Menu>

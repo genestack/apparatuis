@@ -51,7 +51,7 @@ export const MarginBox = (props: Props) => {
         <MarginBoxContext.Provider value={contained}>
             <Component
                 {...rest}
-                className={classNames(rest.className, {
+                className={classNames(rest.className, classes.root, {
                     [classes.inPage]: contained === 'in-page',
                     [classes.inDialog]: contained === 'in-dialog'
                 })}
