@@ -49,30 +49,35 @@ const placements = [
 <Controls justify="space-between">
     <ControlsItem style={{width: 200, alignSelf: 'flex-start'}}>
         <PageContent as={Paper}>
-            <ListItemText variant="section" box="paragraph">
-                Properties
-            </ListItemText>
             <PageFullWidth>
                 <List>
-                    <ListItem as="label">
-                        <ListItemCell>
+                    <ListItem>
+                        <Typography variant="section">Properties</Typography>
+                    </ListItem>
+                    <ListItem
+                        as="label"
+                        interactive
+                        prepend={
                             <input
                                 type="checkbox"
                                 checked={state.withArrow}
                                 onChange={handleWithArrowChange}
                             />
-                        </ListItemCell>
-                        <ListItemText>With Arrow</ListItemText>
+                        }
+                    >
+                        With Arrow
                     </ListItem>
-                    <ListItem as="label">
-                        <ListItemCell>
+                    <ListItem
+                        as="label"
+                        prepend={
                             <input
                                 type="checkbox"
                                 checked={state.disableTransition}
                                 onChange={handleDisableTransitionChange}
                             />
-                        </ListItemCell>
-                        <ListItemText>Disable Transition</ListItemText>
+                        }
+                    >
+                        Disable Transition
                     </ListItem>
                 </List>
             </PageFullWidth>
@@ -101,22 +106,28 @@ const placements = [
     </ControlsItem>
     <ControlsItem style={{width: 200}}>
         <PageContent as={Paper}>
-            <ListItemText variant="section" box="paragraph">
-                Placement
-            </ListItemText>
             <PageFullWidth>
+                <ListItem>
+                    <Typography variant="section" box="paragraph">
+                        Placement
+                    </Typography>
+                </ListItem>
                 <List onChange={handlePlacementChange}>
                     {placements.map((placement) => (
-                        <ListItem key={placement} as="label">
-                            <ListItemCell>
+                        <ListItem
+                            key={placement}
+                            as="label"
+                            interactive
+                            prepend={
                                 <input
                                     type="radio"
                                     name="placement"
                                     value={placement}
                                     defaultChecked={state.placement === placement}
                                 />
-                            </ListItemCell>
-                            <ListItemText>{placement}</ListItemText>
+                            }
+                        >
+                            {placement}
                         </ListItem>
                     ))}
                 </List>

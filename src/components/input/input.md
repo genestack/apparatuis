@@ -22,21 +22,26 @@ initialState = {
 };
 
 renderCheckbox = (name, label) => (
-    <ListItem as="label">
-        <ListItemCell>
+    <ListItem
+        as="label"
+        interactive
+        prepend={
             <input
                 type="checkbox"
                 checked={state[name]}
                 onChange={(event) => setState({[name]: event.target.checked})}
             />
-        </ListItemCell>
-        <ListItemText>{label}</ListItemText>
+        }
+    >
+        {label}
     </ListItem>
 );
 
 renderRadio = (name, label, value) => (
-    <ListItem as="label">
-        <ListItemCell>
+    <ListItem
+        as="label"
+        interactive
+        prepend={
             <input
                 type="radio"
                 name={name}
@@ -44,8 +49,9 @@ renderRadio = (name, label, value) => (
                 checked={state[name] === value}
                 onChange={(event) => setState({[name]: value})}
             />
-        </ListItemCell>
-        <ListItemText>{label}</ListItemText>
+        }
+    >
+        {label}
     </ListItem>
 );
 
@@ -108,16 +114,16 @@ handleClearButtonClick = () => setState({value: ''});
                                 {renderCheckbox('required', 'Required')}
                                 {renderCheckbox('readOnly', 'Read Only')}
                                 <Divider />
-                                <ListLabel>
-                                    <ListItemText variant="section">Inner elements:</ListItemText>
-                                </ListLabel>
+                                <ListItem>
+                                    <Typography variant="section">Inner elements:</Typography>
+                                </ListItem>
                                 {renderCheckbox('showSearchIcon', 'Show Search Icon')}
                                 {renderCheckbox('showHelpIcon', 'Show Help Icon')}
                                 {renderCheckbox('clearable', 'Show Clear Button')}
                                 <Divider />
-                                <ListLabel>
-                                    <ListItemText variant="section">Spinner:</ListItemText>
-                                </ListLabel>
+                                <ListItem>
+                                    <Typography variant="section">Spinner:</Typography>
+                                </ListItem>
                                 {renderRadio('spinner', 'None', 'none')}
                                 {renderRadio('spinner', 'Show on value change', 'on-change')}
                                 {renderRadio('spinner', 'Permanent', 'permanent')}

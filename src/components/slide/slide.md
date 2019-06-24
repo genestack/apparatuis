@@ -5,10 +5,6 @@ const directions = ['left', 'right', 'top', 'bottom'];
 
 handleFastChange = (event) => setState({fast: event.currentTarget.checked});
 handleButtonClick = () => setState(({visible}) => ({visible: !visible}));
-handleDirectionChange = (event) =>
-    setState({
-        direction: event.target.value
-    });
 
 <Controls>
     <FlexExpander />
@@ -31,34 +27,37 @@ handleDirectionChange = (event) =>
         <PageContent as={Paper}>
             <PageFullWidth>
                 <List>
-                    <ListItem as="label">
-                        <ListItemCell>
+                    <ListItem
+                        as="label"
+                        interactive
+                        prepend={
                             <input
                                 type="checkbox"
                                 onChange={handleFastChange}
                                 checked={state.fast}
                             />
-                        </ListItemCell>
-                        <ListItemText>Fast transition</ListItemText>
+                        }
+                    >
+                        Fast transition
                     </ListItem>
-                </List>
-            </PageFullWidth>
-            <Typography box="paragraph" variant="section">
-                Direction:
-            </Typography>
-            <PageFullWidth>
-                <List onChange={handleDirectionChange}>
+                    <ListItem>
+                        <Typography variant="section">Direction:</Typography>
+                    </ListItem>
                     {directions.map((direction) => (
-                        <ListItem as="label" key={direction}>
-                            <ListItemCell>
+                        <ListItem
+                            as="label"
+                            interactive
+                            key={direction}
+                            prepend={
                                 <input
                                     type="radio"
                                     name="direction"
-                                    value={direction}
-                                    defaultChecked={state.direction === direction}
+                                    checked={state.direction === direction}
+                                    onChange={() => setState({direction})}
                                 />
-                            </ListItemCell>
-                            <ListItemText>{direction}</ListItemText>
+                            }
+                        >
+                            {direction}
                         </ListItem>
                     ))}
                 </List>

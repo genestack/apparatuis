@@ -38,16 +38,20 @@ handleTransformOriginChange = (event) => setState({transformOrigin: event.target
             <PageFullWidth>
                 <List onChange={handleTransformOriginChange}>
                     {transformOrigins.map((transformOrigin) => (
-                        <ListItem as="label" key={transformOrigin}>
-                            <ListItemCell>
+                        <ListItem
+                            as="label"
+                            key={transformOrigin}
+                            interactive
+                            prepend={
                                 <input
                                     type="radio"
                                     defaultChecked={transformOrigin === state.transformOrigin}
                                     value={transformOrigin}
                                     name="transformOrigin"
                                 />
-                            </ListItemCell>
-                            <ListItemText>{transformOrigin}</ListItemText>
+                            }
+                        >
+                            {transformOrigin}
                         </ListItem>
                     ))}
                 </List>

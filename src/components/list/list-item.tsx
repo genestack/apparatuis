@@ -11,16 +11,28 @@ import * as React from 'react';
 import {Omit} from '../../utils/omit';
 import {WithClasses, mergeClassesProps} from '../../utils/styles';
 import {ButtonBase, ButtonBaseProps} from '../button-base';
-import {Flex} from '../flex';
 import {MarginBoxContext} from '../margin-box/margin-box-context';
+import {TypographyProps, Typography} from '../typography';
 
-import {ListItemText} from './list-item-text';
 import * as styles from './list-item.module.css';
 
 type TargetProps = Omit<ButtonBaseProps, 'activeClassName'>;
 
 /** ListItem public properties */
 export interface Props extends TargetProps, WithClasses<keyof typeof styles> {
+    interactive?: boolean;
+    /**
+     * Left element for a menu item.
+     * Anyway If no prepend passed a menu item will have empty left margin
+     * for menu items align.
+     */
+    prepend?: React.ReactNode;
+    /** Right element for a menu item. */
+    append?: React.ReactNode;
+    /** Small caption below the main title */
+    subtitle?: React.ReactNode;
+    /** Toggle title wrapping */
+    wrap?: boolean;
     /** If `true` element has `pressed` style. */
     active?: boolean;
     /** If `true` element has `hover` style. */
@@ -34,43 +46,115 @@ export interface Props extends TargetProps, WithClasses<keyof typeof styles> {
      * you should pass `disabled` property certain to contained elements.
      */
     disabled?: boolean;
+    /** Properties for wrapper of prepend element */
+    prependProps?: React.HTMLAttributes<HTMLDivElement>;
+    /** Properties for wrapper of append element */
+    appendProps?: React.HTMLAttributes<HTMLDivElement>;
+    /** Properties for wrapper of content element */
+    contentProps?: React.HTMLAttributes<HTMLDivElement>;
+    /** Properties for wrapper of title element */
+    titleProps?: React.HTMLAttributes<HTMLDivElement>;
+    /** Properties for wrapper of children */
+    titleContentProps?: TypographyProps;
+    /** Properties for wrapper of subtitle element */
+    subtitleProps?: React.HTMLAttributes<HTMLDivElement>;
 }
 
 /**
  * Single item of List component
  */
 export function ListItem(props: Props) {
-    const {classes, active, hovered, focused, disabled, className, ...rest} = mergeClassesProps(
-        props,
-        styles
-    );
+    const {
+        as: Component,
+        classes,
+        interactive,
+        prepend,
+        append,
+        subtitle,
+        wrap,
+        active,
+        hovered,
+        focused,
+        disabled,
+        className,
+        prependProps = {},
+        appendProps = {},
+        contentProps = {},
+        titleProps = {},
+        titleContentProps = {},
+        subtitleProps = {},
+        children,
+        ...rest
+    } = mergeClassesProps(props, styles);
 
     const contained = React.useContext(MarginBoxContext);
 
-    const children =
-        typeof props.children === 'string' ? (
-            <ListItemText>{props.children}</ListItemText>
-        ) : (
-            props.children
-        );
+    const BaseComponent =
+        typeof Component === 'undefined'
+            ? typeof rest.href === 'undefined'
+                ? 'li'
+                : 'a'
+            : Component;
+
+    const RenderComponent = interactive ? ButtonBase : BaseComponent;
+    const renderComponentProps = interactive
+        ? {as: BaseComponent, activeClassName: classes.active}
+        : {};
 
     return (
-        <Flex ellipsis container gap={0}>
-            <ButtonBase
-                disabled={disabled}
-                {...rest}
-                activeClassName={classes.active}
-                className={classNames(className, classes.root, {
-                    [classes.active]: active,
-                    [classes.hovered]: hovered,
-                    [classes.focused]: focused,
-                    [classes.disabled]: disabled,
-                    [classes.inPage]: contained === 'in-page',
-                    [classes.inDialog]: contained === 'in-dialog'
-                })}
-            >
-                {children}
-            </ButtonBase>
-        </Flex>
+        <RenderComponent
+            {...rest}
+            {...renderComponentProps}
+            disabled={disabled}
+            className={classNames(className, classes.root, {
+                [classes.interactive]: interactive,
+                [classes.focused]: focused,
+                [classes.hovered]: hovered,
+                [classes.disabled]: disabled,
+                [classes.active]: active,
+                [classes.inPage]: contained === 'in-page',
+                [classes.inDialog]: contained === 'in-dialog'
+            })}
+        >
+            {prepend ? (
+                <div
+                    {...prependProps}
+                    className={classNames(prependProps.className, classes.prepend)}
+                >
+                    {prepend}
+                </div>
+            ) : null}
+            <div {...contentProps} className={classNames(contentProps.className, classes.content)}>
+                <div {...titleProps} className={classNames(titleProps.className, classes.title)}>
+                    <Typography
+                        ellipsis={!wrap}
+                        as="div"
+                        {...titleContentProps}
+                        className={classNames(titleContentProps.className, classes.titleContent)}
+                    >
+                        {children}
+                    </Typography>
+                    {append ? (
+                        <div
+                            {...appendProps}
+                            className={classNames(appendProps.className, classes.append)}
+                        >
+                            {append}
+                        </div>
+                    ) : null}
+                </div>
+                {subtitle ? (
+                    <Typography
+                        variant="caption"
+                        quiet
+                        as="div"
+                        {...subtitleProps}
+                        className={classNames(subtitleProps.className, classes.subtitle)}
+                    >
+                        {subtitle}
+                    </Typography>
+                ) : null}
+            </div>
+        </RenderComponent>
     );
 }

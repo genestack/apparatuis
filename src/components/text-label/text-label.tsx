@@ -71,7 +71,7 @@ export const TextLabel = (props: Props) => {
                 {...labelProps}
                 className={classNames(labelProps.className, classes.label, {
                     [classes.wrap]: wrap,
-                    [classes.wrap]: grow
+                    [classes.grow]: grow
                 })}
             >
                 {children}

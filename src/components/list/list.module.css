@@ -9,6 +9,8 @@
 
 .root {
     box-sizing: border-box;
+    padding: 0;
+    margin: 0;
     margin-top: calc(var(--gs-spacing-unit) / 2);
     margin-bottom: calc(var(--gs-spacing-unit) / 2);
 }

@@ -13,6 +13,6 @@ import {List} from './list';
 describe('<List />', () => {
     test('should render div HTML element', () => {
         const wrapper = mount(<List />);
-        expect(wrapper.children().is('div')).toBe(true);
+        expect(wrapper.children().is('ul')).toBe(true);
     });
 });

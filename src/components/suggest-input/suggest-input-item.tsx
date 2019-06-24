@@ -7,10 +7,11 @@
  */
 import * as React from 'react';
 
+import {Omit} from '../../utils/omit';
 import {ListItem, ListItemProps} from '../list';
 
 /** SuggestInputItem public properties */
-export interface Props extends ListItemProps {
+export interface Props extends Omit<ListItemProps, 'interactive'> {
     value?: string;
 }
 
@@ -18,5 +19,5 @@ export interface Props extends ListItemProps {
 export const SuggestInputItem = (props: Props) => {
     const {value, ...rest} = props;
 
-    return <ListItem {...rest} />;
+    return <ListItem {...rest} interactive />;
 };
