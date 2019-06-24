@@ -2,13 +2,19 @@
 
 ## [Unreleased]
 
+## [8.0.0-alpha.16] - 2019-06-24
+
 ### Added
 
 -   `subtitle` property for `MenuItem`
 
 ### Removed
 
--   `MenuItemText`, `MenuItemCell` components
+-   **(breaking change)** Remove `MenuItemText`, `MenuItemCell` components
+
+### Fixed
+
+-   Fix `HeaderItemText` margins
 
 ## [8.0.0-alpha.15] - 2019-06-21
 
