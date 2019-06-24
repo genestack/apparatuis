@@ -120,7 +120,7 @@ describe('<HeaderBlock />', () => {
 
     it('should render an additional element if children is string', () => {
         const wrapper = app.mount(<HeaderBlock>string</HeaderBlock>);
-        expect(wrapper.find('span')).toHaveLength(1);
+        expect(wrapper.find('div')).toHaveLength(2);
     });
 });
 
