@@ -37,9 +37,13 @@ function getSuggestInputChildren(
 
         index += 1;
 
-        const itemProps: Omit<SuggestInputItemProps, 'as'> = {
+        // `downshift.getItemProps` uses `AllHTMLProps` that are conflict with `SuggestInputItemProps`
+        // we should omit the next properties:
+        // `as` for <link /> elements
+        // `wrap` for `<textarea />` elements
+        const itemProps: Omit<SuggestInputItemProps, 'as' | 'wrap'> = {
             ...childProps,
-            active: downshift.highlightedIndex === index
+            focused: downshift.highlightedIndex === index
         };
 
         return React.cloneElement(child, {

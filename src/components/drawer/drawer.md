@@ -35,33 +35,33 @@ handleDrawerClose = () =>
 
         <DrawerFullWidth>
             <List>
-                <ListItem as="button" onClick={handleDrawerClose}>
-                    <ListItemText>Dashboard</ListItemText>
+                <ListItem interactive onClick={handleDrawerClose}>
+                    Dashboard
                 </ListItem>
-                <ListItem as="button" onClick={handleDrawerClose}>
-                    <ListItemText>Data Browser</ListItemText>
+                <ListItem interactive onClick={handleDrawerClose}>
+                    Data Browser
                 </ListItem>
-                <ListItem as="button" onClick={handleDrawerClose}>
-                    <ListItemText>File Manager</ListItemText>
+                <ListItem interactive onClick={handleDrawerClose}>
+                    File Manager
                 </ListItem>
-                <ListItem as="button" onClick={handleDrawerClose}>
-                    <ListItemText>Import Data</ListItemText>
+                <ListItem interactive onClick={handleDrawerClose}>
+                    Import Data
                 </ListItem>
             </List>
 
             <List>
-                <ListItem as="button" onClick={handleDrawerClose}>
-                    <ListItemText>Manage Applications</ListItemText>
+                <ListItem interactive onClick={handleDrawerClose}>
+                    Manage Applications
                 </ListItem>
-                <ListItem as="button" onClick={handleDrawerClose}>
-                    <ListItemText>Manage Groups</ListItemText>
+                <ListItem interactive onClick={handleDrawerClose}>
+                    Manage Groups
                 </ListItem>
             </List>
             <Divider />
 
             <List>
-                <ListItem as="button" onClick={handleDrawerClose}>
-                    <ListItemText>Expression Data Miner</ListItemText>
+                <ListItem interactive onClick={handleDrawerClose}>
+                    Expression Data Miner
                 </ListItem>
             </List>
         </DrawerFullWidth>

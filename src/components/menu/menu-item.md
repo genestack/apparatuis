@@ -20,21 +20,26 @@ const longSubtitle = 'Subtitle could contains some description about menu item';
 const shortSubtitle = 'Subtitle for menu item';
 
 renderCheckbox = (name, label) => (
-    <ListItem as="label">
-        <ListItemCell>
+    <ListItem
+        as="label"
+        interactive
+        prepend={
             <input
                 type="checkbox"
                 checked={state[name]}
                 onChange={(event) => setState({[name]: event.target.checked})}
             />
-        </ListItemCell>
-        <ListItemText>{label}</ListItemText>
+        }
+    >
+        {label}
     </ListItem>
 );
 
 renderRadio = (name, label, value) => (
-    <ListItem as="label">
-        <ListItemCell>
+    <ListItem
+        as="label"
+        interactive
+        prepend={
             <input
                 type="radio"
                 name={name}
@@ -42,8 +47,9 @@ renderRadio = (name, label, value) => (
                 checked={state[name] === value}
                 onChange={(event) => setState({[name]: value})}
             />
-        </ListItemCell>
-        <ListItemText>{label}</ListItemText>
+        }
+    >
+        {label}
     </ListItem>
 );
 

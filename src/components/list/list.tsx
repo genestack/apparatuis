@@ -13,7 +13,9 @@ import * as styles from './list.module.css';
 type TargetProps = React.HTMLAttributes<HTMLDivElement>;
 
 /** List public properties */
-export interface Props extends TargetProps {}
+export interface Props extends TargetProps {
+    as?: React.ReactType;
+}
 
 /**
  * Lists are a continuous group of text.
@@ -21,7 +23,7 @@ export interface Props extends TargetProps {}
  * which are represented by icons, radios, checkboxes or other text.
  */
 export const List = (props: Props) => {
-    const {className, ...rest} = props;
+    const {as: Component = 'ul', className, ...rest} = props;
 
-    return <div {...rest} className={classNames(className, styles.root)} />;
+    return <Component {...rest} className={classNames(className, styles.root)} />;
 };

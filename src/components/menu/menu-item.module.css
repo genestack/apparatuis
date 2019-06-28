@@ -42,10 +42,7 @@
     flex-grow: 0;
     width: 20px;
     height: 20px;
-    margin-top: calc(var(--gs-spacing-unit) * 3 / 4);
-    margin-bottom: calc(var(--gs-spacing-unit) * 3 / 4);
     margin-right: calc(var(--gs-spacing-unit) / 2);
-    align-self: flex-start;
     display: flex;
     align-items: center;
 }

@@ -2,6 +2,15 @@
 
 ## [Unreleased]
 
+### Removed
+
+-   **(breaking change)** Remove `ListItemText`, `ListItemCell`, `ListLabel` components
+
+### Added
+
+-   **(breaking change)** Add `interactive` property for `ListItem`. `false` by default
+-   Add `subtitle`, `prepend` and `append` properties to `ListItem`
+
 ## [8.0.0-alpha.16] - 2019-06-24
 
 ### Added

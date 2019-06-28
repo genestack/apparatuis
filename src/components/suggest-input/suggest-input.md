@@ -34,22 +34,20 @@ const renderItem = (value, item) => {
     const wordsToHighlight = value.split(' ');
     return (
         <SuggestInputItem key={fullName} value={fullName}>
-            <ListItemText>
-                <Typography box="inline" variant="caption" quiet style={{marginRight: 4}} as="span">
-                    <Highlight words={wordsToHighlight}>{item.name}</Highlight>
-                </Typography>
-                <Highlight words={wordsToHighlight}>{item.surname}</Highlight>
-            </ListItemText>
+            <Typography box="inline" variant="caption" quiet style={{marginRight: 4}} as="span">
+                <Highlight words={wordsToHighlight}>{item.name}</Highlight>
+            </Typography>
+            <Highlight words={wordsToHighlight}>{item.surname}</Highlight>
         </SuggestInputItem>
     );
 };
 
 const notFoundElement = (
-    <ListLabel>
+    <ListItem>
         <Typography quiet variant="caption">
             No Suggests
         </Typography>
-    </ListLabel>
+    </ListItem>
 );
 
 function fetchItems(query) {

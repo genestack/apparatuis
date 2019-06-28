@@ -1,11 +1,15 @@
 ```js
 items = new Array(100).fill(null).map((_, index) => (
-    <ListItem key={index}>
-        <ListItemText>List Item</ListItemText>
-        <FlexExpander />
-        <ListItemCell>
-            <Typography quiet>{index}</Typography>
-        </ListItemCell>
+    <ListItem
+        key={index}
+        interactive
+        append={
+            <Typography quiet as="span">
+                {index}
+            </Typography>
+        }
+    >
+        List Item
     </ListItem>
 ));
 

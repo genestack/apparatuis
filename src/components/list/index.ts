@@ -7,5 +7,3 @@
  */
 export {List, Props as ListProps} from './list';
 export {ListItem, Props as ListItemProps} from './list-item';
-export {ListItemText, Props as ListItemTextProps} from './list-item-text';
-export {ListItemCell, Props as ListItemCellProps} from './list-item-cell';

@@ -6,91 +6,80 @@ const leftCellStyle = {width: 20, textAlign: 'center'};
 const StateExample = (props) => (
     <div {...props} style={{width: 200, border: '1px solid #ddd', marginBottom: 8}} />
 );
-const Quiet = (props) => <Typography {...props} variant="caption" quiet box="inline" as="span" />;
+const Quiet = (props) => <Typography {...props} quiet box="inline" as="span" />;
 
 <Controls style={{alignItems: 'flex-start'}}>
     <ControlsItem style={{width: 200}}>
         <PageContent as={Paper}>
-            <Typography variant="section" box="paragraph">
-                Tissue:
-            </Typography>
             <PageFullWidth>
                 <List>
-                    <ListItem as="label">
-                        <ListItemCell style={leftCellStyle}>
-                            <input type="checkbox" />
-                        </ListItemCell>
-                        <ListItemText>
-                            <ListItemText noGrow>Liver</ListItemText>
-                            <ListItemText noGrow quiet variant="caption">
-                                12
-                            </ListItemText>
-                        </ListItemText>
-                        <ListItemCell>
-                            <HelpIcon />
-                        </ListItemCell>
+                    <ListItem>
+                        <Typography variant="section">Tissue:</Typography>
                     </ListItem>
-                    <ListItem as="label">
-                        <ListItemCell style={leftCellStyle}>
-                            <input type="checkbox" />
-                        </ListItemCell>
-                        <ListItemText>
-                            <ListItemText>Very long name of tissue</ListItemText>
-                            <ListItemText noShrink quiet variant="caption">
+                    <ListItem
+                        as="label"
+                        interactive
+                        prepend={<input type="checkbox" />}
+                        append={<HelpIcon />}
+                    >
+                        <TextLabel caption="12">Liver</TextLabel>
+                    </ListItem>
+                    <ListItem
+                        as="label"
+                        interactive
+                        prepend={<input type="checkbox" />}
+                        append={
+                            <Typography as="span" quiet>
                                 99999
-                            </ListItemText>
-                        </ListItemText>
+                            </Typography>
+                        }
+                    >
+                        Very long name of tissue
                     </ListItem>
-                    <ListItem as="label">
-                        <ListItemCell style={leftCellStyle}>
-                            <input type="checkbox" />
-                        </ListItemCell>
-                        <ListItemText wrap>Very long name of tissue. Few lines</ListItemText>
-                        <ListItemText quiet variant="caption" noShrink>
-                            3
-                        </ListItemText>
+                    <ListItem
+                        as="label"
+                        interactive
+                        wrap
+                        prepend={<input type="checkbox" />}
+                        append={
+                            <Typography as="span" quiet>
+                                3
+                            </Typography>
+                        }
+                    >
+                        <TextLabel wrap>Very long name of tissue. Few lines</TextLabel>
                     </ListItem>
-                    <ListItem disabled>
-                        <ListItemCell style={leftCellStyle}>
-                            <input type="checkbox" disabled />
-                        </ListItemCell>
-                        <ListItemText>Bone</ListItemText>
-                        <ListItemCell>
-                            <Quiet>3</Quiet>
-                        </ListItemCell>
+                    <ListItem
+                        disabled
+                        prepend={<input type="checkbox" disabled />}
+                        append={
+                            <Typography as="span" quiet>
+                                3
+                            </Typography>
+                        }
+                    >
+                        Bone
                     </ListItem>
-                    <ListItem as="label">
-                        <ListItemCell style={leftCellStyle}>
-                            <input type="checkbox" />
-                        </ListItemCell>
-                        <ListItemText>Leaf</ListItemText>
+                    <ListItem as="label" interactive prepend={<input type="checkbox" />}>
+                        Leaf
                     </ListItem>
                     <Divider />
-                    <ListItem href="#">
-                        <ListItemText>I am a link</ListItemText>
+                    <ListItem href="#" interactive>
+                        I am a link
                     </ListItem>
-                    <ListItem as="label">
-                        <ListItemCell style={leftCellStyle}>
-                            <input type="radio" name="foo" />
-                        </ListItemCell>
-                        <ListItemText>Brain</ListItemText>
+                    <ListItem as="label" interactive prepend={<input type="radio" name="foo" />}>
+                        Brain
                     </ListItem>
-                    <ListItem as="label">
-                        <ListItemCell style={leftCellStyle}>
-                            <input type="radio" name="foo" />
-                        </ListItemCell>
-                        <ListItemText>Lymph Node</ListItemText>
+                    <ListItem as="label" interactive prepend={<input type="radio" name="foo" />}>
+                        Lymph Node
                     </ListItem>
-                    <ListItem as="label">
-                        <ListItemCell style={leftCellStyle}>
-                            <DownloadIcon />
-                        </ListItemCell>
-                        <ListItemText>
-                            <ListItemText noGrow>Download</ListItemText>
-                            <ListItemText quiet variant="caption">
-                                145 MB
-                            </ListItemText>
-                        </ListItemText>
+                    <ListItem
+                        as="label"
+                        interactive
+                        prepend={<DownloadIcon />}
+                        subtitle="Downloading of big file could overload your network"
+                    >
+                        <TextLabel caption="145 MB">Download</TextLabel>
                     </ListItem>
                 </List>
             </PageFullWidth>
@@ -102,20 +91,28 @@ const Quiet = (props) => <Typography {...props} variant="caption" quiet box="inl
                 List Item States:
             </Typography>
             <StateExample>
-                <ListItem>Normal</ListItem>
+                <ListItem interactive>Normal</ListItem>
             </StateExample>
             <StateExample>
-                <ListItem focused>Focused</ListItem>
+                <ListItem interactive focused>
+                    Focused
+                </ListItem>
             </StateExample>
             <StateExample>
-                <ListItem hovered>Hovered</ListItem>
+                <ListItem interactive hovered>
+                    Hovered
+                </ListItem>
             </StateExample>
             <StateExample>
-                <ListItem active>Active</ListItem>
+                <ListItem interactive active>
+                    Active
+                </ListItem>
             </StateExample>
 
             <StateExample>
-                <ListItem disabled>Disabled</ListItem>
+                <ListItem interactive disabled>
+                    Disabled
+                </ListItem>
             </StateExample>
         </PageContent>
     </ControlsItem>

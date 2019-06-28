@@ -31,19 +31,25 @@ handleDialogClose = () => {
 
             <DialogFullWidth>
                 <List>
-                    <ListItem>
-                        <ListItemText>List item</ListItemText>
-                        <FlexExpander />
-                        <ListItemCell>
-                            <Typography quiet>1</Typography>
-                        </ListItemCell>
+                    <ListItem
+                        interactive
+                        append={
+                            <Typography quiet as="span">
+                                1
+                            </Typography>
+                        }
+                    >
+                        List item
                     </ListItem>
-                    <ListItem>
-                        <ListItemText>List item</ListItemText>
-                        <FlexExpander />
-                        <ListItemCell>
-                            <Typography quiet>2</Typography>
-                        </ListItemCell>
+                    <ListItem
+                        interactive
+                        append={
+                            <Typography quiet as="span">
+                                2
+                            </Typography>
+                        }
+                    >
+                        List item
                     </ListItem>
                 </List>
             </DialogFullWidth>
@@ -152,21 +158,37 @@ initialState = {
     size: 'auto'
 };
 
-renderStateCheckbox = (name) => (
-    <input
-        type="checkbox"
-        checked={state[name]}
-        onChange={(event) => setState({[name]: event.target.checked})}
-    />
+renderStateCheckbox = (key, title) => (
+    <ListItem
+        as="label"
+        interactive
+        prepend={
+            <input
+                type="checkbox"
+                checked={state[key]}
+                onChange={(event) => setState({[key]: event.target.checked})}
+            />
+        }
+    >
+        {title}
+    </ListItem>
 );
 
-renderSizeRadio = (value) => (
-    <input
-        name="size"
-        type="radio"
-        checked={state.size === value}
-        onChange={(event) => setState({size: value})}
-    />
+renderStateRadio = (key, value, title) => (
+    <ListItem
+        as="label"
+        interactive
+        prepend={
+            <input
+                name={key}
+                type="radio"
+                checked={state[key] === value}
+                onChange={(event) => setState({[key]: value})}
+            />
+        }
+    >
+        {title}
+    </ListItem>
 );
 
 handleDialogOpen = () => {
@@ -255,14 +277,16 @@ const samples = [
                     <DialogFullWidth>
                         <List>
                             {samples.map((item, i) => (
-                                <ListItem key={i}>
-                                    <ListItemText>{item.title}</ListItemText>
-                                    <FlexExpander />
-                                    <ListItemCell>
-                                        <Typography quiet variant="caption" box="inline">
+                                <ListItem
+                                    key={i}
+                                    interactive
+                                    append={
+                                        <Typography quiet as="span">
                                             {item.count}
                                         </Typography>
-                                    </ListItemCell>
+                                    }
+                                >
+                                    {item.title}
                                 </ListItem>
                             ))}
                         </List>
@@ -297,60 +321,23 @@ const samples = [
         >
             <PageFullWidth>
                 <List>
-                    <ListItem as="label">
-                        <ListItemCell>{renderStateCheckbox('showCloseButton')}</ListItemCell>
-                        <ListItemText>Close Button</ListItemText>
+                    {renderStateCheckbox('showCloseButton', 'Close Button')}
+                    {renderStateCheckbox('scrollableDialog', 'Scrollable')}
+                    {renderStateCheckbox('showLongBody', 'Long Body')}
+                    {renderStateCheckbox('showTitle', 'Title')}
+                    {renderStateCheckbox('showSubtitle', 'Subtitle')}
+                    {renderStateCheckbox('showBody', 'Body')}
+                    {renderStateCheckbox('showList', 'List')}
+                    {renderStateCheckbox('showFooter', 'Footer')}
+
+                    <ListItem>
+                        <Typography variant="section">Size:</Typography>
                     </ListItem>
-                    <ListItem as="label">
-                        <ListItemCell>{renderStateCheckbox('scrollableDialog')}</ListItemCell>
-                        <ListItemText>Scrollable</ListItemText>
-                    </ListItem>
-                    <ListItem as="label">
-                        <ListItemCell>{renderStateCheckbox('showLongBody')}</ListItemCell>
-                        <ListItemText>Long Body</ListItemText>
-                    </ListItem>
-                    <ListItem as="label">
-                        <ListItemCell>{renderStateCheckbox('showTitle')}</ListItemCell>
-                        <ListItemText>Title</ListItemText>
-                    </ListItem>
-                    <ListItem as="label">
-                        <ListItemCell>{renderStateCheckbox('showSubtitle')}</ListItemCell>
-                        <ListItemText>Subtitle</ListItemText>
-                    </ListItem>
-                    <ListItem as="label">
-                        <ListItemCell>{renderStateCheckbox('showBody')}</ListItemCell>
-                        <ListItemText>Body</ListItemText>
-                    </ListItem>
-                    <ListItem as="label">
-                        <ListItemCell>{renderStateCheckbox('showList')}</ListItemCell>
-                        <ListItemText>List</ListItemText>
-                    </ListItem>
-                    <ListItem as="label">
-                        <ListItemCell>{renderStateCheckbox('showFooter')}</ListItemCell>
-                        <ListItemText>Footer</ListItemText>
-                    </ListItem>
+                    {renderStateRadio('size', 'auto', 'Auto')}
+                    {renderStateRadio('size', 'small', 'Small')}
+                    {renderStateRadio('size', 'medium', 'Medium')}
+                    {renderStateRadio('size', 'large', 'Large')}
                 </List>
-            </PageFullWidth>
-            <Typography variant="section" box="paragraph">
-                Size:
-            </Typography>
-            <PageFullWidth>
-                <ListItem as="label">
-                    <ListItemCell>{renderSizeRadio('auto')}</ListItemCell>
-                    <ListItemText>Auto</ListItemText>
-                </ListItem>
-                <ListItem as="label">
-                    <ListItemCell>{renderSizeRadio('small')}</ListItemCell>
-                    <ListItemText>Small</ListItemText>
-                </ListItem>
-                <ListItem as="label">
-                    <ListItemCell>{renderSizeRadio('medium')}</ListItemCell>
-                    <ListItemText>Medium</ListItemText>
-                </ListItem>
-                <ListItem as="label">
-                    <ListItemCell>{renderSizeRadio('large')}</ListItemCell>
-                    <ListItemText>Large</ListItemText>
-                </ListItem>
             </PageFullWidth>
         </PageContent>
     </Dialog>

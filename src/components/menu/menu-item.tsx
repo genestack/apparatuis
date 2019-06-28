@@ -110,7 +110,6 @@ const selectFocusDirection = (event: React.KeyboardEvent): 'next' | 'prev' | nul
  * It has three cells:
  *   - left icon cell, that could be omitted,
  *   - main content cell, that could have any React.Elements.
- *     Basically it should be `<ListItemText />`
  *   - right icon cell, that is shown when menu item has `subMenu`.
  */
 export class MenuItem extends React.PureComponent<Props, State> {
