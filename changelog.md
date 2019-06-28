@@ -2,6 +2,8 @@
 
 ## [Unreleased]
 
+## [8.0.0-alpha.17] - 2019-06-28
+
 ### Removed
 
 -   **(breaking change)** Remove `ListItemText`, `ListItemCell`, `ListLabel` components
