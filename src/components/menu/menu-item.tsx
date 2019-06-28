@@ -24,6 +24,7 @@ import {WithClasses, mergeClassesProps} from '../../utils/styles';
 import {ButtonBase, ButtonBaseProps} from '../button-base';
 import {FocusTrap} from '../focus-trap';
 import {IconProps} from '../icon';
+import {ListItem, ListItemProps} from '../list';
 import {RootRef} from '../root-ref';
 import {Typography, TypographyProps} from '../typography';
 
@@ -35,43 +36,19 @@ import {Props as SubMenuProps} from './sub-menu';
 const OPEN_TIMEOUT = 200;
 const CLOSE_TIMEOUT = 150;
 
-type TargetProps = ButtonBaseProps;
+type TargetProps = Omit<ListItemProps, 'classes' | 'value' | 'interactive'>;
 
 type SubMenuProp = React.ReactElement<SubMenuProps> | (() => React.ReactElement<SubMenuProps>);
 
 /** MenuItem public properties */
 export interface Props extends TargetProps, WithClasses<keyof typeof styles> {
     /**
-     * Left element for a menu item.
-     * Anyway If no prepend passed a menu item will have empty left margin
-     * for menu items align.
-     */
-    prepend?: React.ReactNode;
-    /** Right element for a menu item. */
-    append?: React.ReactNode;
-    /** Small caption below the main title */
-    subtitle?: React.ReactNode;
-    /** Toggle title wrapping */
-    wrap?: boolean;
-    /**
      * SubMenu is shown when user focuses on menu item.
      * Accepts only `<SubMenu />` elements or functions that returns it.
      */
     subMenu?: SubMenuProp;
     /** Value that is used for `Menu.onValueSelect` callback */
-    value?: any;
-    /** Properties for wrapper of prepend element */
-    prependProps?: React.HTMLAttributes<HTMLDivElement>;
-    /** Properties for wrapper of append element */
-    appendProps?: React.HTMLAttributes<HTMLDivElement>;
-    /** Properties for wrapper of content element */
-    contentProps?: React.HTMLAttributes<HTMLDivElement>;
-    /** Properties for wrapper of title element */
-    titleProps?: React.HTMLAttributes<HTMLDivElement>;
-    /** Properties for wrapper of children */
-    titleContentProps?: TypographyProps;
-    /** Properties for wrapper of subtitle element */
-    subtitleProps?: React.HTMLAttributes<HTMLDivElement>;
+    value?: unknown;
     /** Properties for popover that shows SubMenu */
     subMenuPopoverProps?: Omit<
         MenuPopoverProps,
@@ -293,19 +270,16 @@ export class MenuItem extends React.PureComponent<Props, State> {
         const {
             classes,
             className,
-            children,
+
             prepend,
             append,
             subMenu,
             value,
-            wrap,
-            subtitle,
-            subtitleProps = {},
+
             subMenuPopoverProps = {},
             prependProps = {},
             appendProps = {},
-            contentProps = {},
-            titleContentProps = {},
+
             subMenuArrowIconProps,
             titleProps = {},
             ...rest
@@ -339,76 +313,39 @@ export class MenuItem extends React.PureComponent<Props, State> {
                 {(menuContext) => (
                     <React.Fragment>
                         <RootRef rootRef={this.itemRef}>
-                            <ButtonBase
+                            <ListItem
                                 {...rest}
-                                className={classNames(className, classes.root, {
-                                    [classes.focused]: this.state.highlighted
-                                })}
+                                interactive
+                                focused={this.state.highlighted}
+                                className={classNames(className, classes.root)}
+                                prependProps={{
+                                    ...prependProps,
+                                    className: classNames(prependProps.className, classes.prepend)
+                                }}
+                                prepend={<React.Fragment>{prepend}</React.Fragment>}
+                                appendProps={{
+                                    ...appendProps,
+                                    className: classNames(appendProps.className, classes.append)
+                                }}
+                                append={
+                                    append || subMenu ? (
+                                        <React.Fragment>
+                                            {append}
+                                            {subMenu ? (
+                                                <KeyboardArrowRightIcon
+                                                    {...subMenuArrowIconProps}
+                                                />
+                                            ) : null}
+                                        </React.Fragment>
+                                    ) : null
+                                }
                                 onClick={chain(rest.onClick, this.createClickHandler(menuContext))}
                                 onFocus={chain(rest.onFocus, this.handleFocus)}
                                 onBlur={chain(rest.onFocus, this.handleBlur)}
                                 onKeyDown={chain(rest.onKeyDown, this.handleKeyDown)}
                                 onMouseEnter={chain(rest.onMouseEnter, this.handleMouseEnter)}
                                 onMouseLeave={chain(rest.onMouseLeave, this.handleMouseLeave)}
-                            >
-                                <div
-                                    {...prependProps}
-                                    className={classNames(prependProps.className, classes.prepend)}
-                                >
-                                    {prepend}
-                                </div>
-                                <div
-                                    {...contentProps}
-                                    className={classNames(contentProps.className, classes.content)}
-                                >
-                                    <div
-                                        {...titleProps}
-                                        className={classNames(titleProps.className, classes.title)}
-                                    >
-                                        <Typography
-                                            ellipsis={!wrap}
-                                            as="div"
-                                            {...titleContentProps}
-                                            className={classNames(
-                                                titleContentProps.className,
-                                                classes.titleContent
-                                            )}
-                                        >
-                                            {children}
-                                        </Typography>
-                                        {append || subMenu ? (
-                                            <div
-                                                {...appendProps}
-                                                className={classNames(
-                                                    appendProps.className,
-                                                    classes.append
-                                                )}
-                                            >
-                                                {append}
-                                                {subMenu ? (
-                                                    <KeyboardArrowRightIcon
-                                                        {...subMenuArrowIconProps}
-                                                    />
-                                                ) : null}
-                                            </div>
-                                        ) : null}
-                                    </div>
-                                    {subtitle ? (
-                                        <Typography
-                                            variant="caption"
-                                            quiet
-                                            as="div"
-                                            {...subtitleProps}
-                                            className={classNames(
-                                                subtitleProps.className,
-                                                classes.subtitle
-                                            )}
-                                        >
-                                            {subtitle}
-                                        </Typography>
-                                    ) : null}
-                                </div>
-                            </ButtonBase>
+                            />
                         </RootRef>
                         {subMenuPopover}
                     </React.Fragment>
