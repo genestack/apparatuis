@@ -20,6 +20,11 @@ type TargetProps = Omit<ButtonBaseProps, 'activeClassName'>;
 
 /** ListItem public properties */
 export interface Props extends TargetProps, WithClasses<keyof typeof styles> {
+    /**
+     * If `true` list item becomes an element like a button
+     * (uses `BaseButton` under the hood).
+     * It has interactive states (hover, active, focused etc.).
+     */
     interactive?: boolean;
     /**
      * Left element for a menu item.
