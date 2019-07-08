@@ -39,7 +39,7 @@ export interface Props {
      */
     show?: boolean;
     /**
-     * What should be rendered when `show` prop eqals to `false`
+     * What should be rendered when `show` prop equals to `false`
      *
      * Default `undefined`
      */
@@ -125,11 +125,11 @@ export const Preloader = ({
         <ListWrapper>
             {reduceNumber<JSX.Element[]>(
                 count,
-                (preloaderlines, index) => {
+                (preloaderLines, index) => {
                     const nextClassName = classNameGenerator.next().value;
 
                     return [
-                        ...preloaderlines,
+                        ...preloaderLines,
                         <ListItemWrapper key={`${nextClassName}-${index}`}>
                             <DarkContext.Consumer>
                                 {(darkContext) => {
