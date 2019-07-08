@@ -11,7 +11,7 @@ import * as React from 'react';
 import * as styles from './icon.module.css';
 
 /** Common properties for all icons */
-export type Props = React.SVGAttributes<React.ReactSVGElement>;
+export type Props = React.SVGAttributes<SVGElement>;
 
 /**
  * Component adds common styles for `SVG` icons.
