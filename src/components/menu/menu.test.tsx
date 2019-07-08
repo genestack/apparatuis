@@ -13,6 +13,7 @@ import {createTestApp} from '../../../test-utils/create-test-app';
 import {FocusTrap} from '../focus-trap';
 
 import {Menu} from './menu';
+import {MenuCaption} from './menu-caption';
 import {MenuItem} from './menu-item';
 
 describe('<Menu />', () => {
@@ -69,6 +70,7 @@ describe('<Menu />', () => {
         app.mount(
             <Menu id="test" open onClose={onClose} referenceElement={referenceElement}>
                 <MenuItem id="first" />
+                <MenuCaption />
                 <MenuItem id="second" />
             </Menu>
         );

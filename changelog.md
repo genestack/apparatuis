@@ -2,6 +2,10 @@
 
 ## [Unreleased]
 
+### Added
+
+-   Add `MenuCaption` component
+
 ### Fixed
 
 -   Fix margins for transparent `Divider` in Safari
