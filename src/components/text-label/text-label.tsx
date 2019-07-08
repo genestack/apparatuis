@@ -45,6 +45,7 @@ const captionVariantsMap: Partial<Record<TypographyVariant, TypographyVariant>> 
 export const TextLabel = (props: Props) => {
     const {
         caption,
+        as: Component = 'div',
         variant = 'body',
         wrap,
         labelProps = {},
@@ -61,6 +62,7 @@ export const TextLabel = (props: Props) => {
     return (
         <Typography
             {...rest}
+            as={Component}
             variant={variant}
             box={box}
             className={classNames(rest.className, classes.root, {

@@ -6,6 +6,7 @@ initialState = {
     longTitle: false,
     caption: false,
     wrap: false,
+    disabled: false,
     prepend: false,
     appendIcon: false,
     appendText: false,
@@ -60,6 +61,7 @@ renderRadio = (name, label, value) => (
                 <MenuItem
                     wrap={state.wrap}
                     prepend={state.prepend ? <DownloadIcon /> : null}
+                    disabled={state.disabled}
                     append={
                         state.appendIcon && state.appendText ? (
                             <Controls>
@@ -96,20 +98,23 @@ renderRadio = (name, label, value) => (
             </Paper>
         </ControlsItem>
         <ControlsItem>
-            <Paper>
-                <List>
-                    {renderCheckbox('longTitle', 'Long Title')}
-                    {renderCheckbox('caption', 'Caption')}
-                    {renderCheckbox('wrap', 'Wrap title')}
-                    {renderCheckbox('prepend', 'Prepend Icon')}
-                    {renderCheckbox('appendIcon', 'Append Icon')}
-                    {renderCheckbox('appendText', 'Append Text')}
-                    {renderCheckbox('subMenu', 'SubMenu')}
-                    {renderRadio('subtitle', 'No Subtitle', 'none')}
-                    {renderRadio('subtitle', 'Short Subtitle', 'short')}
-                    {renderRadio('subtitle', 'Long Subtitle', 'long')}
-                </List>
-            </Paper>
+            <PageContent as={Paper}>
+                <PageFullWidth>
+                    <List>
+                        {renderCheckbox('longTitle', 'Long Title')}
+                        {renderCheckbox('caption', 'Caption')}
+                        {renderCheckbox('wrap', 'Wrap title')}
+                        {renderCheckbox('disabled', 'Disabled')}
+                        {renderCheckbox('prepend', 'Prepend Icon')}
+                        {renderCheckbox('appendIcon', 'Append Icon')}
+                        {renderCheckbox('appendText', 'Append Text')}
+                        {renderCheckbox('subMenu', 'SubMenu')}
+                        {renderRadio('subtitle', 'No Subtitle', 'none')}
+                        {renderRadio('subtitle', 'Short Subtitle', 'short')}
+                        {renderRadio('subtitle', 'Long Subtitle', 'long')}
+                    </List>
+                </PageFullWidth>
+            </PageContent>
         </ControlsItem>
     </Controls>
 </PageContent>;
