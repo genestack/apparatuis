@@ -2,6 +2,10 @@
 
 ## [Unreleased]
 
+### Fixed
+
+-   Fix margins for transparent `Divider` in Safari
+
 ## [8.0.0-alpha.18] - 2019-07-08
 
 ### Added
