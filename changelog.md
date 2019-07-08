@@ -2,6 +2,12 @@
 
 ## [Unreleased]
 
+## [8.0.0-alpha.18] - 2019-07-08
+
+### Added
+
+-   Add `Preloader` component
+
 ## [8.0.0-alpha.17] - 2019-06-28
 
 ### Removed

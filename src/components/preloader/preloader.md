@@ -3,7 +3,7 @@ const {DarkContext} = require('../../utils/dark-context');
 const {Checkbox} = require('../checkbox');
 
 initialState = {
-    contextnverted: false,
+    contextInverted: false,
     inverted: false,
     drawerOpen: false,
     isLoading: false
@@ -30,13 +30,13 @@ handleDrawerClose = () =>
 <React.Fragment>
     <PageContent
         as={Paper}
-        style={{background: state.contextnverted ? 'rgb(51, 51, 51)' : 'rgb(255, 255, 255)'}}
+        style={{background: state.contextInverted ? 'rgb(51, 51, 51)' : 'rgb(255, 255, 255)'}}
     >
-        <DarkContext.Provider value={state.contextnverted}>
+        <DarkContext.Provider value={state.contextInverted}>
             <Typography variant="section">In context</Typography>
             <Checkbox
-                onValueChange={(value) => setState({contextnverted: value})}
-                checked={state.contextnverted}
+                onValueChange={(value) => setState({contextInverted: value})}
+                checked={state.contextInverted}
             >
                 <Typography>Inverted</Typography>
             </Checkbox>
