@@ -1,0 +1,40 @@
+/*
+ * Copyright (c) 2011-2019 Genestack Limited
+ * All Rights Reserved
+ * THIS IS UNPUBLISHED PROPRIETARY SOURCE CODE OF GENESTACK LIMITED
+ * The copyright notice above does not evidence any
+ * actual or intended publication of such source code.
+ */
+
+.width100 {
+    width: 100%;
+}
+
+.width75 {
+    width: 75%;
+}
+
+.width85 {
+    width: 85%;
+}
+
+.preloader {
+    border-radius: 4px;
+}
+
+/**
+ * Thin space inserted here to make browser think that there is some content
+ * in the Typography component and make It take place
+ */
+.preloader:before {
+    content: "\2009";
+    visibility: hidden;
+}
+
+.backgroundRegular {
+    background-color: rgba(228, 229, 233, 1);
+}
+
+.backgroundInverted {
+    background-color: rgba(80, 88, 104, 1);
+}

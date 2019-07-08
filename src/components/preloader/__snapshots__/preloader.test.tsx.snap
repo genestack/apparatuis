@@ -1,0 +1,149 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Preloader component renders children when show === false 1`] = `"Foo"`;
+
+exports[`Preloader component renders correctly with count 1`] = `
+Array [
+  <p
+    className="preloader backgroundRegular width100 root body"
+  />,
+  <p
+    className="preloader backgroundRegular width75 root body"
+  />,
+  <p
+    className="preloader backgroundRegular width85 root body"
+  />,
+  <p
+    className="preloader backgroundRegular width100 root body"
+  />,
+  <p
+    className="preloader backgroundRegular width75 root body"
+  />,
+]
+`;
+
+exports[`Preloader component works with DarkContext 1`] = `
+Array [
+  <p
+    className="preloader backgroundInverted width100 root body inverted"
+  />,
+  <p
+    className="preloader backgroundInverted width75 root body inverted"
+  />,
+  <p
+    className="preloader backgroundInverted width85 root body inverted"
+  />,
+  <p
+    className="preloader backgroundInverted width100 root body inverted"
+  />,
+  <p
+    className="preloader backgroundInverted width75 root body inverted"
+  />,
+  <p
+    className="preloader backgroundInverted width85 root body inverted"
+  />,
+]
+`;
+
+exports[`Preloader component works with custom classnames 1`] = `
+Array [
+  <p
+    className="preloader backgroundRegular foo root body"
+  />,
+  <p
+    className="preloader backgroundRegular bar root body"
+  />,
+  <p
+    className="preloader backgroundRegular baz root body"
+  />,
+  <p
+    className="preloader backgroundRegular foo root body"
+  />,
+  <p
+    className="preloader backgroundRegular bar root body"
+  />,
+]
+`;
+
+exports[`Preloader component works with inverted without DarkContext 1`] = `
+Array [
+  <p
+    className="preloader backgroundInverted width100 root body inverted"
+  />,
+  <p
+    className="preloader backgroundInverted width75 root body inverted"
+  />,
+  <p
+    className="preloader backgroundInverted width85 root body inverted"
+  />,
+  <p
+    className="preloader backgroundInverted width100 root body inverted"
+  />,
+  <p
+    className="preloader backgroundInverted width75 root body inverted"
+  />,
+  <p
+    className="preloader backgroundInverted width85 root body inverted"
+  />,
+]
+`;
+
+exports[`Preloader component works with wrapAll and wrapEach as IntrinsicElements 1`] = `
+<div>
+  <span>
+    <p
+      className="preloader backgroundRegular width100 root body"
+    />
+  </span>
+  <span>
+    <p
+      className="preloader backgroundRegular width75 root body"
+    />
+  </span>
+  <span>
+    <p
+      className="preloader backgroundRegular width85 root body"
+    />
+  </span>
+  <span>
+    <p
+      className="preloader backgroundRegular width100 root body"
+    />
+  </span>
+  <span>
+    <p
+      className="preloader backgroundRegular width75 root body"
+    />
+  </span>
+</div>
+`;
+
+exports[`Preloader component works with wrapAll and wrapEach as fucntional components 1`] = `
+<div>
+  <span>
+    <p
+      className="preloader backgroundRegular width100 root body"
+    />
+  </span>
+  <span>
+    <p
+      className="preloader backgroundRegular width75 root body"
+    />
+  </span>
+  <span>
+    <p
+      className="preloader backgroundRegular width85 root body"
+    />
+  </span>
+  <span>
+    <p
+      className="preloader backgroundRegular width100 root body"
+    />
+  </span>
+  <span>
+    <p
+      className="preloader backgroundRegular width75 root body"
+    />
+  </span>
+</div>
+`;
