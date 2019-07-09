@@ -11,6 +11,8 @@ handleValueSelect = (value) => {
 
 const menu = (
     <Menu onValueSelect={handleValueSelect}>
+        <MenuCaption>Some menu caption</MenuCaption>
+
         <MenuItem
             value="Menu Item 1"
             append={
@@ -59,7 +61,7 @@ const menu = (
 );
 
 <PageContent as={Paper}>
-    <MenuHandler menu={() => menu}>
+    <MenuHandler menu={menu}>
         <Button>Open Stateful Menu {state.value ? `(${state.value})` : null}</Button>
     </MenuHandler>
 </PageContent>;
@@ -140,6 +142,8 @@ items = new Array(100).fill(null).map((_, index) => (
         <MenuItem value="Download" prepend={<DownloadIcon />} subMenu={<SubMenu>{items}</SubMenu>}>
             <TextLabel caption="125 MB">Download</TextLabel>
         </MenuItem>
+
+        <MenuCaption>Some menu caption</MenuCaption>
 
         <MenuItem value="Open File" append={<Quiet>⌘ + O</Quiet>}>
             Open File...

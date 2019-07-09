@@ -2,6 +2,10 @@
 
 ## [Unreleased]
 
+### Added
+
+-   Add `MenuCaption` component
+
 ## [8.0.0-alpha.19] - 2019-07-09
 
 ### Changed
