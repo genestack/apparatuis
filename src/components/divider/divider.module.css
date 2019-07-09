@@ -34,8 +34,11 @@
 }
 
 .transparent {
-    border-bottom-width: 0;
-    height: 0;
+    /**
+     * Safari collapses element and removes its margins
+     * if it has not height.
+     */
+    height: 1px;
     border-bottom-color: transparent;
 }
 
