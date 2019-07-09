@@ -58,6 +58,7 @@ export const Drawer = (props: Props) => {
             <Slide {...slideProps} appear in={open} direction={side}>
                 <MarginBox
                     tabIndex={-1}
+                    contained="in-dialog"
                     {...rest}
                     as={Paper}
                     className={classNames(rest.className, classes.root, {
