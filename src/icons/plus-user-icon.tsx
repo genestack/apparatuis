@@ -16,7 +16,7 @@ import {createIcon} from '../components/icon';
  * User icon and plus sign at the left top corner
  */
 export const PlusUserIcon = createIcon(
-    <svg width="20" height="20" fill="none">
+    <svg viewBox="0 0 20 20">
         <path
             fillRule="evenodd"
             clipRule="evenodd"

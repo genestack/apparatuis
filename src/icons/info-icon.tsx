@@ -16,7 +16,7 @@ import {createIcon} from '../components/icon';
  * This is `i` letter in a circle icon
  */
 export const InfoIcon = createIcon(
-    <svg width="20" height="20" fill="none">
+    <svg viewBox="0 0 20 20">
         <path
             className="gs-svg-icon-fill"
             d="M10 17a7 7 0 1 0 0-14 7 7 0 0 0 0 14zm1-10a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm-2.5 7a.5.5 0 0 1 0-1 .5.5 0 0 0 .5-.5v-2.293a.5.5 0 0 0-.146-.353A.5.5 0 0 1 9.207 9h1.586a.5.5 0 0 1 .353.854.5.5 0 0 0-.146.353V12.5a.5.5 0 0 0 .5.5.5.5 0 0 1 0 1h-3z"

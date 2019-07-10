@@ -16,7 +16,7 @@ import {createIcon} from '../components/icon';
  * Simple bottom arrow and a line below It
  */
 export const ArrowDownloadIcon = createIcon(
-    <svg width="20" height="20" fill="none">
+    <svg viewBox="0 0 20 20">
         <path
             className="gs-svg-icon-fill"
             d="M7.5 8.5c-.39-.39-1.11-.39-1.5 0-.39.39-.39 1.11 0 1.5l4 4 4-4c.39-.39.39-1.11 0-1.5-.39-.39-1.11-.39-1.5 0L11 10V4a1 1 0 1 0-2 0v6L7.5 8.5z"
