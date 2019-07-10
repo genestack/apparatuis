@@ -2,8 +2,11 @@
 
 ## [Unreleased]
 
+## [8.0.0-alpha.20] - 2019-07-10
+
 ### Added
 
+-   Add `ArrowDownloadIcon`, `InfoIcon`, `PlusUserIcon`, and `PlayCircledIcon` icons
 -   Add `MenuCaption` component
 
 ## [8.0.0-alpha.19] - 2019-07-09
