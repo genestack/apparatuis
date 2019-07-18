@@ -12,7 +12,9 @@ import {chain} from '../../utils/chain';
 import {Omit} from '../../utils/omit';
 import {chainRefs} from '../../utils/set-ref';
 import {InputProps, Input} from '../input';
+import {PaperProps} from '../paper';
 import {PopoverProps, Popover} from '../popover';
+import {TransitionPopper} from '../transition-popper';
 
 import * as styles from './suggest.module.css';
 
@@ -59,6 +61,14 @@ export function Suggest(props: Props) {
     const [prevChildren, setPrevChildren] = React.useState<React.ReactNode>(null);
     const childrenToRender = prevChildren || children;
 
+    const popperRef = React.useRef<TransitionPopper<PaperProps>>(null);
+
+    React.useEffect(() => {
+        if (popperRef.current) {
+            popperRef.current.scheduleUpdate();
+        }
+    });
+
     return (
         <Input
             {...rest}
@@ -68,6 +78,7 @@ export function Suggest(props: Props) {
             <Popover
                 placement="bottom-start"
                 {...popoverProps}
+                popperRef={chainRefs(popoverProps.popperRef, popperRef)}
                 open={open}
                 referenceElement={inputRootRef.current}
                 style={{...popoverProps.style, minWidth: `${inputRootWidth || 0}px`}}

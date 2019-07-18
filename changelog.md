@@ -2,6 +2,10 @@
 
 ## [Unreleased]
 
+### Fixed
+
+-   Fix updating suggest position after children change
+
 ## [8.0.0-alpha.20] - 2019-07-10
 
 ### Added
