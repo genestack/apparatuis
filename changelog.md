@@ -2,6 +2,8 @@
 
 ## [Unreleased]
 
+## [8.0.0-alpha.21] - 2019-07-19
+
 ### Fixed
 
 -   Fix updating suggest position after children change
