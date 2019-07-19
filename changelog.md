@@ -5,6 +5,7 @@
 ### Fixed
 
 -   Fix updating suggest position after children change
+-   Add `as` property to dialog
 
 ## [8.0.0-alpha.20] - 2019-07-10
 
