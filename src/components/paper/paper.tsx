@@ -10,12 +10,14 @@ import * as React from 'react';
 
 import * as styles from './paper.module.css';
 
-type TargetProps = React.HTMLAttributes<HTMLDivElement>;
+type TargetProps = React.HTMLAttributes<HTMLElement>;
 
 /** Paper public props */
 export interface Props extends TargetProps {
     /** Reference to root element */
-    rootRef?: React.Ref<HTMLDivElement>;
+    rootRef?: React.Ref<HTMLElement>;
+    /** You could redefine the target component by passing ReactType */
+    as?: React.ReactType;
 }
 
 /**
@@ -23,7 +25,7 @@ export interface Props extends TargetProps {
  * Is used for overlay components.
  */
 export function Paper(props: Props) {
-    const {rootRef, className, ...rest} = props;
+    const {as: Component = 'div', rootRef, className, ...rest} = props;
 
-    return <div {...rest} ref={rootRef} className={classNames(className, styles.root)} />;
+    return <Component {...rest} ref={rootRef} className={classNames(className, styles.root)} />;
 }

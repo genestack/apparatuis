@@ -88,10 +88,20 @@ describe('<Dialog />', () => {
     it('should close dialog by container click', () => {
         const onClose = jest.fn();
         setup({onClose});
-        document
-            .getElementById('container')!
-            .dispatchEvent(new MouseEvent('click', {bubbles: true}));
+        const container = document.getElementById('container')!;
+        container.dispatchEvent(new MouseEvent('mousedown', {bubbles: true}));
+        container.dispatchEvent(new MouseEvent('click', {bubbles: true}));
         expect(onClose).toHaveBeenCalledTimes(1);
+    });
+
+    it('should not close dialog if click starts not in a container', () => {
+        const onClose = jest.fn();
+        setup({onClose});
+        const container = document.getElementById('container')!;
+        const dialogBody = document.getElementById('dialog-body')!;
+        dialogBody.dispatchEvent(new MouseEvent('mousedown', {bubbles: true}));
+        container.dispatchEvent(new MouseEvent('click', {bubbles: true}));
+        expect(onClose).not.toBeCalled();
     });
 
     it('should render close button', () => {

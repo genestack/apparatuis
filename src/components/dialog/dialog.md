@@ -104,42 +104,41 @@ handleFormSubmit = (event) => {
         hideCloseButton
         transitionComponent={FormExampleTransition}
         style={{width: 400}}
+        as="form"
+        onSubmit={handleFormSubmit}
     >
-        <form onSubmit={handleFormSubmit}>
-            <DialogHeader>
-                <Typography variant="title">Session Timed Out</Typography>
-            </DialogHeader>
-            <DialogBody>
-                <Typography box="paragraph">
-                    Your session has timed out, or you logged on as another user in a different
-                    window.
-                </Typography>
-                <Typography box="paragraph">
-                    To continue as <b>user.name@genestack.com</b>, please enter your password:
-                </Typography>
-                <Input
-                    type="password"
-                    name="password"
-                    autoComplete="off"
-                    fullWidth
-                    style={{margin: '4px 0'}}
-                />
-            </DialogBody>
-            <DialogFooter>
-                <Controls>
-                    <ControlsItem>
-                        <Button variant="primary" type="submit">
-                            Sign in
-                        </Button>
-                    </ControlsItem>
-                    <ControlsItem>
-                        <TooltipHandler tooltip={<Tooltip>We will miss you</Tooltip>}>
-                            <Button>Sign in as another user</Button>
-                        </TooltipHandler>
-                    </ControlsItem>
-                </Controls>
-            </DialogFooter>
-        </form>
+        <DialogHeader>
+            <Typography variant="title">Session Timed Out</Typography>
+        </DialogHeader>
+        <DialogBody>
+            <Typography box="paragraph">
+                Your session has timed out, or you logged on as another user in a different window.
+            </Typography>
+            <Typography box="paragraph">
+                To continue as <b>user.name@genestack.com</b>, please enter your password:
+            </Typography>
+            <Input
+                type="password"
+                name="password"
+                autoComplete="off"
+                fullWidth
+                style={{margin: '4px 0'}}
+            />
+        </DialogBody>
+        <DialogFooter>
+            <Controls>
+                <ControlsItem>
+                    <Button variant="primary" type="submit">
+                        Sign in
+                    </Button>
+                </ControlsItem>
+                <ControlsItem>
+                    <TooltipHandler tooltip={<Tooltip>We will miss you</Tooltip>}>
+                        <Button>Sign in as another user</Button>
+                    </TooltipHandler>
+                </ControlsItem>
+            </Controls>
+        </DialogFooter>
     </Dialog>
 </PageContent>;
 ```
