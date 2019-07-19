@@ -6,6 +6,7 @@
 
 -   Fix updating suggest position after children change
 -   Add `as` property to dialog
+-   Do not close Dialog if click event starts into it
 
 ## [8.0.0-alpha.20] - 2019-07-10
 
