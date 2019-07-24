@@ -12,6 +12,7 @@ import {chain} from '../../utils/chain';
 import {Omit} from '../../utils/omit';
 import {useControlledProp} from '../../utils/use-controlled-prop';
 import {List} from '../list';
+import {PopoverProps} from '../popover';
 import {Suggest, SuggestProps} from '../suggest';
 
 import {SuggestInputItem, Props as SuggestInputItemProps} from './suggest-input-item';
@@ -138,22 +139,39 @@ export function SuggestInput(props: Props) {
 
                 const open = !!children;
 
+                const popoverProps: PopoverProps = {
+                    ...inputProps.popoverProps,
+                    ...menuProps,
+                    keepMounted: true,
+                    style: {
+                        ...(inputProps.popoverProps && inputProps.popoverProps.style),
+                        display: open ? 'block' : 'none'
+                    }
+                };
+
+                // Downshift prevents default event behaviour on Escape key down regardless the open state.
+                // Ignore downshift keydown handler for properly work the suggest into dialogs.
+                const handleInputKeyDown: SuggestProps['onKeyDown'] = (event) => {
+                    if (!open && event.key === 'Escape') {
+                        if (rest.onKeyDown) {
+                            rest.onKeyDown(event);
+                        }
+                    } else {
+                        if (inputProps.onKeyDown) {
+                            inputProps.onKeyDown(event);
+                        }
+                    }
+                };
+
                 return (
                     <Suggest
                         {...inputProps}
+                        onKeyDown={handleInputKeyDown}
                         value={value}
                         onValueChange={onValueChange}
                         rootRef={rootRef}
                         rootProps={rootProps}
-                        popoverProps={{
-                            ...inputProps.popoverProps,
-                            ...menuProps,
-                            keepMounted: true,
-                            style: {
-                                ...(inputProps.popoverProps && inputProps.popoverProps.style),
-                                display: open ? 'block' : 'none'
-                            }
-                        }}
+                        popoverProps={popoverProps}
                         open={open}
                     >
                         {open ? <List>{children}</List> : null}

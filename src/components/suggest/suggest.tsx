@@ -70,11 +70,12 @@ export function Suggest(props: Props) {
     });
 
     return (
-        <Input
-            {...rest}
-            rootRef={chainRefs(rootRef, inputRootRef)}
-            className={classNames(rest.className, styles.root)}
-        >
+        <React.Fragment>
+            <Input
+                {...rest}
+                rootRef={chainRefs(rootRef, inputRootRef)}
+                className={classNames(rest.className, styles.root)}
+            />
             <Popover
                 placement="bottom-start"
                 {...popoverProps}
@@ -102,6 +103,6 @@ export function Suggest(props: Props) {
             >
                 {childrenToRender}
             </Popover>
-        </Input>
+        </React.Fragment>
     );
 }

@@ -136,7 +136,8 @@ export class Overlay extends React.Component<Props, State> {
             return;
         }
 
-        if (event.key === 'Escape' && onClose) {
+        if (event.key === 'Escape' && !event.defaultPrevented && onClose) {
+            event.preventDefault();
             onClose('escape-keydown', event);
         }
     };

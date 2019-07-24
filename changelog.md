@@ -2,6 +2,12 @@
 
 ## [Unreleased]
 
+## [8.0.0-alpha.23] - 2019-07-24
+
+### Fixed
+
+-   Improve SuggestInput key down behaviour
+
 ## [8.0.0-alpha.22] - 2019-07-23
 
 ### Fixed
