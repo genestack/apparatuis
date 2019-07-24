@@ -2,6 +2,15 @@
 
 ## [Unreleased]
 
+## [8.0.0-alpha.22] - 2019-07-23
+
+### Fixed
+
+-   Fix padding for `MenuCaption`
+-   Export `MenuCaption` from `genestack-ui`
+-   Props spreading in `SuggestInput`
+-   Max-height in `SuggestInput`
+
 ## [8.0.0-alpha.21] - 2019-07-19
 
 ### Fixed

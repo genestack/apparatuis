@@ -15,7 +15,8 @@ import * as styles from './menu-caption.module.css';
 
 type TargetProps = Omit<ListItemProps, 'value' | 'interactive'>;
 
-interface Props extends TargetProps {}
+/** MenuCaption public properties */
+export interface Props extends TargetProps {}
 
 /** Caption that is used as menu item */
 export const MenuCaption = (props: Props) => (

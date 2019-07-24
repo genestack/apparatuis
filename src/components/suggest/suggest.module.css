@@ -15,5 +15,5 @@
 
 .popover {
     overflow: auto;
-    max-height: calc(50vh - 32px);
+    max-height: calc(50vh - 48px);
 }

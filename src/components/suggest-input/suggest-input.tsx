@@ -16,6 +16,11 @@ import {Suggest, SuggestProps} from '../suggest';
 
 import {SuggestInputItem, Props as SuggestInputItemProps} from './suggest-input-item';
 
+/**
+ * Suggest component get their children with no knowledge of Downshift under the hood. To
+ * achieve this abstraction, we clone those children and enrich them with props, provided
+ * by Downshift.
+ */
 function getSuggestInputChildren(
     children: React.ReactNode,
     downshift: ControllerStateAndHelpers<string>
@@ -28,7 +33,7 @@ function getSuggestInputChildren(
         }
 
         const childValue = (child.props as SuggestInputItemProps).value;
-
+        // do not allow a child without value to be selected
         if (typeof childValue !== 'string') {
             return child;
         }
@@ -141,9 +146,11 @@ export function SuggestInput(props: Props) {
                         rootRef={rootRef}
                         rootProps={rootProps}
                         popoverProps={{
+                            ...inputProps.popoverProps,
                             ...menuProps,
                             keepMounted: true,
                             style: {
+                                ...(inputProps.popoverProps && inputProps.popoverProps.style),
                                 display: open ? 'block' : 'none'
                             }
                         }}
