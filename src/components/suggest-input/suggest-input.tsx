@@ -10,6 +10,7 @@ import * as React from 'react';
 
 import {chain} from '../../utils/chain';
 import {Omit} from '../../utils/omit';
+import {chainRefs} from '../../utils/set-ref';
 import {useControlledProp} from '../../utils/use-controlled-prop';
 import {List} from '../list';
 import {PopoverProps} from '../popover';
@@ -126,6 +127,8 @@ export function SuggestInput(props: Props) {
                     onFocus: chain(rest.onFocus, handleInputFocus)
                 });
 
+                const inputPopoverProps = inputProps.popoverProps || {};
+
                 const children = isOpen
                     ? getSuggestInputChildren(
                           typeof rest.children === 'function'
@@ -140,11 +143,12 @@ export function SuggestInput(props: Props) {
                 const open = !!children;
 
                 const popoverProps: PopoverProps = {
-                    ...inputProps.popoverProps,
+                    ...inputPopoverProps,
                     ...menuProps,
+                    rootRef: chainRefs(menuProps.rootRef, inputPopoverProps.rootRef),
                     keepMounted: true,
                     style: {
-                        ...(inputProps.popoverProps && inputProps.popoverProps.style),
+                        ...inputPopoverProps.style,
                         display: open ? 'block' : 'none'
                     }
                 };

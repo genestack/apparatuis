@@ -2,6 +2,12 @@
 
 ## [Unreleased]
 
+## [8.0.0-alpha.24] - 2019-07-24
+
+### Fixed
+
+-   Add missed `refs` in `Overlay`, `Popover`, `SuggestInput`
+
 ## [8.0.0-alpha.23] - 2019-07-24
 
 ### Fixed
