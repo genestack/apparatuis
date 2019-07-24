@@ -370,7 +370,10 @@ handleDialogClose = () => {
             <Typography box="paragraph">
                 This input should be in focus when dialog opens:
             </Typography>
-            <Input autoFocus fullWidth />
+            <SuggestInput autoFocus fullWidth>
+                <SuggestInputItem value="foo">Foo</SuggestInputItem>
+                <SuggestInputItem value="bar">Bar</SuggestInputItem>
+            </SuggestInput>
         </DialogBody>
 
         <DialogFooter>
