@@ -10,6 +10,7 @@ import * as React from 'react';
 
 import {chain} from '../../utils/chain';
 import {Omit} from '../../utils/omit';
+import {chainRefs} from '../../utils/set-ref';
 import {WithClasses, mergeClassesProps} from '../../utils/styles';
 import {createIcon} from '../icon';
 import {MarginBoxContext} from '../margin-box/margin-box-context';
@@ -40,6 +41,7 @@ export interface Props extends TargetProps, WithClasses<keyof typeof styles> {
     popperRef?: React.Ref<TransitionPopper<PaperProps>>;
     popperElementProps?: React.HTMLAttributes<HTMLDivElement>;
     containerProps?: ContainerProps;
+    containerRef?: React.Ref<HTMLDivElement>;
     transitionProps?: TransitionProps;
     children?: React.ReactNode;
 }
@@ -58,6 +60,7 @@ export const Popover = (props: Props) => {
         withArrow,
         popperRef,
         containerProps = {},
+        containerRef,
         transitionProps = {},
         popperElementProps = {},
         children,
@@ -69,7 +72,7 @@ export const Popover = (props: Props) => {
             {({ref, style, arrowProps, placement, targetProps, onTransitionExited}) => (
                 <div
                     {...containerProps}
-                    ref={ref}
+                    ref={chainRefs(ref, containerRef)}
                     style={style}
                     className={classNames(containerProps.className, {
                         [classes.withArrow]: withArrow

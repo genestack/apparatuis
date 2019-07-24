@@ -55,6 +55,7 @@ export interface Props extends TargetProps {
     /** Properties of nested Backdrop component */
     backdropProps?: Omit<BackdropProps, 'open' | 'invisible'>;
     children?: JSX.Element;
+    rootRef?: React.Ref<HTMLDivElement>;
 }
 
 interface State {
@@ -153,6 +154,7 @@ export class Overlay extends React.Component<Props, State> {
             backdropProps = {},
             children,
             className,
+            rootRef,
             ...rest
         } = this.props;
 
@@ -165,6 +167,7 @@ export class Overlay extends React.Component<Props, State> {
         return ReactDOM.createPortal(
             <div
                 {...rest}
+                ref={rootRef}
                 className={classNames(className, styles.root)}
                 onKeyDown={chain(rest.onKeyDown, this.handleKeyDown)}
             >
