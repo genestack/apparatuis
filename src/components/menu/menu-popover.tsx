@@ -10,7 +10,6 @@ import closest from 'dom-helpers/query/closest';
 import * as React from 'react';
 
 import {Omit} from '../../utils/omit';
-import {WithClasses, mergeClassesProps} from '../../utils/styles';
 import {HiddenScrollbar, HiddenScrollbarProps} from '../hidden-scrollbar';
 import {PopoverProps, Popover} from '../popover';
 
@@ -27,7 +26,7 @@ type TargetProps = Omit<PopoverProps, 'classes' | 'modifiers' | 'popperElementPr
 const MENU_POPOVER_DATA_ATTRIBUTE = 'data-menu-popover';
 
 /** MenuPopover Public properties */
-export interface Props extends TargetProps, WithClasses<keyof typeof styles> {
+export interface Props extends TargetProps {
     hiddenScrollbarProps?: Omit<HiddenScrollbarProps, 'children'>;
 }
 
@@ -48,18 +47,13 @@ export class MenuPopover extends React.Component<Props> {
     }
 
     public render() {
-        const {className, classes, children, hiddenScrollbarProps, ...rest} = mergeClassesProps(
-            this.props,
-            styles
-        );
+        const {className, children, hiddenScrollbarProps, ...rest} = this.props;
 
         return (
             <Popover
+                roundCorners
                 {...rest}
-                className={classNames(className, classes.root)}
-                containerProps={{
-                    className: classes.popover
-                }}
+                className={classNames(className, styles.root)}
                 modifiers={modifiers}
                 popperElementProps={popperElementProps}
             >

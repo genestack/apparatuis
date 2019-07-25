@@ -12,3 +12,4 @@ export const arrow: string;
 export const arrowIcon: string;
 export const withArrow: string;
 export const arrowHidden: string;
+export const roundCorners: string;
