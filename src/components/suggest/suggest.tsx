@@ -52,14 +52,10 @@ export interface Props extends InputProps {
  */
 export function Suggest(props: Props) {
     const {rootRef, open, popoverProps = {}, children, ...rest} = props;
-    const {transitionProps = {}, containerProps = {}} = popoverProps;
+    const {containerProps = {}} = popoverProps;
 
     const inputRootRef = React.useRef<HTMLLabelElement>(null);
     const inputRootWidth = useElementWidth(inputRootRef.current);
-
-    // show previous children while popover transition is exiting
-    const [prevChildren, setPrevChildren] = React.useState<React.ReactNode>(null);
-    const childrenToRender = prevChildren || children;
 
     const popperRef = React.useRef<TransitionPopper<PaperProps>>(null);
 
@@ -78,6 +74,7 @@ export function Suggest(props: Props) {
             />
             <Popover
                 placement="bottom-start"
+                roundCorners
                 {...popoverProps}
                 popperRef={chainRefs(popoverProps.popperRef, popperRef)}
                 open={open}
@@ -88,20 +85,8 @@ export function Suggest(props: Props) {
                     ...containerProps,
                     className: classNames(containerProps.className, styles.popoverContainer)
                 }}
-                transitionProps={{
-                    ...transitionProps,
-                    onEntered: chain(transitionProps.onEntered, () => {
-                        setPrevChildren(null);
-                    }),
-                    onExit: chain(transitionProps.onExit, () => {
-                        setPrevChildren(children);
-                    }),
-                    onExited: chain(transitionProps.onExited, () => {
-                        setPrevChildren(null);
-                    })
-                }}
             >
-                {childrenToRender}
+                {children}
             </Popover>
         </React.Fragment>
     );

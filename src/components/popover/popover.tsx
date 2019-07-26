@@ -38,6 +38,8 @@ const PopoverArrowIcon = createIcon(
 export interface Props extends TargetProps, WithClasses<keyof typeof styles> {
     /** If `true` popover will show arrow */
     withArrow?: boolean;
+    /** Rounds paper corners according the placement and the arrow */
+    roundCorners?: boolean;
     popperRef?: React.Ref<TransitionPopper<PaperProps>>;
     popperElementProps?: React.HTMLAttributes<HTMLDivElement>;
     containerProps?: ContainerProps;
@@ -58,6 +60,7 @@ export const Popover = (props: Props) => {
     const {
         classes,
         withArrow,
+        roundCorners,
         popperRef,
         containerProps = {},
         containerRef,
@@ -94,7 +97,10 @@ export const Popover = (props: Props) => {
                         >
                             <Paper
                                 {...targetProps}
-                                className={classNames(targetProps.className, classes.paper)}
+                                data-placement={placement}
+                                className={classNames(targetProps.className, classes.paper, {
+                                    [classes.roundCorners]: roundCorners
+                                })}
                             >
                                 <MarginBoxContext.Provider value="in-page">
                                     {children}

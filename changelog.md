@@ -2,6 +2,13 @@
 
 ## [Unreleased]
 
+## [8.0.0-alpha.25] - 2019-07-25
+
+### Added
+
+-   Add `roundCorners` property to `Popover`
+-   Add round corners in `Suggest`'s `Popover`
+
 ## [8.0.0-alpha.24] - 2019-07-24
 
 ### Fixed

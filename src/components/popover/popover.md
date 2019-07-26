@@ -4,7 +4,8 @@ initialState = {
     expanded: false,
     placement: 'bottom',
     withArrow: true,
-    disableTransition: false
+    disableTransition: false,
+    roundCorners: false
 };
 
 handleButtonClick = (event) => {
@@ -27,6 +28,8 @@ handleWithArrowChange = (event) =>
 
 handleDisableTransitionChange = (event) =>
     setState({disableTransition: event.currentTarget.checked});
+
+handleRoundCornersChange = (event) => setState({roundCorners: event.currentTarget.checked});
 
 const placements = [
     'auto',
@@ -79,6 +82,18 @@ const placements = [
                     >
                         Disable Transition
                     </ListItem>
+                    <ListItem
+                        as="label"
+                        prepend={
+                            <input
+                                type="checkbox"
+                                checked={state.roundCorners}
+                                onChange={handleRoundCornersChange}
+                            />
+                        }
+                    >
+                        Round Corners
+                    </ListItem>
                 </List>
             </PageFullWidth>
         </PageContent>
@@ -94,6 +109,7 @@ const placements = [
             placement={state.placement}
             withArrow={state.withArrow}
             disableTransition={state.disableTransition}
+            roundCorners={state.roundCorners}
         >
             <PageContent style={{textAlign: 'center'}}>
                 <Typography box="paragraph">Hi! I am popover</Typography>
