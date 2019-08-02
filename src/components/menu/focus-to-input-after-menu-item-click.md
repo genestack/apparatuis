@@ -11,7 +11,6 @@ function Example() {
             <MenuItem
                 subtitle="Input should be focused after menu item selection"
                 onClick={() => {
-                    console.log('focus');
                     inputRef.current.focus();
                 }}
             >
