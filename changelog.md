@@ -2,6 +2,12 @@
 
 ## [Unreleased]
 
+## [8.0.0-alpha.25] - 2019-08-02
+
+### Fixed
+
+-   Fix focusing elements when menu is closing
+
 ## [8.0.0-alpha.25] - 2019-07-25
 
 ### Added

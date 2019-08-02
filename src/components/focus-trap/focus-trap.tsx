@@ -106,6 +106,17 @@ export class FocusTrap extends React.Component<Props> {
 
     public componentWillUnmount() {
         const {activeElementOnMount} = this;
+        const trapElement = this.trapRef.current;
+
+        // focus could be exit from trap, do not restore focus in this cases
+        if (
+            document.activeElement &&
+            isElementFocusable(document.activeElement) &&
+            trapElement &&
+            !contains(trapElement, document.activeElement)
+        ) {
+            return;
+        }
 
         if (activeElementOnMount && contains(document, activeElementOnMount)) {
             activeElementOnMount.focus();

@@ -5,6 +5,7 @@
  * The copyright notice above does not evidence any
  * actual or intended publication of such source code.
  */
+import classNames from 'classnames';
 import * as React from 'react';
 
 import {chain} from '../../utils/chain';
@@ -15,6 +16,7 @@ import {Overlay, OverlayProps} from '../overlay';
 import {MenuContext, MenuContextValue} from './menu-context';
 import {MenuItem} from './menu-item';
 import {MenuPopover, Props as MenuPopoverProps} from './menu-popover';
+import * as styles from './menu.module.css';
 import {SubMenu, Props as ListProps} from './sub-menu';
 
 type TargetProps = ListProps;
@@ -40,6 +42,8 @@ export interface Props extends TargetProps {
 /**
  * A Menu displays a list of choices on a temporary surface.
  * They appear when users interact with a button, action, or other control.
+ *
+ * @example ./focus-to-input-after-menu-item-click.md
  */
 export class Menu extends React.Component<Props> {
     private menuContext: MenuContextValue = {
@@ -103,7 +107,10 @@ export class Menu extends React.Component<Props> {
                         tabIndex={-1}
                         onKeyDown={chain(popoverProps.onKeyDown, this.handleKeyDown)}
                     >
-                        <SubMenu {...rest} />
+                        <SubMenu
+                            {...rest}
+                            className={classNames(rest.className, {[styles.closed]: !open})}
+                        />
                     </MenuPopover>
                 </Overlay>
             </MenuContext.Provider>
