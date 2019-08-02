@@ -6,7 +6,7 @@
  * actual or intended publication of such source code.
  */
 
-/* Prevent any mouse event when menu is closing or closed */
+/* Prevent any mouse events when menu is closing or closed */
 .closed {
     pointer-events: none;
 }
