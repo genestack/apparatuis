@@ -19,7 +19,7 @@ export const MoreIcon = createIcon(
         <path
             fillRule="evenodd"
             clipRule="evenodd"
-            d="M6 10a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm6 0a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 2a2 2 0 1 0 0-4 2 2 0 0 0 0 4z"
+            d="M11.5 10.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm-5.5 0a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm9.5 1.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z"
             className="gs-svg-icon-fill"
         />
     </svg>
