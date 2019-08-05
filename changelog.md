@@ -2,7 +2,13 @@
 
 ## [Unreleased]
 
-## [8.0.0-alpha.25] - 2019-08-02
+## [8.0.0-alpha.27] - 2019-08-05
+
+### Fixed
+
+-   Fix scroll position when long dialog is opening
+
+## [8.0.0-alpha.26] - 2019-08-02
 
 ### Fixed
 
