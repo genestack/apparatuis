@@ -10,12 +10,19 @@ import * as React from 'react';
 
 import {chain} from '../../utils/chain';
 import {Omit} from '../../utils/omit';
+import {chainRefs} from '../../utils/set-ref';
 import {useControlledProp} from '../../utils/use-controlled-prop';
 import {List} from '../list';
+import {PopoverProps} from '../popover';
 import {Suggest, SuggestProps} from '../suggest';
 
 import {SuggestInputItem, Props as SuggestInputItemProps} from './suggest-input-item';
 
+/**
+ * Suggest component get their children with no knowledge of Downshift under the hood. To
+ * achieve this abstraction, we clone those children and enrich them with props, provided
+ * by Downshift.
+ */
 function getSuggestInputChildren(
     children: React.ReactNode,
     downshift: ControllerStateAndHelpers<string>
@@ -28,7 +35,7 @@ function getSuggestInputChildren(
         }
 
         const childValue = (child.props as SuggestInputItemProps).value;
-
+        // do not allow a child without value to be selected
         if (typeof childValue !== 'string') {
             return child;
         }
@@ -120,6 +127,8 @@ export function SuggestInput(props: Props) {
                     onFocus: chain(rest.onFocus, handleInputFocus)
                 });
 
+                const inputPopoverProps = inputProps.popoverProps || {};
+
                 const children = isOpen
                     ? getSuggestInputChildren(
                           typeof rest.children === 'function'
@@ -133,20 +142,40 @@ export function SuggestInput(props: Props) {
 
                 const open = !!children;
 
+                const popoverProps: PopoverProps = {
+                    ...inputPopoverProps,
+                    ...menuProps,
+                    rootRef: chainRefs(menuProps.rootRef, inputPopoverProps.rootRef),
+                    keepMounted: true,
+                    style: {
+                        ...inputPopoverProps.style,
+                        display: open ? 'block' : 'none'
+                    }
+                };
+
+                // Downshift prevents default event behaviour on Escape key down regardless the open state.
+                // Ignore downshift keydown handler for properly work the suggest into dialogs.
+                const handleInputKeyDown: SuggestProps['onKeyDown'] = (event) => {
+                    if (!open && event.key === 'Escape') {
+                        if (rest.onKeyDown) {
+                            rest.onKeyDown(event);
+                        }
+                    } else {
+                        if (inputProps.onKeyDown) {
+                            inputProps.onKeyDown(event);
+                        }
+                    }
+                };
+
                 return (
                     <Suggest
                         {...inputProps}
+                        onKeyDown={handleInputKeyDown}
                         value={value}
                         onValueChange={onValueChange}
                         rootRef={rootRef}
                         rootProps={rootProps}
-                        popoverProps={{
-                            ...menuProps,
-                            keepMounted: true,
-                            style: {
-                                display: open ? 'block' : 'none'
-                            }
-                        }}
+                        popoverProps={popoverProps}
                         open={open}
                     >
                         {open ? <List>{children}</List> : null}

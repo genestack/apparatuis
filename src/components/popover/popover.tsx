@@ -10,6 +10,7 @@ import * as React from 'react';
 
 import {chain} from '../../utils/chain';
 import {Omit} from '../../utils/omit';
+import {chainRefs} from '../../utils/set-ref';
 import {WithClasses, mergeClassesProps} from '../../utils/styles';
 import {createIcon} from '../icon';
 import {MarginBoxContext} from '../margin-box/margin-box-context';
@@ -37,9 +38,12 @@ const PopoverArrowIcon = createIcon(
 export interface Props extends TargetProps, WithClasses<keyof typeof styles> {
     /** If `true` popover will show arrow */
     withArrow?: boolean;
+    /** Rounds paper corners according the placement and the arrow */
+    roundCorners?: boolean;
     popperRef?: React.Ref<TransitionPopper<PaperProps>>;
     popperElementProps?: React.HTMLAttributes<HTMLDivElement>;
     containerProps?: ContainerProps;
+    containerRef?: React.Ref<HTMLDivElement>;
     transitionProps?: TransitionProps;
     children?: React.ReactNode;
 }
@@ -56,8 +60,10 @@ export const Popover = (props: Props) => {
     const {
         classes,
         withArrow,
+        roundCorners,
         popperRef,
         containerProps = {},
+        containerRef,
         transitionProps = {},
         popperElementProps = {},
         children,
@@ -69,7 +75,7 @@ export const Popover = (props: Props) => {
             {({ref, style, arrowProps, placement, targetProps, onTransitionExited}) => (
                 <div
                     {...containerProps}
-                    ref={ref}
+                    ref={chainRefs(ref, containerRef)}
                     style={style}
                     className={classNames(containerProps.className, {
                         [classes.withArrow]: withArrow
@@ -91,7 +97,10 @@ export const Popover = (props: Props) => {
                         >
                             <Paper
                                 {...targetProps}
-                                className={classNames(targetProps.className, classes.paper)}
+                                data-placement={placement}
+                                className={classNames(targetProps.className, classes.paper, {
+                                    [classes.roundCorners]: roundCorners
+                                })}
                             >
                                 <MarginBoxContext.Provider value="in-page">
                                     {children}

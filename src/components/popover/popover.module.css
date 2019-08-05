@@ -73,3 +73,40 @@
 .arrowHidden {
     display: none;
 }
+
+.roundCorners[data-placement^="top-start"] {
+    border-bottom-left-radius: 0;
+}
+
+.roundCorners[data-placement^="top-end"] {
+    border-bottom-right-radius: 0;
+}
+
+.roundCorners[data-placement^="right-start"] {
+    border-top-left-radius: 0;
+}
+
+.roundCorners[data-placement^="right-end"] {
+    border-bottom-left-radius: 0;
+}
+
+.roundCorners[data-placement^="bottom-end"] {
+    border-top-right-radius: 0;
+}
+
+.roundCorners[data-placement^="bottom-start"] {
+    border-top-left-radius: 0;
+}
+
+.roundCorners[data-placement^="left-end"] {
+    border-bottom-right-radius: 0;
+}
+
+.roundCorners[data-placement^="left-start"] {
+    border-top-right-radius: 0;
+}
+
+.roundCorners,
+.withArrow .roundCorners {
+    border-radius: 6px;
+}

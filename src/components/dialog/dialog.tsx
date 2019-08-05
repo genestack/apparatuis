@@ -59,88 +59,98 @@ export interface Props extends TargetProps, WithClasses<keyof typeof styles> {
  * Mostly dialog should contain
  * `<DialogHeader />`, `<DialogBody />` and `<DialogFooter />` elements.
  */
-export class Dialog extends React.Component<Props> {
-    private handleCloseButtonClick: ButtonProps['onClick'] = (event) => {
-        if (this.props.onClose) {
-            this.props.onClose('header-close-button-click', event);
+export function Dialog(props: Props) {
+    const handleCloseButtonClick: ButtonProps['onClick'] = (event) => {
+        if (props.onClose) {
+            props.onClose('header-close-button-click', event);
         }
     };
 
-    private handleContainerClick: ContainerProps['onClick'] = (event) => {
+    const mouseDownRef = React.useRef<EventTarget>();
+
+    const handleContainerMouseDown: React.MouseEventHandler = (event) => {
+        mouseDownRef.current = event.target;
+    };
+
+    const handleContainerClick: ContainerProps['onClick'] = (event) => {
         if (event.target !== event.currentTarget) {
             return;
         }
 
-        if (this.props.onClose) {
-            this.props.onClose('backdrop-click', event);
+        // Make sure the event starts and ends on the same DOM element.
+        if (event.target !== mouseDownRef.current) {
+            return;
+        }
+
+        if (props.onClose) {
+            props.onClose('backdrop-click', event);
         }
     };
 
-    public render() {
-        const {
-            open,
-            scrollable = false,
-            onClose,
-            onClosed,
-            overlayProps = {},
-            transitionComponent: Transition = Fade,
-            classes,
-            children,
-            hideCloseButton = false,
-            closeButtonProps = {},
-            containerProps = {},
-            size = 'auto',
-            ...rest
-        } = mergeClassesProps(this.props, styles);
+    const {
+        open,
+        scrollable = false,
+        onClose,
+        onClosed,
+        overlayProps = {},
+        transitionComponent: Transition = Fade,
+        classes,
+        children,
+        hideCloseButton = false,
+        closeButtonProps = {},
+        containerProps = {},
+        size = 'auto',
+        ...rest
+    } = mergeClassesProps(props, styles);
 
-        return (
-            <Overlay
-                {...overlayProps}
-                open={open}
-                onClose={chain(overlayProps.onClose, onClose)}
-                onClosed={chain(overlayProps.onClosed, onClosed)}
-                className={classNames(overlayProps.className, classes.overlay, {
-                    [classes.overlayScrollable]: !scrollable
-                })}
-            >
-                <DialogContext.Provider value={{scrollable, hideCloseButton}}>
-                    <div
-                        {...containerProps}
-                        onClick={chain(containerProps.onClick, this.handleContainerClick)}
-                        className={classNames(containerProps.className, classes.container)}
-                    >
-                        <Transition in={open} appear>
-                            <Paper
-                                {...rest}
-                                tabIndex={-1}
-                                className={classNames(rest.className, classes.root, {
-                                    [classes.small]: size === 'small',
-                                    [classes.medium]: size === 'medium',
-                                    [classes.large]: size === 'large'
-                                })}
-                            >
-                                {children}
+    return (
+        <Overlay
+            {...overlayProps}
+            open={open}
+            onClose={chain(overlayProps.onClose, onClose)}
+            onClosed={chain(overlayProps.onClosed, onClosed)}
+            className={classNames(overlayProps.className, classes.overlay, {
+                [classes.overlayScrollable]: !scrollable
+            })}
+        >
+            <DialogContext.Provider value={{scrollable, hideCloseButton}}>
+                <div
+                    {...containerProps}
+                    onClick={chain(containerProps.onClick, handleContainerClick)}
+                    onMouseDown={chain(containerProps.onMouseDown, handleContainerMouseDown)}
+                    className={classNames(containerProps.className, classes.container)}
+                >
+                    <Transition in={open} appear>
+                        <Paper
+                            {...rest}
+                            tabIndex={-1}
+                            className={classNames(rest.className, classes.root, {
+                                [classes.small]: size === 'small',
+                                [classes.medium]: size === 'medium',
+                                [classes.large]: size === 'large'
+                            })}
+                        >
+                            {children}
 
-                                {!hideCloseButton ? (
-                                    <Button
-                                        icon={<CrossIcon />}
-                                        variant="ghost"
-                                        {...closeButtonProps}
-                                        className={classNames(
-                                            closeButtonProps.className,
-                                            classes.closeButton
-                                        )}
-                                        onClick={chain(
-                                            closeButtonProps.onClick,
-                                            this.handleCloseButtonClick
-                                        )}
-                                    />
-                                ) : null}
-                            </Paper>
-                        </Transition>
-                    </div>
-                </DialogContext.Provider>
-            </Overlay>
-        );
-    }
+                            {!hideCloseButton ? (
+                                <Button
+                                    icon={<CrossIcon />}
+                                    variant="ghost"
+                                    {...closeButtonProps}
+                                    className={classNames(
+                                        closeButtonProps.className,
+                                        classes.closeButton
+                                    )}
+                                    onClick={chain(
+                                        closeButtonProps.onClick,
+                                        handleCloseButtonClick
+                                    )}
+                                />
+                            ) : null}
+                        </Paper>
+                    </Transition>
+                </div>
+            </DialogContext.Provider>
+        </Overlay>
+    );
 }

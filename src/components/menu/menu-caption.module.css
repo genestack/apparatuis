@@ -8,5 +8,5 @@
 @import "../../variables.css";
 
 .root {
-    padding: 0 calc(var(--gs-spacing-unit) / 2) 0 calc(var(--gs-spacing-unit));
+    padding: 0 calc(var(--gs-spacing-unit) * 2);
 }

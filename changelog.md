@@ -2,6 +2,54 @@
 
 ## [Unreleased]
 
+## [8.0.0-alpha.27] - 2019-08-05
+
+### Fixed
+
+-   Fix scroll position when long dialog is opening
+
+## [8.0.0-alpha.26] - 2019-08-02
+
+### Fixed
+
+-   Fix focusing elements when menu is closing
+
+## [8.0.0-alpha.25] - 2019-07-25
+
+### Added
+
+-   Add `roundCorners` property to `Popover`
+-   Add round corners in `Suggest`'s `Popover`
+
+## [8.0.0-alpha.24] - 2019-07-24
+
+### Fixed
+
+-   Add missed `refs` in `Overlay`, `Popover`, `SuggestInput`
+
+## [8.0.0-alpha.23] - 2019-07-24
+
+### Fixed
+
+-   Improve SuggestInput key down behaviour
+
+## [8.0.0-alpha.22] - 2019-07-23
+
+### Fixed
+
+-   Fix padding for `MenuCaption`
+-   Export `MenuCaption` from `genestack-ui`
+-   Props spreading in `SuggestInput`
+-   Max-height in `SuggestInput`
+
+## [8.0.0-alpha.21] - 2019-07-19
+
+### Fixed
+
+-   Fix updating suggest position after children change
+-   Add `as` property to dialog
+-   Do not close Dialog if click event starts into it
+
 ## [8.0.0-alpha.20] - 2019-07-10
 
 ### Added

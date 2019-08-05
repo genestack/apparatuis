@@ -55,6 +55,7 @@ export interface Props extends TargetProps {
     /** Properties of nested Backdrop component */
     backdropProps?: Omit<BackdropProps, 'open' | 'invisible'>;
     children?: JSX.Element;
+    rootRef?: React.Ref<HTMLDivElement>;
 }
 
 interface State {
@@ -102,6 +103,13 @@ export class Overlay extends React.Component<Props, State> {
 
     private open() {
         manager.mount(this);
+
+        // Revert scroll position when focused element triggers scroll
+        // changes into scrollable overlay.
+        // May be it is better to move scroll container to overlay.
+        if (this.childRef.current) {
+            this.childRef.current.scrollTop = 0;
+        }
     }
 
     private close() {
@@ -136,7 +144,8 @@ export class Overlay extends React.Component<Props, State> {
             return;
         }
 
-        if (event.key === 'Escape' && onClose) {
+        if (event.key === 'Escape' && !event.defaultPrevented && onClose) {
+            event.preventDefault();
             onClose('escape-keydown', event);
         }
     };
@@ -152,6 +161,7 @@ export class Overlay extends React.Component<Props, State> {
             backdropProps = {},
             children,
             className,
+            rootRef,
             ...rest
         } = this.props;
 
@@ -164,6 +174,7 @@ export class Overlay extends React.Component<Props, State> {
         return ReactDOM.createPortal(
             <div
                 {...rest}
+                ref={rootRef}
                 className={classNames(className, styles.root)}
                 onKeyDown={chain(rest.onKeyDown, this.handleKeyDown)}
             >

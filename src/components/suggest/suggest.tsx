@@ -12,7 +12,9 @@ import {chain} from '../../utils/chain';
 import {Omit} from '../../utils/omit';
 import {chainRefs} from '../../utils/set-ref';
 import {InputProps, Input} from '../input';
+import {PaperProps} from '../paper';
 import {PopoverProps, Popover} from '../popover';
+import {TransitionPopper} from '../transition-popper';
 
 import * as styles from './suggest.module.css';
 
@@ -50,24 +52,31 @@ export interface Props extends InputProps {
  */
 export function Suggest(props: Props) {
     const {rootRef, open, popoverProps = {}, children, ...rest} = props;
-    const {transitionProps = {}, containerProps = {}} = popoverProps;
+    const {containerProps = {}} = popoverProps;
 
     const inputRootRef = React.useRef<HTMLLabelElement>(null);
     const inputRootWidth = useElementWidth(inputRootRef.current);
 
-    // show previous children while popover transition is exiting
-    const [prevChildren, setPrevChildren] = React.useState<React.ReactNode>(null);
-    const childrenToRender = prevChildren || children;
+    const popperRef = React.useRef<TransitionPopper<PaperProps>>(null);
+
+    React.useEffect(() => {
+        if (popperRef.current) {
+            popperRef.current.scheduleUpdate();
+        }
+    });
 
     return (
-        <Input
-            {...rest}
-            rootRef={chainRefs(rootRef, inputRootRef)}
-            className={classNames(rest.className, styles.root)}
-        >
+        <React.Fragment>
+            <Input
+                {...rest}
+                rootRef={chainRefs(rootRef, inputRootRef)}
+                className={classNames(rest.className, styles.root)}
+            />
             <Popover
                 placement="bottom-start"
+                roundCorners
                 {...popoverProps}
+                popperRef={chainRefs(popoverProps.popperRef, popperRef)}
                 open={open}
                 referenceElement={inputRootRef.current}
                 style={{...popoverProps.style, minWidth: `${inputRootWidth || 0}px`}}
@@ -76,21 +85,9 @@ export function Suggest(props: Props) {
                     ...containerProps,
                     className: classNames(containerProps.className, styles.popoverContainer)
                 }}
-                transitionProps={{
-                    ...transitionProps,
-                    onEntered: chain(transitionProps.onEntered, () => {
-                        setPrevChildren(null);
-                    }),
-                    onExit: chain(transitionProps.onExit, () => {
-                        setPrevChildren(children);
-                    }),
-                    onExited: chain(transitionProps.onExited, () => {
-                        setPrevChildren(null);
-                    })
-                }}
             >
-                {childrenToRender}
+                {children}
             </Popover>
-        </Input>
+        </React.Fragment>
     );
 }
