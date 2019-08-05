@@ -103,6 +103,13 @@ export class Overlay extends React.Component<Props, State> {
 
     private open() {
         manager.mount(this);
+
+        // Revert scroll position when focused element triggers scroll
+        // changes into scrollable overlay.
+        // May be it is better to move scroll container to overlay.
+        if (this.childRef.current) {
+            this.childRef.current.scrollTop = 0;
+        }
     }
 
     private close() {
