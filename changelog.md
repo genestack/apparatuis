@@ -2,6 +2,12 @@
 
 ## [Unreleased]
 
+## [8.0.0-alpha.28] - 2019-08-05
+
+### Changed
+
+-   Change `MoreIcon` view to tiny
+
 ## [8.0.0-alpha.27] - 2019-08-05
 
 ### Fixed
