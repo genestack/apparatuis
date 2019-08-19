@@ -6,16 +6,12 @@
  * actual or intended publication of such source code.
  */
 export const root: string;
-export const withPrepend: string;
-export const withAppend: string;
 export const input: string;
-export const invalid: string;
-export const fullWidth: string;
+export const withHelpers: string;
+export const helpers: string;
+export const inputCell: string;
+export const prependCell: string;
+export const appendCell: string;
+export const spinner: string;
 export const clearButton: string;
 export const clearButtonIcon: string;
-export const standardAppend: string;
-export const spinnerWrapper: string;
-export const disabled: string;
-export const appendWrapper: string;
-export const prependWrapper: string;
-export const focused: string;

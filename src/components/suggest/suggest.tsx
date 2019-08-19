@@ -8,7 +8,6 @@
 import classNames from 'classnames';
 import * as React from 'react';
 
-import {chain} from '../../utils/chain';
 import {Omit} from '../../utils/omit';
 import {chainRefs} from '../../utils/set-ref';
 import {InputProps, Input} from '../input';
@@ -51,10 +50,10 @@ export interface Props extends InputProps {
  * Wrap it with your controller or use some predefined components like `SuggestInput`.
  */
 export function Suggest(props: Props) {
-    const {rootRef, open, popoverProps = {}, children, ...rest} = props;
+    const {open, rootProps = {}, popoverProps = {}, children, ...rest} = props;
     const {containerProps = {}} = popoverProps;
 
-    const inputRootRef = React.useRef<HTMLLabelElement>(null);
+    const inputRootRef = React.useRef<HTMLElement>(null);
     const inputRootWidth = useElementWidth(inputRootRef.current);
 
     const popperRef = React.useRef<TransitionPopper<PaperProps>>(null);
@@ -69,7 +68,10 @@ export function Suggest(props: Props) {
         <React.Fragment>
             <Input
                 {...rest}
-                rootRef={chainRefs(rootRef, inputRootRef)}
+                rootProps={{
+                    ...rootProps,
+                    ref: chainRefs(rootProps.ref, inputRootRef)
+                }}
                 className={classNames(rest.className, styles.root)}
             />
             <Popover

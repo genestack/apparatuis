@@ -44,83 +44,68 @@ export interface Props extends TargetProps, WithClasses<keyof typeof styles> {
 
 /** Button component */
 export const Button = (props: Props) => {
+    const darkContext = React.useContext(DarkContext);
+    const buttonContext = React.useContext(ButtonContext);
+
+    const {
+        variant = buttonContext.variant,
+        active,
+        icon,
+        tiny,
+        wrap,
+        disabled,
+        classes,
+        children,
+        tabIndex = 0,
+        iconProps = {},
+        contentProps = {},
+        inverted = darkContext,
+        ...rest
+    } = mergeClassesProps(props, styles);
+
+    const iconElement = icon ? (
+        <div {...iconProps} className={classNames(iconProps.className, classes.icon)}>
+            {icon}
+        </div>
+    ) : null;
+
+    const childElement = children ? (
+        <div
+            {...contentProps}
+            className={classNames(contentProps.className, classes.content, {
+                [classes.ellipsis]: !wrap
+            })}
+        >
+            {children}
+        </div>
+    ) : null;
+
+    const Component = typeof rest.href === 'string' ? 'a' : 'button';
+
     return (
-        <DarkContext.Consumer>
-            {(darkContext) => (
-                <ButtonContext.Consumer>
-                    {(buttonContext) => {
-                        const {
-                            variant = buttonContext.variant,
-                            active,
-                            icon,
-                            tiny,
-                            wrap,
-                            disabled,
-                            classes,
-                            children,
-                            tabIndex = 0,
-                            iconProps = {},
-                            contentProps = {},
-                            inverted = darkContext,
-                            ...rest
-                        } = mergeClassesProps(props, styles);
-
-                        const iconElement = icon ? (
-                            <div
-                                {...iconProps}
-                                className={classNames(iconProps.className, classes.icon)}
-                            >
-                                {icon}
-                            </div>
-                        ) : null;
-
-                        const childElement = children ? (
-                            <div
-                                {...contentProps}
-                                className={classNames(contentProps.className, classes.content, {
-                                    [classes.ellipsis]: !wrap
-                                })}
-                            >
-                                {children}
-                            </div>
-                        ) : null;
-
-                        const Component = typeof rest.href === 'string' ? 'a' : 'button';
-
-                        return (
-                            <Typography<TargetProps>
-                                type={Component === 'button' ? 'button' : undefined}
-                                {...rest}
-                                as={Component}
-                                tabIndex={disabled ? -1 : tabIndex}
-                                disabled={disabled}
-                                className={classNames(
-                                    rest.className,
-                                    classes.root,
-                                    buttonContext.className,
-                                    {
-                                        [classes.defaultSize]: !tiny,
-                                        [classes.tiny]: tiny,
-                                        [classes.withIcon]: !!icon && !children,
-                                        [classes.withText]: !icon && !!children,
-                                        [classes.withIconAndText]: !!icon && !!children,
-                                        [classes.defaultVariant]: !variant,
-                                        [classes.primary]: variant === 'primary',
-                                        [classes.outlined]: variant === 'outlined',
-                                        [classes.ghost]: variant === 'ghost',
-                                        [classes.active]: active,
-                                        [classes.disabled]: disabled,
-                                        [classes.inverted]: inverted
-                                    }
-                                )}
-                            >
-                                {iconElement}
-                                {childElement}
-                            </Typography>
-                        );
-                    }}
-                </ButtonContext.Consumer>
-            )}
-        </DarkContext.Consumer>
+        <Typography<TargetProps>
+            type={Component === 'button' ? 'button' : undefined}
+            {...rest}
+            as={Component}
+            tabIndex={disabled ? -1 : tabIndex}
+            disabled={disabled}
+            className={classNames(rest.className, classes.root, buttonContext.className, {
+                [classes.defaultSize]: !tiny,
+                [classes.tiny]: tiny,
+                [classes.withIcon]: !!icon && !children,
+                [classes.withText]: !icon && !!children,
+                [classes.withIconAndText]: !!icon && !!children,
+                [classes.defaultVariant]: !variant,
+                [classes.primary]: variant === 'primary',
+                [classes.outlined]: variant === 'outlined',
+                [classes.ghost]: variant === 'ghost',
+                [classes.active]: active,
+                [classes.disabled]: disabled,
+                [classes.inverted]: inverted
+            })}
+        >
+            {iconElement}
+            {childElement}
+        </Typography>
     );
 };

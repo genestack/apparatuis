@@ -73,8 +73,8 @@ handleClearButtonClick = () => setState({value: ''});
     <Paper style={{background: state.inverted ? '#252E42' : '#FFF'}}>
         <PageContent>
             <Controls>
-                <ControlsItem grow style={{textAlign: 'center'}} as="label">
-                    <div
+                <ControlsItem grow style={{textAlign: 'center'}}>
+                    <label
                         style={{
                             display: state.fullWidth ? 'block' : 'inline-block',
                             textAlign: 'left'
@@ -90,8 +90,10 @@ handleClearButtonClick = () => setState({value: ''});
                             onValueChange={handleValueChange}
                             clearable={state.clearable}
                             loading={
-                                state.spinner === 'permanent' ||
-                                (state.spinner === 'on-change' && state.loading)
+                                state.spinner === 'none'
+                                    ? undefined
+                                    : state.spinner === 'permanent' ||
+                                      (state.spinner === 'on-change' && state.loading)
                             }
                             prepend={state.showSearchIcon ? <SearchIcon /> : null}
                             append={state.showHelpIcon ? <HelpIcon /> : null}
@@ -99,8 +101,9 @@ handleClearButtonClick = () => setState({value: ''});
                             disabled={state.disabled}
                             fullWidth={state.fullWidth}
                             readOnly={state.readOnly}
+                            onClearButtonClick={handleClearButtonClick}
                         />
-                    </div>
+                    </label>
                 </ControlsItem>
                 <ControlsItem>
                     <DarkContext.Provider value={false}>
@@ -213,7 +216,12 @@ handleClearButtonClick = () => setState({value: ''});
                 </Typography>
             </ControlsItem>
             <ControlsItem>
-                <Input placeholder="Password" defaultValue="qwerty" type="password" />
+                <Input
+                    placeholder="Password"
+                    defaultValue="qwerty"
+                    type="password"
+                    autoComplete="off"
+                />
                 <Typography quiet variant="caption" box="paragraph">
                     Password must contain digits
                 </Typography>
@@ -221,9 +229,7 @@ handleClearButtonClick = () => setState({value: ''});
         </Controls>
         <Divider gap={2} variant="transparent" />
         <TooltipHandler tooltip={<Tooltip placement="right">Explanation text</Tooltip>}>
-            <span>
-                <Input invalid placeholder="Text" />
-            </span>
+            <Input invalid placeholder="Text" />
         </TooltipHandler>
     </PageContent>
 </Paper>

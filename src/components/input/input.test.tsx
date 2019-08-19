@@ -26,15 +26,21 @@ describe('<Input />', () => {
 
     it('should call onValueChange on input change', () => {
         const onValueChange = jest.fn();
-        const wrapper = app.mount(<Input id="input" onValueChange={onValueChange} />);
+        const wrapper = app.mount(<Input id="input" value="" onValueChange={onValueChange} />);
         (document.getElementById('input')! as HTMLInputElement).value = 'foo';
         wrapper.find('input').simulate('change');
         expect(onValueChange).toBeCalledWith('foo');
     });
 
-    it('should render label element as root', () => {
+    it('should render div element as root', () => {
         const wrapper = app.mount(<Input />);
-        expect(wrapper.getDOMNode()).toBeInstanceOf(HTMLLabelElement);
+        expect(wrapper.getDOMNode()).toBeInstanceOf(HTMLDivElement);
+    });
+
+    it('should have behaviour like native label element', () => {
+        const wrapper = app.mount(<Input />);
+        wrapper.simulate('focus');
+        expect(document.activeElement).toBeInstanceOf(HTMLInputElement);
     });
 
     describe('when "clearable" prop is passed', () => {
@@ -45,44 +51,54 @@ describe('<Input />', () => {
         });
 
         it('should not render clear button when empty "value" prop is passed', () => {
-            app.mount(<Input clearable value="" clearButtonProps={{id: 'clear-button'}} />);
+            app.mount(
+                <Input
+                    clearable
+                    value=""
+                    onValueChange={jest.fn()}
+                    clearButtonProps={{id: 'clear-button'}}
+                />
+            );
             expect(document.getElementById('clear-button')).toBeFalsy();
         });
 
         it('should render clear button when input value is not empty', () => {
-            const wrapper = app.mount(<Input clearable clearButtonProps={{id: 'clear-button'}} />);
-            wrapper.find('input').simulate('change', {target: {value: 'foo'}});
+            app.mount(
+                <Input
+                    clearable
+                    value="test"
+                    onValueChange={jest.fn()}
+                    clearButtonProps={{id: 'clear-button'}}
+                />
+            );
+
             expect(document.getElementById('clear-button')).toBeTruthy();
         });
 
         it('should render clear button when "value" prop is passed', () => {
-            app.mount(<Input clearable value="foo" clearButtonProps={{id: 'clear-button'}} />);
+            app.mount(
+                <Input
+                    clearable
+                    value="foo"
+                    clearButtonProps={{id: 'clear-button'}}
+                    onValueChange={jest.fn()}
+                />
+            );
             expect(document.getElementById('clear-button')).toBeTruthy();
         });
 
-        it('should clear input value on "clear" button click', () => {
-            const wrapper = app.mount(
-                <Input clearable id="input" clearButtonProps={{id: 'clear-button'}} />
-            );
-            wrapper.find('input').simulate('change', {target: {value: 'foo'}});
-            wrapper
-                .find('#clear-button')
-                .hostNodes()
-                .simulate('click');
-
-            expect((document.getElementById('input') as HTMLInputElement).value).toBe('');
-        });
-
-        it('should call "onValueChange" with empty value when input is controlled', () => {
-            const onValueChange = jest.fn();
+        it('should call onClearButtonClick on "clear" button click', () => {
+            const handleClearButtonClick = jest.fn();
+            const handleValueChange = jest.fn();
 
             const wrapper = app.mount(
                 <Input
                     clearable
                     id="input"
                     value="foo"
-                    onValueChange={onValueChange}
+                    onValueChange={handleValueChange}
                     clearButtonProps={{id: 'clear-button'}}
+                    onClearButtonClick={handleClearButtonClick}
                 />
             );
 
@@ -91,8 +107,8 @@ describe('<Input />', () => {
                 .hostNodes()
                 .simulate('click');
 
-            expect(onValueChange).toHaveBeenCalledTimes(1);
-            expect(onValueChange).toBeCalledWith('');
+            expect(handleClearButtonClick).toHaveBeenCalledTimes(1);
+            expect(handleValueChange).not.toBeCalled();
         });
     });
 
@@ -104,7 +120,7 @@ describe('<Input />', () => {
     describe('when "required" prop is passed', () => {
         it('should have "invalid" class name when input is empty', () => {
             app.mount(
-                <Input rootProps={{id: 'test'}} classes={{invalid: 'invalid-test'}} required />
+                <Input rootProps={{id: 'test', classes: {invalid: 'invalid-test'}}} required />
             );
             expect(document.getElementById('test')!.classList.contains('invalid-test')).toBe(true);
         });
@@ -112,10 +128,10 @@ describe('<Input />', () => {
         it('should remove invalid className when input is not empty', () => {
             app.mount(
                 <Input
-                    rootProps={{id: 'test'}}
-                    classes={{invalid: 'invalid-test'}}
+                    rootProps={{id: 'test', classes: {invalid: 'invalid-test'}}}
                     required
                     value="foo"
+                    onValueChange={jest.fn()}
                 />
             );
             expect(document.getElementById('test')!.classList.contains('invalid-test')).toBe(false);
