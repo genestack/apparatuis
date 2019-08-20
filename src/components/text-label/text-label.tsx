@@ -79,7 +79,7 @@ export const TextLabel = (props: Props) => {
                 {children}
             </span>
 
-            {caption ? (
+            {caption !== undefined && caption !== null ? (
                 <Typography
                     as="span"
                     variant={captionVariant}

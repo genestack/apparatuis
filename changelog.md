@@ -2,6 +2,8 @@
 
 ## [Unreleased]
 
+-   Fix caption in `TextLabel` to display `0`
+
 ## [8.0.0-alpha.28] - 2019-08-05
 
 ### Changed
