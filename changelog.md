@@ -2,6 +2,10 @@
 
 ## [Unreleased]
 
+### Changed
+
+-   Update dependencies
+
 ## [8.0.0-alpha.28] - 2019-08-05
 
 ### Changed

@@ -62,12 +62,12 @@ describe('<HiddenScrollbar />', () => {
                     height: 0,
                     bottom: 0
                 };
-            } else {
-                return {
-                    height: 10,
-                    bottom: 10
-                };
             }
+
+            return {
+                height: 10,
+                bottom: 10
+            };
         });
 
         jest.spyOn(end, 'getBoundingClientRect').mockImplementation(() => {
@@ -76,12 +76,12 @@ describe('<HiddenScrollbar />', () => {
                     height: 0,
                     top: 0
                 };
-            } else {
-                return {
-                    height: 10,
-                    top: 40
-                };
             }
+
+            return {
+                height: 10,
+                top: 40
+            };
         });
 
         let scrollTop = 0;
