@@ -10,35 +10,35 @@ import * as React from 'react';
 
 import {createTestApp} from '../../../test-utils/create-test-app';
 
-import {ButtonBase} from './button-base';
+import {InteractiveElement} from './interactive-element';
 
 const app = createTestApp();
 
 beforeEach(app.beforeEach);
 afterEach(app.afterEach);
 
-describe('<ButtonBase/>', () => {
+describe('<InteractiveElement/>', () => {
     it('should render div by default', () => {
-        app.mount(<ButtonBase id="test" />);
+        app.mount(<InteractiveElement id="test" />);
         expect(document.getElementById('test')).toHaveProperty('tagName', 'DIV');
     });
 
     it('should call onClick callback', () => {
         const onClick = jest.fn();
-        const wrapper = app.mount(<ButtonBase id="test" onClick={onClick} />);
+        const wrapper = app.mount(<InteractiveElement id="test" onClick={onClick} />);
         wrapper.simulate('click');
         expect(onClick).toBeCalled();
     });
 
     it('should not call onClick when disabled', () => {
         const onClick = jest.fn();
-        const wrapper = app.mount(<ButtonBase id="test" onClick={onClick} disabled />);
+        const wrapper = app.mount(<InteractiveElement id="test" onClick={onClick} disabled />);
         wrapper.simulate('click');
         expect(onClick).not.toBeCalled();
     });
 
     describe('when as="button" and disabled passed', () => {
-        beforeEach(() => app.mount(<ButtonBase id="test" as="button" disabled />));
+        beforeEach(() => app.mount(<InteractiveElement id="test" as="button" disabled />));
 
         it('should render button element', () => {
             expect(document.getElementById('test')).toHaveProperty('tagName', 'BUTTON');
@@ -56,7 +56,7 @@ describe('<ButtonBase/>', () => {
     describe('on keyboard events', () => {
         it('should call onClick on "Space" key press', () => {
             const onClick = jest.fn();
-            const wrapper = app.mount(<ButtonBase id="test" onClick={onClick} />);
+            const wrapper = app.mount(<InteractiveElement id="test" onClick={onClick} />);
             wrapper.simulate('keydown', {key: ' '});
             wrapper.simulate('keyup', {key: ' '});
             expect(onClick).toHaveBeenCalledTimes(1);
@@ -64,7 +64,7 @@ describe('<ButtonBase/>', () => {
 
         it('should not call onClick on "Enter" key press', () => {
             const onClick = jest.fn();
-            const wrapper = app.mount(<ButtonBase id="test" onClick={onClick} />);
+            const wrapper = app.mount(<InteractiveElement id="test" onClick={onClick} />);
             wrapper.simulate('keydown', {key: 'Enter'});
             wrapper.simulate('keyup', {key: 'Enter'});
             expect(onClick).toHaveBeenCalledTimes(0);
@@ -72,7 +72,9 @@ describe('<ButtonBase/>', () => {
 
         it('should not call onClick on "Space" key press when listeners are disabled', () => {
             const onClick = jest.fn();
-            const wrapper = app.mount(<ButtonBase id="test" onClick={onClick} disableListeners />);
+            const wrapper = app.mount(
+                <InteractiveElement id="test" onClick={onClick} disableListeners />
+            );
             wrapper.simulate('keydown', {key: ' '});
             wrapper.simulate('keyup', {key: ' '});
             expect(onClick).not.toBeCalled();
@@ -80,7 +82,9 @@ describe('<ButtonBase/>', () => {
 
         it('should not call onClick on "Space" key press when it is native button', () => {
             const onClick = jest.fn();
-            const wrapper = app.mount(<ButtonBase id="test" as="button" onClick={onClick} />);
+            const wrapper = app.mount(
+                <InteractiveElement id="test" as="button" onClick={onClick} />
+            );
             wrapper.simulate('keydown', {key: ' '});
             wrapper.simulate('keyup', {key: ' '});
             expect(onClick).toHaveBeenCalledTimes(0);
@@ -89,7 +93,7 @@ describe('<ButtonBase/>', () => {
         it('should add activeClassName on "Space" keydown', () => {
             const onClick = jest.fn();
             const wrapper = app.mount(
-                <ButtonBase id="test" onClick={onClick} activeClassName="activeClassName" />
+                <InteractiveElement id="test" onClick={onClick} activeClassName="activeClassName" />
             );
             wrapper.simulate('keydown', {key: ' '});
             expect(document.getElementById('test')!.className).toContain('activeClassName');
@@ -98,7 +102,7 @@ describe('<ButtonBase/>', () => {
         it('should remove activeClassName on "Space" keydup', () => {
             const onClick = jest.fn();
             const wrapper = app.mount(
-                <ButtonBase id="test" onClick={onClick} activeClassName="activeClassName" />
+                <InteractiveElement id="test" onClick={onClick} activeClassName="activeClassName" />
             );
             wrapper.simulate('keydown', {key: ' '});
             wrapper.simulate('keyup', {key: ' '});
@@ -108,7 +112,7 @@ describe('<ButtonBase/>', () => {
         it('should remove activeClassName on click after "Space" keydown', () => {
             const onClick = jest.fn();
             const wrapper = app.mount(
-                <ButtonBase id="test" onClick={onClick} activeClassName="activeClassName" />
+                <InteractiveElement id="test" onClick={onClick} activeClassName="activeClassName" />
             );
             wrapper.simulate('keydown', {key: ' '});
             wrapper.simulate('click');

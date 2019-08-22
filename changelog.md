@@ -5,6 +5,7 @@
 ### Changed
 
 -   Update dependencies
+-   Rename `<BaseButton />` to `<InteractiveElement />`
 
 ### Fixed
 

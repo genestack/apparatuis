@@ -11,7 +11,7 @@ import * as React from 'react';
 import {chain} from '../../utils/chain';
 import {Omit} from '../../utils/omit';
 
-import * as styles from './button-base.module.css';
+import * as styles from './interactive-element.module.css';
 
 interface TargetProps {
     className?: string;
@@ -25,7 +25,7 @@ interface TargetProps {
 type DefaultTargetProps = React.AnchorHTMLAttributes<HTMLElement> &
     React.ButtonHTMLAttributes<HTMLElement>;
 
-interface ButtonBaseProps {
+interface InteractiveElementProps {
     /** It `true` button does not react on clicks */
     disabled?: boolean;
     /** Class name which is added when user activates button by "Space" key */
@@ -36,10 +36,10 @@ interface ButtonBaseProps {
     as?: React.ReactType;
 }
 
-/** ButtonBase public properties */
+/** InteractiveElement public properties */
 export type Props<T extends TargetProps = DefaultTargetProps> = Omit<T, 'onClick' | 'onKeyDown'> &
     TargetProps &
-    ButtonBaseProps;
+    InteractiveElementProps;
 
 interface State {
     active?: boolean;
@@ -49,7 +49,7 @@ interface State {
  * Internal component that simulates native button behaviour.
  * It is used for placing button elements into other "button" elements.
  */
-export class ButtonBase<T extends TargetProps = DefaultTargetProps> extends React.Component<
+export class InteractiveElement<T extends TargetProps = DefaultTargetProps> extends React.Component<
     Props<T>,
     State
 > {
