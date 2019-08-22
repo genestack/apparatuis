@@ -5,7 +5,8 @@
     "checkJs": false,
     "typeRoots": ["./node_modules/@types", "./typings/"],
     "types": ["jest"],
-    "esModuleInterop": true
+    "esModuleInterop": true,
+    "noUnusedLocals": true
   },
   "exclude": ["./dist", "./coverage", "**.js"]
 }

@@ -21,12 +21,10 @@ import {
 import {Omit} from '../../utils/omit';
 import {chainRefs} from '../../utils/set-ref';
 import {WithClasses, mergeClassesProps} from '../../utils/styles';
-import {ButtonBase, ButtonBaseProps} from '../button-base';
 import {FocusTrap} from '../focus-trap';
 import {IconProps} from '../icon';
 import {ListItem, ListItemProps} from '../list';
 import {RootRef} from '../root-ref';
-import {Typography, TypographyProps} from '../typography';
 
 import {MenuContext, MenuContextValue} from './menu-context';
 import * as styles from './menu-item.module.css';
