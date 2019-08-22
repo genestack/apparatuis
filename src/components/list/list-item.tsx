@@ -10,13 +10,13 @@ import * as React from 'react';
 
 import {Omit} from '../../utils/omit';
 import {WithClasses, mergeClassesProps} from '../../utils/styles';
-import {ButtonBase, ButtonBaseProps} from '../button-base';
+import {InteractiveElement, InteractiveElementProps} from '../interactive-element';
 import {MarginBoxContext} from '../margin-box/margin-box-context';
 import {TypographyProps, Typography} from '../typography';
 
 import * as styles from './list-item.module.css';
 
-type TargetProps = Omit<ButtonBaseProps, 'activeClassName'>;
+type TargetProps = Omit<InteractiveElementProps, 'activeClassName'>;
 
 /** ListItem public properties */
 export interface Props extends TargetProps, WithClasses<keyof typeof styles> {
@@ -101,7 +101,7 @@ export function ListItem(props: Props) {
                 : 'a'
             : Component;
 
-    const RenderComponent = interactive ? ButtonBase : BaseComponent;
+    const RenderComponent = interactive ? InteractiveElement : BaseComponent;
     const renderComponentProps = interactive
         ? {as: BaseComponent, activeClassName: classes.active}
         : {};

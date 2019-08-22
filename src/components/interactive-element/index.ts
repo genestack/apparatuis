@@ -5,4 +5,4 @@
  * The copyright notice above does not evidence any
  * actual or intended publication of such source code.
  */
-export {ButtonBase, Props as ButtonBaseProps} from './button-base';
+export {InteractiveElement, Props as InteractiveElementProps} from './interactive-element';
