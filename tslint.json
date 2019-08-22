@@ -2,7 +2,8 @@
   "extends": "genestack-tslint-config",
   "rules": {
     "object-literal-key-quotes": false,
-    "jsx-no-lambda": false
+    "jsx-no-lambda": false,
+    "no-null-undefined-union": false
   },
   "linterOptions": {
     "exclude": ["**/**.js"]
