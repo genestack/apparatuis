@@ -2,11 +2,13 @@
 
 ## [Unreleased]
 
-## [8.0.0-alpha.29] - 2019-08-20
-
 ### Added
 
--   Add `<Field />`
+-   Add `<Field />` component
+
+### Fixed
+
+-   Fix background for auto-filled `<Input />` component
 
 ## [8.0.0-alpha.28] - 2019-08-05
 

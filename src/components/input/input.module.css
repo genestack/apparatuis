@@ -10,6 +10,7 @@
 .root {
     position: relative;
     cursor: text;
+    padding: 0;
 }
 
 .inputCell {
@@ -21,19 +22,23 @@
 }
 
 .prependCell {
+    box-sizing: border-box;
+    min-height: 32px;
+    padding: 6px 0 6px 4px;
     flex-grow: 0;
     flex-shrink: 0;
     display: flex;
     align-items: flex-start;
-    margin-right: 4px;
 }
 
 .appendCell {
+    box-sizing: border-box;
+    min-height: 32px;
+    padding: 6px 4px 6px 0;
     flex-grow: 0;
     flex-shrink: 0;
     display: flex;
     align-items: flex-start;
-    margin-left: 4px;
 }
 
 .input {
@@ -46,16 +51,16 @@
     color: var(--gs-color-black);
     background: transparent;
     border: none;
-    padding: 0;
     margin: 0;
-    border-radius: 0;
+    border-radius: 4px;
     outline: none;
     box-shadow: none;
     width: 100%;
+    padding: 6px 8px;
 }
 
-.input::-ms-clear,
-.input::-ms-reveal {
+/* Remove clear button for IE because we render the own one */
+.input::-ms-clear {
     display: none;
 }
 
@@ -69,7 +74,7 @@
 
 .helpers {
     position: absolute;
-    top: 0;
+    top: 6px;
     right: 0;
     width: 20px;
     height: 20px;

@@ -62,7 +62,6 @@ export interface Props extends TargetProps, RootProps {
     onValueChange?: (value: string) => void;
     /** Calls when user clicks to clear button */
     onClearButtonClick?: () => void;
-    inputRef?: React.Ref<HTMLInputElement>;
     /**
      * Properties for root wrapper element.
      * Some properties like styles or mouse listeners from a root level
@@ -76,6 +75,8 @@ export interface Props extends TargetProps, RootProps {
      * @see ExchangedProps
      */
     inputProps?: OtherTargetProps;
+    /** Ref to native input element */
+    inputRef?: React.Ref<HTMLInputElement>;
     /** Properties for input wrapper element */
     inputCellProps?: React.ComponentPropsWithRef<'div'>;
     /** Properties for prepend wrapper element */

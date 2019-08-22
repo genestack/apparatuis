@@ -39,11 +39,6 @@
     color: var(--gs-color-grey);
 }
 
-.root::-ms-clear,
-.root::-ms-reveal {
-    display: none;
-}
-
 /** Paddings and min-height does not work for select elements. */
 /* stylelint-disable-next-line selector-no-qualifying-type */
 select.root {
