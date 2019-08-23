@@ -12,14 +12,14 @@ import {chain} from '../../utils/chain';
 import {getReachableElements, getSiblingElement} from '../../utils/focusable-elements';
 import {Omit} from '../../utils/omit';
 import {mergeClassesProps, WithClasses} from '../../utils/styles';
-import {ButtonBase, ButtonBaseProps} from '../button-base';
+import {InteractiveElement, InteractiveElementProps} from '../interactive-element';
 
 import {HeaderBlock, Props as HeaderBlockProps} from './header-block';
 import {HeaderItemText} from './header-item-text';
 import * as styles from './header-item.module.css';
 
 type TargetProps = Omit<
-    ButtonBaseProps<
+    InteractiveElementProps<
         React.AnchorHTMLAttributes<HTMLElement> &
             React.ButtonHTMLAttributes<HTMLElement> &
             HeaderBlockProps
@@ -69,7 +69,7 @@ export class HeaderItem extends React.Component<Props> {
             styles
         );
 
-        const buttonBaseProps: ButtonBaseProps = {
+        const interactiveElementProps: InteractiveElementProps = {
             disabled,
             activeClassName: classes.active
         };
@@ -91,8 +91,8 @@ export class HeaderItem extends React.Component<Props> {
         return (
             <HeaderBlock
                 {...rest}
-                as={ButtonBase}
-                {...buttonBaseProps}
+                as={InteractiveElement}
+                {...interactiveElementProps}
                 onKeyDown={chain(rest.onKeyDown, this.handleKeyDown)}
                 className={classNames(rest.className, classes.root, {
                     [classes.active]: active,

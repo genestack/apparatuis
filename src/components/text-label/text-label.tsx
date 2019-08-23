@@ -9,6 +9,7 @@ import classNames from 'classnames';
 import * as React from 'react';
 
 import {Omit} from '../../utils/omit';
+import {shouldRenderNode} from '../../utils/should-render-node';
 import {WithClasses, mergeClassesProps} from '../../utils/styles';
 import {Typography, TypographyProps} from '../typography';
 
@@ -79,7 +80,7 @@ export const TextLabel = (props: Props) => {
                 {children}
             </span>
 
-            {caption ? (
+            {shouldRenderNode(caption) ? (
                 <Typography
                     as="span"
                     variant={captionVariant}

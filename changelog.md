@@ -6,8 +6,14 @@
 
 -   Add `<Field />` component
 
+### Changed
+
+-   Update dependencies
+-   Rename `<BaseButton />` to `<InteractiveElement />`
+
 ### Fixed
 
+-   Fix caption in `TextLabel` to display `0`
 -   Fix background for auto-filled `<Input />` component
 
 ## [8.0.0-alpha.28] - 2019-08-05
