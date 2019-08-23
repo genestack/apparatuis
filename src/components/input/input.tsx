@@ -9,7 +9,6 @@ import classNames from 'classnames';
 import * as React from 'react';
 
 import {chain} from '../../utils/chain';
-import {DarkContext} from '../../utils/dark-context';
 import {Omit} from '../../utils/omit';
 import {chainRefs} from '../../utils/set-ref';
 import {mergeClassesProps, WithClasses} from '../../utils/styles';

@@ -8,7 +8,6 @@
 import * as React from 'react';
 
 import {Omit} from './omit';
-import {ClassNames} from './styles';
 
 /**
  * A component whose root component can be controlled via a `component` prop.
