@@ -43,3 +43,4 @@ export * from './components/highlight';
 export * from './components/suggest-input';
 export * from './components/text-label';
 export * from './components/preloader';
+export * from './components/field';

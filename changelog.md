@@ -2,6 +2,10 @@
 
 ## [Unreleased]
 
+### Added
+
+-   Add `<Field />` component
+
 ### Changed
 
 -   Update dependencies
@@ -10,6 +14,7 @@
 ### Fixed
 
 -   Fix caption in `TextLabel` to display `0`
+-   Fix background for auto-filled `<Input />` component
 
 ## [8.0.0-alpha.28] - 2019-08-05
 

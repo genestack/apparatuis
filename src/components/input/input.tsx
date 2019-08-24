@@ -1,275 +1,246 @@
 /*
- * Copyright (c) 2011-2018 Genestack Limited
+ * Copyright (c) 2011-2019 Genestack Limited
  * All Rights Reserved
  * THIS IS UNPUBLISHED PROPRIETARY SOURCE CODE OF GENESTACK LIMITED
  * The copyright notice above does not evidence any
  * actual or intended publication of such source code.
  */
-
 import classNames from 'classnames';
-import React, {useState, useRef, useLayoutEffect} from 'react';
+import * as React from 'react';
 
-import {ClearIcon} from '../../icons/clear-icon';
 import {chain} from '../../utils/chain';
-import {DarkContext} from '../../utils/dark-context';
+import {Omit} from '../../utils/omit';
 import {chainRefs} from '../../utils/set-ref';
-import {WithClasses, mergeClassesProps} from '../../utils/styles';
-import {Button, ButtonProps} from '../button';
-import {Fade} from '../fade';
-import {Spinner, SpinnerProps} from '../spinner';
+import {mergeClassesProps, WithClasses} from '../../utils/styles';
+import {FieldProps, Field} from '../field';
 
+import {InputClearButton, Props as InputClearButtonProps} from './input-clear-button';
+import {InputSpinner, Props as InputSpinnerProps} from './input-spinner';
 import * as styles from './input.module.css';
+import {useInputInvalidity} from './use-input-invalidity';
 
-const SPINNER_SIZE = 16;
+type BaseTargetProps = React.ComponentPropsWithoutRef<'input'>;
+type BaseRootProps = React.ComponentPropsWithRef<'div'>;
 
-function useUncontrolledProp<T>(
-    value: T | undefined,
-    onValueChange: ((value: T) => void) | undefined,
-    defaultValue: T | undefined
-) {
-    const [state, setState] = useState(value === undefined ? defaultValue : value);
+/** Properties that are exchanged between input and its wrapper (root element) */
+type ExchangedProps =
+    | 'className'
+    | 'style'
+    // this properties required for tooltip handler
+    | 'onMouseEnter'
+    | 'onMouseLeave'
+    | 'onFocus'
+    | 'onBlur';
 
-    const handleChange = (updatedValue: T) => {
-        setState(updatedValue);
-        if (onValueChange) {
-            onValueChange(updatedValue);
-        }
-    };
+type TargetProps = Omit<BaseTargetProps, ExchangedProps>;
+type RootProps = Pick<BaseRootProps, ExchangedProps> &
+    Omit<FieldProps, 'classes'> &
+    WithClasses<keyof typeof styles>;
 
-    return {value: value === undefined ? state : value, onChange: handleChange};
-}
-
-function useInputInvalidity(
-    inputRef: React.RefObject<HTMLInputElement>,
-    invalid: boolean | undefined
-) {
-    // Input is valid by default
-    const [invalidState, setInvalidState] = useState(invalid || false);
-
-    // Use native input validation before browser paint
-    useLayoutEffect(() => {
-        if (inputRef.current) {
-            setInvalidState(!inputRef.current.validity.valid);
-        }
-    });
-
-    return invalid === undefined ? invalidState : invalid;
-}
-
-type TargetProps = React.InputHTMLAttributes<HTMLInputElement>;
+type OtherTargetProps = Pick<BaseTargetProps, ExchangedProps>;
+type OtherRootProps = Omit<BaseRootProps, ExchangedProps> & Pick<FieldProps, 'classes'>;
 
 /** Input public properties */
-export interface Props extends TargetProps, WithClasses<keyof typeof styles> {
-    /** If `true` input has invalid styles */
-    invalid?: boolean;
-    /** If `true` input has width: 100% */
-    fullWidth?: boolean;
+export interface Props extends TargetProps, RootProps {
+    /** Shows spinner */
+    loading?: boolean;
+    /**
+     * Shows clear button. Input is stateless component,
+     * so if you want to use clear button save value state yourself.
+     */
+    clearable?: boolean;
+    /** React elements that are prepended before text field */
+    prepend?: React.ReactNode;
+    /** React elements that are appended after text field */
+    append?: React.ReactNode;
     /** Value of input */
     value?: string;
     /** Default value of uncontrolled input */
     defaultValue?: string;
     /** Custom change event handler */
     onValueChange?: (value: string) => void;
-    /** React reference to native input */
-    inputRef?: React.Ref<HTMLInputElement>;
-    /** React elements that are prepended before text field */
-    prepend?: React.ReactNode;
-    /** React elements that are appended after text field */
-    append?: React.ReactNode;
-    /** Shows spinner */
-    loading?: boolean;
-    /** Shows clear button */
-    clearable?: boolean;
-    /** Shows clear button and calls on its click */
-    onClearButtonClick?: React.MouseEventHandler;
-    /** Properties of the spinner element */
-    spinnerProps?: SpinnerProps;
-    /** Properties of the spinner wrapper element */
-    spinnerWrapperProps?: React.HTMLAttributes<HTMLDivElement>;
-    /** Properties of the clear button */
-    clearButtonProps?: ButtonProps;
-    /** Standard `append` element contains spinner and clear button */
-    standardAppendProps?: React.HTMLAttributes<HTMLDivElement>;
+    /** Calls when user clicks to clear button */
+    onClearButtonClick?: () => void;
     /**
-     * Properties of the root element that contains
-     * the target input element.
+     * Properties for root wrapper element.
+     * Some properties like styles or mouse listeners from a root level
+     * of properties are passed to this wrapper not to input.
+     * @see ExchangedProps
      */
-    rootProps?: React.HTMLAttributes<HTMLLabelElement>;
-    /** Ref to the root element */
-    rootRef?: React.Ref<HTMLLabelElement>;
-    /** Properties of the prepend elements wrapper */
-    prependProps?: React.HTMLAttributes<HTMLDivElement>;
-    /** Properties of the append elements wrapper */
-    appendProps?: React.HTMLAttributes<HTMLDivElement>;
-    /** ClassName that is passed to the target input */
-    inputClassName?: string;
-    /** Style that is passed to the target input */
-    inputStyle?: React.CSSProperties;
+    rootProps?: OtherRootProps;
+    /**
+     * The rest properties for native input element that could not be passed
+     * to a root level of properties.
+     * @see ExchangedProps
+     */
+    inputProps?: OtherTargetProps;
+    /** Ref to native input element */
+    inputRef?: React.Ref<HTMLInputElement>;
+    /** Properties for input wrapper element */
+    inputCellProps?: React.ComponentPropsWithRef<'div'>;
+    /** Properties for prepend wrapper element */
+    prependCellProps?: React.ComponentPropsWithRef<'div'>;
+    /** Properties for append wrapper element */
+    appendCellProps?: React.ComponentPropsWithRef<'div'>;
+    /**
+     * Properties for helpers wrapper element.
+     * Helpers help user to see and to manage state of input
+     * like loading or clear value button.
+     */
+    helpersProps?: React.ComponentPropsWithRef<'div'>;
+    /** Properties for clear button */
+    clearButtonProps?: InputClearButtonProps;
+    /** Properties for loading spinner */
+    spinnerProps?: InputSpinnerProps;
 }
 
-/** Text field wrapped around input */
-export const Input = (props: Props) => {
+/**
+ * Base input field is used for data that could be entered into field within keyboard
+ * like `text`, `email`, `password` etc.
+ *
+ * This component is stateless.
+ */
+export function Input(props: Props) {
     const {
-        invalid,
-        fullWidth,
-        onValueChange,
-        inputRef: propInputRef,
         className,
-        classes,
         style,
-        prepend,
-        append,
+        onMouseEnter,
+        onMouseLeave,
+        onFocus,
+        onBlur,
+        invalid,
         loading,
-        onClearButtonClick,
-        spinnerWrapperProps = {},
-        spinnerProps = {},
-        clearButtonProps = {},
-        rootProps = {},
-        standardAppendProps = {},
-        prependProps = {},
-        appendProps = {},
-        rootRef,
-        inputClassName,
-        inputStyle,
-        value,
-        defaultValue,
         clearable,
-        children,
+        classes,
+        onClearButtonClick,
+        inputProps: otherInputProps,
+        rootProps: otherFieldProps = {},
+        prepend,
+        prependCellProps = {},
+        append,
+        appendCellProps = {},
+        inputCellProps = {},
+        helpersProps = {},
+        onValueChange,
+        clearButtonProps,
+        spinnerProps,
+        fullWidth,
+        inputRef: innerInputRef,
         ...rest
     } = mergeClassesProps(props, styles);
 
-    const inputRef = useRef<HTMLInputElement>(null);
-    // Simulate `:focus-within` because Edge does not support it
-    const [focused, setFocused] = useState();
+    const {tabIndex: fieldTabIndex = -1, ...fieldProps} = otherFieldProps;
+    const inputProps: BaseTargetProps = {...rest, ...otherInputProps};
+    const inputRef = React.useRef<HTMLInputElement>(null);
+
+    // add input paddings for placing helpers elements like loader or clear button
+    const withHelpers = typeof loading === 'boolean' || clearable;
+
+    // simulate :focus-within css selector because of IE11
+    const [focused, setFocused] = React.useState(false);
+
+    // use native input attribute to highlight invalid field with css
     const invalidState = useInputInvalidity(inputRef, invalid);
-    const valueState = useUncontrolledProp(value, onValueChange, defaultValue || '');
 
-    const renderSpinner = () => {
-        const [isSpinnerExited, setSpinnerExited] = useState(true);
+    // simulate native html label element behaviour to prevent flickering
+    // focused styles while clicking outside input but into field element
+    const handleFieldFocus: React.FocusEventHandler = (event) => {
+        if (event.target === event.currentTarget && inputRef.current) {
+            inputRef.current.focus();
+        }
 
-        return loading || !isSpinnerExited ? (
-            <Fade
-                in={loading}
-                appear
-                onEnter={() => {
-                    setSpinnerExited(false);
-                }}
-                onExited={() => {
-                    setSpinnerExited(true);
-                }}
-            >
-                <div
-                    {...spinnerWrapperProps}
-                    className={classNames(spinnerWrapperProps.className, classes.spinnerWrapper)}
-                >
-                    <Spinner size={SPINNER_SIZE} {...spinnerProps} />
-                </div>
-            </Fade>
-        ) : null;
+        setFocused(true);
     };
 
-    const renderClearButton = () => {
-        const [isClearButtonExited, setClearButtonExited] = useState(true);
-
-        const showClearButton =
-            valueState.value && clearable && !rest.disabled && !rest.readOnly && !loading;
-
-        return showClearButton || !isClearButtonExited ? (
-            <Fade
-                in={!!showClearButton}
-                appear
-                onEnter={() => {
-                    setClearButtonExited(false);
-                }}
-                onExited={() => {
-                    setClearButtonExited(true);
-                }}
-            >
-                <Button
-                    tiny
-                    variant="ghost"
-                    icon={<ClearIcon />}
-                    classes={{icon: classes.clearButtonIcon}}
-                    {...clearButtonProps}
-                    className={classNames(clearButtonProps.className, classes.clearButton)}
-                    onClick={chain(clearButtonProps.onClick, onClearButtonClick, () => {
-                        if (value === undefined || onClearButtonClick === undefined) {
-                            valueState.onChange('');
-                        }
-
-                        if (inputRef.current) {
-                            inputRef.current.focus();
-                        }
-                    })}
-                />
-            </Fade>
-        ) : null;
+    const handleFieldBlur: React.FocusEventHandler = () => {
+        setFocused(false);
     };
 
-    const spinner = renderSpinner();
-    const clearButton = renderClearButton();
+    const handleInputChange = chain(
+        inputProps.onChange,
+        onValueChange &&
+            ((event: React.ChangeEvent<HTMLInputElement>) => {
+                if (onValueChange) {
+                    onValueChange(event.target.value);
+                }
+            })
+    );
 
-    const standardAppend =
-        spinner || clearButton ? (
-            <div
-                {...standardAppendProps}
-                className={classNames(standardAppendProps.className, classes.standardAppend)}
-            >
-                {clearButton}
-                {spinner}
-            </div>
-        ) : null;
+    const handleClearButtonClick = () => {
+        if (inputRef.current) {
+            inputRef.current.focus();
+        }
+    };
 
     return (
-        <DarkContext.Provider value={false}>
-            <label
-                ref={rootRef}
-                style={style}
-                {...rootProps}
-                onFocus={chain(rootProps.onFocus, () => {
-                    setFocused(true);
-                })}
-                onBlur={chain(rootProps.onBlur, () => {
-                    setFocused(false);
-                })}
-                className={classNames(classes.root, rootProps.className, className, {
-                    [classes.fullWidth]: fullWidth,
-                    [classes.withPrepend]: !!prepend,
-                    [classes.withAppend]: !!standardAppend || !!append,
-                    [classes.invalid]: invalidState,
-                    [classes.disabled]: rest.disabled,
-                    [classes.focused]: focused
-                })}
+        <Field
+            tabIndex={!inputProps.disabled ? fieldTabIndex : undefined}
+            className={classNames(className, classes.root)}
+            style={style}
+            onMouseEnter={onMouseEnter}
+            onMouseLeave={onMouseLeave}
+            onFocus={chain(handleFieldFocus, onFocus)}
+            onBlur={chain(handleFieldBlur, onBlur)}
+            focused={focused}
+            invalid={invalidState}
+            disabled={inputProps.disabled}
+            fullWidth={fullWidth}
+            {...fieldProps}
+        >
+            {prepend ? (
+                <div
+                    {...prependCellProps}
+                    className={classNames(prependCellProps.className, classes.prependCell)}
+                >
+                    {prepend}
+                </div>
+            ) : null}
+            <div
+                {...inputCellProps}
+                className={classNames(inputCellProps.className, classes.inputCell)}
             >
-                {prepend ? (
-                    <div
-                        {...prependProps}
-                        className={classNames(prependProps.className, classes.prependWrapper)}
-                    >
-                        {prepend}
-                    </div>
-                ) : null}
                 <input
-                    {...rest}
-                    ref={chainRefs(propInputRef, inputRef)}
-                    style={inputStyle}
-                    className={classNames(inputClassName, classes.input)}
-                    value={valueState.value}
-                    onChange={chain(rest.onChange, (event) => {
-                        valueState.onChange(event.target.value);
+                    ref={chainRefs(innerInputRef, inputRef)}
+                    {...inputProps}
+                    className={classNames(classes.input, inputProps.className, {
+                        [classes.withHelpers]: withHelpers
                     })}
+                    onChange={handleInputChange}
                 />
-                {standardAppend}
-                {append ? (
+                {withHelpers ? (
                     <div
-                        {...appendProps}
-                        className={classNames(appendProps.className, classes.appendWrapper)}
+                        {...helpersProps}
+                        className={classNames(helpersProps.className, classes.helpers)}
                     >
-                        {append}
+                        <InputSpinner
+                            {...spinnerProps}
+                            show={loading}
+                            className={classes.spinner}
+                        />
+                        <InputClearButton
+                            {...clearButtonProps}
+                            show={
+                                clearable &&
+                                !!inputProps.value &&
+                                !inputProps.disabled &&
+                                !inputProps.readOnly &&
+                                !loading
+                            }
+                            onClick={chain(onClearButtonClick, handleClearButtonClick)}
+                            className={classes.clearButton}
+                            iconProps={{className: classes.clearButtonIcon}}
+                        />
                     </div>
                 ) : null}
-                {children}
-            </label>
-        </DarkContext.Provider>
+            </div>
+            {append ? (
+                <div
+                    {...appendCellProps}
+                    className={classNames(appendCellProps.className, classes.appendCell)}
+                >
+                    {append}
+                </div>
+            ) : null}
+        </Field>
     );
-};
+}

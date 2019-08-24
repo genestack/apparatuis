@@ -8,7 +8,15 @@
 /**
  * Chain all functions in single one.
  */
-export function chain<T extends (...args: any[]) => void>(...funcs: Array<T | undefined>): T {
+export function chain<T extends (...args: any[]) => void>(
+    ...items: Array<T | undefined>
+): T | undefined {
+    const funcs = items.filter(Boolean);
+
+    if (!funcs.length) {
+        return undefined;
+    }
+
     return funcs.reduce<T>(
         (acc, func) => {
             if (!func) {

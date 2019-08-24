@@ -1,0 +1,78 @@
+/*
+ * Copyright (c) 2011-2019 Genestack Limited
+ * All Rights Reserved
+ * THIS IS UNPUBLISHED PROPRIETARY SOURCE CODE OF GENESTACK LIMITED
+ * The copyright notice above does not evidence any
+ * actual or intended publication of such source code.
+ */
+@import "../../variables.css";
+
+:root {
+    --gs-color-input-disabled-background: rgba(221, 224, 227, 1);
+    --gs-color-input-invalid-background: rgba(253, 236, 236, 1);
+    --gs-color-input-invalid-box-shadow: rgba(204, 34, 0, 0.25);
+}
+
+.root {
+    color: var(--gs-color-black);
+    font-weight: normal;
+    font-family: var(--gs-font-family);
+    font-size: 14px;
+    line-height: 20px;
+    display: inline-flex;
+    align-items: flex-start;
+    box-sizing: border-box;
+    background: var(--gs-color-white);
+    border: 1px solid var(--gs-color-grey-outline);
+    padding: 5px 7px;
+    border-radius: 4px;
+    transition-property: border-color, box-shadow, background-color;
+    transition-duration: 0.2s;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    min-width: 200px;
+    outline: none;
+    min-height: 32px;
+    box-shadow: none;
+}
+
+.root::placeholder {
+    color: var(--gs-color-grey);
+}
+
+/** Paddings and min-height does not work for select elements. */
+/* stylelint-disable-next-line selector-no-qualifying-type */
+select.root {
+    height: 32px;
+    align-items: center;
+}
+
+.root:focus,
+.root.focused {
+    transition-property: background-color;
+    border-color: var(--gs-color-action);
+    box-shadow: 0 0 0 2px var(--gs-color-action-25);
+}
+
+.root:invalid,
+.root.invalid {
+    border-color: var(--gs-color-error);
+    background: var(--gs-color-input-invalid-background);
+}
+
+.root:invalid:focus,
+.root.invalid:focus,
+.root:invalid.focused,
+.root.invalid.focused {
+    border-color: var(--gs-color-error);
+    box-shadow: 0 0 0 2px var(--gs-color-input-invalid-box-shadow);
+}
+
+.root.root.disabled {
+    border-color: var(--gs-color-grey-outline);
+    background: var(--gs-color-input-disabled-background);
+    cursor: not-allowed;
+}
+
+.fullWidth {
+    width: 100%;
+}

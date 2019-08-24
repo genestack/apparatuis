@@ -84,7 +84,11 @@ export interface Props extends SuggestProps {
  */
 export function SuggestInput(props: Props) {
     const {onComplete, openOnFocus, onOpenChange, ...rest} = props;
-    const [value, onValueChange] = useControlledProp(rest.value, rest.onValueChange);
+    const [value, onValueChange] = useControlledProp(
+        rest.value,
+        rest.defaultValue || '',
+        rest.onValueChange
+    );
     const [isOpen, setIsOpen] = React.useState(false);
 
     const handleSelect = (item: string) => {
@@ -120,7 +124,10 @@ export function SuggestInput(props: Props) {
     return (
         <Downshift onSelect={handleSelect} isOpen={isOpen} onStateChange={handleStateChange}>
             {(downshift: ControllerStateAndHelpers<string>) => {
-                const {rootRef, ...rootProps} = downshift.getRootProps({refKey: 'rootRef'});
+                const {rootRef, ...rootProps} = downshift.getRootProps(
+                    {refKey: 'rootRef'},
+                    {suppressRefError: true}
+                );
 
                 const inputProps = downshift.getInputProps<SuggestProps>({
                     ...rest,
@@ -173,8 +180,10 @@ export function SuggestInput(props: Props) {
                         onKeyDown={handleInputKeyDown}
                         value={value}
                         onValueChange={onValueChange}
-                        rootRef={rootRef}
-                        rootProps={rootProps}
+                        rootProps={{
+                            ...rootProps,
+                            ref: rootRef
+                        }}
                         popoverProps={popoverProps}
                         open={open}
                     >

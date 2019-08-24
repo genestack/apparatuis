@@ -18,7 +18,8 @@ initialState = {
     readOnly: false,
     spinner: 'none',
     value: '',
-    loading: false
+    loading: false,
+    simulateAutofill: false
 };
 
 renderCheckbox = (name, label) => (
@@ -73,8 +74,8 @@ handleClearButtonClick = () => setState({value: ''});
     <Paper style={{background: state.inverted ? '#252E42' : '#FFF'}}>
         <PageContent>
             <Controls>
-                <ControlsItem grow style={{textAlign: 'center'}} as="label">
-                    <div
+                <ControlsItem grow style={{textAlign: 'center'}}>
+                    <label
                         style={{
                             display: state.fullWidth ? 'block' : 'inline-block',
                             textAlign: 'left'
@@ -90,8 +91,10 @@ handleClearButtonClick = () => setState({value: ''});
                             onValueChange={handleValueChange}
                             clearable={state.clearable}
                             loading={
-                                state.spinner === 'permanent' ||
-                                (state.spinner === 'on-change' && state.loading)
+                                state.spinner === 'none'
+                                    ? undefined
+                                    : state.spinner === 'permanent' ||
+                                      (state.spinner === 'on-change' && state.loading)
                             }
                             prepend={state.showSearchIcon ? <SearchIcon /> : null}
                             append={state.showHelpIcon ? <HelpIcon /> : null}
@@ -99,8 +102,14 @@ handleClearButtonClick = () => setState({value: ''});
                             disabled={state.disabled}
                             fullWidth={state.fullWidth}
                             readOnly={state.readOnly}
+                            onClearButtonClick={handleClearButtonClick}
+                            inputProps={{
+                                style: {
+                                    background: state.simulateAutofill ? '#E8F0FE' : 'transparent'
+                                }
+                            }}
                         />
-                    </div>
+                    </label>
                 </ControlsItem>
                 <ControlsItem>
                     <DarkContext.Provider value={false}>
@@ -113,6 +122,7 @@ handleClearButtonClick = () => setState({value: ''});
                                 {renderCheckbox('invalid', 'Invalid')}
                                 {renderCheckbox('required', 'Required')}
                                 {renderCheckbox('readOnly', 'Read Only')}
+                                {renderCheckbox('simulateAutofill', 'Simulate autofill')}
                                 <Divider />
                                 <ListItem>
                                     <Typography variant="section">Inner elements:</Typography>
@@ -213,7 +223,12 @@ handleClearButtonClick = () => setState({value: ''});
                 </Typography>
             </ControlsItem>
             <ControlsItem>
-                <Input placeholder="Password" defaultValue="qwerty" type="password" />
+                <Input
+                    placeholder="Password"
+                    defaultValue="qwerty"
+                    type="password"
+                    autoComplete="off"
+                />
                 <Typography quiet variant="caption" box="paragraph">
                     Password must contain digits
                 </Typography>
@@ -221,10 +236,53 @@ handleClearButtonClick = () => setState({value: ''});
         </Controls>
         <Divider gap={2} variant="transparent" />
         <TooltipHandler tooltip={<Tooltip placement="right">Explanation text</Tooltip>}>
-            <span>
-                <Input invalid placeholder="Text" />
-            </span>
+            <Input invalid placeholder="Text" />
         </TooltipHandler>
     </PageContent>
 </Paper>
+```
+
+### Auto-filled input
+
+```js
+const {SearchIcon} = require('../../icons/search-icon.tsx');
+
+<RootElement>
+    <PageContent>
+        <div style={{display: 'flex', justifyContent: 'space-around'}}>
+            <Paper style={{width: 320}}>
+                <PageContent>
+                    <form onSubmit={(e) => e.preventDefault()}>
+                        <Typography box="paragraph">
+                            Fill fields and click to the key icon in the address bar to save
+                            credentials and enabling auto-fill.
+                        </Typography>
+
+                        <Typography box="paragraph" style={{marginTop: 12}}>
+                            Email
+                        </Typography>
+                        <Input fullWidth type="email" name="email" autoComplete="username" />
+
+                        <Typography box="paragraph" style={{marginTop: 12}}>
+                            Password
+                        </Typography>
+
+                        <Input
+                            fullWidth
+                            type="password"
+                            name="password"
+                            autoComplete="current-password"
+                        />
+
+                        <Typography box="paragraph" style={{marginTop: 20}}>
+                            <Button type="submit" variant="primary">
+                                Submit
+                            </Button>
+                        </Typography>
+                    </form>
+                </PageContent>
+            </Paper>
+        </div>
+    </PageContent>
+</RootElement>;
 ```

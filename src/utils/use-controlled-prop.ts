@@ -5,14 +5,18 @@
  * The copyright notice above does not evidence any
  * actual or intended publication of such source code.
  */
-import {useState} from 'react';
+import * as React from 'react';
 
 /**
  * Use state for uncontrolled properties.
  * @see https://github.com/jquense/uncontrollable
  */
-export function useControlledProp<T>(value?: T, onValueChange?: (value: T) => void) {
-    const [stateValue, setStateValue] = useState(value);
+export function useControlledProp<T>(
+    value?: T,
+    defaultValue?: T,
+    onValueChange?: (value: T) => void
+) {
+    const [stateValue, setStateValue] = React.useState(defaultValue);
 
     const isUncontrolled = value === undefined;
 
@@ -21,7 +25,9 @@ export function useControlledProp<T>(value?: T, onValueChange?: (value: T) => vo
     const handleChange = (updatedValue: T) => {
         if (isUncontrolled) {
             setStateValue(updatedValue);
-        } else if (onValueChange) {
+        }
+
+        if (onValueChange) {
             onValueChange(updatedValue);
         }
     };

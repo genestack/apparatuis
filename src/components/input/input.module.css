@@ -1,74 +1,65 @@
 /*
- * Copyright (c) 2011-2018 Genestack Limited
+ * Copyright (c) 2011-2019 Genestack Limited
  * All Rights Reserved
  * THIS IS UNPUBLISHED PROPRIETARY SOURCE CODE OF GENESTACK LIMITED
  * The copyright notice above does not evidence any
  * actual or intended publication of such source code.
  */
-@import "./../../variables.css";
-
-:root {
-    --gs-color-input-disabled-background: rgba(221, 224, 227, 1);
-    --gs-color-input-invalid-background: rgba(253, 236, 236, 1);
-    --gs-color-input-invalid-box-shadow: rgba(204, 34, 0, 0.25);
-}
+@import "../../variables.css";
 
 .root {
-    display: inline-flex;
-    align-items: center;
-    box-sizing: border-box;
-    background: var(--gs-color-white);
-    border: 1px solid var(--gs-color-grey-outline);
-    padding: 0 calc(var(--gs-spacing-unit) - 1px);
-    border-radius: calc(var(--gs-spacing-unit) / 2);
-    transition-property: border-color, box-shadow, background-color;
-    transition-duration: 0.2s;
-    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-    width: 200px;
+    position: relative;
     cursor: text;
+    padding: 0;
 }
 
-.focused {
-    transition-property: background-color;
-    border-color: var(--gs-color-action);
-    box-shadow: 0 0 0 2px var(--gs-color-action-25);
-}
-
-.invalid {
-    border-color: var(--gs-color-error);
-    background: var(--gs-color-input-invalid-background);
-}
-
-.invalid.focused {
-    border-color: var(--gs-color-error);
-    box-shadow: 0 0 0 2px var(--gs-color-input-invalid-box-shadow);
-}
-
-.disabled {
-    border-color: var(--gs-color-grey-outline);
-    background: var(--gs-color-input-disabled-background);
-    cursor: not-allowed;
-}
-
-.input {
+.inputCell {
     flex-grow: 1;
     flex-shrink: 1;
     flex-basis: 0;
     min-width: 0;
     position: relative;
+}
+
+.prependCell {
+    box-sizing: border-box;
+    min-height: 32px;
+    padding: 6px 0 6px 4px;
+    flex-grow: 0;
+    flex-shrink: 0;
+    display: flex;
+    align-items: flex-start;
+}
+
+.appendCell {
+    box-sizing: border-box;
+    min-height: 32px;
+    padding: 6px 4px 6px 0;
+    flex-grow: 0;
+    flex-shrink: 0;
+    display: flex;
+    align-items: flex-start;
+}
+
+.input {
+    position: relative;
     box-sizing: border-box;
     font-family: var(--gs-font-family);
     font-size: 14px;
     line-height: 20px;
+    min-height: 20px;
     color: var(--gs-color-black);
     background: transparent;
     border: none;
-    padding: 0;
-    border-radius: 0;
+    margin: 0;
+    border-radius: 4px;
     outline: none;
-    margin: calc(var(--gs-spacing-unit) * 0.75 - 1px) 0;
+    box-shadow: none;
+    width: 100%;
+    padding: 6px 8px;
 }
 
+/* Remove clear button for IE because we render the own one */
 .input::-ms-clear {
     display: none;
 }
@@ -77,31 +68,37 @@
     cursor: not-allowed;
 }
 
-.withPrepend {
-    padding-left: calc(var(--gs-spacing-unit) * 0.75 - 1px);
+.withHelpers {
+    padding-right: 24px;
 }
 
-.withPrepend .input {
-    margin-left: calc(var(--gs-spacing-unit) / 2);
+.helpers {
+    position: absolute;
+    top: 6px;
+    right: 4px;
+    width: 20px;
+    height: 20px;
 }
 
-.withAppend {
-    padding-right: calc(var(--gs-spacing-unit) * 0.75 - 1px);
-}
-
-.withAppend .input {
-    margin-right: calc(var(--gs-spacing-unit) / 2);
-}
-
-.fullWidth {
-    width: 100%;
+.spinner {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
 }
 
 .clearButton {
-    padding: 0;
-    width: calc(var(--gs-spacing-unit) * 2.5);
-    height: calc(var(--gs-spacing-unit) * 2.5);
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 20px;
+    height: 20px;
     border-radius: 100%;
+    padding: 0;
 }
 
 .clearButton:focus:after {
@@ -110,31 +107,4 @@
 
 .clearButtonIcon {
     margin: 0;
-}
-
-.standardAppend {
-    position: relative;
-    display: flex;
-    width: calc(var(--gs-spacing-unit) * 2.5);
-    height: calc(var(--gs-spacing-unit) * 2.5);
-    flex-grow: 0;
-    flex-shrink: 0;
-}
-
-.spinnerWrapper {
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
-}
-
-.prependWrapper,
-.appendWrapper {
-    display: flex;
-    flex-grow: 0;
-    flex-shrink: 0;
 }
