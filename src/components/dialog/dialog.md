@@ -60,7 +60,7 @@ handleDialogClose = () => {
                 <ControlsItem>
                     <Controls>
                         <ControlsItem>
-                            <Button variant="primary">Main Action</Button>
+                            <Button intent="accent">Main Action</Button>
                         </ControlsItem>
                         <ControlsItem>
                             <Button onClick={handleDialogClose}>Close</Button>
@@ -128,7 +128,7 @@ handleFormSubmit = (event) => {
         <DialogFooter>
             <Controls>
                 <ControlsItem>
-                    <Button variant="primary" type="submit">
+                    <Button intent="accent" type="submit">
                         Sign in
                     </Button>
                 </ControlsItem>
@@ -300,7 +300,7 @@ const samples = [
                     <ControlsItem>
                         <Controls>
                             <ControlsItem>
-                                <Button variant="primary">Main Action</Button>
+                                <Button intent="accent">Main Action</Button>
                             </ControlsItem>
                             <ControlsItem>
                                 <Button onClick={handleDialogClose}>Close</Button>

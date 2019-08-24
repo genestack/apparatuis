@@ -22,22 +22,9 @@
     position: absolute;
     top: 6px;
     right: 6px;
-    border-radius: 100%;
+    width: 24px;
+    height: 24px;
     padding: 0;
-    width: 24px;
-    height: 24px;
-}
-
-.closeButton:focus:after {
-    border-radius: 100%;
-}
-
-.closeButtonContent {
-    display: flex;
-    position: relative;
-    width: 24px;
-    height: 24px;
-    justify-content: center;
 }
 
 .circularProgress {

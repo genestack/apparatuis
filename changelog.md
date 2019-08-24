@@ -4,13 +4,25 @@
 
 ### Added
 
--   Add `<BaseButton />` component
+-   Add new `<BaseButton />` component
 -   Add `<Field />` component
+-   [Button] Add `size` property with new `small` and `tiny` variants
+-   [Button] Add `intent` property with new `alarm` variant
+-   [Button] Add `ghost` separated property
 
 ### Changed
 
+-   [Button] Breaking change `variant="ghost"` -> `ghost={true}`
+-   [Button] Breaking change `variant="primary"` -> `intent="accent"`
+-   [Button] Breaking change `variant="outlined"` -> `ghost intent="accent"`
+-   [Button] Breaking change `as` -> `component`
+-   [Button] Breaking change `tiny` -> `size="small"`
 -   Update dependencies
 -   Rename `<BaseButton />` to `<InteractiveElement />`
+
+### Removed
+
+-   [Button] Remove `href` property (to enable `href` property use `component="a"`)
 
 ### Fixed
 

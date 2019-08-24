@@ -38,7 +38,7 @@ export interface Props extends TargetProps, WithClasses<keyof typeof styles> {
     /** Hides close button */
     hideCloseButton?: boolean;
     /** Properties passed to close button */
-    closeButtonProps?: ButtonProps;
+    closeButtonProps?: ButtonProps & React.ComponentPropsWithRef<'button'>;
     /** Calls when dialog closes by user action */
     onClose?: CloseHandler;
     /** Calls when dialog close transition is completed */
@@ -134,9 +134,10 @@ export function Dialog(props: Props) {
 
                             {!hideCloseButton ? (
                                 <Button
-                                    icon={<CrossIcon />}
-                                    variant="ghost"
                                     {...closeButtonProps}
+                                    ghost
+                                    size="tiny"
+                                    component="button"
                                     className={classNames(
                                         closeButtonProps.className,
                                         classes.closeButton
@@ -145,7 +146,9 @@ export function Dialog(props: Props) {
                                         closeButtonProps.onClick,
                                         handleCloseButtonClick
                                     )}
-                                />
+                                >
+                                    <CrossIcon />
+                                </Button>
                             ) : null}
                         </Paper>
                     </Transition>

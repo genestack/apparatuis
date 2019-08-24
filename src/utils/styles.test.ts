@@ -39,11 +39,11 @@ describe('result of calling mergeClassesProps', () => {
             expect(props).toHaveProperty('classes');
         });
 
-        it('should have classes property with valid keys', () => {
+        it('should have classes property with any keys', () => {
             const props = mergeClassesSample();
             expect(props.classes).toHaveProperty('root');
             expect(props.classes).toHaveProperty('comp');
-            expect(props.classes).not.toHaveProperty('any');
+            expect(props.classes).toHaveProperty('any');
         });
 
         it('should have classes property with valid values', () => {

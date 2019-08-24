@@ -7,4 +7,4 @@
  */
 export const root: string;
 export const button: string;
-export const outlined: string;
+export const ghostAccent: string;

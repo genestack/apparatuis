@@ -25,7 +25,7 @@ handleTransformOriginChange = (event) => setState({transformOrigin: event.target
                 <Typography>Hi! I am could be hidden.</Typography>
             </Paper>
         </Grow>
-        <Button variant="primary" style={{width: 100, marginTop: 8}} onClick={handleButtonClick}>
+        <Button intent="accent" style={{width: 100, marginTop: 8}} onClick={handleButtonClick}>
             {state.visible ? 'Hide' : 'Show'}
         </Button>{' '}
     </ControlsItem>

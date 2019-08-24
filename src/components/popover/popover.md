@@ -99,7 +99,7 @@ const placements = [
         </PageContent>
     </ControlsItem>
     <ControlsItem>
-        <Button onClick={handleButtonClick} variant="primary">
+        <Button onClick={handleButtonClick} intent="accent">
             Toggle popover
         </Button>
         <Popover

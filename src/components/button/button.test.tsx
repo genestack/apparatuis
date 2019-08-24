@@ -36,8 +36,8 @@ describe('<Button />', () => {
         expect(document.getElementById('test')).toBeInstanceOf(HTMLButtonElement);
     });
 
-    it('should render anchor element if href is passed', () => {
-        app.mount(<Button id="test" href="foo" />);
+    it('should render anchor element if href and component="a" are passed', () => {
+        app.mount(<Button id="test" component="a" href="foo" />);
         expect(document.getElementById('test')).toBeInstanceOf(HTMLAnchorElement);
         expect(document.getElementById('test')).toHaveProperty('href', 'http://localhost/foo');
     });

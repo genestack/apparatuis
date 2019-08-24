@@ -13,7 +13,6 @@
     display: inline-block;
     width: calc(var(--gs-spacing-unit) * 2.5);
     height: calc(var(--gs-spacing-unit) * 2.5);
-    position: relative;
     user-select: none;
 }
 
