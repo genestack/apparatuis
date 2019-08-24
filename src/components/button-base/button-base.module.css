@@ -1,0 +1,419 @@
+/*
+ * Copyright (c) 2011-2019 Genestack Limited
+ * All Rights Reserved
+ * THIS IS UNPUBLISHED PROPRIETARY SOURCE CODE OF GENESTACK LIMITED
+ * The copyright notice above does not evidence any
+ * actual or intended publication of such source code.
+ */
+
+/* stylelint-disable no-descending-specificity */
+
+@import "../../variables.css";
+
+:root {
+    --gs-focused-shadow: 0 0 0 2px var(--gs-color-action-25);
+    --gs-focused-shadow-inverted: 0 0 0 2px var(--gs-color-action-inverted-50);
+    --gs-background-normal-intent-default: rgba(222, 226, 231, 1);
+    --gs-color-alarm: rgba(226, 101, 101, 1);
+    --gs-color-alarm-active: rgba(172, 32, 32, 1);
+    --gs-background-ghost-intent-default: rgba(222, 226, 231, 0.6);
+    --gs-background-ghost-intent-default-active: rgba(222, 226, 231, 1);
+    --gs-box-shadow-normal-active: inset 0 2px 4px rgba(0, 0, 0, 0.25);
+}
+
+.root {
+    outline: none;
+    cursor: pointer;
+    background: transparent;
+    border: none;
+    padding: 0;
+    text-align: left;
+    text-decoration: none;
+    box-sizing: border-box;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--gs-color-black);
+    font-weight: normal;
+    font-family: var(--gs-font-family);
+    font-size: 14px;
+    line-height: 20px;
+    user-select: none;
+}
+
+.root.disabled,
+.root:disabled {
+    cursor: not-allowed;
+}
+
+.root.focused,
+.root:focus {
+    box-shadow: var(--gs-focused-shadow);
+}
+
+.inverted.root.focused,
+.inverted.root:focus {
+    box-shadow: var(--gs-focused-shadow-inverted);
+}
+
+.normal.active,
+.normal:active {
+    box-shadow: var(--gs-box-shadow-normal-active);
+}
+
+.normal.active.focused,
+.normal.active:focus,
+.normal:active.focused,
+.normal:active:focus {
+    box-shadow: var(--gs-box-shadow-normal-active), var(--gs-focused-shadow);
+}
+
+.inverted.normal.active.focused,
+.inverted.normal.active:focus,
+.inverted.normal:active.focused,
+.inverted.normal:active:focus {
+    box-shadow: var(--gs-box-shadow-normal-active), var(--gs-focused-shadow-inverted);
+}
+
+.root.normal.disabled,
+.root.normal:disabled,
+.inverted.root.normal.disabled,
+.inverted.root.normal:disabled {
+    box-shadow: none;
+}
+
+/* normal intent=default */
+
+.normal.intentDefault {
+    background: var(--gs-background-normal-intent-default);
+    color: var(--gs-color-action-text);
+}
+
+.normal.intentDefault :global(.gs-svg-icon-fill) {
+    fill: var(--gs-color-action-text-60);
+}
+
+.normal.intentDefault :global(.gs-svg-icon-stroke) {
+    stroke: var(--gs-color-action-text-60);
+}
+
+.normal.intentDefault.hovered,
+.normal.intentDefault:hover {
+    background: var(--gs-color-action-hover);
+    color: var(--gs-color-white);
+}
+
+.normal.intentDefault.hovered :global(.gs-svg-icon-fill),
+.normal.intentDefault:hover :global(.gs-svg-icon-fill) {
+    fill: var(--gs-color-white);
+}
+
+.normal.intentDefault.hovered :global(.gs-svg-icon-stroke),
+.normal.intentDefault:hover :global(.gs-svg-icon-stroke) {
+    stroke: var(--gs-color-white);
+}
+
+.normal.intentDefault.active,
+.normal.intentDefault:active {
+    background: var(--gs-color-action-text);
+    color: var(--gs-color-white);
+}
+
+.normal.intentDefault.active :global(.gs-svg-icon-fill),
+.normal.intentDefault:active :global(.gs-svg-icon-fill) {
+    fill: var(--gs-color-white);
+}
+
+.normal.intentDefault.active :global(.gs-svg-icon-stroke),
+.normal.intentDefault:active :global(.gs-svg-icon-stroke) {
+    stroke: var(--gs-color-white);
+}
+
+.normal.intentDefault.disabled,
+.normal.intentDefault:disabled {
+    background: var(--gs-background-normal-intent-default);
+    color: var(--gs-color-grey-50);
+}
+
+.normal.intentDefault.disabled :global(.gs-svg-icon-fill),
+.normal.intentDefault:disabled :global(.gs-svg-icon-fill) {
+    fill: var(--gs-color-grey-50);
+}
+
+.normal.intentDefault.disabled :global(.gs-svg-icon-stroke),
+.normal.intentDefault:disabled :global(.gs-svg-icon-stroke) {
+    stroke: var(--gs-color-grey-50);
+}
+
+/* normal intent=accent */
+
+.normal.accent {
+    background: var(--gs-color-action);
+    color: var(--gs-color-white);
+}
+
+.normal.accent :global(.gs-svg-icon-fill) {
+    fill: var(--gs-color-white);
+}
+
+.normal.accent :global(.gs-svg-icon-stroke) {
+    stroke: var(--gs-color-white);
+}
+
+.normal.accent.hovered,
+.normal.accent:hover {
+    background: var(--gs-color-action-hover);
+}
+
+.normal.accent.active,
+.normal.accent:active {
+    background: var(--gs-color-action-text);
+}
+
+.normal.accent.disabled,
+.normal.accent:disabled {
+    background: var(--gs-color-grey-50);
+}
+
+/* normal intent=alarm */
+
+.normal.alarm {
+    background: var(--gs-color-alarm);
+    color: var(--gs-color-white);
+}
+
+.normal.alarm :global(.gs-svg-icon-fill) {
+    fill: var(--gs-color-white);
+}
+
+.normal.alarm :global(.gs-svg-icon-stroke) {
+    stroke: var(--gs-color-white);
+}
+
+.normal.alarm.hovered,
+.normal.alarm:hover {
+    background: var(--gs-color-error);
+}
+
+.normal.alarm.active,
+.normal.alarm:active {
+    background: var(--gs-color-alarm-active);
+}
+
+.normal.alarm.disabled,
+.normal.alarm:disabled {
+    background: var(--gs-color-grey-50);
+}
+
+/* ghost intent=default */
+
+.ghost.intentDefault {
+    color: var(--gs-color-action-text);
+}
+
+.ghost.intentDefault :global(.gs-svg-icon-fill) {
+    fill: var(--gs-color-action-text-60);
+}
+
+.ghost.intentDefault :global(.gs-svg-icon-stroke) {
+    stroke: var(--gs-color-action-text-60);
+}
+
+.inverted.ghost.intentDefault {
+    color: var(--gs-color-white);
+}
+
+.inverted.ghost.intentDefault :global(.gs-svg-icon-fill) {
+    fill: var(--gs-color-grey-outline);
+}
+
+.inverted.ghost.intentDefault :global(.gs-svg-icon-stroke) {
+    stroke: var(--gs-color-grey-outline);
+}
+
+.ghost.intentDefault.hovered,
+.ghost.intentDefault:hover {
+    background: var(--gs-background-ghost-intent-default);
+}
+
+.inverted.ghost.intentDefault.hovered,
+.inverted.ghost.intentDefault:hover {
+    color: var(--gs-color-action-text);
+}
+
+.inverted.ghost.intentDefault.hovered :global(.gs-svg-icon-fill),
+.inverted.ghost.intentDefault:hover :global(.gs-svg-icon-fill) {
+    fill: var(--gs-color-action-text-60);
+}
+
+.inverted.ghost.intentDefault.hovered :global(.gs-svg-icon-stroke),
+.inverted.ghost.intentDefault:hover :global(.gs-svg-icon-stroke) {
+    stroke: var(--gs-color-action-text-60);
+}
+
+.ghost.intentDefault.active,
+.ghost.intentDefault:active,
+.inverted.ghost.intentDefault.active,
+.inverted.ghost.intentDefault:active {
+    color: var(--gs-color-black);
+    background: var(--gs-background-ghost-intent-default-active);
+}
+
+.ghost.intentDefault:active :global(.gs-svg-icon-fill),
+.ghost.intentDefault.active :global(.gs-svg-icon-fill),
+.inverted.ghost.intentDefault:active :global(.gs-svg-icon-fill),
+.inverted.ghost.intentDefault.active :global(.gs-svg-icon-fill) {
+    fill: var(--gs-color-black);
+}
+
+.ghost.intentDefault:active :global(.gs-svg-icon-stroke),
+.ghost.intentDefault.active :global(.gs-svg-icon-stroke),
+.inverted.ghost.intentDefault:active :global(.gs-svg-icon-stroke),
+.inverted.ghost.intentDefault.active :global(.gs-svg-icon-stroke) {
+    stroke: var(--gs-color-black);
+}
+
+/* ghost intent=accent */
+
+.ghost.accent {
+    color: var(--gs-color-action-text);
+    border: 1px solid var(--gs-color-grey-outline);
+}
+
+.ghost.accent :global(.gs-svg-icon-fill) {
+    fill: var(--gs-color-action-text-60);
+}
+
+.ghost.accent :global(.gs-svg-icon-stroke) {
+    stroke: var(--gs-color-action-text-60);
+}
+
+.inverted.ghost.accent {
+    color: var(--gs-color-white);
+    border: 1px solid var(--gs-color-grey-50);
+}
+
+.inverted.ghost.accent :global(.gs-svg-icon-fill) {
+    fill: var(--gs-color-grey-outline);
+}
+
+.inverted.ghost.accent :global(.gs-svg-icon-stroke) {
+    stroke: var(--gs-color-grey-outline);
+}
+
+.ghost.accent.hovered,
+.ghost.accent:hover {
+    background: var(--gs-background-ghost-intent-default);
+}
+
+.inverted.ghost.accent:hover,
+.inverted.ghost.accent.hovered {
+    color: var(--gs-color-action-text);
+}
+
+.inverted.ghost.accent:hover :global(.gs-svg-icon-fill),
+.inverted.ghost.accent.hovered :global(.gs-svg-icon-fill) {
+    fill: var(--gs-color-action-text-60);
+}
+
+.inverted.ghost.accent:hover :global(.gs-svg-icon-stroke),
+.inverted.ghost.accent.hovered :global(.gs-svg-icon-stroke) {
+    stroke: var(--gs-color-action-text-60);
+}
+
+.ghost.accent.active,
+.ghost.accent:active,
+.inverted.ghost.accent.active,
+.inverted.ghost.accent:active {
+    color: var(--gs-color-black);
+    background: var(--gs-background-ghost-intent-default-active);
+}
+
+.ghost.accent:active :global(.gs-svg-icon-fill),
+.ghost.accent.active :global(.gs-svg-icon-fill),
+.inverted.ghost.accent:active :global(.gs-svg-icon-fill),
+.inverted.ghost.accent.active :global(.gs-svg-icon-fill) {
+    fill: var(--gs-color-black);
+}
+
+.ghost.accent:active :global(.gs-svg-icon-stroke),
+.ghost.accent.active :global(.gs-svg-icon-stroke),
+.inverted.ghost.accent:active :global(.gs-svg-icon-stroke),
+.inverted.ghost.accent.active :global(.gs-svg-icon-stroke) {
+    stroke: var(--gs-color-black);
+}
+
+/* ghost intent=alarm */
+
+.ghost.alarm {
+    color: var(--gs-color-alarm);
+}
+
+.ghost.alarm :global(.gs-svg-icon-fill) {
+    fill: var(--gs-color-alarm);
+}
+
+.ghost.alarm :global(.gs-svg-icon-stroke) {
+    stroke: var(--gs-color-alarm);
+}
+
+.ghost.alarm.hovered,
+.ghost.alarm:hover {
+    background: var(--gs-color-error-10);
+}
+
+.ghost.alarm.active,
+.ghost.alarm:active {
+    color: var(--gs-color-black);
+    background: var(--gs-color-error-10);
+}
+
+.ghost.alarm:active :global(.gs-svg-icon-fill),
+.ghost.alarm.active :global(.gs-svg-icon-fill) {
+    fill: var(--gs-color-black);
+}
+
+.ghost.alarm:active :global(.gs-svg-icon-stroke),
+.ghost.alarm.active :global(.gs-svg-icon-stroke) {
+    stroke: var(--gs-color-black);
+}
+
+.inverted.ghost.alarm.active,
+.inverted.ghost.alarm:active {
+    color: var(--gs-color-white);
+}
+
+.inverted.ghost.alarm:active :global(.gs-svg-icon-fill),
+.inverted.ghost.alarm.active :global(.gs-svg-icon-fill) {
+    fill: var(--gs-color-white);
+}
+
+.inverted.ghost.alarm:active :global(.gs-svg-icon-stroke),
+.inverted.ghost.alarm.active :global(.gs-svg-icon-stroke) {
+    stroke: var(--gs-color-white);
+}
+
+/* ghost disabled */
+
+.root.ghost.disabled,
+.root.ghost:disabled,
+.inverted.root.ghost.disabled,
+.inverted.root.ghost:disabled {
+    background: none;
+    color: var(--gs-color-grey-50);
+    box-shadow: none;
+}
+
+.root.ghost.disabled :global(.gs-svg-icon-fill),
+.root.ghost:disabled :global(.gs-svg-icon-fill),
+.inverted.root.ghost.disabled :global(.gs-svg-icon-fill),
+.inverted.root.ghost:disabled :global(.gs-svg-icon-fill) {
+    fill: var(--gs-color-grey-50);
+}
+
+.root.ghost.disabled :global(.gs-svg-icon-stroke),
+.root.ghost:disabled :global(.gs-svg-icon-stroke),
+.inverted.root.ghost.disabled :global(.gs-svg-icon-stroke),
+.inverted.root.ghost:disabled :global(.gs-svg-icon-stroke) {
+    stroke: var(--gs-color-grey-50);
+}
