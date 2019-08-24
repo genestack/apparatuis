@@ -17,7 +17,7 @@ handleButtonClick = () => setState(({visible}) => ({visible: !visible}));
         <Button
             style={{width: 100, marginTop: 8, position: 'relative'}}
             onClick={handleButtonClick}
-            variant="primary"
+            intent="accent"
         >
             {state.visible ? 'Hide' : 'Show'}
         </Button>

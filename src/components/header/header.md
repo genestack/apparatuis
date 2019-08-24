@@ -68,7 +68,7 @@ const exportMenu = (
         </MenuHandler>
         <HeaderItem shrink grow>
             <HeaderItemSecondaryActions>
-                <Button tiny variant="ghost" icon={<ShareIcon />} />
+                <Button size="small" ghost icon={<ShareIcon />} />
             </HeaderItemSecondaryActions>
             <HeaderItemText variant="section">
                 iPSC derived Pancreatic Beta Cell Def-PANC
@@ -76,7 +76,7 @@ const exportMenu = (
         </HeaderItem>
         <HeaderBlock>
             <HeaderItemCell>
-                <Button tiny>Trial version</Button>
+                <Button size="small">Trial version</Button>
             </HeaderItemCell>
         </HeaderBlock>
         <HeaderItem>

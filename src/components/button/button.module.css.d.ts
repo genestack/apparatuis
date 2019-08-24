@@ -6,22 +6,12 @@
  * actual or intended publication of such source code.
  */
 export const root: string;
-
-export const defaultSize: string;
-export const tiny: string;
 export const icon: string;
-export const content: string;
-export const ellipsis: string;
-export const inverted: string;
-
-export const withText: string;
-export const withIcon: string;
-export const withIconAndText: string;
-
-export const defaultVariant: string;
-export const primary: string;
-export const outlined: string;
+export const singleIcon: string;
 export const ghost: string;
-
-export const active: string;
-export const disabled: string;
+export const accent: string;
+export const nowrap: string;
+export const small: string;
+export const tiny: string;
+export const rounded: string;
+export const text: string;

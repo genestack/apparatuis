@@ -10,10 +10,7 @@ import * as React from 'react';
 import {Props} from './button';
 
 /** ButtonContext value */
-export interface ButtonContextValue {
-    variant?: Props['variant'];
-    className?: Props['className'];
-}
+export type ButtonContextValue = Pick<Props, 'className' | 'ghost' | 'intent' | 'size'>;
 
 /** Internal Button context */
 export const ButtonContext = React.createContext<ButtonContextValue>({});

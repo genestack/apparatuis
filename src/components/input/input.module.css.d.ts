@@ -14,4 +14,3 @@ export const prependCell: string;
 export const appendCell: string;
 export const spinner: string;
 export const clearButton: string;
-export const clearButtonIcon: string;

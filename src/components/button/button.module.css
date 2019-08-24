@@ -5,132 +5,85 @@
  * The copyright notice above does not evidence any
  * actual or intended publication of such source code.
  */
-
-/* stylelint-disable no-descending-specificity */
-
-@import "../../variables.css";
-@import "./variant-default.css";
-@import "./variant-primary.css";
-@import "./variant-outlined.css";
-@import "./variant-ghost.css";
-
 .root {
-    composes: resetButton from "../../variables.css";
-    box-sizing: border-box;
-    display: inline-flex;
-    vertical-align: middle;
-    align-items: center;
-    border-radius: calc(var(--gs-spacing-unit) / 2);
-    cursor: pointer;
-    position: relative;
-    max-width: 100%;
-    text-align: left;
+    border-radius: 4px;
+    min-width: 0;
+    min-height: 32px;
+    padding: 6px 16px;
 }
 
-:root {
-    --gs-button-box-shadow-active: inset 0 2px 4px rgba(0, 0, 0, 0.25);
-}
-
-.root.disabled,
-.root:disabled {
-    cursor: not-allowed;
-    outline: none;
-}
-
-.root:focus:after {
-    content: "";
-    position: absolute;
-    left: 0;
-    top: 0;
-    bottom: 0;
-    right: 0;
-    border-radius: calc(var(--gs-spacing-unit) / 2);
-    box-shadow: 0 0 0 2px var(--gs-color-action-25);
-}
-
-.root.inverted:focus:after {
-    box-shadow: 0 0 0 2px var(--gs-color-action-inverted-50);
-}
-
-.root.disabled:after,
-.root:disabled:after {
-    display: none;
-}
-
-.defaultSize {
-    padding-top: calc(var(--gs-spacing-unit) * 0.75);
-    padding-bottom: calc(var(--gs-spacing-unit) * 0.75);
-}
-
-.tiny {
-    padding-top: calc(var(--gs-spacing-unit) / 4);
-    padding-bottom: calc(var(--gs-spacing-unit) / 4);
-}
-
-.withText {
-    padding-left: calc(var(--gs-spacing-unit) * 2);
-    padding-right: calc(var(--gs-spacing-unit) * 2);
-}
-
-.tiny.withText {
-    padding-left: var(--gs-spacing-unit);
-    padding-right: var(--gs-spacing-unit);
-}
-
-.withIcon {
-    padding-left: calc(var(--gs-spacing-unit) / 2);
-    padding-right: calc(var(--gs-spacing-unit) / 2);
-}
-
-.tiny.withIcon {
-    padding-left: 0;
-    padding-right: 0;
-}
-
-.withIconAndText {
-    padding-left: var(--gs-spacing-unit);
-    padding-right: calc(var(--gs-spacing-unit) * 2);
-}
-
-.tiny.withIconAndText {
-    padding-left: 0;
-    padding-right: var(--gs-spacing-unit);
+.rounded {
+    border-radius: 100em;
 }
 
 .icon {
-    margin: 0 2px;
-    flex-grow: 0;
-    flex-shrink: 0;
     display: inline-flex;
-    position: relative; /* IE11 inner padding fix */
+    align-items: center;
+    justify-content: space-around;
+    width: 20px;
+    height: 20px;
+    margin-right: 4px;
+    margin-left: -10px;
+    flex-shrink: 0;
+    flex-grow: 0;
 }
 
-.content {
-    flex-grow: 1;
+.text {
     flex-shrink: 1;
-    position: relative; /* IE11 inner padding fix */
+    flex-grow: 0;
 }
 
-/**
- * In IE 11 `:active` selector does not work
- * for elements that have nested elements.
- */
-@media all and (-ms-high-contrast: none) {
-    *::-ms-backdrop,
-    .icon {
-        pointer-events: none;
-    }
-
-    *::-ms-backdrop,
-    .content {
-        pointer-events: none;
-    }
-}
-
-.ellipsis {
+.nowrap {
     white-space: nowrap;
-    text-overflow: ellipsis;
     overflow: hidden;
-    min-width: 0;
-    text-align: center;
+    text-overflow: ellipsis;
+}
+
+.ghost.accent {
+    padding: 5px 15px;
+}
+
+.singleIcon {
+    margin-right: -10px;
+}
+
+.small {
+    min-height: 24px;
+    padding: 2px 8px;
+}
+
+.small .icon {
+    margin-left: -6px;
+}
+
+.small .singleIcon {
+    margin-right: -6px;
+}
+
+.small.ghost.accent {
+    padding: 1px 7px;
+}
+
+.tiny {
+    min-height: 20px;
+    padding: 0 4px;
+}
+
+.tiny .icon {
+    margin-left: -4px;
+    margin-top: -1px;
+    margin-bottom: -1px;
+}
+
+.tiny .singleIcon {
+    margin-right: -4px;
+}
+
+.tiny.ghost.accent {
+    padding: 0 3px;
+}
+
+.tiny .text {
+    margin-top: -1px;
+    margin-bottom: -1px;
 }

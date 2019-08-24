@@ -222,7 +222,7 @@ const {SearchIcon} = require('../../icons/search-icon.tsx');
                         />
 
                         <Typography box="paragraph" style={{marginTop: 20}}>
-                            <Button type="submit" variant="primary">
+                            <Button type="submit" intent="accent">
                                 Submit
                             </Button>
                         </Typography>

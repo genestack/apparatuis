@@ -95,16 +95,4 @@
     position: absolute;
     top: 0;
     right: 0;
-    width: 20px;
-    height: 20px;
-    border-radius: 100%;
-    padding: 0;
-}
-
-.clearButton:focus:after {
-    border-radius: 100%;
-}
-
-.clearButtonIcon {
-    margin: 0;
 }
