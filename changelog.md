@@ -4,6 +4,7 @@
 
 ### Added
 
+-   Add `<BaseButton />` component
 -   Add `<Field />` component
 
 ### Changed

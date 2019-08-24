@@ -28,6 +28,7 @@
     --gs-color-success: rgba(119, 171, 48, 1);
     --gs-color-warning: rgba(246, 166, 85, 1);
     --gs-color-error: rgba(244, 113, 113, 1);
+    --gs-color-error-10: rgba(244, 113, 113, 0.1);
 
     /* greys */
     --gs-color-black: rgba(51, 51, 51, 1);
