@@ -75,17 +75,11 @@ export const ButtonBase: OverridableComponent<TypeMap> = React.forwardRef<
 
     const handleClick = React.useCallback<React.ReactEventHandler>(
         (event) => {
-            if (isNativeButton) {
-                if (onClick) {
-                    onClick(event);
-                }
-            } else {
-                if (!disabled && onClick) {
-                    onClick(event);
-                }
+            if (!disabled && onClick) {
+                onClick(event);
             }
         },
-        [onClick, disabled, isNativeButton]
+        [onClick, disabled]
     );
 
     const activeState = useButtonActiveState({
