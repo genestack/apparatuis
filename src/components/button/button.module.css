@@ -33,6 +33,22 @@
     flex-grow: 0;
 }
 
+/**
+ * In IE 11 `:active` selector does not work
+ * for elements that have nested elements.
+ */
+@media all and (-ms-high-contrast: none) {
+    *::-ms-backdrop,
+    .icon {
+        pointer-events: none;
+    }
+
+    *::-ms-backdrop,
+    .text {
+        pointer-events: none;
+    }
+}
+
 .nowrap {
     white-space: nowrap;
     overflow: hidden;
