@@ -43,14 +43,14 @@
     margin: 0 calc(var(--gs-spacing-unit) / 2);
 }
 
-.gap6 {
-    margin-left: calc(-1 * var(--gs-spacing-unit) * 1.5);
-    margin-right: calc(-1 * var(--gs-spacing-unit) * 1.5);
-    width: calc(100% + var(--gs-spacing-unit) * 3);
+.gap4 {
+    margin-left: calc(-1 * var(--gs-spacing-unit));
+    margin-right: calc(-1 * var(--gs-spacing-unit));
+    width: calc(100% + var(--gs-spacing-unit) * 2);
 }
 
-.gap6 > .item {
-    margin: 0 calc(var(--gs-spacing-unit) * 1.5);
+.gap4 > .item {
+    margin: 0 calc(var(--gs-spacing-unit) * 1);
 }
 
 .gap8 {
