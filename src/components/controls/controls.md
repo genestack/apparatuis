@@ -178,7 +178,7 @@ const regulationButtons = (
                 </ControlsItem>
             </Controls>
 
-            <Controls gap={6}>
+            <Controls gap={4}>
                 <ControlsItem>
                     <Controls gap={1}>
                         <ControlsItem>

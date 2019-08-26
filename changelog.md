@@ -8,6 +8,7 @@
 
 ### Changed
 
+-   Breaking change `<Controls/>` `gap={6}` -> `gap={4}`
 -   Update dependencies
 -   Rename `<BaseButton />` to `<InteractiveElement />`
 

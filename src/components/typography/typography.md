@@ -51,7 +51,7 @@ initialState = {
 
     <Divider gap={4} variant="transparent" />
 
-    <Controls style={{alignItems: 'flex-start'}} gap={6}>
+    <Controls style={{alignItems: 'flex-start'}} gap={4}>
         <ControlsItem>
             <Controls justify="end" as="label">
                 <ControlsItem>

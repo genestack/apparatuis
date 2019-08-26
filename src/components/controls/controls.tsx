@@ -16,7 +16,7 @@ type TargetProps = React.HTMLAttributes<HTMLElement>;
 /** Controls public properties */
 export interface Props extends TargetProps {
     /** Defines size of gaps between items */
-    gap?: 0 | 1 | 2 | 6 | 8;
+    gap?: 0 | 1 | 2 | 4 | 8;
     /** Defines items justifying */
     justify?: 'start' | 'end' | 'center' | 'space-between';
     /** Redefines the target element */
@@ -39,7 +39,7 @@ export const Controls = (props: Props) => {
             className={classNames(rest.className, styles.container, {
                 [styles.gap1]: gap === 1,
                 [styles.gap2]: gap === 2,
-                [styles.gap6]: gap === 6,
+                [styles.gap4]: gap === 4,
                 [styles.gap8]: gap === 8,
                 [styles.justifyCenter]: justify === 'center',
                 [styles.justifyEnd]: justify === 'end',
