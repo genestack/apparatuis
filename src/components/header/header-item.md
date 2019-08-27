@@ -77,7 +77,7 @@ const WhiteControlsItem = (props) => <ControlsItem style={{background: '#fff'}} 
             <WhiteControlsItem>
                 <HeaderItem>
                     <HeaderItemSecondaryActions>
-                        <Button tiny variant="ghost" icon={<LockIcon />} />
+                        <Button size="small" ghost icon={<LockIcon />} />
                     </HeaderItemSecondaryActions>
                     <HeaderItemIcon>
                         <FileIcon />
@@ -95,7 +95,7 @@ const WhiteControlsItem = (props) => <ControlsItem style={{background: '#fff'}} 
                                 </Tooltip>
                             }
                         >
-                            <Button disabled tiny variant="ghost" icon={<LockIcon />} />
+                            <Button disabled size="small" ghost icon={<LockIcon />} />
                         </TooltipHandler>
                     </HeaderItemSecondaryActions>
                     <HeaderItemIcon>
@@ -110,7 +110,7 @@ const WhiteControlsItem = (props) => <ControlsItem style={{background: '#fff'}} 
                         <FileIcon />
                     </HeaderItemIcon>
                     <HeaderItemSecondaryActions>
-                        <Button tiny variant="ghost" icon={<LockIcon />} />
+                        <Button size="small" ghost icon={<LockIcon />} />
                     </HeaderItemSecondaryActions>
                     <HeaderItemText>File link name</HeaderItemText>
                 </HeaderItem>
@@ -122,7 +122,7 @@ const WhiteControlsItem = (props) => <ControlsItem style={{background: '#fff'}} 
                     </HeaderItemIcon>
                     <HeaderItemText>File link name</HeaderItemText>
                     <HeaderItemSecondaryActions>
-                        <Button tiny variant="ghost" icon={<MoreIcon />} />
+                        <Button size="small" ghost icon={<MoreIcon />} />
                     </HeaderItemSecondaryActions>
                 </HeaderItem>
             </WhiteControlsItem>
@@ -131,8 +131,8 @@ const WhiteControlsItem = (props) => <ControlsItem style={{background: '#fff'}} 
             <WhiteControlsItem>
                 <HeaderItem>
                     <HeaderItemSecondaryActions>
-                        <Button tiny variant="ghost" icon={<ShareIcon />} />
-                        <Button tiny variant="ghost" icon={<LockIcon />} />
+                        <Button size="small" ghost icon={<ShareIcon />} />
+                        <Button size="small" ghost icon={<LockIcon />} />
                     </HeaderItemSecondaryActions>
                     <HeaderItemIcon>
                         <FileIcon />
@@ -144,8 +144,8 @@ const WhiteControlsItem = (props) => <ControlsItem style={{background: '#fff'}} 
                 <TooltipHandler tooltip={<Tooltip>Did not expect to see me here?</Tooltip>}>
                     <HeaderItem disabled>
                         <HeaderItemSecondaryActions>
-                            <Button disabled tiny variant="ghost" icon={<ShareIcon />} />
-                            <Button disabled tiny variant="ghost" icon={<LockIcon />} />
+                            <Button disabled size="small" ghost icon={<ShareIcon />} />
+                            <Button disabled size="small" ghost icon={<LockIcon />} />
                         </HeaderItemSecondaryActions>
                         <HeaderItemIcon>
                             <FileIcon />
@@ -175,14 +175,14 @@ const WhiteControlsItem = (props) => <ControlsItem style={{background: '#fff'}} 
             <WhiteControlsItem>
                 <HeaderBlock>
                     <HeaderItemCell>
-                        <Button tiny>Trial version</Button>
+                        <Button size="small">Trial version</Button>
                     </HeaderItemCell>
                 </HeaderBlock>
             </WhiteControlsItem>
             <WhiteControlsItem>
                 <HeaderBlock>
                     <HeaderItemCell>
-                        <Button tiny icon={<ShareIcon />}>
+                        <Button size="small" icon={<ShareIcon />}>
                             Trial version
                         </Button>
                     </HeaderItemCell>
@@ -193,7 +193,7 @@ const WhiteControlsItem = (props) => <ControlsItem style={{background: '#fff'}} 
             <WhiteControlsItem>
                 <HeaderItem href="#">
                     <HeaderItemSecondaryActions>
-                        <Button tiny variant="ghost" icon={<ShareIcon />} />
+                        <Button size="small" ghost icon={<ShareIcon />} />
                     </HeaderItemSecondaryActions>
                     <HeaderItemText>Button inside an anchor</HeaderItemText>
                 </HeaderItem>

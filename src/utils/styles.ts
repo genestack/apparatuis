@@ -109,17 +109,16 @@ export function mergeClassesProps<P extends WithClasses<K>, K extends string>(
     props: P,
     styles: ClassNames<K>
 ): InternalProps<P, K> {
-    const {classes: publicClasses, ...rest} = props as any;
+    const {classes: publicClasses = {}, ...rest} = props as any;
 
     const privateClasses: Partial<ClassNames<K>> = {};
 
-    (Object.keys(styles) as K[]).forEach((key) => {
-        const value = styles[key];
-        privateClasses[key] = classNames(
-            privateClasses[key],
-            value,
-            publicClasses && publicClasses[key]
-        );
+    const keys = Array.from(
+        new Set([...Object.keys(styles), ...Object.keys(publicClasses)])
+    ) as K[];
+
+    keys.forEach((key) => {
+        privateClasses[key] = classNames(privateClasses[key], styles[key], publicClasses[key]);
     });
 
     return {

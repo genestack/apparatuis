@@ -8,104 +8,89 @@
 import classNames from 'classnames';
 import * as React from 'react';
 
-import {DarkContext} from '../../utils/dark-context';
+import {Omit} from '../../utils/omit';
+import {OverridableComponent, OverridableProps} from '../../utils/overridable-component';
 import {WithClasses, mergeClassesProps} from '../../utils/styles';
-// import icon's css first for right styles cascading
-import '../icon';
-import {Typography} from '../typography';
+import {ButtonBaseProps, ButtonBase} from '../button-base';
 
 import {ButtonContext} from './button-context';
 import * as styles from './button.module.css';
 
-type ButtonProps = React.ButtonHTMLAttributes<HTMLElement>;
-type AnchorProps = React.AnchorHTMLAttributes<HTMLElement>;
-
-type TargetProps = ButtonProps & AnchorProps;
+type ButtonBaseClassNames = keyof Exclude<ButtonBaseProps['classes'], undefined>;
+type ButtonClassNames = keyof typeof styles;
 
 /** Button public properties */
-export interface Props extends TargetProps, WithClasses<keyof typeof styles> {
-    /** Style variant of the button */
-    variant?: 'primary' | 'outlined' | 'ghost';
+export interface Props
+    extends Omit<ButtonBaseProps, 'classes'>,
+        WithClasses<ButtonBaseClassNames | ButtonClassNames> {
     /** Component that is inserted in the left side of the button. */
     icon?: React.ReactNode;
     /** If `true` text in the button is wrapped */
     wrap?: boolean;
-    /** Small version of the button */
-    tiny?: boolean;
-    /** If `true` element has `pressed` style. */
-    active?: boolean;
-    /** If `true` element has `hover` style. */
-    iconProps?: React.HTMLAttributes<HTMLDivElement>;
-    /** Properties that is be spread to the button children container */
-    contentProps?: React.HTMLAttributes<HTMLDivElement>;
-    /** Inverses colors on dark backgrounds */
-    inverted?: boolean;
+    /** Size of button */
+    size?: 'normal' | 'small' | 'tiny';
+    /** If `true` button will have fully-rounded border */
+    rounded?: boolean;
 }
 
-/** Button component */
-export const Button = (props: Props) => {
-    const darkContext = React.useContext(DarkContext);
+interface TypeMap {
+    props: Props;
+    defaultType: 'button';
+}
+
+/**
+ * Button component
+ *
+ * @example ./all-button-combinations.md
+ */
+export const Button: OverridableComponent<TypeMap> = React.forwardRef<
+    HTMLButtonElement,
+    OverridableProps<TypeMap>
+    // tslint:disable-next-line: no-shadowed-variable
+>(function Button(props, ref) {
     const buttonContext = React.useContext(ButtonContext);
 
     const {
-        variant = buttonContext.variant,
-        active,
+        ghost = buttonContext.ghost,
+        intent = buttonContext.intent,
+        size = buttonContext.size,
         icon,
-        tiny,
-        wrap,
-        disabled,
-        classes,
         children,
-        tabIndex = 0,
-        iconProps = {},
-        contentProps = {},
-        inverted = darkContext,
+        wrap,
+        rounded,
+        classes,
         ...rest
     } = mergeClassesProps(props, styles);
 
-    const iconElement = icon ? (
-        <div {...iconProps} className={classNames(iconProps.className, classes.icon)}>
-            {icon}
-        </div>
-    ) : null;
-
-    const childElement = children ? (
-        <div
-            {...contentProps}
-            className={classNames(contentProps.className, classes.content, {
-                [classes.ellipsis]: !wrap
-            })}
-        >
-            {children}
-        </div>
-    ) : null;
-
-    const Component = typeof rest.href === 'string' ? 'a' : 'button';
-
     return (
-        <Typography<TargetProps>
-            type={Component === 'button' ? 'button' : undefined}
+        <ButtonBase
+            ref={ref}
             {...rest}
-            as={Component}
-            tabIndex={disabled ? -1 : tabIndex}
-            disabled={disabled}
+            ghost={ghost}
+            intent={intent}
+            classes={classes}
             className={classNames(rest.className, classes.root, buttonContext.className, {
-                [classes.defaultSize]: !tiny,
-                [classes.tiny]: tiny,
-                [classes.withIcon]: !!icon && !children,
-                [classes.withText]: !icon && !!children,
-                [classes.withIconAndText]: !!icon && !!children,
-                [classes.defaultVariant]: !variant,
-                [classes.primary]: variant === 'primary',
-                [classes.outlined]: variant === 'outlined',
-                [classes.ghost]: variant === 'ghost',
-                [classes.active]: active,
-                [classes.disabled]: disabled,
-                [classes.inverted]: inverted
+                [classes.small]: size === 'small',
+                [classes.tiny]: size === 'tiny',
+                [classes.rounded]: rounded
             })}
         >
-            {iconElement}
-            {childElement}
-        </Typography>
+            {icon ? (
+                <span
+                    className={classNames(classes.icon, {
+                        [classes.singleIcon]: !children
+                    })}
+                >
+                    {icon}
+                </span>
+            ) : null}
+            <span
+                className={classNames(classes.text, {
+                    [classes.nowrap]: !wrap
+                })}
+            >
+                {children}
+            </span>
+        </ButtonBase>
     );
-};
+});

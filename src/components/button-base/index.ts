@@ -5,6 +5,4 @@
  * The copyright notice above does not evidence any
  * actual or intended publication of such source code.
  */
-export const root: string;
-export const button: string;
-export const ghostAccent: string;
+export {ButtonBase, Props as ButtonBaseProps} from './button-base';

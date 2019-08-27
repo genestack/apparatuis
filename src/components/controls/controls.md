@@ -62,7 +62,7 @@ const regulationButtons = (
 
             <Controls>
                 <ControlsItem>
-                    <Button variant="primary">Sign in</Button>
+                    <Button intent="accent">Sign in</Button>
                 </ControlsItem>
                 <ControlsItem>
                     <Button>Sign in as another user</Button>
@@ -98,22 +98,26 @@ const regulationButtons = (
 
             <Controls>
                 <ControlsItem>
-                    <ButtonGroup variant="outlined">{regulationButtons}</ButtonGroup>
+                    <ButtonGroup ghost intent="accent">
+                        {regulationButtons}
+                    </ButtonGroup>
                 </ControlsItem>
                 <ControlsItem>
-                    <ButtonGroup variant="outlined">
+                    <ButtonGroup ghost intent="accent">
                         <Button icon={<ArrowLeftIcon />} />
                         <Button icon={<ArrowRightIcon />} />
                     </ButtonGroup>
                 </ControlsItem>
                 <ControlsItem>
-                    <ButtonGroup variant="outlined">
+                    <ButtonGroup ghost intent="accent">
                         <Button>Create new</Button>
                         <Button icon={<MoreIcon />} />
                     </ButtonGroup>
                 </ControlsItem>
                 <ControlsItem shrink>
-                    <Button variant="outlined">Very very very long button text</Button>
+                    <Button ghost intent="accent">
+                        Very very very long button text
+                    </Button>
                 </ControlsItem>
             </Controls>
 
@@ -133,13 +137,13 @@ const regulationButtons = (
                 <ControlsItem>
                     <Controls gap={1}>
                         <ControlsItem>
-                            <Button variant="ghost" icon={<PlayIcon />} disabled />
+                            <Button ghost icon={<PlayIcon />} disabled />
                         </ControlsItem>
                         <ControlsItem>
-                            <Button variant="ghost" icon={<PauseIcon />} />
+                            <Button ghost icon={<PauseIcon />} />
                         </ControlsItem>
                         <ControlsItem>
-                            <Button variant="ghost" icon={<StopIcon />} />
+                            <Button ghost icon={<StopIcon />} />
                         </ControlsItem>
                     </Controls>
                 </ControlsItem>
@@ -196,10 +200,12 @@ const regulationButtons = (
 
             <Controls gap={8}>
                 <ControlsItem>
-                    <ButtonGroup variant="outlined">{regulationButtons}</ButtonGroup>
+                    <ButtonGroup ghost intent="accent">
+                        {regulationButtons}
+                    </ButtonGroup>
                 </ControlsItem>
                 <ControlsItem>
-                    <ButtonGroup variant="outlined">
+                    <ButtonGroup ghost intent="accent">
                         <Button icon={<ArrowLeftIcon />} />
                         <Button icon={<ArrowRightIcon />} />
                     </ButtonGroup>

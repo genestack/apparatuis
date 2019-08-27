@@ -7,5 +7,4 @@
  */
 export const root: string;
 export const closeButton: string;
-export const closeButtonContent: string;
 export const circularProgress: string;

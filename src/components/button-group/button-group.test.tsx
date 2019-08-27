@@ -21,11 +21,15 @@ afterEach(app.afterEach);
 describe('<ButtonGroup />', () => {
     it('should pass variant to containing buttons', () => {
         app.mount(
-            <ButtonGroup variant="ghost">
+            <ButtonGroup ghost intent="accent">
                 <Button id="button-1" />
             </ButtonGroup>
         );
 
-        expect(document.getElementById('button-1')!.className).toContain('ghost');
+        const className = document.getElementById('button-1')!.className;
+
+        expect(className).toContain('ghost');
+        expect(className).toContain('accent');
+        expect(className).toContain('ghostAccent');
     });
 });

@@ -18,23 +18,31 @@ type TargetProps = React.HTMLAttributes<HTMLDivElement>;
 
 /** ButtonGroup public properties */
 export interface Props extends TargetProps, WithClasses<keyof typeof styles> {
-    variant?: ButtonProps['variant'];
+    rootRef?: React.Ref<HTMLDivElement>;
+    intent?: ButtonProps['intent'];
+    ghost?: ButtonProps['ghost'];
+    size?: ButtonProps['size'];
 }
 
 /** Joined group of buttons */
 export const ButtonGroup = (props: Props) => {
-    const {variant, classes, ...rest} = mergeClassesProps(props, styles);
+    const {rootRef, intent, ghost, classes, size, ...rest} = mergeClassesProps(props, styles);
 
-    const contextValue: ButtonContextValue = {
-        variant,
-        className: classNames(classes.button, {
-            [classes.outlined]: variant === 'outlined'
-        })
-    };
+    const contextValue: ButtonContextValue = React.useMemo(
+        () => ({
+            intent,
+            ghost,
+            size,
+            className: classNames(classes.button, {
+                [classes.ghostAccent]: ghost && intent === 'accent'
+            })
+        }),
+        [ghost, intent, classes.button, classes.ghostAccent, size]
+    );
 
     return (
         <ButtonContext.Provider value={contextValue}>
-            <div {...rest} className={classNames(rest.className, classes.root)} />
+            <div {...rest} ref={rootRef} className={classNames(rest.className, classes.root)} />
         </ButtonContext.Provider>
     );
 };

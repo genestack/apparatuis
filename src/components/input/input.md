@@ -1,150 +1,97 @@
 ```js
-const {DarkContext} = require('../../utils/dark-context.ts');
+const {
+    Presentation,
+    usePresentation,
+    PresentationControls,
+    PresentationState,
+    PresentationPane
+} = require('../../../styleguide-components/presentation');
+
 const {SearchIcon} = require('../../icons/search-icon.tsx');
 const {HelpIcon} = require('../../icons/help-icon.tsx');
 
-timeout = null;
+function InputExample(props) {
+    const presentation = usePresentation();
 
-initialState = {
-    inverted: false,
-    showPlaceholder: false,
-    fullWidth: false,
-    showSearchIcon: false,
-    showHelpIcon: false,
-    disabled: false,
-    clearable: false,
-    invalid: false,
-    required: false,
-    readOnly: false,
-    spinner: 'none',
-    value: '',
-    loading: false,
-    simulateAutofill: false
-};
+    const [loading, setLoading] = React.useState(false);
+    const [value, setValue] = React.useState('');
+    const timeoutRef = React.useRef(null);
 
-renderCheckbox = (name, label) => (
-    <ListItem
-        as="label"
-        interactive
-        prepend={
-            <input
-                type="checkbox"
-                checked={state[name]}
-                onChange={(event) => setState({[name]: event.target.checked})}
-            />
-        }
-    >
-        {label}
-    </ListItem>
-);
-
-renderRadio = (name, label, value) => (
-    <ListItem
-        as="label"
-        interactive
-        prepend={
-            <input
-                type="radio"
-                name={name}
-                value={value}
-                checked={state[name] === value}
-                onChange={(event) => setState({[name]: value})}
-            />
-        }
-    >
-        {label}
-    </ListItem>
-);
-
-handleValueChange = (value) => {
-    if (value) {
-        clearTimeout(timeout);
-    }
-
-    setState({value, loading: !!value}, () => {
+    const handleValueChange = (value) => {
         if (value) {
-            timeout = setTimeout(() => setState({loading: false}), 2000);
+            clearTimeout(timeoutRef.current);
         }
-    });
-};
 
-handleClearButtonClick = () => setState({value: ''});
+        setValue(value);
+        setLoading(!!value);
+        timeoutRef.current = setTimeout(() => setLoading(false), 2000);
+    };
 
-<DarkContext.Provider value={state.inverted}>
-    <Paper style={{background: state.inverted ? '#252E42' : '#FFF'}}>
-        <PageContent>
-            <Controls>
-                <ControlsItem grow style={{textAlign: 'center'}}>
-                    <label
-                        style={{
-                            display: state.fullWidth ? 'block' : 'inline-block',
-                            textAlign: 'left'
-                        }}
-                    >
-                        <Typography variant="section" box="paragraph">
-                            Input
-                        </Typography>
-                        <Input
-                            value={state.value}
-                            invalid={state.invalid || undefined}
-                            required={state.required}
-                            onValueChange={handleValueChange}
-                            clearable={state.clearable}
-                            loading={
-                                state.spinner === 'none'
-                                    ? undefined
-                                    : state.spinner === 'permanent' ||
-                                      (state.spinner === 'on-change' && state.loading)
-                            }
-                            prepend={state.showSearchIcon ? <SearchIcon /> : null}
-                            append={state.showHelpIcon ? <HelpIcon /> : null}
-                            placeholder={state.showPlaceholder ? 'Placeholder' : null}
-                            disabled={state.disabled}
-                            fullWidth={state.fullWidth}
-                            readOnly={state.readOnly}
-                            onClearButtonClick={handleClearButtonClick}
-                            inputProps={{
-                                style: {
-                                    background: state.simulateAutofill ? '#E8F0FE' : 'transparent'
-                                }
-                            }}
-                        />
-                    </label>
-                </ControlsItem>
-                <ControlsItem>
-                    <DarkContext.Provider value={false}>
-                        <Paper>
-                            <List>
-                                {renderCheckbox('inverted', 'Inverted')}
-                                {renderCheckbox('showPlaceholder', 'Show Placeholder')}
-                                {renderCheckbox('fullWidth', 'Full Width')}
-                                {renderCheckbox('disabled', 'Disabled')}
-                                {renderCheckbox('invalid', 'Invalid')}
-                                {renderCheckbox('required', 'Required')}
-                                {renderCheckbox('readOnly', 'Read Only')}
-                                {renderCheckbox('simulateAutofill', 'Simulate autofill')}
-                                <Divider />
-                                <ListItem>
-                                    <Typography variant="section">Inner elements:</Typography>
-                                </ListItem>
-                                {renderCheckbox('showSearchIcon', 'Show Search Icon')}
-                                {renderCheckbox('showHelpIcon', 'Show Help Icon')}
-                                {renderCheckbox('clearable', 'Show Clear Button')}
-                                <Divider />
-                                <ListItem>
-                                    <Typography variant="section">Spinner:</Typography>
-                                </ListItem>
-                                {renderRadio('spinner', 'None', 'none')}
-                                {renderRadio('spinner', 'Show on value change', 'on-change')}
-                                {renderRadio('spinner', 'Permanent', 'permanent')}
-                            </List>
-                        </Paper>
-                    </DarkContext.Provider>
-                </ControlsItem>
-            </Controls>
-        </PageContent>
-    </Paper>
-</DarkContext.Provider>;
+    return (
+        <React.Fragment>
+            <Typography variant="section" box="paragraph">
+                Input
+            </Typography>
+            <Input
+                value={value}
+                invalid={presentation.invalid || undefined}
+                required={presentation.required}
+                onValueChange={handleValueChange}
+                clearable={presentation.clearable}
+                loading={
+                    presentation.spinner === 'permanent' ||
+                    (presentation.spinner === 'on-change' && loading)
+                }
+                prepend={presentation.showSearchIcon ? <SearchIcon /> : null}
+                append={presentation.showHelpIcon ? <HelpIcon /> : null}
+                placeholder={presentation.showPlaceholder ? 'Placeholder' : null}
+                disabled={presentation.disabled}
+                fullWidth={presentation.fullWidth}
+                readOnly={presentation.readOnly}
+                onClearButtonClick={() => handleValueChange('')}
+                inputProps={{
+                    style: {
+                        background: presentation.simulateAutofill ? '#E8F0FE' : 'transparent'
+                    }
+                }}
+            />
+        </React.Fragment>
+    );
+}
+
+<Presentation
+    initialState={{
+        spinner: 'none'
+    }}
+>
+    <PresentationPane>
+        <InputExample />
+    </PresentationPane>
+    <PresentationControls>
+        <PresentationState name="inverted" label="Inverted" />
+        <PresentationState name="showPlaceholder" label="Show Placeholder" />
+        <PresentationState name="fullWidth" label="Full Width" />
+        <PresentationState name="disabled" label="Disabled" />
+        <PresentationState name="invalid" label="Invalid" />
+        <PresentationState name="required" label="Required" />
+        <PresentationState name="readOnly" label="Read Only" />
+        <PresentationState name="simulateAutofill" label="Simulate auto-fill" />
+        <Divider />
+        <ListItem>
+            <Typography variant="section">Inner elements:</Typography>
+        </ListItem>
+        <PresentationState name="showSearchIcon" label="Show Search Icon" />
+        <PresentationState name="showHelpIcon" label="Show Help Icon" />
+        <PresentationState name="clearable" label="Show Clear Button" />
+        <Divider />
+        <ListItem>
+            <Typography variant="section">Spinner:</Typography>
+        </ListItem>
+        <PresentationState name="spinner" value="none" label="None" />
+        <PresentationState name="spinner" value="on-change" label="Show on value change" />
+        <PresentationState name="spinner" value="permanent" label="Permanent" />
+    </PresentationControls>
+</Presentation>;
 ```
 
 ### Usage examples
@@ -275,7 +222,7 @@ const {SearchIcon} = require('../../icons/search-icon.tsx');
                         />
 
                         <Typography box="paragraph" style={{marginTop: 20}}>
-                            <Button type="submit" variant="primary">
+                            <Button type="submit" intent="accent">
                                 Submit
                             </Button>
                         </Typography>

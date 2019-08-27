@@ -228,7 +228,6 @@ export function Input(props: Props) {
                             }
                             onClick={chain(onClearButtonClick, handleClearButtonClick)}
                             className={classes.clearButton}
-                            iconProps={{className: classes.clearButtonIcon}}
                         />
                     </div>
                 ) : null}

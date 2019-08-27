@@ -35,7 +35,7 @@ export interface Props extends TargetProps, WithClasses<keyof typeof styles> {
     /** State of countdown */
     countdown?: 'active' | 'stopped' | 'none';
     /** Close button properties */
-    closeButtonProps?: ButtonProps;
+    closeButtonProps?: ButtonProps & React.ComponentPropsWithRef<'button'>;
 }
 
 interface State {
@@ -72,20 +72,14 @@ export class Notification extends React.Component<Props, State> {
             ...rest
         } = mergeClassesProps(this.props, styles);
 
-        const {contentProps: closeButtonContentProps = {}} = closeButtonProps;
-
         const closeButton = (
             <Button
-                variant="ghost"
-                wrap
                 {...closeButtonProps}
-                contentProps={{
-                    ...closeButtonContentProps,
-                    className: classNames(
-                        closeButtonContentProps.className,
-                        classes.closeButtonContent
-                    )
-                }}
+                ghost
+                rounded
+                wrap
+                size="small"
+                component="button"
                 className={classNames(closeButtonProps.className, classes.closeButton)}
                 onClick={chain(closeButtonProps.onClick, this.handleCloseButtonClick)}
             >

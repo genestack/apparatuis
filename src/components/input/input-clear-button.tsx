@@ -11,8 +11,10 @@ import {ClearIcon} from '../../icons/clear-icon';
 import {ButtonProps, Button} from '../button';
 import {Fade} from '../fade';
 
+type TargetProps = ButtonProps & React.ComponentPropsWithoutRef<'button'>;
+
 /** InputClearButton public properties */
-export interface Props extends ButtonProps {
+export interface Props extends TargetProps {
     show?: boolean;
 }
 
@@ -33,7 +35,15 @@ export const InputClearButton = (props: Props) => {
                 setClearButtonExited(true);
             }}
         >
-            <Button tiny variant="ghost" icon={<ClearIcon />} inverted={false} {...rest} />
+            <Button
+                size="tiny"
+                ghost
+                component="button"
+                rounded
+                icon={<ClearIcon />}
+                inverted={false}
+                {...rest}
+            />
         </Fade>
     ) : null;
 };
