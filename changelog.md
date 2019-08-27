@@ -17,6 +17,7 @@
 -   [Button] Breaking change `variant="outlined"` -> `ghost intent="accent"`
 -   [Button] Breaking change `as` -> `component`
 -   [Button] Breaking change `tiny` -> `size="small"`
+-   Breaking change `<Controls/>` `gap={6}` -> `gap={4}`
 -   Update dependencies
 -   Rename `<BaseButton />` to `<InteractiveElement />`
 

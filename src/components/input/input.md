@@ -139,7 +139,7 @@ function InputExample(props) {
             </ControlsItem>
         </Controls>
         <Divider gap={2} variant="transparent" />
-        <Controls gap={6}>
+        <Controls gap={4}>
             <ControlsItem>
                 <Controls as="label">
                     <ControlsItem>
@@ -162,7 +162,7 @@ function InputExample(props) {
             </ControlsItem>
         </Controls>
         <Divider gap={2} variant="transparent" />
-        <Controls gap={6} as="form">
+        <Controls gap={4} as="form">
             <ControlsItem>
                 <Input placeholder="Email" defaultValue="qwerty" type="email" />
                 <Typography status="error" variant="caption" box="paragraph">
