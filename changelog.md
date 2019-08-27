@@ -2,10 +2,15 @@
 
 ## [Unreleased]
 
+## [8.0.0-alpha.29] - 2019-08-27
+
 ### Added
 
 -   Add new `<BaseButton />` component
 -   Add `<Field />` component
+-   Add `<BookmarkIcon >`, `<CheckMarkIcon />`, `<EyeIcon />`, `<KeyboardArrowLeftIcon />`,
+    `<LedIcon />`, `<PlusIcon />` and `<WarningIcon />` components. Now they can be
+    imported as `import {FooIcon, BarIcon} form 'genestack-ui/src/icons';`
 -   [Button] Add `size` property with new `small` and `tiny` variants
 -   [Button] Add `intent` property with new `alarm` variant
 -   [Button] Add `ghost` separated property

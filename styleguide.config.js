@@ -12,7 +12,7 @@ module.exports = {
             return props.parent ? !props.parent.fileName.match('node_modules') : false;
         }
     }).parse,
-    components: ['src/components/**/*.tsx'],
+    components: ['src/components/**/*.tsx', 'src/icons/icons.ts'],
     ignore: [
         '**/*.test.tsx',
         '**/index.tsx',
