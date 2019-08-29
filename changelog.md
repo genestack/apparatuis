@@ -2,6 +2,16 @@
 
 ## [Unreleased]
 
+## [8.0.0-alpha.30] - 2019-08-29
+
+### Added
+
+-   `<BookmarkBorderedIcon >`
+
+### Removed
+
+-   `<LedIcon />`
+
 ## [8.0.0-alpha.29] - 2019-08-27
 
 ### Added

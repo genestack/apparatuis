@@ -14,10 +14,16 @@ M7.5 4.5c-1.5 0-2 .5-2 2v8s0 1 1 1S9 13 10 13s2.5 2.5 3.5 2.5 1-1 1-1v-8c0-1.5-.
 `;
 
 /**
- * Bookmark icon
+ * Bordered bookmark icon
  */
-export const BookmarkIcon = createIcon(
+export const BookmarkBorderedIcon = createIcon(
     <svg viewBox="0 0 20 20">
-        <path d={bookmarkPath} className="gs-svg-icon-fill" strokeLinecap="round" />
+        <path
+            d={bookmarkPath}
+            className="gs-svg-icon-stroke"
+            strokeWidth="1"
+            strokeLinecap="round"
+            fill="none"
+        />
     </svg>
 );
