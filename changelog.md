@@ -2,6 +2,12 @@
 
 ## [Unreleased]
 
+## [8.0.0-alpha.31] - 2019-09-02
+
+### Fixed
+
+-   Export `ButtonGroup` from `genestack-ui`
+
 ## [8.0.0-alpha.30] - 2019-08-29
 
 ### Added
