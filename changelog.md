@@ -2,6 +2,10 @@
 
 ## [Unreleased]
 
+### Added
+
+-   Add `useMenuHandler` hook
+
 ## [8.0.0-alpha.31] - 2019-09-02
 
 ### Fixed

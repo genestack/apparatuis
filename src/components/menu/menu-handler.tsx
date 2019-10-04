@@ -7,10 +7,10 @@
  */
 import * as React from 'react';
 
-import {chain} from '../../utils/chain';
 import {RootRef} from '../root-ref';
 
 import {Props as MenuProps} from './menu';
+import {useMenuHandler} from './use-menu-handler';
 
 type MenuProp = (() => React.ReactElement<MenuProps>) | React.ReactElement<MenuProps>;
 
@@ -39,9 +39,10 @@ export interface Props {
     disableListeners?: boolean;
 }
 
-interface State {
-    open: boolean;
-    exited: boolean;
+/** Imperative MenuHandler API */
+export interface MenuHandlerApi {
+    open: () => void;
+    close: () => void;
 }
 
 /**
@@ -49,94 +50,49 @@ interface State {
  * It opens menu by children click event and closes menu on a item click
  * that does not have subMenu.
  */
-export class MenuHandler extends React.Component<Props, State> {
-    private childRef = React.createRef<HTMLElement>();
+export const MenuHandler = React.forwardRef<MenuHandlerApi, Props>(function MenuHandlerRef(
+    props,
+    ref
+) {
+    const childRef = React.useRef<HTMLElement>(null);
 
-    public state: State = {
-        open: false,
-        exited: true
+    const menuHandler = useMenuHandler({
+        disableListeners: props.disableListeners,
+        referenceElement: childRef.current
+    });
+
+    React.useImperativeHandle(
+        ref,
+        () => ({
+            open: menuHandler.open,
+            close: menuHandler.close
+        }),
+        []
+    );
+
+    const renderChild = () => {
+        const child =
+            typeof props.children === 'function'
+                ? props.children({open: menuHandler.isOpen})
+                : (props.children as React.ReactElement<ChildProps>);
+
+        return React.cloneElement(child, menuHandler.getReferenceProps(child.props));
     };
 
-    public close() {
-        this.setState({open: false});
-    }
-
-    public open() {
-        this.setState({open: true, exited: false});
-    }
-
-    private handleMenuValueSelect: MenuProps['onValueSelect'] = (value, event, menuItem) => {
-        if (!menuItem.props.subMenu) {
-            this.close();
-        }
-    };
-
-    private handleReferenceClick = () => {
-        this.open();
-    };
-
-    private handleReferenceKeyDown: ChildProps['onKeyDown'] = (event) => {
-        if (event.key === 'ArrowDown') {
-            event.preventDefault();
-            this.open();
-        }
-    };
-
-    private handleMenuClose = () => {
-        this.close();
-    };
-
-    private handleMenuClosed = () => {
-        this.setState({exited: true});
-    };
-
-    private renderChild() {
-        const {children, disableListeners} = this.props;
-
-        const child = (typeof children === 'function'
-            ? children({open: !this.state.exited})
-            : children) as React.ReactElement<ChildProps>;
-
-        const childProps: ChildProps = !disableListeners
-            ? {
-                  onClick: chain(child.props.onClick, this.handleReferenceClick),
-                  onKeyDown: chain(child.props.onKeyDown, this.handleReferenceKeyDown)
-              }
-            : {};
-
-        return React.cloneElement(child, childProps);
-    }
-
-    private renderMenu() {
-        const {open} = this.state;
-        const referenceElement = this.childRef.current;
-
-        const menu = referenceElement
-            ? typeof this.props.menu === 'function'
-                ? this.props.menu()
-                : this.props.menu
+    const renderMenu = () => {
+        const menu = menuHandler.isOpen
+            ? typeof props.menu === 'function'
+                ? props.menu()
+                : props.menu
             : null;
 
-        const menuProps: MenuProps | null =
-            menu && referenceElement
-                ? {
-                      open,
-                      referenceElement,
-                      onClose: chain(menu.props.onClose, this.handleMenuClose),
-                      onClosed: chain(menu.props.onClosed, this.handleMenuClosed),
-                      onValueSelect: chain(menu.props.onValueSelect, this.handleMenuValueSelect)
-                  }
-                : null;
+        return menu ? React.cloneElement(menu, menuHandler.getMenuProps(menu.props)) : null;
+    };
 
-        return menu && menuProps ? React.cloneElement(menu, menuProps) : null;
-    }
-
-    public render() {
-        return (
-            <React.Fragment>
-                <RootRef rootRef={this.childRef}>{this.renderChild()}</RootRef>
-                {this.renderMenu()}
-            </React.Fragment>
-        );
-    }
-}
+    return (
+        <React.Fragment>
+            <RootRef rootRef={childRef}>{renderChild()}</RootRef>
+            {renderMenu()}
+        </React.Fragment>
+    );
+});

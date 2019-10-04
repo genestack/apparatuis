@@ -212,3 +212,36 @@ items = new Array(100).fill(null).map((_, index) => (
     </Menu>
 </PageContent>;
 ```
+
+### useMenuHandler hook
+
+```js
+const {useMenuHandler} = require('.');
+
+function Example() {
+    const referenceElement = React.useRef();
+    const menu = useMenuHandler({referenceElement: referenceElement.current});
+
+    return (
+        <React.Fragment>
+            <Button
+                {...menu.getReferenceProps({
+                    ref: referenceElement,
+                    active: menu.isOpen
+                })}
+            >
+                Open menu
+            </Button>
+            <Menu {...menu.getMenuProps()}>
+                <MenuItem>Item 1</MenuItem>
+                <MenuItem>Item 2</MenuItem>
+                <MenuItem>Item 3</MenuItem>
+            </Menu>
+        </React.Fragment>
+    );
+}
+
+<PageContent as={Paper}>
+    <Example />
+</PageContent>;
+```
