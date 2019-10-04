@@ -10,7 +10,7 @@ import * as React from 'react';
 import {createTestApp} from '../../../test-utils/create-test-app';
 
 import {Menu} from './menu';
-import {MenuHandler, Props as MenuHandlerProps} from './menu-handler';
+import {MenuHandler, Props as MenuHandlerProps, MenuHandlerApi} from './menu-handler';
 import {MenuItem} from './menu-item';
 import {SubMenu} from './sub-menu';
 
@@ -23,20 +23,27 @@ afterEach(app.afterEach);
 describe('<MenuHandler />', () => {
     const setup = (props?: Partial<MenuHandlerProps>) => {
         const subMenu = () => <SubMenu />;
+        const ref = React.createRef<MenuHandlerApi>();
 
-        return app.mount(
-            <MenuHandler
-                menu={
-                    <Menu id="menu">
-                        <MenuItem id="item" />
-                        <MenuItem id="with-sub-menu" subMenu={subMenu} />
-                    </Menu>
-                }
-                {...props}
-            >
-                <button id="button" />
-            </MenuHandler>
+        const wrapper = app.mount(
+            // https://git.io/JecSk
+            <React.Fragment>
+                <MenuHandler
+                    ref={ref}
+                    menu={
+                        <Menu id="menu">
+                            <MenuItem id="item" />
+                            <MenuItem id="with-sub-menu" subMenu={subMenu} />
+                        </Menu>
+                    }
+                    {...props}
+                >
+                    <button id="button" />
+                </MenuHandler>
+            </React.Fragment>
         );
+
+        return {wrapper, ref};
     };
 
     it('should not show menu at mount', () => {
@@ -45,19 +52,19 @@ describe('<MenuHandler />', () => {
     });
 
     it('should open menu on child click', () => {
-        const wrapper = setup();
+        const {wrapper} = setup();
         wrapper.find('#button').simulate('click');
         expect(document.getElementById('menu')).toBeTruthy();
     });
 
     it('should open menu on child click', () => {
-        const wrapper = setup({disableListeners: true});
+        const {wrapper} = setup({disableListeners: true});
         wrapper.find('#button').simulate('click');
         expect(document.getElementById('menu')).toBeFalsy();
     });
 
     it('should close menu on menu item without sub menu', () => {
-        const wrapper = setup();
+        const {wrapper} = setup();
         wrapper.find('#button').simulate('click');
         wrapper
             .find('#item')
@@ -72,21 +79,21 @@ describe('<MenuHandler />', () => {
     });
 
     it('should expose open method', () => {
-        expect(setup().instance()).toHaveProperty('open', expect.any(Function));
+        expect(setup().ref.current).toHaveProperty('open', expect.any(Function));
     });
 
     it('should expose close method', () => {
-        expect(setup().instance()).toHaveProperty('close', expect.any(Function));
+        expect(setup().ref.current).toHaveProperty('close', expect.any(Function));
     });
 
     it('should open menu on ArrowDown keypress', () => {
-        const wrapper = setup();
+        const {wrapper} = setup();
         wrapper.find('#button').simulate('keydown', {key: 'ArrowDown'});
         expect(document.getElementById('menu')).toBeTruthy();
     });
 
     it('should not open menu on ArrowDown keypress if `disabledListeners` is passed', () => {
-        const wrapper = setup({disableListeners: true});
+        const {wrapper} = setup({disableListeners: true});
         wrapper.find('#button').simulate('keydown', {key: 'ArrowDown'});
         expect(document.getElementById('menu')).toBeFalsy();
     });

@@ -8,5 +8,6 @@
 export {Menu, Props as MenuProps} from './menu';
 export {MenuItem, Props as MenuItemProps} from './menu-item';
 export {SubMenu, Props as SubMenuProps} from './sub-menu';
-export {MenuHandler, Props as MenuHandlerProps} from './menu-handler';
+export {MenuHandler, Props as MenuHandlerProps, MenuHandlerApi} from './menu-handler';
 export {MenuCaption, Props as MenuCaptionProps} from './menu-caption';
+export {useMenuHandler} from './use-menu-handler';
