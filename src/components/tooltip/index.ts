@@ -6,4 +6,5 @@
  * actual or intended publication of such source code.
  */
 export {Tooltip, Props as TooltipProps} from './tooltip';
-export {TooltipHandler, Props as TooltipHandlerProps} from './tooltip-handler';
+export {TooltipHandler, Props as TooltipHandlerProps, TooltipHandlerApi} from './tooltip-handler';
+export {useTooltipHandler} from './use-tooltip-handler';

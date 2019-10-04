@@ -24,3 +24,27 @@ handleTooltipClose = () => setState({referenceElement: null});
     </Tooltip>
 </PageContent>;
 ```
+
+### useTooltipHandler hook
+
+```js
+const {useTooltipHandler} = require('./use-tooltip-handler');
+
+function Example() {
+    const referenceRef = React.useRef();
+    const tooltip = useTooltipHandler({
+        referenceElement: referenceRef.current
+    });
+
+    return (
+        <React.Fragment>
+            <Button {...tooltip.getReferenceProps({ref: referenceRef})}>Hover Me</Button>
+            <Tooltip {...tooltip.getTooltipProps()}>Hi human!</Tooltip>
+        </React.Fragment>
+    );
+}
+
+<PageContent as={Paper}>
+    <Example />
+</PageContent>;
+```

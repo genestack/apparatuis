@@ -44,6 +44,7 @@
     --gs-z-index-header: 800;
     --gs-z-index-drawer: 900;
     --gs-z-index-modal: 1000;
+    --gs-z-index-tooltip: 1100;
 }
 
 .resetButton {
