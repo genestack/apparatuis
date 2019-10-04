@@ -5,16 +5,12 @@
  * The copyright notice above does not evidence any
  * actual or intended publication of such source code.
  */
-import contains from 'dom-helpers/query/contains';
 import * as React from 'react';
 
-import {chain} from '../../utils/chain';
-import {debounce, Debounced} from '../../utils/debounce';
 import {RootRef} from '../root-ref';
 
 import {Props as TooltipProps} from './tooltip';
-
-const DEFAULT_OPEN_DELAY = 500;
+import {useTooltipHandler} from './use-tooltip-handler';
 
 interface ChildProps {
     onMouseEnter?: React.MouseEventHandler;
@@ -46,165 +42,62 @@ export interface Props {
     openDelay?: number;
 }
 
-interface State {
-    open: boolean;
-    exited: boolean;
+/** Imperative TooltipHandler API */
+export interface TooltipHandlerApi {
+    open: () => void;
+    close: () => void;
 }
 
 /**
  * Common tooltip handler.
  * It listen hover and focus on the reference element.
  */
-export class TooltipHandler extends React.Component<Props, State> {
-    private childRef = React.createRef<HTMLElement>();
+export const TooltipHandler = React.forwardRef<TooltipHandlerApi, Props>(function TooltipHandlerRef(
+    props,
+    ref
+) {
+    const childRef = React.useRef<HTMLElement>(null);
 
-    public state: State = {
-        open: false,
-        exited: true
+    const tooltipHandler = useTooltipHandler({
+        disableFocusListener: props.disableFocusListener,
+        disableHoverListener: props.disableHoverListener,
+        disableListeners: props.disableListeners,
+        referenceElement: childRef.current
+    });
+
+    React.useImperativeHandle(
+        ref,
+        () => ({
+            close: tooltipHandler.close,
+            open: tooltipHandler.open
+        }),
+        []
+    );
+
+    const renderChild = () => {
+        const child = (typeof props.children === 'function'
+            ? props.children({open: tooltipHandler.isOpen})
+            : props.children) as React.ReactElement<ChildProps>;
+
+        return React.cloneElement(child, tooltipHandler.getReferenceProps(child.props));
     };
 
-    private openDebounced: Debounced<() => void>;
-
-    constructor(props: Props) {
-        super(props);
-
-        const {openDelay = DEFAULT_OPEN_DELAY} = props;
-
-        this.openDebounced = debounce(() => {
-            this.open();
-        }, openDelay);
-    }
-
-    public componentWillUnmount() {
-        window.removeEventListener('mousemove', this.handleWindowMouseMove);
-        this.openDebounced.cancel();
-    }
-
-    public close() {
-        window.removeEventListener('mousemove', this.handleWindowMouseMove);
-        this.openDebounced.cancel();
-        this.setState({open: false});
-    }
-
-    public open() {
-        this.setState({open: true, exited: false});
-    }
-
-    private handleWindowMouseMove = (event: MouseEvent) => {
-        if (
-            this.childRef.current &&
-            event.target instanceof Node &&
-            !contains(this.childRef.current, event.target)
-        ) {
-            this.close();
-        }
-    };
-
-    private handleReferenceMouseEnter = () => {
-        if (
-            this.openDebounced.active ||
-            this.props.disableListeners ||
-            this.props.disableHoverListener
-        ) {
-            return;
-        }
-
-        this.openDebounced();
-        window.addEventListener('mousemove', this.handleWindowMouseMove);
-    };
-
-    private handleReferenceMouseLeave: ChildProps['onMouseLeave'] = (event) => {
-        if (
-            (event.relatedTarget instanceof Node &&
-                contains(event.currentTarget, event.relatedTarget)) ||
-            this.props.disableListeners ||
-            this.props.disableHoverListener
-        ) {
-            return;
-        }
-
-        this.close();
-    };
-
-    private handleReferenceFocus: ChildProps['onFocus'] = () => {
-        if (
-            this.openDebounced.active ||
-            this.props.disableListeners ||
-            this.props.disableFocusListener
-        ) {
-            return;
-        }
-
-        this.openDebounced();
-    };
-
-    private handleReferenceBlur: ChildProps['onBlur'] = (event) => {
-        if (
-            (event.relatedTarget instanceof Node &&
-                contains(event.currentTarget, event.relatedTarget)) ||
-            this.props.disableListeners ||
-            this.props.disableFocusListener
-        ) {
-            return;
-        }
-
-        this.close();
-    };
-
-    private handleTooltipClose = () => {
-        this.close();
-    };
-
-    private handleTooltipClosed = () => {
-        this.setState({exited: true});
-    };
-
-    private renderChild() {
-        const child = (typeof this.props.children === 'function'
-            ? this.props.children({open: !this.state.exited})
-            : this.props.children) as React.ReactElement<ChildProps>;
-
-        const childProps: ChildProps = {
-            onMouseEnter: chain(child.props.onMouseEnter, this.handleReferenceMouseEnter),
-            onMouseLeave: chain(child.props.onMouseLeave, this.handleReferenceMouseLeave),
-            onFocus: chain(child.props.onFocus, this.handleReferenceFocus),
-            onBlur: chain(child.props.onBlur, this.handleReferenceBlur)
-        };
-
-        return React.cloneElement(child, childProps);
-    }
-
-    private renderTooltip() {
-        const {open, exited} = this.state;
-        const referenceElement = this.childRef.current;
-
-        const tooltip = referenceElement
-            ? typeof this.props.tooltip === 'function'
-                ? this.props.tooltip()
-                : this.props.tooltip
+    const renderTooltip = () => {
+        const tooltip = tooltipHandler.isOpen
+            ? typeof props.tooltip === 'function'
+                ? props.tooltip()
+                : props.tooltip
             : null;
 
-        const tooltipProps: TooltipProps | null =
-            tooltip && referenceElement
-                ? {
-                      open,
-                      referenceElement,
-                      onClose: chain(tooltip.props.onClose, this.handleTooltipClose),
-                      onClosed: chain(tooltip.props.onClosed, this.handleTooltipClosed)
-                  }
-                : null;
-
-        return tooltip && tooltipProps && !exited
-            ? React.cloneElement(tooltip, tooltipProps)
+        return tooltip && tooltipHandler.isOpen
+            ? React.cloneElement(tooltip, tooltipHandler.getTooltipProps(tooltip.props))
             : null;
-    }
+    };
 
-    public render() {
-        return (
-            <React.Fragment>
-                {this.renderTooltip()}
-                <RootRef rootRef={this.childRef}>{this.renderChild()}</RootRef>
-            </React.Fragment>
-        );
-    }
-}
+    return (
+        <React.Fragment>
+            <RootRef rootRef={childRef}>{renderChild()}</RootRef>
+            {renderTooltip()}
+        </React.Fragment>
+    );
+});

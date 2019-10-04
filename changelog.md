@@ -1,10 +1,15 @@
 # Changelog
 
-## [Unreleased]
+## [8.0.0-alpha.32] - 2019-09-04
 
 ### Added
 
 -   Add `useMenuHandler` hook
+-   Add `useTooltipHandler` hook
+
+### Fixed
+
+-   Fix problem with `z` axis for `Tooltip`
 
 ## [8.0.0-alpha.31] - 2019-09-02
 

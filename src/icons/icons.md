@@ -28,7 +28,7 @@ function IconPlate({icon, name, variable}) {
                     </ControlsItem>
                     <ControlsItem>
                         <Typography>{name}</Typography>
-                        <Typography quiet variant="caption">
+                        <Typography quiet variant="caption" as="div">
                             <pre>{`import {${variable}} from 'genestack-ui/src/icons';`}</pre>
                         </Typography>
                     </ControlsItem>
@@ -58,7 +58,7 @@ function makeChunks(arr, chunkLength) {
             {chunk.map((iconName) => {
                 const Icon = icons[iconName];
                 return (
-                    <ControlsItem>
+                    <ControlsItem key={iconName}>
                         <IconPlate icon={<Icon />} name={iconName.replace('Icon', '')} variable={iconName} />
                     </ControlsItem>
                 )

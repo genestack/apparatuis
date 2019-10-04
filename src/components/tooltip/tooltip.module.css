@@ -19,6 +19,7 @@
 
 .popperContainer {
     pointer-events: none;
+    z-index: var(--gs-z-index-tooltip);
 }
 
 .tooltipContainer[data-placement^="top"] {
