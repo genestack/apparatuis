@@ -35,3 +35,4 @@ export {SearchIcon} from './search-icon';
 export {ShareIcon} from './share-icon';
 export {StopIcon} from './stop-icon';
 export {WarningIcon} from './warning-icon';
+export {UserIcon} from './user-icon';
