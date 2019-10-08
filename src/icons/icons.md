@@ -39,22 +39,21 @@ function IconPlate({icon, name, variable}) {
 }
 function makeChunks(arr, chunkLength) {
     const chunked = [];
-    let chunk = [];
-    arr.forEach((icon) => {
-        if(chunk.length < chunkLength) {
-            chunk.push(icon);
-        } else {
+    let chunk = null;
+    arr.forEach((icon, index) => {
+        if (index % chunkLength === 0) {
+            chunk = [];
             chunked.push(chunk);
-            chunk = [icon];
         }
+        chunk.push(icon);
     });
     return chunked;
 }
 
 
 <WithSeparator separator={<Divider gap={2} variant="transparent" />}>
-    {makeChunks(Object.keys(icons).sort(), 2).map((chunk) => (
-        <Controls>
+    {makeChunks(Object.keys(icons).sort(), 2).map((chunk, index) => (
+        <Controls key={index}>
             {chunk.map((iconName) => {
                 const Icon = icons[iconName];
                 return (

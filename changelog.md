@@ -2,6 +2,10 @@
 
 ## [Unreleased]
 
+## [8.0.0-alpha.33] - 2019-09-08
+
+-   Add `UserIcon` icon
+
 ## [8.0.0-alpha.32] - 2019-09-04
 
 ### Added
