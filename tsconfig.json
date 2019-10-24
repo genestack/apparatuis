@@ -1,12 +1,18 @@
 {
   "extends": "./node_modules/genestack-tsconfig/tsconfig.json",
   "compilerOptions": {
+    "jsx": "react",
     "allowJs": false,
     "checkJs": false,
     "typeRoots": ["./node_modules/@types", "./typings/"],
     "types": ["jest"],
+    "outDir": "./dist",
+    "module": "commonjs",
+    "declaration": true,
+    "sourceMap": true,
     "esModuleInterop": true,
     "noUnusedLocals": true
   },
-  "exclude": ["./dist", "./coverage", "**.js"]
+  "include": ["src/**/*"],
+  "exclude": ["./dist", "./coverage", "**.js", "**/*.test.ts", "**/*.test.tsx"]
 }

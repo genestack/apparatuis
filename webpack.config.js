@@ -11,6 +11,8 @@ const postcssCustomProperties = require('postcss-custom-properties');
 const postcssImport = require('postcss-import');
 const autoprefixer = require('autoprefixer');
 const calc = require('postcss-calc');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const process = require('process');
 
 // Styleguidist has dependencies that are not traspiled and do not work in IE.
 // Force babel-loader to transpile it manually.
@@ -23,19 +25,36 @@ const transpileDependencies = [
 ];
 
 const babelExcludePattern = new RegExp(`node_modules/(?!(${transpileDependencies.join('|')})/).*`);
+const isProduction = process.env.NODE_ENV === 'production';
 
 module.exports = {
     devtool: false,
     cache: true,
     entry: './src/index.ts',
-    output: {
-        libraryTarget: 'commonjs',
-        path: path.join(__dirname, 'dist'),
-        filename: 'genestack-ui.js'
-    },
+    output: isProduction
+        ? {
+              libraryTarget: 'commonjs',
+              path: path.join(__dirname, 'dist'),
+              filename: 'index.js'
+          }
+        : {
+              libraryTarget: 'commonjs',
+              path: path.join(__dirname, 'dist'),
+              filename: 'genestack-ui.js'
+          },
     resolve: {
-        extensions: ['.ts', '.tsx']
+        extensions: ['.ts', '.tsx', '.js']
     },
+    plugins: isProduction
+        ? [
+              new MiniCssExtractPlugin({
+                  // Options similar to the same options in webpackOptions.output
+                  // all options are optional
+                  filename: 'index.css',
+                  ignoreOrder: false // Enable to remove warnings about conflicting order
+              })
+          ]
+        : [],
     module: {
         rules: [
             {
@@ -55,6 +74,7 @@ module.exports = {
                 include: /src/,
                 use: [
                     'style-loader',
+                    ...(isProduction ? [MiniCssExtractPlugin.loader] : []),
                     {
                         loader: 'css-loader',
                         options: {
@@ -102,5 +122,17 @@ module.exports = {
             }
         ]
     },
-    externals: ['classnames', 'react', 'react-dom']
+    externals: [
+        'react',
+        'react-dom',
+        'classnames',
+        'dom-helpers',
+        'downshift',
+        'react-popper',
+        'react-textarea-autosize',
+        'react-transition-group'
+    ],
+    optimization: {
+        minimize: isProduction
+    }
 };

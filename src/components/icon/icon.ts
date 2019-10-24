@@ -37,7 +37,7 @@ export type Props = React.SVGAttributes<SVGElement>;
 export function createIcon<P extends Props = Props>(
     icon: React.FunctionComponent<P> | JSX.Element
 ) {
-    class Icon extends React.PureComponent<P> {
+    return class Icon extends React.PureComponent<P> {
         public render() {
             const element = typeof icon === 'function' ? icon(this.props) : icon;
 
@@ -54,7 +54,5 @@ export function createIcon<P extends Props = Props>(
                 className: classNames(className, this.props.className, styles.root)
             });
         }
-    }
-
-    return Icon;
+    };
 }
