@@ -325,6 +325,7 @@ export class MenuItem extends React.PureComponent<Props, State> {
                                     ...appendProps,
                                     className: classNames(appendProps.className, classes.append)
                                 }}
+                                titleProps={titleProps}
                                 append={
                                     append || subMenu ? (
                                         <React.Fragment>
