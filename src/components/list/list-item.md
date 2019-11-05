@@ -28,7 +28,6 @@ function ListItemExample() {
                         style={{width: 200, border: '1px solid #ddd'}}
                         interactive={presentation.interactive}
                         wrap={presentation.wrap}
-                        tiny={presentation.tiny}
                         prepend={
                             presentation.prepend === 'icon' ? (
                                 <DownloadIcon />
@@ -80,8 +79,7 @@ function ListItemExample() {
         prepend: null,
         appendCaption: false,
         appendIcon: false,
-        appendText: false,
-        tiny: false
+        appendText: false
     }}
 >
     <PresentationPane>
@@ -90,7 +88,6 @@ function ListItemExample() {
     <PresentationControls>
         <PresentationState name="longTitle" label="Long Title" />
         <PresentationState name="interactive" label="Interactive" />
-        <PresentationState name="tiny" label="Tiny" />
         <PresentationState name="disabled" label="Disabled" />
         <PresentationState name="wrap" label="Wrap title" />
         <PresentationState name="appendCaption" label="Append Caption" />
