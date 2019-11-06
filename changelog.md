@@ -2,6 +2,14 @@
 
 ## [Unreleased]
 
+## [8.0.0-alpha.34] - 2019-11-06
+
+### Changed
+-   Changed `background` to `background-color` css property of `ListItem`
+
+### Fixed
+-   Fixed passing of `titleProps` in `MenuItem`
+
 ## [8.0.0-alpha.33] - 2019-09-08
 
 -   Add `UserIcon` icon
