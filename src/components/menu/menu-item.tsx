@@ -340,7 +340,7 @@ export class MenuItem extends React.PureComponent<Props, State> {
                                 }
                                 onClick={chain(rest.onClick, this.createClickHandler(menuContext))}
                                 onFocus={chain(rest.onFocus, this.handleFocus)}
-                                onBlur={chain(rest.onFocus, this.handleBlur)}
+                                onBlur={chain(rest.onBlur, this.handleBlur)}
                                 onKeyDown={chain(rest.onKeyDown, this.handleKeyDown)}
                                 onMouseEnter={chain(rest.onMouseEnter, this.handleMouseEnter)}
                                 onMouseLeave={chain(rest.onMouseLeave, this.handleMouseLeave)}
