@@ -2,6 +2,10 @@
 
 ## [Unreleased]
 
+### Fixed
+
+-   Fix `onBlur` and `onFocus` props mismatching for `<MenuItem />`
+
 ## [8.0.0-alpha.34] - 2019-11-06
 
 ### Changed
