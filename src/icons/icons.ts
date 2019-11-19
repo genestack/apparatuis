@@ -14,6 +14,7 @@ export {BookmarkBorderedIcon} from './bookmark-bordered-icon';
 export {CheckMarkIcon} from './checkmark-icon';
 export {ClearIcon} from './clear-icon';
 export {CrossIcon} from './cross-icon';
+export {CrossSmallIcon} from './cross-small-icon';
 export {DownloadIcon} from './download-icon';
 export {EyeIcon} from './eye-icon';
 export {FileIcon} from './file-icon';

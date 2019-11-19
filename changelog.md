@@ -2,6 +2,12 @@
 
 ## [Unreleased]
 
+## [8.0.0-alpha.35] - 2019-11-19
+
+### Added
+
+-   `<CrossSmallIcon />`
+
 ### Fixed
 
 -   Fix `onBlur` and `onFocus` props mismatching for `<MenuItem />`
