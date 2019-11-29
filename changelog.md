@@ -2,6 +2,12 @@
 
 ## [Unreleased]
 
+## [8.0.0-alpha.37] - 2019-11-29
+
+### Fixed
+
+-   Fix icon colors for hovered ghost buttons
+
 ## [8.0.0-alpha.36] - 2019-11-29
 
 ### Changed

@@ -241,6 +241,16 @@
     color: var(--gs-color-action-text);
 }
 
+.ghost.intentDefault.hovered :global(.gs-svg-icon-fill),
+.ghost.intentDefault:hover :global(.gs-svg-icon-fill) {
+    fill: var(--gs-color-action-text);
+}
+
+.ghost.intentDefault.hovered :global(.gs-svg-icon-stroke),
+.ghost.intentDefault:hover :global(.gs-svg-icon-stroke) {
+    stroke: var(--gs-color-action-text);
+}
+
 .inverted.ghost.intentDefault.hovered :global(.gs-svg-icon-fill),
 .inverted.ghost.intentDefault:hover :global(.gs-svg-icon-fill) {
     fill: var(--gs-color-action-text-60);
@@ -309,6 +319,16 @@
 .inverted.ghost.accent:hover,
 .inverted.ghost.accent.hovered {
     color: var(--gs-color-action-text);
+}
+
+.ghost.accent:hover :global(.gs-svg-icon-fill),
+.ghost.accent.hovered :global(.gs-svg-icon-fill) {
+    fill: var(--gs-color-action-text);
+}
+
+.ghost.accent:hover :global(.gs-svg-icon-stroke),
+.ghost.accent.hovered :global(.gs-svg-icon-stroke) {
+    stroke: var(--gs-color-action-text);
 }
 
 .inverted.ghost.accent:hover :global(.gs-svg-icon-fill),
