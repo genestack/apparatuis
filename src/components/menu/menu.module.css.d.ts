@@ -6,3 +6,4 @@
  * actual or intended publication of such source code.
  */
 export const closed: string;
+export const subMenu: string;

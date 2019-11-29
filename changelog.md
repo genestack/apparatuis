@@ -2,6 +2,12 @@
 
 ## [Unreleased]
 
+## [8.0.0-alpha.34] - 2019-11-29
+
+### Changed
+
+-   Increase margins for `<List>` component to 16px
+
 ## [8.0.0-alpha.35] - 2019-11-19
 
 ### Added
