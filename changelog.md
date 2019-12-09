@@ -2,6 +2,13 @@
 
 ## [Unreleased]
 
+## [8.0.0-alpha.38] - 2019-11-09
+
+### Fixed
+
+-   Fix React warning about state updates after unmounting for `<TooltipHandler />`
+-   Enable `openDelay` works property for `<TooltipHandler />`
+
 ## [8.0.0-alpha.37] - 2019-11-29
 
 ### Fixed

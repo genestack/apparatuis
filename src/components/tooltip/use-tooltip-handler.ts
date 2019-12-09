@@ -27,6 +27,7 @@ interface Props {
     disableListeners?: boolean;
     disableHoverListener?: boolean;
     disableFocusListener?: boolean;
+    openDelay?: number;
 }
 
 interface State {
@@ -36,6 +37,8 @@ interface State {
 
 /** Hook to using tooltip */
 export function useTooltipHandler(props: Props) {
+    const {openDelay = DEFAULT_OPEN_DELAY} = props;
+
     const [state, setState] = React.useState<State>({
         exited: true,
         open: false
@@ -45,17 +48,19 @@ export function useTooltipHandler(props: Props) {
         setState({open: true, exited: false});
     }
 
-    const openDebouncedRef = React.useRef(debounce(open, DEFAULT_OPEN_DELAY));
+    const openDebouncedRef = React.useRef(debounce(open, openDelay));
+    const referenceElementRef = React.useRef(props.referenceElement);
+    referenceElementRef.current = props.referenceElement;
 
-    const handleWindowMouseMove = (event: MouseEvent) => {
+    const handleWindowMouseMove = React.useCallback((event: MouseEvent) => {
         if (
-            props.referenceElement &&
+            referenceElementRef.current &&
             event.target instanceof Node &&
-            !contains(props.referenceElement, event.target)
+            !contains(referenceElementRef.current, event.target)
         ) {
             close();
         }
-    };
+    }, []);
 
     function close() {
         window.removeEventListener('mousemove', handleWindowMouseMove);

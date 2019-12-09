@@ -38,7 +38,10 @@ export interface Props {
     disableFocusListener?: boolean;
     /** Disable mouse events listener */
     disableHoverListener?: boolean;
-    /** Delay before tooltip will be shown (default 500ms) */
+    /**
+     * Delay before tooltip will be shown (default 500ms).
+     * This property could not be updated without remounting component.
+     */
     openDelay?: number;
 }
 
@@ -62,7 +65,8 @@ export const TooltipHandler = React.forwardRef<TooltipHandlerApi, Props>(functio
         disableFocusListener: props.disableFocusListener,
         disableHoverListener: props.disableHoverListener,
         disableListeners: props.disableListeners,
-        referenceElement: childRef.current
+        referenceElement: childRef.current,
+        openDelay: props.openDelay
     });
 
     React.useImperativeHandle(
