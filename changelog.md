@@ -2,7 +2,13 @@
 
 ## [Unreleased]
 
-## [8.0.0-alpha.38] - 2019-11-09
+## [8.0.0-alpha.39] - 2019-12-17
+
+### Fixed
+
+-   Pass all props from `<MarginBox />` to `<DialogBody />`
+
+## [8.0.0-alpha.38] - 2019-12-09
 
 ### Fixed
 
