@@ -2,6 +2,12 @@
 
 ## [Unreleased]
 
+## [8.0.0-alpha.41] - 2020-01-09
+
+### Added
+
+-   Add new `<Switch />` component
+
 ## [8.0.0-alpha.40] - 2020-01-09
 
 ### Changed
