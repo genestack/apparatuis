@@ -2,6 +2,12 @@
 
 ## [Unreleased]
 
+## [8.0.0-alpha.40] - 2020-01-09
+
+### Changed
+
+-   Update `typescript@3.7.2`
+
 ## [8.0.0-alpha.39] - 2019-12-17
 
 ### Fixed
