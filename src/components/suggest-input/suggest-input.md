@@ -68,39 +68,36 @@ function useItemsRequest() {
 
     const [state, setState] = React.useState(initialState);
 
-    React.useEffect(
-        () => {
-            let didCancel = false;
+    React.useEffect(() => {
+        let didCancel = false;
 
-            if (!state.query) {
-                setState((prevState) => ({
-                    ...prevState,
-                    loading: false,
-                    result: undefined,
-                    prevResult: prevState.result
-                }));
-            } else {
-                setState((prevState) => ({
-                    ...prevState,
-                    loading: true,
-                    result: undefined,
-                    prevResult: prevState.result || prevState.prevResult
-                }));
+        if (!state.query) {
+            setState((prevState) => ({
+                ...prevState,
+                loading: false,
+                result: undefined,
+                prevResult: prevState.result
+            }));
+        } else {
+            setState((prevState) => ({
+                ...prevState,
+                loading: true,
+                result: undefined,
+                prevResult: prevState.result || prevState.prevResult
+            }));
 
-                fetchItems(state.query).then((result) => {
-                    if (didCancel) {
-                        return;
-                    }
-                    setState((prevState) => ({...prevState, loading: false, result}));
-                });
-            }
+            fetchItems(state.query).then((result) => {
+                if (didCancel) {
+                    return;
+                }
+                setState((prevState) => ({...prevState, loading: false, result}));
+            });
+        }
 
-            return () => {
-                didCancel = true;
-            };
-        },
-        [state.query]
-    );
+        return () => {
+            didCancel = true;
+        };
+    }, [state.query]);
 
     return {
         loading: state.loading,
