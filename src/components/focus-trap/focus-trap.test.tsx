@@ -38,8 +38,8 @@ function simulateTabKeyDown({shiftKey}: {shiftKey: boolean} = {shiftKey: false})
         element !== document.body
             ? focusableElements.indexOf(element)
             : shiftKey
-                ? focusableElements.length
-                : -1;
+            ? focusableElements.length
+            : -1;
 
     const nextIndex = shiftKey ? currentIndex - 1 : currentIndex + 1;
 

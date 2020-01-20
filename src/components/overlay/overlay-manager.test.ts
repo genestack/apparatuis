@@ -16,8 +16,8 @@ import {hasVerticalScrollbar as _hasVerticalScrollbar} from '../../utils/has-ver
 
 import {OverlayManager, OverlayComponent, FIXED_BLOCKS_CLASS_NAME} from './overlay-manager';
 
-const getScrollbarSize = _scrollbarSize as (typeof _scrollbarSize) & jest.MockInstance<any>;
-const hasVerticalScrollbar = _hasVerticalScrollbar as (typeof _hasVerticalScrollbar) &
+const getScrollbarSize = _scrollbarSize as typeof _scrollbarSize & jest.MockInstance<any>;
+const hasVerticalScrollbar = _hasVerticalScrollbar as typeof _hasVerticalScrollbar &
     jest.MockInstance<any>;
 
 function createOverlayMock(): OverlayComponent {

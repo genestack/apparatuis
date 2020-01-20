@@ -140,7 +140,8 @@ initialState = {
                     <Typography box="paragraph">
                         <Typography quiet as="span" box="inline">
                             Quiet is useful for secondary information
-                        </Typography>, while <em>Italic</em> is done with &lt;EM&gt; tag.
+                        </Typography>
+                        , while <em>Italic</em> is done with &lt;EM&gt; tag.
                     </Typography>
                     <Typography box="paragraph" variant="section" status="error">
                         Error has occurred
