@@ -149,3 +149,40 @@ const {Presentation, PresentationPane} = require('../../../styleguide-components
     </PresentationPane>
 </Presentation>;
 ```
+
+### Button in disabled fieldset
+
+```js
+const {
+    Presentation,
+    usePresentation,
+    PresentationControls,
+    PresentationState,
+    PresentationPane
+} = require('../../../styleguide-components/presentation');
+
+function ButtonFieldsetExample() {
+    const presentation = usePresentation();
+
+    return (
+        <fieldset disabled={presentation.disabled}>
+            <Button
+                onClick={() => alert('click')}
+                component={presentation.span ? 'span' : 'button'}
+            >
+                Click
+            </Button>
+        </fieldset>
+    );
+}
+
+<Presentation initialState={{disabled: true, span: false}}>
+    <PresentationPane>
+        <ButtonFieldsetExample />
+    </PresentationPane>
+    <PresentationControls>
+        <PresentationState name="disabled" label="Disable fieldset" />
+        <PresentationState name="span" label="Use span element for button" />
+    </PresentationControls>
+</Presentation>;
+```

@@ -2,6 +2,12 @@
 
 ## [Unreleased]
 
+## [8.0.0-alpha.42] - 2020-02-04
+
+### Fix
+
+-   [ButtonBase] Do not call `onClick` from disabled fieldset (https://git.io/JvGuI)
+
 ## [8.0.0-alpha.41] - 2020-01-09
 
 ### Added

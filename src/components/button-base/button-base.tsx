@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2011-2019 Genestack Limited
+ * Copyright (c) 2011-2020 Genestack Limited
  * All Rights Reserved
  * THIS IS UNPUBLISHED PROPRIETARY SOURCE CODE OF GENESTACK LIMITED
  * The copyright notice above does not evidence any
@@ -75,7 +75,11 @@ export const ButtonBase: OverridableComponent<TypeMap> = React.forwardRef<
 
     const handleClick = React.useCallback<React.ReactEventHandler>(
         (event) => {
-            if (!disabled && onClick) {
+            // React has bug in Chrome. It calls `onClick` callback when button is
+            // in disabled fieldset. It is a workaround. @see https://git.io/JvGEj
+            const isHtmlDisabled = event.currentTarget.matches(':disabled');
+
+            if (!disabled && onClick && !isHtmlDisabled) {
                 onClick(event);
             }
         },
