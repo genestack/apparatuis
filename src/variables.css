@@ -34,6 +34,7 @@
     --gs-color-black: rgba(51, 51, 51, 1);
     --gs-color-white: rgba(255, 255, 255, 1);
     --gs-color-white-60: rgba(255, 255, 255, 0.6);
+    --gs-color-grey-light-background: rgba(243, 245, 247, 1);
     --gs-color-grey: rgba(130, 130, 130, 1);
     --gs-color-grey-50: rgba(130, 130, 130, 0.5);
     --gs-color-grey-background: rgba(235, 237, 239, 1);

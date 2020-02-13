@@ -2,6 +2,10 @@
 
 ## [Unreleased]
 
+### Added
+
+-   New color variable `--gs-color-grey-light-background`
+
 ## [8.0.0-alpha.42] - 2020-02-04
 
 ### Fix
