@@ -1,10 +1,19 @@
 # Changelog
 
-## [Unreleased]
+## [8.0.0-alpha.43] - 2020-02-13
+
+### Fixed
+
+-   Fix margins for list in `<SuggestInput />`
+-   Do not close `<Dialog />` when `overlayProps.disableClickListener = true`
+
+### Added
+
+-   New color variable `--gs-color-grey-light-background`
 
 ## [8.0.0-alpha.42] - 2020-02-04
 
-### Fix
+### Fixed
 
 -   [ButtonBase] Do not call `onClick` from disabled fieldset (https://git.io/JvGuI)
 

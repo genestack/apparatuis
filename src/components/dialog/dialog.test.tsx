@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2011-2019 Genestack Limited
+ * Copyright (c) 2011-2020 Genestack Limited
  * All Rights Reserved
  * THIS IS UNPUBLISHED PROPRIETARY SOURCE CODE OF GENESTACK LIMITED
  * The copyright notice above does not evidence any
@@ -159,5 +159,14 @@ describe('<Dialog />', () => {
                 .find(Divider)
                 .filterWhere((component) => component.prop('variant') === 'stroke')
         ).toHaveLength(1);
+    });
+
+    it('should not close dialog on backdrop click when overlayProps.disableClickListener = true', () => {
+        const onClose = jest.fn();
+        setup({onClose, overlayProps: {disableClickListener: true}});
+        const container = document.getElementById('container')!;
+        container.dispatchEvent(new MouseEvent('mousedown', {bubbles: true}));
+        container.dispatchEvent(new MouseEvent('click', {bubbles: true}));
+        expect(onClose).toHaveBeenCalledTimes(0);
     });
 });
