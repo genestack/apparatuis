@@ -1,10 +1,11 @@
 # Changelog
 
-## [Unreleased]
+## [8.0.0-alpha.43] - 2020-02-13
 
 ### Fixed
 
 -   Fix margins for list in `<SuggestInput />`
+-   Do not close `<Dialog />` when `overlayProps.disableClickListener = true`
 
 ### Added
 

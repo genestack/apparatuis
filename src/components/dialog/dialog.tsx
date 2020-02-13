@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2011-2019 Genestack Limited
+ * Copyright (c) 2011-2020 Genestack Limited
  * All Rights Reserved
  * THIS IS UNPUBLISHED PROPRIETARY SOURCE CODE OF GENESTACK LIMITED
  * The copyright notice above does not evidence any
@@ -79,6 +79,10 @@ export function Dialog(props: Props) {
 
         // Make sure the event starts and ends on the same DOM element.
         if (event.target !== mouseDownRef.current) {
+            return;
+        }
+
+        if (props.overlayProps?.disableClickListener === true) {
             return;
         }
 
