@@ -2,13 +2,17 @@
 
 ## [Unreleased]
 
+### Fixed
+
+-   Fix margins for list in `<SuggestInput />`
+
 ### Added
 
 -   New color variable `--gs-color-grey-light-background`
 
 ## [8.0.0-alpha.42] - 2020-02-04
 
-### Fix
+### Fixed
 
 -   [ButtonBase] Do not call `onClick` from disabled fieldset (https://git.io/JvGuI)
 
