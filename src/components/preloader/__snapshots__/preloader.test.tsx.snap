@@ -6,18 +6,23 @@ exports[`Preloader component renders correctly with count 1`] = `
 Array [
   <p
     className="preloader backgroundRegular width100 root body"
+    data-qa="typography"
   />,
   <p
     className="preloader backgroundRegular width75 root body"
+    data-qa="typography"
   />,
   <p
     className="preloader backgroundRegular width85 root body"
+    data-qa="typography"
   />,
   <p
     className="preloader backgroundRegular width100 root body"
+    data-qa="typography"
   />,
   <p
     className="preloader backgroundRegular width75 root body"
+    data-qa="typography"
   />,
 ]
 `;
@@ -26,21 +31,27 @@ exports[`Preloader component works with DarkContext 1`] = `
 Array [
   <p
     className="preloader backgroundInverted width100 root body inverted"
+    data-qa="typography"
   />,
   <p
     className="preloader backgroundInverted width75 root body inverted"
+    data-qa="typography"
   />,
   <p
     className="preloader backgroundInverted width85 root body inverted"
+    data-qa="typography"
   />,
   <p
     className="preloader backgroundInverted width100 root body inverted"
+    data-qa="typography"
   />,
   <p
     className="preloader backgroundInverted width75 root body inverted"
+    data-qa="typography"
   />,
   <p
     className="preloader backgroundInverted width85 root body inverted"
+    data-qa="typography"
   />,
 ]
 `;
@@ -49,18 +60,23 @@ exports[`Preloader component works with custom classnames 1`] = `
 Array [
   <p
     className="preloader backgroundRegular foo root body"
+    data-qa="typography"
   />,
   <p
     className="preloader backgroundRegular bar root body"
+    data-qa="typography"
   />,
   <p
     className="preloader backgroundRegular baz root body"
+    data-qa="typography"
   />,
   <p
     className="preloader backgroundRegular foo root body"
+    data-qa="typography"
   />,
   <p
     className="preloader backgroundRegular bar root body"
+    data-qa="typography"
   />,
 ]
 `;
@@ -69,21 +85,27 @@ exports[`Preloader component works with inverted without DarkContext 1`] = `
 Array [
   <p
     className="preloader backgroundInverted width100 root body inverted"
+    data-qa="typography"
   />,
   <p
     className="preloader backgroundInverted width75 root body inverted"
+    data-qa="typography"
   />,
   <p
     className="preloader backgroundInverted width85 root body inverted"
+    data-qa="typography"
   />,
   <p
     className="preloader backgroundInverted width100 root body inverted"
+    data-qa="typography"
   />,
   <p
     className="preloader backgroundInverted width75 root body inverted"
+    data-qa="typography"
   />,
   <p
     className="preloader backgroundInverted width85 root body inverted"
+    data-qa="typography"
   />,
 ]
 `;
@@ -93,26 +115,31 @@ exports[`Preloader component works with wrapAll and wrapEach as IntrinsicElement
   <span>
     <p
       className="preloader backgroundRegular width100 root body"
+      data-qa="typography"
     />
   </span>
   <span>
     <p
       className="preloader backgroundRegular width75 root body"
+      data-qa="typography"
     />
   </span>
   <span>
     <p
       className="preloader backgroundRegular width85 root body"
+      data-qa="typography"
     />
   </span>
   <span>
     <p
       className="preloader backgroundRegular width100 root body"
+      data-qa="typography"
     />
   </span>
   <span>
     <p
       className="preloader backgroundRegular width75 root body"
+      data-qa="typography"
     />
   </span>
 </div>
@@ -123,26 +150,31 @@ exports[`Preloader component works with wrapAll and wrapEach as fucntional compo
   <span>
     <p
       className="preloader backgroundRegular width100 root body"
+      data-qa="typography"
     />
   </span>
   <span>
     <p
       className="preloader backgroundRegular width75 root body"
+      data-qa="typography"
     />
   </span>
   <span>
     <p
       className="preloader backgroundRegular width85 root body"
+      data-qa="typography"
     />
   </span>
   <span>
     <p
       className="preloader backgroundRegular width100 root body"
+      data-qa="typography"
     />
   </span>
   <span>
     <p
       className="preloader backgroundRegular width75 root body"
+      data-qa="typography"
     />
   </span>
 </div>
