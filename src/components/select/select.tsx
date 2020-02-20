@@ -91,6 +91,7 @@ export class Select extends PureComponent<Props> {
 
         return (
             <select
+                data-qa="select"
                 className={selectClassName}
                 value={selectValue}
                 onChange={this.handleChange}

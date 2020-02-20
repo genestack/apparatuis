@@ -64,6 +64,7 @@ export const Button: OverridableComponent<TypeMap> = React.forwardRef<
 
     return (
         <ButtonBase
+            data-qa="button"
             ref={ref}
             {...rest}
             ghost={ghost}

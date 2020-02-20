@@ -67,6 +67,7 @@ export function Suggest(props: Props) {
     return (
         <React.Fragment>
             <Input
+                data-qa="suggest"
                 {...rest}
                 rootProps={{
                     ...rootProps,
@@ -75,6 +76,7 @@ export function Suggest(props: Props) {
                 className={classNames(rest.className, styles.root)}
             />
             <Popover
+                data-qa="suggest-popover"
                 placement="bottom-start"
                 roundCorners
                 {...popoverProps}

@@ -33,7 +33,7 @@ export const InputSpinner = (props: Props) => {
                 setSpinnerExited(true);
             }}
         >
-            <div {...rest}>
+            <div data-qa="input-spinner" {...rest}>
                 <Spinner size={SPINNER_SIZE} />
             </div>
         </Fade>

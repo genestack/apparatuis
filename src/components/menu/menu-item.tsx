@@ -312,6 +312,7 @@ export class MenuItem extends React.PureComponent<Props, State> {
                     <React.Fragment>
                         <RootRef rootRef={this.itemRef}>
                             <ListItem
+                                data-qa="menu-item"
                                 {...rest}
                                 interactive
                                 focused={this.state.highlighted}

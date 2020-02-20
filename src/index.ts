@@ -41,6 +41,7 @@ export * from './components/spinner';
 export * from './components/suggest';
 export * from './components/highlight';
 export * from './components/suggest-input';
+export * from './components/switch';
 export * from './components/text-label';
 export * from './components/preloader';
 export * from './components/field';

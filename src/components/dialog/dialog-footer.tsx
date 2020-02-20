@@ -38,6 +38,7 @@ export const DialogFooter = (props: Props) => {
         <DialogContext.Consumer>
             {(dialogContext) => (
                 <MarginBox
+                    data-qa="dialog-footer"
                     contained="in-dialog"
                     {...rest}
                     className={classNames(rest.className, styles.root)}

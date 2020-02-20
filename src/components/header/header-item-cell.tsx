@@ -17,5 +17,9 @@ export interface Props extends TargetProps {}
 
 /** Shortcut to ListItemCell */
 export const HeaderItemCell = (props: Props) => (
-    <div {...props} className={classNames(props.className, styles.root)} />
+    <div
+        data-qa="header-item-cell"
+        {...props}
+        className={classNames(props.className, styles.root)}
+    />
 );

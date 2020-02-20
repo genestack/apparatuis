@@ -25,5 +25,5 @@ export interface Props extends TargetProps {
 export const List = (props: Props) => {
     const {as: Component = 'ul', className, ...rest} = props;
 
-    return <Component {...rest} className={classNames(className, styles.root)} />;
+    return <Component data-qa="list" {...rest} className={classNames(className, styles.root)} />;
 };

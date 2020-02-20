@@ -15,4 +15,4 @@ export type Props = MarginBoxProps;
 /**
  * Shortcut to MarginBox for adding common paddings to the main page container
  */
-export const PageContent = (props: Props) => <MarginBox {...props} />;
+export const PageContent = (props: Props) => <MarginBox data-qa="page-content" {...props} />;

@@ -3,6 +3,7 @@
 exports[`Typography Component by default should match snapshot 1`] = `
 <p
   className="root body"
+  data-qa="typography"
 >
   Test String
 </p>
@@ -11,6 +12,7 @@ exports[`Typography Component by default should match snapshot 1`] = `
 exports[`Typography Component should use default tagnames depending on "variant" prop "as" prop provided as well as "variant" prop 1`] = `
 <h1
   className="root section"
+  data-qa="typography"
 >
   Foo
 </h1>
@@ -19,6 +21,7 @@ exports[`Typography Component should use default tagnames depending on "variant"
 exports[`Typography Component should use default tagnames depending on "variant" prop "body" variant provided 1`] = `
 <p
   className="root body"
+  data-qa="typography"
 >
   Foo
 </p>
@@ -27,6 +30,7 @@ exports[`Typography Component should use default tagnames depending on "variant"
 exports[`Typography Component should use default tagnames depending on "variant" prop "caption" variant provided 1`] = `
 <p
   className="root caption"
+  data-qa="typography"
 >
   Foo
 </p>
@@ -35,6 +39,7 @@ exports[`Typography Component should use default tagnames depending on "variant"
 exports[`Typography Component should use default tagnames depending on "variant" prop "header" variant provided 1`] = `
 <h2
   className="root header"
+  data-qa="typography"
 >
   Foo
 </h2>
@@ -43,6 +48,7 @@ exports[`Typography Component should use default tagnames depending on "variant"
 exports[`Typography Component should use default tagnames depending on "variant" prop "section" variant provided 1`] = `
 <h3
   className="root section"
+  data-qa="typography"
 >
   Foo
 </h3>
@@ -51,6 +57,7 @@ exports[`Typography Component should use default tagnames depending on "variant"
 exports[`Typography Component should use default tagnames depending on "variant" prop "title" variant provided 1`] = `
 <h1
   className="root title"
+  data-qa="typography"
 >
   Foo
 </h1>
@@ -59,6 +66,7 @@ exports[`Typography Component should use default tagnames depending on "variant"
 exports[`Typography Component should use default tagnames depending on "variant" prop no variant provided 1`] = `
 <p
   className="root body"
+  data-qa="typography"
 >
   Foo
 </p>
@@ -67,6 +75,7 @@ exports[`Typography Component should use default tagnames depending on "variant"
 exports[`Typography Component when pass "button" string to \`as\` property should match snapshot 1`] = `
 <button
   className="root body"
+  data-qa="typography"
 >
   Test String
 </button>
@@ -75,6 +84,7 @@ exports[`Typography Component when pass "button" string to \`as\` property shoul
 exports[`Typography Component when pass React.Component to \`as\` property should match snapshot 1`] = `
 <p
   className="root body"
+  data-qa="typography"
 >
   Test String
 </p>

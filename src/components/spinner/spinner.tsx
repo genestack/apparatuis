@@ -52,6 +52,7 @@ export const Spinner = (props: Props) => {
 
     return (
         <svg
+            data-qa="spinner"
             viewBox={`0 0 ${size} ${size}`}
             style={{width: size, height: size}}
             {...rest}

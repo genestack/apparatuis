@@ -174,6 +174,7 @@ export function Input(props: Props) {
 
     return (
         <Field
+            data-qa="input-field"
             tabIndex={!inputProps.disabled ? fieldTabIndex : undefined}
             className={classNames(className, classes.root)}
             style={style}
@@ -200,6 +201,7 @@ export function Input(props: Props) {
                 className={classNames(inputCellProps.className, classes.inputCell)}
             >
                 <input
+                    data-qa="input"
                     ref={chainRefs(innerInputRef, inputRef)}
                     {...inputProps}
                     className={classNames(classes.input, inputProps.className, {

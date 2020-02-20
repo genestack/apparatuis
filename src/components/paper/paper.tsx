@@ -27,5 +27,12 @@ export interface Props extends TargetProps {
 export function Paper(props: Props) {
     const {as: Component = 'div', rootRef, className, ...rest} = props;
 
-    return <Component {...rest} ref={rootRef} className={classNames(className, styles.root)} />;
+    return (
+        <Component
+            data-qa="paper"
+            {...rest}
+            ref={rootRef}
+            className={classNames(className, styles.root)}
+        />
+    );
 }

@@ -62,6 +62,7 @@ export const TextLabel = (props: Props) => {
 
     return (
         <Typography
+            data-qa="text-label"
             {...rest}
             as={Component}
             variant={variant}

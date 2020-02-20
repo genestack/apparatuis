@@ -98,7 +98,11 @@ export class Notification extends React.Component<Props, State> {
 
         return (
             <DarkContext.Provider value>
-                <Paper {...rest} className={classNames(rest.className, classes.root)}>
+                <Paper
+                    data-qa="notification"
+                    {...rest}
+                    className={classNames(rest.className, classes.root)}
+                >
                     <Divider variant="transparent" startGap={0} endGap={2} />
 
                     {children}

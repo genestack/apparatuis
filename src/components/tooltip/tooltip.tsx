@@ -119,6 +119,7 @@ export class Tooltip extends React.Component<Props> {
                             >
                                 <DarkContext.Provider value>
                                     <Typography
+                                        data-qa="tooltip"
                                         as="div"
                                         {...targetProps}
                                         className={classNames(targetProps.className, classes.root, {

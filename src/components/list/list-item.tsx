@@ -108,6 +108,7 @@ export function ListItem(props: Props) {
 
     return (
         <RenderComponent
+            data-qa="list-item"
             {...rest}
             {...renderComponentProps}
             disabled={disabled}
