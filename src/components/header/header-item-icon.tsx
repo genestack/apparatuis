@@ -20,5 +20,9 @@ export interface Props extends TargetProps {}
  * It has different margins from header item cell or text.
  */
 export const HeaderItemIcon = (props: Props) => (
-    <div {...props} className={classNames(props.className, styles.root)} />
+    <div
+        data-qa="header-item-icon"
+        {...props}
+        className={classNames(props.className, styles.root)}
+    />
 );

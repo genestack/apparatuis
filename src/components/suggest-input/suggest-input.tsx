@@ -179,6 +179,7 @@ export function SuggestInput(props: Props) {
 
                 return (
                     <Suggest
+                        data-qa="suggest-input"
                         {...inputProps}
                         onKeyDown={handleInputKeyDown}
                         value={value}
@@ -192,6 +193,7 @@ export function SuggestInput(props: Props) {
                     >
                         {open ? (
                             <List
+                                data-qa="suggest-input-list"
                                 {...listProps}
                                 className={classNames(listProps.className, styles.list)}
                             >

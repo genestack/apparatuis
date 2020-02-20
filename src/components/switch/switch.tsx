@@ -90,6 +90,7 @@ export const Switch = (props: Props) => {
 
     return (
         <div
+            data-qa="switch"
             {...rootProps}
             className={classNames(classes.root, rest.className, {
                 [classes.small]: size === 'small',

@@ -126,6 +126,7 @@ export function Dialog(props: Props) {
                 >
                     <Transition in={open} appear>
                         <Paper
+                            data-qa="dialog"
                             {...rest}
                             tabIndex={-1}
                             className={classNames(rest.className, classes.root, {

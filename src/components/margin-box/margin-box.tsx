@@ -50,6 +50,7 @@ export const MarginBox = (props: Props) => {
     return (
         <MarginBoxContext.Provider value={contained}>
             <Component
+                data-qa="margin-box"
                 {...rest}
                 className={classNames(rest.className, classes.root, {
                     [classes.inPage]: contained === 'in-page',

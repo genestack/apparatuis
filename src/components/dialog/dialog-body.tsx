@@ -33,6 +33,7 @@ export const DialogBody = (props: Props) => {
         <DialogContext.Consumer>
             {(dialogContext) => (
                 <MarginBox
+                    data-qa="dialog-body"
                     contained="in-dialog"
                     {...rest}
                     className={classNames(rest.className, classes.root, {

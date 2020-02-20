@@ -68,6 +68,7 @@ export const Link = (props: Props) => {
 
     return (
         <Typography<TargetProps>
+            data-qa="link"
             {...rest}
             href={href}
             tabIndex={tabIndex}

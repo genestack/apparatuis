@@ -57,6 +57,7 @@ export const Drawer = (props: Props) => {
         >
             <Slide {...slideProps} appear in={open} direction={side}>
                 <MarginBox
+                    data-qa="drawer"
                     tabIndex={-1}
                     contained="in-dialog"
                     {...rest}

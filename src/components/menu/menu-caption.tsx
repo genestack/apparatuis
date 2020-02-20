@@ -20,5 +20,9 @@ export interface Props extends TargetProps {}
 
 /** Caption that is used as menu item */
 export const MenuCaption = (props: Props) => (
-    <ListItem {...props} className={classNames(props.className, styles.root)} />
+    <ListItem
+        data-qa="menu-caption"
+        {...props}
+        className={classNames(props.className, styles.root)}
+    />
 );

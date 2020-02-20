@@ -42,7 +42,12 @@ export const ButtonGroup = (props: Props) => {
 
     return (
         <ButtonContext.Provider value={contextValue}>
-            <div {...rest} ref={rootRef} className={classNames(rest.className, classes.root)} />
+            <div
+                data-qa="button-group"
+                {...rest}
+                ref={rootRef}
+                className={classNames(rest.className, classes.root)}
+            />
         </ButtonContext.Provider>
     );
 };

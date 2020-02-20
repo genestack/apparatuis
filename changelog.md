@@ -1,5 +1,11 @@
 # Changelog
 
+[Unreleased]
+
+### Added
+
+-   Add `data-qa` attribute to all components
+
 ## [8.0.0-alpha.43] - 2020-02-13
 
 ### Fixed

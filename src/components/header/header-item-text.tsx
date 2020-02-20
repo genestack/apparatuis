@@ -17,5 +17,10 @@ export type Props = TypographyProps;
 
 /** Shortcut to ListItemText */
 export const HeaderItemText = (props: Props) => (
-    <Typography as="div" {...props} className={classNames(props.className, styles.root)} />
+    <Typography
+        data-qa="header-item-text"
+        as="div"
+        {...props}
+        className={classNames(props.className, styles.root)}
+    />
 );

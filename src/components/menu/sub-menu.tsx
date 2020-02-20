@@ -22,5 +22,11 @@ export type Props = ListProps;
  * caused by transition components.
  */
 export const SubMenu = wrapPureComponent((props: Props) => {
-    return <List {...props} className={classNames(props.className, styles.subMenu)} />;
+    return (
+        <List
+            data-qa="sub-menu"
+            {...props}
+            className={classNames(props.className, styles.subMenu)}
+        />
+    );
 });

@@ -93,6 +93,7 @@ export const ButtonBase: OverridableComponent<TypeMap> = React.forwardRef<
 
     return (
         <Component
+            data-qa="button-base"
             type={isNativeButton ? 'button' : undefined}
             {...rest}
             disabled={isNativeButton ? disabled : undefined}

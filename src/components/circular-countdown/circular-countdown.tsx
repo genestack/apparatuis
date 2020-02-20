@@ -151,6 +151,7 @@ export class CircularCountdown extends React.PureComponent<Props> {
 
         return (
             <svg
+                data-qa="circular-countdown"
                 viewBox={`0 0 ${DIAMETER} ${DIAMETER}`}
                 {...rest}
                 className={classNames(rest.className, classes.root)}

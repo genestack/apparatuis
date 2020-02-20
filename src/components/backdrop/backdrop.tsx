@@ -57,6 +57,7 @@ export class Backdrop extends React.Component<Props> {
                 onExited={chain(fadeProps.onExited, onExited)}
             >
                 <div
+                    data-qa="backdrop"
                     {...rest}
                     className={classNames(className, classes.root, {
                         [classes.invisible]: invisible

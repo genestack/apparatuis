@@ -121,6 +121,7 @@ export function Typography<T extends TargetProps = DefaultTargetProps>(props: Pr
 
                 return (
                     <Component
+                        data-qa="typography"
                         {...rest}
                         className={classNames(className, classes.root, {
                             [classes.header]: variant === 'header',

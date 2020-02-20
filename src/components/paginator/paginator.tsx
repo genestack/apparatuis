@@ -42,7 +42,7 @@ export const Paginator = (props: Props) => {
     const paginatorFullClassName = classNames(styles.container, className);
 
     return (
-        <div className={paginatorFullClassName}>
+        <div data-qa="paginator" className={paginatorFullClassName}>
             <div className={styles.info}>
                 {firstShownItem === lastShownItem
                     ? lastShownItem

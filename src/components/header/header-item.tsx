@@ -90,6 +90,7 @@ export class HeaderItem extends React.Component<Props> {
 
         return (
             <HeaderBlock
+                data-qa="header-item"
                 {...rest}
                 as={InteractiveElement}
                 {...interactiveElementProps}
