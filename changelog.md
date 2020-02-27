@@ -6,7 +6,7 @@
 
 ### Added
 
-- `<BooleanIcon />`, `<DateIcon />`, `<DecimalIcon />`, `<IntegerIcon />`, `<LinkIcon />`, `<TextIcon />`
+-   `<BooleanIcon />`, `<DateIcon />`, `<DecimalIcon />`, `<IntegerIcon />`, `<LinkIcon />`, `<TextIcon />`
 
 ## [8.0.0-alpha.44] - 2020-02-20
 
