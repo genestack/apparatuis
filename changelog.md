@@ -2,6 +2,12 @@
 
 [Unreleased]
 
+## [8.0.0-alpha.45] - 2020-02-27
+
+### Added
+
+-   `<BooleanIcon />`, `<DateIcon />`, `<DecimalIcon />`, `<IntegerIcon />`, `<LinkIcon />`, `<TextIcon />`
+
 ## [8.0.0-alpha.44] - 2020-02-20
 
 ### Added
