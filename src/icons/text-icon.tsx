@@ -7,6 +7,7 @@
  */
 
 import * as React from 'react';
+
 import {createIcon} from '../components/icon';
 
 /**
@@ -14,9 +15,6 @@ import {createIcon} from '../components/icon';
  */
 export const TextIcon = createIcon(
     <svg viewBox="0 0 20 20">
-        <path
-            d="M5 5H14V7H13V6H10V14H12V15H7V14H9V6H6V7H5V5Z"
-            className="gs-svg-icon-fill" 
-        />
+        <path d="M5 5H14V7H13V6H10V14H12V15H7V14H9V6H6V7H5V5Z" className="gs-svg-icon-fill" />
     </svg>
 );

@@ -7,6 +7,7 @@
  */
 
 import * as React from 'react';
+
 import {createIcon} from '../components/icon';
 
 /**
@@ -14,31 +15,10 @@ import {createIcon} from '../components/icon';
  */
 export const DateIcon = createIcon(
     <svg viewBox="0 0 20 20" fill="none">
-        <path
-             d="M3.5 4.5H17.5V16.5L3.5 16.5V4.5Z" 
-            className="gs-svg-icon-stroke"
-        />
-        <path
-             d="M6 7.5H9.5V10.5M6 13.5H9.5V10.5M9.5 10.5H7" 
-            className="gs-svg-icon-stroke"
-        />
-        <path
-             d="M13.5 13.5V7.5H12M13.5 13.5H11M13.5 13.5H15" 
-            className="gs-svg-icon-stroke"
-        />
-        <rect 
-            x="6"
-            y="2"
-            width="1"
-            height="3"
-            className="gs-svg-icon-fill"
-        />
-        <rect 
-            x="14"
-            y="2"
-            width="1"
-            height="3"
-            className="gs-svg-icon-fill"
-        />
+        <path d="M3.5 4.5H17.5V16.5L3.5 16.5V4.5Z" className="gs-svg-icon-stroke" />
+        <path d="M6 7.5H9.5V10.5M6 13.5H9.5V10.5M9.5 10.5H7" className="gs-svg-icon-stroke" />
+        <path d="M13.5 13.5V7.5H12M13.5 13.5H11M13.5 13.5H15" className="gs-svg-icon-stroke" />
+        <rect x="6" y="2" width="1" height="3" className="gs-svg-icon-fill" />
+        <rect x="14" y="2" width="1" height="3" className="gs-svg-icon-fill" />
     </svg>
 );
