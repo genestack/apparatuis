@@ -2,6 +2,19 @@
 
 [Unreleased]
 
+## [8.0.0-alpha.46] - 2020-03-05
+
+### Added
+
+-   `<TimeReverseIcon />`
+-   `<UploadIcon />`
+-   `<DraftIcon />`
+-   `<BulletIcon />`
+
+### Fixed
+
+-   Fixed `<MenuIcon />` path blurring on Windows
+
 ## [8.0.0-alpha.45] - 2020-02-27
 
 ### Added
