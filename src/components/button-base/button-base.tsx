@@ -10,6 +10,7 @@ import * as React from 'react';
 
 import {chain} from '../../utils/chain';
 import {DarkContext} from '../../utils/dark-context';
+import {matches} from '../../utils/matches';
 import {OverridableComponent, OverridableProps} from '../../utils/overridable-component';
 import {WithClasses, mergeClassesProps} from '../../utils/styles';
 
@@ -77,7 +78,7 @@ export const ButtonBase: OverridableComponent<TypeMap> = React.forwardRef<
         (event) => {
             // React has bug in Chrome. It calls `onClick` callback when button is
             // in disabled fieldset. It is a workaround. @see https://git.io/JvGEj
-            const isHtmlDisabled = event.currentTarget.matches(':disabled');
+            const isHtmlDisabled = matches(event.currentTarget, ':disabled');
 
             if (!disabled && onClick && !isHtmlDisabled) {
                 onClick(event);
