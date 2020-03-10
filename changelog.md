@@ -2,6 +2,12 @@
 
 [Unreleased]
 
+## [8.0.0-alpha.47] - 2020-03-10
+
+### Fixed
+
+-   Fix IE11 error for `Element.prototype.matches`
+
 ## [8.0.0-alpha.46] - 2020-03-05
 
 ### Added

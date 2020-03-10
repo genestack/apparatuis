@@ -1,10 +1,11 @@
 /*
- * Copyright (c) 2011-2019 Genestack Limited
+ * Copyright (c) 2011-2020 Genestack Limited
  * All Rights Reserved
  * THIS IS UNPUBLISHED PROPRIETARY SOURCE CODE OF GENESTACK LIMITED
  * The copyright notice above does not evidence any
  * actual or intended publication of such source code.
  */
+import {matches} from './matches';
 
 /**
  * See difference between focusable and reachable elements at
@@ -27,15 +28,6 @@ const REACHABLE_SELECTOR = [
     'textarea:not([disabled]):not([tabindex^="-"])',
     '[tabindex]:not([tabindex^="-"])'
 ].join(', ');
-
-function matches(element: Element, selector: string) {
-    // ie 11
-    if ((element as any).msMatchesSelector) {
-        return (element as any).msMatchesSelector(selector) as boolean;
-    }
-
-    return element.matches(selector);
-}
 
 /** Returns true if element could be focused */
 export function isElementFocusable(element: Element) {
