@@ -26,6 +26,7 @@ export interface Props extends TargetProps {
     placeholder?: string;
     hasError?: boolean;
     onValueChange: (value: any) => any;
+    selectRef?: React.Ref<HTMLSelectElement>;
 }
 
 /**
@@ -73,6 +74,7 @@ export class Select extends PureComponent<Props> {
             options,
             onChange,
             onValueChange,
+            selectRef,
             ...rest
         } = this.props;
 
@@ -96,6 +98,7 @@ export class Select extends PureComponent<Props> {
                 value={selectValue}
                 onChange={this.handleChange}
                 required={required}
+                ref={selectRef}
                 {...rest}
             >
                 {required && !isEmptyValue ? null : (
