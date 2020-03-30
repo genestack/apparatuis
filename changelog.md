@@ -2,6 +2,12 @@
 
 [Unreleased]
 
+## [8.0.0-alpha.48] - 2020-03-30
+
+### Added
+
+-   `<Select>`: add `selectRef` prop
+
 ## [8.0.0-alpha.47] - 2020-03-10
 
 ### Fixed
