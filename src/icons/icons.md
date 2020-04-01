@@ -18,50 +18,37 @@ const {Controls, ControlsItem} = require('../components/controls');
 
 function IconPlate({icon, name, variable}) {
     return (
-        <Paper style={{width: '450px'}}>
-            <PageContent>
-                <Controls gap={4}>
-                    <ControlsItem>{icon}</ControlsItem>
-                    <ControlsItem>
-                        <Typography>{name}</Typography>
-                        <Typography quiet variant="caption" as="div">
-                            <pre>{`import {${variable}} from 'genestack-ui/src/icons';`}</pre>
-                        </Typography>
-                    </ControlsItem>
-                </Controls>
-            </PageContent>
-        </Paper>
+        <div style={{padding: '8px 16px'}}>
+            <Controls gap={4}>
+                <ControlsItem>{icon}</ControlsItem>
+                <ControlsItem>
+                    <Typography>{name}</Typography>
+                    <Typography quiet variant="caption" as="div">
+                        <pre
+                            style={{margin: '0'}}
+                        >{`import {${variable}} from 'genestack-ui/src/icons';`}</pre>
+                    </Typography>
+                </ControlsItem>
+            </Controls>
+        </div>
     );
 }
-function makeChunks(arr, chunkLength) {
-    const chunked = [];
-    let chunk = null;
-    arr.forEach((icon, index) => {
-        if (index % chunkLength === 0) {
-            chunk = [];
-            chunked.push(chunk);
-        }
-        chunk.push(icon);
-    });
-    return chunked;
-}
 
-<WithSeparator separator={<Divider gap={2} variant="transparent" />}>
-    {makeChunks(Object.keys(icons).sort(), 2).map((chunk, index) => (
-        <Controls key={index}>
-            {chunk.map((iconName) => {
+<Paper>
+    <WithSeparator separator={<Divider style={{marginLeft: 50, width: 'auto'}} gap={0} />}>
+        {Object.keys(icons)
+            .sort()
+            .map((iconName, index) => {
                 const Icon = icons[iconName];
                 return (
-                    <ControlsItem key={iconName}>
-                        <IconPlate
-                            icon={<Icon />}
-                            name={iconName.replace('Icon', '')}
-                            variable={iconName}
-                        />
-                    </ControlsItem>
+                    <IconPlate
+                        key={index}
+                        icon={<Icon />}
+                        name={iconName.replace('Icon', '')}
+                        variable={iconName}
+                    />
                 );
             })}
-        </Controls>
-    ))}
-</WithSeparator>;
+    </WithSeparator>
+</Paper>;
 ```
