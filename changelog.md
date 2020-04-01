@@ -2,8 +2,12 @@
 
 [Unreleased]
 
+## [8.0.0-alpha.49] - 2020-04-01
+
 ### Added
 
+-   Add `<RadioIcon />`
+-   Add `<CheckedRadioIcon />`
 -   Add `gs-color-grey-outline-20` color
 
 ## [8.0.0-alpha.48] - 2020-03-30
