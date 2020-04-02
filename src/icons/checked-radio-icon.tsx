@@ -16,7 +16,7 @@ import {createIcon} from '../components/icon';
  */
 export const CheckedRadioIcon = createIcon(
     <svg width="20" height="20" fill="none">
-        <circle cx="10" cy="10" r="7" className="gs-svg-icon-stroke" strokeWidth="2" />
+        <circle cx="10" cy="10" r="8" className="gs-svg-icon-stroke" strokeWidth="1" />
         <circle cx="10" cy="10" r="4" className="gs-svg-icon-fill" />
     </svg>
 );
