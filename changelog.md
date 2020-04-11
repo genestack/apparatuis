@@ -2,6 +2,10 @@
 
 [Unreleased]
 
+### Added
+
+-   Add `<ArrowDownloadThinIcon />`
+
 ## [8.0.0-alpha.50] - 2020-04-02
 
 ### Changed

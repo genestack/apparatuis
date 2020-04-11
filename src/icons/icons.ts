@@ -7,6 +7,7 @@
  */
 
 export {ArrowDownloadIcon} from './arrow-download-icon';
+export {ArrowDownloadThinIcon} from './arrow-download-thin-icon';
 export {ArrowLeftIcon} from './arrow-left-icon';
 export {ArrowRightIcon} from './arrow-right-icon';
 export {BookmarkBorderedIcon} from './bookmark-bordered-icon';
