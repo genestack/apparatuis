@@ -109,7 +109,7 @@ initialState = {
                         </Typography>{' '}
                         Helvetica Bold
                         <Typography as="span" variant="body" box="inline" quiet={state.quiet}>
-                            20/28
+                            14/20
                         </Typography>
                     </Typography>
                     <Typography box="paragraph">
