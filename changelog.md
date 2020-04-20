@@ -5,6 +5,7 @@
 ### Added
 
 -   Add `<ArrowDownloadThinIcon />`
+-   Add `<FilterIcon />`
 
 ## [8.0.0-alpha.50] - 2020-04-02
 
