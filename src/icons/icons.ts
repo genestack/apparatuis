@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2011-2019 Genestack Limited
+ * Copyright (c) 2011-2020 Genestack Limited
  * All Rights Reserved
  * THIS IS UNPUBLISHED PROPRIETARY SOURCE CODE OF GENESTACK LIMITED
  * The copyright notice above does not evidence any
@@ -25,6 +25,7 @@ export {DownloadIcon} from './download-icon';
 export {DraftIcon} from './draft-icon';
 export {EyeIcon} from './eye-icon';
 export {FileIcon} from './file-icon';
+export {FiltersIcon} from './filters-icon';
 export {HelpIcon} from './help-icon';
 export {InfoIcon} from './info-icon';
 export {IntegerIcon} from './integer-icon';
