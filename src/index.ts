@@ -5,6 +5,7 @@
  * The copyright notice above does not evidence any
  * actual or intended publication of such source code.
  */
+export * from './components/avatar';
 export * from './components/button';
 export * from './components/checkbox';
 export * from './components/input';
