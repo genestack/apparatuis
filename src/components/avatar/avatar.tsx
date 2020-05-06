@@ -8,8 +8,8 @@
 import classNames from 'classnames';
 import * as React from 'react';
 
-import {Typography} from '../typography';
 import {mergeClassesProps, WithClasses} from '../../utils/styles';
+import {Typography} from '../typography';
 
 import * as styles from './avatar.module.css';
 
