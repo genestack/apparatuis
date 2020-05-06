@@ -9,13 +9,14 @@ import classNames from 'classnames';
 import * as React from 'react';
 
 import {Typography} from '../typography';
+import {mergeClassesProps, WithClasses} from '../../utils/styles';
 
 import * as styles from './avatar.module.css';
 
 type TargetProps = React.HTMLAttributes<HTMLDivElement>;
 
 /** Avatar public properties */
-export interface Props extends TargetProps {
+export interface Props extends TargetProps, WithClasses<keyof typeof styles> {
     /**
      * Defines the initials displayed.
      * Displays one symbol, if the property consists of one symbol.
@@ -28,17 +29,17 @@ export interface Props extends TargetProps {
  * Avatar component is the graphical representation of a user
  */
 export const Avatar = (props: Props) => {
-    const {initials: initialsProp, ...rest} = props;
+    const {initials: initialsProp, classes, ...rest} = mergeClassesProps(props, styles);
 
     const initials = initialsProp ? (
         <>
-            {initialsProp[1] ? <div className={styles.letter}>{initialsProp[1]}</div> : null}
-            <div className={styles.letter}>{initialsProp[0]}</div>
+            {initialsProp[1] ? <div className={classes.letter}>{initialsProp[1]}</div> : null}
+            <div className={classes.letter}>{initialsProp[0]}</div>
         </>
     ) : null;
 
     return (
-        <Typography as="div" className={classNames(styles.root, rest.className)} {...rest}>
+        <Typography as="div" {...rest} className={classNames(classes.root, rest.className)}>
             {initials}
             {rest.children}
         </Typography>

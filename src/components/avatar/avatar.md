@@ -1,6 +1,6 @@
 ```js
 initialState = {
-    userName: 'Marcus Aurelius'
+    userName: 'Marc Chagall'
 };
 
 const AvatarListExample = () => {
@@ -9,30 +9,30 @@ const AvatarListExample = () => {
             <ListItem>
                 <Controls>
                     <ControlsItem>
-                        <Avatar initials="PE" title="Parmenides of Elea" />
+                        <Avatar initials="WK" title="Wassily Kandinsky" />
                     </ControlsItem>
                     <ControlsItem>
-                        <Typography>Parmenides of Elea</Typography>
-                    </ControlsItem>
-                </Controls>
-            </ListItem>
-            <ListItem>
-                <Controls>
-                    <ControlsItem>
-                        <Avatar initials="ZC" title="Zeno of Citium" />
-                    </ControlsItem>
-                    <ControlsItem>
-                        <Typography>Zeno of Citium</Typography>
+                        <Typography>Wassily Kandinsky</Typography>
                     </ControlsItem>
                 </Controls>
             </ListItem>
             <ListItem>
                 <Controls>
                     <ControlsItem>
-                        <Avatar initials="A" title="Aristotle" />
+                        <Avatar initials="IR" title="Ilya Repin" />
                     </ControlsItem>
                     <ControlsItem>
-                        <Typography>Aristotle</Typography>
+                        <Typography>Ilya Repin</Typography>
+                    </ControlsItem>
+                </Controls>
+            </ListItem>
+            <ListItem>
+                <Controls>
+                    <ControlsItem>
+                        <Avatar initials="M" title="Malevich" />
+                    </ControlsItem>
+                    <ControlsItem>
+                        <Typography>Malevich</Typography>
                     </ControlsItem>
                 </Controls>
             </ListItem>
