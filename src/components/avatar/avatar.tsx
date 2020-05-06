@@ -28,24 +28,19 @@ export interface Props extends TargetProps {
  * Avatar component is the graphical representation of a user
  */
 export const Avatar = (props: Props) => {
-    const {initials, children: childrenProp, ...rest} = props;
+    const {initials: initialsProp, ...rest} = props;
 
-    let children = null;
-
-    if (childrenProp) {
-        children = childrenProp;
-    } else if (initials) {
-        children = (
-            <>
-                <div className={styles.letter}>{initials[0]}</div>
-                {initials[1] ? <div className={styles.letter}>{initials[1]}</div> : null}
-            </>
-        );
-    }
+    const initials = initialsProp ? (
+        <>
+            {initialsProp[1] ? <div className={styles.letter}>{initialsProp[1]}</div> : null}
+            <div className={styles.letter}>{initialsProp[0]}</div>
+        </>
+    ) : null;
 
     return (
         <Typography as="div" className={classNames(styles.root, rest.className)} {...rest}>
-            {children}
+            {initials}
+            {rest.children}
         </Typography>
     );
 };

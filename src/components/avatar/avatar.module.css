@@ -13,25 +13,37 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    position: relative;
     background-color: var(--gs-color-grey);
     border-radius: 50%;
     color: var(--gs-color-white);
     font-weight: bold;
     cursor: default;
+    user-select: none;
 }
 
-.letter:last-child {
-    transform: translate(-1px, 2px);
+.letter {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .letter:first-child {
-    transform: translate(1px, -2px);
+    right: 50%;
+    bottom: 50%;
+    transform: translate(calc(50% + 4px), calc(50% + 2px));
+}
+
+.letter:last-child {
+    top: 50%;
+    left: 50%;
+    transform: translate(calc(-50% - 4px), calc(-50% - 2px));
     text-shadow: var(--gs-color-grey) 1px 1px;
-    z-index: 1;
 }
 
 .letter:only-child {
     font-size: 18px;
     line-height: 18px;
-    transform: none;
+    transform: translate(50%, 50%);
 }
