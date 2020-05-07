@@ -33,8 +33,10 @@ export const Avatar = (props: Props) => {
 
     const initials = initialsProp ? (
         <>
-            {initialsProp[1] ? <div className={classes.letter}>{initialsProp[1]}</div> : null}
-            <div className={classes.letter}>{initialsProp[0]}</div>
+            {initialsProp[1] ? (
+                <div className={classes.letter}>{initialsProp[1].toUpperCase()}</div>
+            ) : null}
+            <div className={classes.letter}>{initialsProp[0].toUpperCase()}</div>
         </>
     ) : null;
 

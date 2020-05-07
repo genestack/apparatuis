@@ -69,7 +69,9 @@ const AvatarListExample = () => {
                 <ControlsItem>
                     <Avatar
                         initials={state.userName
+                            .trim()
                             .split(' ')
+                            .filter((word, index, arr) => index === 0 || index === arr.length - 1)
                             .map((word) => word[0])
                             .join('')}
                     />
