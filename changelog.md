@@ -1,11 +1,11 @@
 # Changelog
 
-[Unreleased]
+## [8.0.0-alpha.51] - 2020-05-07
 
 ### Added
 
--   Add `<ArrowDownloadThinIcon />`
--   Add `<FiltersIcon />`
+-   Add `<Avatar />` component
+-   Add `<ArrowDownloadThinIcon />`, `<FiltersIcon />`
 
 ## [8.0.0-alpha.50] - 2020-04-02
 
