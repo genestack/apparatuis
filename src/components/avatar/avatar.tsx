@@ -38,15 +38,24 @@ export const Avatar = (props: Props) => {
         initials = (
             <>
                 {letters[1] ? (
-                    <div className={classes.letter}>{letters[1].toUpperCase()}</div>
+                    <div className={classes.letter} data-qa="avatar-initials">
+                        {letters[1].toUpperCase()}
+                    </div>
                 ) : null}
-                <div className={classes.letter}>{letters[0].toUpperCase()}</div>
+                <div className={classes.letter} data-qa="avatar-initials">
+                    {letters[0].toUpperCase()}
+                </div>
             </>
         );
     }
 
     return (
-        <Typography as="div" {...rest} className={classNames(classes.root, rest.className)}>
+        <Typography
+            data-qa="avatar"
+            as="div"
+            {...rest}
+            className={classNames(classes.root, rest.className)}
+        >
             {initials}
             {rest.children}
         </Typography>
