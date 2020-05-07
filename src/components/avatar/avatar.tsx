@@ -38,7 +38,7 @@ export const Avatar = (props: Props) => {
         initials = (
             <>
                 {letters[1] ? (
-                    <div className={classes.letter} data-qa="avatar-initials">
+                    <div className={classes.letter} data-qa="avatar-letter">
                         {letters[1].toUpperCase()}
                     </div>
                 ) : null}
