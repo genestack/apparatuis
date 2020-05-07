@@ -1,5 +1,13 @@
 # Changelog
 
+## [Unreleased]
+
+## [8.0.0-alpha.52] - 2020-05-07
+
+### Fixed
+
+-   Add `data-qa` attribute to `<Avatar />` component
+
 ## [8.0.0-alpha.51] - 2020-05-07
 
 ### Added
