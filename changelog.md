@@ -1,6 +1,6 @@
 # Changelog
 
-[Unreleased]
+## [Unreleased]
 
 ## [8.0.0-alpha.52] - 2020-05-07
 
