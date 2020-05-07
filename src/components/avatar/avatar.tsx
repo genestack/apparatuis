@@ -22,7 +22,7 @@ export interface Props extends TargetProps, WithClasses<keyof typeof styles> {
      * Displays one symbol, if the property consists of one symbol.
      * Displays two first symbols, if the property consists of two or more symbols.
      */
-    initials: string;
+    initials?: string;
 }
 
 /**
