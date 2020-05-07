@@ -72,7 +72,7 @@ const AvatarListExample = () => {
                             .trim()
                             .split(' ')
                             .filter((word, index, arr) => index === 0 || index === arr.length - 1)
-                            .map((word) => word[0])
+                            .map((word) => Array.from(word)[0])
                             .join('')}
                     />
                 </ControlsItem>

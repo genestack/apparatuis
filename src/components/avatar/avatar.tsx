@@ -31,14 +31,19 @@ export interface Props extends TargetProps, WithClasses<keyof typeof styles> {
 export const Avatar = (props: Props) => {
     const {initials: initialsProp, classes, ...rest} = mergeClassesProps(props, styles);
 
-    const initials = initialsProp ? (
-        <>
-            {initialsProp[1] ? (
-                <div className={classes.letter}>{initialsProp[1].toUpperCase()}</div>
-            ) : null}
-            <div className={classes.letter}>{initialsProp[0].toUpperCase()}</div>
-        </>
-    ) : null;
+    let initials = null;
+
+    if (initialsProp) {
+        const letters = Array.from(initialsProp);
+        initials = (
+            <>
+                {letters[1] ? (
+                    <div className={classes.letter}>{letters[1].toUpperCase()}</div>
+                ) : null}
+                <div className={classes.letter}>{letters[0].toUpperCase()}</div>
+            </>
+        );
+    }
 
     return (
         <Typography as="div" {...rest} className={classNames(classes.root, rest.className)}>

@@ -11,7 +11,7 @@ import * as React from 'react';
 import {Avatar} from './avatar';
 
 describe('<Avatar />', () => {
-    describe('if "initials" property has length 1', () => {
+    describe('"initials" property has length 1', () => {
         const getComponent = () => shallow(<Avatar initials="A" />);
         it('should render div HTML element', () => {
             expect(getComponent().find('div')).toHaveLength(1);
@@ -26,14 +26,14 @@ describe('<Avatar />', () => {
         });
     });
 
-    describe('if "initials" property has length 2', () => {
+    describe('"initials" property has length 2', () => {
         const getComponent = () => shallow(<Avatar initials="AB" />);
         it('it should render two div HTML elements', () => {
             expect(getComponent().find('div')).toHaveLength(2);
         });
     });
 
-    describe('if "initials" property has length 3', () => {
+    describe('"initials" property has length 3', () => {
         test('it should render two div HTML elements', () => {
             const getComponent = () => shallow(<Avatar initials="ABC" />);
 
