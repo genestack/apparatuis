@@ -2,6 +2,12 @@
 
 ## [Unreleased]
 
+## [8.0.0-alpha.53] - 2020-05-08
+
+### Added
+
+-   Add `<OrganizationIcon />`, `<SharedWithUserIcon />`
+
 ## [8.0.0-alpha.52] - 2020-05-07
 
 ### Fixed
