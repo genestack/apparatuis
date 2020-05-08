@@ -37,6 +37,7 @@ export {LockIcon} from './lock-icon';
 export {MenuIcon} from './menu-icon';
 export {MoreIcon} from './more-icon';
 export {OpenFolderIcon} from './open-folder-icon';
+export {OrganizationIcon} from './organization-icon';
 export {PauseIcon} from './pause-icon';
 export {PlayCircledIcon} from './play-circled-icon';
 export {PlayIcon} from './play-icon';
