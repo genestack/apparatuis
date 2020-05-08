@@ -46,6 +46,7 @@ export {PlusUserIcon} from './plus-user-icon';
 export {RadioIcon} from './radio-icon';
 export {SearchIcon} from './search-icon';
 export {ShareIcon} from './share-icon';
+export {SharedWithUserIcon} from './shared-with-user-icon';
 export {StopIcon} from './stop-icon';
 export {TextIcon} from './text-icon';
 export {TimeReverseIcon} from './time-reverse-icon';
