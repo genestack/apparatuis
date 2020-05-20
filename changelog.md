@@ -2,6 +2,10 @@
 
 ## [Unreleased]
 
+## [8.0.0-alpha.54] - 2020-05-20
+
+-   Fix TS error in `<Avatar/>` component
+
 ## [8.0.0-alpha.53] - 2020-05-08
 
 ### Added
