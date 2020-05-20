@@ -31,7 +31,7 @@ export interface Props extends TargetProps, WithClasses<keyof typeof styles> {
 export const Avatar = (props: Props) => {
     const {initials: initialsProp, classes, ...rest} = mergeClassesProps(props, styles);
 
-    let initials = null;
+    let initials: React.ReactElement | null = null;
 
     if (initialsProp) {
         const letters = Array.from(initialsProp);
