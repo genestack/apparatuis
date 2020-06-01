@@ -51,5 +51,6 @@ export {StopIcon} from './stop-icon';
 export {TextIcon} from './text-icon';
 export {TimeReverseIcon} from './time-reverse-icon';
 export {UploadIcon} from './upload-icon';
+export {UserGroupIcon} from './user-group-icon';
 export {UserIcon} from './user-icon';
 export {WarningIcon} from './warning-icon';
