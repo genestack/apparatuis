@@ -2,6 +2,18 @@
 
 ## [Unreleased]
 
+## [8.0.0-alpha.55] - 2020-06-01
+
+### Added
+
+-   Add `<UserGroupIcon />`
+
+### Changed
+
+-   Change `<PlusUserIcon />`
+-   Change `<SharedWithUserIcon />`
+-   Change `<UserIcon />`
+
 ## [8.0.0-alpha.54] - 2020-05-20
 
 -   Fix TS error in `<Avatar/>` component
