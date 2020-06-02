@@ -2,6 +2,15 @@
 
 ## [Unreleased]
 
+## [8.0.0-alpha.56] - 2020-06-02
+
+### Changed
+
+-   Change `<UserGroupIcon />`
+-   Change `<PlusUserIcon />`
+-   Change `<SharedWithUserIcon />`
+-   Change `<UserIcon />`
+
 ## [8.0.0-alpha.55] - 2020-06-01
 
 ### Added
