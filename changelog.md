@@ -2,6 +2,13 @@
 
 ## [Unreleased]
 
+## [8.0.0-alpha.59] - 2020-06-03
+
+### Changed
+
+-   Update `<BookmarkIcon />` path dimensions
+-   Update `<BookmarkBorderedIcon />` path dimensions, rounded corners and colouring in
+
 ## [8.0.0-alpha.58] - 2020-06-03
 
 ### Added
