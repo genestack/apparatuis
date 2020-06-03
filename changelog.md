@@ -2,6 +2,12 @@
 
 ## [Unreleased]
 
+## [8.0.0-alpha.57] - 2020-06-02
+
+### Changed
+
+-   Enable ref on `<ListItem />`
+
 ## [8.0.0-alpha.56] - 2020-06-02
 
 ### Changed
