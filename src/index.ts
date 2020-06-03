@@ -47,3 +47,4 @@ export * from './components/text-label';
 export * from './components/preloader';
 export * from './components/field';
 export * from './components/button-group';
+export * from './components/scroll-view';

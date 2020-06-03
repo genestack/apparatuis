@@ -2,6 +2,12 @@
 
 ## [Unreleased]
 
+## [8.0.0-alpha.58] - 2020-06-03
+
+### Added
+
+-   Add `<ScrollView />` component
+
 ## [8.0.0-alpha.57] - 2020-06-02
 
 ### Changed
