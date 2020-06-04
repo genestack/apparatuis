@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2011-2019 Genestack Limited
+ * Copyright (c) 2011-2020 Genestack Limited
  * All Rights Reserved
  * THIS IS UNPUBLISHED PROPRIETARY SOURCE CODE OF GENESTACK LIMITED
  * The copyright notice above does not evidence any
@@ -18,6 +18,10 @@ M7 4.5C6 4.5 5.5 5 5.5 6V14.5C5.5 15.5 5.5 16.5 6.5 16.5C7.5 16.5 9 13.5 10 13.5
  */
 export const BookmarkIcon = createIcon(
     <svg viewBox="0 0 20 20">
-        <path d={bookmarkPath} className="gs-svg-icon-fill" strokeLinecap="round" />
+        <path
+            d={bookmarkPath}
+            className="gs-svg-icon-stroke gs-svg-icon-fill"
+            strokeLinecap="round"
+        />
     </svg>
 );

@@ -2,6 +2,12 @@
 
 ## [Unreleased]
 
+## [8.0.1] - 2020-06-04
+
+### Changed
+
+-   Update `<BookmarkIcon />` path colouring in
+
 ## [8.0.0-alpha.59] - 2020-06-03
 
 ### Changed
