@@ -2,6 +2,11 @@
 
 ## [Unreleased]
 
+### Added
+
+-   Add `<FirstPageIcon />`
+-   Add `<LastPageIcon />`
+
 ## [8.0.1] - 2020-06-04
 
 ### Changed
