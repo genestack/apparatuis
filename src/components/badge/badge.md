@@ -6,16 +6,16 @@ function ListExample() {
         <Paper style={{maxWidth: 257}}>
             <List>
                 <ListItem box="paragraph" append={<Badge ghost>Admin</Badge>}>
-                    Breast
+                    Macfarlane Burnet
                 </ListItem>
                 <ListItem box="paragraph" append={<Badge uppercase={false}>You</Badge>}>
-                    Breast
+                    Cyril Burt
                 </ListItem>
                 <ListItem box="paragraph" append={<Badge ghost>Superadmin</Badge>}>
-                    Breast
+                    John Cairns
                 </ListItem>
                 <ListItem box="paragraph" append={<Badge ghost>Admin</Badge>}>
-                    Breast
+                    Allan Campbell
                 </ListItem>
             </List>
         </Paper>
@@ -24,8 +24,8 @@ function ListExample() {
 
 function RowExample() {
     return (
-        <React.Fragment>
-            <div style={{width: 400, display: 'flex'}}>
+        <div style={{width: 400}}>
+            <div style={{display: 'flex'}}>
                 <Typography variant="caption" style={{display: 'flex', flexShrink: 1, flexGrow: 1}}>
                     Name
                 </Typography>
@@ -37,7 +37,7 @@ function RowExample() {
                 </Typography>
             </div>
             <Divider gap={1} variant="dashed" />
-            <div style={{width: 400, display: 'flex'}}>
+            <div style={{display: 'flex'}}>
                 <Typography
                     style={{display: 'flex', flexShrink: 1, flexGrow: 1, marginRight: '16px'}}
                 >
@@ -58,7 +58,7 @@ function RowExample() {
                     <Badge>Foo</Badge>
                 </div>
             </div>
-        </React.Fragment>
+        </div>
     );
 }
 
@@ -67,7 +67,7 @@ function RowExample() {
         <WithSeparator separator={<Divider gap={4} />}>
             <React.Fragment>
                 <Typography quiet>In text</Typography>
-                <Divider variant="transparent" gap={2} />
+                <Divider variant="transparent" gap={1} />
 
                 <Typography>
                     Clermont Dionne <Badge ghost>Admin</Badge>
@@ -75,19 +75,19 @@ function RowExample() {
             </React.Fragment>
             <React.Fragment>
                 <Typography quiet>In button</Typography>
-                <Divider variant="transparent" gap={2} />
-                <Button variant="section" box="paragraph">
-                    <Badge ghost>EXP</Badge> Send
+                <Divider variant="transparent" gap={1} />
+                <Button>
+                    <Badge>EXP</Badge>
                 </Button>
             </React.Fragment>
             <React.Fragment>
                 <Typography quiet>In list</Typography>
-                <Divider variant="transparent" gap={2} />
+                <Divider variant="transparent" gap={1} />
                 <ListExample />
             </React.Fragment>
             <React.Fragment>
                 <Typography quiet>In input</Typography>
-                <Divider variant="transparent" gap={2} />
+                <Divider variant="transparent" gap={1} />
                 <Input
                     prepend={<SearchIcon />}
                     append={<Badge ghost>EXP</Badge>}
@@ -96,7 +96,7 @@ function RowExample() {
             </React.Fragment>
             <React.Fragment>
                 <Typography quiet>In row cell</Typography>
-                <Divider variant="transparent" gap={2} />
+                <Divider variant="transparent" gap={1} />
                 <RowExample />
             </React.Fragment>
         </WithSeparator>
