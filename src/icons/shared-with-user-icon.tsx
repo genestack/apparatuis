@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2011-2019 Genestack Limited
+ * Copyright (c) 2011-2020 Genestack Limited
  * All Rights Reserved
  * THIS IS UNPUBLISHED PROPRIETARY SOURCE CODE OF GENESTACK LIMITED
  * The copyright notice above does not evidence any
@@ -16,13 +16,16 @@ import {createIcon} from '../components/icon';
 export const SharedWithUserIcon = createIcon(
     <svg viewBox="0 0 20 20">
         <path
-            d="M9.66667 12.8846C8.63018 13.4108 8.11988 13.336 8.01891 14.4994C7.99503 14.7745 8.22265 15 8.4988 15L13 15H17.5C17.7761 15 18.005 14.7745 17.9811 14.4994C17.8801 13.336 17.3698 13.4108 16.3333 12.8846C15.1667 12.2923 13.8333 11.6154 13.8333 10.7692C13.8333 9.92308 14.4558 9.75384 14.9411 9.24615C15.4263 8.73846 15.5 8.48462 15.5 6.96154C15.5 4.84615 14.25 4 13 4C11.75 4 10.5 4.84615 10.5 6.96154C10.5 8.48462 10.5736 8.73846 11.0589 9.24615C11.5442 9.75384 12.1667 9.92308 12.1667 10.7692C12.1667 11.6154 10.8333 12.2923 9.66667 12.8846Z"
+            fillRule="evenodd"
+            clipRule="evenodd"
+            d="M5 11H2V9h3V6.5L8.5 10 5 13.5V11z"
             className="gs-svg-icon-fill"
         />
         <path
-            d="M2 10H8.25M8.25 10L5 6.5M8.25 10L5 13.5"
-            className="gs-svg-icon-stroke"
-            strokeWidth="2"
+            fillRule="evenodd"
+            clipRule="evenodd"
+            d="M8.4 13.6C7.2 14.2 6 14.8 6 16h12c0-1.2-1.2-1.8-2.4-2.4-1.2-.6-2.602-.857-2.602-1.886 0-1.028.5-1.028.998-1.543.5-.514.999-1.542.999-3.085C14.995 5.029 13.654 4 12 4c-1.654 0-2.995 1.382-2.995 3.086 0 1.543.5 2.571.998 3.085.5.515.999.515.999 1.543C11.002 12.743 9.6 13 8.4 13.6z"
+            className="gs-svg-icon-fill"
         />
     </svg>
 );

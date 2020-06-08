@@ -4,6 +4,52 @@
 
 -   Add `<Badge/>` component
 
+## [8.0.1] - 2020-06-04
+
+### Changed
+
+-   Update `<BookmarkIcon />` path colouring in
+
+## [8.0.0-alpha.59] - 2020-06-03
+
+### Changed
+
+-   Update `<BookmarkIcon />` path dimensions
+-   Update `<BookmarkBorderedIcon />` path dimensions, rounded corners and colouring in
+
+## [8.0.0-alpha.58] - 2020-06-03
+
+### Added
+
+-   Add `<ScrollView />` component
+
+## [8.0.0-alpha.57] - 2020-06-02
+
+### Changed
+
+-   Enable ref on `<ListItem />`
+
+## [8.0.0-alpha.56] - 2020-06-02
+
+### Changed
+
+-   Change `<UserGroupIcon />`
+-   Change `<PlusUserIcon />`
+-   Change `<SharedWithUserIcon />`
+-   Change `<UserIcon />`
+
+## [8.0.0-alpha.55] - 2020-06-01
+
+### Added
+
+-   Add `<UserGroupIcon />`
+
+### Changed
+
+-   Change `<PlusUserIcon />`
+-   Change `<SharedWithUserIcon />`
+-   Change `<UserIcon />`
+
 ## [8.0.0-alpha.54] - 2020-05-20
 
 -   Fix TS error in `<Avatar/>` component

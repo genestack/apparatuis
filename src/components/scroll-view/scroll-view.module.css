@@ -1,0 +1,22 @@
+/*
+ * Copyright (c) 2011-2020 Genestack Limited
+ * All Rights Reserved
+ * THIS IS UNPUBLISHED PROPRIETARY SOURCE CODE OF GENESTACK LIMITED
+ * The copyright notice above does not evidence any
+ * actual or intended publication of such source code.
+ */
+
+.root {
+    overflow: auto;
+
+    /*
+     * covers cases when `root` is a flex-item and its height is indefinite,
+     * which forces `simplebar-wrapper`s height fit its content
+     */
+    display: flex;
+}
+
+.root :global(.simplebar-wrapper) {
+    height: 100%;
+    width: 100%;
+}
