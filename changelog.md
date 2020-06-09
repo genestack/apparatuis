@@ -4,6 +4,12 @@
 
 -   Add `<Badge/>` component
 
+## [8.1.0] - 2020-06-09
+
+### Changed
+
+-   Enable ref on `<InteractiveElement />`
+
 ## [8.0.1] - 2020-06-04
 
 ### Changed

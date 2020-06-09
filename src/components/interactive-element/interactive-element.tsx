@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2011-2019 Genestack Limited
+ * Copyright (c) 2011-2020 Genestack Limited
  * All Rights Reserved
  * THIS IS UNPUBLISHED PROPRIETARY SOURCE CODE OF GENESTACK LIMITED
  * The copyright notice above does not evidence any
@@ -9,20 +9,10 @@ import classNames from 'classnames';
 import * as React from 'react';
 
 import {chain} from '../../utils/chain';
-import {Omit} from '../../utils/omit';
 
 import * as styles from './interactive-element.module.css';
 
-interface TargetProps {
-    className?: string;
-    onClick?: React.ReactEventHandler;
-    onKeyDown?: React.KeyboardEventHandler;
-    onKeyUp?: React.KeyboardEventHandler;
-    tabIndex?: number;
-    href?: string;
-}
-
-type DefaultTargetProps = React.AnchorHTMLAttributes<HTMLElement> &
+type TargetProps = React.AnchorHTMLAttributes<HTMLElement> &
     React.ButtonHTMLAttributes<HTMLElement>;
 
 interface InteractiveElementProps {
@@ -37,9 +27,7 @@ interface InteractiveElementProps {
 }
 
 /** InteractiveElement public properties */
-export type Props<T extends TargetProps = DefaultTargetProps> = Omit<T, 'onClick' | 'onKeyDown'> &
-    TargetProps &
-    InteractiveElementProps;
+export type Props = TargetProps & InteractiveElementProps;
 
 interface State {
     active?: boolean;
@@ -49,86 +37,78 @@ interface State {
  * Internal component that simulates native button behaviour.
  * It is used for placing button elements into other "button" elements.
  */
-export class InteractiveElement<T extends TargetProps = DefaultTargetProps> extends React.Component<
-    Props<T>,
-    State
-> {
-    public state: State = {
-        active: false
+
+export const InteractiveElement = React.forwardRef((props: Props, ref) => {
+    const [state, setState] = React.useState<State>({active: false});
+
+    const {
+        as: Component = typeof props.href === 'string' ? 'a' : 'div',
+        activeClassName,
+        disabled,
+        disableListeners,
+        tabIndex = 0,
+        type = 'button',
+        onClick,
+        onKeyDown,
+        onKeyUp,
+        ...rest
+    } = props;
+
+    const handleClick: TargetProps['onClick'] = (event) => {
+        setState({active: false});
+
+        if (!disabled && onClick) {
+            onClick(event);
+        }
     };
 
-    public shouldComponentUpdate(props: Props, state: State) {
-        return props !== this.props || state.active !== this.state.active;
+    const handleKeyDown: Props['onKeyDown'] = (event) => {
+        if (event.target === event.currentTarget && event.key === ' ') {
+            event.preventDefault();
+            setState({active: true});
+        }
+    };
+
+    const handleKeyUp: Props['onKeyUp'] = (event) => {
+        if (event.target === event.currentTarget && event.key === ' ') {
+            event.preventDefault();
+            setState({active: false});
+
+            // keyboard accessibility for non interactive elements hack
+            if (onClick) {
+                onClick(event as any);
+            }
+        }
+    };
+
+    const buttonProps: React.ButtonHTMLAttributes<HTMLButtonElement> = {};
+    const buttonLikeProps: Props = {};
+
+    if (Component === 'button') {
+        buttonProps.disabled = disabled;
+        buttonProps.type = type;
     }
 
-    private handleClick: TargetProps['onClick'] = (event) => {
-        this.setState({active: false});
+    if (Component !== 'a' && Component !== 'button') {
+        buttonLikeProps.onClick = handleClick;
 
-        if (!this.props.disabled && this.props.onClick) {
-            this.props.onClick(event);
+        if (!disabled && !disableListeners) {
+            buttonLikeProps.onKeyDown = chain(onKeyDown, handleKeyDown);
+            buttonLikeProps.onKeyUp = chain(onKeyUp, handleKeyUp);
         }
-    };
+    }
 
-    private handleKeyDown: TargetProps['onKeyDown'] = (event) => {
-        if (event.target === event.currentTarget && event.key === ' ') {
-            event.preventDefault();
-            this.setState({active: true});
-        }
-    };
-
-    private handleKeyUp: TargetProps['onKeyUp'] = (event) => {
-        if (event.target === event.currentTarget && event.key === ' ') {
-            event.preventDefault();
-            this.setState({active: false});
-
-            if (this.props.onClick) {
-                this.props.onClick(event);
-            }
-        }
-    };
-
-    public render() {
-        const props = this.props as Props;
-
-        const {
-            as: Component = typeof props.href === 'string' ? 'a' : 'div',
-            activeClassName,
-            disabled,
-            disableListeners,
-            tabIndex = 0,
-            type = 'button',
-            ...rest
-        } = props;
-
-        const buttonProps: React.ButtonHTMLAttributes<HTMLButtonElement> = {};
-        const buttonLikeProps: TargetProps = {};
-
-        if (Component === 'button') {
-            buttonProps.disabled = disabled;
-            buttonProps.type = type;
-        }
-
-        if (Component !== 'a' && Component !== 'button') {
-            buttonLikeProps.onClick = this.handleClick;
-
-            if (!disabled && !disableListeners) {
-                buttonLikeProps.onKeyDown = chain(rest.onKeyDown, this.handleKeyDown);
-                buttonLikeProps.onKeyUp = chain(rest.onKeyUp, this.handleKeyUp);
-            }
-        }
-
-        return (
+    return React.useMemo(
+        () => (
             <Component
                 {...rest}
                 {...buttonProps}
                 {...buttonLikeProps}
                 tabIndex={disabled ? -1 : tabIndex}
-                className={classNames(
-                    rest.className,
-                    styles.root,
-                    this.state.active && activeClassName
-                )}
+                className={classNames(rest.className, styles.root, state.active && activeClassName)}
+                ref={ref}
             />
-        );
-    }
-}
+        ),
+        [props, state.active]
+    );
+});
