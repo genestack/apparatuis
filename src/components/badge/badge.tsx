@@ -32,7 +32,7 @@ export interface Props extends RootProps, WithClasses<keyof typeof styles> {
 /**
  * Text which plays the role of an icon
  */
-export const Badge = (props: Props) => {
+export const Badge = React.forwardRef((props: Props, ref) => {
     const {
         as: Component = 'div',
         variant = 'body',
@@ -51,6 +51,7 @@ export const Badge = (props: Props) => {
             as={Component}
             variant={variant}
             className={classNames(rest.className, classes.root)}
+            ref={ref}
         >
             <div
                 className={classNames(contentProps.className, classes.content, {
@@ -62,4 +63,4 @@ export const Badge = (props: Props) => {
             </div>
         </Typography>
     );
-};
+});
