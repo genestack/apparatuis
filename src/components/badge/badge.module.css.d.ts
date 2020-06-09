@@ -7,6 +7,5 @@
  */
 export const root: string;
 export const content: string;
-export const inline: string;
-export const uppercase: string;
+export const disableTextTransform: string;
 export const ghost: string;

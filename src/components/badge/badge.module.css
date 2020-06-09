@@ -16,24 +16,24 @@
 
 .content {
     display: block;
-    box-sizing: border-box;
-    height: calc(var(--gs-spacing-unit) * 2);
-    padding: 1px 4px;
+    padding: 1px 4px 0;
     background-color: var(--gs-color-action-text-60);
     color: var(--gs-color-white);
     text-align: center;
     font-size: 11px;
     border-radius: 2px;
-    line-height: 16px;
-}
-
-.uppercase {
+    line-height: 15px;
     letter-spacing: 1px;
     text-transform: uppercase;
 }
 
+.disableTextTransform {
+    letter-spacing: normal;
+    text-transform: none;
+}
+
 .ghost {
-    padding: 0 4px;
+    line-height: 13px;
     background-color: transparent;
     color: var(--gs-color-grey);
     border: 1px solid var(--gs-color-grey-outline);

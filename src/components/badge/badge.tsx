@@ -16,12 +16,15 @@ import * as styles from './badge.module.css';
 
 type RootProps = Omit<TypographyProps, 'classes'>;
 
-/** TextLabel public properties */
+/** Badge public properties */
 export interface Props extends RootProps, WithClasses<keyof typeof styles> {
     /** Light badge variant with border and without background */
     ghost?: boolean;
-    /** Enable uppercase text with bigger letter-spacing */
-    uppercase?: boolean;
+    /**
+     * It `true`, removes `uppercase` text-transform and bigger letter-spacing,
+     * which Badge sets by default
+     */
+    disableTextTransform?: boolean;
     /** Properties for content element */
     contentProps?: React.HTMLAttributes<HTMLDivElement>;
 }
@@ -37,7 +40,7 @@ export const Badge = (props: Props) => {
         children,
         classes,
         contentProps = {},
-        uppercase = true,
+        disableTextTransform,
         ...rest
     } = mergeClassesProps(props, styles);
 
@@ -52,7 +55,7 @@ export const Badge = (props: Props) => {
             <div
                 className={classNames(contentProps.className, classes.content, {
                     [classes.ghost]: ghost,
-                    [classes.uppercase]: uppercase
+                    [classes.disableTextTransform]: disableTextTransform
                 })}
             >
                 {children}

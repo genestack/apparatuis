@@ -8,7 +8,7 @@ function ListExample() {
                 <ListItem box="paragraph" append={<Badge ghost>Admin</Badge>}>
                     Macfarlane Burnet
                 </ListItem>
-                <ListItem box="paragraph" append={<Badge uppercase={false}>You</Badge>}>
+                <ListItem box="paragraph" append={<Badge disableTextTransform>You</Badge>}>
                     Cyril Burt
                 </ListItem>
                 <ListItem box="paragraph" append={<Badge ghost>Superadmin</Badge>}>
