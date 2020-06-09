@@ -1,4 +1,62 @@
 ```js
+const {
+    Presentation,
+    usePresentation,
+    PresentationControls,
+    PresentationState,
+    PresentationPane
+} = require('../../../styleguide-components/presentation');
+
+const BadgeExample = (props) => {
+    const presentation = usePresentation();
+    const [text, setText] = React.useState('Superadmin');
+
+    return (
+        <React.Fragment>
+            <Controls>
+                <ControlsItem>
+                    <Badge
+                        ghost={presentation.ghost}
+                        disableTextTransform={presentation.disableTextTransform}
+                    >
+                        {text}
+                    </Badge>
+                </ControlsItem>
+            </Controls>
+            <Divider variant="transparent" gap={3} />
+            <Controls>
+                <ControlsItem>
+                    <Typography as="label" htmlFor="badge-text">
+                        Badge text:
+                    </Typography>
+                </ControlsItem>
+                <ControlsItem>
+                    <Input
+                        style={{width: 100}}
+                        id="badge-text"
+                        value={text}
+                        onValueChange={setText}
+                    />
+                </ControlsItem>
+            </Controls>
+        </React.Fragment>
+    );
+};
+
+<Presentation>
+    <PresentationPane>
+        <BadgeExample />
+    </PresentationPane>
+    <PresentationControls>
+        <PresentationState name="disableTextTransform" label="Disable text transform" />
+        <PresentationState name="ghost" label="Ghost" />
+    </PresentationControls>
+</Presentation>;
+```
+
+#### Usage example
+
+```js
 const {SearchIcon} = require('../../icons/search-icon.tsx');
 
 function ListExample() {
@@ -55,7 +113,7 @@ function RowExample() {
                 >
                     <Badge>Abc</Badge>
                     <Badge>Qwe</Badge>
-                    <Badge>Foo</Badge>
+                    <Badge>aggr</Badge>
                 </div>
             </div>
         </div>

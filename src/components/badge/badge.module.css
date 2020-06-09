@@ -12,10 +12,15 @@
     height: calc(var(--gs-spacing-unit) * 2.5);
     display: inline-flex;
     align-items: center;
+    min-width: 20px;
+    min-height: 20px;
 }
 
 .content {
     display: block;
+    min-width: 16px;
+    min-height: 16px;
+    box-sizing: border-box;
     padding: 1px 4px 0;
     background-color: var(--gs-color-action-text-60);
     color: var(--gs-color-white);
