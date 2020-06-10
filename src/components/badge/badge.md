@@ -16,7 +16,7 @@ const BadgeExample = (props) => {
             <Controls>
                 <ControlsItem>
                     <Badge
-                        ghost={presentation.ghost}
+                        ghost={presentation.variant === 'ghost'}
                         intent={presentation.intent}
                         disableTextTransform={presentation.disableTextTransform}
                     >
@@ -46,6 +46,7 @@ const BadgeExample = (props) => {
 
 <Presentation
     initialState={{
+        variant: 'solid',
         intent: 'default'
     }}
 >
@@ -54,7 +55,11 @@ const BadgeExample = (props) => {
     </PresentationPane>
     <PresentationControls>
         <PresentationState name="disableTextTransform" label="Disable text transform" />
-        <PresentationState name="ghost" label="Ghost" />
+        <ListItem>
+            <Typography variant="section">Variant</Typography>
+        </ListItem>
+        <PresentationState name="variant" label="Solid" value="solid" />
+        <PresentationState name="variant" label="Ghost" value="ghost" />
         <ListItem>
             <Typography variant="section">Intent</Typography>
         </ListItem>
