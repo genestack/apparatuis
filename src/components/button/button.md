@@ -87,7 +87,7 @@ function ButtonExample() {
 <Presentation
     initialState={{
         renderAs: 'button',
-        variant: 'normal',
+        variant: 'solid',
         intent: 'default',
         text: 'short',
         size: 'normal'
@@ -117,12 +117,12 @@ function ButtonExample() {
         <ListItem>
             <Typography variant="section">Variant</Typography>
         </ListItem>
-        <PresentationState name="variant" label="Normal" value="normal" />
+        <PresentationState name="variant" label="Solid" value="solid" />
         <PresentationState name="variant" label="Ghost" value="ghost" />
         <ListItem>
             <Typography variant="section">Intent</Typography>
         </ListItem>
-        <PresentationState name="intent" label="Default" value="default" />
+        <PresentationState name="intent" label="No intent" value="default" />
         <PresentationState name="intent" label="Accent" value="accent" />
         <PresentationState name="intent" label="Alarm" value="alarm" />
         <ListItem>
