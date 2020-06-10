@@ -20,6 +20,8 @@ type RootProps = Omit<TypographyProps, 'classes'>;
 export interface Props extends RootProps, WithClasses<keyof typeof styles> {
     /** Light badge variant with border and without background */
     ghost?: boolean;
+    /** Intent of badge */
+    intent?: 'default' | 'warning';
     /**
      * It `true`, removes `uppercase` text-transform and bigger letter-spacing,
      * which Badge sets by default
@@ -36,6 +38,7 @@ export const Badge = React.forwardRef((props: Props, ref) => {
     const {
         as: Component = 'div',
         variant = 'body',
+        intent = 'default',
         ghost,
         children,
         classes,
@@ -55,6 +58,8 @@ export const Badge = React.forwardRef((props: Props, ref) => {
         >
             <div
                 className={classNames(contentProps.className, classes.content, {
+                    [classes.intentDefault]: intent === 'default',
+                    [classes.warning]: intent === 'warning',
                     [classes.ghost]: ghost,
                     [classes.disableTextTransform]: disableTextTransform
                 })}

@@ -8,4 +8,6 @@
 export const root: string;
 export const content: string;
 export const disableTextTransform: string;
+export const intentDefault: string;
+export const warning: string;
 export const ghost: string;
