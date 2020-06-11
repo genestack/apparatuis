@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2011-2019 Genestack Limited
+ * Copyright (c) 2011-2020 Genestack Limited
  * All Rights Reserved
  * THIS IS UNPUBLISHED PROPRIETARY SOURCE CODE OF GENESTACK LIMITED
  * The copyright notice above does not evidence any
@@ -155,6 +155,13 @@ export function Input(props: Props) {
     const handleFieldBlur: React.FocusEventHandler = () => {
         setFocused(false);
     };
+
+    // https://github.com/facebook/react/issues/9142
+    React.useEffect(() => {
+        if (props.disabled) {
+            setFocused(false);
+        }
+    }, [props.disabled]);
 
     const handleInputChange = chain(
         inputProps.onChange,

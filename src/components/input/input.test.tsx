@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2011-2019 Genestack Limited
+ * Copyright (c) 2011-2020 Genestack Limited
  * All Rights Reserved
  * THIS IS UNPUBLISHED PROPRIETARY SOURCE CODE OF GENESTACK LIMITED
  * The copyright notice above does not evidence any
@@ -8,6 +8,7 @@
 // tslint:disable no-non-null-assertion
 import * as React from 'react';
 
+import {awaitTimeout} from '../../../test-utils/await-timeout';
 import {createTestApp} from '../../../test-utils/create-test-app';
 import {Spinner} from '../spinner';
 
@@ -136,5 +137,24 @@ describe('<Input />', () => {
             );
             expect(document.getElementById('test')!.classList.contains('invalid-test')).toBe(false);
         });
+    });
+
+    it('should be blurred after disabling', async () => {
+        const wrapper = app.mount(
+            <Input rootProps={{id: 'test', classes: {focused: 'focused-test'}}} />
+        );
+
+        const classList = document.getElementById('test')?.classList;
+
+        wrapper.simulate('focus');
+
+        expect(classList?.contains('focused-test')).toStrictEqual(true);
+
+        wrapper.setProps({disabled: true});
+
+        // apply effects
+        await awaitTimeout();
+
+        expect(classList?.contains('focused-test')).toStrictEqual(false);
     });
 });

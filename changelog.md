@@ -2,9 +2,16 @@
 
 ## [Unreleased]
 
-## [8.2.0] - 2020-06-10
+
+## [8.2.0] - 2020-06-11
 
 -   Add `<Badge/>` component
+
+## [8.1.1] - 2020-06-11
+
+### Fixed
+
+-   Reset focus state on disable `<Input />`
 
 ## [8.1.0] - 2020-06-09
 
