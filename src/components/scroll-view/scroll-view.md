@@ -305,7 +305,7 @@ const ButtonWDialog = () => {
     <ControlsItem style={{width: 200}}>
         <PageContent as={Paper}>
             <PageFullWidth>
-                <List as={ScrollView} style={{height: 150}}>
+                <List as={ScrollView} style={{overflow: 'auto', height: 150}}>
                     <ListItem>
                         <Typography variant="section">Tissue:</Typography>
                     </ListItem>
@@ -402,7 +402,7 @@ const ButtonWDialog = () => {
                 Description and Background
             </Typography>
 
-            <PageFullWidth as={ScrollView} style={{height: 150}}>
+            <PageFullWidth as={ScrollView} style={{overflow: 'auto', height: 150}}>
                 <PageContent>
                     <Typography box="paragraph">
                         Morphological changes in the small airway epithelium are the first

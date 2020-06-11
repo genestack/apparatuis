@@ -74,4 +74,38 @@ describe('<ListItem />', () => {
 
         expect(subtitle.props().children).toEqual('subtitle');
     });
+
+    it('should pass ref with non-interactive component', () => {
+        const ref = React.createRef();
+
+        const wrapper = app.mount(
+            <div>
+                <ListItem subtitle="subtitle" ref={ref} />
+            </div>
+        );
+
+        expect(
+            wrapper
+                .find('li')
+                .first()
+                .instance()
+        ).toBe(ref.current);
+    });
+
+    it('should pass ref with interactive component', () => {
+        const ref = React.createRef();
+
+        const wrapper = app.mount(
+            <div>
+                <ListItem subtitle="subtitle" ref={ref} interactive />
+            </div>
+        );
+
+        expect(
+            wrapper
+                .find('li')
+                .first()
+                .instance()
+        ).toBe(ref.current);
+    });
 });

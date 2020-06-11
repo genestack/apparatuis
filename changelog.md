@@ -7,6 +7,18 @@
 -   Add `<FirstPageIcon />`
 -   Add `<LastPageIcon />`
 
+## [8.1.1] - 2020-06-11
+
+### Fixed
+
+-   Reset focus state on disable `<Input />`
+
+## [8.1.0] - 2020-06-09
+
+### Changed
+
+-   Enable ref on `<InteractiveElement />`
+
 ## [8.0.1] - 2020-06-04
 
 ### Changed
