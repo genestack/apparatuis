@@ -2,6 +2,12 @@
 
 ## [Unreleased]
 
+## [8.2.1] - 2020-06-11
+
+### Fixed
+
+-   Fix <Input /> height
+
 ## [8.2.0] - 2020-06-11
 
 ### Added
