@@ -10,7 +10,7 @@ import * as React from 'react';
 
 import {createIcon} from '../components/icon';
 
-/** Two near right chevrons */
+/** Right-pointing double chevrons */
 export const LastPageIcon = createIcon(
     <svg viewBox="0 0 20 20" fill="none">
         <path
