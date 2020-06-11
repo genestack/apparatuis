@@ -2,7 +2,6 @@
 
 ## [Unreleased]
 
-
 ## [8.2.0] - 2020-06-11
 
 -   Add `<Badge/>` component
