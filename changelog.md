@@ -2,6 +2,12 @@
 
 ## [Unreleased]
 
+## [8.1.1] - 2020-06-11
+
+### Fixed
+
+-   Reset focus state on disable `<Input />`
+
 ## [8.1.0] - 2020-06-09
 
 ### Changed
