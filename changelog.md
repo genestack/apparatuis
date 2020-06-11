@@ -4,7 +4,11 @@
 
 ## [8.2.0] - 2020-06-11
 
+### Added
+
 -   Add `<Badge/>` component
+-   Add `<FirstPageIcon />`
+-   Add `<LastPageIcon />`
 
 ## [8.1.1] - 2020-06-11
 
