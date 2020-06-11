@@ -156,6 +156,7 @@ export function Input(props: Props) {
         setFocused(false);
     };
 
+    // https://github.com/facebook/react/issues/9142
     React.useEffect(() => {
         if (props.disabled) {
             setFocused(false);
