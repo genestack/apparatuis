@@ -51,7 +51,7 @@ function ButtonGroupExample() {
 <Presentation
     initialState={{
         variant: 'solid',
-        intent: 'default',
+        intent: 'no-intent',
         size: 'normal',
         text: true
     }}
@@ -72,7 +72,7 @@ function ButtonGroupExample() {
         <ListItem>
             <Typography variant="section">Intent</Typography>
         </ListItem>
-        <PresentationState name="intent" label="No intent" value="default" />
+        <PresentationState name="intent" label="No intent" value="no-intent" />
         <PresentationState name="intent" label="Accent" value="accent" />
         <PresentationState name="intent" label="Alarm" value="alarm" />
         <ListItem>

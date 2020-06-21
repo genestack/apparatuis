@@ -13,11 +13,11 @@
 :root {
     --gs-focused-shadow: 0 0 0 2px var(--gs-color-action-25);
     --gs-focused-shadow-inverted: 0 0 0 2px var(--gs-color-action-inverted-50);
-    --gs-background-normal-intent-default: rgba(222, 226, 231, 1);
+    --gs-background-normal-no-intent: rgba(222, 226, 231, 1);
     --gs-color-alarm: rgba(226, 101, 101, 1);
     --gs-color-alarm-active: rgba(172, 32, 32, 1);
-    --gs-background-ghost-intent-default: rgba(222, 226, 231, 0.6);
-    --gs-background-ghost-intent-default-active: rgba(222, 226, 231, 1);
+    --gs-background-ghost-no-intent: rgba(222, 226, 231, 0.6);
+    --gs-background-ghost-no-intent-active: rgba(222, 226, 231, 1);
     --gs-box-shadow-normal-active: inset 0 2px 4px rgba(0, 0, 0, 0.25);
 }
 
@@ -82,66 +82,66 @@
     box-shadow: none;
 }
 
-/* normal intent=default */
+/* normal intent=no-intent */
 
-.normal.intentDefault {
-    background: var(--gs-background-normal-intent-default);
+.normal.noIntent {
+    background: var(--gs-background-normal-no-intent);
     color: var(--gs-color-action-text);
 }
 
-.normal.intentDefault :global(.gs-svg-icon-fill) {
+.normal.noIntent :global(.gs-svg-icon-fill) {
     fill: var(--gs-color-action-text-60);
 }
 
-.normal.intentDefault :global(.gs-svg-icon-stroke) {
+.normal.noIntent :global(.gs-svg-icon-stroke) {
     stroke: var(--gs-color-action-text-60);
 }
 
-.normal.intentDefault.hovered,
-.normal.intentDefault:hover {
+.normal.noIntent.hovered,
+.normal.noIntent:hover {
     background: var(--gs-color-action-hover);
     color: var(--gs-color-white);
 }
 
-.normal.intentDefault.hovered :global(.gs-svg-icon-fill),
-.normal.intentDefault:hover :global(.gs-svg-icon-fill) {
+.normal.noIntent.hovered :global(.gs-svg-icon-fill),
+.normal.noIntent:hover :global(.gs-svg-icon-fill) {
     fill: var(--gs-color-white);
 }
 
-.normal.intentDefault.hovered :global(.gs-svg-icon-stroke),
-.normal.intentDefault:hover :global(.gs-svg-icon-stroke) {
+.normal.noIntent.hovered :global(.gs-svg-icon-stroke),
+.normal.noIntent:hover :global(.gs-svg-icon-stroke) {
     stroke: var(--gs-color-white);
 }
 
-.normal.intentDefault.active,
-.normal.intentDefault:active {
+.normal.noIntent.active,
+.normal.noIntent:active {
     background: var(--gs-color-action-text);
     color: var(--gs-color-white);
 }
 
-.normal.intentDefault.active :global(.gs-svg-icon-fill),
-.normal.intentDefault:active :global(.gs-svg-icon-fill) {
+.normal.noIntent.active :global(.gs-svg-icon-fill),
+.normal.noIntent:active :global(.gs-svg-icon-fill) {
     fill: var(--gs-color-white);
 }
 
-.normal.intentDefault.active :global(.gs-svg-icon-stroke),
-.normal.intentDefault:active :global(.gs-svg-icon-stroke) {
+.normal.noIntent.active :global(.gs-svg-icon-stroke),
+.normal.noIntent:active :global(.gs-svg-icon-stroke) {
     stroke: var(--gs-color-white);
 }
 
-.normal.intentDefault.disabled,
-.normal.intentDefault:disabled {
-    background: var(--gs-background-normal-intent-default);
+.normal.noIntent.disabled,
+.normal.noIntent:disabled {
+    background: var(--gs-background-normal-no-intent);
     color: var(--gs-color-grey-50);
 }
 
-.normal.intentDefault.disabled :global(.gs-svg-icon-fill),
-.normal.intentDefault:disabled :global(.gs-svg-icon-fill) {
+.normal.noIntent.disabled :global(.gs-svg-icon-fill),
+.normal.noIntent:disabled :global(.gs-svg-icon-fill) {
     fill: var(--gs-color-grey-50);
 }
 
-.normal.intentDefault.disabled :global(.gs-svg-icon-stroke),
-.normal.intentDefault:disabled :global(.gs-svg-icon-stroke) {
+.normal.noIntent.disabled :global(.gs-svg-icon-stroke),
+.normal.noIntent:disabled :global(.gs-svg-icon-stroke) {
     stroke: var(--gs-color-grey-50);
 }
 
@@ -205,81 +205,81 @@
     background: var(--gs-color-grey-50);
 }
 
-/* ghost intent=default */
+/* ghost intent=no-intent */
 
-.ghost.intentDefault {
+.ghost.noIntent {
     color: var(--gs-color-action-text);
 }
 
-.ghost.intentDefault :global(.gs-svg-icon-fill) {
+.ghost.noIntent :global(.gs-svg-icon-fill) {
     fill: var(--gs-color-action-text-60);
 }
 
-.ghost.intentDefault :global(.gs-svg-icon-stroke) {
+.ghost.noIntent :global(.gs-svg-icon-stroke) {
     stroke: var(--gs-color-action-text-60);
 }
 
-.inverted.ghost.intentDefault {
+.inverted.ghost.noIntent {
     color: var(--gs-color-white);
 }
 
-.inverted.ghost.intentDefault :global(.gs-svg-icon-fill) {
+.inverted.ghost.noIntent :global(.gs-svg-icon-fill) {
     fill: var(--gs-color-grey-outline);
 }
 
-.inverted.ghost.intentDefault :global(.gs-svg-icon-stroke) {
+.inverted.ghost.noIntent :global(.gs-svg-icon-stroke) {
     stroke: var(--gs-color-grey-outline);
 }
 
-.ghost.intentDefault.hovered,
-.ghost.intentDefault:hover {
-    background: var(--gs-background-ghost-intent-default);
+.ghost.noIntent.hovered,
+.ghost.noIntent:hover {
+    background: var(--gs-background-ghost-no-intent);
 }
 
-.inverted.ghost.intentDefault.hovered,
-.inverted.ghost.intentDefault:hover {
+.inverted.ghost.noIntent.hovered,
+.inverted.ghost.noIntent:hover {
     color: var(--gs-color-action-text);
 }
 
-.ghost.intentDefault.hovered :global(.gs-svg-icon-fill),
-.ghost.intentDefault:hover :global(.gs-svg-icon-fill) {
+.ghost.noIntent.hovered :global(.gs-svg-icon-fill),
+.ghost.noIntent:hover :global(.gs-svg-icon-fill) {
     fill: var(--gs-color-action-text);
 }
 
-.ghost.intentDefault.hovered :global(.gs-svg-icon-stroke),
-.ghost.intentDefault:hover :global(.gs-svg-icon-stroke) {
+.ghost.noIntent.hovered :global(.gs-svg-icon-stroke),
+.ghost.noIntent:hover :global(.gs-svg-icon-stroke) {
     stroke: var(--gs-color-action-text);
 }
 
-.inverted.ghost.intentDefault.hovered :global(.gs-svg-icon-fill),
-.inverted.ghost.intentDefault:hover :global(.gs-svg-icon-fill) {
+.inverted.ghost.noIntent.hovered :global(.gs-svg-icon-fill),
+.inverted.ghost.noIntent:hover :global(.gs-svg-icon-fill) {
     fill: var(--gs-color-action-text-60);
 }
 
-.inverted.ghost.intentDefault.hovered :global(.gs-svg-icon-stroke),
-.inverted.ghost.intentDefault:hover :global(.gs-svg-icon-stroke) {
+.inverted.ghost.noIntent.hovered :global(.gs-svg-icon-stroke),
+.inverted.ghost.noIntent:hover :global(.gs-svg-icon-stroke) {
     stroke: var(--gs-color-action-text-60);
 }
 
-.ghost.intentDefault.active,
-.ghost.intentDefault:active,
-.inverted.ghost.intentDefault.active,
-.inverted.ghost.intentDefault:active {
+.ghost.noIntent.active,
+.ghost.noIntent:active,
+.inverted.ghost.noIntent.active,
+.inverted.ghost.noIntent:active {
     color: var(--gs-color-black);
-    background: var(--gs-background-ghost-intent-default-active);
+    background: var(--gs-background-ghost-no-intent-active);
 }
 
-.ghost.intentDefault:active :global(.gs-svg-icon-fill),
-.ghost.intentDefault.active :global(.gs-svg-icon-fill),
-.inverted.ghost.intentDefault:active :global(.gs-svg-icon-fill),
-.inverted.ghost.intentDefault.active :global(.gs-svg-icon-fill) {
+.ghost.noIntent:active :global(.gs-svg-icon-fill),
+.ghost.noIntent.active :global(.gs-svg-icon-fill),
+.inverted.ghost.noIntent:active :global(.gs-svg-icon-fill),
+.inverted.ghost.noIntent.active :global(.gs-svg-icon-fill) {
     fill: var(--gs-color-black);
 }
 
-.ghost.intentDefault:active :global(.gs-svg-icon-stroke),
-.ghost.intentDefault.active :global(.gs-svg-icon-stroke),
-.inverted.ghost.intentDefault:active :global(.gs-svg-icon-stroke),
-.inverted.ghost.intentDefault.active :global(.gs-svg-icon-stroke) {
+.ghost.noIntent:active :global(.gs-svg-icon-stroke),
+.ghost.noIntent.active :global(.gs-svg-icon-stroke),
+.inverted.ghost.noIntent:active :global(.gs-svg-icon-stroke),
+.inverted.ghost.noIntent.active :global(.gs-svg-icon-stroke) {
     stroke: var(--gs-color-black);
 }
 
@@ -313,7 +313,7 @@
 
 .ghost.accent.hovered,
 .ghost.accent:hover {
-    background: var(--gs-background-ghost-intent-default);
+    background: var(--gs-background-ghost-no-intent);
 }
 
 .inverted.ghost.accent:hover,
@@ -346,7 +346,7 @@
 .inverted.ghost.accent.active,
 .inverted.ghost.accent:active {
     color: var(--gs-color-black);
-    background: var(--gs-background-ghost-intent-default-active);
+    background: var(--gs-background-ghost-no-intent-active);
 }
 
 .ghost.accent:active :global(.gs-svg-icon-fill),
