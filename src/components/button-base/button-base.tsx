@@ -22,7 +22,7 @@ export interface Props extends WithClasses<keyof typeof styles> {
     /** Light button variant without background */
     ghost?: boolean;
     /** Intent of button */
-    intent?: 'default' | 'accent' | 'alarm';
+    intent?: 'no-intent' | 'accent' | 'alarm';
     /**
      * If `true` element has `hover` style.
      * It is used only for examples. Avoid using this property.
@@ -58,7 +58,7 @@ export const ButtonBase: OverridableComponent<TypeMap> = React.forwardRef<
 
     const {
         ghost,
-        intent = 'default',
+        intent = 'no-intent',
         hovered,
         focused,
         // use default tabIndex to enable focusing
@@ -107,7 +107,7 @@ export const ButtonBase: OverridableComponent<TypeMap> = React.forwardRef<
                 [classes.disabled]: disabled,
                 [classes.ghost]: ghost,
                 [classes.normal]: !ghost,
-                [classes.intentDefault]: intent === 'default',
+                [classes.noIntent]: intent === 'no-intent',
                 [classes.accent]: intent === 'accent',
                 [classes.alarm]: intent === 'alarm',
                 [classes.inverted]: inverted || darkContext

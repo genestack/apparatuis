@@ -56,8 +56,8 @@ function ButtonSamples(props) {
             <Controls>
                 <ControlsItem>
                     <ButtonWithShake {...props} component={state.component}>
-                        {capitalize(props.intent || 'default') +
-                            (props.ghost ? ' ghost ' : ' normal ')}
+                        {capitalize(props.intent || 'No intent') +
+                            (props.ghost ? ' ghost ' : ' solid ')}
                     </ButtonWithShake>
                 </ControlsItem>
                 <ControlsItem>
@@ -66,7 +66,7 @@ function ButtonSamples(props) {
             </Controls>
             <Divider variant="transparent" />
             <ButtonWithShake {...props} component={state.component} icon={<ArrowRightIcon />}>
-                {capitalize(props.intent || 'default') + (props.ghost ? ' ghost ' : ' normal ')}{' '}
+                {capitalize(props.intent || 'No intent') + (props.ghost ? ' ghost ' : ' solid ')}{' '}
                 with icon
             </ButtonWithShake>
         </div>
@@ -142,7 +142,7 @@ const FullScreenPaper = (props) => (
                     <WithSeparator separator={<Divider variant="transparent" gap={2} />}>
                         <Typography variant="section">Variant</Typography>
                         <IntentSection>
-                            <Typography>Normal</Typography>
+                            <Typography>Solid</Typography>
                         </IntentSection>
                         <IntentSection />
                         <IntentSection />
@@ -158,7 +158,7 @@ const FullScreenPaper = (props) => (
                     <WithSeparator separator={<Divider variant="transparent" gap={2} />}>
                         <Typography variant="section">Intent</Typography>
                         <IntentSection>
-                            <Typography>Default</Typography>
+                            <Typography>No intent</Typography>
                         </IntentSection>
                         <IntentSection>
                             <Typography>Accent</Typography>
@@ -173,7 +173,7 @@ const FullScreenPaper = (props) => (
                             </Typography>
                         </IntentSection>
                         <IntentSection>
-                            <Typography>Default</Typography>
+                            <Typography>No intent</Typography>
                         </IntentSection>
                         <IntentSection>
                             <Typography>Accent</Typography>

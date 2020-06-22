@@ -2,6 +2,14 @@
 
 ## [Unreleased]
 
+## [8.3.0] - 2020-06-22
+
+## Changed
+
+-   Changed `intent = 'default'` to `intent = 'no-intent'` in `ButtonBase` public properties
+-   Changed `intentDefault` to `noIntent` in `ButtonBase` `classes`
+-   Changed `ghost`-opposite `variant: 'normal'` to `variant: 'solid'` in `Button` and `ButtonGroup` examples
+
 ## [8.2.1] - 2020-06-11
 
 ### Fixed
