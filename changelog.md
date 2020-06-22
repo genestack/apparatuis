@@ -2,6 +2,8 @@
 
 ## [Unreleased]
 
+## [8.3.0] - 2020-06-22
+
 ## Changed
 
 -   Changed `intent = 'default'` to `intent = 'no-intent'` in `ButtonBase` public properties
