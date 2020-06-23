@@ -2,6 +2,12 @@
 
 ## [Unreleased]
 
+## [8.3.1] - 2020-06-19
+
+### Changed
+
+-   Introduce `showScrollbars` option of `<ScrollView />` component
+
 ## [8.3.0] - 2020-06-22
 
 ## Changed

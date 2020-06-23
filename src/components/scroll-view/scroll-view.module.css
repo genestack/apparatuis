@@ -20,3 +20,34 @@
     height: 100%;
     width: 100%;
 }
+
+/* capturing pointer events on scrollbar track */
+.root > :global(.simplebar-track) > :global(.simplebar-scrollbar) {
+    pointer-events: all;
+}
+
+/* overriding vertical scrollbar track width and horizontal scrollbar track height */
+.root > :global(.simplebar-track.simplebar-vertical) {
+    width: 13px;
+}
+
+.root > :global(.simplebar-track.simplebar-horizontal) {
+    height: 13px;
+}
+
+.root > :global(.simplebar-track.simplebar-horizontal) > :global(.simplebar-scrollbar) {
+    top: 3px;
+    height: 8px;
+}
+
+.root > :global(.simplebar-track.simplebar-vertical) > :global(.simplebar-scrollbar:before) {
+    left: 3px;
+}
+
+/* hiding scrollbars when not hovered and not being dragged */
+/* stylelint-disable selector-combinator-space-before */
+.root:not(:hover):not(.scrollbarsAlwaysShown):not(:global(.simplebar-dragging))
+    > :global(.simplebar-track) {
+    visibility: hidden !important;
+}
+/* stylelint-enable selector-combinator-space-before */
