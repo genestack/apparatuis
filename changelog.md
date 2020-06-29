@@ -2,6 +2,10 @@
 
 ## [Unreleased]
 
+## [8.4.0] - 2020-06-29
+
+-   Add `<TemplateIcon />`
+
 ## [8.3.1] - 2020-06-19
 
 ### Changed
