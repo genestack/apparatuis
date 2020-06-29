@@ -321,89 +321,99 @@ handleScrollbarsModeCheckboxChange = (event) =>
             </PageContent>
         </ControlsItem>
 
-        <ControlsItem style={{width: 200}}>
-            <PageContent as={Paper}>
-                <PageFullWidth>
-                    <List
-                        as={ScrollView}
-                        showScrollbars={state.scrollbarsAlwaysShown ? 'always' : 'default'}
-                        style={{overflow: 'auto', height: 225}}
-                    >
-                        <ListItem>
-                            <Typography variant="section">Organism:</Typography>
-                        </ListItem>
-                        {organismSampleSet.map(([title, append]) => (
-                            <ListItem
-                                key={title}
-                                append={
-                                    <Typography quiet as="span">
-                                        {append}
-                                    </Typography>
-                                }
-                            >
-                                <TextLabel>{title}</TextLabel>
-                            </ListItem>
-                        ))}
-                    </List>
-                </PageFullWidth>
-            </PageContent>
-        </ControlsItem>
-
         <ControlsItem grow>
             <Paper>
-                <ScrollView
-                    showScrollbars={state.scrollbarsAlwaysShown ? 'always' : 'default'}
-                    style={{overflow: 'auto', height: 259}}
-                >
-                    <PageContent>
-                        <Typography variant="header" box="paragraph">
-                            Small Airways Smoking Hackett 2012 SRP005411 (SRA)
-                        </Typography>
-                        <Typography box="paragraph">
-                            I&R, Homo sapiens,{' '}
-                            <Typography as="span" quiet box="inline">
-                                Tissue:
-                            </Typography>{' '}
-                            Epithelium of Bronchiole
-                        </Typography>
+                <Controls style={{alignItems: 'flex-start'}}>
+                    <ControlsItem grow>
+                        <List
+                            as={ScrollView}
+                            showScrollbars={state.scrollbarsAlwaysShown ? 'always' : 'default'}
+                            style={{
+                                overflow: 'auto',
+                                height: 259,
+                                backgroundColor: '#e6e9eb',
+                                marginTop: 0,
+                                marginBottom: 0
+                            }}
+                        >
+                            <Divider variant="transparent" />
+                            <ListItem>
+                                <Typography variant="section">Organism:</Typography>
+                            </ListItem>
+                            {organismSampleSet.map(([title, append]) => (
+                                <ListItem
+                                    key={title}
+                                    append={
+                                        <Typography quiet as="span">
+                                            {append}
+                                        </Typography>
+                                    }
+                                >
+                                    <TextLabel>{title}</TextLabel>
+                                </ListItem>
+                            ))}
+                            <Divider variant="transparent" />
+                        </List>
+                    </ControlsItem>
+                    <ControlsItem grow>
+                        <ScrollView
+                            showScrollbars={state.scrollbarsAlwaysShown ? 'always' : 'default'}
+                            style={{overflow: 'auto', height: 259}}
+                        >
+                            <PageContent>
+                                <Typography variant="header" box="paragraph">
+                                    Small Airways Smoking Hackett 2012 SRP005411 (SRA)
+                                </Typography>
+                                <Typography box="paragraph">
+                                    I&R, Homo sapiens,{' '}
+                                    <Typography as="span" quiet box="inline">
+                                        Tissue:
+                                    </Typography>{' '}
+                                    Epithelium of Bronchiole
+                                </Typography>
 
-                        <Typography variant="title" box="paragraph">
-                            Description and Background
-                        </Typography>
+                                <Typography variant="title" box="paragraph">
+                                    Description and Background
+                                </Typography>
 
-                        <Typography box="paragraph">
-                            Morphological changes in the small airway epithelium are the first
-                            histopathological manifestations of smoking-induced lung disease. Gene
-                            expression profiling using microarrays has permitted the identification
-                            of changes in the small airway epithelium of chronic cigarette smokers
-                            who have normal pulmonary function.
-                        </Typography>
-                        <Typography box="paragraph">
-                            The availability of high throughput, massively parallel RNA sequencing
-                            (RNA-Seq) of the entire transcriptome opens the possibility of a higher
-                            sensitivity and more detailed characterization of the response of the
-                            small airway epithelium to smoking.
-                        </Typography>
+                                <Typography box="paragraph">
+                                    Morphological changes in the small airway epithelium are the
+                                    first histopathological manifestations of smoking-induced lung
+                                    disease. Gene expression profiling using microarrays has
+                                    permitted the identification of changes in the small airway
+                                    epithelium of chronic cigarette smokers who have normal
+                                    pulmonary function.
+                                </Typography>
+                                <Typography box="paragraph">
+                                    The availability of high throughput, massively parallel RNA
+                                    sequencing (RNA-Seq) of the entire transcriptome opens the
+                                    possibility of a higher sensitivity and more detailed
+                                    characterization of the response of the small airway epithelium
+                                    to smoking.
+                                </Typography>
 
-                        <Typography variant="section" box="paragraph">
-                            Epithelium of Bronchiole Basic information
-                        </Typography>
-                        <Typography box="paragraph">
-                            Epithelial cells were obtained by fiberoptic bronchoscopy and brushing
-                            of healthy smokers (n=6) and n=5 healthy nonsmokers, all with normal
-                            lung function and chest x-rays. RNA was extracted and used for massively
-                            parallel sequencing of PolyA selected transcripts using the Illumina
-                            Genome Snalyzer II.
-                        </Typography>
+                                <Typography variant="section" box="paragraph">
+                                    Epithelium of Bronchiole Basic information
+                                </Typography>
+                                <Typography box="paragraph">
+                                    Epithelial cells were obtained by fiberoptic bronchoscopy and
+                                    brushing of healthy smokers (n=6) and n=5 healthy nonsmokers,
+                                    all with normal lung function and chest x-rays. RNA was
+                                    extracted and used for massively parallel sequencing of PolyA
+                                    selected transcripts using the Illumina Genome Snalyzer II.
+                                </Typography>
 
-                        <Typography variant="caption" box="paragraph" quiet>
-                            The availability of high throughput, massively parallel RNA sequencing
-                            (RNA-Seq) of the entire transcriptome opens the possibility of a higher
-                            sensitivity and more detailed characterization of the response of the
-                            small airway epithelium to smoking.
-                        </Typography>
-                    </PageContent>
-                </ScrollView>
+                                <Typography variant="caption" box="paragraph" quiet>
+                                    The availability of high throughput, massively parallel RNA
+                                    sequencing (RNA-Seq) of the entire transcriptome opens the
+                                    possibility of a higher sensitivity and more detailed
+                                    characterization of the response of the small airway epithelium
+                                    to smoking.
+                                </Typography>
+                            </PageContent>
+                        </ScrollView>
+                    </ControlsItem>
+                </Controls>
             </Paper>
         </ControlsItem>
     </Controls>
