@@ -2,6 +2,12 @@
 
 ## [Unreleased]
 
+## [8.4.1] - 2020-06-30
+
+### Fixed
+
+-   Fix clicks on `<InteractiveElement />` when it is a button or a link
+
 ## [8.4.0] - 2020-06-29
 
 -   Add `<TemplateIcon />`

@@ -30,6 +30,13 @@ describe('<InteractiveElement/>', () => {
         expect(onClick).toBeCalled();
     });
 
+    it('should call onClick callback on buttons', () => {
+        const onClick = jest.fn();
+        const wrapper = app.mount(<InteractiveElement id="test" as="button" onClick={onClick} />);
+        wrapper.simulate('click');
+        expect(onClick).toBeCalled();
+    });
+
     it('should not call onClick when disabled', () => {
         const onClick = jest.fn();
         const wrapper = app.mount(<InteractiveElement id="test" onClick={onClick} disabled />);

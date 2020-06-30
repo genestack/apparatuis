@@ -48,17 +48,14 @@ export const InteractiveElement = React.forwardRef((props: Props, ref) => {
         disableListeners,
         tabIndex = 0,
         type = 'button',
-        onClick,
-        onKeyDown,
-        onKeyUp,
         ...rest
     } = props;
 
     const handleClick: TargetProps['onClick'] = (event) => {
         setState({active: false});
 
-        if (!disabled && onClick) {
-            onClick(event);
+        if (!disabled) {
+            props.onClick?.(event);
         }
     };
 
@@ -75,9 +72,7 @@ export const InteractiveElement = React.forwardRef((props: Props, ref) => {
             setState({active: false});
 
             // keyboard accessibility for non interactive elements hack
-            if (onClick) {
-                onClick(event as any);
-            }
+            props.onClick?.(event as any);
         }
     };
 
@@ -93,8 +88,8 @@ export const InteractiveElement = React.forwardRef((props: Props, ref) => {
         buttonLikeProps.onClick = handleClick;
 
         if (!disabled && !disableListeners) {
-            buttonLikeProps.onKeyDown = chain(onKeyDown, handleKeyDown);
-            buttonLikeProps.onKeyUp = chain(onKeyUp, handleKeyUp);
+            buttonLikeProps.onKeyDown = chain(props.onKeyDown, handleKeyDown);
+            buttonLikeProps.onKeyUp = chain(props.onKeyUp, handleKeyUp);
         }
     }
 
