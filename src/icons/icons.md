@@ -18,15 +18,13 @@ const {Controls, ControlsItem} = require('../components/controls');
 
 function IconPlate({icon, name, variable}) {
     return (
-        <div style={{padding: '8px 16px'}}>
-            <Controls gap={4}>
+        <div style={{padding: '8px 16px', '&:hover': {background: 'red'}}}>
+            <Controls gap={4} style={{display: 'flex', flexDirection: 'column'}}>
                 <ControlsItem>{icon}</ControlsItem>
+                <Divider variant="transparent" gap={2} />
                 <ControlsItem>
-                    <Typography>{name}</Typography>
-                    <Typography quiet variant="caption" as="div">
-                        <pre
-                            style={{margin: '0'}}
-                        >{`import {${variable}} from 'genestack-ui/src/icons';`}</pre>
+                    <Typography quiet variant="caption">
+                        {name}
                     </Typography>
                 </ControlsItem>
             </Controls>
