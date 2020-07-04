@@ -40,6 +40,7 @@
     "css-loader": "^2.1.0",
     "enzyme": "^3.8.0",
     "enzyme-adapter-react-16": "^1.7.1",
+    "file-loader": "^2.0.0",
     "genestack-frontend-builder": "^0.9.2",
     "genestack-stylelint-config": "^3.0.0",
     "genestack-tsconfig": "^2.0.0",
