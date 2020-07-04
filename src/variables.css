@@ -7,7 +7,7 @@
  */
 
 :root {
-    --gs-font-family: "Helvetica", "Arial", "Myriad Pro", sans-serif;
+    --gs-font-family: "IBM Plex Sans", "Arial", "Myriad Pro", sans-serif;
 
     /* Spacing unit is used for margins and paddings as basic unit */
     --gs-spacing-unit: 8px;
