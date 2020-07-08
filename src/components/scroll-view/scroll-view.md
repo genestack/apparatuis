@@ -1,4 +1,5 @@
 ```js
+const {DarkContext} = require('../../utils/dark-context');
 const {DownloadIcon} = require('../../icons/download-icon');
 const {HelpIcon} = require('../../icons/help-icon');
 
@@ -139,65 +140,67 @@ const ButtonWDialog = ({showScrollbars}) => {
                 Open dialog
             </Button>
 
-            <Dialog
-                open={dialogOpened}
-                onClose={() => setDialogOpened(false)}
-                size="medium"
-                scrollable
-            >
-                <DialogHeader>
-                    <Typography variant="header">Typography</Typography>
-                </DialogHeader>
-                <DialogBody
-                    as={ScrollView}
-                    showScrollbars={showScrollbars ? 'always' : 'default'}
-                    style={{height: 300}}
+            <DarkContext.Provider value={true}>
+                <Dialog
+                    open={dialogOpened}
+                    onClose={() => setDialogOpened(false)}
+                    size="medium"
+                    scrollable
                 >
-                    <Typography variant="header" box="paragraph">
-                        Small Airways Smoking Hackett 2012 SRP005411 (SRA)
-                    </Typography>
-                    <Typography box="paragraph">
-                        I&R, Homo sapiens,{' '}
-                        <Typography as="span" quiet box="inline">
-                            Tissue:
-                        </Typography>{' '}
-                        Epithelium of Bronchiole
-                    </Typography>
-                    <Typography variant="title" box="paragraph">
-                        Description and Background
-                    </Typography>
-                    <Typography box="paragraph">
-                        Morphological changes in the small airway epithelium are the first
-                        histopathological manifestations of smoking-induced lung disease. Gene
-                        expression profiling using microarrays has permitted the identification of
-                        changes in the small airway epithelium of chronic cigarette smokers who have
-                        normal pulmonary function.
-                    </Typography>
-                    <Typography box="paragraph">
-                        The availability of high throughput, massively parallel RNA sequencing
-                        (RNA-Seq) of the entire transcriptome opens the possibility of a higher
-                        sensitivity and more detailed characterization of the response of the small
-                        airway epithelium to smoking.
-                    </Typography>
-                    <Typography variant="section" box="paragraph">
-                        Epithelium of Bronchiole Basic information
-                    </Typography>
-                    <Typography box="paragraph">
-                        Epithelial cells were obtained by fiberoptic bronchoscopy and brushing of
-                        healthy smokers (n=6) and n=5 healthy nonsmokers, all with normal lung
-                        function and chest x-rays. RNA was extracted and used for massively parallel
-                        sequencing of PolyA selected transcripts using the Illumina Genome Snalyzer
-                        II.
-                    </Typography>
+                    <DialogHeader>
+                        <Typography variant="header">Typography</Typography>
+                    </DialogHeader>
+                    <DialogBody
+                        as={ScrollView}
+                        showScrollbars={showScrollbars ? 'always' : 'default'}
+                        style={{height: 300}}
+                    >
+                        <Typography variant="header" box="paragraph">
+                            Small Airways Smoking Hackett 2012 SRP005411 (SRA)
+                        </Typography>
+                        <Typography box="paragraph">
+                            I&R, Homo sapiens,{' '}
+                            <Typography as="span" quiet box="inline">
+                                Tissue:
+                            </Typography>{' '}
+                            Epithelium of Bronchiole
+                        </Typography>
+                        <Typography variant="title" box="paragraph">
+                            Description and Background
+                        </Typography>
+                        <Typography box="paragraph">
+                            Morphological changes in the small airway epithelium are the first
+                            histopathological manifestations of smoking-induced lung disease. Gene
+                            expression profiling using microarrays has permitted the identification
+                            of changes in the small airway epithelium of chronic cigarette smokers
+                            who have normal pulmonary function.
+                        </Typography>
+                        <Typography box="paragraph">
+                            The availability of high throughput, massively parallel RNA sequencing
+                            (RNA-Seq) of the entire transcriptome opens the possibility of a higher
+                            sensitivity and more detailed characterization of the response of the
+                            small airway epithelium to smoking.
+                        </Typography>
+                        <Typography variant="section" box="paragraph">
+                            Epithelium of Bronchiole Basic information
+                        </Typography>
+                        <Typography box="paragraph">
+                            Epithelial cells were obtained by fiberoptic bronchoscopy and brushing
+                            of healthy smokers (n=6) and n=5 healthy nonsmokers, all with normal
+                            lung function and chest x-rays. RNA was extracted and used for massively
+                            parallel sequencing of PolyA selected transcripts using the Illumina
+                            Genome Snalyzer II.
+                        </Typography>
 
-                    <Typography variant="caption" box="paragraph">
-                        The availability of high throughput, massively parallel RNA sequencing
-                        (RNA-Seq) of the entire transcriptome opens the possibility of a higher
-                        sensitivity and more detailed characterization of the response of the small
-                        airway epithelium to smoking.
-                    </Typography>
-                </DialogBody>
-            </Dialog>
+                        <Typography variant="caption" box="paragraph">
+                            The availability of high throughput, massively parallel RNA sequencing
+                            (RNA-Seq) of the entire transcriptome opens the possibility of a higher
+                            sensitivity and more detailed characterization of the response of the
+                            small airway epithelium to smoking.
+                        </Typography>
+                    </DialogBody>
+                </Dialog>
+            </DarkContext.Provider>
         </>
     );
 };

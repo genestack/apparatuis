@@ -139,7 +139,7 @@ function SwitchListItems() {
             <SwitchListItems />
         </Paper>
         <DarkContext.Provider value={true}>
-            <Paper style={{maxWidth: 257, backgroundColor: '#242E42'}}>
+            <Paper style={{maxWidth: 257}}>
                 <SwitchListItems />
             </Paper>
         </DarkContext.Provider>

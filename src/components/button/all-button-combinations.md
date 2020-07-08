@@ -116,7 +116,7 @@ const FullScreenPaper = (props) => (
             background: 'rgb(227,227,227)'
         }}
     >
-        <Paper style={{minWidth: 0, background: state.inverted ? '#252E42' : '#FFF'}} {...props}>
+        <Paper style={{minWidth: 0}} {...props}>
             {props.children}
         </Paper>
     </RootElement>

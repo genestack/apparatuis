@@ -80,11 +80,8 @@ initialState = {
             </Controls>
         </ControlsItem>
         <ControlsItem shrink>
-            <PageContent
-                as={Paper}
-                style={{background: state.inverted ? 'rgb(51, 51, 51)' : 'rgb(255, 255, 255)'}}
-            >
-                <DarkContext.Provider value={state.inverted}>
+            <DarkContext.Provider value={state.inverted}>
+                <PageContent as={Paper}>
                     <Typography variant="header" box="paragraph">
                         <Typography as="span" variant="header" box="inline" quiet={state.quiet}>
                             Quiet Header
@@ -152,8 +149,8 @@ initialState = {
                     <Typography box="paragraph" status="success">
                         Download is complete.
                     </Typography>
-                </DarkContext.Provider>
-            </PageContent>
+                </PageContent>
+            </DarkContext.Provider>
         </ControlsItem>
     </Controls>
 </React.Fragment>;

@@ -10,6 +10,8 @@ import * as React from 'react';
 import SimpleBar from 'simplebar-react';
 import 'simplebar/dist/simplebar.min.css';
 
+import {DarkContext} from '../../utils/dark-context';
+
 import * as styles from './scroll-view.module.css';
 
 /** Props of ScrollView component */
@@ -31,14 +33,19 @@ const simplebarOptions = {
 /**
  * A wrapper component over [SimpleBar](https://github.com/Grsmto/simplebar/tree/master/packages/simplebar-react) that provides crossplatform experience for scrollable views.
  */
-export const ScrollView = ({className, showScrollbars = 'auto', ...rest}: Props) => (
-    <SimpleBar
-        {...rest}
-        className={classNames(
-            styles.root,
-            {[styles.scrollbarsAlwaysShown]: showScrollbars === 'always'},
-            className
-        )}
-        {...simplebarOptions}
-    />
-);
+export const ScrollView = ({className, showScrollbars = 'auto', ...rest}: Props) => {
+    const inverted = React.useContext(DarkContext);
+
+    return (
+        <SimpleBar
+            {...rest}
+            className={classNames(
+                styles.root,
+                {[styles.inverted]: inverted},
+                {[styles.scrollbarsAlwaysShown]: showScrollbars === 'always'},
+                className
+            )}
+            {...simplebarOptions}
+        />
+    );
+};

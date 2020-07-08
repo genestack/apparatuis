@@ -41,6 +41,7 @@
     --gs-color-grey-background-50: rgba(235, 237, 239, 0.5);
     --gs-color-grey-outline: rgba(199, 202, 209, 1);
     --gs-color-grey-outline-20: rgba(199, 202, 209, 0.2);
+    --gs-color-dark-background: rgba(60, 64, 73, 1);
 
     /* z-indexes */
     --gs-z-index-header: 800;

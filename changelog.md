@@ -2,6 +2,13 @@
 
 ## [Unreleased]
 
+## [8.4.2] - 2020-07-08
+
+### Changed
+
+-   Chnaged `<Paper />` to consume dark context and change own appearance depending on its value
+-   Updated scrollbar colors in `<ScrollView />`
+
 ## [8.4.1] - 2020-06-30
 
 ### Fixed

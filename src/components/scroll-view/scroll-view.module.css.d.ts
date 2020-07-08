@@ -7,4 +7,6 @@
  */
 export const root: string;
 
+export const inverted: string;
+
 export const scrollbarsAlwaysShown: string;
