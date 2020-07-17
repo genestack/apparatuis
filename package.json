@@ -1,6 +1,6 @@
 {
   "name": "genestack-ui",
-  "version": "8.4.1",
+  "version": "8.4.1-next1.2",
   "description": "UI library",
   "main": "src/",
   "types": "src/",

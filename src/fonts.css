@@ -8,28 +8,28 @@
 
 @font-face {
     font-family: "IBM Plex Sans";
-    src: url("fonts/IBMPlexSans-Medium.ttf") format("truetype");
+    src: url("./fonts/IBMPlexSans-Medium.ttf") format("truetype");
     font-weight: bold;
     font-style: normal;
 }
 
 @font-face {
     font-family: "IBM Plex Sans";
-    src: url("fonts/IBMPlexSans-MediumItalic.ttf") format("truetype");
+    src: url("./fonts/IBMPlexSans-MediumItalic.ttf") format("truetype");
     font-weight: bold;
     font-style: italic;
 }
 
 @font-face {
     font-family: "IBM Plex Sans";
-    src: url("fonts/IBMPlexSans-Regular.ttf") format("truetype");
+    src: url("./fonts/IBMPlexSans-Regular.ttf") format("truetype");
     font-weight: normal;
     font-style: normal;
 }
 
 @font-face {
     font-family: "IBM Plex Sans";
-    src: url("fonts/IBMPlexSans-Italic.ttf") format("truetype");
+    src: url("./fonts/IBMPlexSans-Italic.ttf") format("truetype");
     font-weight: normal;
     font-style: italic;
 }
