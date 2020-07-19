@@ -28,11 +28,8 @@ handleDrawerClose = () =>
     });
 
 <React.Fragment>
-    <PageContent
-        as={Paper}
-        style={{background: state.contextInverted ? 'rgb(51, 51, 51)' : 'rgb(255, 255, 255)'}}
-    >
-        <DarkContext.Provider value={state.contextInverted}>
+    <DarkContext.Provider value={state.contextInverted}>
+        <PageContent as={Paper}>
             <Typography variant="section">In context</Typography>
             <Checkbox
                 onValueChange={(value) => setState({contextInverted: value})}
@@ -41,20 +38,23 @@ handleDrawerClose = () =>
                 <Typography>Inverted</Typography>
             </Checkbox>
             <Preloader show count={5} box="paragraph" />
-        </DarkContext.Provider>
-    </PageContent>
-    <PageContent
-        as={Paper}
-        style={{background: state.inverted ? 'rgb(51, 51, 51)' : 'rgb(255, 255, 255)'}}
-    >
-        <Typography inverted={state.inverted} variant="section">
-            Out of context
-        </Typography>
-        <Checkbox onValueChange={(value) => setState({inverted: value})} checked={state.inverted}>
-            <Typography inverted={state.inverted}>Inverted</Typography>
-        </Checkbox>
-        <Preloader show count={5} box="paragraph" inverted={state.inverted} />
-    </PageContent>
+        </PageContent>
+    </DarkContext.Provider>
+
+    <DarkContext.Provider value={state.inverted}>
+        <PageContent as={Paper}>
+            <Typography inverted={state.inverted} variant="section">
+                Out of context
+            </Typography>
+            <Checkbox
+                onValueChange={(value) => setState({inverted: value})}
+                checked={state.inverted}
+            >
+                <Typography inverted={state.inverted}>Inverted</Typography>
+            </Checkbox>
+            <Preloader show count={5} box="paragraph" inverted={state.inverted} />
+        </PageContent>
+    </DarkContext.Provider>
 
     <PageContent as={Paper}>
         <Controls justify="space-between">

@@ -8,6 +8,8 @@
 import classNames from 'classnames';
 import * as React from 'react';
 
+import {DarkContext} from '../../utils/dark-context';
+
 import * as styles from './paper.module.css';
 
 type TargetProps = React.HTMLAttributes<HTMLElement>;
@@ -18,6 +20,12 @@ export interface Props extends TargetProps {
     rootRef?: React.Ref<HTMLElement>;
     /** You could redefine the target component by passing ReactType */
     as?: React.ReactType;
+    /**
+     * Changes own background to dark. Will fallback to `DarkContext`'s value if `undefined`.
+     *
+     * Default: `"false"`
+     */
+    inverted?: boolean;
 }
 
 /**
@@ -25,14 +33,20 @@ export interface Props extends TargetProps {
  * Is used for overlay components.
  */
 export function Paper(props: Props) {
-    const {as: Component = 'div', rootRef, className, ...rest} = props;
+    const {
+        as: Component = 'div',
+        rootRef,
+        className,
+        inverted = React.useContext(DarkContext),
+        ...rest
+    } = props;
 
     return (
         <Component
             data-qa="paper"
             {...rest}
             ref={rootRef}
-            className={classNames(className, styles.root)}
+            className={classNames(className, styles.root, {[styles.inverted]: inverted})}
         />
     );
 }

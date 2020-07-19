@@ -24,7 +24,7 @@ export function Presentation(props: Props) {
     return (
         <PresentationContext.Provider value={state}>
             <DarkContext.Provider value={state[0].inverted}>
-                <Paper style={{background: state[0].inverted ? '#252E42' : '#FFF'}}>
+                <Paper>
                     <Controls>{props.children}</Controls>
                 </Paper>
             </DarkContext.Provider>

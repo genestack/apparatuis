@@ -6,6 +6,8 @@
  * actual or intended publication of such source code.
  */
 
+/* stylelint-disable no-descending-specificity, selector-combinator-space-before */
+
 .root {
     overflow: auto;
 
@@ -19,4 +21,55 @@
 .root :global(.simplebar-wrapper) {
     height: 100%;
     width: 100%;
+}
+
+/* capturing pointer events on scrollbar track */
+.root > :global(.simplebar-track) > :global(.simplebar-scrollbar) {
+    pointer-events: all;
+}
+
+.root > :global(.simplebar-track) > :global(.simplebar-scrollbar:before) {
+    background-color: rgba(85, 85, 85, 0.5);
+}
+
+.root > :global(.simplebar-track) > :global(.simplebar-scrollbar.simplebar-hover:before),
+.root:global(.simplebar-dragging)
+    > :global(.simplebar-track)
+    > :global(.simplebar-scrollbar:before) {
+    background-color: rgba(85, 85, 85, 0.8);
+}
+
+.root.inverted > :global(.simplebar-track) > :global(.simplebar-scrollbar:before) {
+    background-color: rgba(204, 204, 204, 0.5);
+}
+
+.root.inverted > :global(.simplebar-track) > :global(.simplebar-scrollbar.simplebar-hover:before),
+.root.inverted:global(.simplebar-dragging)
+    > :global(.simplebar-track)
+    > :global(.simplebar-scrollbar:before) {
+    background-color: rgba(204, 204, 204, 0.8);
+}
+
+/* overriding vertical scrollbar track width and horizontal scrollbar track height */
+.root > :global(.simplebar-track.simplebar-vertical) {
+    width: 13px;
+}
+
+.root > :global(.simplebar-track.simplebar-horizontal) {
+    height: 13px;
+}
+
+.root > :global(.simplebar-track.simplebar-horizontal) > :global(.simplebar-scrollbar) {
+    top: 3px;
+    height: 8px;
+}
+
+.root > :global(.simplebar-track.simplebar-vertical) > :global(.simplebar-scrollbar:before) {
+    left: 3px;
+}
+
+/* hiding scrollbars when not hovered and not being dragged */
+.root:not(:hover):not(.scrollbarsAlwaysShown):not(:global(.simplebar-dragging))
+    > :global(.simplebar-track) {
+    visibility: hidden !important;
 }

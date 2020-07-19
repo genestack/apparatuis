@@ -60,3 +60,4 @@ export {UploadIcon} from './upload-icon';
 export {UserGroupIcon} from './user-group-icon';
 export {UserIcon} from './user-icon';
 export {WarningIcon} from './warning-icon';
+export {TemplateIcon} from './template-icon';

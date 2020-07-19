@@ -2,6 +2,29 @@
 
 ## [Unreleased]
 
+## [8.4.2] - 2020-07-08
+
+### Changed
+
+-   Chnaged `<Paper />` to consume dark context and change own appearance depending on its value
+-   Updated scrollbar colors in `<ScrollView />`
+
+## [8.4.1] - 2020-06-30
+
+### Fixed
+
+-   Fix clicks on `<InteractiveElement />` when it is a button or a link
+
+## [8.4.0] - 2020-06-29
+
+-   Add `<TemplateIcon />`
+
+## [8.3.1] - 2020-06-19
+
+### Changed
+
+-   Introduce `showScrollbars` option of `<ScrollView />` component
+
 ## [8.3.0] - 2020-06-22
 
 ## Changed
