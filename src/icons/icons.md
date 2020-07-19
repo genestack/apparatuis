@@ -18,10 +18,18 @@ const {Controls, ControlsItem} = require('../components/controls');
 
 function IconPlate({icon, name, variable}) {
     return (
-        <div style={{padding: '8px 16px', '&:hover': {background: 'red'}}}>
+        <div
+            style={{
+                padding: '8px 16px',
+                width: '90px',
+                height: '65px',
+                display: 'inline-block',
+                '&:hover': {background: 'red'}
+            }}
+        >
             <Controls gap={4} style={{display: 'flex', flexDirection: 'column'}}>
                 <ControlsItem>{icon}</ControlsItem>
-                <Divider variant="transparent" gap={2} />
+                <Divider variant="transparent" gap={1} />
                 <ControlsItem>
                     <Typography quiet variant="caption">
                         {name}
@@ -32,21 +40,38 @@ function IconPlate({icon, name, variable}) {
     );
 }
 
-<Paper>
-    <WithSeparator separator={<Divider style={{marginLeft: 50, width: 'auto'}} gap={0} />}>
-        {Object.keys(icons)
-            .sort()
-            .map((iconName, index) => {
-                const Icon = icons[iconName];
-                return (
-                    <IconPlate
-                        key={index}
-                        icon={<Icon />}
-                        name={iconName.replace('Icon', '')}
-                        variable={iconName}
-                    />
-                );
-            })}
-    </WithSeparator>
-</Paper>;
+initialState = {
+    value: ''
+};
+
+const results = Object.keys(icons).filter((name) =>
+    name.toLowerCase().match(state.value.toLowerCase())
+);
+
+<PageContent as={Paper}>
+    <Controls>
+        <Input
+            value={state.value}
+            onValueChange={(value) => setState({value})}
+            style={{width: '300px'}}
+            placeholder={'Search icons...'}
+        />
+    </Controls>
+    <Divider variant="transparent" gap={1} />
+    <Typography>
+        {results.length} matching {results.length === 1 ? 'value' : 'values'}
+    </Typography>
+    <Divider variant="transparent" gap={3} />
+    {results.map((iconName, index) => {
+        const Icon = icons[iconName];
+        return (
+            <IconPlate
+                key={index}
+                icon={<Icon />}
+                name={iconName.replace('Icon', '')}
+                variable={iconName}
+            />
+        );
+    })}
+</PageContent>;
 ```

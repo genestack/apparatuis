@@ -6,8 +6,9 @@
  * actual or intended publication of such source code.
  */
 
-import {createIcon} from '../components/icon';
 import * as React from 'react';
+
+import {createIcon} from '../components/icon';
 
 /**
  * Gear icon
