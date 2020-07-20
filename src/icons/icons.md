@@ -23,8 +23,7 @@ function IconPlate({icon, name, variable}) {
                 padding: '8px 16px',
                 width: '90px',
                 height: '65px',
-                display: 'inline-block',
-                '&:hover': {background: 'red'}
+                display: 'inline-block'
             }}
         >
             <Controls gap={4} style={{display: 'flex', flexDirection: 'column'}}>
