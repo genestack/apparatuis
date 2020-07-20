@@ -2,6 +2,10 @@
 
 ## [Unreleased]
 
+### Added
+
+-   Add `<GearIcon />`, `<GenericFileIcon />`, `<StudyIcon>`
+
 ## [8.4.2] - 2020-07-08
 
 ### Changed

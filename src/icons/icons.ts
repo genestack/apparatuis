@@ -6,6 +6,10 @@
  * actual or intended publication of such source code.
  */
 
+export {GenericFileIcon} from './generic-file-icon';
+export {TemplateIcon} from './template-icon';
+export {StudyIcon} from './study-icon';
+
 export {ArrowDownloadIcon} from './arrow-download-icon';
 export {ArrowDownloadThinIcon} from './arrow-download-thin-icon';
 export {ArrowLeftIcon} from './arrow-left-icon';
@@ -27,6 +31,7 @@ export {EyeIcon} from './eye-icon';
 export {FileIcon} from './file-icon';
 export {FiltersIcon} from './filters-icon';
 export {FirstPageIcon} from './first-page-icon';
+export {GearIcon} from './gear-icon';
 export {HelpIcon} from './help-icon';
 export {InfoIcon} from './info-icon';
 export {IntegerIcon} from './integer-icon';
@@ -56,4 +61,3 @@ export {UploadIcon} from './upload-icon';
 export {UserGroupIcon} from './user-group-icon';
 export {UserIcon} from './user-icon';
 export {WarningIcon} from './warning-icon';
-export {TemplateIcon} from './template-icon';

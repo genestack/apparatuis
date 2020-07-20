@@ -18,15 +18,20 @@ const {Controls, ControlsItem} = require('../components/controls');
 
 function IconPlate({icon, name, variable}) {
     return (
-        <div style={{padding: '8px 16px'}}>
-            <Controls gap={4}>
+        <div
+            style={{
+                padding: '8px 16px',
+                width: '90px',
+                height: '65px',
+                display: 'inline-block'
+            }}
+        >
+            <Controls gap={4} style={{display: 'flex', flexDirection: 'column'}}>
                 <ControlsItem>{icon}</ControlsItem>
+                <Divider variant="transparent" gap={1} />
                 <ControlsItem>
-                    <Typography>{name}</Typography>
-                    <Typography quiet variant="caption" as="div">
-                        <pre
-                            style={{margin: '0'}}
-                        >{`import {${variable}} from 'genestack-ui/src/icons';`}</pre>
+                    <Typography quiet variant="caption">
+                        {name}
                     </Typography>
                 </ControlsItem>
             </Controls>
@@ -34,21 +39,38 @@ function IconPlate({icon, name, variable}) {
     );
 }
 
-<Paper>
-    <WithSeparator separator={<Divider style={{marginLeft: 50, width: 'auto'}} gap={0} />}>
-        {Object.keys(icons)
-            .sort()
-            .map((iconName, index) => {
-                const Icon = icons[iconName];
-                return (
-                    <IconPlate
-                        key={index}
-                        icon={<Icon />}
-                        name={iconName.replace('Icon', '')}
-                        variable={iconName}
-                    />
-                );
-            })}
-    </WithSeparator>
-</Paper>;
+initialState = {
+    value: ''
+};
+
+const results = Object.keys(icons).filter((name) =>
+    name.toLowerCase().match(state.value.toLowerCase())
+);
+
+<PageContent as={Paper}>
+    <Controls>
+        <Input
+            value={state.value}
+            onValueChange={(value) => setState({value})}
+            style={{width: '300px'}}
+            placeholder={'Search icons...'}
+        />
+    </Controls>
+    <Divider variant="transparent" gap={1} />
+    <Typography>
+        {results.length} matching {results.length === 1 ? 'value' : 'values'}
+    </Typography>
+    <Divider variant="transparent" gap={3} />
+    {results.map((iconName, index) => {
+        const Icon = icons[iconName];
+        return (
+            <IconPlate
+                key={index}
+                icon={<Icon />}
+                name={iconName.replace('Icon', '')}
+                variable={iconName}
+            />
+        );
+    })}
+</PageContent>;
 ```
