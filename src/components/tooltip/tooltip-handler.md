@@ -41,8 +41,8 @@ class AsyncTooltip extends React.Component {
                     'Loading...'
                 ) : (
                     <React.Fragment>
-                        Hello!<br />
-                        I am an async tooltip!
+                        Hello!
+                        <br />I am an async tooltip!
                     </React.Fragment>
                 )}
             </Tooltip>

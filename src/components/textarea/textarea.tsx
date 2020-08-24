@@ -46,6 +46,7 @@ export const Textarea = (props: Props) => {
 
     return (
         <TextareaAutosize
+            data-qa="textarea"
             {...rest}
             inputRef={inputRef as any}
             onChange={chain(rest.onChange, handleChange)}

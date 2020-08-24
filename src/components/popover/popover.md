@@ -17,7 +17,10 @@ handleButtonClick = (event) => {
 };
 
 handleToggleExpandButtonClick = () =>
-    setState(({expanded}) => ({expanded: !expanded}), () => this.popper.scheduleUpdate());
+    setState(
+        ({expanded}) => ({expanded: !expanded}),
+        () => this.popper.scheduleUpdate()
+    );
 
 handlePlacementChange = (event) => {
     setState({placement: event.target.value});

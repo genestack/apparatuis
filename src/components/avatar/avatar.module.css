@@ -1,0 +1,50 @@
+/*
+ * Copyright (c) 2011-2020 Genestack Limited
+ * All Rights Reserved
+ * THIS IS UNPUBLISHED PROPRIETARY SOURCE CODE OF GENESTACK LIMITED
+ * The copyright notice above does not evidence any
+ * actual or intended publication of such source code.
+ */
+@import "../../variables.css";
+
+.root {
+    width: 32px;
+    height: 32px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    background-color: var(--gs-color-grey);
+    border-radius: 50%;
+    color: var(--gs-color-white);
+    font-weight: bold;
+    cursor: default;
+    user-select: none;
+}
+
+.letter {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.letter:first-child {
+    margin-top: 3px;
+    margin-left: 4px;
+}
+
+.letter:last-child {
+    margin-top: -2px;
+    margin-left: -4px;
+    text-shadow: var(--gs-color-grey) 1px 1px;
+}
+
+.letter:only-child {
+    margin: 0;
+    font-size: 18px;
+    line-height: 18px;
+}

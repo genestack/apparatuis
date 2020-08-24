@@ -35,6 +35,7 @@ export const Controls = (props: Props) => {
 
     return (
         <Component
+            data-qa="controls"
             {...rest}
             className={classNames(rest.className, styles.container, {
                 [styles.gap1]: gap === 1,

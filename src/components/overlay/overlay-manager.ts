@@ -22,9 +22,9 @@ export type OverlayComponent = React.ReactInstance;
 interface ContainerState {
     startFocusButton: HTMLButtonElement;
     endFocusButton: HTMLButtonElement;
-    containerOverflow: string | null;
-    containerPaddingRight: string | null;
-    fixedBlocksPaddingsRight: Map<HTMLElement, string | null>;
+    containerOverflow: string;
+    containerPaddingRight: string;
+    fixedBlocksPaddingsRight: Map<HTMLElement, string>;
 }
 
 function createHiddenFocusButton() {
@@ -81,7 +81,7 @@ export class OverlayManager {
         document.body.appendChild(endFocusButton);
         document.body.insertBefore(startFocusButton, document.body.firstChild);
 
-        const fixedBlocksPaddingsRight = new Map<HTMLElement, string | null>();
+        const fixedBlocksPaddingsRight = new Map<HTMLElement, string>();
 
         this.containerState = {
             containerOverflow: container.style.overflow,
@@ -94,7 +94,7 @@ export class OverlayManager {
         const containerOverflow = 'hidden';
         let containerPaddingRight = '0px';
 
-        const appliedFixedBlocksPaddings = new Map<HTMLElement, string | null>();
+        const appliedFixedBlocksPaddings = new Map<HTMLElement, string>();
 
         if (hasVerticalScrollbar(container)) {
             const size = scrollbarSize();
@@ -126,8 +126,8 @@ export class OverlayManager {
             return;
         }
 
-        container.style.overflow = containerState.containerOverflow || '';
-        container.style.paddingRight = containerState.containerPaddingRight || '';
+        container.style.overflow = containerState.containerOverflow;
+        container.style.paddingRight = containerState.containerPaddingRight;
         containerState.startFocusButton.removeEventListener('focus', this.handleStartButtonFocus);
         remove(containerState.startFocusButton);
         containerState.endFocusButton.removeEventListener('focus', this.handleEndButtonFocus);

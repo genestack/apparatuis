@@ -58,6 +58,7 @@ export const Header = (props: Props) => {
             {spacer}
             <Flex container gap={0}>
                 <div
+                    data-qa="header"
                     {...rest}
                     className={classNames(classes.root, rest.className, {
                         [FIXED_BLOCKS_CLASS_NAME]: !disablePositionFixed,

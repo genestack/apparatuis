@@ -99,6 +99,7 @@ export class Menu extends React.Component<Props> {
                     invisible
                 >
                     <MenuPopover
+                        data-qa="menu"
                         {...popoverProps}
                         referenceElement={referenceElement}
                         open={open}

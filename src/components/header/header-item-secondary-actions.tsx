@@ -28,6 +28,7 @@ export class HeaderItemSecondaryActions extends React.Component<Props> {
     public render() {
         return (
             <div
+                data-qa="header-item-secondary-actions"
                 {...this.props}
                 onClick={chain(this.props.onClick, this.handleClick)}
                 className={classNames(this.props.className, styles.root)}

@@ -12,7 +12,9 @@ const wait = (timeout) => {
         <Divider gap={3} variant="transparent" />
         <div style={{textAlign: 'center'}}>
             <Button onClick={() => wait(5000)}>
-                Block JS thread<br />for 5 seconds
+                Block JS thread
+                <br />
+                for 5 seconds
             </Button>
         </div>
     </PageContent>

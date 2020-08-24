@@ -1,10 +1,11 @@
 /*
- * Copyright (c) 2011-2019 Genestack Limited
+ * Copyright (c) 2011-2020 Genestack Limited
  * All Rights Reserved
  * THIS IS UNPUBLISHED PROPRIETARY SOURCE CODE OF GENESTACK LIMITED
  * The copyright notice above does not evidence any
  * actual or intended publication of such source code.
  */
+import classNames from 'classnames';
 import Downshift, {ControllerStateAndHelpers, StateChangeOptions} from 'downshift';
 import * as React from 'react';
 
@@ -16,6 +17,7 @@ import {List} from '../list';
 import {PopoverProps} from '../popover';
 import {Suggest, SuggestProps} from '../suggest';
 
+import * as styles from './styles.module.css';
 import {SuggestInputItem, Props as SuggestInputItemProps} from './suggest-input-item';
 
 /**
@@ -74,6 +76,7 @@ export interface Props extends SuggestProps {
     /** Calls when open state is changed */
     onOpenChange?: (open: boolean) => void;
     children?: SuggestInputChildren;
+    listProps?: React.ComponentPropsWithRef<typeof List>;
 }
 
 /**
@@ -83,7 +86,7 @@ export interface Props extends SuggestProps {
  * It supports only string values.
  */
 export function SuggestInput(props: Props) {
-    const {onComplete, openOnFocus, onOpenChange, ...rest} = props;
+    const {onComplete, openOnFocus, onOpenChange, listProps = {}, ...rest} = props;
     const [value, onValueChange] = useControlledProp(
         rest.value,
         rest.defaultValue || '',
@@ -176,6 +179,7 @@ export function SuggestInput(props: Props) {
 
                 return (
                     <Suggest
+                        data-qa="suggest-input"
                         {...inputProps}
                         onKeyDown={handleInputKeyDown}
                         value={value}
@@ -187,7 +191,15 @@ export function SuggestInput(props: Props) {
                         popoverProps={popoverProps}
                         open={open}
                     >
-                        {open ? <List>{children}</List> : null}
+                        {open ? (
+                            <List
+                                data-qa="suggest-input-list"
+                                {...listProps}
+                                className={classNames(listProps.className, styles.list)}
+                            >
+                                {children}
+                            </List>
+                        ) : null}
                     </Suggest>
                 );
             }}

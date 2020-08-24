@@ -86,8 +86,8 @@ renderRadio = (name, label, value) => (
                         state.subtitle === 'short'
                             ? shortSubtitle
                             : state.subtitle === 'long'
-                                ? longSubtitle
-                                : null
+                            ? longSubtitle
+                            : null
                     }
                     subMenu={state.subMenu ? <SubMenu /> : null}
                 >

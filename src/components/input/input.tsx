@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2011-2019 Genestack Limited
+ * Copyright (c) 2011-2020 Genestack Limited
  * All Rights Reserved
  * THIS IS UNPUBLISHED PROPRIETARY SOURCE CODE OF GENESTACK LIMITED
  * The copyright notice above does not evidence any
@@ -156,6 +156,13 @@ export function Input(props: Props) {
         setFocused(false);
     };
 
+    // https://github.com/facebook/react/issues/9142
+    React.useEffect(() => {
+        if (props.disabled) {
+            setFocused(false);
+        }
+    }, [props.disabled]);
+
     const handleInputChange = chain(
         inputProps.onChange,
         onValueChange &&
@@ -174,6 +181,7 @@ export function Input(props: Props) {
 
     return (
         <Field
+            data-qa="input-field"
             tabIndex={!inputProps.disabled ? fieldTabIndex : undefined}
             className={classNames(className, classes.root)}
             style={style}
@@ -200,6 +208,7 @@ export function Input(props: Props) {
                 className={classNames(inputCellProps.className, classes.inputCell)}
             >
                 <input
+                    data-qa="input"
                     ref={chainRefs(innerInputRef, inputRef)}
                     {...inputProps}
                     className={classNames(classes.input, inputProps.className, {

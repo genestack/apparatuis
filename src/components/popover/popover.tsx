@@ -96,6 +96,7 @@ export const Popover = (props: Props) => {
                             data-placement={placement}
                         >
                             <Paper
+                                data-qa="popover"
                                 {...targetProps}
                                 data-placement={placement}
                                 className={classNames(targetProps.className, classes.paper, {

@@ -42,6 +42,7 @@ export const HeaderBlock = (props: Props) => {
 
     return (
         <Component
+            data-qa="header-block"
             {...rest}
             className={classNames(rest.className, styles.root, {
                 [styles.grow]: grow,

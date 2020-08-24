@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2011-2019 Genestack Limited
+ * Copyright (c) 2011-2020 Genestack Limited
  * All Rights Reserved
  * THIS IS UNPUBLISHED PROPRIETARY SOURCE CODE OF GENESTACK LIMITED
  * The copyright notice above does not evidence any
@@ -64,6 +64,7 @@ export const Button: OverridableComponent<TypeMap> = React.forwardRef<
 
     return (
         <ButtonBase
+            data-qa="button"
             ref={ref}
             {...rest}
             ghost={ghost}

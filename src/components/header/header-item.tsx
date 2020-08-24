@@ -10,7 +10,6 @@ import * as React from 'react';
 
 import {chain} from '../../utils/chain';
 import {getReachableElements, getSiblingElement} from '../../utils/focusable-elements';
-import {Omit} from '../../utils/omit';
 import {mergeClassesProps, WithClasses} from '../../utils/styles';
 import {InteractiveElement, InteractiveElementProps} from '../interactive-element';
 
@@ -18,14 +17,9 @@ import {HeaderBlock, Props as HeaderBlockProps} from './header-block';
 import {HeaderItemText} from './header-item-text';
 import * as styles from './header-item.module.css';
 
-type TargetProps = Omit<
-    InteractiveElementProps<
-        React.AnchorHTMLAttributes<HTMLElement> &
-            React.ButtonHTMLAttributes<HTMLElement> &
-            HeaderBlockProps
-    >,
-    'activeClassName'
->;
+type TargetProps = React.AnchorHTMLAttributes<HTMLElement> &
+    React.ButtonHTMLAttributes<HTMLElement> &
+    HeaderBlockProps;
 
 /** HeaderItem public properties */
 export interface Props extends TargetProps, WithClasses<keyof typeof styles> {
@@ -90,6 +84,7 @@ export class HeaderItem extends React.Component<Props> {
 
         return (
             <HeaderBlock
+                data-qa="header-item"
                 {...rest}
                 as={InteractiveElement}
                 {...interactiveElementProps}

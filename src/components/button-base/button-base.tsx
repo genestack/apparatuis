@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2011-2019 Genestack Limited
+ * Copyright (c) 2011-2020 Genestack Limited
  * All Rights Reserved
  * THIS IS UNPUBLISHED PROPRIETARY SOURCE CODE OF GENESTACK LIMITED
  * The copyright notice above does not evidence any
@@ -10,6 +10,7 @@ import * as React from 'react';
 
 import {chain} from '../../utils/chain';
 import {DarkContext} from '../../utils/dark-context';
+import {matches} from '../../utils/matches';
 import {OverridableComponent, OverridableProps} from '../../utils/overridable-component';
 import {WithClasses, mergeClassesProps} from '../../utils/styles';
 
@@ -21,7 +22,7 @@ export interface Props extends WithClasses<keyof typeof styles> {
     /** Light button variant without background */
     ghost?: boolean;
     /** Intent of button */
-    intent?: 'default' | 'accent' | 'alarm';
+    intent?: 'no-intent' | 'accent' | 'alarm';
     /**
      * If `true` element has `hover` style.
      * It is used only for examples. Avoid using this property.
@@ -57,7 +58,7 @@ export const ButtonBase: OverridableComponent<TypeMap> = React.forwardRef<
 
     const {
         ghost,
-        intent = 'default',
+        intent = 'no-intent',
         hovered,
         focused,
         // use default tabIndex to enable focusing
@@ -75,7 +76,11 @@ export const ButtonBase: OverridableComponent<TypeMap> = React.forwardRef<
 
     const handleClick = React.useCallback<React.ReactEventHandler>(
         (event) => {
-            if (!disabled && onClick) {
+            // React has bug in Chrome. It calls `onClick` callback when button is
+            // in disabled fieldset. It is a workaround. @see https://git.io/JvGEj
+            const isHtmlDisabled = matches(event.currentTarget, ':disabled');
+
+            if (!disabled && onClick && !isHtmlDisabled) {
                 onClick(event);
             }
         },
@@ -89,6 +94,7 @@ export const ButtonBase: OverridableComponent<TypeMap> = React.forwardRef<
 
     return (
         <Component
+            data-qa="button-base"
             type={isNativeButton ? 'button' : undefined}
             {...rest}
             disabled={isNativeButton ? disabled : undefined}
@@ -101,7 +107,7 @@ export const ButtonBase: OverridableComponent<TypeMap> = React.forwardRef<
                 [classes.disabled]: disabled,
                 [classes.ghost]: ghost,
                 [classes.normal]: !ghost,
-                [classes.intentDefault]: intent === 'default',
+                [classes.noIntent]: intent === 'no-intent',
                 [classes.accent]: intent === 'accent',
                 [classes.alarm]: intent === 'alarm',
                 [classes.inverted]: inverted || darkContext

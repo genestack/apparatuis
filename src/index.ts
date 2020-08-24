@@ -1,10 +1,12 @@
 /*
- * Copyright (c) 2011-2019 Genestack Limited
+ * Copyright (c) 2011-2020 Genestack Limited
  * All Rights Reserved
  * THIS IS UNPUBLISHED PROPRIETARY SOURCE CODE OF GENESTACK LIMITED
  * The copyright notice above does not evidence any
  * actual or intended publication of such source code.
  */
+export * from './components/avatar';
+export * from './components/badge';
 export * from './components/button';
 export * from './components/checkbox';
 export * from './components/input';
@@ -41,9 +43,11 @@ export * from './components/spinner';
 export * from './components/suggest';
 export * from './components/highlight';
 export * from './components/suggest-input';
+export * from './components/switch';
 export * from './components/text-label';
 export * from './components/preloader';
 export * from './components/field';
 export * from './components/button-group';
+export * from './components/scroll-view';
 export * from './icons';
 export * from './utils';

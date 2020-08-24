@@ -8,14 +8,14 @@
 import classNames from 'classnames';
 import * as React from 'react';
 
+import {Omit} from '../../utils/omit';
 import {WithClasses, mergeClassesProps} from '../../utils/styles';
 import {MarginBoxProps, MarginBox} from '../margin-box';
 
 import * as styles from './dialog-body.module.css';
 import {DialogContext} from './dialog-context';
 
-type TargetProps = React.HTMLAttributes<HTMLDivElement> &
-    Pick<MarginBoxProps, 'startDividerProps' | 'endDividerProps'>;
+type TargetProps = React.HTMLAttributes<HTMLDivElement> & Omit<MarginBoxProps, 'classes'>;
 
 /** DialogBody public properties */
 export interface Props extends TargetProps, WithClasses<keyof typeof styles> {}
@@ -33,6 +33,7 @@ export const DialogBody = (props: Props) => {
         <DialogContext.Consumer>
             {(dialogContext) => (
                 <MarginBox
+                    data-qa="dialog-body"
                     contained="in-dialog"
                     {...rest}
                     className={classNames(rest.className, classes.root, {

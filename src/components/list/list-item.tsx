@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2011-2019 Genestack Limited
+ * Copyright (c) 2011-2020 Genestack Limited
  * All Rights Reserved
  * THIS IS UNPUBLISHED PROPRIETARY SOURCE CODE OF GENESTACK LIMITED
  * The copyright notice above does not evidence any
@@ -68,7 +68,7 @@ export interface Props extends TargetProps, WithClasses<keyof typeof styles> {
 /**
  * Single item of List component
  */
-export function ListItem(props: Props) {
+export const ListItem = React.forwardRef((props: Props, ref) => {
     const {
         as: Component,
         classes,
@@ -108,6 +108,7 @@ export function ListItem(props: Props) {
 
     return (
         <RenderComponent
+            data-qa="list-item"
             {...rest}
             {...renderComponentProps}
             disabled={disabled}
@@ -120,6 +121,7 @@ export function ListItem(props: Props) {
                 [classes.inPage]: contained === 'in-page',
                 [classes.inDialog]: contained === 'in-dialog'
             })}
+            ref={ref}
         >
             {prepend ? (
                 <div
@@ -162,4 +164,4 @@ export function ListItem(props: Props) {
             </div>
         </RenderComponent>
     );
-}
+});

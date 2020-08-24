@@ -36,6 +36,7 @@ export const InputClearButton = (props: Props) => {
             }}
         >
             <Button
+                data-qa="input-clear-button"
                 size="tiny"
                 ghost
                 component="button"

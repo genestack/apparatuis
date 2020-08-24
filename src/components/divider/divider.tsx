@@ -56,6 +56,7 @@ export function Divider(props: Props) {
 
                 return (
                     <hr
+                        data-qa="divider"
                         {...rest}
                         className={classNames(className, classes.root, {
                             [classes.dashed]: variant === 'dashed',

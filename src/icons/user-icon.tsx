@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2011-2019 Genestack Limited
+ * Copyright (c) 2011-2020 Genestack Limited
  * All Rights Reserved
  * THIS IS UNPUBLISHED PROPRIETARY SOURCE CODE OF GENESTACK LIMITED
  * The copyright notice above does not evidence any
@@ -16,7 +16,7 @@ import {createIcon} from '../components/icon';
 export const UserIcon = createIcon(
     <svg viewBox="0 0 20 20">
         <path
-            d="M5.8 14.2c-1.225.612-2.45 1.225-2.737 2.305-.07.267.16.495.435.495h13.004c.276 0 .506-.228.435-.495-.288-1.08-1.512-1.693-2.737-2.305-1.4-.7-3.035-1-3.035-2.2 0-1.2.582-1.2 1.164-1.8.583-.6 1.165-1.8 1.165-3.6C13.494 4.2 11.93 3 10 3 8.07 3 6.506 4.612 6.506 6.6c0 1.8.582 3 1.165 3.6.582.6 1.164.6 1.164 1.8 0 1.2-1.635 1.5-3.035 2.2z"
+            d="M6.4 13.6C5.2 14.2 4 14.8 4 16h12c0-1.2-1.2-1.8-2.4-2.4-1.2-.6-2.602-.857-2.602-1.886 0-1.028.5-1.028.998-1.543.5-.514.999-1.542.999-3.085C12.995 5.029 11.654 4 10 4 8.346 4 7.005 5.382 7.005 7.086c0 1.543.5 2.571.998 3.085.5.515.999.515.999 1.543C9.002 12.743 7.6 13 6.4 13.6z"
             className="gs-svg-icon-fill"
         />
     </svg>

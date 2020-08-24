@@ -1,0 +1,61 @@
+/*
+ * Copyright (c) 2011-2020 Genestack Limited
+ * All Rights Reserved
+ * THIS IS UNPUBLISHED PROPRIETARY SOURCE CODE OF GENESTACK LIMITED
+ * The copyright notice above does not evidence any
+ * actual or intended publication of such source code.
+ */
+
+@import "../../variables.css";
+
+.root {
+    height: calc(var(--gs-spacing-unit) * 2.5);
+    display: inline-flex;
+    align-items: center;
+    min-width: 20px;
+    min-height: 20px;
+}
+
+.content {
+    display: block;
+    min-width: 16px;
+    min-height: 16px;
+    box-sizing: border-box;
+    padding: 1px 4px 0;
+    text-align: center;
+    font-size: 11px;
+    border-radius: 2px;
+    line-height: 15px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.intentDefault {
+    background-color: var(--gs-color-action-text-60);
+    color: var(--gs-color-white);
+}
+
+.disableTextTransform {
+    letter-spacing: normal;
+    text-transform: none;
+}
+
+.warning {
+    background-color: var(--gs-color-warning);
+    color: var(--gs-color-white);
+}
+
+.ghost {
+    line-height: 13px;
+    background-color: transparent;
+}
+
+.intentDefault.ghost {
+    color: var(--gs-color-grey);
+    border: 1px solid var(--gs-color-grey-outline);
+}
+
+.warning.ghost {
+    border: 1px solid var(--gs-color-warning);
+    color: var(--gs-color-warning);
+}

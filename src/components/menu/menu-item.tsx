@@ -312,6 +312,7 @@ export class MenuItem extends React.PureComponent<Props, State> {
                     <React.Fragment>
                         <RootRef rootRef={this.itemRef}>
                             <ListItem
+                                data-qa="menu-item"
                                 {...rest}
                                 interactive
                                 focused={this.state.highlighted}
@@ -325,6 +326,7 @@ export class MenuItem extends React.PureComponent<Props, State> {
                                     ...appendProps,
                                     className: classNames(appendProps.className, classes.append)
                                 }}
+                                titleProps={titleProps}
                                 append={
                                     append || subMenu ? (
                                         <React.Fragment>
@@ -339,7 +341,7 @@ export class MenuItem extends React.PureComponent<Props, State> {
                                 }
                                 onClick={chain(rest.onClick, this.createClickHandler(menuContext))}
                                 onFocus={chain(rest.onFocus, this.handleFocus)}
-                                onBlur={chain(rest.onFocus, this.handleBlur)}
+                                onBlur={chain(rest.onBlur, this.handleBlur)}
                                 onKeyDown={chain(rest.onKeyDown, this.handleKeyDown)}
                                 onMouseEnter={chain(rest.onMouseEnter, this.handleMouseEnter)}
                                 onMouseLeave={chain(rest.onMouseLeave, this.handleMouseLeave)}

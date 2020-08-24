@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2011-2019 Genestack Limited
+ * Copyright (c) 2011-2020 Genestack Limited
  * All Rights Reserved
  * THIS IS UNPUBLISHED PROPRIETARY SOURCE CODE OF GENESTACK LIMITED
  * The copyright notice above does not evidence any
@@ -82,6 +82,10 @@ export function Dialog(props: Props) {
             return;
         }
 
+        if (props.overlayProps?.disableClickListener === true) {
+            return;
+        }
+
         if (props.onClose) {
             props.onClose('backdrop-click', event);
         }
@@ -122,6 +126,7 @@ export function Dialog(props: Props) {
                 >
                     <Transition in={open} appear>
                         <Paper
+                            data-qa="dialog"
                             {...rest}
                             tabIndex={-1}
                             className={classNames(rest.className, classes.root, {

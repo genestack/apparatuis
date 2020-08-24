@@ -38,8 +38,8 @@ const regulationButtons = (
     </React.Fragment>
 );
 
-<PageContent as={Paper} style={{background: state.inverted ? '#141820' : undefined}}>
-    <DarkContext.Provider value={state.inverted}>
+<DarkContext.Provider value={state.inverted}>
+    <PageContent as={Paper}>
         <WithSeparator
             separator={
                 <PageFullWidth>
@@ -212,6 +212,6 @@ const regulationButtons = (
                 </ControlsItem>
             </Controls>
         </WithSeparator>
-    </DarkContext.Provider>
-</PageContent>;
+    </PageContent>
+</DarkContext.Provider>;
 ```

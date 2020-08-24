@@ -87,8 +87,8 @@ function ButtonExample() {
 <Presentation
     initialState={{
         renderAs: 'button',
-        variant: 'normal',
-        intent: 'default',
+        variant: 'solid',
+        intent: 'no-intent',
         text: 'short',
         size: 'normal'
     }}
@@ -117,12 +117,12 @@ function ButtonExample() {
         <ListItem>
             <Typography variant="section">Variant</Typography>
         </ListItem>
-        <PresentationState name="variant" label="Normal" value="normal" />
+        <PresentationState name="variant" label="Solid" value="solid" />
         <PresentationState name="variant" label="Ghost" value="ghost" />
         <ListItem>
             <Typography variant="section">Intent</Typography>
         </ListItem>
-        <PresentationState name="intent" label="Default" value="default" />
+        <PresentationState name="intent" label="No intent" value="no-intent" />
         <PresentationState name="intent" label="Accent" value="accent" />
         <PresentationState name="intent" label="Alarm" value="alarm" />
         <ListItem>
@@ -147,5 +147,42 @@ const {Presentation, PresentationPane} = require('../../../styleguide-components
             <input type="file" style={{display: 'none'}} />
         </Button>
     </PresentationPane>
+</Presentation>;
+```
+
+### Button in disabled fieldset
+
+```js
+const {
+    Presentation,
+    usePresentation,
+    PresentationControls,
+    PresentationState,
+    PresentationPane
+} = require('../../../styleguide-components/presentation');
+
+function ButtonFieldsetExample() {
+    const presentation = usePresentation();
+
+    return (
+        <fieldset disabled={presentation.disabled}>
+            <Button
+                onClick={() => alert('click')}
+                component={presentation.span ? 'span' : 'button'}
+            >
+                Click
+            </Button>
+        </fieldset>
+    );
+}
+
+<Presentation initialState={{disabled: true, span: false}}>
+    <PresentationPane>
+        <ButtonFieldsetExample />
+    </PresentationPane>
+    <PresentationControls>
+        <PresentationState name="disabled" label="Disable fieldset" />
+        <PresentationState name="span" label="Use span element for button" />
+    </PresentationControls>
 </Presentation>;
 ```

@@ -17,23 +17,23 @@
 
 .interactive:focus,
 .interactive.focused {
-    background: var(--gs-color-action-inverted-25);
+    background-color: var(--gs-color-action-inverted-25);
 }
 
 .interactive:hover,
 .interactive.hovered {
-    background: var(--gs-color-action-inverted-25);
+    background-color: var(--gs-color-action-inverted-25);
 }
 
 .interactive:active,
 .interactive.active {
-    background: var(--gs-color-action-inverted-50);
+    background-color: var(--gs-color-action-inverted-50);
 }
 
 .root:disabled,
 .root.disabled {
     opacity: 0.6;
-    background: none;
+    background-color: transparent;
     box-shadow: none;
     cursor: not-allowed;
     pointer-events: none;

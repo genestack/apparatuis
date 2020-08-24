@@ -19,7 +19,7 @@ export const MenuIcon = createIcon(
         <path
             fillRule="evenodd"
             clipRule="evenodd"
-            d="M2 5h16v2H2V5zm0 4h16v2H2V9zm16 4H2v2h16v-2z"
+            d="M2 5H18V7H2V5ZM2 9H18V11H2V9ZM18 13H2V15H18V13Z"
             className="gs-svg-icon-fill"
         />
     </svg>

@@ -40,6 +40,7 @@ export const DialogHeader = (props: Props) => {
 
     return (
         <MarginBox
+            data-qa="dialog-header"
             contained="in-dialog"
             {...rest}
             className={classNames(rest.className, classes.root)}

@@ -1,6 +1,263 @@
 # Changelog
 
-## [Unreleased]
+## [8.5.0] - 2020-08-03
+
+### Added
+
+-   Add `<GearIcon />`, `<GenericFileIcon />`, `<StudyIcon>`
+
+## [8.4.2] - 2020-07-08
+
+### Changed
+
+-   Chnaged `<Paper />` to consume dark context and change own appearance depending on its value
+-   Updated scrollbar colors in `<ScrollView />`
+
+## [8.4.1] - 2020-06-30
+
+### Fixed
+
+-   Fix clicks on `<InteractiveElement />` when it is a button or a link
+
+## [8.4.0] - 2020-06-29
+
+-   Add `<TemplateIcon />`
+
+## [8.3.1] - 2020-06-19
+
+### Changed
+
+-   Introduce `showScrollbars` option of `<ScrollView />` component
+
+## [8.3.0] - 2020-06-22
+
+## Changed
+
+-   Changed `intent = 'default'` to `intent = 'no-intent'` in `ButtonBase` public properties
+-   Changed `intentDefault` to `noIntent` in `ButtonBase` `classes`
+-   Changed `ghost`-opposite `variant: 'normal'` to `variant: 'solid'` in `Button` and `ButtonGroup` examples
+
+## [8.2.1] - 2020-06-11
+
+### Fixed
+
+-   Fix <Input /> height
+
+## [8.2.0] - 2020-06-11
+
+### Added
+
+-   Add `<Badge/>` component
+-   Add `<FirstPageIcon />`
+-   Add `<LastPageIcon />`
+
+## [8.1.1] - 2020-06-11
+
+### Fixed
+
+-   Reset focus state on disable `<Input />`
+
+## [8.1.0] - 2020-06-09
+
+### Changed
+
+-   Enable ref on `<InteractiveElement />`
+
+## [8.0.1] - 2020-06-04
+
+### Changed
+
+-   Update `<BookmarkIcon />` path colouring in
+
+## [8.0.0-alpha.59] - 2020-06-03
+
+### Changed
+
+-   Update `<BookmarkIcon />` path dimensions
+-   Update `<BookmarkBorderedIcon />` path dimensions, rounded corners and colouring in
+
+## [8.0.0-alpha.58] - 2020-06-03
+
+### Added
+
+-   Add `<ScrollView />` component
+
+## [8.0.0-alpha.57] - 2020-06-02
+
+### Changed
+
+-   Enable ref on `<ListItem />`
+
+## [8.0.0-alpha.56] - 2020-06-02
+
+### Changed
+
+-   Change `<UserGroupIcon />`
+-   Change `<PlusUserIcon />`
+-   Change `<SharedWithUserIcon />`
+-   Change `<UserIcon />`
+
+## [8.0.0-alpha.55] - 2020-06-01
+
+### Added
+
+-   Add `<UserGroupIcon />`
+
+### Changed
+
+-   Change `<PlusUserIcon />`
+-   Change `<SharedWithUserIcon />`
+-   Change `<UserIcon />`
+
+## [8.0.0-alpha.54] - 2020-05-20
+
+-   Fix TS error in `<Avatar/>` component
+
+## [8.0.0-alpha.53] - 2020-05-08
+
+### Added
+
+-   Add `<OrganizationIcon />`, `<SharedWithUserIcon />`
+
+## [8.0.0-alpha.52] - 2020-05-07
+
+### Fixed
+
+-   Add `data-qa` attribute to `<Avatar />` component
+
+## [8.0.0-alpha.51] - 2020-05-07
+
+### Added
+
+-   Add `<Avatar />` component
+-   Add `<ArrowDownloadThinIcon />`, `<FiltersIcon />`
+
+## [8.0.0-alpha.50] - 2020-04-02
+
+### Changed
+
+-   Change `<RadioIcon />`
+-   Change `<CheckedRadioIcon />`
+
+## [8.0.0-alpha.49] - 2020-04-01
+
+### Added
+
+-   Add `<RadioIcon />`
+-   Add `<CheckedRadioIcon />`
+-   Add `gs-color-grey-outline-20` color
+
+## [8.0.0-alpha.48] - 2020-03-30
+
+### Added
+
+-   `<Select>`: add `selectRef` prop
+
+## [8.0.0-alpha.47] - 2020-03-10
+
+### Fixed
+
+-   Fix IE11 error for `Element.prototype.matches`
+
+## [8.0.0-alpha.46] - 2020-03-05
+
+### Added
+
+-   `<TimeReverseIcon />`
+-   `<UploadIcon />`
+-   `<DraftIcon />`
+-   `<BulletIcon />`
+
+### Fixed
+
+-   Fixed `<MenuIcon />` path blurring on Windows
+
+## [8.0.0-alpha.45] - 2020-02-27
+
+### Added
+
+-   `<BooleanIcon />`, `<DateIcon />`, `<DecimalIcon />`, `<IntegerIcon />`, `<LinkIcon />`, `<TextIcon />`
+
+## [8.0.0-alpha.44] - 2020-02-20
+
+### Added
+
+-   Export `<Switch />` from index file
+-   Add `data-qa` attribute to all components
+
+## [8.0.0-alpha.43] - 2020-02-13
+
+### Fixed
+
+-   Fix margins for list in `<SuggestInput />`
+-   Do not close `<Dialog />` when `overlayProps.disableClickListener = true`
+
+### Added
+
+-   New color variable `--gs-color-grey-light-background`
+
+## [8.0.0-alpha.42] - 2020-02-04
+
+### Fixed
+
+-   [ButtonBase] Do not call `onClick` from disabled fieldset (https://git.io/JvGuI)
+
+## [8.0.0-alpha.41] - 2020-01-09
+
+### Added
+
+-   Add new `<Switch />` component
+
+## [8.0.0-alpha.40] - 2020-01-09
+
+### Changed
+
+-   Update `typescript@3.7.2`
+
+## [8.0.0-alpha.39] - 2019-12-17
+
+### Fixed
+
+-   Pass all props from `<MarginBox />` to `<DialogBody />`
+
+## [8.0.0-alpha.38] - 2019-12-09
+
+### Fixed
+
+-   Fix React warning about state updates after unmounting for `<TooltipHandler />`
+-   Enable `openDelay` works property for `<TooltipHandler />`
+
+## [8.0.0-alpha.37] - 2019-11-29
+
+### Fixed
+
+-   Fix icon colors for hovered ghost buttons
+
+## [8.0.0-alpha.36] - 2019-11-29
+
+### Changed
+
+-   Increase margins for `<List>` component to 16px
+
+## [8.0.0-alpha.35] - 2019-11-19
+
+### Added
+
+-   `<CrossSmallIcon />`
+
+### Fixed
+
+-   Fix `onBlur` and `onFocus` props mismatching for `<MenuItem />`
+
+## [8.0.0-alpha.34] - 2019-11-06
+
+### Changed
+
+-   Changed `background` to `background-color` css property of `ListItem`
+
+### Fixed
+
+-   Fixed passing of `titleProps` in `MenuItem`
 
 ## [8.0.0-alpha.33] - 2019-09-08
 

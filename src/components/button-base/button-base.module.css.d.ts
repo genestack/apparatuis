@@ -12,7 +12,7 @@ export const focused: string;
 export const disabled: string;
 export const normal: string;
 export const ghost: string;
-export const intentDefault: string;
+export const noIntent: string;
 export const accent: string;
 export const alarm: string;
 export const inverted: string;
