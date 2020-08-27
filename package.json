@@ -1,10 +1,11 @@
 {
   "name": "genestack-ui",
-  "version": "8.5.0",
+  "version": "8.6.0",
   "description": "UI library",
   "main": "dist/",
-  "types": "src/",
+  "types": "dist/",
   "files": [
+    "dist/*",
     "src/*"
   ],
   "repository": {
@@ -19,8 +20,8 @@
   "license": "UNLICENSED",
   "scripts": {
     "start": "styleguidist server",
-    "styleguidist:build": "styleguidist build",
-    "build": "npm run clean && cross-env NODE_ENV=production webpack",
+    "build": "styleguidist build",
+    "build:bundle": "npm run clean && npm run test && webpack --env production",
     "clean": "rm -rf dist",
     "tslint": "tslint -p .",
     "stylelint": "stylelint src/**/*.css",
@@ -38,7 +39,6 @@
     "@types/node": "^10.14.1",
     "@types/react-test-renderer": "^16.0.1",
     "autoprefixer": "^8.6.4",
-    "cross-env": "^5.1.3",
     "css-loader": "^2.1.0",
     "enzyme": "^3.8.0",
     "enzyme-adapter-react-16": "^1.7.1",
@@ -49,7 +49,6 @@
     "jest": "^23.3.0",
     "jsdom": "^11.12.0",
     "mini-css-extract-plugin": "^0.4.5",
-    "parcel-bundler": "^1.6.2",
     "popper.js": "^1.14.6",
     "postcss-calc": "^7.0.1",
     "postcss-custom-properties": "^7.0.0",
