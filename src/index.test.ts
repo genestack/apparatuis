@@ -6,7 +6,7 @@
  * actual or intended publication of such source code.
  */
 
-import '..';
+import './index';
 
 test('Just an empty test to calculate real coverage', () => {
     expect(true).toBe(true);

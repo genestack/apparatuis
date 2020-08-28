@@ -1,5 +1,11 @@
 # Changelog
 
+## [8.6.0] - 2020-08-28
+
+### Changed
+
+-   Builds code into a bundle
+
 ## [8.5.0] - 2020-08-03
 
 ### Added
