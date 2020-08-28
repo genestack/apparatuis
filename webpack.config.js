@@ -12,6 +12,7 @@ const postcssImport = require('postcss-import');
 const autoprefixer = require('autoprefixer');
 const calc = require('postcss-calc');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const CopyPlugin = require('copy-webpack-plugin');
 
 // Styleguidist has dependencies that are not traspiled and do not work in IE.
 // Force babel-loader to transpile it manually.
@@ -48,7 +49,14 @@ module.exports = (env) => {
                       // all options are optional
                       filename: 'genestack-ui.css',
                       ignoreOrder: false // Enable to remove warnings about conflicting order
-                  })
+                  }),
+                  new CopyPlugin([
+                      {
+                          context: path.join(__dirname, 'src'),
+                          from: '**/*.css.d.ts',
+                          to: path.join(__dirname, 'dist')
+                      }
+                  ])
               ]
             : [],
         module: {
