@@ -1,5 +1,11 @@
 # Changelog
 
+## [8.6.1] - 2020-08-28
+
+### Fixed
+
+-   Add types for styles to dist
+
 ## [8.6.0] - 2020-08-28
 
 ### Changed
