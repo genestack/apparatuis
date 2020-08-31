@@ -1,5 +1,11 @@
 # Changelog
 
+## [8.6.2] - 2020-08-31
+
+### Fixed
+
+-   Add missed exports
+
 ## [8.6.1] - 2020-08-28
 
 ### Fixed
