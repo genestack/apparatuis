@@ -1,12 +1,11 @@
 {
   "name": "genestack-ui",
-  "version": "8.6.2",
+  "version": "9.0.0",
   "description": "UI library",
   "main": "dist/",
   "types": "dist/",
   "files": [
-    "dist/*",
-    "src/*"
+    "dist/*"
   ],
   "repository": {
     "type": "git",
@@ -21,8 +20,9 @@
   "scripts": {
     "start": "styleguidist server",
     "build": "styleguidist build",
-    "build:bundle": "npm run clean && npm run test && webpack --env production",
+    "build:bundle": "npm run clean && webpack --env production",
     "clean": "rm -rf dist",
+    "prepublishOnly": "npm run test && npm run build:bundle",
     "tslint": "tslint -p .",
     "stylelint": "stylelint src/**/*.css",
     "tscheck": "tsc --noEmit -p .",

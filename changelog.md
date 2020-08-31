@@ -1,18 +1,6 @@
 # Changelog
 
-## [8.6.2] - 2020-08-31
-
-### Fixed
-
--   Add missed exports
-
-## [8.6.1] - 2020-08-28
-
-### Fixed
-
--   Add types for styles to dist
-
-## [8.6.0] - 2020-08-28
+## [9.0.0] - 2020-09-02
 
 ### Changed
 
