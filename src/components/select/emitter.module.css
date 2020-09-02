@@ -1,0 +1,31 @@
+/*
+ * Copyright (c) 2011-2020 Genestack Limited
+ * All Rights Reserved
+ * THIS IS UNPUBLISHED PROPRIETARY SOURCE CODE OF GENESTACK LIMITED
+ * The copyright notice above does not evidence any
+ * actual or intended publication of such source code.
+ */
+@import "./../../variables.css";
+
+.root {
+    height: 32px;
+    line-height: 20px;
+    padding: 6px 8px;
+    border-radius: 4px;
+    white-space: nowrap;
+}
+
+.root.small {
+    height: 24px;
+    padding: 2px 4px;
+}
+
+/* arrow */
+.arrow {
+    flex-shrink: 0;
+    margin-left: 4px;
+}
+
+.arrow:first-child {
+    margin-left: 0;
+}

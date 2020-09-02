@@ -12,12 +12,12 @@ import {chain} from '../../utils/chain';
 import {Omit} from '../../utils/omit';
 import {chainRefs} from '../../utils/set-ref';
 import {mergeClassesProps, WithClasses} from '../../utils/styles';
+import {useControlInvalidity} from '../../utils/use-constol-invalidity';
 import {FieldProps, Field} from '../field';
 
 import {InputClearButton, Props as InputClearButtonProps} from './input-clear-button';
 import {InputSpinner, Props as InputSpinnerProps} from './input-spinner';
 import * as styles from './input.module.css';
-import {useInputInvalidity} from './use-input-invalidity';
 
 type BaseTargetProps = React.ComponentPropsWithoutRef<'input'>;
 type BaseRootProps = React.ComponentPropsWithRef<'div'>;
@@ -140,7 +140,7 @@ export function Input(props: Props) {
     const [focused, setFocused] = React.useState(false);
 
     // use native input attribute to highlight invalid field with css
-    const invalidState = useInputInvalidity(inputRef, invalid);
+    const invalidState = useControlInvalidity(inputRef, invalid);
 
     // simulate native html label element behaviour to prevent flickering
     // focused styles while clicking outside input but into field element

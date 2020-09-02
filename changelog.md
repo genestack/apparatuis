@@ -1,5 +1,15 @@
 # Changelog
 
+## [10.0.0] - 2020-09-02
+
+### Changed
+
+-   Changed [Select](src/components/select/select.tsx) API
+-   Add [Select](src/components/select/select.tsx) support in native and menu mode
+-   Add [Option](src/components/select/option.tsx)
+-   Add [OptionLabel](src/components/select/option-label.tsx)
+-   Add [Emitter](src/components/select/emitter.tsx)
+
 ## [9.0.0] - 2020-09-02
 
 ### Changed
@@ -16,7 +26,7 @@
 
 ### Changed
 
--   Chnaged `<Paper />` to consume dark context and change own appearance depending on its value
+-   Changed `<Paper />` to consume dark context and change own appearance depending on its value
 -   Updated scrollbar colors in `<ScrollView />`
 
 ## [8.4.1] - 2020-06-30
