@@ -55,6 +55,11 @@ module.exports = (env) => {
                           context: path.join(__dirname, 'src'),
                           from: '**/*.css.d.ts',
                           to: path.join(__dirname, 'dist')
+                      },
+                      {
+                          context: path.join(__dirname, 'src'),
+                          from: 'variables.css',
+                          to: path.join(__dirname, 'dist')
                       }
                   ])
               ]
@@ -79,7 +84,7 @@ module.exports = (env) => {
                     enforce: 'pre',
                     include: /src/,
                     use: [
-                        ...(isProduction ? [MiniCssExtractPlugin.loader] : []),
+                        ...(isProduction ? [MiniCssExtractPlugin.loader] : ['style-loader']),
                         {
                             loader: 'css-loader',
                             options: {
@@ -138,7 +143,7 @@ module.exports = (env) => {
             'react-transition-group'
         ],
         optimization: {
-            minimize: isProduction
+            minimize: false
         }
     };
 };
