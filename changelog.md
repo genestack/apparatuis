@@ -1,5 +1,12 @@
 # Changelog
 
+## [9.0.1] - 2020-09-10
+
+### Changed
+
+-   Change assembly of styles for external libraries
+-   Add SimpleBar to externals in webpack
+
 ## [9.0.0] - 2020-09-02
 
 ### Changed

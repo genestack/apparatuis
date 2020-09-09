@@ -24,6 +24,13 @@ const transpileDependencies = [
     'strip-ansi'
 ];
 
+const postCssLoaderParams = {
+    loader: 'postcss-loader',
+    options: {
+        plugins: [postcssImport, postcssCustomProperties({preserve: false}), calc(), autoprefixer]
+    }
+};
+
 const babelExcludePattern = new RegExp(`node_modules/(?!(${transpileDependencies.join('|')})/).*`);
 
 module.exports = (env) => {
@@ -93,17 +100,7 @@ module.exports = (env) => {
                                 localIdentName: '[name]__[local]--[hash:base64:5]'
                             }
                         },
-                        {
-                            loader: 'postcss-loader',
-                            options: {
-                                plugins: [
-                                    postcssImport,
-                                    postcssCustomProperties({preserve: false}),
-                                    calc(),
-                                    autoprefixer
-                                ]
-                            }
-                        }
+                        postCssLoaderParams
                     ]
                 },
                 {
@@ -111,23 +108,14 @@ module.exports = (env) => {
                     enforce: 'pre',
                     exclude: /\.module\.css/,
                     use: [
+                        ...(isProduction ? [MiniCssExtractPlugin.loader] : ['style-loader']),
                         {
                             loader: 'css-loader',
                             options: {
                                 importLoaders: 1
                             }
                         },
-                        {
-                            loader: 'postcss-loader',
-                            options: {
-                                plugins: [
-                                    postcssImport,
-                                    postcssCustomProperties({preserve: false}),
-                                    calc(),
-                                    autoprefixer
-                                ]
-                            }
-                        }
+                        postCssLoaderParams
                     ]
                 }
             ]
@@ -140,7 +128,9 @@ module.exports = (env) => {
             'downshift',
             'react-popper',
             'react-textarea-autosize',
-            'react-transition-group'
+            'react-transition-group',
+            'simplebar',
+            'simplebar-react'
         ],
         optimization: {
             minimize: false
