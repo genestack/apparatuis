@@ -164,14 +164,12 @@ function SelectExample() {
                 placeholder={native ? 'Select a wall' : 'Select a report...'}
                 value={value}
                 onValueChange={(value) => setValue(value)}
+                ghost={variant === 'ghost'}
+                intent={intent}
+                size={size}
+                invalid={invalid}
                 disabled={disabled}
-                emitterProps={{
-                    ghost: variant === 'ghost',
-                    intent,
-                    size,
-                    invalid,
-                    focused
-                }}
+                focused={focused}
             >
                 {native ? (
                     NATIVE_OPTIONS.map(({value, label}) => (

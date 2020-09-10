@@ -8,22 +8,29 @@
 
 import React from 'react';
 
-import {MenuItem} from '../menu';
+import {MenuItem, MenuItemProps} from '../menu';
 
 import {useSelectContext} from './select-context';
 
 /** Option props */
-export interface Props {
-    /** Option value */
-    value: number | string;
+export interface Props extends Omit<MenuItemProps, 'value'> {
+    /** Select value */
+    value?: string | number;
     /** Option label used for render in SelectWrapper */
     label?: React.ReactNode;
 }
 
 /** Option component for Select */
-export function Option<AnyProps = {}>({label, ...restProps}: Props & AnyProps) {
+export function Option({label, ...restProps}: Props) {
     const {native} = useSelectContext();
-    const Component = native ? 'option' : MenuItem;
 
-    return <Component {...restProps} />;
+    if (native) {
+        return (
+            <option value={restProps.value} label={typeof label === 'string' ? label : undefined}>
+                {restProps.children}
+            </option>
+        );
+    }
+
+    return <MenuItem {...restProps} />;
 }

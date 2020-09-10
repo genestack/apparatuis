@@ -68,8 +68,7 @@ export const Emitter = React.forwardRef<HTMLElement, Props>(function EmitterRef(
         className
     );
 
-    const placeholderComponent =
-        typeof placeholder === 'string' ? <OptionLabel>{placeholder}</OptionLabel> : placeholder;
+    const buttonLabel = label || placeholder;
 
     return (
         <ButtonBase
@@ -78,9 +77,12 @@ export const Emitter = React.forwardRef<HTMLElement, Props>(function EmitterRef(
             className={controlClassName}
             intent={invalid ? 'alarm' : intent}
             component={isButton ? 'button' : 'div'}
-            disableFocus={!isButton}
         >
-            {label || placeholderComponent}
+            {typeof buttonLabel === 'string' ? (
+                <OptionLabel>{buttonLabel}</OptionLabel>
+            ) : (
+                buttonLabel
+            )}
 
             <KeyboardArrowBottomIcon
                 {...arrowProps}

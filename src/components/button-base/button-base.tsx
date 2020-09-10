@@ -41,8 +41,6 @@ export interface Props extends WithClasses<keyof typeof styles> {
      */
     onClick?: React.ReactEventHandler;
     inverted?: boolean;
-    /** Disable focus on ButtonBase */
-    disableFocus?: boolean;
 }
 
 interface TypeMap {
@@ -63,15 +61,13 @@ export const ButtonBase: OverridableComponent<TypeMap> = React.forwardRef<
         intent = 'no-intent',
         hovered,
         focused,
-        // use default tabIndex to enable focusing
-        tabIndex = 0,
+        tabIndex,
         active,
         classes,
         component: Component = 'button',
         disabled,
         onClick,
         inverted,
-        disableFocus,
         ...rest
     } = mergeClassesProps(props, styles);
 
@@ -102,7 +98,7 @@ export const ButtonBase: OverridableComponent<TypeMap> = React.forwardRef<
             {...rest}
             disabled={isNativeButton ? disabled : undefined}
             ref={ref}
-            tabIndex={!disabled && !disableFocus ? tabIndex : undefined}
+            tabIndex={!disabled ? tabIndex : undefined}
             className={classNames(rest.className, classes.root, {
                 [classes.active]: active || activeState.active,
                 [classes.hovered]: hovered,

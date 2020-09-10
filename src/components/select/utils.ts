@@ -27,7 +27,7 @@ function findSelectedOption(
             return null;
         }
 
-        if (child.type === Option && child.props.value === value) {
+        if ((child.type === Option || child.type === 'option') && child.props.value === value) {
             return child;
         }
 
@@ -38,7 +38,7 @@ function findSelectedOption(
 }
 
 /** Get select label from Options */
-export const getSelectLabel = (children: React.ReactNode, selectValue?: SelectValueType) => {
+export const getSelectLabel = (children: React.ReactNode, selectValue?: number | string) => {
     if (!selectValue) {
         return null;
     }

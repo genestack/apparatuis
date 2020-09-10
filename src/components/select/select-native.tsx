@@ -28,7 +28,7 @@ export interface Props extends CommonSelectProps {
 
 /** Native select */
 export function SelectNative(props: Props) {
-    const {selectProps, value, onValueChange, ...rest} = props;
+    const {selectProps, value, onValueChange, children, ...rest} = props;
 
     const selectRef = React.useRef<HTMLSelectElement | null>(null);
 
@@ -54,7 +54,7 @@ export function SelectNative(props: Props) {
                 onChange={chain(selectProps?.onChange, handleValueChange)}
                 disabled={rest.disabled}
             >
-                {rest.children}
+                {children}
             </select>
         </Emitter>
     );

@@ -26,7 +26,7 @@ export interface Props extends CommonSelectProps {
 
 /** Menu based select */
 export function SelectMenu(props: Props) {
-    const {selectProps, value, onValueChange, ...rest} = props;
+    const {selectProps, value, onValueChange, children, ...rest} = props;
 
     const emitterRef = React.useRef<HTMLButtonElement>(null);
 
@@ -60,7 +60,7 @@ export function SelectMenu(props: Props) {
                         onValueChange
                     )}
                 >
-                    {rest.children}
+                    {children}
                 </Menu>
             </DarkContext.Provider>
         </>

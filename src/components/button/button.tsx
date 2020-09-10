@@ -66,6 +66,8 @@ export const Button: OverridableComponent<TypeMap> = React.forwardRef<
         <ButtonBase
             data-qa="button"
             ref={ref}
+            // use default tabIndex to enable focusing
+            tabIndex={0}
             {...rest}
             ghost={ghost}
             intent={intent}

@@ -12,7 +12,7 @@ import React from 'react';
 import * as styles from './option-label.module.css';
 import {useSelectContext} from './select-context';
 
-type TargetProps = React.HTMLAttributes<HTMLElement>;
+type TargetProps = React.HTMLAttributes<HTMLSpanElement>;
 
 /** SelectLabel props */
 export interface Props extends TargetProps {
@@ -26,7 +26,7 @@ export interface Props extends TargetProps {
 export function OptionLabel(props: Props) {
     const {invalid, intent, ghost, disabled} = useSelectContext();
 
-    const {prepend, append, children} = props;
+    const {prepend, append, children, ...rest} = props;
     const notAvailable = disabled || invalid;
 
     const labelClassName = classNames(styles.label, {
@@ -34,7 +34,7 @@ export function OptionLabel(props: Props) {
     });
 
     return (
-        <span>
+        <span {...rest}>
             {prepend && <span className={labelClassName}>{prepend}</span>}
             {children && <span className={styles.value}>{children}</span>}
             {append && <span className={labelClassName}>{append}</span>}
