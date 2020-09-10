@@ -8,12 +8,12 @@
 
 import React from 'react';
 
-import {Option, SelectValueType, OptionProps} from './';
+import {Option, OptionProps} from './';
 
 // FIXME use selectContext instead this after fixing Menu (Menu must support the "keepMounted" property)
 /** finds Option, skips fragments and other react elements */
 function findSelectedOption(
-    value: SelectValueType,
+    value: number | string,
     children: React.ReactNode
 ): React.ReactElement<OptionProps> | null {
     let selectedChild = null;

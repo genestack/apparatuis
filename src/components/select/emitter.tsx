@@ -15,19 +15,23 @@ import {ButtonBase, ButtonBaseProps} from '../button-base';
 import * as styles from './emitter.module.css';
 import {OptionLabel} from './option-label';
 
-type TargetProps = React.HTMLAttributes<HTMLButtonElement | HTMLDivElement>;
+type TargetProps = Omit<
+    React.HTMLAttributes<HTMLButtonElement | HTMLDivElement>,
+    'onClick' | 'placeholder'
+>;
 type ButtonProps = Omit<ButtonBaseProps, 'intent'>;
 
 /** Available emitter intent types */
 export type EmitterIntent = 'no-intent' | 'accent';
 
-interface EmitterProps {
+/** Emitter props */
+export interface Props extends TargetProps, ButtonProps {
     /** SelectWrapper label (gets from Option property) */
-    label: React.ReactNode;
+    label?: React.ReactNode;
     /** Used to render button component or div */
     isButton?: boolean;
     /** Select placeholder */
-    placeholder?: string;
+    placeholder?: React.ReactNode;
     /** Intent of button */
     intent?: EmitterIntent;
     /** Size of select (default - normal) */
@@ -36,10 +40,8 @@ interface EmitterProps {
     invalid?: boolean;
     /** Disable button */
     disabled?: boolean;
+    arrowProps?: React.ComponentPropsWithRef<typeof KeyboardArrowBottomIcon>;
 }
-
-/** Emitter props */
-export type Props = ButtonProps & TargetProps & EmitterProps;
 
 /** Wrapper for select */
 export const Emitter = React.forwardRef<HTMLElement, Props>(function EmitterRef(props: Props, ref) {
@@ -52,6 +54,7 @@ export const Emitter = React.forwardRef<HTMLElement, Props>(function EmitterRef(
         size,
         invalid,
         children,
+        arrowProps,
         ...restProps
     } = props;
 
@@ -65,17 +68,24 @@ export const Emitter = React.forwardRef<HTMLElement, Props>(function EmitterRef(
         className
     );
 
+    const placeholderComponent =
+        typeof placeholder === 'string' ? <OptionLabel>{placeholder}</OptionLabel> : placeholder;
+
     return (
         <ButtonBase
+            {...restProps}
+            ref={ref as React.RefObject<HTMLButtonElement>}
             className={controlClassName}
             intent={invalid ? 'alarm' : intent}
-            ref={ref as React.RefObject<HTMLButtonElement>}
-            {...restProps}
             component={isButton ? 'button' : 'div'}
             disableFocus={!isButton}
         >
-            {label || <OptionLabel>{placeholder}</OptionLabel>}
-            <KeyboardArrowBottomIcon className={styles.arrow} />
+            {label || placeholderComponent}
+
+            <KeyboardArrowBottomIcon
+                {...arrowProps}
+                className={classNames(styles.arrow, arrowProps?.className)}
+            />
 
             {children}
         </ButtonBase>
