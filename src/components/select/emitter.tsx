@@ -13,6 +13,7 @@ import {KeyboardArrowBottomIcon} from '../../icons';
 import {ButtonBase, ButtonBaseProps} from '../button-base';
 
 import * as styles from './emitter.module.css';
+import {OptionLabel} from './option-label';
 
 type TargetProps = React.HTMLAttributes<HTMLButtonElement | HTMLDivElement>;
 type ButtonProps = Omit<ButtonBaseProps, 'intent'>;
@@ -64,8 +65,6 @@ export const Emitter = React.forwardRef<HTMLElement, Props>(function EmitterRef(
         className
     );
 
-    const buttonLabel = label || placeholder;
-
     return (
         <ButtonBase
             className={controlClassName}
@@ -75,7 +74,7 @@ export const Emitter = React.forwardRef<HTMLElement, Props>(function EmitterRef(
             component={isButton ? 'button' : 'div'}
             disableFocus={!isButton}
         >
-            {buttonLabel && <span>{buttonLabel}</span>}
+            {label || <OptionLabel>{placeholder}</OptionLabel>}
             <KeyboardArrowBottomIcon className={styles.arrow} />
 
             {children}

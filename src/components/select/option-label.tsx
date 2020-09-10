@@ -34,10 +34,10 @@ export function OptionLabel(props: Props) {
     });
 
     return (
-        <>
+        <span>
             {prepend && <span className={labelClassName}>{prepend}</span>}
             {children && <span className={styles.value}>{children}</span>}
             {append && <span className={labelClassName}>{append}</span>}
-        </>
+        </span>
     );
 }
