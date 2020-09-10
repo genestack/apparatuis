@@ -117,6 +117,10 @@ module.exports = (env) => {
                         },
                         postCssLoaderParams
                     ]
+                },
+                {
+                    test: /\.(jpe?g|png|gif|svg|woff|woff2|eot|ttf)$/i,
+                    loader: 'file-loader'
                 }
             ]
         },
