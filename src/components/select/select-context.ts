@@ -7,24 +7,14 @@
  */
 import React from 'react';
 
-import {EmitterIntent} from './emitter';
+import {Props as SelectMenuProps} from './select-menu';
+import {Props as SelectNativeProps} from './select-native';
 
 /** SelectContext value */
-export interface SelectContextValue {
-    /** Use native select instead Menu (used for Options) */
-    native?: boolean;
-    /** Ghost styles for emitter */
-    ghost?: boolean;
-    /** Intent of emitter */
-    intent?: EmitterIntent;
-    /** Sets `invalid` styles for emitter */
-    invalid?: boolean;
-    /** Sets `disabled` styles for emitter */
-    disabled?: boolean;
-}
+export type Props = SelectNativeProps | SelectMenuProps;
 
 /** Select Context */
-export const SelectContext = React.createContext<SelectContextValue | null>(null);
+export const SelectContext = React.createContext<Props | null>(null);
 
 /** Select Context hook */
 export const useSelectContext = () => {

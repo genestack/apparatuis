@@ -10,13 +10,12 @@ import React from 'react';
 
 import {MenuItem} from '../menu';
 
-import {SelectValueType} from './select';
 import {useSelectContext} from './select-context';
 
 /** Option props */
 export interface Props {
     /** Option value */
-    value: SelectValueType;
+    value: number | string;
     /** Option label used for render in SelectWrapper */
     label?: React.ReactNode;
 }

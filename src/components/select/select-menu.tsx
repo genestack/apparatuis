@@ -8,60 +8,59 @@
 
 import React from 'react';
 
-import {DarkContext} from '../../utils';
-import {Menu} from '../menu';
+import {DarkContext, chain} from '../../utils';
+import {Menu, MenuProps} from '../menu';
 
-import {SelectProps} from './';
+import {CommonSelectProps} from './common-select-props';
 import {Emitter} from './emitter';
-import {OnChangeSelectHandler} from './select';
-import {getSelectLabel} from './utils';
 
-type TargetProps = React.SelectHTMLAttributes<HTMLDivElement>;
-type Props = TargetProps & SelectProps;
+/** Select Menu Props */
+export interface Props extends CommonSelectProps {
+    /** Use native select instead Menu (default false) */
+    native: false;
+    /** Select onChange handler */
+    onValueChange?: MenuProps['onValueSelect'];
+    /** Other menu props */
+    selectProps?: MenuProps;
+}
 
 /** Menu based select */
 export function SelectMenu(props: Props) {
-    const {value, onValueChange, disabled, emitterProps, children} = props;
+    const {selectProps, value, onValueChange, ...rest} = props;
 
-    const wrapperRef = React.useRef<HTMLButtonElement>(null);
+    const emitterRef = React.useRef<HTMLButtonElement>(null);
+
     const [isMenuVisible, setMenuVisibility] = React.useState<boolean>(false);
 
-    const handleMenuOpen = React.useCallback(() => {
-        setMenuVisibility((visibility) => !visibility);
-    }, []);
+    const handleMenuOpen = () => {
+        setMenuVisibility(true);
+    };
 
-    const onCloseSelect = React.useCallback(() => {
+    const handleMenuClose = () => {
         setMenuVisibility(false);
-    }, []);
-
-    const onValueSelect: OnChangeSelectHandler = React.useCallback(
-        (...args) => {
-            onValueChange(...args);
-            onCloseSelect();
-        },
-        [onValueChange]
-    );
-
-    const label = getSelectLabel(children, value);
+    };
 
     return (
         <>
             <Emitter
-                label={label}
-                ref={wrapperRef}
-                {...emitterProps}
+                {...rest}
                 isButton
-                onClick={handleMenuOpen}
-                disabled={disabled}
+                onClick={chain(handleMenuOpen, rest.onClick)}
+                ref={emitterRef}
             />
             <DarkContext.Provider value={false}>
                 <Menu
+                    {...selectProps}
                     open={isMenuVisible}
-                    onClose={onCloseSelect}
-                    onValueSelect={onValueSelect}
-                    referenceElement={wrapperRef.current}
+                    referenceElement={emitterRef.current}
+                    onClose={chain(handleMenuClose, selectProps?.onClose)}
+                    onValueSelect={chain(
+                        handleMenuClose,
+                        selectProps?.onValueSelect,
+                        onValueChange
+                    )}
                 >
-                    {children}
+                    {rest.children}
                 </Menu>
             </DarkContext.Provider>
         </>
