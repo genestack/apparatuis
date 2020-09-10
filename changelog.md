@@ -10,6 +10,13 @@
 -   Add [OptionLabel](src/components/select/option-label.tsx)
 -   Add [Emitter](src/components/select/emitter.tsx)
 
+## [9.0.1] - 2020-09-10
+
+### Changed
+
+-   Change assembly of styles for external libraries
+-   Add SimpleBar to externals in webpack
+
 ## [9.0.0] - 2020-09-02
 
 ### Changed
