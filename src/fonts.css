@@ -1,0 +1,35 @@
+/*
+ * Copyright (c) 2011-2020 Genestack Limited
+ * All Rights Reserved
+ * THIS IS UNPUBLISHED PROPRIETARY SOURCE CODE OF GENESTACK LIMITED
+ * The copyright notice above does not evidence any
+ * actual or intended publication of such source code.
+ */
+
+@font-face {
+    font-family: "IBM Plex Sans";
+    src: url("./fonts/IBMPlexSans-Medium.ttf") format("truetype");
+    font-weight: bold;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "IBM Plex Sans";
+    src: url("./fonts/IBMPlexSans-MediumItalic.ttf") format("truetype");
+    font-weight: bold;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: "IBM Plex Sans";
+    src: url("./fonts/IBMPlexSans-Regular.ttf") format("truetype");
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "IBM Plex Sans";
+    src: url("./fonts/IBMPlexSans-Italic.ttf") format("truetype");
+    font-weight: normal;
+    font-style: italic;
+}
