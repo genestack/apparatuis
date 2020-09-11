@@ -17,7 +17,7 @@ import {Emitter} from './emitter';
 /** Select Menu Props */
 export interface Props extends CommonSelectProps {
     /** Use native select instead Menu (default false) */
-    native: false;
+    native?: false;
     /** Select onChange handler */
     onValueChange?: MenuProps['onValueSelect'];
     /** Other menu props */
@@ -26,7 +26,7 @@ export interface Props extends CommonSelectProps {
 
 /** Menu based select */
 export function SelectMenu(props: Props) {
-    const {selectProps, value, onValueChange, children, ...rest} = props;
+    const {native, selectProps, value, onValueChange, children, ...rest} = props;
 
     const emitterRef = React.useRef<HTMLButtonElement>(null);
 
