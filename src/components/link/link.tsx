@@ -36,6 +36,8 @@ export interface Props extends TargetProps, WithClasses<keyof typeof styles> {
     append?: React.ReactNode;
     /** Properties for label wrapper element */
     labelProps?: React.HTMLAttributes<HTMLSpanElement>;
+    /** You could redefine the target component by passing ReactType. */
+    as?: React.ReactType;
 }
 
 /**
@@ -69,10 +71,10 @@ export const Link = (props: Props) => {
     return (
         <Typography<TargetProps>
             data-qa="link"
+            as="a"
             {...rest}
             href={href}
             tabIndex={tabIndex}
-            as="a"
             box="inline"
             onClick={onClick}
             className={classNames(classes.root, rest.className, {

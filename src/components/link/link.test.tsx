@@ -50,11 +50,17 @@ describe('<Link/>', () => {
 
     it('should pass tabIndex to anchor', () => {
         app.mount(<Link id="link" tabIndex={0} />);
-        expect(document.getElementById('link')!.getAttribute('tabindex')).toBe('0');
+        expect(document.getElementById('link')?.getAttribute('tabindex')).toBe('0');
     });
 
     it('should not pass tabIndex to anchor if disabled', () => {
         app.mount(<Link id="link" tabIndex={0} disabled />);
-        expect(document.getElementById('link')!.getAttribute('tabindex')).toBe(null);
+        expect(document.getElementById('link')?.getAttribute('tabindex')).toBe(null);
+    });
+
+    it('should render div when use "as" property', () => {
+        app.mount(<Link id="link" as="div" />);
+
+        expect(document.getElementById('link')).toBeInstanceOf(HTMLDivElement);
     });
 });

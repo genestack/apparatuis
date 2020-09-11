@@ -1,5 +1,11 @@
 # Changelog
 
+## [9.0.2] - 2020-09-10
+
+### Added
+
+-   Add `as` property to `<Link />`
+
 ## [10.0.0] - 2020-09-02
 
 ### Changed
