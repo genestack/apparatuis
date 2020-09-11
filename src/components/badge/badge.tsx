@@ -8,13 +8,12 @@
 import classNames from 'classnames';
 import * as React from 'react';
 
-import {Omit} from '../../utils/omit';
 import {WithClasses, mergeClassesProps} from '../../utils/styles';
 import {Typography, TypographyProps} from '../typography';
 
 import * as styles from './badge.module.css';
 
-type RootProps = Omit<TypographyProps, 'classes'>;
+type RootProps = Omit<TypographyProps, 'classes' | 'intent'>;
 
 /** Badge public properties */
 export interface Props extends RootProps, WithClasses<keyof typeof styles> {

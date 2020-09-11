@@ -78,76 +78,157 @@ initialState = {
                     />
                 </ControlsItem>
             </Controls>
+            <Divider variant="transparent" />
+            <Controls justify="end" as="label">
+                <ControlsItem>
+                    <Typography>Condensed</Typography>
+                </ControlsItem>
+                <ControlsItem>
+                    <input
+                        type="checkbox"
+                        checked={state.condensed}
+                        onChange={(event) => setState({condensed: event.currentTarget.checked})}
+                    />
+                </ControlsItem>
+            </Controls>
         </ControlsItem>
         <ControlsItem shrink>
             <DarkContext.Provider value={state.inverted}>
                 <PageContent as={Paper}>
-                    <Typography variant="header" box="paragraph">
-                        <Typography as="span" variant="header" box="inline" quiet={state.quiet}>
+                    <Typography variant="header" box="paragraph" condensed={state.condensed}>
+                        <Typography
+                            as="span"
+                            variant="header"
+                            box="inline"
+                            intent={state.quiet ? 'quiet' : 'no-intent'}
+                            condensed={state.condensed}
+                        >
                             Quiet Header
                         </Typography>{' '}
                         Helvetica Bold{' '}
-                        <Typography as="span" variant="title" box="inline" quiet={state.quiet}>
+                        <Typography
+                            as="span"
+                            variant="title"
+                            box="inline"
+                            intent={state.quiet ? 'quiet' : 'no-intent'}
+                            condensed={state.condensed}
+                        >
                             24/32
                         </Typography>
                     </Typography>
-                    <Typography variant="title" box="paragraph">
-                        <Typography as="span" variant="title" box="inline" quiet={state.quiet}>
+                    <Typography variant="title" box="paragraph" condensed={state.condensed}>
+                        <Typography
+                            as="span"
+                            variant="title"
+                            box="inline"
+                            intent={state.quiet ? 'quiet' : 'no-intent'}
+                            condensed={state.condensed}
+                        >
                             Quiet Title
                         </Typography>{' '}
                         Helvetica Bold{' '}
-                        <Typography as="span" variant="title" box="inline" quiet={state.quiet}>
+                        <Typography
+                            as="span"
+                            variant="title"
+                            box="inline"
+                            intent={state.quiet ? 'quiet' : 'no-intent'}
+                            condensed={state.condensed}
+                        >
                             20/28
                         </Typography>
                     </Typography>
-                    <Typography variant="section" box="paragraph">
-                        <Typography as="span" variant="section" box="inline" quiet={state.quiet}>
+                    <Typography variant="section" box="paragraph" condensed={state.condensed}>
+                        <Typography
+                            as="span"
+                            variant="section"
+                            box="inline"
+                            intent={state.quiet ? 'quiet' : 'no-intent'}
+                            condensed={state.condensed}
+                        >
                             Quiet Section
                         </Typography>{' '}
                         Helvetica Bold
-                        <Typography as="span" variant="body" box="inline" quiet={state.quiet}>
+                        <Typography
+                            as="span"
+                            variant="body"
+                            box="inline"
+                            intent={state.quiet ? 'quiet' : 'no-intent'}
+                            condensed={state.condensed}
+                        >
                             14/20
                         </Typography>
                     </Typography>
-                    <Typography box="paragraph">
-                        <Typography as="span" box="inline" quiet={state.quiet}>
+                    <Typography box="paragraph" condensed={state.condensed}>
+                        <Typography
+                            as="span"
+                            box="inline"
+                            intent={state.quiet ? 'quiet' : 'no-intent'}
+                            condensed={state.condensed}
+                        >
                             Quiet body text
                         </Typography>{' '}
                         Helvetica Normal
-                        <Typography as="span" variant="caption" box="inline" quiet={state.quiet}>
+                        <Typography
+                            as="span"
+                            variant="caption"
+                            box="inline"
+                            intent={state.quiet ? 'quiet' : 'no-intent'}
+                            condensed={state.condensed}
+                        >
                             14/20
                         </Typography>
                     </Typography>
-                    <Typography variant="caption" box="paragraph" quiet={state.quiet}>
+                    <Typography
+                        variant="caption"
+                        box="paragraph"
+                        intent={state.quiet ? 'quiet' : 'no-intent'}
+                        condensed={state.condensed}
+                    >
                         Quiet caption text – small body text Helvetica Normal 12/18
                     </Typography>
-                    <Typography variant="caption" box="paragraph">
-                        <Typography as="span" variant="caption" box="inline" quiet>
+                    <Typography variant="caption" box="paragraph" condensed={state.condensed}>
+                        <Typography
+                            as="span"
+                            variant="caption"
+                            box="inline"
+                            intent="quiet"
+                            condensed={state.condensed}
+                        >
                             Tissue:
                         </Typography>{' '}
                         Epithelium of Bronchiole
                     </Typography>
                     <Divider gap={4} variant="transparent" />
-                    <Typography box="paragraph">
+                    <Typography box="paragraph" condensed={state.condensed}>
                         A &lt;STRONG&gt; tag{' '}
                         <strong>
                             is working well with <em>texts</em> and <em>captions</em>
                         </strong>
                     </Typography>
-                    <Typography box="paragraph">
-                        <Typography quiet as="span" box="inline">
+                    <Typography box="paragraph" condensed={state.condensed}>
+                        <Typography
+                            intent="quiet"
+                            as="span"
+                            box="inline"
+                            condensed={state.condensed}
+                        >
                             Quiet is useful for secondary information
                         </Typography>
                         , while <em>Italic</em> is done with &lt;EM&gt; tag.
                     </Typography>
-                    <Typography box="paragraph" variant="section" status="error">
+                    <Typography
+                        box="paragraph"
+                        variant="section"
+                        intent="alarm"
+                        condensed={state.condensed}
+                    >
                         Error has occurred
                     </Typography>
-                    <Typography box="paragraph" status="warning">
+                    <Typography box="paragraph" intent="warning" condensed={state.condensed}>
                         You shall not pass! (c) Gandalf
                     </Typography>
-                    <Typography box="paragraph" status="success">
-                        Download is complete.
+                    <Typography box="paragraph" intent="success" condensed={state.condensed}>
+                        Download is complete
                     </Typography>
                 </PageContent>
             </DarkContext.Provider>

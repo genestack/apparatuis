@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2011-2019 Genestack Limited
+ * Copyright (c) 2011-2020 Genestack Limited
  * All Rights Reserved
  * THIS IS UNPUBLISHED PROPRIETARY SOURCE CODE OF GENESTACK LIMITED
  * The copyright notice above does not evidence any
@@ -8,8 +8,7 @@
 import classNames from 'classnames';
 import * as React from 'react';
 
-import {DarkContext} from '../../utils/dark-context';
-import {mergeClassesProps, WithClasses} from '../../utils/styles';
+import {DarkContext, mergeClassesProps, WithClasses} from '../../utils';
 
 import * as styles from './typography.module.css';
 
@@ -28,10 +27,15 @@ interface TypographyProps extends WithClasses<keyof typeof styles> {
      * Default: `"body"`
      */
     variant?: 'header' | 'title' | 'section' | 'body' | 'caption';
+
     /**
-     * Makes text quiet. It is useful for secondary information
+     * Defines the intention of using the Typography element
      */
-    quiet?: boolean;
+    intent?: 'no-intent' | 'quiet' | 'alarm' | 'warning' | 'success';
+    /**
+     * Makes the font condensed
+     */
+    condensed?: boolean;
     /**
      * Describes how the text is presented in block model.
      *
@@ -48,8 +52,6 @@ interface TypographyProps extends WithClasses<keyof typeof styles> {
      * Default: `"false"`
      */
     inverted?: boolean;
-    /** Defines a color of the text */
-    status?: 'success' | 'warning' | 'error';
     /**
      * Adds ellipsis style to element
      */
@@ -86,12 +88,12 @@ export function Typography<T extends TargetProps = DefaultTargetProps>(props: Pr
                 const {
                     as,
                     variant = 'body',
-                    quiet,
+                    intent = 'no-intent',
                     box = 'block',
                     inverted = darkContext,
                     classes,
                     className,
-                    status,
+                    condensed,
                     ellipsis,
                     ...rest
                 } = mergedProps;
@@ -130,7 +132,7 @@ export function Typography<T extends TargetProps = DefaultTargetProps>(props: Pr
                             [classes.body]: variant === 'body',
                             [classes.caption]: variant === 'caption',
 
-                            [classes.quiet]: quiet,
+                            [classes.quiet]: intent === 'quiet',
 
                             [classes.inverted]: inverted,
 
@@ -138,11 +140,13 @@ export function Typography<T extends TargetProps = DefaultTargetProps>(props: Pr
 
                             [classes.paragraph]: box === 'paragraph',
 
-                            [classes.success]: status === 'success',
-                            [classes.warning]: status === 'warning',
-                            [classes.error]: status === 'error',
+                            [classes.success]: intent === 'success',
+                            [classes.warning]: intent === 'warning',
+                            [classes.alarm]: intent === 'alarm',
 
-                            [classes.ellipsis]: ellipsis
+                            [classes.ellipsis]: ellipsis,
+
+                            [classes.condensed]: condensed
                         })}
                     />
                 );

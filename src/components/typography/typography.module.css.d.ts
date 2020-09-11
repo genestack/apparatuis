@@ -9,8 +9,11 @@
 export const root: string;
 export const ellipsis: string;
 
-/** quiet */
+/** intents */
 export const quiet: string;
+export const success: string;
+export const warning: string;
+export const alarm: string;
 
 /** box */
 export const inline: string;
@@ -26,7 +29,5 @@ export const section: string;
 export const body: string;
 export const caption: string;
 
-/** statuses */
-export const success: string;
-export const warning: string;
-export const error: string;
+/** condensed */
+export const condensed: string;

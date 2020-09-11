@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2011-2019 Genestack Limited
+ * Copyright (c) 2011-2020 Genestack Limited
  * All Rights Reserved
  * THIS IS UNPUBLISHED PROPRIETARY SOURCE CODE OF GENESTACK LIMITED
  * The copyright notice above does not evidence any
@@ -15,12 +15,18 @@
     font-weight: normal;
     font-family: var(--gs-font-family);
     margin: 0;
+    font-variant-numeric: slashed-zero;
+    font-feature-settings: "liga", "clig";
 }
 
 .ellipsis {
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
+}
+
+.condensed {
+    font-family: "IBM Plex Sans Condensed", "IBM Plex Sans", "Helvetica", "Arial", sans-serif;
 }
 
 /** box */
@@ -47,6 +53,11 @@
     margin-bottom: var(--gs-spacing-unit);
 }
 
+.header.quiet {
+    font-weight: 500;
+    color: var(--gs-color-black);
+}
+
 /** title variant */
 
 .title {
@@ -60,6 +71,11 @@
     margin-bottom: var(--gs-spacing-unit);
 }
 
+.title.quiet {
+    font-weight: 500;
+    color: var(--gs-color-black);
+}
+
 /** section */
 
 .section {
@@ -71,6 +87,11 @@
 .section.paragraph {
     margin-top: calc(var(--gs-spacing-unit) * 2);
     margin-bottom: var(--gs-spacing-unit);
+}
+
+.section.quiet {
+    font-weight: 500;
+    color: var(--gs-color-black);
 }
 
 /** section */
@@ -121,9 +142,9 @@
     color: var(--gs-color-success);
 }
 
-.error,
-.error.inverted,
-.error.inverted.quiet {
+.alarm,
+.alarm.inverted,
+.alarm.inverted.quiet {
     color: var(--gs-color-error);
 }
 
