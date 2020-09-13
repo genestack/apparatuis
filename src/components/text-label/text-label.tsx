@@ -85,7 +85,7 @@ export const TextLabel = (props: Props) => {
                 <Typography
                     as="span"
                     variant={captionVariant}
-                    quiet
+                    intent="quiet"
                     {...captionProps}
                     className={classNames(captionProps.className, classes.caption)}
                 >
