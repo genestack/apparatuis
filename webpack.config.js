@@ -120,7 +120,10 @@ module.exports = (env) => {
                 },
                 {
                     test: /\.(jpe?g|png|gif|svg|woff|woff2|eot|ttf)$/i,
-                    loader: 'file-loader'
+                    loader: 'file-loader',
+                    options: {
+                        publicPath: './'
+                    }
                 }
             ]
         },
