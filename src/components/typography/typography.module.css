@@ -131,7 +131,7 @@
 }
 
 .inverted.quiet {
-    color: var(--gs-color-white-60);
+    color: var(--gs-color-white);
 }
 
 /** statuses */
