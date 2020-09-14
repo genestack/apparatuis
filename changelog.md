@@ -1,5 +1,17 @@
 # Changelog
 
+## [Unreleased]
+
+### Changed
+
+-   Changed a default font-family to `IBM Plex Sans`
+-   Changed `Typography` public properties:
+    -   `quiet` to `intent = 'quiet'`
+    -   `status = 'success' | 'warning' | 'error'` to `intent = 'success' | 'warning' | 'alarm'`
+    -   added `boolean condensed` property
+-   Changed `Typography` `classes`:
+    -   `error` to `alarm`
+
 ## [9.0.2] - 2020-09-10
 
 ### Added
