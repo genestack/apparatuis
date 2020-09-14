@@ -1,11 +1,5 @@
 # Changelog
 
-## [9.0.2] - 2020-09-10
-
-### Added
-
--   Add `as` property to `<Link />`
-
 ## [10.0.0] - 2020-09-02
 
 ### Changed
@@ -15,6 +9,12 @@
 -   Add [Option](src/components/select/option.tsx)
 -   Add [OptionLabel](src/components/select/option-label.tsx)
 -   Add [Emitter](src/components/select/emitter.tsx)
+
+## [9.0.2] - 2020-09-10
+
+### Added
+
+-   Add `as` property to `<Link />`
 
 ## [9.0.1] - 2020-09-10
 
