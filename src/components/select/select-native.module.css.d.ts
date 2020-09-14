@@ -6,6 +6,4 @@
  * actual or intended publication of such source code.
  */
 
-export const root: string;
-
 export const select: string;

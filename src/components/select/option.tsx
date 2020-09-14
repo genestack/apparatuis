@@ -25,8 +25,10 @@ export function Option({label, ...restProps}: Props) {
     const {native} = useSelectContext();
 
     if (native) {
+        const optionLabel = typeof label === 'string' ? label : undefined;
+
         return (
-            <option value={restProps.value} label={typeof label === 'string' ? label : undefined}>
+            <option value={restProps.value} label={optionLabel}>
                 {restProps.children}
             </option>
         );

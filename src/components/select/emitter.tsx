@@ -68,7 +68,9 @@ export const Emitter = React.forwardRef<HTMLElement, Props>(function EmitterRef(
         className
     );
 
-    const buttonLabel = label || placeholder;
+    const buttonLabel = label ?? placeholder;
+    // tslint:disable-next-line:strict-type-predicates
+    const isInlineLabel = typeof buttonLabel === 'string' || typeof buttonLabel === 'number';
 
     return (
         <ButtonBase
@@ -78,11 +80,7 @@ export const Emitter = React.forwardRef<HTMLElement, Props>(function EmitterRef(
             intent={invalid ? 'alarm' : intent}
             component={isButton ? 'button' : 'div'}
         >
-            {typeof buttonLabel === 'string' ? (
-                <OptionLabel>{buttonLabel}</OptionLabel>
-            ) : (
-                buttonLabel
-            )}
+            {isInlineLabel ? <OptionLabel>{buttonLabel}</OptionLabel> : buttonLabel}
 
             <KeyboardArrowBottomIcon
                 {...arrowProps}

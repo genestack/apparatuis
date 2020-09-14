@@ -41,11 +41,7 @@ export function SelectNative(props: Props) {
         });
 
     return (
-        <Emitter
-            {...rest}
-            className={classNames(rest.className, styles.root)}
-            invalid={invalidState}
-        >
+        <Emitter {...rest} invalid={invalidState}>
             <select
                 {...selectProps}
                 value={value}

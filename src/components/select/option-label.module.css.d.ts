@@ -6,6 +6,8 @@
  * actual or intended publication of such source code.
  */
 
+export const root: string;
+
 export const value: string;
 
 export const label: string;

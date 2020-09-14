@@ -64,19 +64,15 @@
 }
 
 .normal.active.focused,
-.normal.active:focus-within,
 .normal.active:focus,
 .normal:active.focused,
-.normal:active:focus-within,
 .normal:active:focus {
     box-shadow: var(--gs-box-shadow-normal-active), var(--gs-focused-shadow);
 }
 
 .inverted.normal.active.focused,
-.inverted.normal.active:focus-within,
 .inverted.normal.active:focus,
 .inverted.normal:active.focused,
-.inverted.normal:active:focus-within,
 .inverted.normal:active:focus {
     box-shadow: var(--gs-box-shadow-normal-active), var(--gs-focused-shadow-inverted);
 }

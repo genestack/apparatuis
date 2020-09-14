@@ -12,6 +12,12 @@
     --gs-color-normal-accent: rgba(222, 226, 231, 1);
 }
 
+.root {
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
 .value {
     white-space: nowrap;
     text-overflow: ellipsis;
@@ -19,6 +25,11 @@
     font-size: inherit;
     color: inherit;
     overflow: hidden;
+    margin-right: 4px;
+}
+
+.value:last-child {
+    margin-right: 0;
 }
 
 /* label */
@@ -32,6 +43,7 @@
 }
 
 .label:last-child {
+    margin-left: auto;
     margin-right: 0;
 }
 

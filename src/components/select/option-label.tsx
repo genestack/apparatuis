@@ -34,7 +34,11 @@ export function OptionLabel(props: Props) {
     });
 
     return (
-        <span {...rest}>
+        <span
+            title={typeof children === 'string' ? children : undefined}
+            {...rest}
+            className={classNames(styles.root, rest.className)}
+        >
             {prepend && <span className={labelClassName}>{prepend}</span>}
             {children && <span className={styles.value}>{children}</span>}
             {append && <span className={labelClassName}>{append}</span>}
