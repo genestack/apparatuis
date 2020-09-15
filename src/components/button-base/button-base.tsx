@@ -61,8 +61,7 @@ export const ButtonBase: OverridableComponent<TypeMap> = React.forwardRef<
         intent = 'no-intent',
         hovered,
         focused,
-        // use default tabIndex to enable focusing
-        tabIndex = 0,
+        tabIndex,
         active,
         classes,
         component: Component = 'button',
