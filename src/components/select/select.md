@@ -266,43 +266,12 @@ function SelectExample() {
 </Presentation>;
 ```
 
-### Native select with label
+### Native select with OptionLabel
 
 ```js
 const React = require('react');
 const {Typography} = require('../typography');
 const {HelpIcon, InfoIcon, FiltersIcon, LockIcon} = require('../../icons');
-
-const OPTIONS = [
-    {
-        value: '10',
-        label: 'Help',
-        labelProps: {
-            prepend: <HelpIcon />
-        }
-    },
-    {
-        value: '20',
-        label: 'Filters',
-        labelProps: {
-            prepend: <FiltersIcon />
-        }
-    },
-    {
-        value: '30',
-        label: 'Info',
-        labelProps: {
-            prepend: <InfoIcon />
-        }
-    },
-    {
-        value: '40',
-        label: 'Lock',
-        labelProps: {
-            prepend: <LockIcon />
-        }
-    }
-];
 
 function SelectFrame() {
     const [selectValue, setSelectValue] = React.useState('');
@@ -319,16 +288,21 @@ function SelectFrame() {
                 onValueChange={(value) => setSelectValue(value)}
             >
                 <Option value="" />
-                {OPTIONS.map(({value, label, labelProps = {}, ...restProps}) => (
-                    <Option
-                        key={value}
-                        value={value}
-                        label={<OptionLabel {...labelProps}>{label}</OptionLabel>}
-                        {...restProps}
-                    >
-                        {label}
-                    </Option>
-                ))}
+                <Option value="10" label={<OptionLabel prepend={<HelpIcon />}>Help</OptionLabel>}>
+                    Help
+                </Option>
+                <Option
+                    value="20"
+                    label={<OptionLabel prepend={<FiltersIcon />}>Filters</OptionLabel>}
+                >
+                    Filters
+                </Option>
+                <Option value="30" label={<OptionLabel prepend={<InfoIcon />}>Info</OptionLabel>}>
+                    Info
+                </Option>
+                <Option value="40" label={<OptionLabel prepend={<LockIcon />}>Lock</OptionLabel>}>
+                    Lock
+                </Option>
             </Select>
         </>
     );
@@ -345,84 +319,62 @@ function SelectFrame() {
 const React = require('react');
 const {Typography} = require('../typography');
 const {CheckMarkIcon, PlayIcon, CrossIcon, MenuIcon} = require('../../icons');
-const {Badge} = require('../badge');
-
-const OPTIONS = [
-    {
-        value: '10',
-        label: 'Done',
-        prepend: <CheckMarkIcon />,
-        append: (
-            <Typography quiet as="span" status="success">
-                12
-            </Typography>
-        )
-    },
-    {
-        value: '20',
-        label: 'Queued',
-        prepend: <MenuIcon />,
-        append: (
-            <Typography quiet as="span">
-                8
-            </Typography>
-        )
-    },
-    {
-        value: '30',
-        label: 'Running',
-        prepend: <PlayIcon />,
-        append: (
-            <Typography quiet as="span">
-                354
-            </Typography>
-        )
-    },
-    {
-        value: '40',
-        label: 'Failed',
-        prepend: <CrossIcon />,
-        append: (
-            <Typography quiet as="span">
-                1
-            </Typography>
-        ),
-        disabled: true
-    },
-    {
-        hasDivider: true,
-        value: '0',
-        label: 'All reports'
-    }
-];
 
 function SelectFrame() {
-    const [selectValue, setSelectValue] = React.useState('30');
+    const [selectValue, setSelectValue] = React.useState(30);
 
     return (
         <>
-            <Select
-                value={selectValue}
-                onValueChange={(value) => setSelectValue(value)}
-                style={{
-                    width: 135
-                }}
-            >
-                {OPTIONS.map(({value, label, ...restProps}) => (
-                    <Option
-                        key={value}
-                        value={value}
-                        label={
-                            <OptionLabel
-                                prepend={<Badge>{label}</Badge>}
-                                append={restProps.append}
-                            />
-                        }
-                        {...restProps}
-                    >
-                        {label}
-                    </Option>
-                ))}
+            <Select value={selectValue} onValueChange={(value) => setSelectValue(value)}>
+                <Option
+                    value={10}
+                    label="Done"
+                    prepend={<CheckMarkIcon />}
+                    append={
+                        <Typography quiet as="span" status="success">
+                            12
+                        </Typography>
+                    }
+                >
+                    Done
+                </Option>
+                <Option
+                    value={20}
+                    label="Queued"
+                    prepend={<MenuIcon />}
+                    append={
+                        <Typography quiet as="span">
+                            10
+                        </Typography>
+                    }
+                >
+                    Queued
+                </Option>
+                <Option
+                    value={30}
+                    label="Running"
+                    prepend={<PlayIcon />}
+                    append={
+                        <Typography quiet as="span">
+                            8
+                        </Typography>
+                    }
+                >
+                    Running
+                </Option>
+                <Option
+                    value={40}
+                    label="Failed"
+                    prepend={<CheckMarkIcon />}
+                    append={
+                        <Typography quiet as="span">
+                            9
+                        </Typography>
+                    }
+                    disabled
+                >
+                    Failed
+                </Option>
             </Select>
         </>
     );
