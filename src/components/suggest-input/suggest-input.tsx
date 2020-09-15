@@ -160,7 +160,8 @@ export function SuggestInput(props: Props) {
                     style: {
                         ...inputPopoverProps.style,
                         display: open ? 'block' : 'none'
-                    }
+                    },
+                    eventsEnabled: isOpen
                 };
 
                 // Downshift prevents default event behaviour on Escape key down regardless the open state.
