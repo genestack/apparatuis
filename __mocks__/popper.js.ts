@@ -53,7 +53,9 @@ export default class Popper {
             destroy: () => (this.state.isDestroyed = true),
             scheduleUpdate: () => {
                 update();
-            }
+            },
+            enableEventListeners: () => null,
+            disableEventListeners: () => null
         } as any;
     }
 }
