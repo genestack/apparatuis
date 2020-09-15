@@ -47,11 +47,13 @@
 }
 
 .root.focused,
+.root:focus-within,
 .root:focus {
     box-shadow: var(--gs-focused-shadow);
 }
 
 .inverted.root.focused,
+.inverted.root:focus-within,
 .inverted.root:focus {
     box-shadow: var(--gs-focused-shadow-inverted);
 }

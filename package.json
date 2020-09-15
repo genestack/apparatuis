@@ -1,6 +1,6 @@
 {
   "name": "genestack-ui",
-  "version": "9.0.3",
+  "version": "10.0.0",
   "description": "UI library",
   "main": "dist/",
   "types": "dist/",
@@ -21,6 +21,8 @@
     "start": "styleguidist server",
     "build": "styleguidist build",
     "build:bundle": "npm run clean && webpack --env production",
+    "prettier": "git ls-files | grep -E '\\.(js|jsx|ts|tsx|md|css|json)$' | xargs prettier",
+    "prettier:check": "npm run prettier -- -l",
     "clean": "rm -rf dist",
     "prepublishOnly": "npm run test && npm run build:bundle",
     "tslint": "tslint -p .",

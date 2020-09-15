@@ -7,7 +7,3 @@
  */
 
 export const select: string;
-
-export const hasError: string;
-
-export const emptyValue: string;

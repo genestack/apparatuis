@@ -29,19 +29,17 @@ interface EventHandlers {
 export function useButtonActiveState(props: Props) {
     const [active, setActiveState] = React.useState(false);
 
-    function subscribeToWindowMouseUp() {
-        if (active) {
-            const handleWindowMouseUp = () => {
-                setActiveState(false);
-            };
+    React.useEffect(() => {
+        const handleWindowMouseUp = () => {
+            setActiveState(false);
+        };
 
-            window.addEventListener('mouseup', handleWindowMouseUp);
+        window.addEventListener('mouseup', handleWindowMouseUp);
 
-            return () => {
-                window.removeEventListener('mouseup', handleWindowMouseUp);
-            };
-        }
-    }
+        return () => {
+            window.removeEventListener('mouseup', handleWindowMouseUp);
+        };
+    }, []);
 
     function getEventHandlers(): EventHandlers {
         if (props.disableHook) {
@@ -87,8 +85,6 @@ export function useButtonActiveState(props: Props) {
             }
         };
     }
-
-    React.useEffect(subscribeToWindowMouseUp, [active]);
 
     const callbackProps = React.useMemo(getEventHandlers, [
         active,

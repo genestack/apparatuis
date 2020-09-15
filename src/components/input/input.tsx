@@ -12,12 +12,12 @@ import {chain} from '../../utils/chain';
 import {Omit} from '../../utils/omit';
 import {chainRefs} from '../../utils/set-ref';
 import {mergeClassesProps, WithClasses} from '../../utils/styles';
+import {useInputInvalidity} from '../../utils/use-constol-invalidity';
 import {FieldProps, Field} from '../field';
 
 import {InputClearButton, Props as InputClearButtonProps} from './input-clear-button';
 import {InputSpinner, Props as InputSpinnerProps} from './input-spinner';
 import * as styles from './input.module.css';
-import {useInputInvalidity} from './use-input-invalidity';
 
 type BaseTargetProps = React.ComponentPropsWithoutRef<'input'>;
 type BaseRootProps = React.ComponentPropsWithRef<'div'>;

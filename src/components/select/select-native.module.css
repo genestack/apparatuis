@@ -1,0 +1,32 @@
+/*
+ * Copyright (c) 2011-2018 Genestack Limited
+ * All Rights Reserved
+ * THIS IS UNPUBLISHED PROPRIETARY SOURCE CODE OF GENESTACK LIMITED
+ * The copyright notice above does not evidence any
+ * actual or intended publication of such source code.
+ */
+@import "./../../variables.css";
+
+.select {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    appearance: none;
+    color: transparent;
+    margin-bottom: 0;
+    outline: none;
+    border: none;
+    border-radius: inherit;
+    background: none;
+    cursor: pointer;
+}
+
+.select:disabled {
+    cursor: not-allowed;
+}
+
+.select::placeholder {
+    color: transparent;
+}
