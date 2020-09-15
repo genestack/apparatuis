@@ -7,11 +7,6 @@
  */
 @import "./../../variables.css";
 
-:root {
-    --gs-color-normal: rgba(129, 129, 129, 1);
-    --gs-color-normal-accent: rgba(222, 226, 231, 1);
-}
-
 .root {
     position: relative;
     justify-content: flex-start;
@@ -65,7 +60,7 @@
 /* optionLabel info */
 .info {
     font-size: 12px;
-    color: var(--gs-color-normal);
+    color: var(--gs-color-grey);
     margin: 0 4px;
 }
 
@@ -84,7 +79,7 @@
 }
 
 .root.ghost.accent .info {
-    color: var(--gs-color-normal);
+    color: var(--gs-color-grey);
 }
 
 .root.ghost.accent.invalid .info,
