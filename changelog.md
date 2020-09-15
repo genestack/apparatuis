@@ -1,5 +1,11 @@
 # Changelog
 
+## [9.0.3] - 2020-09-15
+
+### Added
+
+-   Add `<SuggestInput/>` popper events only when it opened
+
 ## [9.0.2] - 2020-09-10
 
 ### Added
