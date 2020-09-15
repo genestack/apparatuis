@@ -8,8 +8,20 @@
 
 export const root: string;
 
+export const arrow: string;
+
+export const optionLabel: string;
+
 export const value: string;
 
-export const label: string;
+export const info: string;
 
-export const quiet: string;
+export const small: string;
+
+export const ghost: string;
+
+export const accent: string;
+
+export const invalid: string;
+
+export const disabled: string;

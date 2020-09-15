@@ -10,10 +10,9 @@ import classNames from 'classnames';
 import React from 'react';
 
 import {chain, chainRefs} from '../../utils';
-import {useControlInvalidity} from '../../utils/use-constol-invalidity';
 
 import {CommonSelectProps} from './common-select-props';
-import {Emitter} from './emitter';
+import {SelectEmitter} from './select-emitter';
 import * as styles from './select-native.module.css';
 
 /** Native Select Props */
@@ -32,8 +31,6 @@ export function SelectNative(props: Props) {
 
     const selectRef = React.useRef<HTMLSelectElement | null>(null);
 
-    const invalidState = useControlInvalidity(selectRef, rest.invalid);
-
     const handleValueChange =
         onValueChange &&
         ((e: React.ChangeEvent<HTMLSelectElement>) => {
@@ -41,7 +38,7 @@ export function SelectNative(props: Props) {
         });
 
     return (
-        <Emitter {...rest} invalid={invalidState}>
+        <SelectEmitter {...rest}>
             <select
                 {...selectProps}
                 value={value}
@@ -52,6 +49,6 @@ export function SelectNative(props: Props) {
             >
                 {children}
             </select>
-        </Emitter>
+        </SelectEmitter>
     );
 }

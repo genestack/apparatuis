@@ -9,9 +9,9 @@ import * as React from 'react';
 
 import {createTestApp} from '../../../test-utils/create-test-app';
 
-import {Emitter} from './emitter';
 import {Option} from './option';
 import {Select} from './select';
+import {SelectEmitter} from './select-emitter';
 import {SelectMenu} from './select-menu';
 import {SelectNative} from './select-native';
 
@@ -32,7 +32,7 @@ describe('<Select />', () => {
 
     it('should render emitter as button', () => {
         const wrapper = app.mount(<Select />);
-        expect(wrapper.find(Emitter).getDOMNode().tagName).toBe('BUTTON');
+        expect(wrapper.find(SelectEmitter).getDOMNode().tagName).toBe('BUTTON');
     });
 
     // Native select
@@ -44,7 +44,7 @@ describe('<Select />', () => {
 
     it('should render emitter as div', () => {
         const wrapper = app.mount(<Select native />);
-        expect(wrapper.find(Emitter).getDOMNode().tagName).toBe('DIV');
+        expect(wrapper.find(SelectEmitter).getDOMNode().tagName).toBe('DIV');
     });
 
     it('should render Option as option', () => {
@@ -68,7 +68,7 @@ describe('<Select />', () => {
             </Select>
         );
 
-        expect(wrapper.find(Emitter).text()).toBe('Some placeholder');
+        expect(wrapper.find(SelectEmitter).text()).toBe('Some placeholder');
     });
 
     it('should render emitter with custom label', () => {
@@ -78,6 +78,6 @@ describe('<Select />', () => {
             </Select>
         );
 
-        expect(wrapper.find(Emitter).text()).toBe('Some text');
+        expect(wrapper.find(SelectEmitter).text()).toBe('Some text');
     });
 });

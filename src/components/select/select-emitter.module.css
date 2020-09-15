@@ -1,0 +1,93 @@
+/*
+ * Copyright (c) 2011-2020 Genestack Limited
+ * All Rights Reserved
+ * THIS IS UNPUBLISHED PROPRIETARY SOURCE CODE OF GENESTACK LIMITED
+ * The copyright notice above does not evidence any
+ * actual or intended publication of such source code.
+ */
+@import "./../../variables.css";
+
+:root {
+    --gs-color-normal: rgba(129, 129, 129, 1);
+    --gs-color-normal-accent: rgba(222, 226, 231, 1);
+}
+
+.root {
+    position: relative;
+    justify-content: flex-start;
+    max-width: 100%;
+    width: 200px;
+    height: 32px;
+    line-height: 20px;
+    padding: 6px 32px 6px 8px;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.root.small {
+    height: 24px;
+    padding: 2px 24px 2px 4px;
+}
+
+/* arrow */
+.arrow {
+    position: absolute;
+    top: 50%;
+    right: 8px;
+    transform: translate(0, -50%);
+}
+
+.arrow.small {
+    right: 4px;
+}
+
+.arrow:first-child {
+    margin-left: 0;
+}
+
+/* optionLabel */
+.optionLabel {
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
+/* optionLabel value */
+.value {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    font-family: inherit;
+    font-size: inherit;
+    color: inherit;
+    overflow: hidden;
+}
+
+/* optionLabel info */
+.info {
+    font-size: 12px;
+    color: var(--gs-color-normal);
+    margin: 0 4px;
+}
+
+.info:first-child {
+    margin-left: 0;
+}
+
+.info:last-child {
+    margin-right: 0;
+}
+
+.root.accent .info,
+.root.invalid .info,
+.root.disabled .info {
+    color: inherit;
+}
+
+.root.ghost.accent .info {
+    color: var(--gs-color-normal);
+}
+
+.root.ghost.accent.invalid .info,
+.root.ghost.accent.disabled .info {
+    color: inherit;
+}

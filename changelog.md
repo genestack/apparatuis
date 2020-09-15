@@ -8,7 +8,8 @@
 -   Add [Select](src/components/select/select.tsx) support in native and menu mode
 -   Add [Option](src/components/select/option.tsx)
 -   Add [OptionLabel](src/components/select/option-label.tsx)
--   Add [Emitter](src/components/select/emitter.tsx)
+-   Add [SelectEmitter](src/components/select/select-emitter.tsx)
+-   Add [ArrowBottomThinIcon](src/icons/arrow-bottom-thin-icon.tsx)
 
 ## [9.0.2] - 2020-09-10
 

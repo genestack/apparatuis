@@ -9,8 +9,7 @@
 import classNames from 'classnames';
 import React from 'react';
 
-import * as styles from './option-label.module.css';
-import {useSelectContext} from './select-context';
+import * as styles from './select-emitter.module.css';
 
 type TargetProps = React.HTMLAttributes<HTMLSpanElement>;
 
@@ -24,24 +23,17 @@ export interface Props extends TargetProps {
 
 /** Option label (depends of SelectContext) */
 export function OptionLabel(props: Props) {
-    const {invalid, intent, ghost, disabled} = useSelectContext();
-
     const {prepend, append, children, ...rest} = props;
-    const notAvailable = disabled || invalid;
-
-    const labelClassName = classNames(styles.label, {
-        [styles.quiet]: !notAvailable && (intent !== 'accent' || ghost)
-    });
 
     return (
         <span
             title={typeof children === 'string' ? children : undefined}
             {...rest}
-            className={classNames(styles.root, rest.className)}
+            className={classNames(styles.optionLabel, rest.className)}
         >
-            {prepend && <span className={labelClassName}>{prepend}</span>}
+            {prepend && <span className={styles.info}>{prepend}</span>}
             {children && <span className={styles.value}>{children}</span>}
-            {append && <span className={labelClassName}>{append}</span>}
+            {append && <span className={styles.info}>{append}</span>}
         </span>
     );
 }

@@ -12,7 +12,7 @@ import {DarkContext, chain} from '../../utils';
 import {Menu, MenuProps} from '../menu';
 
 import {CommonSelectProps} from './common-select-props';
-import {Emitter} from './emitter';
+import {SelectEmitter} from './select-emitter';
 
 /** Select Menu Props */
 export interface Props extends CommonSelectProps {
@@ -42,7 +42,7 @@ export function SelectMenu(props: Props) {
 
     return (
         <>
-            <Emitter
+            <SelectEmitter
                 {...rest}
                 isButton
                 onClick={chain(handleMenuOpen, rest.onClick)}

@@ -10,6 +10,7 @@ export {GenericFileIcon} from './generic-file-icon';
 export {TemplateIcon} from './template-icon';
 export {StudyIcon} from './study-icon';
 
+export {ArrowBottomThinIcon} from './arrow-bottom-thin-icon';
 export {ArrowDownloadIcon} from './arrow-download-icon';
 export {ArrowDownloadThinIcon} from './arrow-download-thin-icon';
 export {ArrowLeftIcon} from './arrow-left-icon';

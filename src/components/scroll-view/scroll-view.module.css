@@ -33,9 +33,7 @@
 }
 
 .root > :global(.simplebar-track) > :global(.simplebar-scrollbar.simplebar-hover:before),
-.root:global(.simplebar-dragging)
-    > :global(.simplebar-track)
-    > :global(.simplebar-scrollbar:before) {
+.root:global(.simplebar-dragging) > :global(.simplebar-track) > :global(.simplebar-scrollbar:before) {
     background-color: rgba(85, 85, 85, 0.8);
 }
 
@@ -44,9 +42,7 @@
 }
 
 .root.inverted > :global(.simplebar-track) > :global(.simplebar-scrollbar.simplebar-hover:before),
-.root.inverted:global(.simplebar-dragging)
-    > :global(.simplebar-track)
-    > :global(.simplebar-scrollbar:before) {
+.root.inverted:global(.simplebar-dragging) > :global(.simplebar-track) > :global(.simplebar-scrollbar:before) {
     background-color: rgba(204, 204, 204, 0.8);
 }
 
@@ -69,7 +65,6 @@
 }
 
 /* hiding scrollbars when not hovered and not being dragged */
-.root:not(:hover):not(.scrollbarsAlwaysShown):not(:global(.simplebar-dragging))
-    > :global(.simplebar-track) {
+.root:not(:hover):not(.scrollbarsAlwaysShown):not(:global(.simplebar-dragging)) > :global(.simplebar-track) {
     visibility: hidden !important;
 }

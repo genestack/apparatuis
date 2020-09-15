@@ -9,11 +9,11 @@
 import classNames from 'classnames';
 import React from 'react';
 
-import {KeyboardArrowBottomIcon} from '../../icons';
+import {ArrowBottomThinIcon} from '../../icons';
 import {ButtonBase, ButtonBaseProps} from '../button-base';
 
-import * as styles from './emitter.module.css';
 import {OptionLabel} from './option-label';
+import * as styles from './select-emitter.module.css';
 
 type TargetProps = Omit<
     React.HTMLAttributes<HTMLButtonElement | HTMLDivElement>,
@@ -40,11 +40,14 @@ export interface Props extends TargetProps, ButtonProps {
     invalid?: boolean;
     /** Disable button */
     disabled?: boolean;
-    arrowProps?: React.ComponentPropsWithRef<typeof KeyboardArrowBottomIcon>;
+    arrowProps?: React.ComponentPropsWithRef<typeof ArrowBottomThinIcon>;
 }
 
 /** Wrapper for select */
-export const Emitter = React.forwardRef<HTMLElement, Props>(function EmitterRef(props: Props, ref) {
+export const SelectEmitter = React.forwardRef<HTMLElement, Props>(function EmitterRef(
+    props: Props,
+    ref
+) {
     const {
         className,
         label,
@@ -62,10 +65,20 @@ export const Emitter = React.forwardRef<HTMLElement, Props>(function EmitterRef(
         styles.root,
         {
             [styles.accent]: intent === 'accent',
+            [styles.ghost]: restProps.ghost,
             [styles.invalid]: invalid,
+            [styles.disabled]: restProps.disabled,
             [styles.small]: size === 'small'
         },
         className
+    );
+
+    const arrowClassName = classNames(
+        styles.arrow,
+        {
+            [styles.small]: size === 'small'
+        },
+        arrowProps?.className
     );
 
     const buttonLabel = label ?? placeholder;
@@ -82,10 +95,7 @@ export const Emitter = React.forwardRef<HTMLElement, Props>(function EmitterRef(
         >
             {isInlineLabel ? <OptionLabel>{buttonLabel}</OptionLabel> : buttonLabel}
 
-            <KeyboardArrowBottomIcon
-                {...arrowProps}
-                className={classNames(styles.arrow, arrowProps?.className)}
-            />
+            <ArrowBottomThinIcon {...arrowProps} className={arrowClassName} />
 
             {children}
         </ButtonBase>
