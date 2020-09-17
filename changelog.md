@@ -2,7 +2,7 @@
 
 ## [Unreleased]
 
-## [10.0.0] - 2020-09-16
+## [10.0.0] - 2020-09-17
 
 ### Changed
 
@@ -13,11 +13,11 @@
 -   Add [SelectEmitter](src/components/select/select-emitter.tsx)
 -   Add [ArrowBottomThinIcon](src/icons/arrow-bottom-thin-icon.tsx)
 -   Changed a default font-family to `IBM Plex Sans`
--   Changed `Typography` public properties:
+-   Changed [Typography](src/components/typography/typography.tsx) public properties:
     -   `quiet` to `intent = 'quiet'`
     -   `status = 'success' | 'warning' | 'error'` to `intent = 'success' | 'warning' | 'alarm'`
     -   added `boolean condensed` property
--   Changed `Typography` `classes`:
+-   Changed [Typography](src/components/typography/typography.tsx) `classes`:
     -   `error` to `alarm`
 
 ## [9.0.3] - 2020-09-15
