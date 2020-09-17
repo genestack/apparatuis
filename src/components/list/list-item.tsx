@@ -153,7 +153,7 @@ export const ListItem = React.forwardRef((props: Props, ref) => {
                 {subtitle ? (
                     <Typography
                         variant="caption"
-                        quiet
+                        intent="quiet"
                         as="div"
                         {...subtitleProps}
                         className={classNames(subtitleProps.className, classes.subtitle)}

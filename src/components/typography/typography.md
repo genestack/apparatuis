@@ -1,11 +1,90 @@
 ```js
 const {DarkContext} = require('../../utils/dark-context');
+const {
+    Presentation,
+    usePresentation,
+    PresentationControls,
+    PresentationState,
+    PresentationPane
+} = require('../../../styleguide-components/presentation');
 
-initialState = {
-    inverted: false,
-    quiet: true
-};
+function TypographyExample() {
+    const presentation = usePresentation();
+    return (
+        <React.Fragment>
+            <Typography
+                variant="header"
+                box="paragraph"
+                condensed={presentation.condensed}
+                intent={presentation.intent}
+            >
+                Header IBM Plex <em>{presentation.condensed ? 'Condensed' : 'Sans'}</em>{' '}
+                {presentation.intent === 'quiet' ? 'Medium' : 'Bold'} 24/32
+            </Typography>
+            <Typography
+                variant="title"
+                box="paragraph"
+                condensed={presentation.condensed}
+                intent={presentation.intent}
+            >
+                Title IBM Plex <em>{presentation.condensed ? 'Condensed' : 'Sans'}</em>{' '}
+                {presentation.intent === 'quiet' ? 'Medium' : 'Bold'} 20/28
+            </Typography>
+            <Typography
+                variant="section"
+                box="paragraph"
+                condensed={presentation.condensed}
+                intent={presentation.intent}
+            >
+                Section IBM Plex <em>{presentation.condensed ? 'Condensed' : 'Sans'}</em>{' '}
+                {presentation.intent === 'quiet' ? 'Medium' : 'Bold'} 14/20
+            </Typography>
+            <Typography
+                box="paragraph"
+                condensed={presentation.condensed}
+                intent={presentation.intent}
+            >
+                Body IBM Plex <em>{presentation.condensed ? 'Condensed' : 'Sans'}</em> Regular 14/20
+            </Typography>
 
+            <Typography
+                variant="caption"
+                box="paragraph"
+                condensed={presentation.condensed}
+                intent={presentation.intent}
+            >
+                Caption IBM Plex <em>{presentation.condensed ? 'Condensed' : 'Sans'}</em> Regular
+                12/18
+            </Typography>
+        </React.Fragment>
+    );
+}
+<Presentation
+    initialState={{
+        inverted: false,
+        intent: 'no-intent',
+        condensed: false
+    }}
+>
+    <PresentationControls>
+        <PresentationState name="inverted" label="Inverted" />
+        <PresentationState name="condensed" label="Condensed" />
+        <ListItem>
+            <Typography variant="section">Intent</Typography>
+        </ListItem>
+        <PresentationState name="intent" label="No intent" value="no-intent" />
+        <PresentationState name="intent" label="Quiet" value="quiet" />
+        <PresentationState name="intent" label="Alarm" value="alarm" />
+        <PresentationState name="intent" label="Warning" value="warning" />
+        <PresentationState name="intent" label="Success" value="success" />
+    </PresentationControls>
+    <PresentationPane>
+        <TypographyExample />
+    </PresentationPane>{' '}
+</Presentation>;
+```
+
+```js
 <React.Fragment>
     <PageContent as={Paper}>
         <Typography variant="header" box="paragraph">
@@ -48,110 +127,5 @@ initialState = {
             characterization of the response of the small airway epithelium to smoking.
         </Typography>
     </PageContent>
-
-    <Divider gap={4} variant="transparent" />
-
-    <Controls style={{alignItems: 'flex-start'}} gap={4}>
-        <ControlsItem>
-            <Controls justify="end" as="label">
-                <ControlsItem>
-                    <Typography>Inverted</Typography>
-                </ControlsItem>
-                <ControlsItem>
-                    <input
-                        type="checkbox"
-                        checked={state.inverted}
-                        onChange={(event) => setState({inverted: event.currentTarget.checked})}
-                    />
-                </ControlsItem>
-            </Controls>
-            <Divider variant="transparent" />
-            <Controls justify="end" as="label">
-                <ControlsItem>
-                    <Typography>Quiet</Typography>
-                </ControlsItem>
-                <ControlsItem>
-                    <input
-                        type="checkbox"
-                        checked={state.quiet}
-                        onChange={(event) => setState({quiet: event.currentTarget.checked})}
-                    />
-                </ControlsItem>
-            </Controls>
-        </ControlsItem>
-        <ControlsItem shrink>
-            <DarkContext.Provider value={state.inverted}>
-                <PageContent as={Paper}>
-                    <Typography variant="header" box="paragraph">
-                        <Typography as="span" variant="header" box="inline" quiet={state.quiet}>
-                            Quiet Header
-                        </Typography>{' '}
-                        Helvetica Bold{' '}
-                        <Typography as="span" variant="title" box="inline" quiet={state.quiet}>
-                            24/32
-                        </Typography>
-                    </Typography>
-                    <Typography variant="title" box="paragraph">
-                        <Typography as="span" variant="title" box="inline" quiet={state.quiet}>
-                            Quiet Title
-                        </Typography>{' '}
-                        Helvetica Bold{' '}
-                        <Typography as="span" variant="title" box="inline" quiet={state.quiet}>
-                            20/28
-                        </Typography>
-                    </Typography>
-                    <Typography variant="section" box="paragraph">
-                        <Typography as="span" variant="section" box="inline" quiet={state.quiet}>
-                            Quiet Section
-                        </Typography>{' '}
-                        Helvetica Bold
-                        <Typography as="span" variant="body" box="inline" quiet={state.quiet}>
-                            14/20
-                        </Typography>
-                    </Typography>
-                    <Typography box="paragraph">
-                        <Typography as="span" box="inline" quiet={state.quiet}>
-                            Quiet body text
-                        </Typography>{' '}
-                        Helvetica Normal
-                        <Typography as="span" variant="caption" box="inline" quiet={state.quiet}>
-                            14/20
-                        </Typography>
-                    </Typography>
-                    <Typography variant="caption" box="paragraph" quiet={state.quiet}>
-                        Quiet caption text – small body text Helvetica Normal 12/18
-                    </Typography>
-                    <Typography variant="caption" box="paragraph">
-                        <Typography as="span" variant="caption" box="inline" quiet>
-                            Tissue:
-                        </Typography>{' '}
-                        Epithelium of Bronchiole
-                    </Typography>
-                    <Divider gap={4} variant="transparent" />
-                    <Typography box="paragraph">
-                        A &lt;STRONG&gt; tag{' '}
-                        <strong>
-                            is working well with <em>texts</em> and <em>captions</em>
-                        </strong>
-                    </Typography>
-                    <Typography box="paragraph">
-                        <Typography quiet as="span" box="inline">
-                            Quiet is useful for secondary information
-                        </Typography>
-                        , while <em>Italic</em> is done with &lt;EM&gt; tag.
-                    </Typography>
-                    <Typography box="paragraph" variant="section" status="error">
-                        Error has occurred
-                    </Typography>
-                    <Typography box="paragraph" status="warning">
-                        You shall not pass! (c) Gandalf
-                    </Typography>
-                    <Typography box="paragraph" status="success">
-                        Download is complete.
-                    </Typography>
-                </PageContent>
-            </DarkContext.Provider>
-        </ControlsItem>
-    </Controls>
-</React.Fragment>;
+</React.Fragment>
 ```

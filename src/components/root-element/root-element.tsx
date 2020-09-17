@@ -8,6 +8,8 @@
 import classNames from 'classnames';
 import * as React from 'react';
 
+import '../../fonts.css';
+
 import * as styles from './root-element.module.css';
 
 type TargetProps = React.HTMLAttributes<HTMLElement>;
