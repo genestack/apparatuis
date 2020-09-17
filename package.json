@@ -91,7 +91,7 @@
     "simplebar-react": "^2.1.0"
   },
   "peerDependencies": {
-    "genestack-frontend-builder": ">= 0.9.0 < 2.0.0",
+    "genestack-frontend-builder": ">= 0.9.5 < 2.0.0",
     "react": ">= 16.8 < 17",
     "react-dom": ">= 16.8 < 17",
     "typescript": ">= 3.7"
