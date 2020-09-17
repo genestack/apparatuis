@@ -43,7 +43,7 @@
 /* optionLabel */
 .optionLabel {
     display: flex;
-    align-items: center;
+    align-items: flex-end;
     width: 100%;
 }
 
@@ -60,6 +60,7 @@
 /* optionLabel info */
 .info {
     font-size: 12px;
+    line-height: 18px;
     color: var(--gs-color-grey);
     margin: 0 4px;
 }
@@ -70,6 +71,10 @@
 
 .info:last-child {
     margin-right: 0;
+}
+
+.root:hover .info {
+    color: inherit;
 }
 
 .root.accent .info,

@@ -16,11 +16,9 @@ import {createIcon} from '../components/icon';
 export const ArrowBottomThinIcon = createIcon(
     <svg viewBox="0 0 20 20">
         <path
-            d="M6.5 8.5L10 12L13.5 8.5"
-            fill="none"
-            className="gs-svg-icon-stroke"
-            strokeWidth="0.6"
-            strokeLinecap="round"
+            d="M7 8l3 3 3-3c1-1 2 0 1 1l-4 4-4-4C5 8 6 7 7 8z"
+            className="gs-svg-icon-fill"
+            fillOpacity="0.6"
         />
     </svg>
 );
