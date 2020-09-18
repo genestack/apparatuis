@@ -106,6 +106,14 @@
     margin-bottom: calc(var(--gs-spacing-unit) * 0.5);
 }
 
+.body.inverted {
+    color: var(--gs-color-grey-background);
+}
+
+.body.inverted.quiet {
+    color: var(--gs-color-grey-background-60);
+}
+
 /** caption variant */
 
 .caption {
@@ -116,6 +124,14 @@
 .caption.paragraph {
     margin-top: calc(var(--gs-spacing-unit) * 0.5);
     margin-bottom: calc(var(--gs-spacing-unit) * 0.5);
+}
+
+.caption.inverted {
+    color: var(--gs-color-grey-background);
+}
+
+.caption.inverted.quiet {
+    color: var(--gs-color-grey-background-60);
 }
 
 /** quiet */
