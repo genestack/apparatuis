@@ -2,6 +2,11 @@
 
 ## [Unreleased]
 
+### Changed
+
+-   Changed color of [Typography](src/components/typography/typography.tsx) `intent = 'quiet'`
+    for `body` and `caption` variants
+
 ## [10.0.0] - 2020-09-17
 
 ### Changed
