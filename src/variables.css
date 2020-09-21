@@ -26,8 +26,11 @@
 
     /* statuses */
     --gs-color-success: rgba(119, 171, 48, 1);
+    --gs-color-success-text: rgba(101, 140, 49, 1);
     --gs-color-warning: rgba(246, 166, 85, 1);
+    --gs-color-warning-text: rgba(231, 133, 35, 1);
     --gs-color-error: rgba(244, 113, 113, 1);
+    --gs-color-error-text: rgba(231, 96, 96, 1);
     --gs-color-error-10: rgba(244, 113, 113, 0.1);
 
     /* greys */

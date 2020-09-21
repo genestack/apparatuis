@@ -152,20 +152,26 @@
 
 /** statuses */
 
-.success,
-.success.inverted,
-.success.inverted.quiet {
+.success {
+    color: var(--gs-color-success-text);
+}
+
+.success.inverted {
     color: var(--gs-color-success);
 }
 
-.alarm,
-.alarm.inverted,
-.alarm.inverted.quiet {
+.alarm {
+    color: var(--gs-color-error-text);
+}
+
+.alarm.inverted {
     color: var(--gs-color-error);
 }
 
-.warning,
-.warning.inverted,
-.warning.inverted.quiet {
+.warning {
+    color: var(--gs-color-warning-text);
+}
+
+.warning.inverted {
     color: var(--gs-color-warning);
 }
