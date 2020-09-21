@@ -56,6 +56,6 @@
 }
 
 .warning.ghost {
-    border: 1px solid var(--gs-color-warning);
-    color: var(--gs-color-warning);
+    border: 1px solid var(--gs-color-warning-text);
+    color: var(--gs-color-warning-text);
 }

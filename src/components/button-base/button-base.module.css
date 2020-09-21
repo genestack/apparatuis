@@ -368,15 +368,15 @@
 /* ghost intent=alarm */
 
 .ghost.alarm {
-    color: var(--gs-color-alarm);
+    color: var(--gs-color-error-text);
 }
 
 .ghost.alarm :global(.gs-svg-icon-fill) {
-    fill: var(--gs-color-alarm);
+    fill: var(--gs-color-error-text);
 }
 
 .ghost.alarm :global(.gs-svg-icon-stroke) {
-    stroke: var(--gs-color-alarm);
+    stroke: var(--gs-color-error-text);
 }
 
 .ghost.alarm.hovered,
@@ -398,6 +398,18 @@
 .ghost.alarm:active :global(.gs-svg-icon-stroke),
 .ghost.alarm.active :global(.gs-svg-icon-stroke) {
     stroke: var(--gs-color-black);
+}
+
+.inverted.ghost.alarm {
+    color: var(--gs-color-error);
+}
+
+.inverted.ghost.alarm :global(.gs-svg-icon-fill) {
+    fill: var(--gs-color-error);
+}
+
+.inverted.ghost.alarm :global(.gs-svg-icon-stroke) {
+    stroke: var(--gs-color-error);
 }
 
 .inverted.ghost.alarm.active,
