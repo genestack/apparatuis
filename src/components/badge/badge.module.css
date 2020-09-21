@@ -52,6 +52,7 @@
 .intentDefault.ghost {
     color: var(--gs-color-grey);
     border: 1px solid var(--gs-color-grey-outline);
+    background-color: transparent;
 }
 
 .inverted.ghost {
@@ -66,18 +67,18 @@
     color: var(--gs-color-white);
 }
 
+.inverted.warning {
+    color: var(--gs-color-black);
+    background-color: var(--gs-color-warning);
+}
+
 .warning.ghost {
     border: 1px solid var(--gs-color-warning-text);
     color: var(--gs-color-warning-text);
     background-color: transparent;
 }
 
-.inverted.warning {
-    background-color: var(--gs-color-warning);
-}
-
 .inverted.warning.ghost {
     border: 1px solid var(--gs-color-warning);
     color: var(--gs-color-warning);
-    background-color: transparent;
 }
