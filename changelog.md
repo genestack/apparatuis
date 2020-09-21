@@ -8,6 +8,10 @@
 
 -   Changed color of [Typography](src/components/typography/typography.tsx) `intent = 'quiet'`
     for `body` and `caption` variants
+-   Changed colors of ghost alarm `Button`, ghost warning `Badge`
+
+### Added
+
 -   Added slashed zeros as default feature of [Typography](src/components/typography/typography.tsx)
 
 ## [10.0.0] - 2020-09-17
