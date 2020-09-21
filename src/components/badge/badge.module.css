@@ -55,7 +55,17 @@
     border: 1px solid var(--gs-color-grey-outline);
 }
 
+.inverted.ghost {
+    color: var(--gs-color-grey-background-60);
+    border: 1px solid var(--gs-color-grey-background-60);
+}
+
 .warning.ghost {
     border: 1px solid var(--gs-color-warning-text);
     color: var(--gs-color-warning-text);
+}
+
+.inverted.warning.ghost {
+    border: 1px solid var(--gs-color-warning);
+    color: var(--gs-color-warning);
 }

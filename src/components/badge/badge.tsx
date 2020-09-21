@@ -8,7 +8,7 @@
 import classNames from 'classnames';
 import * as React from 'react';
 
-import {WithClasses, mergeClassesProps} from '../../utils/styles';
+import {DarkContext, WithClasses, mergeClassesProps} from '../../utils';
 import {Typography, TypographyProps} from '../typography';
 
 import * as styles from './badge.module.css';
@@ -28,6 +28,7 @@ export interface Props extends RootProps, WithClasses<keyof typeof styles> {
     disableTextTransform?: boolean;
     /** Properties for content element */
     contentProps?: React.HTMLAttributes<HTMLDivElement>;
+    inverted?: boolean;
 }
 
 /**
@@ -43,8 +44,11 @@ export const Badge = React.forwardRef((props: Props, ref) => {
         classes,
         contentProps = {},
         disableTextTransform,
+        inverted,
         ...rest
     } = mergeClassesProps(props, styles);
+
+    const darkContext = React.useContext(DarkContext);
 
     return (
         <Typography
@@ -60,7 +64,8 @@ export const Badge = React.forwardRef((props: Props, ref) => {
                     [classes.intentDefault]: intent === 'default',
                     [classes.warning]: intent === 'warning',
                     [classes.ghost]: ghost,
-                    [classes.disableTextTransform]: disableTextTransform
+                    [classes.disableTextTransform]: disableTextTransform,
+                    [classes.inverted]: inverted || darkContext
                 })}
             >
                 {children}
