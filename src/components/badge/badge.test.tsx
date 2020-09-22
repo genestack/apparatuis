@@ -5,22 +5,25 @@
  * The copyright notice above does not evidence any
  * actual or intended publication of such source code.
  */
-import {shallow} from 'enzyme';
 import * as React from 'react';
+
+import {createTestApp} from '../../../test-utils/create-test-app';
 
 import {Badge} from './badge';
 
+const app = createTestApp();
+
+beforeEach(app.beforeEach);
+afterEach(app.afterEach);
+
 describe('<Badge />', () => {
-    const getComponent = () => shallow(<Badge>Foo</Badge>);
     it('should render div HTML element by default', () => {
-        expect(getComponent().find('div')).toHaveLength(1);
+        app.mount(<Badge id="test">Foo</Badge>);
+        expect(document.getElementById('test')).toBeInstanceOf(HTMLDivElement);
     });
 
     it('should render children', () => {
-        expect(
-            getComponent()
-                .find('div')
-                .text()
-        ).toBe('Foo');
+        app.mount(<Badge id="test">Foo</Badge>);
+        expect(document.getElementById('test')!.textContent).toBe('Foo');
     });
 });
