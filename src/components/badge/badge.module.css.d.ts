@@ -11,3 +11,4 @@ export const disableTextTransform: string;
 export const intentDefault: string;
 export const warning: string;
 export const ghost: string;
+export const inverted: string;

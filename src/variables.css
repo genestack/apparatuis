@@ -26,8 +26,11 @@
 
     /* statuses */
     --gs-color-success: rgba(119, 171, 48, 1);
+    --gs-color-success-text: rgba(101, 140, 49, 1);
     --gs-color-warning: rgba(246, 166, 85, 1);
+    --gs-color-warning-text: rgba(231, 133, 35, 1);
     --gs-color-error: rgba(244, 113, 113, 1);
+    --gs-color-error-text: rgba(231, 96, 96, 1);
     --gs-color-error-10: rgba(244, 113, 113, 0.1);
 
     /* greys */
@@ -38,6 +41,7 @@
     --gs-color-grey: rgba(130, 130, 130, 1);
     --gs-color-grey-50: rgba(130, 130, 130, 0.5);
     --gs-color-grey-background: rgba(235, 237, 239, 1);
+    --gs-color-grey-background-60: rgba(235, 237, 239, 0.6);
     --gs-color-grey-background-50: rgba(235, 237, 239, 0.5);
     --gs-color-grey-outline: rgba(199, 202, 209, 1);
     --gs-color-grey-outline-20: rgba(199, 202, 209, 0.2);

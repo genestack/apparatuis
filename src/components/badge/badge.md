@@ -54,6 +54,7 @@ const BadgeExample = (props) => {
         <BadgeExample />
     </PresentationPane>
     <PresentationControls>
+        <PresentationState name="inverted" label="Inverted" />
         <PresentationState name="disableTextTransform" label="Disable text transform" />
         <ListItem>
             <Typography variant="section">Variant</Typography>

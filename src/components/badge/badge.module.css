@@ -30,32 +30,55 @@
     text-transform: uppercase;
 }
 
-.intentDefault {
-    background-color: var(--gs-color-action-text-60);
-    color: var(--gs-color-white);
-}
-
 .disableTextTransform {
     letter-spacing: normal;
     text-transform: none;
 }
 
-.warning {
-    background-color: var(--gs-color-warning);
+.intentDefault {
+    background-color: var(--gs-color-action-text-60);
     color: var(--gs-color-white);
+}
+
+.intentDefault.inverted {
+    color: var(--gs-color-black);
+    background-color: var(--gs-color-white);
 }
 
 .ghost {
     line-height: 13px;
-    background-color: transparent;
 }
 
 .intentDefault.ghost {
     color: var(--gs-color-grey);
     border: 1px solid var(--gs-color-grey-outline);
+    background-color: transparent;
+}
+
+.inverted.ghost {
+    color: var(--gs-color-grey-light-background);
+    border: 1px solid var(--gs-color-grey-outline);
+    background-color: transparent;
+}
+
+/* intent="warning" */
+.warning {
+    background-color: var(--gs-color-warning-text);
+    color: var(--gs-color-white);
+}
+
+.inverted.warning {
+    color: var(--gs-color-black);
+    background-color: var(--gs-color-warning);
 }
 
 .warning.ghost {
+    border: 1px solid var(--gs-color-warning-text);
+    color: var(--gs-color-warning-text);
+    background-color: transparent;
+}
+
+.inverted.warning.ghost {
     border: 1px solid var(--gs-color-warning);
     color: var(--gs-color-warning);
 }
