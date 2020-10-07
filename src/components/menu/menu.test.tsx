@@ -186,4 +186,42 @@ describe('<Menu />', () => {
         expect(document.getElementById('test')).toBeInstanceOf(HTMLAnchorElement);
         expect(document.getElementById('test')).toHaveProperty('href', 'http://localhost/foo');
     });
+
+    describe('keepMounted', () => {
+        it("shouldn't render children", () => {
+            const onClose = jest.fn();
+            const referenceElement = document.createElement('div');
+
+            const wrapper = app.mount(
+                <Menu
+                    open={false}
+                    keepMounted={false}
+                    onClose={onClose}
+                    referenceElement={referenceElement}
+                >
+                    <MenuItem />
+                </Menu>
+            );
+
+            expect(wrapper.find(MenuItem).length).toBe(0);
+        });
+
+        it('should render children', () => {
+            const onClose = jest.fn();
+            const referenceElement = document.createElement('div');
+
+            const wrapper = app.mount(
+                <Menu
+                    open={false}
+                    keepMounted
+                    onClose={onClose}
+                    referenceElement={referenceElement}
+                >
+                    <MenuItem />
+                </Menu>
+            );
+
+            expect(wrapper.find(MenuItem).length).toBe(1);
+        });
+    });
 });

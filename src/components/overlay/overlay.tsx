@@ -52,7 +52,7 @@ export interface Props extends TargetProps {
     disableEscListener?: boolean;
     /** Makes backdrop invisible. Shortcut to Backdrop.invisible */
     invisible?: boolean;
-    /** Always keep the menu in the DOM. */
+    /** Always keep the overlay in the DOM. */
     keepMounted?: boolean;
     /** Properties of nested Backdrop component */
     backdropProps?: Omit<BackdropProps, 'open' | 'invisible'>;
