@@ -52,6 +52,8 @@ export interface Props extends TargetProps {
     disableEscListener?: boolean;
     /** Makes backdrop invisible. Shortcut to Backdrop.invisible */
     invisible?: boolean;
+    /** Always keep the overlay in the DOM. */
+    keepMounted?: boolean;
     /** Properties of nested Backdrop component */
     backdropProps?: Omit<BackdropProps, 'open' | 'invisible'>;
     children?: JSX.Element;
@@ -153,6 +155,7 @@ export class Overlay extends React.Component<Props, State> {
     public render() {
         const {
             open,
+            keepMounted,
             onClose,
             onClosed,
             disableClickListener,
@@ -167,7 +170,7 @@ export class Overlay extends React.Component<Props, State> {
 
         const {exited} = this.state;
 
-        if (!open && exited) {
+        if (!keepMounted && !open && exited) {
             return null;
         }
 
@@ -175,7 +178,13 @@ export class Overlay extends React.Component<Props, State> {
             <div
                 {...rest}
                 ref={rootRef}
-                className={classNames(className, styles.root)}
+                className={classNames(
+                    className,
+                    {
+                        [styles.invisible]: !open && exited
+                    },
+                    styles.root
+                )}
                 onKeyDown={chain(rest.onKeyDown, this.handleKeyDown)}
             >
                 <Backdrop

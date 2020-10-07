@@ -34,6 +34,8 @@ export interface Props extends TargetProps {
     onClosed?: OverlayProps['onClosed'];
     referenceElement?: MenuPopoverProps['referenceElement'];
     placement?: MenuPopoverProps['placement'];
+    /** Always keep the menu in the DOM. */
+    keepMounted?: boolean;
     overlayProps?: RestOverlayProps;
     popoverProps?: RestPopoverProps;
     onValueSelect?: (value: any, event: React.SyntheticEvent, ref: MenuItem) => void;
@@ -82,6 +84,7 @@ export class Menu extends React.Component<Props> {
             onClosed,
             referenceElement,
             placement = 'bottom-start',
+            keepMounted,
             popoverProps = {},
             onValueSelect,
             // tslint:disable-next-line no-object-literal-type-assertion
@@ -94,6 +97,7 @@ export class Menu extends React.Component<Props> {
                 <Overlay
                     {...overlayProps}
                     open={open}
+                    keepMounted={keepMounted}
                     onClose={onClose}
                     onClosed={onClosed}
                     invisible
@@ -104,6 +108,7 @@ export class Menu extends React.Component<Props> {
                         referenceElement={referenceElement}
                         open={open}
                         placement={placement}
+                        keepMounted={keepMounted}
                         positionFixed
                         tabIndex={-1}
                         onKeyDown={chain(popoverProps.onKeyDown, this.handleKeyDown)}
