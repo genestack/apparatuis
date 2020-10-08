@@ -19,3 +19,8 @@
     display: flex;
     z-index: var(--gs-z-index-modal);
 }
+
+.invisible {
+    visibility: hidden;
+    opacity: 0;
+}

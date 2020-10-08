@@ -150,6 +150,19 @@ describe('<Overlay />', () => {
         expect(document.getElementById('test')).toBeFalsy();
     });
 
+    it('should stay mounted after close (used keepMounted property)', () => {
+        const wrapper = mount(
+            <Overlay open keepMounted onClose={jest.fn()}>
+                <div id="test" />
+            </Overlay>
+        );
+
+        wrapper.setProps({open: false});
+        expect(document.getElementById('test')).toBeTruthy();
+        jest.runAllTimers();
+        expect(document.getElementById('test')).toBeTruthy();
+    });
+
     describe('when focus to sentinels', () => {
         beforeEach(() => {
             mount(
