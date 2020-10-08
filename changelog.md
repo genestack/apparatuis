@@ -1,12 +1,18 @@
 # Changelog
 
+## [Unreleased]
+
+## [10.2.1] - 2020-10-08
+
+### Fixed
+
+-   Fixed rendering of bold fonts in Windows
+
 ## [10.2.0] - 2020-09-17
 
 ### Changed
 
 -   Add keepMounted property to [Menu](src/components/menu/menu.tsx) and [Overlay](src/components/overlay/overlay.tsx)
-
-## [Unreleased]
 
 ## [10.1.0] - 2020-09-22
 
