@@ -6,7 +6,7 @@ const leftCellStyle = {width: 20, textAlign: 'center'};
 const StateExample = (props) => (
     <div {...props} style={{width: 200, border: '1px solid #ddd', marginBottom: 8}} />
 );
-const Quiet = (props) => <Typography {...props} quiet box="inline" as="span" />;
+const Quiet = (props) => <Typography {...props} intent="quiet" box="inline" as="span" />;
 
 <Controls style={{alignItems: 'flex-start'}}>
     <ControlsItem style={{width: 200}}>
@@ -29,7 +29,7 @@ const Quiet = (props) => <Typography {...props} quiet box="inline" as="span" />;
                         interactive
                         prepend={<input type="checkbox" />}
                         append={
-                            <Typography as="span" quiet>
+                            <Typography as="span" intent="quiet">
                                 99999
                             </Typography>
                         }
@@ -42,7 +42,7 @@ const Quiet = (props) => <Typography {...props} quiet box="inline" as="span" />;
                         wrap
                         prepend={<input type="checkbox" />}
                         append={
-                            <Typography as="span" quiet>
+                            <Typography as="span" intent="quiet">
                                 3
                             </Typography>
                         }
@@ -53,7 +53,7 @@ const Quiet = (props) => <Typography {...props} quiet box="inline" as="span" />;
                         disabled
                         prepend={<input type="checkbox" disabled />}
                         append={
-                            <Typography as="span" quiet>
+                            <Typography as="span" intent="quiet">
                                 3
                             </Typography>
                         }

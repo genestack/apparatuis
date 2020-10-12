@@ -47,7 +47,7 @@ const MENU_OPTIONS = [
         value: '10',
         label: 'Done',
         append: (
-            <Typography quiet as="span" status="success">
+            <Typography intent="quiet" as="span" status="success">
                 12
             </Typography>
         )
@@ -56,7 +56,7 @@ const MENU_OPTIONS = [
         value: '20',
         label: 'Queued',
         append: (
-            <Typography quiet as="span">
+            <Typography intent="quiet" as="span">
                 8
             </Typography>
         )
@@ -65,7 +65,7 @@ const MENU_OPTIONS = [
         value: '30',
         label: 'Running',
         append: (
-            <Typography quiet as="span">
+            <Typography intent="quiet" as="span">
                 354
             </Typography>
         )
@@ -74,7 +74,7 @@ const MENU_OPTIONS = [
         value: '40',
         label: 'Failed',
         append: (
-            <Typography quiet as="span">
+            <Typography intent="quiet" as="span">
                 1
             </Typography>
         ),
@@ -107,7 +107,7 @@ const SelectExampleFrame = (props) => {
         >
             <Typography
                 variant="caption"
-                quiet
+                intent="quiet"
                 style={{
                     position: 'absolute',
                     right: 4,
@@ -184,7 +184,7 @@ function SelectExample() {
                 ) : (
                     <>
                         <MenuCaption>
-                            <Typography quiet>Within the last 24 hours</Typography>
+                            <Typography intent="quiet">Within the last 24 hours</Typography>
                         </MenuCaption>
 
                         {MENU_OPTIONS.map(({value, label, hasDivider, ...restProps}) => (
@@ -278,7 +278,7 @@ function SelectFrame() {
 
     return (
         <>
-            <Typography quiet as="span">
+            <Typography intent="quiet" as="span">
                 Icon:{' '}
             </Typography>
             <Select
@@ -331,7 +331,7 @@ function SelectFrame() {
                     label="Done"
                     prepend={<CheckMarkIcon />}
                     append={
-                        <Typography quiet as="span" status="success">
+                        <Typography intent="quiet" as="span" status="success">
                             12
                         </Typography>
                     }
@@ -343,7 +343,7 @@ function SelectFrame() {
                     label="Queued"
                     prepend={<MenuIcon />}
                     append={
-                        <Typography quiet as="span">
+                        <Typography intent="quiet" as="span">
                             10
                         </Typography>
                     }
@@ -355,7 +355,7 @@ function SelectFrame() {
                     label="Running"
                     prepend={<PlayIcon />}
                     append={
-                        <Typography quiet as="span">
+                        <Typography intent="quiet" as="span">
                             8
                         </Typography>
                     }
@@ -367,7 +367,7 @@ function SelectFrame() {
                     label="Failed"
                     prepend={<CheckMarkIcon />}
                     append={
-                        <Typography quiet as="span">
+                        <Typography intent="quiet" as="span">
                             9
                         </Typography>
                     }

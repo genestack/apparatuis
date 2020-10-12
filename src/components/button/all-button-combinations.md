@@ -148,7 +148,7 @@ const FullScreenPaper = (props) => (
                         <IntentSection />
                         <IntentSection>
                             <Typography>Ghost</Typography>
-                            <Typography variant="caption" quiet>
+                            <Typography variant="caption" intent="quiet">
                                 Subtle variant for highly-loaded interfaces and toolbars.
                             </Typography>
                         </IntentSection>
@@ -162,13 +162,13 @@ const FullScreenPaper = (props) => (
                         </IntentSection>
                         <IntentSection>
                             <Typography>Accent</Typography>
-                            <Typography variant="caption" quiet>
+                            <Typography variant="caption" intent="quiet">
                                 Indicate main action on the page, e.g. “Sign in”.
                             </Typography>
                         </IntentSection>
                         <IntentSection>
                             <Typography>Alarm</Typography>
-                            <Typography variant="caption" quiet>
+                            <Typography variant="caption" intent="quiet">
                                 Indicate potentially dangerous action, e.g. “delete”.
                             </Typography>
                         </IntentSection>

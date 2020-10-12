@@ -140,7 +140,7 @@ function RowExample() {
     <PageContent as={Paper}>
         <WithSeparator separator={<Divider gap={4} />}>
             <React.Fragment>
-                <Typography quiet>In text</Typography>
+                <Typography intent="quiet">In text</Typography>
                 <Divider variant="transparent" gap={1} />
 
                 <Typography>
@@ -148,19 +148,19 @@ function RowExample() {
                 </Typography>
             </React.Fragment>
             <React.Fragment>
-                <Typography quiet>In button</Typography>
+                <Typography intent="quiet">In button</Typography>
                 <Divider variant="transparent" gap={1} />
                 <Button>
                     <Badge>EXP</Badge>
                 </Button>
             </React.Fragment>
             <React.Fragment>
-                <Typography quiet>In list</Typography>
+                <Typography intent="quiet">In list</Typography>
                 <Divider variant="transparent" gap={1} />
                 <ListExample />
             </React.Fragment>
             <React.Fragment>
-                <Typography quiet>In input</Typography>
+                <Typography intent="quiet">In input</Typography>
                 <Divider variant="transparent" gap={1} />
                 <Input
                     prepend={<SearchIcon />}
@@ -169,7 +169,7 @@ function RowExample() {
                 />
             </React.Fragment>
             <React.Fragment>
-                <Typography quiet>In row cell</Typography>
+                <Typography intent="quiet">In row cell</Typography>
                 <Divider variant="transparent" gap={1} />
                 <RowExample />
             </React.Fragment>

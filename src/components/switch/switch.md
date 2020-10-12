@@ -108,12 +108,12 @@ function SwitchListItems() {
 }
 <PageContent as={Paper}>
     <Controls>
-        <Typography quiet>In menus</Typography>
+        <Typography intent="quiet">In menus</Typography>
     </Controls>
     <Divider variant="transparent" gap={2} />
     <MenuExample />
     <Divider gap={4} />
-    <Typography quiet>In lists</Typography>
+    <Typography intent="quiet">In lists</Typography>
     <Divider variant="transparent" gap={2} />
     <div style={{display: 'flex', justifyContent: 'space-between'}}>
         <Paper style={{maxWidth: 257}}>

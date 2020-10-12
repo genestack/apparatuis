@@ -102,10 +102,10 @@ handleDrawerClose = () =>
         </DrawerFullWidth>
         <FlexExpander />
 
-        <Typography variant="caption" quiet box="paragraph">
+        <Typography variant="caption" intent="quiet" box="paragraph">
             Genestack Limited
         </Typography>
-        <Typography variant="caption" quiet box="paragraph">
+        <Typography variant="caption" intent="quiet" box="paragraph">
             Copyright (c) 2011-{new Date().getFullYear()}
         </Typography>
     </Drawer>

@@ -160,7 +160,7 @@ const ButtonWDialog = ({showScrollbars}) => {
                         </Typography>
                         <Typography box="paragraph">
                             I&R, Homo sapiens,{' '}
-                            <Typography as="span" quiet box="inline">
+                            <Typography as="span" intent="quiet" box="inline">
                                 Tissue:
                             </Typography>{' '}
                             Epithelium of Bronchiole
@@ -253,7 +253,7 @@ handleScrollbarsModeCheckboxChange = (event) =>
                             interactive
                             prepend={<input type="checkbox" />}
                             append={
-                                <Typography as="span" quiet>
+                                <Typography as="span" intent="quiet">
                                     99999
                                 </Typography>
                             }
@@ -266,7 +266,7 @@ handleScrollbarsModeCheckboxChange = (event) =>
                             wrap
                             prepend={<input type="checkbox" />}
                             append={
-                                <Typography as="span" quiet>
+                                <Typography as="span" intent="quiet">
                                     3
                                 </Typography>
                             }
@@ -277,7 +277,7 @@ handleScrollbarsModeCheckboxChange = (event) =>
                             disabled
                             prepend={<input type="checkbox" disabled />}
                             append={
-                                <Typography as="span" quiet>
+                                <Typography as="span" intent="quiet">
                                     3
                                 </Typography>
                             }
@@ -347,7 +347,7 @@ handleScrollbarsModeCheckboxChange = (event) =>
                                 <ListItem
                                     key={title}
                                     append={
-                                        <Typography quiet as="span">
+                                        <Typography intent="quiet" as="span">
                                             {append}
                                         </Typography>
                                     }
@@ -369,7 +369,7 @@ handleScrollbarsModeCheckboxChange = (event) =>
                                 </Typography>
                                 <Typography box="paragraph">
                                     I&R, Homo sapiens,{' '}
-                                    <Typography as="span" quiet box="inline">
+                                    <Typography as="span" intent="quiet" box="inline">
                                         Tissue:
                                     </Typography>{' '}
                                     Epithelium of Bronchiole
@@ -406,7 +406,7 @@ handleScrollbarsModeCheckboxChange = (event) =>
                                     selected transcripts using the Illumina Genome Snalyzer II.
                                 </Typography>
 
-                                <Typography variant="caption" box="paragraph" quiet>
+                                <Typography variant="caption" box="paragraph" intent="quiet">
                                     The availability of high throughput, massively parallel RNA
                                     sequencing (RNA-Seq) of the entire transcriptome opens the
                                     possibility of a higher sensitivity and more detailed
