@@ -66,7 +66,7 @@ renderRadio = (name, label, value) => (
                         state.appendIcon && state.appendText ? (
                             <Controls>
                                 <ControlsItem>
-                                    <Typography quiet as="span">
+                                    <Typography intent="quiet" as="span">
                                         ⌘ + O
                                     </Typography>
                                 </ControlsItem>
@@ -77,7 +77,7 @@ renderRadio = (name, label, value) => (
                         ) : state.appendIcon ? (
                             <HelpIcon />
                         ) : state.appendText ? (
-                            <Typography quiet as="span">
+                            <Typography intent="quiet" as="span">
                                 ⌘ + O
                             </Typography>
                         ) : null

@@ -92,7 +92,7 @@ function TypographyExample() {
         </Typography>
         <Typography box="paragraph">
             I&R, Homo sapiens,{' '}
-            <Typography as="span" quiet box="inline">
+            <Typography as="span" intent="quiet" box="inline">
                 Tissue:
             </Typography>{' '}
             Epithelium of Bronchiole

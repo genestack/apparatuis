@@ -4,7 +4,7 @@ items = new Array(100).fill(null).map((_, index) => (
         key={index}
         interactive
         append={
-            <Typography quiet as="span">
+            <Typography intent="quiet" as="span">
                 {index}
             </Typography>
         }

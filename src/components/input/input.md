@@ -114,7 +114,7 @@ function InputExample(props) {
             <ControlsItem as="label">
                 <Typography box="paragraph">
                     Label{' '}
-                    <Typography box="inline" variant="caption" as="span" quiet>
+                    <Typography box="inline" variant="caption" as="span" intent="quiet">
                         optional
                     </Typography>
                 </Typography>
@@ -165,7 +165,7 @@ function InputExample(props) {
         <Controls gap={4} as="form">
             <ControlsItem>
                 <Input placeholder="Email" defaultValue="qwerty" type="email" />
-                <Typography status="error" variant="caption" box="paragraph">
+                <Typography status="alarm" variant="caption" box="paragraph">
                     Enter correct email
                 </Typography>
             </ControlsItem>
@@ -176,7 +176,7 @@ function InputExample(props) {
                     type="password"
                     autoComplete="off"
                 />
-                <Typography quiet variant="caption" box="paragraph">
+                <Typography intent="quiet" variant="caption" box="paragraph">
                     Password must contain digits
                 </Typography>
             </ControlsItem>

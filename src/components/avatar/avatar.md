@@ -42,7 +42,7 @@ const AvatarListExample = () => {
 
 <PageContent as={Paper}>
     <Controls>
-        <Typography quiet>In list</Typography>
+        <Typography intent="quiet">In list</Typography>
     </Controls>
     <AvatarListExample />
     <Divider gap={4} />

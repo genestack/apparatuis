@@ -16,7 +16,7 @@ const menu = (
         <MenuItem
             value="Menu Item 1"
             append={
-                <Typography quiet as="span">
+                <Typography intent="quiet" as="span">
                     1
                 </Typography>
             }
@@ -27,7 +27,7 @@ const menu = (
         <MenuItem
             value="Menu Item 2"
             append={
-                <Typography quiet as="span">
+                <Typography intent="quiet" as="span">
                     2
                 </Typography>
             }
@@ -40,7 +40,7 @@ const menu = (
                     <MenuItem
                         value="Menu Item 3.1"
                         append={
-                            <Typography quiet as="span">
+                            <Typography intent="quiet" as="span">
                                 3.1
                             </Typography>
                         }
@@ -50,7 +50,7 @@ const menu = (
                 </SubMenu>
             }
             append={
-                <Typography quiet as="span">
+                <Typography intent="quiet" as="span">
                     3
                 </Typography>
             }
@@ -73,7 +73,7 @@ const menu = (
 const {DownloadIcon} = require('../../icons/download-icon');
 const {LockIcon} = require('../../icons/lock-icon.tsx');
 
-const Quiet = (props) => <Typography {...props} quiet box="inline" as="span" />;
+const Quiet = (props) => <Typography {...props} intent="quiet" box="inline" as="span" />;
 
 const getInfiniteSubMenu = () => (
     <SubMenu>
@@ -109,7 +109,7 @@ items = new Array(100).fill(null).map((_, index) => (
         onClick={handleMenuClose}
         subMenu={getInfiniteSubMenu}
         append={
-            <Typography quiet as="span">
+            <Typography intent="quiet" as="span">
                 {index}
             </Typography>
         }
@@ -191,7 +191,7 @@ items = new Array(100).fill(null).map((_, index) => (
     <MenuItem
         key={index}
         append={
-            <Typography quiet as="span">
+            <Typography intent="quiet" as="span">
                 {index}
             </Typography>
         }

@@ -30,7 +30,7 @@ function IconPlate({icon, name, variable}) {
                 <ControlsItem>{icon}</ControlsItem>
                 <Divider variant="transparent" gap={1} />
                 <ControlsItem>
-                    <Typography quiet variant="caption">
+                    <Typography intent="quiet" variant="caption">
                         {name}
                     </Typography>
                 </ControlsItem>

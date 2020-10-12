@@ -19,7 +19,7 @@ handleDialogClose = () => {
     <Dialog open={state.open} onClose={handleDialogClose}>
         <DialogHeader>
             <Typography variant="title">Underlying studies for "Exocrine System" column</Typography>
-            <Typography quiet>Morphological changes</Typography>
+            <Typography intent="quiet">Morphological changes</Typography>
         </DialogHeader>
 
         <DialogBody>
@@ -34,7 +34,7 @@ handleDialogClose = () => {
                     <ListItem
                         interactive
                         append={
-                            <Typography quiet as="span">
+                            <Typography intent="quiet" as="span">
                                 1
                             </Typography>
                         }
@@ -44,7 +44,7 @@ handleDialogClose = () => {
                     <ListItem
                         interactive
                         append={
-                            <Typography quiet as="span">
+                            <Typography intent="quiet" as="span">
                                 2
                             </Typography>
                         }
@@ -68,7 +68,7 @@ handleDialogClose = () => {
                     </Controls>
                 </ControlsItem>
                 <ControlsItem>
-                    <Typography quiet>Helper text</Typography>
+                    <Typography intent="quiet">Helper text</Typography>
                 </ControlsItem>
             </Controls>
         </DialogFooter>
@@ -235,7 +235,9 @@ const samples = [
                     </Typography>
                 ) : null}
 
-                {state.showSubtitle ? <Typography quiet>Morphological changes</Typography> : null}
+                {state.showSubtitle ? (
+                    <Typography intent="quiet">Morphological changes</Typography>
+                ) : null}
             </DialogHeader>
         ) : null}
 
@@ -280,7 +282,7 @@ const samples = [
                                     key={i}
                                     interactive
                                     append={
-                                        <Typography quiet as="span">
+                                        <Typography intent="quiet" as="span">
                                             {item.count}
                                         </Typography>
                                     }
@@ -308,7 +310,7 @@ const samples = [
                         </Controls>
                     </ControlsItem>
                     <ControlsItem>
-                        <Typography quiet>Helper text</Typography>
+                        <Typography intent="quiet">Helper text</Typography>
                     </ControlsItem>
                 </Controls>
             </DialogFooter>

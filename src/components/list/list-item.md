@@ -40,7 +40,7 @@ function ListItemExample() {
                             presentation.appendIcon && presentation.appendText ? (
                                 <Controls>
                                     <ControlsItem>
-                                        <Typography quiet as="span">
+                                        <Typography intent="quiet" as="span">
                                             ⌘ + O
                                         </Typography>
                                     </ControlsItem>
@@ -51,7 +51,7 @@ function ListItemExample() {
                             ) : presentation.appendIcon ? (
                                 <HelpIcon />
                             ) : presentation.appendText ? (
-                                <Typography quiet as="span">
+                                <Typography intent="quiet" as="span">
                                     ⌘ + O
                                 </Typography>
                             ) : null
