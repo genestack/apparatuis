@@ -8,9 +8,9 @@
 
 -   Fixed rendering of bold fonts in Windows
 
-## [10.2.0] - 2020-09-17
+## [10.2.0] - 2020-10-08
 
-### Changed
+### Added
 
 -   Add keepMounted property to [Menu](src/components/menu/menu.tsx) and [Overlay](src/components/overlay/overlay.tsx)
 

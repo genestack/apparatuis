@@ -9,6 +9,8 @@
 import classNames from 'classnames';
 import React from 'react';
 
+import {Typography, TypographyProps} from '../typography';
+
 import * as styles from './select-emitter.module.css';
 
 type TargetProps = React.HTMLAttributes<HTMLSpanElement>;
@@ -17,13 +19,25 @@ type TargetProps = React.HTMLAttributes<HTMLSpanElement>;
 export interface Props extends TargetProps {
     /** Element before children */
     prepend?: React.ReactNode;
+    prependProps?: TypographyProps;
     /** Element after children */
     append?: React.ReactNode;
+    appendProps?: TypographyProps;
+    /** Value props */
+    valueProps?: TargetProps;
 }
 
 /** Option label (depends of SelectContext) */
 export function OptionLabel(props: Props) {
-    const {prepend, append, children, ...rest} = props;
+    const {
+        prepend,
+        prependProps = {},
+        append,
+        appendProps = {},
+        valueProps = {},
+        children,
+        ...rest
+    } = props;
 
     return (
         <span
@@ -31,9 +45,33 @@ export function OptionLabel(props: Props) {
             {...rest}
             className={classNames(styles.optionLabel, rest.className)}
         >
-            {prepend && <span className={styles.info}>{prepend}</span>}
-            {children && <span className={styles.value}>{children}</span>}
-            {append && <span className={styles.info}>{append}</span>}
+            {prepend && (
+                <Typography
+                    intent="quiet"
+                    as="span"
+                    variant="caption"
+                    {...prependProps}
+                    className={classNames(styles.info, prependProps.className)}
+                >
+                    {prepend}
+                </Typography>
+            )}
+            {children && (
+                <span {...valueProps} className={classNames(styles.value, valueProps.className)}>
+                    {children}
+                </span>
+            )}
+            {append && (
+                <Typography
+                    intent="quiet"
+                    as="span"
+                    variant="caption"
+                    {...appendProps}
+                    className={classNames(styles.info, appendProps.className)}
+                >
+                    {append}
+                </Typography>
+            )}
         </span>
     );
 }
