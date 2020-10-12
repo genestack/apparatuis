@@ -235,7 +235,9 @@ const samples = [
                     </Typography>
                 ) : null}
 
-                {state.showSubtitle ? <Typography intent="quiet">Morphological changes</Typography> : null}
+                {state.showSubtitle ? (
+                    <Typography intent="quiet">Morphological changes</Typography>
+                ) : null}
             </DialogHeader>
         ) : null}
 
