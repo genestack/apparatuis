@@ -9,69 +9,72 @@
 import classNames from 'classnames';
 import React from 'react';
 
-import {Typography, TypographyProps} from '../typography';
+import {WithClasses, OverridableProps, OverridableComponent, mergeClassesProps} from '../../utils';
 
 import * as styles from './select-emitter.module.css';
 
-type TargetProps = React.HTMLAttributes<HTMLSpanElement>;
+type SpanProps = React.HTMLAttributes<HTMLSpanElement>;
 
 /** SelectLabel props */
-export interface Props extends TargetProps {
+export interface Props extends WithClasses<keyof typeof styles> {
     /** Element before children */
     prepend?: React.ReactNode;
-    prependProps?: TypographyProps;
+    prependProps?: SpanProps;
     /** Element after children */
     append?: React.ReactNode;
-    appendProps?: TypographyProps;
-    /** Value props */
-    valueProps?: TargetProps;
+    appendProps?: SpanProps;
+    /** Label props */
+    labelProps?: SpanProps;
+}
+
+interface TypeMap {
+    props: Props;
+    defaultType: 'span';
 }
 
 /** Option label (depends of SelectContext) */
-export function OptionLabel(props: Props) {
+export const OptionLabel: OverridableComponent<TypeMap> = React.forwardRef<
+    HTMLSpanElement,
+    OverridableProps<TypeMap>
+>(function OptionLabelComponent(props, ref) {
     const {
+        component: Component = 'span',
+        className,
         prepend,
         prependProps = {},
         append,
         appendProps = {},
-        valueProps = {},
+        labelProps = {},
+        classes,
         children,
         ...rest
-    } = props;
+    } = mergeClassesProps(props, styles);
 
     return (
-        <span
+        <Component
+            className={classNames(classes.optionLabel, className)}
             title={typeof children === 'string' ? children : undefined}
             {...rest}
-            className={classNames(styles.optionLabel, rest.className)}
+            ref={ref}
         >
             {prepend && (
-                <Typography
-                    intent="quiet"
-                    as="span"
-                    variant="caption"
+                <span
                     {...prependProps}
-                    className={classNames(styles.info, prependProps.className)}
+                    className={classNames(classes.info, prependProps.className)}
                 >
                     {prepend}
-                </Typography>
+                </span>
             )}
             {children && (
-                <span {...valueProps} className={classNames(styles.value, valueProps.className)}>
+                <span {...labelProps} className={classNames(classes.label, labelProps.className)}>
                     {children}
                 </span>
             )}
             {append && (
-                <Typography
-                    intent="quiet"
-                    as="span"
-                    variant="caption"
-                    {...appendProps}
-                    className={classNames(styles.info, appendProps.className)}
-                >
+                <span {...appendProps} className={classNames(classes.info, appendProps.className)}>
                     {append}
-                </Typography>
+                </span>
             )}
-        </span>
+        </Component>
     );
-}
+});
