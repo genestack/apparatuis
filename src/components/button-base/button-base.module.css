@@ -11,8 +11,6 @@
 @import "../../variables.css";
 
 :root {
-    --gs-focused-shadow: 0 0 0 2px var(--gs-color-action-25);
-    --gs-focused-shadow-inverted: 0 0 0 2px var(--gs-color-action-inverted-50);
     --gs-background-normal-no-intent: rgba(222, 226, 231, 1);
     --gs-color-alarm-active: rgba(172, 32, 32, 1);
     --gs-background-ghost-no-intent: rgba(222, 226, 231, 0.6);
