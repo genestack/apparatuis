@@ -16,7 +16,7 @@ const app = createTestApp();
 beforeEach(app.beforeEach);
 afterEach(app.afterEach);
 
-describe('<Button />', () => {
+describe('<Tab />', () => {
     it('should render children', () => {
         app.mount(
             <Tab>
@@ -48,5 +48,16 @@ describe('<Button />', () => {
             </Tab>
         );
         expect(wrapper.find('button').prop('title')).toBeFalsy();
+    });
+
+    it('should render button element by default', () => {
+        app.mount(<Tab id="test" />);
+        expect(document.getElementById('test')).toBeInstanceOf(HTMLButtonElement);
+    });
+
+    it('should render anchor element if href and component="a" are passed', () => {
+        app.mount(<Tab id="test" component="a" href="foo" />);
+        expect(document.getElementById('test')).toBeInstanceOf(HTMLAnchorElement);
+        expect(document.getElementById('test')).toHaveProperty('href', 'http://localhost/foo');
     });
 });
