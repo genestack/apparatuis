@@ -39,6 +39,21 @@
     padding: 2px 8px;
 }
 
+.root.empty.normal {
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.root.empty.small {
+    padding-left: 6px;
+    padding-right: 6px;
+}
+
+.root.empty.tiny {
+    padding-left: 2px;
+    padding-right: 2px;
+}
+
 .root:focus,
 .root:focus-within {
     box-shadow: var(--gs-focused-shadow);
@@ -71,7 +86,7 @@
 
 .root.selected.solid {
     background: var(--gs-color-action-text);
-    color: var(--gs-color-grey-outline);
+    color: var(--gs-color-white);
 }
 
 .root:disabled,
@@ -82,28 +97,28 @@
     cursor: not-allowed;
 }
 
-.info {
-    margin: 0 4px;
+.prepend {
+    margin-right: 4px;
 }
 
-.info:first-child {
-    margin-left: 0;
-}
-
-.info:last-child {
+.prepend:last-child {
     margin-right: 0;
 }
 
-.info :global(.gs-svg-icon-fill) {
+.append {
+    margin-left: 4px;
+}
+
+.append:first-child {
+    margin-left: 0;
+}
+
+.root :global(.gs-svg-icon-fill) {
     fill: var(--gs-color-action-text-60);
 }
 
-.info :global(.gs-svg-icon-stroke) {
+.root :global(.gs-svg-icon-stroke) {
     stroke: var(--gs-color-action-text-60);
-}
-
-.info.selected.solid {
-    color: var(--gs-color-grey-outline);
 }
 
 .root:disabled :global(.gs-svg-icon-fill) {
@@ -114,11 +129,11 @@
     stroke: var(--gs-color-grey-50);
 }
 
-.info.selected.solid :global(.gs-svg-icon-fill) {
+.root.selected.solid :global(.gs-svg-icon-fill) {
     fill: var(--gs-color-white);
 }
 
-.info.selected.solid :global(.gs-svg-icon-stroke) {
+.root.selected.solid :global(.gs-svg-icon-stroke) {
     stroke: var(--gs-color-white);
 }
 

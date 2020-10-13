@@ -9,14 +9,14 @@
 import classNames from 'classnames';
 import React from 'react';
 
-import {OverridableComponent, OverridableProps} from '../../utils';
+import {OverridableComponent, OverridableProps, WithClasses, mergeClassesProps} from '../../utils';
 
 import * as styles from './tab.module.css';
 
 type SpanProps = React.HTMLAttributes<HTMLSpanElement>;
 
 /** Tab props */
-export interface Props {
+export interface Props extends WithClasses<keyof typeof styles> {
     /** Style of tab (default: "ghost") */
     variant?: 'ghost' | 'solid';
     /** Size of tab (default: "normal") */
@@ -62,47 +62,44 @@ export const Tab: OverridableComponent<TypeMap> = React.forwardRef<
         prependProps = {},
         append,
         appendProps = {},
+        classes,
         children,
         ...restProps
-    } = props;
-
-    const infoClasses = classNames(styles.info, {
-        [styles.selected]: selected,
-        [styles.solid]: variant === 'solid'
-    });
+    } = mergeClassesProps(props, styles);
 
     return (
         <Component
             className={classNames(
                 styles.root,
                 {
-                    [styles.hovered]: hovered,
-                    [styles.selected]: selected,
-                    [styles.solid]: variant === 'solid',
-                    [styles.normal]: size === 'normal',
-                    [styles.small]: size === 'small',
-                    [styles.tiny]: size === 'tiny'
+                    [classes.hovered]: hovered,
+                    [classes.selected]: selected,
+                    [classes.empty]: !children,
+                    [classes.solid]: variant === 'solid',
+                    [classes.normal]: size === 'normal',
+                    [classes.small]: size === 'small',
+                    [classes.tiny]: size === 'tiny'
                 },
                 className
             )}
             aria-selected={selected}
             aria-disabled={restProps.disabled}
-            title={typeof children === 'string' ? children : undefined}
+            title={typeof children === 'string' ? children : ''}
             {...restProps}
             ref={ref}
         >
             {prepend && (
-                <span {...prependProps} className={classNames(infoClasses, prependProps.className)}>
+                <span {...prependProps} className={classes.prepend}>
                     {prepend}
                 </span>
             )}
             {children && (
-                <span {...labelProps} className={classNames(styles.label, labelProps.className)}>
+                <span {...labelProps} className={classes.label}>
                     {children}
                 </span>
             )}
             {append && (
-                <span {...appendProps} className={classNames(infoClasses, appendProps.className)}>
+                <span {...appendProps} className={classes.append}>
                     {append}
                 </span>
             )}

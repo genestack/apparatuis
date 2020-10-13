@@ -12,6 +12,8 @@ export const hovered: string;
 
 export const selected: string;
 
+export const empty: string;
+
 export const ghost: string;
 
 export const solid: string;
@@ -22,8 +24,8 @@ export const small: string;
 
 export const tiny: string;
 
-export const value: string;
+export const prepend: string;
 
-export const info: string;
+export const append: string;
 
 export const label: string;

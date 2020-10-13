@@ -41,13 +41,13 @@ describe('<Tab />', () => {
         expect(wrapper.find('button').prop('title')).toBe('Some title');
     });
 
-    it("shouldn't have title", () => {
+    it('should have empty title', () => {
         const wrapper = app.mount(
             <Tab>
                 <div>Some title</div>
             </Tab>
         );
-        expect(wrapper.find('button').prop('title')).toBeFalsy();
+        expect(wrapper.find('button').prop('title')).toBe('');
     });
 
     it('should render button element by default', () => {
