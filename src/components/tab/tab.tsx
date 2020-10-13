@@ -13,11 +13,10 @@ import {OverridableComponent, OverridableProps} from '../../utils';
 
 import * as styles from './tab.module.css';
 
-type TargetProps = React.HTMLAttributes<HTMLButtonElement>;
 type SpanProps = React.HTMLAttributes<HTMLSpanElement>;
 
 /** Tab props */
-export interface Props extends TargetProps {
+export interface Props {
     /** Style of tab (default: "ghost") */
     variant?: 'ghost' | 'solid';
     /** Size of tab (default: "normal") */
@@ -53,6 +52,7 @@ export const Tab: OverridableComponent<TypeMap> = React.forwardRef<
 >(function TabComponent(props, ref) {
     const {
         className,
+        component: Component = 'button',
         variant = 'ghost',
         size = 'normal',
         hovered,
@@ -72,7 +72,7 @@ export const Tab: OverridableComponent<TypeMap> = React.forwardRef<
     });
 
     return (
-        <button
+        <Component
             className={classNames(
                 styles.root,
                 {
@@ -106,6 +106,6 @@ export const Tab: OverridableComponent<TypeMap> = React.forwardRef<
                     {append}
                 </span>
             )}
-        </button>
+        </Component>
     );
 });
