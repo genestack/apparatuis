@@ -5,14 +5,12 @@
  * The copyright notice above does not evidence any
  * actual or intended publication of such source code.
  */
-import {shallow} from 'enzyme';
 import * as React from 'react';
 
 import {createTestApp} from '../../../test-utils/create-test-app';
 import {Tab} from '../tab';
 
 import {Tabs} from './tabs';
-import {TabsContext} from './tabs-context';
 
 const app = createTestApp();
 
@@ -21,21 +19,65 @@ afterEach(app.afterEach);
 
 // tslint:disable no-magic-numbers
 describe('<Tabs />', () => {
-    it('should set default values for orientation, size and variant', () => {
-        const wrapper = shallow(<Tabs />);
+    it('should set values for size and variant from tabs to children', () => {
+        const wrapper = app.mount(
+            <Tabs value={1} size="small" variant="solid">
+                <Tab />
+            </Tabs>
+        );
 
-        expect(wrapper.find(TabsContext.Provider).prop('value')).toEqual({
-            orientation: 'horizontal',
-            size: 'normal',
-            variant: 'ghost'
+        expect(wrapper.find(Tab).props()).toEqual({
+            onClick: expect.anything(),
+            value: 0,
+            selected: false,
+            size: 'small',
+            variant: 'solid'
         });
+    });
+
+    it('should set selected value for tab', () => {
+        const wrapper = app.mount(
+            <Tabs value={1} size="small" variant="solid">
+                <Tab />
+            </Tabs>
+        );
+
+        expect(wrapper.find(Tab).prop('selected')).toBe(false);
+
+        wrapper.setProps({
+            value: 0
+        });
+
+        expect(wrapper.find(Tab).prop('selected')).toBe(true);
+    });
+
+    it('should execute onValueChange with tabIndex', () => {
+        const onValueChange = jest.fn();
+
+        const wrapper = app.mount(
+            <Tabs value={0} onValueChange={onValueChange}>
+                <Tab />
+                <Tab />
+                <Tab />
+            </Tabs>
+        );
+
+        expect(onValueChange).toHaveBeenCalledTimes(0);
+
+        wrapper
+            .find(Tab)
+            .at(2)
+            .simulate('click');
+
+        expect(onValueChange).toHaveBeenCalledTimes(1);
+        expect(onValueChange).toBeCalledWith(2);
     });
 
     it('should execute onValueChange with 30', () => {
         const onValueChange = jest.fn();
 
         const wrapper = app.mount(
-            <Tabs value="20" onValueChange={onValueChange}>
+            <Tabs value={20} onValueChange={onValueChange}>
                 <Tab value={10} />
                 <Tab value={20} />
                 <Tab value={30} />

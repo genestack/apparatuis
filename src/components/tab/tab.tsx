@@ -12,14 +12,13 @@ import React from 'react';
 import {OverridableComponent, OverridableProps, WithClasses, mergeClassesProps} from '../../utils';
 
 import * as styles from './tab.module.css';
-import {useTabProps} from './use-tab-props';
 
 type SpanProps = React.HTMLAttributes<HTMLSpanElement>;
 
 /** Tab props */
 export interface Props extends WithClasses<keyof typeof styles> {
     /** Value of tab */
-    value: any;
+    value?: any;
     /** Style of tab (default: "ghost") */
     variant?: 'ghost' | 'solid';
     /** Size of tab (default: "normal") */
@@ -43,8 +42,7 @@ export interface Props extends WithClasses<keyof typeof styles> {
     labelProps?: SpanProps;
 }
 
-/** Tab typed map */
-export interface TypeMap {
+interface TypeMap {
     props: Props;
     defaultType: 'button';
 }
@@ -54,8 +52,6 @@ export const Tab: OverridableComponent<TypeMap> = React.forwardRef<
     HTMLButtonElement,
     OverridableProps<TypeMap>
 >(function TabComponent(props, ref) {
-    const contextProps = useTabProps(props);
-
     const {
         className,
         component: Component = 'button',
@@ -71,7 +67,7 @@ export const Tab: OverridableComponent<TypeMap> = React.forwardRef<
         classes,
         children,
         ...restProps
-    } = mergeClassesProps(contextProps, styles);
+    } = mergeClassesProps(props, styles);
 
     return (
         <Component
@@ -88,6 +84,7 @@ export const Tab: OverridableComponent<TypeMap> = React.forwardRef<
                 },
                 className
             )}
+            role="tab"
             aria-selected={selected}
             aria-disabled={restProps.disabled}
             title={typeof children === 'string' ? children : ''}

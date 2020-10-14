@@ -57,7 +57,7 @@ const TabsExampleFrame = (props) => {
 function TabsExample() {
     const {inverted, hasPrepend, hasAppend, view, orientation, variant, size} = usePresentation();
 
-    const [value, setValue] = React.useState(10);
+    const [value, setValue] = React.useState(0);
 
     return (
         <TabsExampleFrame inverted={inverted}>
@@ -68,14 +68,9 @@ function TabsExample() {
                 variant={variant}
                 size={size}
             >
-                <Tab value={10} prepend={hasPrepend && <LinkIcon />}>
-                    Signals
-                </Tab>
-                <Tab value={20} prepend={hasPrepend && <OpenFolderIcon />}>
-                    Tree view
-                </Tab>
+                <Tab prepend={hasPrepend && <LinkIcon />}>Signals</Tab>
+                <Tab prepend={hasPrepend && <OpenFolderIcon />}>Tree view</Tab>
                 <Tab
-                    value={30}
                     prepend={hasPrepend && <BookmarkBorderedIcon />}
                     append={
                         hasAppend && (
@@ -87,7 +82,7 @@ function TabsExample() {
                 >
                     My bookmarks
                 </Tab>
-                <Tab value={40} prepend={hasPrepend && <DraftIcon />} disabled>
+                <Tab prepend={hasPrepend && <DraftIcon />} disabled>
                     Drafts
                 </Tab>
             </Tabs>
@@ -130,6 +125,27 @@ function TabsExample() {
         <PresentationState name="size" label="Tiny" value="tiny" />
     </PresentationControls>
 </Presentation>;
+```
+
+### Simple tabs
+
+```js
+function TabsFrame() {
+    const [tabValue, setTabValue] = React.useState(0);
+
+    return (
+        <Tabs value={tabValue} onValueChange={(value) => setTabValue(value)}>
+            <Tab>Signals</Tab>
+            <Tab>Tree view</Tab>
+            <Tab>My bookmarks</Tab>
+            <Tab disabled>Drafts</Tab>
+        </Tabs>
+    );
+}
+
+<PageContent as={Paper}>
+    <TabsFrame />
+</PageContent>;
 ```
 
 ### Horizontal tabs with long labels
@@ -183,6 +199,34 @@ function TabsFrame() {
             </Tab>
             <Tab value={40} prepend={<DraftIcon />} disabled>
                 Drafts
+            </Tab>
+        </Tabs>
+    );
+}
+
+<PageContent as={Paper}>
+    <TabsFrame />
+</PageContent>;
+```
+
+### Tabs as links
+
+```js
+const {BookmarkBorderedIcon, DraftIcon, OpenFolderIcon, LinkIcon} = require('../../icons');
+
+function TabsFrame() {
+    const [tabValue, setTabValue] = React.useState(10);
+
+    return (
+        <Tabs value={tabValue} onValueChange={(value) => setTabValue(value)}>
+            <Tab value={10} component="a" href="#tabs">
+                Tab
+            </Tab>
+            <Tab value={20} component="a" href="#link">
+                Link
+            </Tab>
+            <Tab value={30} component="a" href="#select">
+                Select
             </Tab>
         </Tabs>
     );

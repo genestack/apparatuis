@@ -12,14 +12,16 @@
     position: relative;
     display: inline-flex;
     align-items: center;
-    text-align: left;
     background: transparent;
+    font-family: var(--gs-font-family);
+    text-align: left;
     font-size: 14px;
     line-height: 20px;
     color: var(--gs-color-action-text);
     white-space: nowrap;
     outline: none;
     border: none;
+    text-decoration: none;
     box-sizing: border-box;
     cursor: pointer;
 }

@@ -9,15 +9,14 @@
 import classNames from 'classnames';
 import React from 'react';
 
-import {OverridableComponent, OverridableProps, mergeClassesProps} from '../../utils';
+import {OverridableComponent, OverridableProps, mergeClassesProps, chain} from '../../utils';
 
-import {TabsContext} from './tabs-context';
 import * as styles from './tabs.module.css';
 
 /** Tabs props */
 export interface Props {
     /** Value of selected tab */
-    value?: any;
+    value: any;
     /** Tabs onChange handler */
     onValueChange?: (value: any) => void;
 
@@ -45,7 +44,7 @@ export const Tabs: OverridableComponent<TypeMap> = React.forwardRef<
     OverridableProps<TypeMap>
 >(function TabsComponent(props, ref) {
     const {
-        value,
+        value: tabsValue,
         onValueChange,
 
         component: Component = 'div',
@@ -58,25 +57,36 @@ export const Tabs: OverridableComponent<TypeMap> = React.forwardRef<
     } = mergeClassesProps(props, styles);
 
     return (
-        <TabsContext.Provider
-            value={{
-                value,
-                onValueChange,
-
-                orientation,
-                variant,
-                size
-            }}
+        <Component
+            {...restProps}
+            ref={ref}
+            className={classNames(classes.root, {
+                [classes.vertical]: orientation === 'vertical'
+            })}
         >
-            <Component
-                {...restProps}
-                ref={ref}
-                className={classNames(classes.root, {
-                    [classes.vertical]: orientation === 'vertical'
-                })}
-            >
-                {children}
-            </Component>
-        </TabsContext.Provider>
+            {React.Children.map(children, (child, childIndex) => {
+                if (!React.isValidElement(child)) {
+                    return null;
+                }
+
+                const {onClick, value, ...restChildProps} = child.props;
+                const childValue = value === undefined ? childIndex : value;
+
+                const handleClick = React.useCallback(() => {
+                    if (onValueChange) {
+                        onValueChange(childValue);
+                    }
+                }, [onValueChange, childValue]);
+
+                return React.cloneElement(child, {
+                    value: childValue,
+                    onClick: chain(handleClick, onClick),
+                    selected: childValue === tabsValue,
+                    variant,
+                    size,
+                    ...restChildProps
+                });
+            })}
+        </Component>
     );
 });

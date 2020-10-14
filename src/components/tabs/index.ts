@@ -7,4 +7,3 @@
  */
 
 export {Tabs, Props as TabsProps} from './tabs';
-export {TabsContext, useTabsContext, Props as TabsContextValue} from './tabs-context';
