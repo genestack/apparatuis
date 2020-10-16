@@ -70,7 +70,7 @@ export const Tabs: OverridableComponent<TypeMap> = React.forwardRef<
                 }
 
                 const {onClick, value, ...restChildProps} = child.props;
-                const childValue = value === undefined ? childIndex : value;
+                const childValue = value ?? childIndex;
 
                 const handleClick = React.useCallback(() => {
                     if (onValueChange) {
