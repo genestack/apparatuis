@@ -6,4 +6,6 @@
  * actual or intended publication of such source code.
  */
 
-export {Tab, Props as TabProps} from './tab';
+export const root: string;
+
+export const vertical: string;

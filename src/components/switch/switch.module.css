@@ -8,11 +8,6 @@
 
 @import "../../variables.css";
 
-:root {
-    --gs-focused-shadow: 0 0 0 2px var(--gs-color-action-25);
-    --gs-focused-shadow-inverted: 0 0 0 2px var(--gs-color-action-inverted-50);
-}
-
 .root {
     width: 32px;
     height: 20px;

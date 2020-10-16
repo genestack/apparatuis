@@ -47,6 +47,10 @@
     --gs-color-grey-outline-20: rgba(199, 202, 209, 0.2);
     --gs-color-dark-background: rgba(60, 64, 73, 1);
 
+    /* shadows */
+    --gs-focused-shadow: 0 0 0 2px var(--gs-color-action-25);
+    --gs-focused-shadow-inverted: 0 0 0 2px var(--gs-color-action-inverted-50);
+
     /* z-indexes */
     --gs-z-index-header: 800;
     --gs-z-index-drawer: 900;

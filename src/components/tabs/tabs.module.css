@@ -6,4 +6,13 @@
  * actual or intended publication of such source code.
  */
 
-export {Tab, Props as TabProps} from './tab';
+@import "../../variables.css";
+
+.root {
+    position: relative;
+    display: inline-flex;
+}
+
+.root.vertical {
+    flex-direction: column;
+}

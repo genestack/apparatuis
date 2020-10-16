@@ -6,4 +6,4 @@
  * actual or intended publication of such source code.
  */
 
-export {Tab, Props as TabProps} from './tab';
+export {Tabs, Props as TabsProps} from './tabs';
