@@ -51,6 +51,7 @@ export * from './components/spinner';
 export * from './components/suggest';
 export * from './components/suggest-input';
 export * from './components/switch';
+export * from './components/tab';
 export * from './components/text-label';
 export * from './components/textarea';
 export * from './components/tooltip';

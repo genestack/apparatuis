@@ -2,6 +2,12 @@
 
 ## [Unreleased]
 
+## [10.3.0] - 2020-10-16
+
+### Added
+
+-   Added [Tab](src/components/tab/tab.tsx)
+
 ## [10.2.1] - 2020-10-08
 
 ### Fixed
