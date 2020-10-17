@@ -9,8 +9,16 @@
 import classNames from 'classnames';
 import React from 'react';
 
-import {OverridableComponent, OverridableProps, mergeClassesProps, chain} from '../../utils';
+import {
+    OverridableComponent,
+    OverridableProps,
+    mergeClassesProps,
+    chain,
+    chainRefs
+} from '../../utils';
 
+import {Orientation, Variant, Size} from './common-tabs-props';
+import {TabIndicator} from './tab-indicator';
 import * as styles from './tabs.module.css';
 
 /** Tabs props */
@@ -21,11 +29,11 @@ export interface Props {
     onValueChange?: (value: any) => void;
 
     /** Tabs orientation (default: "horizontal") */
-    orientation?: 'horizontal' | 'vertical';
+    orientation?: Orientation;
     /** Style of tabs (default: "ghost") */
-    variant?: 'ghost' | 'solid';
+    variant?: Variant;
     /** Size of tabs (default: "normal") */
-    size?: 'normal' | 'small' | 'tiny';
+    size?: Size;
 }
 
 interface TypeMap {
@@ -56,21 +64,41 @@ export const Tabs: OverridableComponent<TypeMap> = React.forwardRef<
         ...restProps
     } = mergeClassesProps(props, styles);
 
+    let childIndex = 0;
+    const valueToIndex = new Map();
+    const tabListRef = React.useRef(null);
+    const [activeTabNode] = React.useState<HTMLElement | null>(null);
+
+    React.useEffect(() => {
+        console.log(123, tabListRef);
+    });
+
     return (
         <Component
+            role="tablist"
             {...restProps}
-            ref={ref}
+            ref={chainRefs(tabListRef, ref)}
             className={classNames(classes.root, {
                 [classes.vertical]: orientation === 'vertical'
             })}
         >
-            {React.Children.map(children, (child, childIndex) => {
+            <TabIndicator
+                wrapperNode={tabListRef.current}
+                activeTabNode={activeTabNode}
+                variant={variant}
+            />
+
+            {React.Children.map(children, (child) => {
                 if (!React.isValidElement(child)) {
                     return null;
                 }
 
                 const {onClick, value, ...restChildProps} = child.props;
                 const childValue = value ?? childIndex;
+                const selected = childValue === tabsValue;
+
+                valueToIndex.set(childValue, childIndex);
+                childIndex += 1;
 
                 const handleClick = React.useCallback(() => {
                     if (onValueChange) {
@@ -81,7 +109,7 @@ export const Tabs: OverridableComponent<TypeMap> = React.forwardRef<
                 return React.cloneElement(child, {
                     value: childValue,
                     onClick: chain(handleClick, onClick),
-                    selected: childValue === tabsValue,
+                    selected,
                     variant,
                     size,
                     ...restChildProps
