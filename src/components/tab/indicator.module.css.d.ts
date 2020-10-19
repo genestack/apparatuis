@@ -8,6 +8,8 @@
 
 export const root: string;
 
+export const fullWidth: string;
+
 export const selected: string;
 
 export const bottom: string;

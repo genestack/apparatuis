@@ -7,52 +7,82 @@
  */
 import React from 'react';
 
+import {OverridableComponent, OverridableProps} from '../../utils';
+import {Indicator, IndicatorProps, IndicatorPosition} from '../tab';
+
 import {Variant} from './common-tabs-props';
-import {Indicator, Props as IndicatorProps, IndicatorPosition} from './indicator';
 
 /** TabIndicator props */
 export interface Props extends IndicatorProps {
-    wrapperNode: HTMLElement | null;
-    activeTabNode: HTMLElement | null;
-    variant: Variant;
+    /** Style of tab indicator (default: "ghost") */
+    variant?: Variant;
+    /** Tab list DOM node */
+    tabListNode: HTMLElement;
+    /** Selected tab DOM node */
+    selectedTabNode?: Element;
+}
+
+interface TypeMap {
+    props: Props;
+    defaultType: 'span';
+}
+
+interface IndicatorStyles {
+    top: number;
+    left: number;
+    width: number;
+    height: number;
 }
 
 /** Tab indicator component */
-export function TabIndicator({
-    className,
-    wrapperNode,
-    activeTabNode,
-    variant,
-    position = 'bottom',
-    ...restProps
-}: Props) {
-    const [tabIndicatorStyles, setTabIndicatorStyles] = React.useState<React.CSSProperties>({});
+export const TabIndicator: OverridableComponent<TypeMap> = React.forwardRef<
+    HTMLSpanElement,
+    OverridableProps<TypeMap>
+>(function TabIndicatorComponent(props, ref) {
+    const {
+        variant = 'ghost',
+        tabListNode,
+        selectedTabNode,
+        position = 'bottom',
+        ...restProps
+    } = props;
 
-    console.log(666, wrapperNode);
+    if (!selectedTabNode) {
+        return null;
+    }
+
+    const [tabIndicatorStyles, setTabIndicatorStyles] = React.useState<IndicatorStyles>({
+        top: 0,
+        left: 0,
+        width: 0,
+        height: 0
+    });
 
     React.useEffect(() => {
-        if (wrapperNode && activeTabNode) {
-            const indicatorPositionStyles = getPositionStyles(
-                wrapperNode,
-                activeTabNode,
+        if (tabListNode && selectedTabNode) {
+            const indicatorStyles = getPositionStyles(
+                tabListNode,
+                selectedTabNode,
                 position,
                 variant
             );
 
-            if (JSON.stringify(indicatorPositionStyles) !== JSON.stringify(tabIndicatorStyles)) {
-                // FIXME
-                setTabIndicatorStyles(indicatorPositionStyles);
+            const isSameObject = Object.keys(indicatorStyles).every(
+                (prop) =>
+                    tabIndicatorStyles[prop as keyof IndicatorStyles] ===
+                    indicatorStyles[prop as keyof IndicatorStyles]
+            );
+
+            if (!isSameObject) {
+                setTabIndicatorStyles(indicatorStyles);
             }
         }
     });
 
-    if (!wrapperNode || !activeTabNode) {
-        return null;
-    }
-
     return (
         <Indicator
             {...restProps}
+            ref={ref}
             selected
             style={{
                 ...tabIndicatorStyles,
@@ -60,16 +90,16 @@ export function TabIndicator({
             }}
         />
     );
-}
+});
 
 function getPositionStyles(
-    wrapperNode: HTMLElement,
-    tabNode: HTMLElement,
+    tabListNode: HTMLElement,
+    selectedTabNode: Element,
     indicatorPosition: IndicatorPosition,
     variant: Variant
-): React.CSSProperties {
-    const wrapperClientRect = wrapperNode.getBoundingClientRect();
-    const tabClientRect = tabNode.getBoundingClientRect();
+): IndicatorStyles {
+    const wrapperClientRect = tabListNode.getBoundingClientRect();
+    const tabClientRect = selectedTabNode.getBoundingClientRect();
 
     const top = tabClientRect.y - wrapperClientRect.y;
     const left = tabClientRect.x - wrapperClientRect.x;
@@ -107,6 +137,6 @@ function getPositionStyles(
                 width: indicatorWidth
             };
         default:
-            return {};
+            throw new Error('Invalid value for tab indicator position');
     }
 }

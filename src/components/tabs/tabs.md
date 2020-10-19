@@ -55,7 +55,17 @@ const TabsExampleFrame = (props) => {
 };
 
 function TabsExample() {
-    const {inverted, hasPrepend, hasAppend, view, orientation, variant, size} = usePresentation();
+    const {
+        inverted,
+        animated,
+        hasPrepend,
+        hasAppend,
+        view,
+        orientation,
+        variant,
+        size,
+        indicatorPosition
+    } = usePresentation();
 
     const [value, setValue] = React.useState(0);
 
@@ -67,6 +77,8 @@ function TabsExample() {
                 orientation={orientation}
                 variant={variant}
                 size={size}
+                animated={animated}
+                indicatorPosition={indicatorPosition}
             >
                 <Tab prepend={hasPrepend && <LinkIcon />}>Signals</Tab>
                 <Tab prepend={hasPrepend && <OpenFolderIcon />}>Tree view</Tab>
@@ -92,16 +104,20 @@ function TabsExample() {
 
 <Presentation
     initialState={{
+        animated: true,
         label: 'short',
         orientation: 'horizontal',
         variant: 'ghost',
-        size: 'normal'
+        size: 'normal',
+        indicatorPosition: 'bottom'
     }}
 >
     <PresentationPane>
         <TabsExample />
     </PresentationPane>
     <PresentationControls>
+        <PresentationState name="animated" label="Animated" />
+
         <PresentationState name="hasPrepend" label="Prepend" />
         <PresentationState name="hasAppend" label="Append" />
 
@@ -123,6 +139,14 @@ function TabsExample() {
         <PresentationState name="size" label="Normal" value="normal" />
         <PresentationState name="size" label="Small" value="small" />
         <PresentationState name="size" label="Tiny" value="tiny" />
+
+        <ListItem>
+            <Typography variant="section">Indicator position</Typography>
+        </ListItem>
+        <PresentationState name="indicatorPosition" label="Left" value="left" />
+        <PresentationState name="indicatorPosition" label="Top" value="top" />
+        <PresentationState name="indicatorPosition" label="Right" value="right" />
+        <PresentationState name="indicatorPosition" label="Bottom" value="bottom" />
     </PresentationControls>
 </Presentation>;
 ```

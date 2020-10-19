@@ -8,6 +8,10 @@
 
 @import "../../variables.css";
 
+:root {
+    --transition: ease-in-out 250ms;
+}
+
 .root {
     position: relative;
     display: inline-flex;
@@ -15,4 +19,20 @@
 
 .root.vertical {
     flex-direction: column;
+}
+
+.tab {
+    transition: color var(--transition);
+}
+
+.tab :global(.gs-svg-icon-fill) {
+    transition: fill var(--transition);
+}
+
+.tab :global(.gs-svg-icon-stroke) {
+    transition: stroke var(--transition);
+}
+
+.indicator {
+    transition: var(--transition);
 }

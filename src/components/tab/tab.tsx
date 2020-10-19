@@ -11,6 +11,7 @@ import React from 'react';
 
 import {OverridableComponent, OverridableProps, WithClasses, mergeClassesProps} from '../../utils';
 
+import {Indicator, IndicatorPosition, Props as IndicatorProps} from './indicator';
 import * as styles from './tab.module.css';
 
 type SpanProps = React.HTMLAttributes<HTMLSpanElement>;
@@ -30,6 +31,10 @@ export interface Props extends WithClasses<keyof typeof styles> {
     hovered?: boolean;
     /** Adds styles for selected state */
     selected?: boolean;
+    /** Properties for body of tab */
+    bodyProps?: SpanProps;
+    /** Properties for wrapper of label element */
+    labelProps?: SpanProps;
     /** Node that is placed before tab label */
     prepend?: React.ReactNode;
     /** Properties for wrapper of prepend element */
@@ -38,8 +43,11 @@ export interface Props extends WithClasses<keyof typeof styles> {
     append?: React.ReactNode;
     /** Properties for wrapper of append element */
     appendProps?: SpanProps;
-    /** Properties for wrapper of label element */
-    labelProps?: SpanProps;
+
+    /** Indicator position of tab (default: "bottom") */
+    indicatorPosition?: IndicatorPosition;
+    /** Props of tab indicator */
+    indicatorProps?: IndicatorProps;
 }
 
 interface TypeMap {
@@ -59,11 +67,16 @@ export const Tab: OverridableComponent<TypeMap> = React.forwardRef<
         size = 'normal',
         hovered,
         selected,
+        bodyProps = {},
         labelProps = {},
         prepend,
         prependProps = {},
         append,
         appendProps = {},
+
+        indicatorPosition = 'bottom',
+        indicatorProps = {},
+
         classes,
         children,
         ...restProps
@@ -91,20 +104,34 @@ export const Tab: OverridableComponent<TypeMap> = React.forwardRef<
             {...restProps}
             ref={ref}
         >
-            {prepend && (
-                <span {...prependProps} className={classes.prepend}>
-                    {prepend}
-                </span>
-            )}
-            {children && (
-                <span {...labelProps} className={classes.label}>
-                    {children}
-                </span>
-            )}
-            {append && (
-                <span {...appendProps} className={classes.append}>
-                    {append}
-                </span>
+            <span {...bodyProps} className={classes.body}>
+                {prepend && (
+                    <span {...prependProps} className={classes.prepend}>
+                        {prepend}
+                    </span>
+                )}
+                {children && (
+                    <span {...labelProps} className={classes.label}>
+                        {children}
+                    </span>
+                )}
+                {append && (
+                    <span {...appendProps} className={classes.append}>
+                        {append}
+                    </span>
+                )}
+            </span>
+
+            {!restProps.disabled && (
+                <Indicator
+                    fullWidth={variant === 'solid'}
+                    selected={selected}
+                    position={indicatorPosition}
+                    {...indicatorProps}
+                    className={classNames(classes.indicator, {
+                        [classes.selected]: selected
+                    })}
+                />
             )}
         </Component>
     );

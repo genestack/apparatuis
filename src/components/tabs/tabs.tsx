@@ -16,6 +16,7 @@ import {
     chain,
     chainRefs
 } from '../../utils';
+import {IndicatorProps, IndicatorPosition} from '../tab';
 
 import {Orientation, Variant, Size} from './common-tabs-props';
 import {TabIndicator} from './tab-indicator';
@@ -34,6 +35,17 @@ export interface Props {
     variant?: Variant;
     /** Size of tabs (default: "normal") */
     size?: Size;
+    /** Animation of the tab indicator(default: true) */
+    animated?: boolean;
+
+    /**
+     * Indicator position
+     * Default value for horizontal tabs: "bottom"
+     * Default value for vertical tabs: "right"
+     */
+    indicatorPosition?: IndicatorPosition;
+    /** Props of tab indicator */
+    indicatorProps?: IndicatorProps;
 }
 
 interface TypeMap {
@@ -52,13 +64,18 @@ export const Tabs: OverridableComponent<TypeMap> = React.forwardRef<
     OverridableProps<TypeMap>
 >(function TabsComponent(props, ref) {
     const {
-        value: tabsValue,
+        value: selectedValue,
         onValueChange,
 
         component: Component = 'div',
         orientation = 'horizontal',
         variant = 'ghost',
         size = 'normal',
+        animated = true,
+
+        indicatorPosition: outlinePosition,
+        indicatorProps = {},
+
         classes,
         children,
         ...restProps
@@ -66,12 +83,24 @@ export const Tabs: OverridableComponent<TypeMap> = React.forwardRef<
 
     let childIndex = 0;
     const valueToIndex = new Map();
-    const tabListRef = React.useRef(null);
-    const [activeTabNode] = React.useState<HTMLElement | null>(null);
+    const [mounted, setMounted] = React.useState(false);
+    const tabListRef = React.useRef<HTMLElement>(null);
+
+    const indicatorPosition = React.useMemo(() => {
+        if (outlinePosition) {
+            return outlinePosition;
+        }
+
+        if (orientation === 'vertical') {
+            return 'right';
+        }
+
+        return 'bottom';
+    }, [outlinePosition, orientation]);
 
     React.useEffect(() => {
-        console.log(123, tabListRef);
-    });
+        setMounted(true);
+    }, []);
 
     return (
         <Component
@@ -82,20 +111,19 @@ export const Tabs: OverridableComponent<TypeMap> = React.forwardRef<
                 [classes.vertical]: orientation === 'vertical'
             })}
         >
-            <TabIndicator
-                wrapperNode={tabListRef.current}
-                activeTabNode={activeTabNode}
-                variant={variant}
-            />
-
             {React.Children.map(children, (child) => {
                 if (!React.isValidElement(child)) {
                     return null;
                 }
 
-                const {onClick, value, ...restChildProps} = child.props;
+                const {
+                    onClick,
+                    value,
+                    indicatorProps: tabIndicatorProps = {},
+                    ...restChildProps
+                } = child.props;
                 const childValue = value ?? childIndex;
-                const selected = childValue === tabsValue;
+                const selected = childValue === selectedValue;
 
                 valueToIndex.set(childValue, childIndex);
                 childIndex += 1;
@@ -107,14 +135,34 @@ export const Tabs: OverridableComponent<TypeMap> = React.forwardRef<
                 }, [onValueChange, childValue]);
 
                 return React.cloneElement(child, {
+                    className: animated && classes.tab,
                     value: childValue,
                     onClick: chain(handleClick, onClick),
                     selected,
                     variant,
                     size,
+                    classes: {
+                        indicator: animated && classes.indicator
+                    },
+                    indicatorPosition,
+                    indicatorProps: {
+                        ...tabIndicatorProps,
+                        selected: !animated && selected
+                    },
                     ...restChildProps
                 });
             })}
+
+            {animated && mounted && tabListRef.current && (
+                <TabIndicator
+                    tabListNode={tabListRef.current}
+                    selectedTabNode={tabListRef.current.children[valueToIndex.get(selectedValue)]}
+                    variant={variant}
+                    position={indicatorPosition}
+                    {...indicatorProps}
+                    className={classes.indicator}
+                />
+            )}
         </Component>
     );
 });
