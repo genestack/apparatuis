@@ -101,8 +101,8 @@ function getPositionStyles(
     const wrapperClientRect = tabListNode.getBoundingClientRect();
     const tabClientRect = selectedTabNode.getBoundingClientRect();
 
-    const top = tabClientRect.y - wrapperClientRect.y;
-    const left = tabClientRect.x - wrapperClientRect.x;
+    const top = tabClientRect.top - wrapperClientRect.top;
+    const left = tabClientRect.left - wrapperClientRect.left;
 
     const indicatorHeight = variant === 'ghost' ? 2 : tabClientRect.height;
     const indicatorWidth = variant === 'ghost' ? 2 : tabClientRect.width;
