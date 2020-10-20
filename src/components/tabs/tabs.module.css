@@ -17,7 +17,11 @@
     display: inline-flex;
 }
 
-.root.vertical {
+.tabList {
+    display: flex;
+}
+
+.tabList.vertical {
     flex-direction: column;
 }
 

@@ -8,6 +8,8 @@
 
 export const root: string;
 
+export const tabList: string;
+
 export const vertical: string;
 
 export const tab: string;

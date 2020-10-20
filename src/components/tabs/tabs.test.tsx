@@ -8,9 +8,8 @@
 import * as React from 'react';
 
 import {createTestApp} from '../../../test-utils/create-test-app';
-import {Tab} from '../tab';
+import {Tab, Indicator} from '../tab';
 
-import {TabIndicator} from './tab-indicator';
 import {Tabs} from './tabs';
 
 const app = createTestApp();
@@ -55,10 +54,10 @@ describe('<Tabs />', () => {
         expect(wrapper.find(Tab).prop('variant')).toBe('solid');
     });
 
-    it('should render <TabIndicator>', () => {
+    it('should render <Indicator>', () => {
         const wrapper = app.mount(<Tabs value={1} />);
 
-        expect(wrapper.find(TabIndicator)).toBeTruthy();
+        expect(wrapper.find(Indicator)).toBeTruthy();
     });
 
     it('should set selected value for tab', () => {

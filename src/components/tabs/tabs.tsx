@@ -9,18 +9,12 @@
 import classNames from 'classnames';
 import React from 'react';
 
-import {
-    OverridableComponent,
-    OverridableProps,
-    mergeClassesProps,
-    chain,
-    chainRefs
-} from '../../utils';
-import {IndicatorProps, IndicatorPosition} from '../tab';
+import {OverridableComponent, OverridableProps, mergeClassesProps, chain} from '../../utils';
+import {IndicatorProps, IndicatorPosition, Indicator} from '../tab';
 
 import {Orientation, Variant, Size} from './common-tabs-props';
-import {TabIndicator} from './tab-indicator';
 import * as styles from './tabs.module.css';
+import {PositionStyles, getPositionStyles} from './utils';
 
 /** Tabs props */
 export interface Props {
@@ -38,6 +32,8 @@ export interface Props {
     /** Animation of the tab indicator(default: true) */
     animated?: boolean;
 
+    /** Props of tabs wrapper */
+    tabListProps?: React.HTMLAttributes<HTMLDivElement>;
     /**
      * Indicator position
      * Default value for horizontal tabs: "bottom"
@@ -73,18 +69,19 @@ export const Tabs: OverridableComponent<TypeMap> = React.forwardRef<
         size = 'normal',
         animated = true,
 
+        tabListProps = {},
         indicatorPosition: outlinePosition,
         indicatorProps = {},
 
         classes,
-        children,
+        children: childrenList,
         ...restProps
     } = mergeClassesProps(props, styles);
 
-    let childIndex = 0;
     const valueToIndex = new Map();
     const [mounted, setMounted] = React.useState(false);
-    const tabListRef = React.useRef<HTMLElement>(null);
+    const tabListRef = React.useRef<HTMLDivElement>(null);
+    const [indicatorStyles, setIndicatorStyles] = React.useState<PositionStyles | null>(null);
 
     const indicatorPosition = React.useMemo(() => {
         if (outlinePosition) {
@@ -98,69 +95,91 @@ export const Tabs: OverridableComponent<TypeMap> = React.forwardRef<
         return 'bottom';
     }, [outlinePosition, orientation]);
 
+    const children: React.ReactElement[] = React.Children.toArray(childrenList).filter(
+        React.isValidElement
+    );
+
     React.useEffect(() => {
         setMounted(true);
     }, []);
 
+    React.useEffect(() => {
+        if (!tabListRef.current) {
+            return undefined;
+        }
+
+        const selectedTabNode = tabListRef.current.children[valueToIndex.get(selectedValue)];
+        if (!selectedTabNode) {
+            setIndicatorStyles(null);
+
+            return undefined;
+        }
+
+        const tabIndicatorStyles = getPositionStyles(
+            tabListRef.current,
+            selectedTabNode,
+            indicatorPosition,
+            variant
+        );
+
+        setIndicatorStyles(tabIndicatorStyles);
+    }, [indicatorPosition, variant, size, orientation, selectedValue, childrenList]);
+
     return (
-        <Component
-            role="tablist"
-            {...restProps}
-            ref={chainRefs(tabListRef, ref)}
-            className={classNames(classes.root, {
-                [classes.vertical]: orientation === 'vertical'
-            })}
-        >
-            {React.Children.map(children, (child) => {
-                if (!React.isValidElement(child)) {
-                    return null;
-                }
+        <Component {...restProps} ref={ref} className={classes.root}>
+            <div
+                role="tablist"
+                {...tabListProps}
+                ref={tabListRef}
+                className={classNames(classes.tabList, {
+                    [classes.vertical]: orientation === 'vertical'
+                })}
+            >
+                {children.map((child, childIndex) => {
+                    const {
+                        onClick,
+                        value,
+                        indicatorProps: tabIndicatorProps = {},
+                        ...restChildProps
+                    } = child.props;
 
-                const {
-                    onClick,
-                    value,
-                    indicatorProps: tabIndicatorProps = {},
-                    ...restChildProps
-                } = child.props;
-                const childValue = value ?? childIndex;
-                const selected = childValue === selectedValue;
+                    const childValue = value ?? childIndex;
+                    const selected = childValue === selectedValue;
 
-                valueToIndex.set(childValue, childIndex);
-                childIndex += 1;
+                    valueToIndex.set(childValue, childIndex);
 
-                const handleClick = React.useCallback(() => {
-                    if (onValueChange) {
-                        onValueChange(childValue);
-                    }
-                }, [onValueChange, childValue]);
+                    const handleClick = React.useCallback(() => {
+                        if (onValueChange) {
+                            onValueChange(childValue);
+                        }
+                    }, [onValueChange, childValue]);
 
-                return React.cloneElement(child, {
-                    className: animated && classes.tab,
-                    value: childValue,
-                    onClick: chain(handleClick, onClick),
-                    selected,
-                    variant,
-                    size,
-                    classes: {
-                        indicator: animated && classes.indicator
-                    },
-                    indicatorPosition,
-                    indicatorProps: {
-                        ...tabIndicatorProps,
-                        selected: !animated && selected
-                    },
-                    ...restChildProps
-                });
-            })}
+                    return React.cloneElement(child, {
+                        className: animated && classes.tab,
+                        value: childValue,
+                        onClick: chain(handleClick, onClick),
+                        selected,
+                        variant,
+                        size,
+                        classes: {
+                            indicator: animated && classes.indicator
+                        },
+                        indicatorPosition,
+                        indicatorProps: {
+                            ...tabIndicatorProps,
+                            selected: !animated && selected
+                        },
+                        ...restChildProps
+                    });
+                })}
+            </div>
 
-            {animated && mounted && tabListRef.current && (
-                <TabIndicator
-                    tabListNode={tabListRef.current}
-                    selectedTabNode={tabListRef.current.children[valueToIndex.get(selectedValue)]}
-                    variant={variant}
-                    position={indicatorPosition}
+            {animated && mounted && indicatorStyles && (
+                <Indicator
                     {...indicatorProps}
+                    selected
                     className={classes.indicator}
+                    style={indicatorStyles}
                 />
             )}
         </Component>
