@@ -17,6 +17,8 @@ type SpanProps = React.HTMLAttributes<HTMLSpanElement>;
 
 /** Tab props */
 export interface Props extends WithClasses<keyof typeof styles> {
+    /** Value of tab */
+    value?: any;
     /** Style of tab (default: "ghost") */
     variant?: 'ghost' | 'solid';
     /** Size of tab (default: "normal") */
@@ -82,6 +84,7 @@ export const Tab: OverridableComponent<TypeMap> = React.forwardRef<
                 },
                 className
             )}
+            role="tab"
             aria-selected={selected}
             aria-disabled={restProps.disabled}
             title={typeof children === 'string' ? children : ''}
