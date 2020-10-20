@@ -2,6 +2,12 @@
 
 ## [Unreleased]
 
+## [10.5.0] - 2020-10-20
+
+### Added
+
+-   Added `<DictionaryIcon />`, `<LockOutlinedIcon />`, `<RetryIcon>`, `<TrashIcon>`
+
 ## [10.4.0] - 2020-10-16
 
 ### Added
