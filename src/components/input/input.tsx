@@ -12,7 +12,7 @@ import {chain} from '../../utils/chain';
 import {Omit} from '../../utils/omit';
 import {chainRefs} from '../../utils/set-ref';
 import {mergeClassesProps, WithClasses} from '../../utils/styles';
-import {useInputInvalidity} from '../../utils/use-constol-invalidity';
+import {useInputInvalidity} from '../../utils/use-input-invalidity';
 import {FieldProps, Field} from '../field';
 
 import {InputClearButton, Props as InputClearButtonProps} from './input-clear-button';

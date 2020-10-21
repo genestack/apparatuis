@@ -1,6 +1,11 @@
 # Changelog
 
-## [Unreleased]
+## [10.6.0] - 2020-10-21
+
+### Added
+
+-   Add [Indicator](src/components/tab/indicator.tsx)
+-   Add `animated` property for [Tabs](src/components/tabs/tabs.tsx)
 
 ## [10.5.0] - 2020-10-20
 

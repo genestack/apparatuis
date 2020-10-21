@@ -5,13 +5,11 @@
  * The copyright notice above does not evidence any
  * actual or intended publication of such source code.
  */
+/** Tabs orientation */
+export type Orientation = 'horizontal' | 'vertical';
 
-export const root: string;
+/** Tabs variant */
+export type Variant = 'ghost' | 'solid';
 
-export const tabList: string;
-
-export const vertical: string;
-
-export const tab: string;
-
-export const indicator: string;
+/** Tabs size */
+export type Size = 'normal' | 'small' | 'tiny';

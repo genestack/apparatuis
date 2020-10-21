@@ -7,3 +7,4 @@
  */
 
 export {Tab, Props as TabProps} from './tab';
+export {Indicator, Props as IndicatorProps, IndicatorPlacement} from './indicator';

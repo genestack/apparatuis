@@ -55,7 +55,17 @@ const TabsExampleFrame = (props) => {
 };
 
 function TabsExample() {
-    const {inverted, hasPrepend, hasAppend, view, orientation, variant, size} = usePresentation();
+    const {
+        inverted,
+        animated,
+        hasPrepend,
+        hasAppend,
+        view,
+        orientation,
+        variant,
+        size,
+        indicatorPlacement
+    } = usePresentation();
 
     const [value, setValue] = React.useState(0);
 
@@ -67,6 +77,8 @@ function TabsExample() {
                 orientation={orientation}
                 variant={variant}
                 size={size}
+                animated={animated}
+                indicatorPlacement={indicatorPlacement}
             >
                 <Tab prepend={hasPrepend && <LinkIcon />}>Signals</Tab>
                 <Tab prepend={hasPrepend && <OpenFolderIcon />}>Tree view</Tab>
@@ -92,16 +104,20 @@ function TabsExample() {
 
 <Presentation
     initialState={{
+        animated: true,
         label: 'short',
         orientation: 'horizontal',
         variant: 'ghost',
-        size: 'normal'
+        size: 'normal',
+        indicatorPlacement: 'bottom'
     }}
 >
     <PresentationPane>
         <TabsExample />
     </PresentationPane>
     <PresentationControls>
+        <PresentationState name="animated" label="Animated" />
+
         <PresentationState name="hasPrepend" label="Prepend" />
         <PresentationState name="hasAppend" label="Append" />
 
@@ -123,6 +139,14 @@ function TabsExample() {
         <PresentationState name="size" label="Normal" value="normal" />
         <PresentationState name="size" label="Small" value="small" />
         <PresentationState name="size" label="Tiny" value="tiny" />
+
+        <ListItem>
+            <Typography variant="section">Indicator placement</Typography>
+        </ListItem>
+        <PresentationState name="indicatorPlacement" label="Left" value="left" />
+        <PresentationState name="indicatorPlacement" label="Top" value="top" />
+        <PresentationState name="indicatorPlacement" label="Right" value="right" />
+        <PresentationState name="indicatorPlacement" label="Bottom" value="bottom" />
     </PresentationControls>
 </Presentation>;
 ```
@@ -130,16 +154,41 @@ function TabsExample() {
 ### Simple tabs
 
 ```js
+function TabPanel(props) {
+    const {children, selectedValue, value} = props;
+
+    return (
+        <div role="tabpanel" hidden={selectedValue !== value} style={{paddingTop: 20}}>
+            <Typography>{children}</Typography>
+        </div>
+    );
+}
+
 function TabsFrame() {
     const [tabValue, setTabValue] = React.useState(0);
 
     return (
-        <Tabs value={tabValue} onValueChange={(value) => setTabValue(value)}>
-            <Tab>Signals</Tab>
-            <Tab>Tree view</Tab>
-            <Tab>My bookmarks</Tab>
-            <Tab disabled>Drafts</Tab>
-        </Tabs>
+        <>
+            <Tabs value={tabValue} onValueChange={(value) => setTabValue(value)}>
+                <Tab>Signals</Tab>
+                <Tab>Tree view</Tab>
+                <Tab>My bookmarks</Tab>
+                <Tab disabled>Drafts</Tab>
+            </Tabs>
+
+            <TabPanel selectedValue={tabValue} value={0}>
+                Signals
+            </TabPanel>
+            <TabPanel selectedValue={tabValue} value={1}>
+                Tree view
+            </TabPanel>
+            <TabPanel selectedValue={tabValue} value={2}>
+                My bookmarks
+            </TabPanel>
+            <TabPanel selectedValue={tabValue} value={3}>
+                Drafts
+            </TabPanel>
+        </>
     );
 }
 
@@ -151,17 +200,41 @@ function TabsFrame() {
 ### Horizontal tabs with long labels
 
 ```js
+function TabPanel(props) {
+    const {children, selectedValue, value} = props;
+
+    return (
+        <div role="tabpanel" hidden={selectedValue !== value} style={{paddingTop: 20}}>
+            <Typography>{children}</Typography>
+        </div>
+    );
+}
+
 function TabsFrame() {
     const [tabValue, setTabValue] = React.useState(10);
 
     return (
-        <Tabs value={tabValue} onValueChange={(value) => setTabValue(value)}>
-            <Tab value={10}>Creative Commons Attribution 2.0 Gene Expression Similarity Search</Tab>
-            <Tab value={20}>Expression Data Miner</Tab>
-            <Tab value={30} disabled>
+        <>
+            <Tabs value={tabValue} onValueChange={(value) => setTabValue(value)}>
+                <Tab value={10}>
+                    Creative Commons Attribution 2.0 Gene Expression Similarity Search
+                </Tab>
+                <Tab value={20}>Expression Data Miner</Tab>
+                <Tab value={30} disabled>
+                    Genetic Variations Initializer
+                </Tab>
+            </Tabs>
+
+            <TabPanel selectedValue={tabValue} value={10}>
+                Creative Commons Attribution 2.0 Gene Expression Similarity Search
+            </TabPanel>
+            <TabPanel selectedValue={tabValue} value={20}>
+                Expression Data Miner
+            </TabPanel>
+            <TabPanel selectedValue={tabValue} value={30}>
                 Genetic Variations Initializer
-            </Tab>
-        </Tabs>
+            </TabPanel>
+        </>
     );
 }
 
@@ -175,32 +248,109 @@ function TabsFrame() {
 ```js
 const {BookmarkBorderedIcon, DraftIcon, OpenFolderIcon, LinkIcon} = require('../../icons');
 
+function TabPanel(props) {
+    const {children, selectedValue, value} = props;
+
+    return (
+        <div role="tabpanel" hidden={selectedValue !== value} style={{paddingTop: 20}}>
+            <Typography>{children}</Typography>
+        </div>
+    );
+}
+
 function TabsFrame() {
     const [tabValue, setTabValue] = React.useState(10);
 
     return (
-        <Tabs value={tabValue} onValueChange={(value) => setTabValue(value)}>
-            <Tab value={10} prepend={<LinkIcon />}>
+        <>
+            <Tabs value={tabValue} onValueChange={(value) => setTabValue(value)}>
+                <Tab value={10} prepend={<LinkIcon />}>
+                    Signals
+                </Tab>
+                <Tab value={20} prepend={<OpenFolderIcon />}>
+                    Tree view
+                </Tab>
+                <Tab
+                    value={30}
+                    prepend={<BookmarkBorderedIcon />}
+                    append={
+                        <Typography as="span" intent="quiet" variant="caption">
+                            120
+                        </Typography>
+                    }
+                >
+                    My bookmarks
+                </Tab>
+                <Tab value={40} prepend={<DraftIcon />} disabled>
+                    Drafts
+                </Tab>
+            </Tabs>
+
+            <TabPanel selectedValue={tabValue} value={10}>
                 Signals
-            </Tab>
-            <Tab value={20} prepend={<OpenFolderIcon />}>
+            </TabPanel>
+            <TabPanel selectedValue={tabValue} value={20}>
                 Tree view
-            </Tab>
-            <Tab
-                value={30}
-                prepend={<BookmarkBorderedIcon />}
-                append={
-                    <Typography as="span" intent="quiet" variant="caption">
-                        120
-                    </Typography>
-                }
-            >
+            </TabPanel>
+            <TabPanel selectedValue={tabValue} value={30}>
                 My bookmarks
-            </Tab>
-            <Tab value={40} prepend={<DraftIcon />} disabled>
+            </TabPanel>
+            <TabPanel selectedValue={tabValue} value={40}>
                 Drafts
-            </Tab>
-        </Tabs>
+            </TabPanel>
+        </>
+    );
+}
+
+<PageContent as={Paper}>
+    <TabsFrame />
+</PageContent>;
+```
+
+### Vertical tabs with icons
+
+```js
+const {BookmarkBorderedIcon, DraftIcon, OpenFolderIcon, LinkIcon} = require('../../icons');
+
+function TabPanel(props) {
+    const {children, selectedValue, value} = props;
+
+    return (
+        <div role="tabpanel" hidden={selectedValue !== value} style={{padding: '10px 20px'}}>
+            <Typography>{children}</Typography>
+        </div>
+    );
+}
+
+function TabsFrame() {
+    const [tabValue, setTabValue] = React.useState(0);
+
+    return (
+        <div style={{display: 'flex'}}>
+            <Tabs
+                value={tabValue}
+                orientation="vertical"
+                onValueChange={(value) => setTabValue(value)}
+            >
+                <Tab prepend={<LinkIcon />} title="Signals" />
+                <Tab prepend={<OpenFolderIcon />} title="Tree view" />
+                <Tab prepend={<BookmarkBorderedIcon />} title="My bookmarks" />
+                <Tab prepend={<DraftIcon />} title="Drafts" disabled />
+            </Tabs>
+
+            <TabPanel selectedValue={tabValue} value={0}>
+                Signals
+            </TabPanel>
+            <TabPanel selectedValue={tabValue} value={1}>
+                Tree view
+            </TabPanel>
+            <TabPanel selectedValue={tabValue} value={2}>
+                My bookmarks
+            </TabPanel>
+            <TabPanel selectedValue={tabValue} value={3}>
+                Drafts
+            </TabPanel>
+        </div>
     );
 }
 
@@ -228,29 +378,6 @@ function TabsFrame() {
             <Tab value={30} component="a" href="#select">
                 Select
             </Tab>
-        </Tabs>
-    );
-}
-
-<PageContent as={Paper}>
-    <TabsFrame />
-</PageContent>;
-```
-
-### Vertical tabs with icons
-
-```js
-const {BookmarkBorderedIcon, DraftIcon, OpenFolderIcon, LinkIcon} = require('../../icons');
-
-function TabsFrame() {
-    const [tabValue, setTabValue] = React.useState(10);
-
-    return (
-        <Tabs value={tabValue} orientation="vertical" onValueChange={(value) => setTabValue(value)}>
-            <Tab value={10} prepend={<LinkIcon />} title="Signals" />
-            <Tab value={20} prepend={<OpenFolderIcon />} title="Tree view" />
-            <Tab value={30} prepend={<BookmarkBorderedIcon />} title="My bookmarks" />
-            <Tab value={40} prepend={<DraftIcon />} title="Drafts" disabled />
         </Tabs>
     );
 }

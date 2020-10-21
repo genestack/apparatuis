@@ -8,7 +8,7 @@
 import * as React from 'react';
 
 import {createTestApp} from '../../../test-utils/create-test-app';
-import {Tab} from '../tab';
+import {Tab, Indicator} from '../tab';
 
 import {Tabs} from './tabs';
 
@@ -19,6 +19,30 @@ afterEach(app.afterEach);
 
 // tslint:disable no-magic-numbers
 describe('<Tabs />', () => {
+    it('should set initial props for tab', () => {
+        const wrapper = app.mount(
+            <Tabs value={1}>
+                <Tab />
+            </Tabs>
+        );
+
+        expect(wrapper.find(Tab).props()).toEqual({
+            className: 'tab',
+            onClick: expect.anything(),
+            value: 0,
+            selected: false,
+            size: 'normal',
+            variant: 'ghost',
+            indicatorPlacement: 'bottom',
+            indicatorProps: {
+                selected: false
+            },
+            classes: {
+                indicator: 'indicator'
+            }
+        });
+    });
+
     it('should set values for size and variant from tabs to children', () => {
         const wrapper = app.mount(
             <Tabs value={1} size="small" variant="solid">
@@ -26,13 +50,14 @@ describe('<Tabs />', () => {
             </Tabs>
         );
 
-        expect(wrapper.find(Tab).props()).toEqual({
-            onClick: expect.anything(),
-            value: 0,
-            selected: false,
-            size: 'small',
-            variant: 'solid'
-        });
+        expect(wrapper.find(Tab).prop('size')).toBe('small');
+        expect(wrapper.find(Tab).prop('variant')).toBe('solid');
+    });
+
+    it('should render <Indicator>', () => {
+        const wrapper = app.mount(<Tabs value={1} />);
+
+        expect(wrapper.find(Indicator)).toBeTruthy();
     });
 
     it('should set selected value for tab', () => {

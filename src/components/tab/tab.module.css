@@ -10,8 +10,6 @@
 
 .root {
     position: relative;
-    display: inline-flex;
-    align-items: center;
     background: transparent;
     font-family: var(--gs-font-family);
     text-align: left;
@@ -64,25 +62,17 @@
 .root:hover,
 .root.hovered {
     color: var(--gs-color-action-hover);
-    box-shadow: inset 0 -2px var(--gs-color-grey-outline);
 }
 
 .root:disabled,
 .root:disabled:hover {
     color: var(--gs-color-grey-50);
-    box-shadow: none;
     cursor: not-allowed;
-}
-
-.root:focus:hover,
-.root:focus-within:hover {
-    box-shadow: inset 0 -2px var(--gs-color-grey-outline), var(--gs-focused-shadow);
 }
 
 .root.solid:hover,
 .root.solid.hovered {
     background: var(--gs-color-grey-background);
-    box-shadow: none;
 }
 
 .root.solid:focus,
@@ -90,23 +80,21 @@
     box-shadow: var(--gs-focused-shadow);
 }
 
-.root.solid.selected {
-    background: none;
-}
-
 .root.selected {
     color: var(--gs-color-black);
     cursor: default;
-    box-shadow: inset 0 -2px var(--gs-color-action-text);
-}
-
-.root.selected:focus {
-    box-shadow: inset 0 -2px var(--gs-color-action-text), var(--gs-focused-shadow);
 }
 
 .root.selected.solid {
-    background: var(--gs-color-action-text);
     color: var(--gs-color-white);
+}
+
+.root.selected:disabled {
+    color: var(--gs-color-grey-50);
+}
+
+.root.selected.solid:disabled {
+    color: var(--gs-color-grey-50);
 }
 
 .root.solid:disabled {
@@ -161,10 +149,33 @@
     stroke: var(--gs-color-grey-50);
 }
 
+.body {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    z-index: 1;
+}
+
 .label {
     display: block;
     white-space: nowrap;
     max-width: 260px;
     overflow: hidden;
     text-overflow: ellipsis;
+}
+
+.indicator {
+    visibility: hidden;
+    opacity: 0;
+}
+
+.indicator.selected {
+    visibility: visible;
+    opacity: 1;
+}
+
+.root:hover .indicator,
+.root.hovered .indicator {
+    visibility: visible;
+    opacity: 1;
 }
