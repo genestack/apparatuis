@@ -6,7 +6,7 @@
  * actual or intended publication of such source code.
  */
 
-import {IndicatorPosition} from '../tab';
+import {IndicatorPlacement} from '../tab';
 
 import {Variant} from './common-tabs-props';
 
@@ -22,7 +22,7 @@ export interface PositionStyles {
 export function getPositionStyles(
     tabListNode: HTMLElement,
     selectedTabNode: Element,
-    indicatorPosition: IndicatorPosition,
+    indicatorPlacement: IndicatorPlacement,
     variant: Variant
 ): PositionStyles {
     const wrapperClientRect = tabListNode.getBoundingClientRect();
@@ -34,7 +34,7 @@ export function getPositionStyles(
     const indicatorHeight = variant === 'ghost' ? 2 : tabClientRect.height;
     const indicatorWidth = variant === 'ghost' ? 2 : tabClientRect.width;
 
-    switch (indicatorPosition) {
+    switch (indicatorPlacement) {
         case 'bottom':
             return {
                 left,

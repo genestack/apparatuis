@@ -1,12 +1,18 @@
 # Changelog
 
-## [10.5.0] - 2020-10-16
+## [10.6.0] - 2020-10-21
 
 ### Added
 
 -   Add [Indicator](src/components/tab/indicator.tsx)
 -   Add [TabIndicator](src/components/tabs/tab-indicator.tsx)
 -   Add `animated` property for [Tabs](src/components/tabs/tabs.tsx)
+
+## [10.5.0] - 2020-10-20
+
+### Added
+
+-   Added `<DictionaryIcon />`, `<LockOutlinedIcon />`, `<RetryIcon>`, `<TrashIcon>`
 
 ## [10.4.0] - 2020-10-20
 

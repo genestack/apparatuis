@@ -12,17 +12,17 @@ import {OverridableComponent, OverridableProps, mergeClassesProps} from '../../u
 
 import * as styles from './indicator.module.css';
 
-/** Indicator position */
-export type IndicatorPosition = 'top' | 'bottom' | 'left' | 'right';
+/** Indicator placement */
+export type IndicatorPlacement = 'top' | 'bottom' | 'left' | 'right';
 
 /** Indicator props */
 export interface Props {
-    /** Adds styles for selected state */
-    selected?: boolean;
+    /** Adds styles for active state */
+    active?: boolean;
     /** Adds styles for full width state */
     fullWidth?: boolean;
-    /** Indicator position */
-    position?: IndicatorPosition;
+    /** Indicator placement */
+    placement?: IndicatorPlacement;
 }
 
 interface TypeMap {
@@ -39,9 +39,9 @@ export const Indicator: OverridableComponent<TypeMap> = React.forwardRef<
         className,
         classes,
         component: Component = 'span',
-        position,
+        placement,
         fullWidth,
-        selected,
+        active,
         ...restProps
     } = mergeClassesProps(props, styles);
 
@@ -50,12 +50,12 @@ export const Indicator: OverridableComponent<TypeMap> = React.forwardRef<
             className={classNames(
                 classes.root,
                 {
-                    [classes.selected]: selected,
+                    [classes.active]: active,
                     [classes.fullWidth]: fullWidth,
-                    [classes.bottom]: position === 'bottom',
-                    [classes.top]: position === 'top',
-                    [classes.left]: position === 'left',
-                    [classes.right]: position === 'right'
+                    [classes.bottom]: placement === 'bottom',
+                    [classes.top]: placement === 'top',
+                    [classes.left]: placement === 'left',
+                    [classes.right]: placement === 'right'
                 },
                 className
             )}

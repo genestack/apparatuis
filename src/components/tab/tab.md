@@ -17,7 +17,7 @@ const BadgeExample = (props) => {
         size,
         hasPrepend,
         hasAppend,
-        indicatorPosition
+        indicatorPlacement
     } = usePresentation();
     const [text, setText] = React.useState('Gene Expression Similarity Search');
 
@@ -44,7 +44,7 @@ const BadgeExample = (props) => {
                         hovered={hovered}
                         selected={selected}
                         disabled={disabled}
-                        indicatorPosition={indicatorPosition}
+                        indicatorPlacement={indicatorPlacement}
                     >
                         {text}
                     </Tab>
@@ -79,7 +79,7 @@ const BadgeExample = (props) => {
         hasAppend: false,
         variant: 'ghost',
         size: 'normal',
-        indicatorPosition: 'bottom'
+        indicatorPlacement: 'bottom'
     }}
 >
     <PresentationPane>
@@ -106,12 +106,12 @@ const BadgeExample = (props) => {
         <PresentationState name="size" label="Tiny" value="tiny" />
 
         <ListItem>
-            <Typography variant="section">Indicator position</Typography>
+            <Typography variant="section">Indicator placement</Typography>
         </ListItem>
-        <PresentationState name="indicatorPosition" label="Left" value="left" />
-        <PresentationState name="indicatorPosition" label="Top" value="top" />
-        <PresentationState name="indicatorPosition" label="Right" value="right" />
-        <PresentationState name="indicatorPosition" label="Bottom" value="bottom" />
+        <PresentationState name="indicatorPlacement" label="Left" value="left" />
+        <PresentationState name="indicatorPlacement" label="Top" value="top" />
+        <PresentationState name="indicatorPlacement" label="Right" value="right" />
+        <PresentationState name="indicatorPlacement" label="Bottom" value="bottom" />
     </PresentationControls>
 </Presentation>;
 ```

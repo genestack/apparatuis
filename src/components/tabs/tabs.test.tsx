@@ -33,7 +33,7 @@ describe('<Tabs />', () => {
             selected: false,
             size: 'normal',
             variant: 'ghost',
-            indicatorPosition: 'bottom',
+            indicatorPlacement: 'bottom',
             indicatorProps: {
                 selected: false
             },

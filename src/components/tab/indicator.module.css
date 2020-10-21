@@ -13,7 +13,7 @@
     background-color: var(--gs-color-grey-outline);
 }
 
-.root.selected {
+.root.active {
     background-color: var(--gs-color-action-text);
 }
 

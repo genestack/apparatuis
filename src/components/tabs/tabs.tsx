@@ -10,7 +10,7 @@ import classNames from 'classnames';
 import React from 'react';
 
 import {OverridableComponent, OverridableProps, mergeClassesProps, chain} from '../../utils';
-import {IndicatorProps, IndicatorPosition, Indicator} from '../tab';
+import {IndicatorProps, IndicatorPlacement, Indicator} from '../tab';
 
 import {Orientation, Variant, Size} from './common-tabs-props';
 import * as styles from './tabs.module.css';
@@ -35,11 +35,11 @@ export interface Props {
     /** Props of tabs wrapper */
     tabListProps?: React.HTMLAttributes<HTMLDivElement>;
     /**
-     * Indicator position
+     * Indicator placement
      * Default value for horizontal tabs: "bottom"
      * Default value for vertical tabs: "right"
      */
-    indicatorPosition?: IndicatorPosition;
+    indicatorPlacement?: IndicatorPlacement;
     /** Props of tab indicator */
     indicatorProps?: IndicatorProps;
 }
@@ -70,7 +70,7 @@ export const Tabs: OverridableComponent<TypeMap> = React.forwardRef<
         animated = true,
 
         tabListProps = {},
-        indicatorPosition: outlinePosition,
+        indicatorPlacement: outlinePosition,
         indicatorProps = {},
 
         classes,
@@ -83,7 +83,7 @@ export const Tabs: OverridableComponent<TypeMap> = React.forwardRef<
     const tabListRef = React.useRef<HTMLDivElement>(null);
     const [indicatorStyles, setIndicatorStyles] = React.useState<PositionStyles | null>(null);
 
-    const indicatorPosition = React.useMemo(() => {
+    const indicatorPlacement = React.useMemo(() => {
         if (outlinePosition) {
             return outlinePosition;
         }
@@ -118,12 +118,12 @@ export const Tabs: OverridableComponent<TypeMap> = React.forwardRef<
         const tabIndicatorStyles = getPositionStyles(
             tabListRef.current,
             selectedTabNode,
-            indicatorPosition,
+            indicatorPlacement,
             variant
         );
 
         setIndicatorStyles(tabIndicatorStyles);
-    }, [indicatorPosition, variant, size, orientation, selectedValue, childrenList]);
+    }, [indicatorPlacement, variant, size, orientation, selectedValue, childrenList]);
 
     return (
         <Component {...restProps} ref={ref} className={classes.root}>
@@ -164,7 +164,7 @@ export const Tabs: OverridableComponent<TypeMap> = React.forwardRef<
                         classes: {
                             indicator: animated && classes.indicator
                         },
-                        indicatorPosition,
+                        indicatorPlacement,
                         indicatorProps: {
                             ...tabIndicatorProps,
                             selected: !animated && selected
@@ -177,7 +177,7 @@ export const Tabs: OverridableComponent<TypeMap> = React.forwardRef<
             {animated && mounted && indicatorStyles && (
                 <Indicator
                     {...indicatorProps}
-                    selected
+                    active
                     className={classes.indicator}
                     style={indicatorStyles}
                 />

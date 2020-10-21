@@ -9,9 +9,15 @@
 import classNames from 'classnames';
 import React from 'react';
 
-import {OverridableComponent, OverridableProps, WithClasses, mergeClassesProps} from '../../utils';
+import {
+    OverridableComponent,
+    OverridableProps,
+    WithClasses,
+    mergeClassesProps,
+    shouldRenderNode
+} from '../../utils';
 
-import {Indicator, IndicatorPosition, Props as IndicatorProps} from './indicator';
+import {Indicator, IndicatorPlacement, Props as IndicatorProps} from './indicator';
 import * as styles from './tab.module.css';
 
 type SpanProps = React.HTMLAttributes<HTMLSpanElement>;
@@ -44,8 +50,8 @@ export interface Props extends WithClasses<keyof typeof styles> {
     /** Properties for wrapper of append element */
     appendProps?: SpanProps;
 
-    /** Indicator position of tab (default: "bottom") */
-    indicatorPosition?: IndicatorPosition;
+    /** Indicator placement of tab (default: "bottom") */
+    indicatorPlacement?: IndicatorPlacement;
     /** Props of tab indicator */
     indicatorProps?: IndicatorProps;
 }
@@ -74,7 +80,7 @@ export const Tab: OverridableComponent<TypeMap> = React.forwardRef<
         append,
         appendProps = {},
 
-        indicatorPosition = 'bottom',
+        indicatorPlacement = 'bottom',
         indicatorProps = {},
 
         classes,
@@ -105,17 +111,17 @@ export const Tab: OverridableComponent<TypeMap> = React.forwardRef<
             ref={ref}
         >
             <span {...bodyProps} className={classes.body}>
-                {prepend && (
+                {shouldRenderNode(prepend) && (
                     <span {...prependProps} className={classes.prepend}>
                         {prepend}
                     </span>
                 )}
-                {children && (
+                {shouldRenderNode(children) && (
                     <span {...labelProps} className={classes.label}>
                         {children}
                     </span>
                 )}
-                {append && (
+                {shouldRenderNode(append) && (
                     <span {...appendProps} className={classes.append}>
                         {append}
                     </span>
@@ -125,8 +131,8 @@ export const Tab: OverridableComponent<TypeMap> = React.forwardRef<
             {!restProps.disabled && (
                 <Indicator
                     fullWidth={variant === 'solid'}
-                    selected={selected}
-                    position={indicatorPosition}
+                    active={selected}
+                    placement={indicatorPlacement}
                     {...indicatorProps}
                     className={classNames(classes.indicator, {
                         [classes.selected]: selected
