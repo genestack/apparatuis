@@ -6,6 +6,12 @@
 
 -   Add [DropdownTabs](src/components/dropdown-tabs/dropdown-tabs.tsx)
 
+## [10.6.1] - 2020-10-22
+
+### Fixed
+
+-   Mount `<Popper>` in `<Suggest>` only when it opened for better performance
+
 ## [10.6.0] - 2020-10-21
 
 ### Added
