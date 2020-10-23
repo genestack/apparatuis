@@ -24,8 +24,12 @@ export const small: string;
 
 export const tiny: string;
 
+export const body: string;
+
 export const prepend: string;
 
 export const append: string;
 
 export const label: string;
+
+export const indicator: string;

@@ -148,7 +148,10 @@ export function SuggestInput(props: Props) {
                       )
                     : null;
 
-                const menuProps = downshift.getMenuProps({refKey: 'rootRef'});
+                const menuProps = downshift.getMenuProps(
+                    {refKey: 'rootRef'},
+                    {suppressRefError: true}
+                );
 
                 const open = !!children;
 
@@ -156,7 +159,6 @@ export function SuggestInput(props: Props) {
                     ...inputPopoverProps,
                     ...menuProps,
                     rootRef: chainRefs(menuProps.rootRef, inputPopoverProps.rootRef),
-                    keepMounted: true,
                     style: {
                         ...inputPopoverProps.style,
                         display: open ? 'block' : 'none'
@@ -164,7 +166,7 @@ export function SuggestInput(props: Props) {
                     eventsEnabled: isOpen
                 };
 
-                // Downshift prevents default event behaviour on Escape key down regardless the open state.
+                // Downshift prevents default event behavior on Escape key down regardless the open state.
                 // Ignore downshift keydown handler for properly work the suggest into dialogs.
                 const handleInputKeyDown: SuggestProps['onKeyDown'] = (event) => {
                     if (!open && event.key === 'Escape') {
