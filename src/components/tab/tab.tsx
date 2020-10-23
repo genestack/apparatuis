@@ -91,7 +91,7 @@ export const Tab: OverridableComponent<TypeMap> = React.forwardRef<
     return (
         <Component
             className={classNames(
-                styles.root,
+                classes.root,
                 {
                     [classes.hovered]: hovered,
                     [classes.selected]: selected,
@@ -135,7 +135,7 @@ export const Tab: OverridableComponent<TypeMap> = React.forwardRef<
                     placement={indicatorPlacement}
                     {...indicatorProps}
                     className={classNames(classes.indicator, {
-                        [classes.selected]: selected
+                        [classes.selected]: selected || indicatorProps.active
                     })}
                 />
             )}

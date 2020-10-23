@@ -1,5 +1,11 @@
 # Changelog
 
+## [10.7.0] - 2020-10-24
+
+### Added
+
+-   Add [DropdownTabs](src/components/dropdown-tabs/dropdown-tabs.tsx)
+
 ## [10.6.0] - 2020-10-21
 
 ### Added
