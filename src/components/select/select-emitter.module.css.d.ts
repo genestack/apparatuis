@@ -12,7 +12,7 @@ export const arrow: string;
 
 export const optionLabel: string;
 
-export const value: string;
+export const label: string;
 
 export const info: string;
 

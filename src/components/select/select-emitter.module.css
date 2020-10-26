@@ -47,8 +47,8 @@
     width: 100%;
 }
 
-/* optionLabel value */
-.value {
+/* label */
+.label {
     white-space: nowrap;
     text-overflow: ellipsis;
     font-family: inherit;

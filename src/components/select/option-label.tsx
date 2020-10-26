@@ -9,31 +9,72 @@
 import classNames from 'classnames';
 import React from 'react';
 
+import {WithClasses, OverridableProps, OverridableComponent, mergeClassesProps} from '../../utils';
+
 import * as styles from './select-emitter.module.css';
 
-type TargetProps = React.HTMLAttributes<HTMLSpanElement>;
+type SpanProps = React.HTMLAttributes<HTMLSpanElement>;
 
 /** SelectLabel props */
-export interface Props extends TargetProps {
+export interface Props extends WithClasses<keyof typeof styles> {
     /** Element before children */
     prepend?: React.ReactNode;
+    prependProps?: SpanProps;
     /** Element after children */
     append?: React.ReactNode;
+    appendProps?: SpanProps;
+    /** Label props */
+    labelProps?: SpanProps;
+}
+
+interface TypeMap {
+    props: Props;
+    defaultType: 'span';
 }
 
 /** Option label (depends of SelectContext) */
-export function OptionLabel(props: Props) {
-    const {prepend, append, children, ...rest} = props;
+export const OptionLabel: OverridableComponent<TypeMap> = React.forwardRef<
+    HTMLSpanElement,
+    OverridableProps<TypeMap>
+>(function OptionLabelComponent(props, ref) {
+    const {
+        component: Component = 'span',
+        className,
+        prepend,
+        prependProps = {},
+        append,
+        appendProps = {},
+        labelProps = {},
+        classes,
+        children,
+        ...rest
+    } = mergeClassesProps(props, styles);
 
     return (
-        <span
+        <Component
+            className={classNames(classes.optionLabel, className)}
             title={typeof children === 'string' ? children : undefined}
             {...rest}
-            className={classNames(styles.optionLabel, rest.className)}
+            ref={ref}
         >
-            {prepend && <span className={styles.info}>{prepend}</span>}
-            {children && <span className={styles.value}>{children}</span>}
-            {append && <span className={styles.info}>{append}</span>}
-        </span>
+            {prepend && (
+                <span
+                    {...prependProps}
+                    className={classNames(classes.info, prependProps.className)}
+                >
+                    {prepend}
+                </span>
+            )}
+            {children && (
+                <span {...labelProps} className={classNames(classes.label, labelProps.className)}>
+                    {children}
+                </span>
+            )}
+            {append && (
+                <span {...appendProps} className={classNames(classes.info, appendProps.className)}>
+                    {append}
+                </span>
+            )}
+        </Component>
     );
-}
+});
