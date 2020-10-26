@@ -1,0 +1,40 @@
+/*
+ * Copyright (c) 2011-2020 Genestack Limited
+ * All Rights Reserved
+ * THIS IS UNPUBLISHED PROPRIETARY SOURCE CODE OF GENESTACK LIMITED
+ * The copyright notice above does not evidence any
+ * actual or intended publication of such source code.
+ */
+@import "../../variables.css";
+
+.root {
+    position: relative;
+    display: inline-flex;
+}
+
+.control {
+    width: 200px;
+}
+
+.control.selected {
+    cursor: pointer;
+}
+
+.control.normal {
+    padding-right: 48px;
+}
+
+.control.small {
+    padding-right: 44px;
+}
+
+.control.tiny {
+    padding-right: 40px;
+}
+
+.icon {
+    position: absolute;
+    top: 50%;
+    right: 8px;
+    transform: translate(0, -50%);
+}
