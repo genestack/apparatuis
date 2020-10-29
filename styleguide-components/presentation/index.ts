@@ -9,4 +9,5 @@ export {Presentation} from './presentation';
 export {PresentationControls} from './presentation-controls';
 export {PresentationState} from './presentation-state';
 export {PresentationPane} from './presentation-pane';
+export {PresentationSection} from './presentation-section';
 export {usePresentation} from './presentation-context';

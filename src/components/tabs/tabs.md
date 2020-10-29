@@ -4,7 +4,8 @@ const {
     usePresentation,
     PresentationControls,
     PresentationState,
-    PresentationPane
+    PresentationPane,
+    PresentationSection
 } = require('../../../styleguide-components/presentation');
 const {Typography} = require('../typography');
 const {BookmarkBorderedIcon, DraftIcon, OpenFolderIcon, LinkIcon} = require('../../icons');
@@ -139,13 +140,15 @@ function TabsExample() {
         <PresentationState name="size" label="Small" value="small" />
         <PresentationState name="size" label="Tiny" value="tiny" />
 
-        <ListItem>
-            <Typography variant="section">Indicator placement</Typography>
-        </ListItem>
-        <PresentationState name="indicatorPlacement" label="Left" value="left" />
-        <PresentationState name="indicatorPlacement" label="Top" value="top" />
-        <PresentationState name="indicatorPlacement" label="Right" value="right" />
-        <PresentationState name="indicatorPlacement" label="Bottom" value="bottom" />
+        <PresentationSection depends="variant" value="ghost">
+            <ListItem>
+                <Typography variant="section">Indicator placement</Typography>
+            </ListItem>
+            <PresentationState name="indicatorPlacement" label="Left" value="left" />
+            <PresentationState name="indicatorPlacement" label="Top" value="top" />
+            <PresentationState name="indicatorPlacement" label="Right" value="right" />
+            <PresentationState name="indicatorPlacement" label="Bottom" value="bottom" />
+        </PresentationSection>
     </PresentationControls>
 </Presentation>;
 ```
@@ -157,8 +160,9 @@ function TabPanel(props) {
     const {children, selectedValue, value} = props;
 
     return (
-        <div role="tabpanel" hidden={selectedValue !== value} style={{paddingTop: 20}}>
-            <Typography>{children}</Typography>
+        <div role="tabpanel" hidden={selectedValue !== value}>
+            <Typography style={{padding: '20px 24px 0'}}>{children}</Typography>
+            <Preloader show count={4} wrapAll={List} wrapEach={ListItem} />
         </div>
     );
 }
@@ -203,8 +207,9 @@ function TabPanel(props) {
     const {children, selectedValue, value} = props;
 
     return (
-        <div role="tabpanel" hidden={selectedValue !== value} style={{paddingTop: 20}}>
-            <Typography>{children}</Typography>
+        <div role="tabpanel" hidden={selectedValue !== value}>
+            <Typography style={{padding: '20px 24px 0'}}>{children}</Typography>
+            <Preloader show count={4} wrapAll={List} wrapEach={ListItem} />
         </div>
     );
 }
@@ -242,7 +247,7 @@ function TabsFrame() {
 </PageContent>;
 ```
 
-### Horizontal tabs with meta info
+### Horizontal tabs with meta info (prepend, append)
 
 ```js
 const {BookmarkBorderedIcon, DraftIcon, OpenFolderIcon, LinkIcon} = require('../../icons');
@@ -251,8 +256,9 @@ function TabPanel(props) {
     const {children, selectedValue, value} = props;
 
     return (
-        <div role="tabpanel" hidden={selectedValue !== value} style={{paddingTop: 20}}>
-            <Typography>{children}</Typography>
+        <div role="tabpanel" hidden={selectedValue !== value}>
+            <Typography style={{padding: '20px 24px 0'}}>{children}</Typography>
+            <Preloader show count={4} wrapAll={List} wrapEach={ListItem} />
         </div>
     );
 }
@@ -315,8 +321,9 @@ function TabPanel(props) {
     const {children, selectedValue, value} = props;
 
     return (
-        <div role="tabpanel" hidden={selectedValue !== value} style={{padding: '10px 20px'}}>
-            <Typography>{children}</Typography>
+        <div role="tabpanel" hidden={selectedValue !== value} style={{width: '100%'}}>
+            <Typography style={{padding: '0 24px'}}>{children}</Typography>
+            <Preloader show count={4} wrapAll={List} wrapEach={ListItem} />
         </div>
     );
 }
@@ -331,10 +338,23 @@ function TabsFrame() {
                 orientation="vertical"
                 onValueChange={(value) => setTabValue(value)}
             >
-                <Tab prepend={<LinkIcon />} title="Signals" />
-                <Tab prepend={<OpenFolderIcon />} title="Tree view" />
-                <Tab prepend={<BookmarkBorderedIcon />} title="My bookmarks" />
-                <Tab prepend={<DraftIcon />} title="Drafts" disabled />
+                <Tab
+                    prepend={<LinkIcon />}
+                    tooltip={<span style={{whiteSpace: 'nowrap'}}>Signals</span>}
+                />
+                <Tab
+                    prepend={<OpenFolderIcon />}
+                    tooltip={<span style={{whiteSpace: 'nowrap'}}>Tree view</span>}
+                />
+                <Tab
+                    prepend={<BookmarkBorderedIcon />}
+                    tooltip={<span style={{whiteSpace: 'nowrap'}}>My bookmarks</span>}
+                />
+                <Tab
+                    prepend={<DraftIcon />}
+                    tooltip={<span style={{whiteSpace: 'nowrap'}}>Drafts</span>}
+                    disabled
+                />
             </Tabs>
 
             <TabPanel selectedValue={tabValue} value={0}>

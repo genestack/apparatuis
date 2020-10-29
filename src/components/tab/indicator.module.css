@@ -13,10 +13,6 @@
     background-color: var(--gs-color-grey-outline);
 }
 
-.root.active {
-    background-color: var(--gs-color-action-text);
-}
-
 .root.bottom,
 .root.top {
     left: 0;
@@ -32,6 +28,7 @@
 }
 
 .root.fullWidth {
+    background: var(--gs-color-grey-background);
     width: 100%;
     height: 100%;
 }
@@ -50,4 +47,8 @@
 
 .root.right {
     right: 0;
+}
+
+.root.active {
+    background-color: var(--gs-color-action-text);
 }
