@@ -48,10 +48,7 @@ function TabSamples(props) {
                     </Tab>
                 </ControlsItem>
                 <ControlsItem>
-                    <Tab
-                        {...tabProps}
-                        tooltip="Some tooltip text"
-                    >
+                    <Tab {...tabProps} tooltip="Some tooltip text">
                         With tooltip
                     </Tab>
                 </ControlsItem>
