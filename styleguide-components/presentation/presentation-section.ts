@@ -10,12 +10,18 @@ import * as React from 'react';
 import {PresentationContext} from './presentation-context';
 
 interface Props {
+    /** The name of the field on which the display of the section depends */
     depends: string;
+    /**
+     * Field value at which the section will be displayed
+     * if the value is undefined, it will be used as boolean
+     */
     value?: unknown;
+    /** Section content */
     children: React.ReactNode;
 }
 
-/** Rendering of a section depending on state of field */
+/** Rendering of a section depending on value of field */
 export function PresentationSection({depends, value, children}: Props) {
     const [state] = React.useContext(PresentationContext);
 
