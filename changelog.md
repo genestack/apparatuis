@@ -1,6 +1,12 @@
 # Changelog
 
-## [10.7.0] - 2020-10-24
+## [10.8.0] - 2020-10-30
+
+### Changed
+
+-   Add [PresentationSection](styleguide-components/presentation/presentation-section.ts)
+-   Add tooltip property to [Tab](src/components/tab/tab.tsx)
+-   Fix tab background hover
 
 ### Added
 

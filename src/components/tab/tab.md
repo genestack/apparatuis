@@ -10,6 +10,7 @@ const {DraftIcon} = require('../../icons');
 
 const BadgeExample = (props) => {
     const {
+        useTooltip,
         hovered,
         selected,
         disabled,
@@ -45,6 +46,7 @@ const BadgeExample = (props) => {
                         selected={selected}
                         disabled={disabled}
                         indicatorPlacement={indicatorPlacement}
+                        tooltip={useTooltip && text}
                     >
                         {text}
                     </Tab>
@@ -72,6 +74,7 @@ const BadgeExample = (props) => {
 
 <Presentation
     initialState={{
+        useTooltip: false,
         hovered: false,
         selected: false,
         disabled: false,
@@ -86,6 +89,7 @@ const BadgeExample = (props) => {
         <BadgeExample />
     </PresentationPane>
     <PresentationControls>
+        <PresentationState name="useTooltip" label="Use tooltip" />
         <PresentationState name="hovered" label="Hovered" />
         <PresentationState name="selected" label="Selected" />
         <PresentationState name="disabled" label="Disabled" />
@@ -114,66 +118,4 @@ const BadgeExample = (props) => {
         <PresentationState name="indicatorPlacement" label="Bottom" value="bottom" />
     </PresentationControls>
 </Presentation>;
-```
-
-#### Usage example
-
-```js
-const {DraftIcon, BookmarkIcon} = require('../../icons');
-
-<RootElement>
-    <PageContent as={Paper}>
-        <WithSeparator separator={<Divider gap={4} />}>
-            <React.Fragment>
-                <Typography intent="quiet">Ghost tabs</Typography>
-                <Divider variant="transparent" gap={1} />
-
-                <Tab selected>All study</Tab>
-                <Tab prepend={<DraftIcon />}>My bookmarks</Tab>
-                <Tab prepend={<BookmarkIcon />} append={81}>
-                    My bookmarks
-                </Tab>
-                <Tab prepend={<DraftIcon />} disabled>
-                    Drafts
-                </Tab>
-            </React.Fragment>
-
-            <React.Fragment>
-                <Typography intent="quiet">Solid tabs</Typography>
-                <Divider variant="transparent" gap={1} />
-
-                <Tab variant="solid" selected>
-                    All study
-                </Tab>
-                <Tab variant="solid" prepend={<DraftIcon />}>
-                    My bookmarks
-                </Tab>
-                <Tab variant="solid" prepend={<BookmarkIcon />} append={81}>
-                    My bookmarks
-                </Tab>
-                <Tab variant="solid" prepend={<DraftIcon />} disabled>
-                    Drafts
-                </Tab>
-            </React.Fragment>
-
-            <React.Fragment>
-                <Typography intent="quiet">Small solid tabs</Typography>
-                <Divider variant="transparent" gap={1} />
-
-                <Tab variant="solid" size="small" selected>
-                    All study
-                </Tab>
-                <Tab variant="solid" size="small" prepend={<DraftIcon />}>
-                    My bookmarks
-                </Tab>
-                <Tab variant="solid" size="small" prepend={<BookmarkIcon />} append={81}>
-                    My bookmarks
-                </Tab>
-                <Tab variant="solid" size="small" prepend={<DraftIcon />} disabled>
-                    Drafts
-                </Tab>
-            </React.Fragment>
-        </WithSeparator>
-    </PageContent>
-</RootElement>;
 ```

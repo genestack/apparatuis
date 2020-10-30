@@ -14,8 +14,10 @@ import {
     OverridableProps,
     WithClasses,
     mergeClassesProps,
-    shouldRenderNode
+    shouldRenderNode,
+    chainRefs
 } from '../../utils';
+import {Tooltip, useTooltipHandler, TooltipProps} from '../tooltip';
 
 import {Indicator, IndicatorPlacement, Props as IndicatorProps} from './indicator';
 import * as styles from './tab.module.css';
@@ -50,6 +52,11 @@ export interface Props extends WithClasses<keyof typeof styles> {
     /** Properties for wrapper of append element */
     appendProps?: SpanProps;
 
+    /** Node used as tooltip */
+    tooltip?: React.ReactNode;
+    /** Properties for tooltip */
+    tooltipProps?: TooltipProps;
+
     /** Indicator placement of tab (default: "bottom") */
     indicatorPlacement?: IndicatorPlacement;
     /** Props of tab indicator */
@@ -61,7 +68,11 @@ interface TypeMap {
     defaultType: 'button';
 }
 
-/** Tab control component */
+/**
+ *  Tab control component
+ * @example ./tab-combinations.md
+ *
+ */
 export const Tab: OverridableComponent<TypeMap> = React.forwardRef<
     HTMLButtonElement,
     OverridableProps<TypeMap>
@@ -83,62 +94,79 @@ export const Tab: OverridableComponent<TypeMap> = React.forwardRef<
         indicatorPlacement = 'bottom',
         indicatorProps = {},
 
+        tooltip,
+        tooltipProps = {},
+
         classes,
         children,
         ...restProps
     } = mergeClassesProps(props, styles);
 
-    return (
-        <Component
-            className={classNames(
-                classes.root,
-                {
-                    [classes.hovered]: hovered,
-                    [classes.selected]: selected,
-                    [classes.empty]: !children,
-                    [classes.solid]: variant === 'solid',
-                    [classes.normal]: size === 'normal',
-                    [classes.small]: size === 'small',
-                    [classes.tiny]: size === 'tiny'
-                },
-                className
-            )}
-            role="tab"
-            aria-selected={selected}
-            aria-disabled={restProps.disabled}
-            title={typeof children === 'string' ? children : ''}
-            {...restProps}
-            ref={ref}
-        >
-            <span {...bodyProps} className={classes.body}>
-                {shouldRenderNode(prepend) && (
-                    <span {...prependProps} className={classes.prepend}>
-                        {prepend}
-                    </span>
-                )}
-                {shouldRenderNode(children) && (
-                    <span {...labelProps} className={classes.label}>
-                        {children}
-                    </span>
-                )}
-                {shouldRenderNode(append) && (
-                    <span {...appendProps} className={classes.append}>
-                        {append}
-                    </span>
-                )}
-            </span>
+    const tabRef = React.useRef(null);
+    const tooltipHandler = useTooltipHandler({
+        referenceElement: tabRef.current
+    });
 
-            {!restProps.disabled && (
-                <Indicator
-                    fullWidth={variant === 'solid'}
-                    active={selected}
-                    placement={indicatorPlacement}
-                    {...indicatorProps}
-                    className={classNames(classes.indicator, {
-                        [classes.selected]: selected || indicatorProps.active
-                    })}
-                />
+    return (
+        <>
+            <Component
+                className={classNames(
+                    classes.root,
+                    {
+                        [classes.hovered]: hovered,
+                        [classes.selected]: selected,
+                        [classes.empty]: !children,
+                        [classes.solid]: variant === 'solid',
+                        [classes.normal]: size === 'normal',
+                        [classes.small]: size === 'small',
+                        [classes.tiny]: size === 'tiny'
+                    },
+                    className
+                )}
+                role="tab"
+                aria-selected={selected}
+                aria-disabled={restProps.disabled}
+                title={typeof children === 'string' ? children : ''}
+                {...tooltipHandler.getReferenceProps()}
+                {...restProps}
+                ref={chainRefs(ref, tabRef)}
+            >
+                <span {...bodyProps} className={classes.body}>
+                    {shouldRenderNode(prepend) && (
+                        <span {...prependProps} className={classes.prepend}>
+                            {prepend}
+                        </span>
+                    )}
+                    {shouldRenderNode(children) && (
+                        <span {...labelProps} className={classes.label}>
+                            {children}
+                        </span>
+                    )}
+                    {shouldRenderNode(append) && (
+                        <span {...appendProps} className={classes.append}>
+                            {append}
+                        </span>
+                    )}
+                </span>
+
+                {!restProps.disabled && (
+                    <Indicator
+                        fullWidth={variant === 'solid'}
+                        active={selected}
+                        placement={indicatorPlacement}
+                        {...indicatorProps}
+                        className={classNames(classes.indicator, {
+                            [classes.selected]: selected || indicatorProps.active
+                        })}
+                    />
+                )}
+            </Component>
+
+            {shouldRenderNode(tooltip) && (
+                <Tooltip {...tooltipHandler.getTooltipProps()} {...tooltipProps}>
+                    {tooltip}
+                </Tooltip>
             )}
-        </Component>
+        </>
     );
 });

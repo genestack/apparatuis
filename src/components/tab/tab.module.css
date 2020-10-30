@@ -70,11 +70,6 @@
     cursor: not-allowed;
 }
 
-.root.solid:hover,
-.root.solid.hovered {
-    background: var(--gs-color-grey-background);
-}
-
 .root.solid:focus,
 .root.solid:focus-within {
     box-shadow: var(--gs-focused-shadow);
