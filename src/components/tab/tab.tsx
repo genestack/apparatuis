@@ -52,9 +52,15 @@ export interface Props extends WithClasses<keyof typeof styles> {
     /** Properties for wrapper of append element */
     appendProps?: SpanProps;
 
-    /** Node used as tooltip */
+    /**
+     * Node used as tooltip
+     * @deprecated This property will be removed in version 11.0.0.
+     */
     tooltip?: React.ReactNode;
-    /** Properties for tooltip */
+    /**
+     *  Properties for tooltip
+     * @deprecated This property will be removed in version 11.0.0.
+     */
     tooltipProps?: TooltipProps;
 
     /** Indicator placement of tab (default: "bottom") */
@@ -94,7 +100,9 @@ export const Tab: OverridableComponent<TypeMap> = React.forwardRef<
         indicatorPlacement = 'bottom',
         indicatorProps = {},
 
+        // tslint:disable-next-line:deprecation
         tooltip,
+        // tslint:disable-next-line:deprecation
         tooltipProps = {},
 
         classes,
