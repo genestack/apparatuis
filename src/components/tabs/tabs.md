@@ -312,10 +312,11 @@ function TabsFrame() {
 </PageContent>;
 ```
 
-### Vertical tabs with icons
+### Vertical tabs with icons and tooltips
 
 ```js
 const {BookmarkBorderedIcon, DraftIcon, OpenFolderIcon, LinkIcon} = require('../../icons');
+const {CloneProps} = require('../../utils');
 
 function TabPanel(props) {
     const {children, selectedValue, value} = props;
@@ -338,23 +339,42 @@ function TabsFrame() {
                 orientation="vertical"
                 onValueChange={(value) => setTabValue(value)}
             >
-                <Tab
-                    prepend={<LinkIcon />}
-                    tooltip={<span style={{whiteSpace: 'nowrap'}}>Signals</span>}
-                />
-                <Tab
-                    prepend={<OpenFolderIcon />}
-                    tooltip={<span style={{whiteSpace: 'nowrap'}}>Tree view</span>}
-                />
-                <Tab
-                    prepend={<BookmarkBorderedIcon />}
-                    tooltip={<span style={{whiteSpace: 'nowrap'}}>My bookmarks</span>}
-                />
-                <Tab
-                    prepend={<DraftIcon />}
-                    tooltip={<span style={{whiteSpace: 'nowrap'}}>Drafts</span>}
-                    disabled
-                />
+                <CloneProps>
+                    {(tabProps) => (
+                        <TooltipHandler
+                            tooltip={<Tooltip style={{whiteSpace: 'nowrap'}}>Signals</Tooltip>}
+                        >
+                            <Tab prepend={<LinkIcon />} {...tabProps} />
+                        </TooltipHandler>
+                    )}
+                </CloneProps>
+                <CloneProps>
+                    {(tabProps) => (
+                        <TooltipHandler
+                            tooltip={<Tooltip style={{whiteSpace: 'nowrap'}}>Tree view</Tooltip>}
+                        >
+                            <Tab prepend={<OpenFolderIcon />} {...tabProps} />
+                        </TooltipHandler>
+                    )}
+                </CloneProps>
+                <CloneProps>
+                    {(tabProps) => (
+                        <TooltipHandler
+                            tooltip={<Tooltip style={{whiteSpace: 'nowrap'}}>My bookmarks</Tooltip>}
+                        >
+                            <Tab prepend={<BookmarkBorderedIcon />} {...tabProps} />
+                        </TooltipHandler>
+                    )}
+                </CloneProps>
+                <CloneProps>
+                    {(tabProps) => (
+                        <TooltipHandler
+                            tooltip={<Tooltip style={{whiteSpace: 'nowrap'}}>Drafts</Tooltip>}
+                        >
+                            <Tab prepend={<DraftIcon />} disabled {...tabProps} />
+                        </TooltipHandler>
+                    )}
+                </CloneProps>
             </Tabs>
 
             <TabPanel selectedValue={tabValue} value={0}>

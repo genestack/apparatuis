@@ -20,3 +20,4 @@ export * from './should-render-node';
 export * from './styles';
 export * from './use-controlled-prop';
 export * from './wrap-pure-component';
+export * from './clone-props';

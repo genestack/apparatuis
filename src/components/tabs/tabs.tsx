@@ -9,7 +9,13 @@
 import classNames from 'classnames';
 import React from 'react';
 
-import {OverridableComponent, OverridableProps, mergeClassesProps, chain} from '../../utils';
+import {
+    OverridableComponent,
+    OverridableProps,
+    mergeClassesProps,
+    chain,
+    WithClasses
+} from '../../utils';
 import {IndicatorProps, IndicatorPlacement, Indicator} from '../tab';
 
 import {Orientation, Variant, Size} from './common-tabs-props';
@@ -17,7 +23,7 @@ import * as styles from './tabs.module.css';
 import {PositionStyles, getPositionStyles} from './utils';
 
 /** Tabs props */
-export interface Props {
+export interface Props extends WithClasses<keyof typeof styles> {
     /** Value of selected tab */
     value: any;
     /** Tabs onChange handler */
@@ -60,6 +66,8 @@ export const Tabs: OverridableComponent<TypeMap> = React.forwardRef<
     OverridableProps<TypeMap>
 >(function TabsComponent(props, ref) {
     const {
+        className,
+
         value: selectedValue,
         onValueChange,
 
@@ -126,7 +134,7 @@ export const Tabs: OverridableComponent<TypeMap> = React.forwardRef<
     }, [indicatorPlacement, variant, size, orientation, selectedValue, childrenList]);
 
     return (
-        <Component {...restProps} ref={ref} className={classes.root}>
+        <Component {...restProps} ref={ref} className={classNames(classes.root, className)}>
             <div
                 role="tablist"
                 {...tabListProps}

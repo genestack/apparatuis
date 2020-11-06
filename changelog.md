@@ -1,5 +1,13 @@
 # Changelog
 
+## [10.9.0] - 2020-11-06
+
+### Added
+
+-   Add to imports [Tabs](src/components/tabs/tabs.tsx) from genestack-ui
+-   Add [CloneProps](src/utils/clone-props.ts)
+-   Add "deprecated" comment for tooltip and tooltipProps in [Tab](src/components/tab/tab.tsx) is deprecated
+
 ## [10.8.0] - 2020-10-30
 
 ### Changed
