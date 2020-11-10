@@ -163,19 +163,21 @@ export const Tabs: OverridableComponent<TypeMap> = React.forwardRef<
                     }, [onValueChange, childValue]);
 
                     return React.cloneElement(child, {
-                        className: animated && classes.tab,
+                        className: animated && classes.transition,
                         value: childValue,
                         onClick: chain(handleClick, onClick),
                         selected,
                         variant,
                         size,
                         classes: {
+                            prepend: animated && classes.transition,
+                            append: animated && classes.transition,
                             indicator: animated && classes.indicator
                         },
                         indicatorPlacement,
                         indicatorProps: {
                             ...tabIndicatorProps,
-                            selected: !animated && selected
+                            active: !animated && selected
                         },
                         ...restChildProps
                     });

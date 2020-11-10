@@ -12,6 +12,6 @@ export const tabList: string;
 
 export const vertical: string;
 
-export const tab: string;
+export const transition: string;
 
 export const indicator: string;

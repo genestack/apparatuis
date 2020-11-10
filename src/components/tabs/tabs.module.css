@@ -9,7 +9,8 @@
 @import "../../variables.css";
 
 :root {
-    --transition: ease-in-out 250ms;
+    --indicator-transition: ease-in-out 250ms;
+    --text-transition: ease-in 250ms;
 }
 
 .root {
@@ -25,18 +26,18 @@
     flex-direction: column;
 }
 
-.tab {
-    transition: color var(--transition);
+.transition {
+    transition: color var(--text-transition);
 }
 
-.tab :global(.gs-svg-icon-fill) {
-    transition: fill var(--transition);
+.transition :global(.gs-svg-icon-fill) {
+    transition: fill var(--text-transition);
 }
 
-.tab :global(.gs-svg-icon-stroke) {
-    transition: stroke var(--transition);
+.transition :global(.gs-svg-icon-stroke) {
+    transition: stroke var(--text-transition);
 }
 
 .indicator {
-    transition: var(--transition);
+    transition: var(--indicator-transition);
 }
