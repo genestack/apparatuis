@@ -1,5 +1,11 @@
 # Changelog
 
+## [10.9.1] - 2020-11-10
+
+### Fixes
+
+-   Fix indicator animation for [Tab](src/components/tab/tab.tsx)
+
 ## [10.9.0] - 2020-11-06
 
 ### Added

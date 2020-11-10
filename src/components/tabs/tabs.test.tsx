@@ -27,7 +27,7 @@ describe('<Tabs />', () => {
         );
 
         expect(wrapper.find(Tab).props()).toEqual({
-            className: 'tab',
+            className: 'transition',
             onClick: expect.anything(),
             value: 0,
             selected: false,
@@ -35,9 +35,11 @@ describe('<Tabs />', () => {
             variant: 'ghost',
             indicatorPlacement: 'bottom',
             indicatorProps: {
-                selected: false
+                active: false
             },
             classes: {
+                prepend: 'transition',
+                append: 'transition',
                 indicator: 'indicator'
             }
         });
