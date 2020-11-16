@@ -1,5 +1,12 @@
 # Changelog
 
+## [10.9.2] - 2020-11-16
+
+### Added
+
+-   Overridden scrollableNodeProps types for [ScrollView](src/components/scroll-view/scroll-view.tsx)
+-   Extends "Options" types from a simplebar for [ScrollView](src/components/scroll-view/scroll-view.tsx)
+
 ## [10.9.1] - 2020-11-10
 
 ### Fixes
