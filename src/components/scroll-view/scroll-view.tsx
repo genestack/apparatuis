@@ -7,15 +7,16 @@
  */
 import classNames from 'classnames';
 import * as React from 'react';
+import {Options} from 'simplebar';
 import SimpleBar from 'simplebar-react';
 import 'simplebar/dist/simplebar.min.css';
 
-import {DarkContext} from '../../utils/dark-context';
+import {DarkContext} from '../../utils';
 
 import * as styles from './scroll-view.module.css';
 
 /** Props of ScrollView component */
-export type Props = React.ComponentPropsWithoutRef<'div'> & {
+export interface Props extends React.ComponentPropsWithoutRef<'div'>, Options {
     /**
      * Defines when and how to show scrollbars. Possible values:
      *
@@ -24,7 +25,9 @@ export type Props = React.ComponentPropsWithoutRef<'div'> & {
      * `always` — scrollbars are always shown
      */
     showScrollbars?: 'auto' | 'always';
-};
+    /** Props of SimpleBarReact's scrollableNodeProps */
+    scrollableNodeProps?: {ref: React.RefObject<HTMLDivElement>};
+}
 
 const simplebarOptions = {
     autoHide: false
