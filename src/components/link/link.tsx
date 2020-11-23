@@ -75,7 +75,7 @@ export const Link = (props: Props) => {
             {...rest}
             href={href}
             tabIndex={tabIndex}
-            box="inline"
+            box={props.ellipsis ? 'block' : 'inline'}
             onClick={onClick}
             className={classNames(classes.root, rest.className, {
                 [classes.pseudo]: variant === 'pseudo',

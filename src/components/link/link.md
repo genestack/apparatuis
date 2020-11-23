@@ -92,6 +92,13 @@ handleInvertedChange = (event) => setState({inverted: event.currentTarget.checke
                         “Who am taking the ebonics quiz?”, the prof jovially axed.
                     </Typography>
                 </React.Fragment>
+                <React.Fragment>
+                    <Link ellipsis>
+                        Six big devils from Japan quickly forgot how to waltz. Then a cop quizzed
+                        Mick Jagger’s ex-wives briefly. “Who am taking the ebonics quiz?”, the prof
+                        jovially axed.
+                    </Link>
+                </React.Fragment>
                 <Link tabIndex={0} variant="pseudo" prepend={<DownloadIcon />}>
                     Download
                 </Link>

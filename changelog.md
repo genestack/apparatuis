@@ -1,5 +1,11 @@
 # Changelog
 
+## [10.9.3] - 2020-11-23
+
+### Fixed
+
+-   Fixed `ellipsis` property in `<Link/>`
+
 ## [10.9.2] - 2020-11-16
 
 ### Added
