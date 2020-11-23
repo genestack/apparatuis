@@ -1,5 +1,11 @@
 # Changelog
 
+## [10.10.0] - 2020-11-23
+
+### Added
+
+-   Added `<SampleIcon />`, `<KebabIcon />`
+
 ## [10.9.3] - 2020-11-23
 
 ### Fixed

@@ -8,6 +8,7 @@
 
 export {GenericFileIcon} from './generic-file-icon';
 export {TemplateIcon} from './template-icon';
+export {SampleIcon} from './sample-icon';
 export {StudyIcon} from './study-icon';
 
 export {ArrowBottomThinIcon} from './arrow-bottom-thin-icon';
@@ -37,6 +38,7 @@ export {GearIcon} from './gear-icon';
 export {HelpIcon} from './help-icon';
 export {InfoIcon} from './info-icon';
 export {IntegerIcon} from './integer-icon';
+export {KebabIcon} from './kebab-icon';
 export {KeyboardArrowBottomIcon} from './keyboard-arrow-bottom-icon';
 export {KeyboardArrowLeftIcon} from './keyboard-arrow-left-icon';
 export {KeyboardArrowRightIcon} from './keyboard-arrow-right-icon';
