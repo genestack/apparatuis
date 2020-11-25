@@ -16,3 +16,5 @@ export const justifyCenter: string;
 export const justifySpaceBetween: string;
 export const alignCenter: string;
 export const alignBaseline: string;
+export const noWrap: string;
+export const wrap: string;

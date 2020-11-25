@@ -1,5 +1,11 @@
 # Changelog
 
+## [10.11.0] - 2020-11-25
+
+### Added
+
+-   Added `flexWrap` property in `<Controls/>`
+
 ## [10.10.0] - 2020-11-23
 
 ### Added

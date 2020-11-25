@@ -211,6 +211,16 @@ const regulationButtons = (
                     </ButtonGroup>
                 </ControlsItem>
             </Controls>
+
+            <Controls gap={2} flexWrap="wrap" alignItems="center">
+                {Array.from(Array(20), (_, i) => i + 1).map((item, index) => {
+                    return (
+                        <ControlsItem>
+                            <Button>Button {index}</Button>
+                        </ControlsItem>
+                    );
+                })}
+            </Controls>
         </WithSeparator>
     </PageContent>
 </DarkContext.Provider>;

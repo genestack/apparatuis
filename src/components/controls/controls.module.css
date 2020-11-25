@@ -78,3 +78,47 @@
 .justifySpaceBetween {
     justify-content: space-between;
 }
+
+.noWrap {
+    flex-wrap: nowrap;
+}
+
+.wrap {
+    flex-wrap: wrap;
+}
+
+.wrap.gap1 {
+    margin-top: calc(-1 * var(--gs-spacing-unit) / 4);
+    margin-bottom: calc(-1 * var(--gs-spacing-unit) / 4);
+}
+
+.wrap.gap1 > .item {
+    margin: calc(var(--gs-spacing-unit) / 4);
+}
+
+.wrap.gap2 {
+    margin-top: calc(-1 * var(--gs-spacing-unit) / 2);
+    margin-bottom: calc(-1 * var(--gs-spacing-unit) / 2);
+}
+
+.wrap.gap2 > .item {
+    margin: calc(var(--gs-spacing-unit) / 2);
+}
+
+.wrap.gap4 {
+    margin-top: calc(-1 * var(--gs-spacing-unit) * 1);
+    margin-bottom: calc(-1 * var(--gs-spacing-unit) * 1);
+}
+
+.wrap.gap4 > .item {
+    margin: calc(var(--gs-spacing-unit) * 1);
+}
+
+.wrap.gap8 {
+    margin-top: calc(-1 * var(--gs-spacing-unit) * 2);
+    margin-bottom: calc(-1 * var(--gs-spacing-unit) * 2);
+}
+
+.wrap.gap8 > .item {
+    margin: calc(var(--gs-spacing-unit) * 2);
+}

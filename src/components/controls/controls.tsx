@@ -23,6 +23,8 @@ export interface Props extends TargetProps {
     as?: React.ReactType;
     /** Vertical align */
     align?: 'center' | 'baseline';
+    /** Flex wrap */
+    flexWrap?: 'wrap' | 'nowrap';
 }
 
 /**
@@ -31,7 +33,14 @@ export interface Props extends TargetProps {
  * that are defined by `gap` property of controls container.
  */
 export const Controls = (props: Props) => {
-    const {as: Component = 'div', gap = 2, justify = 'start', align = 'center', ...rest} = props;
+    const {
+        as: Component = 'div',
+        gap = 2,
+        justify = 'start',
+        align = 'center',
+        flexWrap = 'nowrap',
+        ...rest
+    } = props;
 
     return (
         <Component
@@ -47,7 +56,9 @@ export const Controls = (props: Props) => {
                 [styles.justifyStart]: justify === 'start',
                 [styles.justifySpaceBetween]: justify === 'space-between',
                 [styles.alignCenter]: align === 'center',
-                [styles.alignBaseline]: align === 'baseline'
+                [styles.alignBaseline]: align === 'baseline',
+                [styles.noWrap]: flexWrap === 'nowrap',
+                [styles.wrap]: flexWrap === 'wrap'
             })}
         />
     );
