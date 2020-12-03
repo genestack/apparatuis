@@ -1,5 +1,11 @@
 # Changelog
 
+## [10.12.0] - 2020-12-02
+
+### Added
+
+-   Added `align` `justify` `flexWrap` `direction` properties and `0` variant for `gap` property in `<Flex/>`
+
 ## [10.11.0] - 2020-11-25
 
 ### Added
