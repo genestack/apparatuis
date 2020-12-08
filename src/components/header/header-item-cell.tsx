@@ -13,13 +13,25 @@ import * as styles from './header-item-cell.module.css';
 type TargetProps = React.HTMLAttributes<HTMLDivElement>;
 
 /** HeaderItemCell public properties */
-export interface Props extends TargetProps {}
+export interface Props extends TargetProps {
+    /** If `true` flex item will grow */
+    grow?: boolean;
+    /** If `true` flex item will shrink */
+    shrink?: boolean;
+}
 
 /** Shortcut to ListItemCell */
-export const HeaderItemCell = (props: Props) => (
-    <div
-        data-qa="header-item-cell"
-        {...props}
-        className={classNames(props.className, styles.root)}
-    />
-);
+export const HeaderItemCell = (props: Props) => {
+    const {grow, shrink, ...rest} = props;
+
+    return (
+        <div
+            data-qa="header-item-cell"
+            {...rest}
+            className={classNames(rest.className, styles.root, {
+                [styles.grow]: grow,
+                [styles.shrink]: shrink
+            })}
+        />
+    );
+};

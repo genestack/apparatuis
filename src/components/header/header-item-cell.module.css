@@ -15,3 +15,11 @@
     flex-grow: 0;
     flex-shrink: 0;
 }
+
+.grow {
+    flex-grow: 1;
+}
+
+.shrink {
+    flex-shrink: 1;
+}

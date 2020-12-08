@@ -1,5 +1,11 @@
 # Changelog
 
+## [10.13.0] - 2020-12-08
+
+### Added
+
+-   Added `shrink` `grow` properties in `<HeaderItemCell/>`
+
 ## [10.12.0] - 2020-12-02
 
 ### Added
