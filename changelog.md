@@ -1,5 +1,11 @@
 # Changelog
 
+## [10.14.0] - 2021-01-15
+
+### Added
+
+-   Added `usePopoverHandler` hook and `<PopoverHandler/>`
+
 ## [10.13.0] - 2020-12-08
 
 ### Added

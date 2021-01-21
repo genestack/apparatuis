@@ -53,7 +53,7 @@ export interface TooltipHandlerApi {
 
 /**
  * Common tooltip handler.
- * It listen hover and focus on the reference element.
+ * It listens hover and focus on the reference element.
  */
 export const TooltipHandler = React.forwardRef<TooltipHandlerApi, Props>(function TooltipHandlerRef(
     props,

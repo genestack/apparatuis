@@ -62,7 +62,7 @@ describe('<TooltipHandler />', () => {
         });
     });
 
-    it('should close tooltip when mouse leave on reference element', () => {
+    it('should hide tooltip when mouse leave on reference element', () => {
         const wrapper = setup();
 
         act(() => {
@@ -100,7 +100,7 @@ describe('<TooltipHandler />', () => {
         expect(document.getElementById('tooltip')).toBeTruthy();
     });
 
-    it('should close tooltip when blur on reference element', () => {
+    it('should hide tooltip when blur on reference element', () => {
         const wrapper = setup();
 
         act(() => {
@@ -122,7 +122,7 @@ describe('<TooltipHandler />', () => {
         expect(document.getElementById('tooltip')).toBeFalsy();
     });
 
-    it('should close tooltip on escape window keydown event', () => {
+    it('should hide tooltip on escape window keydown event', () => {
         const wrapper = setup();
 
         act(() => {
@@ -267,7 +267,7 @@ describe('<TooltipHandler />', () => {
         });
 
         act(() => {
-            // tslint:disable-next-line: no-non-null-assertion
+            // tslint:disable-next-line: no-non-null-assertion no-unnecessary-type-assertion
             window.document.getElementById('wrapper')!.dispatchEvent(
                 new MouseEvent('mousemove', {
                     bubbles: true
