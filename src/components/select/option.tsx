@@ -10,6 +10,7 @@ import React from 'react';
 
 import {MenuItem, MenuItemProps} from '../menu';
 
+import * as styles from './option.module.css';
 import {useSelectContext} from './select-context';
 
 /** Option props */
@@ -28,7 +29,7 @@ export function Option({label, ...restProps}: Props) {
         const optionLabel = typeof label === 'string' ? label : undefined;
 
         return (
-            <option value={restProps.value} label={optionLabel}>
+            <option className={styles.root} value={restProps.value} label={optionLabel}>
                 {restProps.children}
             </option>
         );
