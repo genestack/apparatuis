@@ -1,5 +1,12 @@
 # Changelog
 
+## [10.14.1] - 2021-02-15
+
+### Fixed
+
+-   Fixed select [option](src/components/select/option.tsx) font color in FF
+-   Add types for [option](src/components/select/option.tsx)
+
 ## [10.14.0] - 2021-01-15
 
 ### Added
