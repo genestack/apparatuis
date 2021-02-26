@@ -26,13 +26,21 @@ handleCheckboxChange = (enableSelfFocus) => setState({enableSelfFocus});
                 <Typography>Focus for the next inputs is trapped:</Typography>
             </ControlsItem>
             <ControlsItem>
-                <label>
-                    <Typography box="inline">Enable container focus: </Typography>
-                    <Checkbox
-                        checked={state.enableSelfFocus}
-                        onValueChange={handleCheckboxChange}
-                    />
-                </label>
+                <Controls align="center">
+                    <ControlsItem>
+                        <Typography as="span" box="inline">
+                            Enable container focus:{' '}
+                        </Typography>
+                    </ControlsItem>
+                    <ControlsItem>
+                        <input
+                            type="checkbox"
+                            checked={state.enableSelfFocus}
+                            onChange={(event) => handleCheckboxChange(event.target.checked)}
+                            style={{margin: 0, display: 'flex'}}
+                        />
+                    </ControlsItem>
+                </Controls>
             </ControlsItem>
         </Controls>
     </Row>

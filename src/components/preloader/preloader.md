@@ -1,6 +1,5 @@
 ```js
 const {DarkContext} = require('../../utils/dark-context');
-const {Checkbox} = require('../checkbox');
 
 initialState = {
     contextInverted: false,
@@ -31,12 +30,19 @@ handleDrawerClose = () =>
     <DarkContext.Provider value={state.contextInverted}>
         <PageContent as={Paper}>
             <Typography variant="section">In context</Typography>
-            <Checkbox
-                onValueChange={(value) => setState({contextInverted: value})}
-                checked={state.contextInverted}
-            >
-                <Typography>Inverted</Typography>
-            </Checkbox>
+            <Controls>
+                <ControlsItem>
+                    <input
+                        type="checkbox"
+                        onChange={(event) => setState({contextInverted: event.target.checked})}
+                        checked={state.contextInverted}
+                        style={{margin: 0, display: 'flex'}}
+                    />
+                </ControlsItem>
+                <ControlsItem>
+                    <Typography as="span">Inverted</Typography>
+                </ControlsItem>
+            </Controls>
             <Preloader show count={5} box="paragraph" />
         </PageContent>
     </DarkContext.Provider>
@@ -46,12 +52,21 @@ handleDrawerClose = () =>
             <Typography inverted={state.inverted} variant="section">
                 Out of context
             </Typography>
-            <Checkbox
-                onValueChange={(value) => setState({inverted: value})}
-                checked={state.inverted}
-            >
-                <Typography inverted={state.inverted}>Inverted</Typography>
-            </Checkbox>
+            <Controls container align="center">
+                <ControlsItem>
+                    <input
+                        type="checkbox"
+                        onChange={(event) => setState({inverted: event.target.checked})}
+                        checked={state.inverted}
+                        style={{margin: 0, display: 'flex'}}
+                    />
+                </ControlsItem>
+                <ControlsItem>
+                    <Typography as="span" inverted={state.inverted}>
+                        Inverted
+                    </Typography>
+                </ControlsItem>
+            </Controls>
             <Preloader show count={5} box="paragraph" inverted={state.inverted} />
         </PageContent>
     </DarkContext.Provider>
