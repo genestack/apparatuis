@@ -1,5 +1,11 @@
 # Changelog
 
+## [11.0.1] - 2021-03-13
+
+### Fixed
+
+-   `<Tab />` remove conditional hook usage
+
 ## [11.0.0] - 2021-02-26
 
 ### Removed
