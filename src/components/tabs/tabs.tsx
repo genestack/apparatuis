@@ -156,11 +156,11 @@ export const Tabs: OverridableComponent<TypeMap> = React.forwardRef<
 
                     valueToIndex.set(childValue, childIndex);
 
-                    const handleClick = React.useCallback(() => {
+                    function handleClick() {
                         if (onValueChange) {
                             onValueChange(childValue);
                         }
-                    }, [onValueChange, childValue]);
+                    }
 
                     return React.cloneElement(child, {
                         className: animated && classes.transition,
