@@ -118,6 +118,7 @@ export const Tab: OverridableComponent<TypeMap> = React.forwardRef<
     return (
         <>
             <Component
+                data-qa="tab"
                 className={classNames(
                     classes.root,
                     {
