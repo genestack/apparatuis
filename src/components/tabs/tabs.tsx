@@ -136,6 +136,7 @@ export const Tabs: OverridableComponent<TypeMap> = React.forwardRef<
     return (
         <Component {...restProps} ref={ref} className={classNames(classes.root, className)}>
             <div
+                data-qa="tabs"
                 role="tablist"
                 {...tabListProps}
                 ref={tabListRef}
