@@ -1,5 +1,13 @@
 # Changelog
 
+## Unreleased
+
+## [11.0.2] - 2021-03-19
+
+### Added
+
+-   Added `data-qa` to `<Tab />` and `<Tabs />`
+
 ## [11.0.1] - 2021-03-13
 
 ### Fixed
