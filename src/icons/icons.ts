@@ -19,6 +19,7 @@ export {ArrowRightIcon} from './arrow-right-icon';
 export {BookmarkBorderedIcon} from './bookmark-bordered-icon';
 export {BookmarkIcon} from './bookmark-icon';
 export {BooleanIcon} from './boolean-icon';
+export {BoxplotIcon} from './boxplot-icon';
 export {BulletIcon} from './bullet-icon';
 export {CheckedRadioIcon} from './checked-radio-icon';
 export {CheckMarkIcon} from './checkmark-icon';
