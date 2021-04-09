@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2011-2020 Genestack Limited
+ * Copyright (c) 2011-2021 Genestack Limited
  * All Rights Reserved
  * THIS IS UNPUBLISHED PROPRIETARY SOURCE CODE OF GENESTACK LIMITED
  * The copyright notice above does not evidence any
@@ -49,6 +49,7 @@ export {LockIcon} from './lock-icon';
 export {LockOutlinedIcon} from './lock-outlined-icon';
 export {MenuIcon} from './menu-icon';
 export {MoreIcon} from './more-icon';
+export {NarrowIcon} from './narrow-icon';
 export {OpenFolderIcon} from './open-folder-icon';
 export {OrganizationIcon} from './organization-icon';
 export {PauseIcon} from './pause-icon';
@@ -69,3 +70,4 @@ export {UploadIcon} from './upload-icon';
 export {UserGroupIcon} from './user-group-icon';
 export {UserIcon} from './user-icon';
 export {WarningIcon} from './warning-icon';
+export {WidenIcon} from './widen-icon';

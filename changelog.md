@@ -1,5 +1,11 @@
 # Changelog
 
+## [11.2.0] - 2021-04-09
+
+### Added
+
+-   Added `<NarrowIcon />`, `<WidenIcon />`
+
 ## Unreleased
 
 ## [11.1.0] - 2021-04-08
