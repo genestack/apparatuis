@@ -154,7 +154,10 @@ export function SuggestInput(props: Props) {
                 const popoverProps: PopoverProps = {
                     ...inputPopoverProps,
                     ...menuProps,
-                    rootRef: chainRefs(menuProps.rootRef, inputPopoverProps.rootRef),
+                    rootRef: chainRefs(
+                        chainRefs(menuProps.rootRef, inputPopoverProps.rootRef),
+                        rest.popoverProps?.rootRef
+                    ),
                     style: {
                         ...inputPopoverProps.style,
                         display: open ? 'block' : 'none'
@@ -184,8 +187,9 @@ export function SuggestInput(props: Props) {
                         value={value}
                         onValueChange={onValueChange}
                         rootProps={{
+                            ...inputProps.rootProps,
                             ...rootProps,
-                            ref: rootRef
+                            ref: chainRefs(rootRef, inputProps.rootProps?.ref)
                         }}
                         popoverProps={popoverProps}
                         open={open}

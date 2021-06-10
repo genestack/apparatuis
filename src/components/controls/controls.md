@@ -212,10 +212,10 @@ const regulationButtons = (
                 </ControlsItem>
             </Controls>
 
-            <Controls gap={2} flexWrap="wrap" alignItems="center">
+            <Controls gap={2} flexWrap="wrap" align="center">
                 {Array.from(Array(20), (_, i) => i + 1).map((item, index) => {
                     return (
-                        <ControlsItem>
+                        <ControlsItem key={index}>
                             <Button>Button {index}</Button>
                         </ControlsItem>
                     );

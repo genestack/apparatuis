@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2011-2019 Genestack Limited
+ * Copyright (c) 2011-2021 Genestack Limited
  * All Rights Reserved
  * THIS IS UNPUBLISHED PROPRIETARY SOURCE CODE OF GENESTACK LIMITED
  * The copyright notice above does not evidence any
@@ -21,7 +21,7 @@ import {PopoverGrow, Props as PopperGrowProps} from './popover-grow-transition';
 import * as styles from './popover.module.css';
 
 type TargetProps = Omit<TransitionPopperProps<PaperProps>, 'children'>;
-type ContainerProps = Omit<React.HTMLAttributes<HTMLDivElement>, 'style'>;
+type ContainerProps = React.HTMLAttributes<HTMLDivElement>;
 type TransitionProps = Omit<
     PopperGrowProps,
     'appear' | 'disableTransition' | 'placement' | 'exit' | 'children'
@@ -76,7 +76,7 @@ export const Popover = (props: Props) => {
                 <div
                     {...containerProps}
                     ref={chainRefs(ref, containerRef)}
-                    style={style}
+                    style={{...containerProps.style, ...style}}
                     className={classNames(containerProps.className, {
                         [classes.withArrow]: withArrow
                     })}

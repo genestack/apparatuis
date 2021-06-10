@@ -6,7 +6,6 @@ const leftCellStyle = {width: 20, textAlign: 'center'};
 const StateExample = (props) => (
     <div {...props} style={{width: 200, border: '1px solid #ddd', marginBottom: 8}} />
 );
-const Quiet = (props) => <Typography {...props} intent="quiet" box="inline" as="span" />;
 
 <Controls style={{alignItems: 'flex-start'}}>
     <ControlsItem style={{width: 200}}>

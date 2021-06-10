@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2011-2020 Genestack Limited
+ * Copyright (c) 2011-2021 Genestack Limited
  * All Rights Reserved
  * THIS IS UNPUBLISHED PROPRIETARY SOURCE CODE OF GENESTACK LIMITED
  * The copyright notice above does not evidence any
@@ -87,6 +87,7 @@ export const SelectEmitter = React.forwardRef<HTMLElement, Props>(function Emitt
 
     return (
         <ButtonBase
+            data-qa="select"
             {...restProps}
             ref={ref as React.RefObject<HTMLButtonElement>}
             className={controlClassName}
