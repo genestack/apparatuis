@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2011-2019 Genestack Limited
+ * Copyright (c) 2011-2021 Genestack Limited
  * All Rights Reserved
  * THIS IS UNPUBLISHED PROPRIETARY SOURCE CODE OF GENESTACK LIMITED
  * The copyright notice above does not evidence any
@@ -40,14 +40,14 @@ describe('<SuggestInput />', () => {
 
         it('should render suggest items when value has been changed', () => {
             const wrapper = setup();
-            (document.getElementById('input')! as HTMLInputElement).value = 'foo';
+            (document.getElementById('input') as HTMLInputElement).value = 'foo';
             wrapper.find('input').simulate('change');
             expect(document.getElementById('item')).toBeTruthy();
         });
 
         it('should render other children when value has been changed', () => {
             const wrapper = setup();
-            (document.getElementById('input')! as HTMLInputElement).value = 'foo';
+            (document.getElementById('input') as HTMLInputElement).value = 'foo';
             wrapper.find('input').simulate('change');
             expect(document.getElementById('title')).toBeTruthy();
         });
@@ -63,7 +63,7 @@ describe('<SuggestInput />', () => {
 
         expect(onOpenChange).not.toBeCalled();
 
-        (document.getElementById('input')! as HTMLInputElement).value = 'foo';
+        (document.getElementById('input') as HTMLInputElement).value = 'foo';
         wrapper.find('input').simulate('change');
         expect(onOpenChange).toHaveBeenCalledTimes(1);
         expect(onOpenChange).toBeCalledWith(true);
@@ -80,6 +80,32 @@ describe('<SuggestInput />', () => {
         wrapper.find('input').simulate('focus');
         expect(onOpenChange).toHaveBeenCalledTimes(1);
         expect(onOpenChange).toBeCalledWith(true);
+    });
+
+    it('should accept any component with value property', () => {
+        const onComplete = jest.fn();
+
+        function AnyComponent(props: any) {
+            const {value, ...rest} = props;
+
+            return <div {...rest} />;
+        }
+
+        const wrapper = app.mount(
+            <SuggestInput id="input" onComplete={onComplete} openOnFocus>
+                <AnyComponent id="any-component" value="bar" />
+            </SuggestInput>
+        );
+
+        wrapper.find('input').simulate('focus');
+        wrapper
+            .find('#any-component')
+            .hostNodes()
+            .simulate('click');
+
+        wrapper.find('input').simulate('focus');
+
+        expect(onComplete).toBeCalledWith('bar');
     });
 
     describe('when item has been selected', () => {
@@ -133,7 +159,7 @@ describe('<SuggestInput />', () => {
         const wrapper = app.mount(<SuggestInput id="input">{render}</SuggestInput>);
 
         expect(render).toHaveBeenCalledTimes(0);
-        (document.getElementById('input')! as HTMLInputElement).value = 'foo';
+        (document.getElementById('input') as HTMLInputElement).value = 'foo';
         wrapper.find('input').simulate('change');
         expect(render).toHaveBeenCalledTimes(1);
         expect(render).toBeCalledWith('foo');

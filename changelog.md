@@ -1,5 +1,9 @@
 # Changelog
 
+## [11.3.0] - 2021-06-10
+
+-   Allow any component with `value` property to be passed in `<SuggestInput />` as `<SuggestInputItem />`
+
 ## [11.2.0] - 2021-04-09
 
 ### Added

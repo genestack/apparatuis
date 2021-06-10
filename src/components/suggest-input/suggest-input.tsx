@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2011-2020 Genestack Limited
+ * Copyright (c) 2011-2021 Genestack Limited
  * All Rights Reserved
  * THIS IS UNPUBLISHED PROPRIETARY SOURCE CODE OF GENESTACK LIMITED
  * The copyright notice above does not evidence any
@@ -10,7 +10,6 @@ import Downshift, {ControllerStateAndHelpers, StateChangeOptions} from 'downshif
 import * as React from 'react';
 
 import {chain} from '../../utils/chain';
-import {Omit} from '../../utils/omit';
 import {chainRefs} from '../../utils/set-ref';
 import {useControlledProp} from '../../utils/use-controlled-prop';
 import {List} from '../list';
@@ -18,7 +17,6 @@ import {PopoverProps} from '../popover';
 import {Suggest, SuggestProps} from '../suggest';
 
 import * as styles from './styles.module.css';
-import {SuggestInputItem, Props as SuggestInputItemProps} from './suggest-input-item';
 
 /**
  * Suggest component get their children with no knowledge of Downshift under the hood. To
@@ -32,17 +30,15 @@ function getSuggestInputChildren(
     let index = -1;
 
     return React.Children.map(children, (child) => {
-        if (!React.isValidElement(child) || child.type !== SuggestInputItem) {
+        if (!React.isValidElement(child)) {
             return child;
         }
 
-        const childValue = (child.props as SuggestInputItemProps).value;
+        const childValue = child.props.value;
         // do not allow a child without value to be selected
         if (typeof childValue !== 'string') {
             return child;
         }
-
-        const childProps = child.props as SuggestInputItemProps;
 
         index += 1;
 
@@ -50,8 +46,8 @@ function getSuggestInputChildren(
         // we should omit the next properties:
         // `as` for <link /> elements
         // `wrap` for `<textarea />` elements
-        const itemProps: Omit<SuggestInputItemProps, 'as' | 'wrap'> = {
-            ...childProps,
+        const itemProps = {
+            ...child.props,
             focused: downshift.highlightedIndex === index
         };
 
