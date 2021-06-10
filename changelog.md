@@ -1,5 +1,12 @@
 # Changelog
 
+## [11.4.0] - 2021-06-10
+
+-   Fix errors in examples
+-   Pass styles to popover container
+-   Pass refs to suggest inputs
+-   Add `data-qa` to `<Select />`
+
 ## [11.3.0] - 2021-06-10
 
 -   Allow any component with `value` property to be passed in `<SuggestInput />` as `<SuggestInputItem />`
