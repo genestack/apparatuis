@@ -31,7 +31,7 @@ const TabsExampleFrame = (props) => {
         >
             <Typography
                 variant="caption"
-                quiet
+                intent="quiet"
                 style={{
                     position: 'absolute',
                     right: 4,

@@ -52,7 +52,7 @@ handleDrawerClose = () =>
             <Typography inverted={state.inverted} variant="section">
                 Out of context
             </Typography>
-            <Controls container align="center">
+            <Controls align="center">
                 <ControlsItem>
                     <input
                         type="checkbox"

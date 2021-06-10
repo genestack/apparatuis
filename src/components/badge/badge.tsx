@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2011-2020 Genestack Limited
+ * Copyright (c) 2011-2021 Genestack Limited
  * All Rights Reserved
  * THIS IS UNPUBLISHED PROPRIETARY SOURCE CODE OF GENESTACK LIMITED
  * The copyright notice above does not evidence any
@@ -36,7 +36,7 @@ export interface Props extends RootProps, WithClasses<keyof typeof styles> {
  */
 export const Badge = React.forwardRef((props: Props, ref) => {
     const {
-        as: Component = 'div',
+        as: Component = 'span',
         variant = 'body',
         intent = 'default',
         ghost,
@@ -59,7 +59,7 @@ export const Badge = React.forwardRef((props: Props, ref) => {
             className={classNames(rest.className, classes.root)}
             ref={ref}
         >
-            <div
+            <span
                 className={classNames(contentProps.className, classes.content, {
                     [classes.intentDefault]: intent === 'default',
                     [classes.warning]: intent === 'warning',
@@ -69,7 +69,7 @@ export const Badge = React.forwardRef((props: Props, ref) => {
                 })}
             >
                 {children}
-            </div>
+            </span>
         </Typography>
     );
 });
