@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2011-2020 Genestack Limited
+ * Copyright (c) 2011-2021 Genestack Limited
  * All Rights Reserved
  * THIS IS UNPUBLISHED PROPRIETARY SOURCE CODE OF GENESTACK LIMITED
  * The copyright notice above does not evidence any
@@ -19,11 +19,11 @@ afterEach(app.afterEach);
 describe('<Badge />', () => {
     it('should render div HTML element by default', () => {
         app.mount(<Badge id="test">Foo</Badge>);
-        expect(document.getElementById('test')).toBeInstanceOf(HTMLDivElement);
+        expect(document.getElementById('test')).toBeInstanceOf(HTMLSpanElement);
     });
 
     it('should render children', () => {
         app.mount(<Badge id="test">Foo</Badge>);
-        expect(document.getElementById('test')!.textContent).toBe('Foo');
+        expect(document.getElementById('test')?.textContent).toBe('Foo');
     });
 });
