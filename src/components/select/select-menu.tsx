@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2011-2020 Genestack Limited
+ * Copyright (c) 2011-2021 Genestack Limited
  * All Rights Reserved
  * THIS IS UNPUBLISHED PROPRIETARY SOURCE CODE OF GENESTACK LIMITED
  * The copyright notice above does not evidence any
@@ -50,6 +50,7 @@ export function SelectMenu(props: Props) {
             />
             <DarkContext.Provider value={false}>
                 <Menu
+                    data-qa="select-menu"
                     {...selectProps}
                     open={isMenuVisible}
                     referenceElement={emitterRef.current}
