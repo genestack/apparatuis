@@ -1,5 +1,11 @@
 # Changelog
 
+## [11.5.0] - 2021-06-21
+
+### Added
+
+-   Added `<ReverseArrowsIcon />`
+
 ## [11.4.0] - 2021-06-10
 
 -   Fix errors in examples

@@ -59,6 +59,7 @@ export {PlusIcon} from './plus-icon';
 export {PlusUserIcon} from './plus-user-icon';
 export {RadioIcon} from './radio-icon';
 export {RetryIcon} from './retry-icon';
+export {ReverseArrowsIcon} from './reverse-arrows-icon';
 export {SearchIcon} from './search-icon';
 export {ShareIcon} from './share-icon';
 export {SharedWithUserIcon} from './shared-with-user-icon';

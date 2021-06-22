@@ -1,0 +1,23 @@
+/*
+ * Copyright (c) 2011-2021 Genestack Limited
+ * All Rights Reserved
+ * THIS IS UNPUBLISHED PROPRIETARY SOURCE CODE OF GENESTACK LIMITED
+ * The copyright notice above does not evidence any
+ * actual or intended publication of such source code.
+ */
+
+import * as React from 'react';
+
+import {createIcon} from '../components/icon';
+
+/** Revers arrows icon */
+export const ReverseArrowsIcon = createIcon(() => (
+    <svg viewBox="0 0 20 20">
+        <path
+            className="gs-svg-icon-fill"
+            fillRule="evenodd"
+            clipRule="evenodd"
+            d="M3.14652 7.14645L2.79297 7.5L3.14652 7.85355L5.64652 10.3536C5.84178 10.5488 6.15837 10.5488 6.35363 10.3536C6.54889 10.1583 6.54889 9.84171 6.35363 9.64645L4.70718 8H16.5001C16.7762 8 17.0001 7.77614 17.0001 7.5C17.0001 7.22386 16.7762 7 16.5001 7H4.70718L6.35363 5.35355C6.54889 5.15829 6.54889 4.84171 6.35363 4.64645C6.15837 4.45118 5.84178 4.45118 5.64652 4.64645L3.14652 7.14645ZM16.8535 13.8536L17.2071 13.5L16.8535 13.1464L14.3535 10.6464C14.1582 10.4512 13.8417 10.4512 13.6464 10.6464C13.4511 10.8417 13.4511 11.1583 13.6464 11.3536L15.2928 13H3.49995C3.22381 13 2.99995 13.2239 2.99995 13.5C2.99995 13.7761 3.22381 14 3.49995 14H15.2928L13.6464 15.6464C13.4511 15.8417 13.4511 16.1583 13.6464 16.3536C13.8417 16.5488 14.1582 16.5488 14.3535 16.3536L16.8535 13.8536Z"
+        />
+    </svg>
+));
