@@ -19,7 +19,7 @@ export interface Props extends TargetProps {
     /** Makes controls item to grow */
     grow?: boolean;
     /** Redefines the target element */
-    as?: React.ReactType;
+    as?: React.ElementType;
 }
 
 /** Single item of controls container */

@@ -19,7 +19,7 @@ export interface Props extends TargetProps {
     /**
      * You could redefine the target component by passing ReactType.
      */
-    as?: React.ReactType;
+    as?: React.ElementType;
 }
 
 /**

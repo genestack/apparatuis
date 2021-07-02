@@ -37,7 +37,7 @@ export interface Props extends TargetProps, WithClasses<keyof typeof styles> {
     /** Properties for label wrapper element */
     labelProps?: React.HTMLAttributes<HTMLSpanElement>;
     /** You could redefine the target component by passing ReactType. */
-    as?: React.ReactType;
+    as?: React.ElementType;
 }
 
 /**

@@ -1,5 +1,11 @@
 # Changelog
 
+## [11.6.0] - 2021-07-02
+
+### Changed
+
+-   Update peer to `react@16.14.0` `react-dom@16.14.0` `@types/react@16.14.5` `@types/react-dom@16.9.12`
+
 ## [11.5.0] - 2021-06-21
 
 ### Added

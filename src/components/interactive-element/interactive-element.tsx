@@ -23,7 +23,7 @@ interface InteractiveElementProps {
     /** Disable all listeners which could make button to be active */
     disableListeners?: boolean;
     /** Target React element. "div" by default */
-    as?: React.ReactType;
+    as?: React.ElementType;
 }
 
 /** InteractiveElement public properties */

@@ -19,7 +19,7 @@ export interface Props extends TargetProps {
     /** Reference to root element */
     rootRef?: React.Ref<HTMLElement>;
     /** You could redefine the target component by passing ReactType */
-    as?: React.ReactType;
+    as?: React.ElementType;
     /**
      * Changes own background to dark. Will fallback to `DarkContext`'s value if `undefined`.
      *

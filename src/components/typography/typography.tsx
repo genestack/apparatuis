@@ -68,7 +68,7 @@ interface TypographyProps extends WithClasses<keyof typeof styles> {
      *   <Typography as={(props) => <RouterLink to="/" {...props} />} />
      * ); // renders as `RouterLink`
      */
-    as?: React.ReactType;
+    as?: React.ElementType;
 }
 
 /** Typography public properties */

@@ -15,7 +15,7 @@ import {Omit} from './omit';
  * Adjusts valid props based on the type of `component`.
  */
 export interface OverridableComponent<M extends OverridableTypeMap> {
-    <C extends React.ReactType>(props: {component: C} & OverrideProps<M, C>): JSX.Element | null;
+    <C extends React.ElementType>(props: {component: C} & OverrideProps<M, C>): JSX.Element | null;
     (props: DefaultComponentProps<M>): JSX.Element | null;
 }
 
@@ -29,7 +29,9 @@ export type OverridableProps<M extends OverridableTypeMap> = DefaultComponentPro
 /**
  * Props of the component if `component={Component}` is used.
  */
-export type OverrideProps<M extends OverridableTypeMap, C extends React.ReactType> = BaseProps<M> &
+export type OverrideProps<M extends OverridableTypeMap, C extends React.ElementType> = BaseProps<
+    M
+> &
     Omit<React.ComponentPropsWithRef<C>, keyof CommonProps>;
 
 /**
@@ -56,5 +58,5 @@ export interface CommonProps {
  */
 export interface OverridableTypeMap {
     props: {};
-    defaultType: React.ReactType;
+    defaultType: React.ElementType;
 }

@@ -23,7 +23,7 @@ export interface Props extends TargetProps {
      * Target element that will be rendered.
      * `div` by default
      */
-    as?: React.ReactType;
+    as?: React.ElementType;
 }
 
 /**

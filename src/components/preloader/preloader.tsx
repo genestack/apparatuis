@@ -49,13 +49,13 @@ export interface Props {
      *
      * Default `React.Fragment`
      */
-    wrapAll?: React.ReactType;
+    wrapAll?: React.ElementType;
     /**
      * Wrapper for each preloader line
      *
      * Default: `React.Fragment`
      */
-    wrapEach?: React.ReactType;
+    wrapEach?: React.ElementType;
     /**
      * Typography `className` prop
      */

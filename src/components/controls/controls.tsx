@@ -20,7 +20,7 @@ export interface Props extends TargetProps {
     /** Defines items justifying */
     justify?: 'start' | 'end' | 'center' | 'space-between';
     /** Redefines the target element */
-    as?: React.ReactType;
+    as?: React.ElementType;
     /** Vertical align */
     align?: 'center' | 'baseline';
     /** Flex wrap */

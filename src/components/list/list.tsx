@@ -14,7 +14,7 @@ type TargetProps = React.HTMLAttributes<HTMLDivElement>;
 
 /** List public properties */
 export interface Props extends TargetProps {
-    as?: React.ReactType;
+    as?: React.ElementType;
 }
 
 /**

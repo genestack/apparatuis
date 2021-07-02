@@ -17,7 +17,7 @@ type TargetProps = React.HTMLAttributes<HTMLElement>;
 
 /** MarginBoxFullWidth public properties */
 export interface Props extends TargetProps, WithClasses<keyof typeof styles> {
-    as?: React.ReactType;
+    as?: React.ElementType;
 }
 
 /**
