@@ -1,5 +1,10 @@
 # Changelog
 
+## [11.7.0] - 2021-07-19
+
+-   Added `iconStart`, `iconEnd` to `<Button/>`
+-   Added deprecated comment for `icon` API to `<Button/>`
+
 ## [11.6.0] - 2021-07-02
 
 ### Changed

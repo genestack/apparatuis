@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2011-2020 Genestack Limited
+ * Copyright (c) 2011-2021 Genestack Limited
  * All Rights Reserved
  * THIS IS UNPUBLISHED PROPRIETARY SOURCE CODE OF GENESTACK LIMITED
  * The copyright notice above does not evidence any
@@ -16,7 +16,7 @@
     border-radius: 100em;
 }
 
-.icon {
+.iconStart {
     display: inline-flex;
     align-items: center;
     justify-content: space-around;
@@ -24,6 +24,18 @@
     height: 20px;
     margin-right: 4px;
     margin-left: -10px;
+    flex-shrink: 0;
+    flex-grow: 0;
+}
+
+.iconEnd {
+    display: inline-flex;
+    align-items: center;
+    justify-content: space-around;
+    width: 20px;
+    height: 20px;
+    margin-left: 4px;
+    margin-right: -10px;
     flex-shrink: 0;
     flex-grow: 0;
 }
@@ -39,7 +51,8 @@
  */
 @media all and (-ms-high-contrast: none) {
     *::-ms-backdrop,
-    .icon {
+    .iconStart,
+    .iconEnd {
         pointer-events: none;
     }
 
@@ -59,8 +72,16 @@
     padding: 5px 15px;
 }
 
-.singleIcon {
+.iconStartSingle {
     margin-right: -10px;
+}
+
+.iconEndSingle {
+    margin-left: -10px;
+}
+
+.iconStartSingle + .iconEndSingle {
+    margin-left: 10px;
 }
 
 .small {
@@ -68,12 +89,24 @@
     padding: 2px 8px;
 }
 
-.small .icon {
+.small .iconStart {
     margin-left: -6px;
 }
 
-.small .singleIcon {
+.small .iconEnd {
     margin-right: -6px;
+}
+
+.small .iconStartSingle {
+    margin-right: -6px;
+}
+
+.small .iconEndSingle {
+    margin-left: -6px;
+}
+
+.small .iconStartSingle + .iconEndSingle {
+    margin-left: 6px;
 }
 
 .small.ghost.accent {
@@ -85,14 +118,29 @@
     padding: 0 4px;
 }
 
-.tiny .icon {
+.tiny .iconStart {
     margin-left: -4px;
     margin-top: -1px;
     margin-bottom: -1px;
 }
 
-.tiny .singleIcon {
+.tiny .iconEnd {
     margin-right: -4px;
+    margin-top: -1px;
+    margin-bottom: -1px;
+}
+
+.tiny .iconStartSingle {
+    margin-right: -4px;
+}
+
+/* stylelint-disable-next-line no-descending-specificity */
+.tiny .iconEndSingle {
+    margin-left: -4px;
+}
+
+.tiny .iconStartSingle + .iconEndSingle {
+    margin-left: 4px;
 }
 
 .tiny.ghost.accent {

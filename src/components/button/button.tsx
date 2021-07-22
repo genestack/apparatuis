@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2011-2020 Genestack Limited
+ * Copyright (c) 2011-2021 Genestack Limited
  * All Rights Reserved
  * THIS IS UNPUBLISHED PROPRIETARY SOURCE CODE OF GENESTACK LIMITED
  * The copyright notice above does not evidence any
@@ -23,8 +23,13 @@ type ButtonClassNames = keyof typeof styles;
 export interface Props
     extends Omit<ButtonBaseProps, 'classes'>,
         WithClasses<ButtonBaseClassNames | ButtonClassNames> {
+    /** @deprecated use iconStart instead */
     /** Component that is inserted in the left side of the button. */
     icon?: React.ReactNode;
+    /** Component that is inserted in the left side of the button. */
+    iconStart?: React.ReactNode;
+    /** Component that is inserted in the right side of the button. */
+    iconEnd?: React.ReactNode;
     /** If `true` text in the button is wrapped */
     wrap?: boolean;
     /** Size of button */
@@ -55,6 +60,8 @@ export const Button: OverridableComponent<TypeMap> = React.forwardRef<
         intent = buttonContext.intent,
         size = buttonContext.size,
         icon,
+        iconStart,
+        iconEnd,
         children,
         wrap,
         rounded,
@@ -78,22 +85,33 @@ export const Button: OverridableComponent<TypeMap> = React.forwardRef<
                 [classes.rounded]: rounded
             })}
         >
-            {icon ? (
+            {icon || iconStart ? (
                 <span
-                    className={classNames(classes.icon, {
-                        [classes.singleIcon]: !children
+                    className={classNames(classes.iconStart, {
+                        [classes.iconStartSingle]: !children
                     })}
                 >
-                    {icon}
+                    {icon || iconStart}
                 </span>
             ) : null}
-            <span
-                className={classNames(classes.text, {
-                    [classes.nowrap]: !wrap
-                })}
-            >
-                {children}
-            </span>
+            {children ? (
+                <span
+                    className={classNames(classes.text, {
+                        [classes.nowrap]: !wrap
+                    })}
+                >
+                    {children}
+                </span>
+            ) : null}
+            {iconEnd ? (
+                <span
+                    className={classNames(classes.iconEnd, {
+                        [classes.iconEndSingle]: !children
+                    })}
+                >
+                    {iconEnd}
+                </span>
+            ) : null}
         </ButtonBase>
     );
 });

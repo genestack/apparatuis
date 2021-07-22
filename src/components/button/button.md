@@ -7,6 +7,7 @@ const {
     PresentationPane
 } = require('../../../styleguide-components/presentation');
 const {ArrowRightIcon} = require('../../icons/arrow-right-icon');
+const {FiltersIcon} = require('../../icons/filters-icon');
 
 const ButtonExampleFrame = (props) => {
     return (
@@ -73,7 +74,8 @@ function ButtonExample() {
                 href={presentation.renderAs === 'a' ? document.location : undefined}
                 ghost={presentation.variant === 'ghost'}
                 intent={presentation.intent}
-                icon={presentation.withIcon ? <ArrowRightIcon /> : undefined}
+                iconStart={presentation.withStartIcon ? <FiltersIcon /> : undefined}
+                iconEnd={presentation.withEndIcon ? <ArrowRightIcon /> : undefined}
                 wrap={presentation.wrap}
                 size={presentation.size}
                 rounded={presentation.rounded}
@@ -107,7 +109,8 @@ function ButtonExample() {
         <PresentationState name="text" label="Short text" value="short" />
         <PresentationState name="text" label="Long text" value="long" />
         <PresentationState name="text" label="Without text" value="none" />
-        <PresentationState name="withIcon" label="With icon" />
+        <PresentationState name="withStartIcon" label="With start icon" />
+        <PresentationState name="withEndIcon" label="With end icon" />
         <ListItem>
             <Typography variant="section">Render as</Typography>
         </ListItem>
