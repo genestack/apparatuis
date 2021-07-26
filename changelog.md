@@ -1,5 +1,9 @@
 # Changelog
 
+## [11.8.0] - 2021-07-26
+
+-   Added `<QuestionIcon />`
+
 ## [11.7.0] - 2021-07-19
 
 -   Added `iconStart`, `iconEnd` to `<Button/>`
