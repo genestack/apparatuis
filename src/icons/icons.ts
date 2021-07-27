@@ -57,6 +57,7 @@ export {PlayCircledIcon} from './play-circled-icon';
 export {PlayIcon} from './play-icon';
 export {PlusIcon} from './plus-icon';
 export {PlusUserIcon} from './plus-user-icon';
+export {QuestionIcon} from './question-icon';
 export {RadioIcon} from './radio-icon';
 export {RetryIcon} from './retry-icon';
 export {ReverseArrowsIcon} from './reverse-arrows-icon';
