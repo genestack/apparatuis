@@ -1,5 +1,10 @@
 # Changelog
 
+## [11.8.1] - 2021-08-02
+
+-   Added `--gs-color-white-smoke` variable in styles
+-   Change hover color for `<HeaderItem />`
+
 ## [11.8.0] - 2021-07-26
 
 -   Added `<QuestionIcon />`

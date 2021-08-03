@@ -36,6 +36,7 @@
     /* greys */
     --gs-color-black: rgba(51, 51, 51, 1);
     --gs-color-white: rgba(255, 255, 255, 1);
+    --gs-color-white-smoke: rgba(222, 226, 231, 1);
     --gs-color-white-60: rgba(255, 255, 255, 0.6);
     --gs-color-grey-light-background: rgba(243, 245, 247, 1);
     --gs-color-grey: rgba(130, 130, 130, 1);

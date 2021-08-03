@@ -41,7 +41,7 @@
 }
 
 .root:hover .fakeHover {
-    background: var(--gs-color-grey-background-50);
+    background: var(--gs-color-white-smoke);
 }
 
 .root:active .fakeHover,
