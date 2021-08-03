@@ -46,7 +46,7 @@
 
 .root:active .fakeHover,
 .root.active .fakeHover {
-    background: var(--gs-color-grey-background);
+    background: var(--gs-color-white-smoke);
 }
 
 .root:disabled .fakeHover,

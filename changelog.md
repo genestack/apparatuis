@@ -1,5 +1,9 @@
 # Changelog
 
+## [11.8.2] - 2021-08-03
+
+-   Fix color for fakeHover in `<HeaderItem>`
+
 ## [11.8.1] - 2021-08-02
 
 -   Added `--gs-color-white-smoke` variable in styles
