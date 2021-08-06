@@ -3,7 +3,7 @@
 Import example:
 
 ```ts
-import {DownloadIcon, WarningIcon} from 'genestack-ui/src/icons';
+import {DownloadIcon, WarningIcon} from '@genestack/ui/src/icons';
 ```
 
 ```jsx harmony

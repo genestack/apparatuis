@@ -1,5 +1,5 @@
 {
-  "extends": "genestack-stylelint-config",
+  "extends": "@genestack/stylelint-config",
   "ignoreFiles": ["**/*.ts", "**/*.tsx"],
   "rules": {
     "property-no-unknown": [true, {
