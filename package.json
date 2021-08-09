@@ -95,6 +95,6 @@
     "@genestack/frontend-builder": ">= 0.9.5 < 2.0.0",
     "react": ">= 16.8 < 17",
     "react-dom": ">= 16.8 < 17",
-    "typescript": ">= 3.7"
+    "typescript": ">= 4.3"
   }
 }
