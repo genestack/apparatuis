@@ -1,5 +1,11 @@
 # Changelog
 
+## [Unreleased]
+
+## [12.0.0] - 2021-08-09
+
+-   Bump Typescript to 4.3
+
 ## [11.8.2] - 2021-08-03
 
 -   Fix color for fakeHover in `<HeaderItem>`
