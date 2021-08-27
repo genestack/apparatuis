@@ -19,12 +19,16 @@
     border: 1px solid var(--gs-color-grey-outline);
     padding: calc(var(--gs-spacing-unit) * 0.75 - 1px) calc(var(--gs-spacing-unit) * 2);
     border-radius: calc(var(--gs-spacing-unit) / 2);
+    transition-property: border-color, box-shadow, background-color;
+    transition-duration: 0.2s;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
     outline: none;
 }
 
 .root:focus {
-    border-color: rgba(82, 168, 236, 0.8);
-    box-shadow: 0 0 0 2px var(--gs-color-action-25), inset 0 2px 4px rgba(0, 0, 0, 0.15);
+    transition-property: background-color;
+    border-color: var(--gs-color-action);
+    box-shadow: 0 0 0 2px var(--gs-color-action-25);
 }
 
 .root.invalid,
@@ -34,7 +38,8 @@
 
 .root.invalid:focus,
 .root:invalid:focus {
-    box-shadow: 0 0 0 2px rgba(233, 50, 60, 0.25), inset 0 2px 4px rgba(0, 0, 0, 0.15);
+    border-color: var(--gs-color-error);
+    box-shadow: 0 0 0 2px var(--gs-color-input-invalid-box-shadow);
 }
 
 .fullWidth {

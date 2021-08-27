@@ -2,6 +2,11 @@
 
 ## [Unreleased]
 
+## [12.1.0] - 2021-08-27
+
+-   Added `<SimpleFileIcon />`
+-   Changed styles for focus state `<Textarea>`
+
 ## [12.0.0] - 2021-08-09
 
 -   Bump Typescript to 4.3

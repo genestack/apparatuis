@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2011-2018 Genestack Limited
+ * Copyright (c) 2011-2021 Genestack Limited
  * All Rights Reserved
  * THIS IS UNPUBLISHED PROPRIETARY SOURCE CODE OF GENESTACK LIMITED
  * The copyright notice above does not evidence any
@@ -9,9 +9,7 @@ import classNames from 'classnames';
 import React from 'react';
 import TextareaAutosize, {TextareaAutosizeProps} from 'react-textarea-autosize';
 
-import {chain} from '../../utils/chain';
-import {Omit} from '../../utils/omit';
-import {mergeClassesProps, WithClasses} from '../../utils/styles';
+import {chain, mergeClassesProps, WithClasses, Omit} from '../../utils';
 
 import * as styles from './textarea.module.css';
 type TargetProps = Omit<TextareaAutosizeProps, 'ref' | 'inputRef'>;
