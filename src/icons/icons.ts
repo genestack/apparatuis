@@ -64,6 +64,7 @@ export {ReverseArrowsIcon} from './reverse-arrows-icon';
 export {SearchIcon} from './search-icon';
 export {ShareIcon} from './share-icon';
 export {SharedWithUserIcon} from './shared-with-user-icon';
+export {SimpleFileIcon} from './simple-file-icon';
 export {StopIcon} from './stop-icon';
 export {TextIcon} from './text-icon';
 export {TimeReverseIcon} from './time-reverse-icon';
