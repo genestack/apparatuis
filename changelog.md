@@ -2,6 +2,10 @@
 
 ## [Unreleased]
 
+## [12.2.0] - 2021-09-01
+
+-   Added `<NewTabIcon />`, `<ExternalLinkIcon />`
+
 ## [12.1.0] - 2021-08-27
 
 -   Added `<SimpleFileIcon />`
