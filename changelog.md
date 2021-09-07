@@ -2,6 +2,11 @@
 
 ## [Unreleased]
 
+## [12.3.0] - 2021-09-07
+
+-   Added `inclusiveDisabled` for `<Button>`
+-   Fix showing public API for each component
+
 ## [12.2.0] - 2021-09-01
 
 -   Added `<NewTabIcon />`, `<ExternalLinkIcon />`

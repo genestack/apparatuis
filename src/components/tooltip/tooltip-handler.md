@@ -82,12 +82,14 @@ initialState = {
 </PageContent>;
 ```
 
-#### Disabled button
+#### Inclusive Disabled button
+
+If you want to use the tooltip on a disabled button, then use `inclusiveDisabled` property instead of `disabled` property
 
 ```js
 <PageContent as={Paper}>
     <TooltipHandler tooltip={<Tooltip>I am tooltip!</Tooltip>}>
-        <Button disabled>Hover me</Button>
+        <Button inclusiveDisabled>Hover me</Button>
     </TooltipHandler>
 </PageContent>
 ```

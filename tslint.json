@@ -3,7 +3,8 @@
   "rules": {
     "object-literal-key-quotes": false,
     "jsx-no-lambda": false,
-    "no-null-undefined-union": false
+    "no-null-undefined-union": false,
+    "no-redundant-jsdoc": false
   },
   "linterOptions": {
     "exclude": ["**/**.js"]

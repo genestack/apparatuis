@@ -71,6 +71,7 @@ function ButtonExample() {
             <Button
                 component={presentation.renderAs}
                 disabled={presentation.disabled}
+                inclusiveDisabled={presentation.inclusiveDisabled}
                 href={presentation.renderAs === 'a' ? document.location : undefined}
                 ghost={presentation.variant === 'ghost'}
                 intent={presentation.intent}
@@ -101,6 +102,7 @@ function ButtonExample() {
     <PresentationControls>
         <PresentationState name="inverted" label="Inverted" />
         <PresentationState name="disabled" label="Disabled" />
+        <PresentationState name="inclusiveDisabled" label="Inclusive Disabled" />
         <PresentationState name="wrap" label="Wrap words" />
         <PresentationState name="rounded" label="Rounded" />
         <ListItem>

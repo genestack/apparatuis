@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2011-2020 Genestack Limited
+ * Copyright (c) 2011-2021 Genestack Limited
  * All Rights Reserved
  * THIS IS UNPUBLISHED PROPRIETARY SOURCE CODE OF GENESTACK LIMITED
  * The copyright notice above does not evidence any
@@ -41,6 +41,11 @@ export interface Props extends WithClasses<keyof typeof styles> {
      */
     onClick?: React.ReactEventHandler;
     inverted?: boolean;
+    /**
+     * If `true`, the component is disabled but allows cursor interactions such as mouse hover (for tooltips) and focus.
+     * @default false
+     */
+    inclusiveDisabled?: boolean;
 }
 
 interface TypeMap {
@@ -68,10 +73,13 @@ export const ButtonBase: OverridableComponent<TypeMap> = React.forwardRef<
         disabled,
         onClick,
         inverted,
+        inclusiveDisabled = false,
         ...rest
     } = mergeClassesProps(props, styles);
 
     const isNativeButton = Component === 'button';
+
+    const anyDisabled = disabled || inclusiveDisabled;
 
     const handleClick = React.useCallback<React.ReactEventHandler>(
         (event) => {
@@ -79,16 +87,16 @@ export const ButtonBase: OverridableComponent<TypeMap> = React.forwardRef<
             // in disabled fieldset. It is a workaround. @see https://git.io/JvGEj
             const isHtmlDisabled = matches(event.currentTarget, ':disabled');
 
-            if (!disabled && onClick && !isHtmlDisabled) {
+            if (onClick && !isHtmlDisabled && !anyDisabled) {
                 onClick(event);
             }
         },
-        [onClick, disabled]
+        [onClick, anyDisabled]
     );
 
     const activeState = useButtonActiveState({
         onClick: handleClick,
-        disableHook: isNativeButton
+        disableHook: isNativeButton || anyDisabled
     });
 
     return (
@@ -98,12 +106,12 @@ export const ButtonBase: OverridableComponent<TypeMap> = React.forwardRef<
             {...rest}
             disabled={isNativeButton ? disabled : undefined}
             ref={ref}
-            tabIndex={!disabled ? tabIndex : undefined}
+            tabIndex={!anyDisabled ? tabIndex : undefined}
             className={classNames(rest.className, classes.root, {
                 [classes.active]: active || activeState.active,
                 [classes.hovered]: hovered,
                 [classes.focused]: focused,
-                [classes.disabled]: disabled,
+                [classes.disabled]: anyDisabled,
                 [classes.ghost]: ghost,
                 [classes.normal]: !ghost,
                 [classes.noIntent]: intent === 'no-intent',

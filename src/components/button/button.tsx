@@ -36,6 +36,11 @@ export interface Props
     size?: 'normal' | 'small' | 'tiny';
     /** If `true` button will have fully-rounded border */
     rounded?: boolean;
+    /**
+     * If `true`, the component is disabled but allows cursor interactions such as mouse hover (for tooltips) and focus.
+     * @default false
+     */
+    inclusiveDisabled?: boolean;
 }
 
 interface TypeMap {
@@ -66,6 +71,7 @@ export const Button: OverridableComponent<TypeMap> = React.forwardRef<
         wrap,
         rounded,
         classes,
+        inclusiveDisabled = false,
         ...rest
     } = mergeClassesProps(props, styles);
 
@@ -84,6 +90,7 @@ export const Button: OverridableComponent<TypeMap> = React.forwardRef<
                 [classes.tiny]: size === 'tiny',
                 [classes.rounded]: rounded
             })}
+            inclusiveDisabled={inclusiveDisabled}
         >
             {icon || iconStart ? (
                 <span
