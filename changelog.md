@@ -2,6 +2,10 @@
 
 ## [Unreleased]
 
+## [12.4.0] - 2021-09-07
+
+-   Added `inclusiveDisabled` for `<Tab>`
+
 ## [12.3.0] - 2021-09-07
 
 -   Added `inclusiveDisabled` for `<Button>`

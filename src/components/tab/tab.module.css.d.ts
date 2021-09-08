@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2011-2020 Genestack Limited
+ * Copyright (c) 2011-2021 Genestack Limited
  * All Rights Reserved
  * THIS IS UNPUBLISHED PROPRIETARY SOURCE CODE OF GENESTACK LIMITED
  * The copyright notice above does not evidence any
@@ -33,3 +33,5 @@ export const append: string;
 export const label: string;
 
 export const indicator: string;
+
+export const disabled: string;

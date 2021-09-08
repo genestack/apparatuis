@@ -314,6 +314,8 @@ function TabsFrame() {
 
 ### Vertical tabs with icons and tooltips
 
+If you want to use the tooltip on a disabled tab, then use `inclusiveDisabled` property instead of `disabled` property
+
 ```js
 const {BookmarkBorderedIcon, DraftIcon, OpenFolderIcon, LinkIcon} = require('../../icons');
 const {CloneProps} = require('../../utils');
@@ -371,7 +373,7 @@ function TabsFrame() {
                         <TooltipHandler
                             tooltip={<Tooltip style={{whiteSpace: 'nowrap'}}>Drafts</Tooltip>}
                         >
-                            <Tab prepend={<DraftIcon />} disabled {...tabProps} />
+                            <Tab prepend={<DraftIcon />} inclusiveDisabled {...tabProps} />
                         </TooltipHandler>
                     )}
                 </CloneProps>

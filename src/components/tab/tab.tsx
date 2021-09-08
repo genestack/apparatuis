@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2011-2020 Genestack Limited
+ * Copyright (c) 2011-2021 Genestack Limited
  * All Rights Reserved
  * THIS IS UNPUBLISHED PROPRIETARY SOURCE CODE OF GENESTACK LIMITED
  * The copyright notice above does not evidence any
@@ -67,6 +67,11 @@ export interface Props extends WithClasses<keyof typeof styles> {
     indicatorPlacement?: IndicatorPlacement;
     /** Props of tab indicator */
     indicatorProps?: IndicatorProps;
+    /**
+     * If `true`, the component is disabled but allows cursor interactions such as mouse hover (for tooltips) and focus.
+     * @default false
+     */
+    inclusiveDisabled?: boolean;
 }
 
 interface TypeMap {
@@ -106,6 +111,8 @@ export const Tab: OverridableComponent<TypeMap> = React.forwardRef<
         tooltipProps = {},
 
         classes,
+        disabled,
+        inclusiveDisabled = false,
         children,
         ...restProps
     } = mergeClassesProps(props, styles);
@@ -114,6 +121,8 @@ export const Tab: OverridableComponent<TypeMap> = React.forwardRef<
     const tooltipHandler = useTooltipHandler({
         referenceElement: tabRef.current
     });
+
+    const anyDisabled = disabled || inclusiveDisabled;
 
     return (
         <>
@@ -124,6 +133,7 @@ export const Tab: OverridableComponent<TypeMap> = React.forwardRef<
                     {
                         [classes.hovered]: hovered,
                         [classes.selected]: selected,
+                        [classes.disabled]: anyDisabled,
                         [classes.empty]: !children,
                         [classes.solid]: variant === 'solid',
                         [classes.normal]: size === 'normal',
@@ -134,10 +144,11 @@ export const Tab: OverridableComponent<TypeMap> = React.forwardRef<
                 )}
                 role="tab"
                 aria-selected={selected}
-                aria-disabled={restProps.disabled}
+                aria-disabled={anyDisabled}
                 title={typeof children === 'string' ? children : ''}
                 {...tooltipHandler.getReferenceProps()}
                 {...restProps}
+                onClick={!anyDisabled ? restProps.onClick : undefined}
                 ref={chainRefs(ref, tabRef)}
             >
                 <span {...bodyProps} className={classes.body}>
@@ -158,7 +169,7 @@ export const Tab: OverridableComponent<TypeMap> = React.forwardRef<
                     )}
                 </span>
 
-                {!restProps.disabled && (
+                {!anyDisabled && (
                     <Indicator
                         fullWidth={variant === 'solid'}
                         active={selected}

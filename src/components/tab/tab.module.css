@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2011-2020 Genestack Limited
+ * Copyright (c) 2011-2021 Genestack Limited
  * All Rights Reserved
  * THIS IS UNPUBLISHED PROPRIETARY SOURCE CODE OF GENESTACK LIMITED
  * The copyright notice above does not evidence any
@@ -64,10 +64,18 @@
     color: var(--gs-color-action-hover);
 }
 
+.root.disabled,
 .root:disabled,
 .root:disabled:hover {
     color: var(--gs-color-grey-50);
     cursor: not-allowed;
+}
+
+.root.disabled:focus,
+.root.disabled:focus-within,
+.root:disabled:focus,
+.root:disabled:focus-within {
+    box-shadow: none;
 }
 
 .root.solid:focus,
@@ -84,16 +92,26 @@
     color: var(--gs-color-white);
 }
 
+.root.selected.disabled,
 .root.selected:disabled {
     color: var(--gs-color-grey-50);
 }
 
+.root.selected.solid.disabled,
 .root.selected.solid:disabled {
     color: var(--gs-color-grey-50);
 }
 
+.root.solid.disabled,
 .root.solid:disabled {
     background: none;
+}
+
+.root.solid.disabled:focus,
+.root.solid.disabled:focus-within,
+.root.solid:disabled:focus,
+.root.solid:disabled:focus-within {
+    box-shadow: none;
 }
 
 .prepend {
@@ -120,10 +138,12 @@
     stroke: var(--gs-color-action-text-60);
 }
 
+.root.disabled :global(.gs-svg-icon-fill),
 .root:disabled :global(.gs-svg-icon-fill) {
     fill: var(--gs-color-grey-50);
 }
 
+.root.disabled :global(.gs-svg-icon-stroke),
 .root:disabled :global(.gs-svg-icon-stroke) {
     stroke: var(--gs-color-grey-50);
 }
@@ -136,10 +156,12 @@
     stroke: var(--gs-color-white);
 }
 
+.root.solid.disabled :global(.gs-svg-icon-fill),
 .root.solid:disabled :global(.gs-svg-icon-fill) {
     fill: var(--gs-color-grey-50);
 }
 
+.root.solid.disabled :global(.gs-svg-icon-stroke),
 .root.solid:disabled :global(.gs-svg-icon-stroke) {
     stroke: var(--gs-color-grey-50);
 }
