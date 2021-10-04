@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2011-2019 Genestack Limited
+ * Copyright (c) 2011-2021 Genestack Limited
  * All Rights Reserved
  * THIS IS UNPUBLISHED PROPRIETARY SOURCE CODE OF GENESTACK LIMITED
  * The copyright notice above does not evidence any
@@ -286,7 +286,7 @@ export class MenuItem extends React.PureComponent<Props, State> {
         const {container, item} = this.state;
 
         const subMenuPopover =
-            subMenu && item && container && !rest.disabled ? (
+            subMenu && item && container && (!rest.disabled || !rest.inclusiveDisabled) ? (
                 <MenuPopover
                     {...subMenuPopoverProps}
                     open

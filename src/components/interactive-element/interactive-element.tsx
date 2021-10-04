@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2011-2020 Genestack Limited
+ * Copyright (c) 2011-2021 Genestack Limited
  * All Rights Reserved
  * THIS IS UNPUBLISHED PROPRIETARY SOURCE CODE OF GENESTACK LIMITED
  * The copyright notice above does not evidence any
@@ -18,6 +18,11 @@ type TargetProps = React.AnchorHTMLAttributes<HTMLElement> &
 interface InteractiveElementProps {
     /** It `true` button does not react on clicks */
     disabled?: boolean;
+    /**
+     * If `true`, the component is disabled but allows cursor interactions such as mouse hover (for tooltips) and focus.
+     * @default false
+     */
+    inclusiveDisabled?: boolean;
     /** Class name which is added when user activates button by "Space" key */
     activeClassName?: string;
     /** Disable all listeners which could make button to be active */
@@ -45,6 +50,7 @@ export const InteractiveElement = React.forwardRef((props: Props, ref) => {
         as: Component = typeof props.href === 'string' ? 'a' : 'div',
         activeClassName,
         disabled,
+        inclusiveDisabled = false,
         disableListeners,
         tabIndex = 0,
         type = 'button',
@@ -53,6 +59,12 @@ export const InteractiveElement = React.forwardRef((props: Props, ref) => {
 
     const handleClick: TargetProps['onClick'] = (event) => {
         setState({active: false});
+
+        if (inclusiveDisabled) {
+            event.preventDefault();
+
+            return;
+        }
 
         if (!disabled) {
             props.onClick?.(event);

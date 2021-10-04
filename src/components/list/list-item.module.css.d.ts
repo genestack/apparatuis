@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2011-2019 Genestack Limited
+ * Copyright (c) 2011-2021 Genestack Limited
  * All Rights Reserved
  * THIS IS UNPUBLISHED PROPRIETARY SOURCE CODE OF GENESTACK LIMITED
  * The copyright notice above does not evidence any
@@ -19,3 +19,4 @@ export const subtitle: string;
 export const append: string;
 export const inPage: string;
 export const inDialog: string;
+export const inclusiveDisabled: string;

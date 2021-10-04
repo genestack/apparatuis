@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2011-2019 Genestack Limited
+ * Copyright (c) 2011-2021 Genestack Limited
  * All Rights Reserved
  * THIS IS UNPUBLISHED PROPRIETARY SOURCE CODE OF GENESTACK LIMITED
  * The copyright notice above does not evidence any
@@ -40,6 +40,15 @@ describe('<InteractiveElement/>', () => {
     it('should not call onClick when disabled', () => {
         const onClick = jest.fn();
         const wrapper = app.mount(<InteractiveElement id="test" onClick={onClick} disabled />);
+        wrapper.simulate('click');
+        expect(onClick).not.toBeCalled();
+    });
+
+    it('should not call onClick when inclusiveDisabled', () => {
+        const onClick = jest.fn();
+        const wrapper = app.mount(
+            <InteractiveElement id="test" onClick={onClick} inclusiveDisabled />
+        );
         wrapper.simulate('click');
         expect(onClick).not.toBeCalled();
     });

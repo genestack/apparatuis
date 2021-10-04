@@ -7,11 +7,12 @@ initialState = {
     caption: false,
     wrap: false,
     disabled: false,
-    prepend: false,
+    prepend: 'none',
     appendIcon: false,
     appendText: false,
     subMenu: false,
-    subtitle: 'none'
+    subtitle: 'none',
+    inclusiveDisabled: false
 };
 
 const shortTitle = 'Menu item';
@@ -58,43 +59,68 @@ renderRadio = (name, label, value) => (
     <Controls>
         <ControlsItem grow style={{textAlign: 'center'}}>
             <Paper style={{display: 'inline-block', maxWidth: 320, minWidth: 160}}>
-                <MenuItem
-                    wrap={state.wrap}
-                    prepend={state.prepend ? <DownloadIcon /> : null}
-                    disabled={state.disabled}
-                    append={
-                        state.appendIcon && state.appendText ? (
-                            <Controls>
-                                <ControlsItem>
-                                    <Typography intent="quiet" as="span">
-                                        ⌘ + O
-                                    </Typography>
-                                </ControlsItem>
-                                <ControlsItem style={{display: 'flex'}}>
-                                    <HelpIcon />
-                                </ControlsItem>
-                            </Controls>
-                        ) : state.appendIcon ? (
-                            <HelpIcon />
-                        ) : state.appendText ? (
-                            <Typography intent="quiet" as="span">
-                                ⌘ + O
-                            </Typography>
+                <TooltipHandler
+                    tooltip={
+                        state.hasTooltip ? (
+                            <Tooltip
+                                portalContainer={document.body}
+                                modifiers={{
+                                    preventOverflow: {
+                                        boundariesElement: 'viewport'
+                                    }
+                                }}
+                                placement="top"
+                            >
+                                Explanation text
+                            </Tooltip>
                         ) : null
                     }
-                    subtitle={
-                        state.subtitle === 'short'
-                            ? shortSubtitle
-                            : state.subtitle === 'long'
-                            ? longSubtitle
-                            : null
-                    }
-                    subMenu={state.subMenu ? <SubMenu /> : null}
                 >
-                    <TextLabel caption={state.caption ? '125 MB' : null} wrap={state.wrap}>
-                        {state.longTitle ? longTitle : shortTitle}
-                    </TextLabel>
-                </MenuItem>
+                    <MenuItem
+                        wrap={state.wrap}
+                        prepend={
+                            state.prepend === 'icon' ? (
+                                <DownloadIcon />
+                            ) : state.prepend === 'checkbox' ? (
+                                <input type="checkbox" id="menuItemExampleCheckbox" />
+                            ) : null
+                        }
+                        disabled={state.disabled}
+                        inclusiveDisabled={state.inclusiveDisabled}
+                        append={
+                            state.appendIcon && state.appendText ? (
+                                <Controls>
+                                    <ControlsItem>
+                                        <Typography intent="quiet" as="span">
+                                            ⌘ + O
+                                        </Typography>
+                                    </ControlsItem>
+                                    <ControlsItem style={{display: 'flex'}}>
+                                        <HelpIcon />
+                                    </ControlsItem>
+                                </Controls>
+                            ) : state.appendIcon ? (
+                                <HelpIcon />
+                            ) : state.appendText ? (
+                                <Typography intent="quiet" as="span">
+                                    ⌘ + O
+                                </Typography>
+                            ) : null
+                        }
+                        subtitle={
+                            state.subtitle === 'short'
+                                ? shortSubtitle
+                                : state.subtitle === 'long'
+                                ? longSubtitle
+                                : null
+                        }
+                        subMenu={state.subMenu ? <SubMenu /> : null}
+                    >
+                        <TextLabel caption={state.caption ? '125 MB' : null} wrap={state.wrap}>
+                            {state.longTitle ? longTitle : shortTitle}
+                        </TextLabel>
+                    </MenuItem>
+                </TooltipHandler>
             </Paper>
         </ControlsItem>
         <ControlsItem>
@@ -105,13 +131,17 @@ renderRadio = (name, label, value) => (
                         {renderCheckbox('caption', 'Caption')}
                         {renderCheckbox('wrap', 'Wrap title')}
                         {renderCheckbox('disabled', 'Disabled')}
-                        {renderCheckbox('prepend', 'Prepend Icon')}
+                        {renderCheckbox('inclusiveDisabled', 'Inclusive disabled')}
+                        {renderRadio('prepend', 'Prepend Icon', 'icon')}
+                        {renderRadio('prepend', 'Prepend Checkbox', 'checkbox')}
                         {renderCheckbox('appendIcon', 'Append Icon')}
                         {renderCheckbox('appendText', 'Append Text')}
                         {renderCheckbox('subMenu', 'SubMenu')}
                         {renderRadio('subtitle', 'No Subtitle', 'none')}
                         {renderRadio('subtitle', 'Short Subtitle', 'short')}
                         {renderRadio('subtitle', 'Long Subtitle', 'long')}
+                        <Divider />
+                        {renderCheckbox('hasTooltip', 'With tooltip')}
                     </List>
                 </PageFullWidth>
             </PageContent>

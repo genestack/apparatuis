@@ -23,47 +23,54 @@ function ListItemExample() {
         <PageContent>
             <Controls>
                 <ControlsItem>
-                    <ListItem
-                        as="label"
-                        style={{width: 200, border: '1px solid #ddd'}}
-                        interactive={presentation.interactive}
-                        wrap={presentation.wrap}
-                        prepend={
-                            presentation.prepend === 'icon' ? (
-                                <DownloadIcon />
-                            ) : presentation.prepend === 'checkbox' ? (
-                                <input type="checkbox" id="listItemExampleCheckbox" />
-                            ) : null
-                        }
-                        disabled={presentation.disabled}
-                        append={
-                            presentation.appendIcon && presentation.appendText ? (
-                                <Controls>
-                                    <ControlsItem>
-                                        <Typography intent="quiet" as="span">
-                                            ⌘ + O
-                                        </Typography>
-                                    </ControlsItem>
-                                    <ControlsItem style={{display: 'flex'}}>
-                                        <HelpIcon />
-                                    </ControlsItem>
-                                </Controls>
-                            ) : presentation.appendIcon ? (
-                                <HelpIcon />
-                            ) : presentation.appendText ? (
-                                <Typography intent="quiet" as="span">
-                                    ⌘ + O
-                                </Typography>
-                            ) : null
+                    <TooltipHandler
+                        tooltip={
+                            presentation.hasTooltip ? <Tooltip>Explanation text</Tooltip> : null
                         }
                     >
-                        <TextLabel
+                        <ListItem
+                            as="label"
+                            style={{width: 200, border: '1px solid #ddd'}}
+                            interactive={presentation.interactive}
                             wrap={presentation.wrap}
-                            caption={presentation.appendCaption ? '12' : null}
+                            prepend={
+                                presentation.prepend === 'icon' ? (
+                                    <DownloadIcon />
+                                ) : presentation.prepend === 'checkbox' ? (
+                                    <input type="checkbox" id="listItemExampleCheckbox" />
+                                ) : null
+                            }
+                            disabled={presentation.disabled}
+                            inclusiveDisabled={presentation.inclusiveDisabled}
+                            append={
+                                presentation.appendIcon && presentation.appendText ? (
+                                    <Controls>
+                                        <ControlsItem>
+                                            <Typography intent="quiet" as="span">
+                                                ⌘ + O
+                                            </Typography>
+                                        </ControlsItem>
+                                        <ControlsItem style={{display: 'flex'}}>
+                                            <HelpIcon />
+                                        </ControlsItem>
+                                    </Controls>
+                                ) : presentation.appendIcon ? (
+                                    <HelpIcon />
+                                ) : presentation.appendText ? (
+                                    <Typography intent="quiet" as="span">
+                                        ⌘ + O
+                                    </Typography>
+                                ) : null
+                            }
                         >
-                            {text}
-                        </TextLabel>
-                    </ListItem>
+                            <TextLabel
+                                wrap={presentation.wrap}
+                                caption={presentation.appendCaption ? '12' : null}
+                            >
+                                {text}
+                            </TextLabel>
+                        </ListItem>
+                    </TooltipHandler>
                 </ControlsItem>
             </Controls>
         </PageContent>
@@ -89,6 +96,7 @@ function ListItemExample() {
         <PresentationState name="longTitle" label="Long Title" />
         <PresentationState name="interactive" label="Interactive" />
         <PresentationState name="disabled" label="Disabled" />
+        <PresentationState name="inclusiveDisabled" label="Inclusive disabled" />
         <PresentationState name="wrap" label="Wrap title" />
         <PresentationState name="appendCaption" label="Append Caption" />
         <PresentationState name="appendIcon" label="Append Icon" />
@@ -96,6 +104,8 @@ function ListItemExample() {
         <PresentationState name="prepend" label="No Prepend" value={null} />
         <PresentationState name="prepend" label="Prepend Icon" value="icon" />
         <PresentationState name="prepend" label="Prepend Checkbox" value="checkbox" />
+        <Divider />
+        <PresentationState name="hasTooltip" label="With tooltip" />
     </PresentationControls>
 </Presentation>;
 ```

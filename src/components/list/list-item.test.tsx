@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2011-2019 Genestack Limited
+ * Copyright (c) 2011-2021 Genestack Limited
  * All Rights Reserved
  * THIS IS UNPUBLISHED PROPRIETARY SOURCE CODE OF GENESTACK LIMITED
  * The copyright notice above does not evidence any
@@ -107,5 +107,11 @@ describe('<ListItem />', () => {
                 .first()
                 .instance()
         ).toBe(ref.current);
+    });
+
+    it('should pass inclusiveDisabled with interactive component', () => {
+        const wrapper = app.mount(<ListItem subtitle="subtitle" interactive inclusiveDisabled />);
+
+        expect(wrapper.props().inclusiveDisabled).toBe(true);
     });
 });

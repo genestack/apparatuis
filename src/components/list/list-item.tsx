@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2011-2020 Genestack Limited
+ * Copyright (c) 2011-2021 Genestack Limited
  * All Rights Reserved
  * THIS IS UNPUBLISHED PROPRIETARY SOURCE CODE OF GENESTACK LIMITED
  * The copyright notice above does not evidence any
@@ -51,6 +51,11 @@ export interface Props extends TargetProps, WithClasses<keyof typeof styles> {
      * you should pass `disabled` property certain to contained elements.
      */
     disabled?: boolean;
+    /**
+     * If `true`, the component is disabled but allows cursor interactions such as mouse hover (for tooltips) and focus.
+     * @default false
+     */
+    inclusiveDisabled?: boolean;
     /** Properties for wrapper of prepend element */
     prependProps?: React.HTMLAttributes<HTMLDivElement>;
     /** Properties for wrapper of append element */
@@ -81,6 +86,7 @@ export const ListItem = React.forwardRef((props: Props, ref) => {
         hovered,
         focused,
         disabled,
+        inclusiveDisabled = false,
         className,
         prependProps = {},
         appendProps = {},
@@ -103,7 +109,7 @@ export const ListItem = React.forwardRef((props: Props, ref) => {
 
     const RenderComponent = interactive ? InteractiveElement : BaseComponent;
     const renderComponentProps = interactive
-        ? {as: BaseComponent, activeClassName: classes.active}
+        ? {as: BaseComponent, activeClassName: classes.active, inclusiveDisabled}
         : {};
 
     return (
@@ -117,6 +123,9 @@ export const ListItem = React.forwardRef((props: Props, ref) => {
                 [classes.focused]: focused,
                 [classes.hovered]: hovered,
                 [classes.disabled]: disabled,
+                // FIXME: Prevent click if `interactive` and `inclusiveDisabled`
+                // https://genestack.atlassian.net/browse/ODM-6993
+                [classes.inclusiveDisabled]: inclusiveDisabled,
                 [classes.active]: active,
                 [classes.inPage]: contained === 'in-page',
                 [classes.inDialog]: contained === 'in-dialog'

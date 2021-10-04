@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2011-2019 Genestack Limited
+ * Copyright (c) 2011-2021 Genestack Limited
  * All Rights Reserved
  * THIS IS UNPUBLISHED PROPRIETARY SOURCE CODE OF GENESTACK LIMITED
  * The copyright notice above does not evidence any
@@ -31,11 +31,16 @@
 }
 
 .root:disabled,
-.root.disabled {
+.root.disabled,
+.root.inclusiveDisabled {
     opacity: 0.6;
     background-color: transparent;
     box-shadow: none;
     cursor: not-allowed;
+}
+
+.root:disabled,
+.root.disabled {
     pointer-events: none;
 }
 

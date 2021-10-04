@@ -2,6 +2,10 @@
 
 ## [Unreleased]
 
+## [12.5.0] - 2021-09-28
+
+-   Added `inclusiveDisabled` for `<ListItem>` and `<MenuItem>`
+
 ## [12.4.0] - 2021-09-07
 
 -   Added `inclusiveDisabled` for `<Tab>`
