@@ -2,6 +2,10 @@
 
 ## [Unreleased]
 
+## [12.6.0] - 2021-11-08
+
+-   Added `<OntologyIcon />`
+
 ## [12.5.0] - 2021-09-28
 
 -   Added `inclusiveDisabled` for `<ListItem>` and `<MenuItem>`

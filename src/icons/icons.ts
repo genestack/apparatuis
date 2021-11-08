@@ -52,6 +52,7 @@ export {MenuIcon} from './menu-icon';
 export {MoreIcon} from './more-icon';
 export {NarrowIcon} from './narrow-icon';
 export {NewTabIcon} from './new-tab';
+export {OntologyIcon} from './ontology-icon';
 export {OpenFolderIcon} from './open-folder-icon';
 export {OrganizationIcon} from './organization-icon';
 export {PauseIcon} from './pause-icon';
