@@ -1,7 +1,6 @@
 ```js
 const {DownloadIcon} = require('../../icons/download-icon');
-const {HelpIcon} = require('../../icons/help-icon');
-
+const {QuestionGhostIcon} = require('../../icons/question-ghost-icon');
 const leftCellStyle = {width: 20, textAlign: 'center'};
 const StateExample = (props) => (
     <div {...props} style={{width: 200, border: '1px solid #ddd', marginBottom: 8}} />
@@ -19,7 +18,7 @@ const StateExample = (props) => (
                         as="label"
                         interactive
                         prepend={<input type="checkbox" />}
-                        append={<HelpIcon />}
+                        append={<QuestionGhostIcon />}
                     >
                         <TextLabel caption="12">Liver</TextLabel>
                     </ListItem>

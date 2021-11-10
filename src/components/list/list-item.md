@@ -8,8 +8,7 @@ const {
 } = require('../../../styleguide-components/presentation');
 const {ArrowRightIcon} = require('../../icons/arrow-right-icon');
 const {DownloadIcon} = require('../../icons/download-icon');
-const {HelpIcon} = require('../../icons/help-icon');
-
+const {QuestionGhostIcon} = require('../../icons/question-ghost-icon');
 const longTitle = 'Super long menu item that could break line in some cases';
 
 function ListItemExample() {
@@ -51,11 +50,11 @@ function ListItemExample() {
                                             </Typography>
                                         </ControlsItem>
                                         <ControlsItem style={{display: 'flex'}}>
-                                            <HelpIcon />
+                                            <QuestionGhostIcon />
                                         </ControlsItem>
                                     </Controls>
                                 ) : presentation.appendIcon ? (
-                                    <HelpIcon />
+                                    <QuestionGhostIcon />
                                 ) : presentation.appendText ? (
                                     <Typography intent="quiet" as="span">
                                         ⌘ + O

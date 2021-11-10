@@ -1,6 +1,6 @@
 ```js
 const {DownloadIcon} = require('../../icons/download-icon');
-const {HelpIcon} = require('../../icons/help-icon');
+const {QuestionGhostIcon} = require('../../icons/question-ghost-icon');
 const {KeyboardArrowRightIcon} = require('../../icons/keyboard-arrow-right-icon');
 
 const Example = (props) => <div {...props} style={{margin: 4, textAlign: 'center'}} />;
@@ -22,7 +22,7 @@ const Caption = (props) => (
     </Example>
     <Example>
         <Plate>
-            <HelpIcon />
+            <QuestionGhostIcon />
         </Plate>
         <Caption>Help Icon</Caption>
     </Example>

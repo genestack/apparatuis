@@ -8,7 +8,7 @@ const {
 } = require('../../../styleguide-components/presentation');
 
 const {SearchIcon} = require('../../icons/search-icon.tsx');
-const {HelpIcon} = require('../../icons/help-icon.tsx');
+const {QuestionGhostIcon} = require('../../icons/question-ghost-icon.tsx');
 
 function InputExample(props) {
     const presentation = usePresentation();
@@ -43,7 +43,7 @@ function InputExample(props) {
                     (presentation.spinner === 'on-change' && loading)
                 }
                 prepend={presentation.showSearchIcon ? <SearchIcon /> : null}
-                append={presentation.showHelpIcon ? <HelpIcon /> : null}
+                append={presentation.showQuestionIcon ? <QuestionGhostIcon /> : null}
                 placeholder={presentation.showPlaceholder ? 'Placeholder' : null}
                 disabled={presentation.disabled}
                 fullWidth={presentation.fullWidth}
@@ -81,7 +81,7 @@ function InputExample(props) {
             <Typography variant="section">Inner elements:</Typography>
         </ListItem>
         <PresentationState name="showSearchIcon" label="Show Search Icon" />
-        <PresentationState name="showHelpIcon" label="Show Help Icon" />
+        <PresentationState name="showQuestionIcon" label="Show Question Icon" />
         <PresentationState name="clearable" label="Show Clear Button" />
         <Divider />
         <ListItem>

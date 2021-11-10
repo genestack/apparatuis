@@ -271,7 +271,7 @@ function SelectExample() {
 ```js
 const React = require('react');
 const {Typography} = require('../typography');
-const {HelpIcon, InfoIcon, FiltersIcon, LockIcon} = require('../../icons');
+const {QuestionGhostIcon, InfoIcon, FiltersIcon, LockIcon} = require('../../icons');
 
 function SelectFrame() {
     const [selectValue, setSelectValue] = React.useState('');
@@ -288,7 +288,10 @@ function SelectFrame() {
                 onValueChange={(value) => setSelectValue(value)}
             >
                 <Option value="" />
-                <Option value="10" label={<OptionLabel prepend={<HelpIcon />}>Help</OptionLabel>}>
+                <Option
+                    value="10"
+                    label={<OptionLabel prepend={<QuestionGhostIcon />}>Help</OptionLabel>}
+                >
                     Help
                 </Option>
                 <Option

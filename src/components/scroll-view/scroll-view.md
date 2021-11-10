@@ -1,8 +1,7 @@
 ```js
 const {DarkContext} = require('../../utils/dark-context');
 const {DownloadIcon} = require('../../icons/download-icon');
-const {HelpIcon} = require('../../icons/help-icon');
-
+const {QuestionGhostIcon} = require('../../icons/question-ghost-icon');
 const organismSampleSet = [
     ['Homo sapiens', '7 832'],
     ['Mus musculus', '319'],
@@ -244,7 +243,7 @@ handleScrollbarsModeCheckboxChange = (event) =>
                             as="label"
                             interactive
                             prepend={<input type="checkbox" />}
-                            append={<HelpIcon />}
+                            append={<QuestionGhostIcon />}
                         >
                             <TextLabel caption="12">Liver</TextLabel>
                         </ListItem>

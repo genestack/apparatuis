@@ -1,7 +1,6 @@
 ```js
 const {DownloadIcon} = require('../../icons/download-icon');
-const {HelpIcon} = require('../../icons/help-icon');
-
+const {QuestionGhostIcon} = require('../../icons/question-ghost-icon');
 initialState = {
     longTitle: false,
     caption: false,
@@ -96,11 +95,11 @@ renderRadio = (name, label, value) => (
                                         </Typography>
                                     </ControlsItem>
                                     <ControlsItem style={{display: 'flex'}}>
-                                        <HelpIcon />
+                                        <QuestionGhostIcon />
                                     </ControlsItem>
                                 </Controls>
                             ) : state.appendIcon ? (
-                                <HelpIcon />
+                                <QuestionGhostIcon />
                             ) : state.appendText ? (
                                 <Typography intent="quiet" as="span">
                                     ⌘ + O

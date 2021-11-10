@@ -2,6 +2,12 @@
 
 ## [Unreleased]
 
+## [12.7.0] - 2021-11-09
+
+-   Added `<FormControlLabel />`, `<QuestionGhostIcon />`
+-   Replaced old `<QuestionIcon />` to new `<QuestionIcon />`
+-   Removed `<HelpIcon />`
+
 ## [12.6.0] - 2021-11-08
 
 -   Added `<OntologyIcon />`

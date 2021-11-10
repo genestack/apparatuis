@@ -46,7 +46,7 @@ const SwitchExample = (props) => {
 
 ```js
 const {useMenuHandler} = require('../menu/use-menu-handler');
-const {HelpIcon} = require('../../icons/help-icon');
+const {QuestionGhostIcon} = require('../../icons/question-ghost-icon');
 const {WarningIcon} = require('../../icons/warning-icon');
 const {DarkContext} = require('../../utils/dark-context');
 
@@ -118,7 +118,7 @@ function SwitchListItems() {
     <div style={{display: 'flex', justifyContent: 'space-between'}}>
         <Paper style={{maxWidth: 257}}>
             <ListItem>List Item 1</ListItem>
-            <ListItem as="label" append={<HelpIcon />}>
+            <ListItem as="label" append={<QuestionGhostIcon />}>
                 List Item 2
             </ListItem>
             <ListItem
@@ -144,5 +144,17 @@ function SwitchListItems() {
             </Paper>
         </DarkContext.Provider>
     </div>
+    <Divider gap={4} />
+    <Typography intent="quiet">
+        <a name="switch-with-label">Label</a>
+    </Typography>
+    <Divider variant="transparent" gap={2} />
+    <Typography>
+        You can provide a label to the Switch via the FormControlLabel component.
+    </Typography>
+    <Divider variant="transparent" gap={2} />
+    <FormControlLabel control={<Switch defaultChecked />} label="Label" />
+    <Divider variant="transparent" gap={1} />
+    <FormControlLabel disabled control={<Switch />} label="Disabled" />
 </PageContent>;
 ```
