@@ -2,6 +2,10 @@
 
 ## [Unreleased]
 
+## [12.7.1] - 2021-11-10
+
+-   Export `<FormControlLabel />` from index file
+
 ## [12.7.0] - 2021-11-09
 
 -   Added `<FormControlLabel />`, `<QuestionGhostIcon />`

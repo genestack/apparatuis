@@ -21,6 +21,7 @@ export * from './components/field';
 export * from './components/flex';
 export * from './components/flex-expander';
 export * from './components/focus-trap';
+export * from './components/form-control-label';
 export * from './components/grow';
 export * from './components/header';
 export * from './components/hidden-scrollbar';

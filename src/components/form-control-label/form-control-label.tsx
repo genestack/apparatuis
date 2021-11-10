@@ -14,7 +14,8 @@ import {Typography, TypographyProps} from '../typography';
 
 import * as styles from './form-control-label.module.css';
 
-interface Props extends React.HTMLAttributes<HTMLLabelElement>, Pick<ControlsProps, 'gap'> {
+/** Public FormControlLabel properties */
+export interface Props extends React.HTMLAttributes<HTMLLabelElement>, Pick<ControlsProps, 'gap'> {
     control: React.ReactElement;
     label: React.ReactChild;
     labelProps?: TypographyProps;
