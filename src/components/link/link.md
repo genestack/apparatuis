@@ -54,7 +54,7 @@ handleInvertedChange = (event) => setState({inverted: event.currentTarget.checke
                 </Controls>
                 <Controls>
                     <ControlsItem>
-                        <Link variant="external" disabled tabIndex={0}>
+                        <Link variant="external" intent="alarm" disabled tabIndex={0}>
                             External Disabled
                         </Link>
                     </ControlsItem>
@@ -69,6 +69,43 @@ handleInvertedChange = (event) => setState({inverted: event.currentTarget.checke
                         </Link>
                     </ControlsItem>
                 </Controls>
+                <React.Fragment>
+                    <Typography box="paragraph" style={{width: 600}} intent="alarm">
+                        Import of{' '}
+                        <Link variant="external" tabIndex={0} intent="alarm">
+                            new books about cats
+                        </Link>{' '}
+                        has failed. Please,
+                        <Link tabIndex={0} intent="alarm">
+                            contact support
+                        </Link>.
+                    </Typography>
+                    <Typography box="paragraph" style={{width: 600}} intent="alarm">
+                        Also, you can{' '}
+                        <Link tabIndex={0} intent="alarm" variant="pseudo">
+                            download demo
+                        </Link>
+                    </Typography>
+                </React.Fragment>
+                <React.Fragment>
+                    <Typography box="paragraph" style={{width: 600}} intent="success">
+                        Import of{' '}
+                        <Link variant="external" tabIndex={0} intent="success">
+                            new books about cats
+                        </Link>{' '}
+                        has finished successfully. To get the bonus, please,
+                        <Link tabIndex={0} intent="success">
+                            contact support
+                        </Link>.
+                    </Typography>
+                    <Typography box="paragraph" style={{width: 600}} intent="success">
+                        Also, you can{' '}
+                        <Link tabIndex={0} intent="success" variant="pseudo">
+                            download demo
+                        </Link>
+                    </Typography>
+                </React.Fragment>
+
                 <React.Fragment>
                     <Typography variant="title" box="paragraph">
                         41 letters:{' '}

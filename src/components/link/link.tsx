@@ -20,6 +20,8 @@ type TargetProps = React.AnchorHTMLAttributes<HTMLAnchorElement>;
 export interface Props extends TargetProps, WithClasses<keyof typeof styles> {
     /** Defines a resource that anchor is linked */
     variant?: 'internal' | 'pseudo' | 'external';
+    /** Defines the intention of using the Link element */
+    intent?: 'no-intent' | 'quiet' | 'alarm' | 'warning' | 'success';
     /** Adds ellipsis for text overflowing */
     ellipsis?: boolean;
     /** Adds styles for pressed state */
@@ -56,6 +58,7 @@ export const Link = (props: Props) => {
         children,
         prepend,
         append,
+        intent,
         labelProps = {},
         ...rest
     } = mergeClassesProps(props, styles);
@@ -83,7 +86,9 @@ export const Link = (props: Props) => {
                 [classes.disabled]: disabled,
                 [classes.active]: active,
                 [classes.focus]: focus,
-                [classes.inverted]: inverted
+                [classes.inverted]: inverted,
+                [classes.alarm]: intent === 'alarm',
+                [classes.success]: intent === 'success'
             })}
         >
             {prepend}

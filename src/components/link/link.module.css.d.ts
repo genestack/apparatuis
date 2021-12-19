@@ -13,3 +13,7 @@ export const inverted: string;
 export const focus: string;
 export const pseudo: string;
 export const external: string;
+export const alarm: string;
+export const warning: string;
+export const success: string;
+export const quiet: string;

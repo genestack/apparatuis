@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2011-2019 Genestack Limited
+ * Copyright (c) 2011-2021 Genestack Limited
  * All Rights Reserved
  * THIS IS UNPUBLISHED PROPRIETARY SOURCE CODE OF GENESTACK LIMITED
  * The copyright notice above does not evidence any
@@ -147,4 +147,76 @@
 .external.inverted.disabled .label {
     color: var(--gs-color-grey);
     border-bottom: 2px solid var(--gs-color-grey);
+}
+
+/** intents */
+
+.alarm {
+    color: var(--gs-color-error-text);
+}
+
+.alarm:hover {
+    color: var(--gs-color-error);
+}
+
+.alarm:focus .label,
+.alarm.focus .label {
+    border-bottom: 3px solid var(--gs-color-error);
+}
+
+.alarm:active .label,
+.alarm.active .label {
+    color: var(--gs-color-alarm-active);
+}
+
+.alarm.inverted .label {
+    color: var(--gs-color-error);
+}
+
+.pseudo.alarm .label {
+    border-bottom: 2px dotted var(--gs-color-error);
+}
+
+.external.alarm .label {
+    color: var(--gs-color-error-text);
+    border-bottom: 2px solid var(--gs-color-error-text);
+}
+
+.warning {
+    color: var(--gs-color-warning-text);
+}
+
+.success {
+    color: var(--gs-color-success-text);
+}
+
+.success:hover {
+    color: var(--gs-color-success);
+}
+
+.success:focus .label,
+.success.focus .label {
+    border-bottom: 3px solid var(--gs-color-success);
+}
+
+.success:active .label,
+.success.active .label {
+    color: var(--gs-color-success-text);
+}
+
+.success.inverted .label {
+    color: var(--gs-color-success);
+}
+
+.success.alarm .label {
+    border-bottom: 2px dotted var(--gs-color-success);
+}
+
+.external.success .label {
+    color: var(--gs-color-success-text);
+    border-bottom: 2px solid var(--gs-color-success-text);
+}
+
+.quiet {
+    color: var(--gs-color-grey);
 }
