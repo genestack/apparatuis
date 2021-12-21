@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2011-2020 Genestack Limited
+ * Copyright (c) 2011-2021 Genestack Limited
  * All Rights Reserved
  * THIS IS UNPUBLISHED PROPRIETARY SOURCE CODE OF GENESTACK LIMITED
  * The copyright notice above does not evidence any
@@ -32,7 +32,8 @@
     --gs-color-error: rgba(244, 113, 113, 1);
     --gs-color-error-text: rgb(231, 96, 96);
     --gs-color-error-10: rgba(244, 113, 113, 0.1);
-    --gs-color-alarm-active: rgba(172, 32, 32, 1);
+    --gs-color-error-25: rgba(244, 113, 113, 0.25);
+    --gs-color-error-50: rgba(244, 113, 113, 0.5);
 
     /* greys */
     --gs-color-black: rgba(51, 51, 51, 1);

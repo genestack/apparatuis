@@ -51,11 +51,6 @@
     cursor: not-allowed;
 }
 
-.root:disabled .label,
-.root.disabled .label {
-    color: var(--gs-color-grey-50);
-}
-
 .inverted.root .label {
     color: var(--gs-color-action-inverted);
 }
@@ -69,11 +64,6 @@
     border-bottom: 3px solid var(--gs-color-action-inverted-50);
 }
 
-.inverted.root:disabled .label,
-.inverted.root.disabled .label {
-    color: var(--gs-color-grey);
-}
-
 .pseudo .label {
     border-bottom: 2px dotted var(--gs-color-action-25);
 }
@@ -81,12 +71,6 @@
 .pseudo:focus .label,
 .pseudo.focus .label {
     border-bottom: 3px solid var(--gs-color-action-25);
-}
-
-.pseudo.disabled .label,
-.pseudo:disabled .label {
-    color: var(--gs-color-grey-50);
-    border-bottom: 2px dotted var(--gs-color-grey-50);
 }
 
 .pseudo.inverted .label {
@@ -104,13 +88,6 @@
     border-bottom: 3px solid var(--gs-color-action-inverted-50);
 }
 
-.pseudo.inverted:disabled .label,
-.pseudo.inverted.disabled .label {
-    color: var(--gs-color-grey);
-    cursor: not-allowed;
-    border-bottom: 2px dotted var(--gs-color-grey);
-}
-
 .external .label {
     color: var(--gs-color-action);
     border-bottom: 2px solid var(--gs-color-action-25);
@@ -119,13 +96,6 @@
 .external:focus .label,
 .external.focus .label {
     border-bottom: 3px solid var(--gs-color-action-25);
-}
-
-.external:disabled .label,
-.external.disabled .label {
-    color: var(--gs-color-grey-50);
-    cursor: not-allowed;
-    border-bottom: 2px solid var(--gs-color-grey-50);
 }
 
 .external.inverted .label {
@@ -143,19 +113,14 @@
     border-bottom: 3px solid var(--gs-color-action-inverted-50);
 }
 
-.external.inverted:disabled .label,
-.external.inverted.disabled .label {
-    color: var(--gs-color-grey);
-    border-bottom: 2px solid var(--gs-color-grey);
-}
-
 /** intents */
 
 .alarm {
     color: var(--gs-color-error-text);
 }
 
-.alarm:hover {
+.alarm:hover,
+.alarm:hover .label {
     color: var(--gs-color-error);
 }
 
@@ -166,57 +131,96 @@
 
 .alarm:active .label,
 .alarm.active .label {
-    color: var(--gs-color-alarm-active);
+    border-bottom: 3px solid var(--gs-color-error-25);
 }
 
-.alarm.inverted .label {
-    color: var(--gs-color-error);
+.alarm.inverted .label,
+.alarm.inverted:hover .label {
+    color: var(--gs-color-error-50);
 }
 
 .pseudo.alarm .label {
+    border-bottom: 2px dotted var(--gs-color-error-25);
+}
+
+.pseudo.alarm:focus .label,
+.pseudo.alarm.focus .label {
+    border-bottom: 3px solid var(--gs-color-error-25);
+}
+
+.pseudo.alarm.inverted .label {
+    color: var(--gs-color-error);
+    border-bottom: 2px dotted var(--gs-color-error-50);
+}
+
+.pseudo.alarm.inverted:hover .label {
     border-bottom: 2px dotted var(--gs-color-error);
+}
+
+.pseudo.alarm.inverted:focus .label,
+.pseudo.alarm.inverted.focus .label {
+    border-bottom: 3px solid var(--gs-color-error);
 }
 
 .external.alarm .label {
     color: var(--gs-color-error-text);
-    border-bottom: 2px solid var(--gs-color-error-text);
+    border-bottom: 2px solid var(--gs-color-error-25);
 }
 
-.warning {
-    color: var(--gs-color-warning-text);
+.external.alarm:focus .label,
+.external.alarm.focus .label {
+    border-bottom: 3px solid var(--gs-color-error-25);
 }
 
-.success {
-    color: var(--gs-color-success-text);
+.external.alarm.inverted .label {
+    color: var(--gs-color-error);
+    border-bottom: 2px solid var(--gs-color-error-50);
 }
 
-.success:hover {
-    color: var(--gs-color-success);
+.external.alarm.inverted:hover .label {
+    color: var(--gs-color-error);
+    border-bottom: 2px solid var(--gs-color-error);
 }
 
-.success:focus .label,
-.success.focus .label {
-    border-bottom: 3px solid var(--gs-color-success);
+.external.alarm.inverted:focus .label,
+.external.alarm.inverted.focus .label {
+    border-bottom: 3px solid var(--gs-color-error-50);
 }
 
-.success:active .label,
-.success.active .label {
-    color: var(--gs-color-success-text);
+/** disabled */
+
+.root:disabled .label,
+.root.disabled .label {
+    color: var(--gs-color-grey-50);
 }
 
-.success.inverted .label {
-    color: var(--gs-color-success);
-}
-
-.success.alarm .label {
-    border-bottom: 2px dotted var(--gs-color-success);
-}
-
-.external.success .label {
-    color: var(--gs-color-success-text);
-    border-bottom: 2px solid var(--gs-color-success-text);
-}
-
-.quiet {
+.inverted.root:disabled .label,
+.inverted.root.disabled .label {
     color: var(--gs-color-grey);
+}
+
+.pseudo.disabled .label,
+.pseudo:disabled .label {
+    color: var(--gs-color-grey-50);
+    border-bottom: 2px dotted var(--gs-color-grey-50);
+}
+
+.pseudo.inverted:disabled .label,
+.pseudo.inverted.disabled .label {
+    color: var(--gs-color-grey);
+    cursor: not-allowed;
+    border-bottom: 2px dotted var(--gs-color-grey);
+}
+
+.external:disabled .label,
+.external.disabled .label {
+    color: var(--gs-color-grey-50);
+    cursor: not-allowed;
+    border-bottom: 2px solid var(--gs-color-grey-50);
+}
+
+.external.inverted:disabled .label,
+.external.inverted.disabled .label {
+    color: var(--gs-color-grey);
+    border-bottom: 2px solid var(--gs-color-grey);
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2011-2019 Genestack Limited
+ * Copyright (c) 2011-2021 Genestack Limited
  * All Rights Reserved
  * THIS IS UNPUBLISHED PROPRIETARY SOURCE CODE OF GENESTACK LIMITED
  * The copyright notice above does not evidence any
@@ -21,7 +21,7 @@ export interface Props extends TargetProps, WithClasses<keyof typeof styles> {
     /** Defines a resource that anchor is linked */
     variant?: 'internal' | 'pseudo' | 'external';
     /** Defines the intention of using the Link element */
-    intent?: 'no-intent' | 'quiet' | 'alarm' | 'warning' | 'success';
+    intent?: 'no-intent' | 'alarm';
     /** Adds ellipsis for text overflowing */
     ellipsis?: boolean;
     /** Adds styles for pressed state */
@@ -87,8 +87,7 @@ export const Link = (props: Props) => {
                 [classes.active]: active,
                 [classes.focus]: focus,
                 [classes.inverted]: inverted,
-                [classes.alarm]: intent === 'alarm',
-                [classes.success]: intent === 'success'
+                [classes.alarm]: intent === 'alarm'
             })}
         >
             {prepend}

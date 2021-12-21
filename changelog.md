@@ -2,6 +2,9 @@
 
 ## [Unreleased]
 
+-   Changed [Link](src/components/link/link.tsx) public properties:
+    -   added `intent = 'alarm'` property
+
 ## [12.7.1] - 2021-11-10
 
 -   Export `<FormControlLabel />` from index file
