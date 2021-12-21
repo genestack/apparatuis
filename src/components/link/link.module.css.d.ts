@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2011-2019 Genestack Limited
+ * Copyright (c) 2011-2021 Genestack Limited
  * All Rights Reserved
  * THIS IS UNPUBLISHED PROPRIETARY SOURCE CODE OF GENESTACK LIMITED
  * The copyright notice above does not evidence any
@@ -14,6 +14,3 @@ export const focus: string;
 export const pseudo: string;
 export const external: string;
 export const alarm: string;
-export const warning: string;
-export const success: string;
-export const quiet: string;
