@@ -36,9 +36,9 @@
     margin-right: 0;
 }
 
-.root:focus .label,
+.root:focus-visible .label,
 .root.focus .label {
-    border-bottom: 3px solid var(--gs-color-action-25);
+    box-shadow: var(--gs-focused-shadow);
 }
 
 .root:active .label,
@@ -59,22 +59,21 @@
     color: var(--gs-color-grey-background);
 }
 
-.inverted.root:focus .label,
+.inverted.root:focus-visible .label,
 .inverted.root.focus .label {
-    border-bottom: 3px solid var(--gs-color-action-inverted-50);
+    box-shadow: var(--gs-focused-shadow-inverted);
 }
 
 .pseudo .label {
     border-bottom: 2px dotted var(--gs-color-action-25);
 }
 
-.pseudo:focus .label,
+.pseudo:focus-visible .label,
 .pseudo.focus .label {
-    border-bottom: 3px solid var(--gs-color-action-25);
+    border-bottom: none;
 }
 
 .pseudo.inverted .label {
-    color: var(--gs-color-action-inverted);
     border-bottom: 2px dotted var(--gs-color-action-inverted-50);
 }
 
@@ -85,21 +84,19 @@
 
 .pseudo.inverted:focus .label,
 .pseudo.inverted.focus .label {
-    border-bottom: 3px solid var(--gs-color-action-inverted-50);
+    border-bottom: none;
 }
 
 .external .label {
-    color: var(--gs-color-action);
     border-bottom: 2px solid var(--gs-color-action-25);
 }
 
-.external:focus .label,
+.external:focus-visible .label,
 .external.focus .label {
-    border-bottom: 3px solid var(--gs-color-action-25);
+    border-bottom: none;
 }
 
 .external.inverted .label {
-    color: var(--gs-color-action-inverted);
     border-bottom: 2px solid var(--gs-color-action-inverted-50);
 }
 
@@ -108,9 +105,10 @@
     border-bottom: 2px solid var(--gs-color-action-inverted);
 }
 
-.external.inverted:focus .label,
+.external.inverted:focus-visible .label,
 .external.inverted.focus .label {
-    border-bottom: 3px solid var(--gs-color-action-inverted-50);
+    color: var(--gs-color-action-inverted);
+    border-bottom: none;
 }
 
 /** intents */
@@ -124,13 +122,14 @@
     color: var(--gs-color-error);
 }
 
-.alarm:focus .label,
+.alarm:focus-visible .label,
 .alarm.focus .label {
-    border-bottom: 3px solid var(--gs-color-error);
+    border-bottom: none;
 }
 
 .alarm:active .label,
 .alarm.active .label {
+    color: var(--gs-color-error-text);
     border-bottom: 3px solid var(--gs-color-error-25);
 }
 
@@ -143,9 +142,9 @@
     border-bottom: 2px dotted var(--gs-color-error-25);
 }
 
-.pseudo.alarm:focus .label,
+.pseudo.alarm:focus-visible .label,
 .pseudo.alarm.focus .label {
-    border-bottom: 3px solid var(--gs-color-error-25);
+    border-bottom: none;
 }
 
 .pseudo.alarm.inverted .label {
@@ -157,19 +156,18 @@
     border-bottom: 2px dotted var(--gs-color-error);
 }
 
-.pseudo.alarm.inverted:focus .label,
+.pseudo.alarm.inverted:focus-visible .label,
 .pseudo.alarm.inverted.focus .label {
-    border-bottom: 3px solid var(--gs-color-error);
+    border-bottom: none;
 }
 
 .external.alarm .label {
-    color: var(--gs-color-error-text);
     border-bottom: 2px solid var(--gs-color-error-25);
 }
 
-.external.alarm:focus .label,
+.external.alarm:focus-visible .label,
 .external.alarm.focus .label {
-    border-bottom: 3px solid var(--gs-color-error-25);
+    border-bottom: none;
 }
 
 .external.alarm.inverted .label {
@@ -182,9 +180,9 @@
     border-bottom: 2px solid var(--gs-color-error);
 }
 
-.external.alarm.inverted:focus .label,
+.external.alarm.inverted:focus-visible .label,
 .external.alarm.inverted.focus .label {
-    border-bottom: 3px solid var(--gs-color-error-50);
+    border-bottom: none;
 }
 
 /** disabled */
