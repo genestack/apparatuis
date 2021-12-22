@@ -69,6 +69,7 @@ handleInvertedChange = (event) => setState({inverted: event.currentTarget.checke
                         </Link>
                     </ControlsItem>
                 </Controls>
+
                 <React.Fragment>
                     <Typography variant="title" box="paragraph">
                         41 letters:{' '}
@@ -99,6 +100,25 @@ handleInvertedChange = (event) => setState({inverted: event.currentTarget.checke
                         jovially axed.
                     </Link>
                 </React.Fragment>
+                <React.Fragment>
+                    <Typography box="paragraph" style={{width: 600}} intent="alarm">
+                        Import of{' '}
+                        <Link variant="external" tabIndex={0} intent="alarm">
+                            the new books about cats
+                        </Link>{' '}
+                        has failed. Please,
+                        <Link tabIndex={0} intent="alarm" variant="external">
+                            contact support
+                        </Link>.
+                    </Typography>
+                    <Typography box="paragraph" style={{width: 600}} intent="alarm">
+                        Also, you can{' '}
+                        <Link tabIndex={0} intent="alarm" variant="pseudo">
+                            download demo
+                        </Link>
+                    </Typography>
+                </React.Fragment>
+
                 <Link tabIndex={0} variant="pseudo" prepend={<DownloadIcon />}>
                     Download
                 </Link>

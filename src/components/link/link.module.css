@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2011-2019 Genestack Limited
+ * Copyright (c) 2011-2021 Genestack Limited
  * All Rights Reserved
  * THIS IS UNPUBLISHED PROPRIETARY SOURCE CODE OF GENESTACK LIMITED
  * The copyright notice above does not evidence any
@@ -36,9 +36,9 @@
     margin-right: 0;
 }
 
-.root:focus .label,
+.root:focus-visible .label,
 .root.focus .label {
-    border-bottom: 3px solid var(--gs-color-action-25);
+    box-shadow: var(--gs-focused-shadow);
 }
 
 .root:active .label,
@@ -51,11 +51,6 @@
     cursor: not-allowed;
 }
 
-.root:disabled .label,
-.root.disabled .label {
-    color: var(--gs-color-grey-50);
-}
-
 .inverted.root .label {
     color: var(--gs-color-action-inverted);
 }
@@ -64,33 +59,21 @@
     color: var(--gs-color-grey-background);
 }
 
-.inverted.root:focus .label,
+.inverted.root:focus-visible .label,
 .inverted.root.focus .label {
-    border-bottom: 3px solid var(--gs-color-action-inverted-50);
-}
-
-.inverted.root:disabled .label,
-.inverted.root.disabled .label {
-    color: var(--gs-color-grey);
+    box-shadow: var(--gs-focused-shadow-inverted);
 }
 
 .pseudo .label {
     border-bottom: 2px dotted var(--gs-color-action-25);
 }
 
-.pseudo:focus .label,
+.pseudo:focus-visible .label,
 .pseudo.focus .label {
-    border-bottom: 3px solid var(--gs-color-action-25);
-}
-
-.pseudo.disabled .label,
-.pseudo:disabled .label {
-    color: var(--gs-color-grey-50);
-    border-bottom: 2px dotted var(--gs-color-grey-50);
+    border-bottom: none;
 }
 
 .pseudo.inverted .label {
-    color: var(--gs-color-action-inverted);
     border-bottom: 2px dotted var(--gs-color-action-inverted-50);
 }
 
@@ -101,7 +84,123 @@
 
 .pseudo.inverted:focus .label,
 .pseudo.inverted.focus .label {
-    border-bottom: 3px solid var(--gs-color-action-inverted-50);
+    border-bottom: none;
+}
+
+.external .label {
+    border-bottom: 2px solid var(--gs-color-action-25);
+}
+
+.external:focus-visible .label,
+.external.focus .label {
+    border-bottom: none;
+}
+
+.external.inverted .label {
+    border-bottom: 2px solid var(--gs-color-action-inverted-50);
+}
+
+.external.inverted:hover .label {
+    color: var(--gs-color-action-inverted);
+    border-bottom: 2px solid var(--gs-color-action-inverted);
+}
+
+.external.inverted:focus-visible .label,
+.external.inverted.focus .label {
+    color: var(--gs-color-action-inverted);
+    border-bottom: none;
+}
+
+/** intents */
+
+.alarm {
+    color: var(--gs-color-error-text);
+}
+
+.alarm:hover,
+.alarm:hover .label {
+    color: var(--gs-color-error);
+}
+
+.alarm:focus-visible .label,
+.alarm.focus .label {
+    border-bottom: none;
+}
+
+.alarm:active .label,
+.alarm.active .label {
+    color: var(--gs-color-error-text);
+    border-bottom: 3px solid var(--gs-color-error-25);
+}
+
+.alarm.inverted .label,
+.alarm.inverted:hover .label {
+    color: var(--gs-color-error-50);
+}
+
+.pseudo.alarm .label {
+    border-bottom: 2px dotted var(--gs-color-error-25);
+}
+
+.pseudo.alarm:focus-visible .label,
+.pseudo.alarm.focus .label {
+    border-bottom: none;
+}
+
+.pseudo.alarm.inverted .label {
+    color: var(--gs-color-error);
+    border-bottom: 2px dotted var(--gs-color-error-50);
+}
+
+.pseudo.alarm.inverted:hover .label {
+    border-bottom: 2px dotted var(--gs-color-error);
+}
+
+.pseudo.alarm.inverted:focus-visible .label,
+.pseudo.alarm.inverted.focus .label {
+    border-bottom: none;
+}
+
+.external.alarm .label {
+    border-bottom: 2px solid var(--gs-color-error-25);
+}
+
+.external.alarm:focus-visible .label,
+.external.alarm.focus .label {
+    border-bottom: none;
+}
+
+.external.alarm.inverted .label {
+    color: var(--gs-color-error);
+    border-bottom: 2px solid var(--gs-color-error-50);
+}
+
+.external.alarm.inverted:hover .label {
+    color: var(--gs-color-error);
+    border-bottom: 2px solid var(--gs-color-error);
+}
+
+.external.alarm.inverted:focus-visible .label,
+.external.alarm.inverted.focus .label {
+    border-bottom: none;
+}
+
+/** disabled */
+
+.root:disabled .label,
+.root.disabled .label {
+    color: var(--gs-color-grey-50);
+}
+
+.inverted.root:disabled .label,
+.inverted.root.disabled .label {
+    color: var(--gs-color-grey);
+}
+
+.pseudo.disabled .label,
+.pseudo:disabled .label {
+    color: var(--gs-color-grey-50);
+    border-bottom: 2px dotted var(--gs-color-grey-50);
 }
 
 .pseudo.inverted:disabled .label,
@@ -111,36 +210,11 @@
     border-bottom: 2px dotted var(--gs-color-grey);
 }
 
-.external .label {
-    color: var(--gs-color-action);
-    border-bottom: 2px solid var(--gs-color-action-25);
-}
-
-.external:focus .label,
-.external.focus .label {
-    border-bottom: 3px solid var(--gs-color-action-25);
-}
-
 .external:disabled .label,
 .external.disabled .label {
     color: var(--gs-color-grey-50);
     cursor: not-allowed;
     border-bottom: 2px solid var(--gs-color-grey-50);
-}
-
-.external.inverted .label {
-    color: var(--gs-color-action-inverted);
-    border-bottom: 2px solid var(--gs-color-action-inverted-50);
-}
-
-.external.inverted:hover .label {
-    color: var(--gs-color-action-inverted);
-    border-bottom: 2px solid var(--gs-color-action-inverted);
-}
-
-.external.inverted:focus .label,
-.external.inverted.focus .label {
-    border-bottom: 3px solid var(--gs-color-action-inverted-50);
 }
 
 .external.inverted:disabled .label,
