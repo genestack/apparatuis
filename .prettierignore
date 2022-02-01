@@ -1,0 +1,8 @@
+node_modules
+package.json
+package-lock.json
+coverage
+dist
+.stylelintrc
+.gitignore
+*.tsx.snap
