@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2011-2021 Genestack Limited
+ * Copyright (c) 2011-2022 Genestack Limited
  * All Rights Reserved
  * THIS IS UNPUBLISHED PROPRIETARY SOURCE CODE OF GENESTACK LIMITED
  * The copyright notice above does not evidence any
@@ -68,6 +68,7 @@ export {SearchIcon} from './search-icon';
 export {ShareIcon} from './share-icon';
 export {SharedWithUserIcon} from './shared-with-user-icon';
 export {SimpleFileIcon} from './simple-file-icon';
+export {SquareArrowsIcon} from './square-arrows-icon';
 export {StopIcon} from './stop-icon';
 export {TextIcon} from './text-icon';
 export {TimeReverseIcon} from './time-reverse-icon';
