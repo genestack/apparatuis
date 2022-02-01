@@ -2,6 +2,10 @@
 
 ## [Unreleased]
 
+## [12.9.0] - 2021-02-01
+
+-   Added `<SquareArrowsIcon />`
+
 ## [12.8.0] - 2021-12-22
 
 -   Changed [Link](src/components/link/link.tsx) public properties:
