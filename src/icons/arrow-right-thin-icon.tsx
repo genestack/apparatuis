@@ -5,21 +5,28 @@
  * The copyright notice above does not evidence any
  * actual or intended publication of such source code.
  */
+
 import * as React from 'react';
 
 import {createIcon} from '../components/icon';
 
 /**
- * Arrow Left Icon
+ * Arrow Right Thin Icon
  */
-export const ArrowLeftIcon = createIcon(
-    <svg viewBox="0 0 20 20">
+export const ArrowRightThinIcon = createIcon(
+    <svg viewBox="0 0 20 20" fill="none">
         <path
-            d="M9 6l-4 4 4 4M7 10h8"
+            d="M11.5 14.5L15.5 10.5L11.5 6.5"
             className="gs-svg-icon-stroke"
-            strokeWidth="2"
             strokeLinecap="round"
-            fill="none"
+        />
+        <line
+            x1="14.5"
+            y1="10.5"
+            x2="4.5"
+            y2="10.5"
+            className="gs-svg-icon-stroke"
+            strokeLinecap="round"
         />
     </svg>
 );
