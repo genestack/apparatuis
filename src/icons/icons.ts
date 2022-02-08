@@ -16,6 +16,8 @@ export {ArrowDownloadIcon} from './arrow-download-icon';
 export {ArrowDownloadThinIcon} from './arrow-download-thin-icon';
 export {ArrowLeftIcon} from './arrow-left-icon';
 export {ArrowRightIcon} from './arrow-right-icon';
+export {ArrowLeftThinIcon} from './arrow-left-thin-icon';
+export {ArrowRightThinIcon} from './arrow-right-thin-icon';
 export {BookmarkBorderedIcon} from './bookmark-bordered-icon';
 export {BookmarkIcon} from './bookmark-icon';
 export {BooleanIcon} from './boolean-icon';

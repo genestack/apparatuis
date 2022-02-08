@@ -2,6 +2,10 @@
 
 ## [Unreleased]
 
+## [12.10.0] - 2021-02-08
+
+-   Added `<ArrowLeftThinIcon />`, `<ArrowRightThinIcon />`
+
 ## [12.9.0] - 2021-02-01
 
 -   Added `<SquareArrowsIcon />`
