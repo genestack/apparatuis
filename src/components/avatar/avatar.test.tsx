@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2011-2020 Genestack Limited
+ * Copyright (c) 2011-2022 Genestack Limited
  * All Rights Reserved
  * THIS IS UNPUBLISHED PROPRIETARY SOURCE CODE OF GENESTACK LIMITED
  * The copyright notice above does not evidence any
@@ -18,11 +18,7 @@ describe('<Avatar />', () => {
         });
 
         it('should render child with text of one letter', () => {
-            expect(
-                getComponent()
-                    .find('div')
-                    .text()
-            ).toBe('A');
+            expect(getComponent().find('div').text()).toBe('A');
         });
     });
 
@@ -38,6 +34,14 @@ describe('<Avatar />', () => {
             const getComponent = () => shallow(<Avatar initials="ABC" />);
 
             expect(getComponent().find('div')).toHaveLength(2);
+        });
+    });
+
+    describe('icon avatars', () => {
+        test('should render icon', () => {
+            const getComponent = () => shallow(<Avatar icon={<div id="icon" />} />);
+
+            expect(getComponent().find('#icon')).toBeTruthy();
         });
     });
 });

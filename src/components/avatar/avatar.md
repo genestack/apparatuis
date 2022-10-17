@@ -3,6 +3,9 @@ initialState = {
     userName: 'Marc Chagall'
 };
 
+const {UserGroupIcon} = require('../../icons/user-group-icon');
+const {OrganizationIcon} = require('../../icons/organization-icon');
+
 const AvatarListExample = () => {
     return (
         <List>
@@ -81,6 +84,20 @@ const AvatarListExample = () => {
                     <Typography>{state.userName}</Typography>
                 </ControlsItem>
             </Controls>
+        </ControlsItem>
+    </Controls>
+    <Divider gap={4} />
+    <Typography intent="quiet">Icon avatars</Typography>
+    <Typography>
+        Icon avatars are created by passing an icon as children or by icon props.
+    </Typography>
+    <Divider gap={2} variant="transparent" />
+    <Controls gap={4}>
+        <ControlsItem>
+            <Avatar icon={<OrganizationIcon />} style={{backgroundColor: '#ebedef'}} />
+        </ControlsItem>
+        <ControlsItem>
+            <Avatar icon={<UserGroupIcon />} style={{backgroundColor: '#ebedef'}} />
         </ControlsItem>
     </Controls>
 </PageContent>;

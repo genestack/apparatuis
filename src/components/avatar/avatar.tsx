@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2011-2020 Genestack Limited
+ * Copyright (c) 2011-2022 Genestack Limited
  * All Rights Reserved
  * THIS IS UNPUBLISHED PROPRIETARY SOURCE CODE OF GENESTACK LIMITED
  * The copyright notice above does not evidence any
@@ -23,13 +23,14 @@ export interface Props extends TargetProps, WithClasses<keyof typeof styles> {
      * Displays two first symbols, if the property consists of two or more symbols.
      */
     initials?: string;
+    icon?: React.ReactNode;
 }
 
 /**
  * Avatar component is the graphical representation of a user
  */
 export const Avatar = (props: Props) => {
-    const {initials: initialsProp, classes, ...rest} = mergeClassesProps(props, styles);
+    const {initials: initialsProp, classes, icon, ...rest} = mergeClassesProps(props, styles);
 
     let initials: React.ReactElement | null = null;
 
@@ -56,8 +57,14 @@ export const Avatar = (props: Props) => {
             {...rest}
             className={classNames(classes.root, rest.className)}
         >
-            {initials}
-            {rest.children}
+            {icon ? (
+                icon
+            ) : (
+                <>
+                    {initials}
+                    {rest.children}
+                </>
+            )}
         </Typography>
     );
 };

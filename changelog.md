@@ -2,6 +2,10 @@
 
 ## [Unreleased]
 
+## [12.11.0] - 2021-04-11
+
+-   Added `icon` for `<Avatar />`
+
 ## [12.10.0] - 2021-02-08
 
 -   Added `<ArrowLeftThinIcon />`, `<ArrowRightThinIcon />`
