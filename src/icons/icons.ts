@@ -80,3 +80,4 @@ export {UserGroupIcon} from './user-group-icon';
 export {UserIcon} from './user-icon';
 export {WarningIcon} from './warning-icon';
 export {WidenIcon} from './widen-icon';
+export {InProgressIcon} from './in-progress-icon';
