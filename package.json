@@ -1,6 +1,6 @@
 {
   "name": "@genestack/ui",
-  "version": "12.12.1",
+  "version": "12.12.2",
   "description": "UI library",
   "main": "dist/",
   "types": "dist/",
