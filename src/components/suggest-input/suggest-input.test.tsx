@@ -98,10 +98,7 @@ describe('<SuggestInput />', () => {
         );
 
         wrapper.find('input').simulate('focus');
-        wrapper
-            .find('#any-component')
-            .hostNodes()
-            .simulate('click');
+        wrapper.find('#any-component').hostNodes().simulate('click');
 
         wrapper.find('input').simulate('focus');
 
@@ -124,10 +121,7 @@ describe('<SuggestInput />', () => {
             );
 
             wrapper.find('input').simulate('focus');
-            wrapper
-                .find('#item')
-                .hostNodes()
-                .simulate('click');
+            wrapper.find('#item').hostNodes().simulate('click');
 
             return {wrapper, onComplete, onOpenChange};
         };

@@ -29,10 +29,10 @@ export type OverridableProps<M extends OverridableTypeMap> = DefaultComponentPro
 /**
  * Props of the component if `component={Component}` is used.
  */
-export type OverrideProps<M extends OverridableTypeMap, C extends React.ElementType> = BaseProps<
-    M
-> &
-    Omit<React.ComponentPropsWithRef<C>, keyof CommonProps>;
+export type OverrideProps<
+    M extends OverridableTypeMap,
+    C extends React.ElementType
+> = BaseProps<M> & Omit<React.ComponentPropsWithRef<C>, keyof CommonProps>;
 
 /**
  * Props if `component={Component}` is NOT used.

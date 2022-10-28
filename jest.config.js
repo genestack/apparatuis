@@ -8,8 +8,9 @@
 
 module.exports = {
     rootDir: process.cwd(),
-    verbose: true,
+    verbose: false,
     collectCoverage: true,
+    silent: false,
 
     testMatch: ['**/*.test.tsx', '**/*.test.ts'],
 

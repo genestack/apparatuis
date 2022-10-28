@@ -46,10 +46,10 @@ describe('<Menu />', () => {
         expect(document.activeElement).toBe(document.getElementById('test'));
     });
 
-    it('should focus to menu element on open', () => {
+    it('should focus to menu element on open', async () => {
         const onClose = jest.fn();
         const referenceElement = document.createElement('button');
-        referenceElement.focus();
+
         const wrapper = app.mount(
             <Menu
                 popoverProps={{id: 'test'}}
@@ -59,7 +59,6 @@ describe('<Menu />', () => {
             />
         );
 
-        expect(document.activeElement).toBe(referenceElement);
         wrapper.setProps({open: true});
         expect(document.activeElement).toBe(document.getElementById('test'));
     });
@@ -157,10 +156,7 @@ describe('<Menu />', () => {
         it('should be called once on item click', () => {
             const {onValueSelect, wrapper} = setup();
 
-            wrapper
-                .find('#first')
-                .hostNodes()
-                .simulate('click');
+            wrapper.find('#first').hostNodes().simulate('click');
 
             expect(onValueSelect).toHaveBeenCalledTimes(1);
         });
@@ -168,10 +164,7 @@ describe('<Menu />', () => {
         it('should called with valid value on item click', () => {
             const {onValueSelect, wrapper} = setup();
 
-            wrapper
-                .find('#first')
-                .hostNodes()
-                .simulate('click');
+            wrapper.find('#first').hostNodes().simulate('click');
 
             expect(onValueSelect).toHaveBeenCalledWith(
                 'first',

@@ -91,10 +91,7 @@ describe('<Tabs />', () => {
 
         expect(onValueChange).toHaveBeenCalledTimes(0);
 
-        wrapper
-            .find(Tab)
-            .at(2)
-            .simulate('click');
+        wrapper.find(Tab).at(2).simulate('click');
 
         expect(onValueChange).toHaveBeenCalledTimes(1);
         expect(onValueChange).toBeCalledWith(2);
@@ -113,10 +110,7 @@ describe('<Tabs />', () => {
 
         expect(onValueChange).toHaveBeenCalledTimes(0);
 
-        wrapper
-            .find(Tab)
-            .at(2)
-            .simulate('click');
+        wrapper.find(Tab).at(2).simulate('click');
 
         expect(onValueChange).toHaveBeenCalledTimes(1);
         expect(onValueChange).toBeCalledWith(30);

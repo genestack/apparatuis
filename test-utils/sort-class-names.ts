@@ -7,8 +7,4 @@
  */
 
 /** Split and sort className */
-export const sortClassNames = (str: string) =>
-    str
-        .split(' ')
-        .sort()
-        .join(' ');
+export const sortClassNames = (str: string) => str.split(' ').sort().join(' ');

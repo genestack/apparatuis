@@ -20,5 +20,5 @@
  * type Bar = OmitIndexSignature<Foo>; // type Bar = { bar?: string; baz: () => void }
  */
 export type OmitIndexSignature<T extends Record<any, any>> = {
-    [ K in keyof T as string extends K ? never : number extends K ? never : K ] : T[K]
+    [K in keyof T as string extends K ? never : number extends K ? never : K]: T[K];
 };

@@ -84,12 +84,7 @@ describe('<ListItem />', () => {
             </div>
         );
 
-        expect(
-            wrapper
-                .find('li')
-                .first()
-                .instance()
-        ).toBe(ref.current);
+        expect(wrapper.find('li').first().instance()).toBe(ref.current);
     });
 
     it('should pass ref with interactive component', () => {
@@ -101,12 +96,7 @@ describe('<ListItem />', () => {
             </div>
         );
 
-        expect(
-            wrapper
-                .find('li')
-                .first()
-                .instance()
-        ).toBe(ref.current);
+        expect(wrapper.find('li').first().instance()).toBe(ref.current);
     });
 
     it('should pass inclusiveDisabled with interactive component', () => {

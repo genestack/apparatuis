@@ -13,7 +13,13 @@ import {createIcon} from '../components/icon';
  * In-progress icon
  */
 export const InProgressIcon = createIcon(
-    <svg width="20" height="20" viewBox="-5 -3 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <svg
+        width="20"
+        height="20"
+        viewBox="-5 -3 20 20"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+    >
         <path
             fillRule="evenodd"
             clipRule="evenodd"

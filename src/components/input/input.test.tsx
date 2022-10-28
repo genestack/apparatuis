@@ -103,10 +103,7 @@ describe('<Input />', () => {
                 />
             );
 
-            wrapper
-                .find('#clear-button')
-                .hostNodes()
-                .simulate('click');
+            wrapper.find('#clear-button').hostNodes().simulate('click');
 
             expect(handleClearButtonClick).toHaveBeenCalledTimes(1);
             expect(handleValueChange).not.toBeCalled();

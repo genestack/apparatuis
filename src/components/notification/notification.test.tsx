@@ -51,10 +51,7 @@ describe('<Notification />', () => {
             </Notification>
         );
 
-        wrapper
-            .find('#button')
-            .hostNodes()
-            .simulate('click');
+        wrapper.find('#button').hostNodes().simulate('click');
         expect(onClose).toBeCalledWith('close-button-click');
     });
 

@@ -66,10 +66,7 @@ describe('<MenuHandler />', () => {
     it('should close menu on menu item without sub menu', () => {
         const {wrapper} = setup();
         wrapper.find('#button').simulate('click');
-        wrapper
-            .find('#item')
-            .hostNodes()
-            .simulate('click');
+        wrapper.find('#item').hostNodes().simulate('click');
 
         expect(document.getElementById('menu')).toBeTruthy();
 

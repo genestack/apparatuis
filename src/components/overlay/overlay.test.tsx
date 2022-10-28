@@ -191,10 +191,7 @@ describe('<Overlay />', () => {
             'should focus to the first focusable element ' +
                 'in the overlay after focus the start sentinel',
             () => {
-                document
-                    .querySelectorAll('button')
-                    .item(0)
-                    .focus();
+                document.querySelectorAll('button').item(0).focus();
                 expect(document.activeElement).toBe(document.getElementById('first'));
             }
         );
