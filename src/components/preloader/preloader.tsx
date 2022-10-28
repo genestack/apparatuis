@@ -74,7 +74,7 @@ export interface Props {
     box?: TypographyProps['box'];
 }
 
-const getIterator = function*<T extends any = any>(array: T[]): IterableIterator<T> {
+const getIterator = function* <T extends any = any>(array: T[]): IterableIterator<T> {
     while (true) {
         for (const value of array) {
             yield value;

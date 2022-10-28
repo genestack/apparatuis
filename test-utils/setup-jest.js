@@ -6,6 +6,6 @@
  * actual or intended publication of such source code.
  */
 const {configure} = require('enzyme');
-const ReactSixteenAdapter = require('enzyme-adapter-react-16');
+const ReactSixteenAdapter = require('@wojtekmaj/enzyme-adapter-react-17');
 
 configure({adapter: new ReactSixteenAdapter()});

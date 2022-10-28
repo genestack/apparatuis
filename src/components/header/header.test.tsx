@@ -60,10 +60,7 @@ describe('<HeaderItem />', () => {
         const wrapper = setup();
         const button = document.getElementById('button')!;
         button.focus();
-        wrapper
-            .find('#button')
-            .hostNodes()
-            .simulate('keydown', {key: 'ArrowRight'});
+        wrapper.find('#button').hostNodes().simulate('keydown', {key: 'ArrowRight'});
         expect(document.getElementById('button-2')).toBe(document.activeElement);
     });
 
@@ -71,10 +68,7 @@ describe('<HeaderItem />', () => {
         const wrapper = setup();
         const button = document.getElementById('button-2')!;
         button.focus();
-        wrapper
-            .find('#button-2')
-            .hostNodes()
-            .simulate('keydown', {key: 'ArrowRight'});
+        wrapper.find('#button-2').hostNodes().simulate('keydown', {key: 'ArrowRight'});
         expect(document.getElementById('button-2')).toBe(document.activeElement);
     });
 
@@ -82,10 +76,7 @@ describe('<HeaderItem />', () => {
         const wrapper = setup();
         const button = document.getElementById('button-2')!;
         button.focus();
-        wrapper
-            .find('#button-2')
-            .hostNodes()
-            .simulate('keydown', {key: 'ArrowLeft'});
+        wrapper.find('#button-2').hostNodes().simulate('keydown', {key: 'ArrowLeft'});
         expect(document.getElementById('button')).toBe(document.activeElement);
     });
 
@@ -93,10 +84,7 @@ describe('<HeaderItem />', () => {
         const wrapper = setup();
         const button = document.getElementById('button')!;
         button.focus();
-        wrapper
-            .find('#button')
-            .hostNodes()
-            .simulate('keydown', {key: 'ArrowLeft'});
+        wrapper.find('#button').hostNodes().simulate('keydown', {key: 'ArrowLeft'});
         expect(document.getElementById('button')).toBe(document.activeElement);
     });
 
@@ -142,20 +130,14 @@ describe('<HeaderItemSecondaryActions />', () => {
     it('should not propagate click from inner button to HeaderButton', () => {
         const {wrapper, onClick} = clickSetup();
 
-        wrapper
-            .find('#button')
-            .hostNodes()
-            .simulate('click');
+        wrapper.find('#button').hostNodes().simulate('click');
         expect(onClick).not.toBeCalled();
     });
 
     it('should propagate click from inner text to HeaderButton', () => {
         const {wrapper, onClick} = clickSetup();
 
-        wrapper
-            .find('#text')
-            .hostNodes()
-            .simulate('click');
+        wrapper.find('#text').hostNodes().simulate('click');
         expect(onClick).toBeCalled();
     });
 });
