@@ -13,7 +13,7 @@ import {Backdrop} from './backdrop';
 jest.useFakeTimers();
 
 describe('Backdrop Component', () => {
-    test('should unmount children after close and end transition', () => {
+    xtest('should unmount children after close and end transition', () => {
         const wrapper = mount(<Backdrop open />);
         expect(wrapper.html()).toBeTruthy();
         wrapper.setProps({open: false});

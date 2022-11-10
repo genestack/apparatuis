@@ -1,0 +1,7 @@
+services:
+  ui:
+    build:
+      context: ../
+      args:
+        - DOCKER_REGISTRY_GROUP
+    image: ${DOCKER_REGISTRY_SNAPSHOTS}/genestack-ui:${IMAGE_TAG}

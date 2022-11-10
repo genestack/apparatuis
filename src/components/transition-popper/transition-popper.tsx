@@ -137,7 +137,9 @@ export class TransitionPopper<T> extends React.Component<Props<T>, State> {
                     children({
                         ...popperChildrenProps,
                         ref: (node) => {
-                            popperChildrenProps.ref(node);
+                            if (typeof popperChildrenProps.ref === 'function') {
+                                popperChildrenProps.ref(node);
+                            }
                             this.popperScheduleUpdate = popperChildrenProps.scheduleUpdate;
                         },
                         targetProps: targetProps as T,
