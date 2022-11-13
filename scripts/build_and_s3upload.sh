@@ -9,7 +9,6 @@
 # This script uses AWS CLI (`aws`) and assumes that AWS CLI is already configured.
 #
 # These variables are required in order to build and upload ui kit bundle:
-# * BRANCH — name of the branch you want to build and upload, can be empty
 # * AWS_S3_UIKIT_BUCKET — name of the bucket on AWS S3
 # * AWS_S3_UIKIT_PATH — remote path to a directory where ui kit should be uploaded (e.g. ui-kit)
 # * Other variables required by AWS CLI to operate
@@ -26,7 +25,7 @@ AWS_S3_UIKIT_BUCKET="${AWS_S3_UIKIT_BUCKET:-gs-public-resources}"
 AWS_S3_UIKIT_PATH="${AWS_S3_UIKIT_PATH:-ui_kit}"
 
 # if $BRANCH isn't defined, default to "refs/heads/master"
-BRANCH="${BRANCH:-refs/heads/master}"
+BRANCH="$(git symbolic-ref HEAD)"
 if [[ "$BRANCH" == "refs/heads/master" ]]; then
     TARGET_PATH="$AWS_S3_UIKIT_PATH/master"
 else
