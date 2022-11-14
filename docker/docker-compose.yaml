@@ -1,0 +1,15 @@
+services:
+  ui:
+    build:
+      context: ../
+      dockerfile: Dockerfile
+      args:
+        - DOCKER_REGISTRY_GROUP
+    image: ${DOCKER_REGISTRY_SNAPSHOTS}/genestack-ui:${IMAGE_TAG}
+  preview-publish:
+    build:
+      context: ../
+      dockerfile: preview-publish.Dockerfile
+      args:
+        - DOCKER_REGISTRY_GROUP
+    image: ${DOCKER_REGISTRY_SNAPSHOTS}/ui-preview-publish:${IMAGE_TAG}

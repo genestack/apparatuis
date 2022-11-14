@@ -28,7 +28,7 @@ function findSelectedOption(
         }
 
         if ((child.type === Option || child.type === 'option') && child.props.value === value) {
-            return child;
+            return child as React.ReactElement<OptionProps>;
         }
 
         selectedChild = findSelectedOption(value, child.props.children);

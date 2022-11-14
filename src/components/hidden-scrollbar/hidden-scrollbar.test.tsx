@@ -61,13 +61,13 @@ describe('<HiddenScrollbar />', () => {
                 return {
                     height: 0,
                     bottom: 0
-                };
+                } as DOMRect;
             }
 
             return {
                 height: 10,
                 bottom: 10
-            };
+            } as DOMRect;
         });
 
         jest.spyOn(end, 'getBoundingClientRect').mockImplementation(() => {
@@ -75,13 +75,13 @@ describe('<HiddenScrollbar />', () => {
                 return {
                     height: 0,
                     top: 0
-                };
+                } as DOMRect;
             }
 
             return {
                 height: 10,
                 top: 40
-            };
+            } as DOMRect;
         });
 
         let scrollTop = 0;
@@ -171,10 +171,13 @@ describe('<HiddenScrollbar />', () => {
         container.scrollTop = 10;
         rafMock.runAll();
         const middleItem = document.getElementById('middle-item')!;
-        jest.spyOn(middleItem, 'getBoundingClientRect').mockImplementation(() => ({
-            top: 10,
-            bottom: 20
-        }));
+        jest.spyOn(middleItem, 'getBoundingClientRect').mockImplementation(
+            () =>
+                ({
+                    top: 10,
+                    bottom: 20
+                } as DOMRect)
+        );
         middleItem.focus();
         rafMock.runAll();
         expect(end.style.display).not.toBe('none');

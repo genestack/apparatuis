@@ -9,7 +9,10 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/genestack/frontend-libraries/tree/master/packages/ui-widgets/genestack-ui"
+    "url": "https://github.com/genestack/apparatuis"
+  },
+  "publishConfig": {
+    "registry": "https://nexus.devops.gs.team/repository/npm-releases"
   },
   "keywords": [
     "genestack",
@@ -25,12 +28,12 @@
     "prettier:fix": "prettier --write \"**/*.*\"",
     "prettier:check": "npm run prettier -- -l",
     "clean": "rm -rf dist",
-    "prepublishOnly": "npm run test && npm run build:bundle",
+    "prepublishOnly": "npm ci && npm run test && npm run build:bundle",
     "tslint": "tslint -p .",
     "stylelint": "stylelint src/**/*.css",
     "tscheck": "tsc --noEmit -p .",
     "jest": "jest -c ./jest.config.js",
-    "test": "npm run tscheck && npm run tslint && npm run stylelint && npm run jest"
+    "test": "npm run tscheck && npm run jest"
   },
   "devDependencies": {
     "@babel/polyfill": "^7.2.5",
@@ -98,8 +101,8 @@
   },
   "peerDependencies": {
     "@genestack/frontend-builder": ">= 0.9.5 < 2.0.0",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2",
+    "react": ">= 16.8 < 18",
+    "react-dom": ">= 16.8 < 18",
     "typescript": ">= 4.3"
   }
 }

@@ -12,13 +12,13 @@ export function createRafMock() {
 
     return {
         beforeEach: () => {
-            jest.spyOn(window, 'requestAnimationFrame').mockImplementation(
-                (callback: () => void) => {
-                    rafCallbacks.push(callback);
+            jest.spyOn(window, 'requestAnimationFrame').mockImplementation((callback) => {
+                rafCallbacks.push(() => {
+                    callback(0);
+                });
 
-                    return rafCallbacks.length - 1;
-                }
-            );
+                return rafCallbacks.length - 1;
+            });
 
             jest.spyOn(window, 'cancelAnimationFrame').mockImplementation((index: number) => {
                 rafCallbacks[index] = null;
