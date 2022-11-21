@@ -27,7 +27,9 @@ const transpileDependencies = [
 const postCssLoaderParams = {
     loader: 'postcss-loader',
     options: {
-        plugins: [postcssImport, postcssCustomProperties({preserve: false}), calc(), autoprefixer]
+        postcssOptions: {
+            plugins: [postcssImport, postcssCustomProperties({preserve: false}), calc(), autoprefixer]
+        }
     }
 };
 
