@@ -1,6 +1,6 @@
 ARG DOCKER_REGISTRY_GROUP
 
-FROM ${DOCKER_REGISTRY_GROUP}/genestack-base-node16-builder:latest
+FROM ${DOCKER_REGISTRY_GROUP}/genestack-builder:latest
 
 COPY . .
 
