@@ -2,7 +2,7 @@
 const [state, setState] = React.useState({
     drawerOpen: false,
     drawerSide: 'left'
-)};
+});
 
 handleLeftDrawerOpen = () =>
     setState({

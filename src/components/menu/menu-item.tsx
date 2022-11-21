@@ -7,7 +7,7 @@
  */
 // tslint:disable max-file-line-count
 import classNames from 'classnames';
-import contains from 'dom-helpers/query/contains';
+import contains from 'dom-helpers/contains';
 import * as React from 'react';
 
 import {KeyboardArrowRightIcon} from '../../icons/keyboard-arrow-right-icon';
@@ -167,7 +167,7 @@ export class MenuItem extends React.PureComponent<Props, State> {
         const {target} = event;
         const item = this.itemRef.current;
 
-        if (target instanceof Node && item && contains(item, target)) {
+        if (target instanceof Element && item && contains(item, target)) {
             item.focus();
             this.openSubMenuImmediately();
         }
@@ -256,13 +256,12 @@ export class MenuItem extends React.PureComponent<Props, State> {
         this.setState({highlighted: false});
     };
 
-    private createClickHandler = (menuContext: MenuContextValue | null) => (
-        event: React.SyntheticEvent
-    ) => {
-        if (menuContext) {
-            menuContext.onItemSelect(this, event);
-        }
-    };
+    private createClickHandler =
+        (menuContext: MenuContextValue | null) => (event: React.SyntheticEvent) => {
+            if (menuContext) {
+                menuContext.onItemSelect(this, event);
+            }
+        };
 
     public render() {
         const {

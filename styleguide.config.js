@@ -19,7 +19,7 @@ module.exports = {
         'src/components/autocomplete-input/downshift-issue-512-fix.tsx'
     ],
     getExampleFilename: (componentPath) => componentPath.replace(/\.tsx?$/, '.md'),
-    require: ['@babel/polyfill', './styleguide-setup.ts'],
+    require: ['./styleguide-setup.ts'],
     getComponentPathLine: (componentPath) => {
         const name = kebabToCamelCase(path.basename(componentPath, '.tsx'));
         // const dir = path.dirname(componentPath).replace(/^src/, 'genestack-ui');

@@ -8,9 +8,9 @@
 // tslint:disable no-non-null-assertion no-unbound-method max-file-line-count
 // tslint:disable match-default-export-name
 jest.mock('../../utils/has-vertical-scrollbar');
-jest.mock('dom-helpers/util/scrollbarSize');
+jest.mock('dom-helpers/scrollbarSize');
 
-import _scrollbarSize from 'dom-helpers/util/scrollbarSize';
+import _scrollbarSize from 'dom-helpers/scrollbarSize';
 
 import {hasVerticalScrollbar as _hasVerticalScrollbar} from '../../utils/has-vertical-scrollbar';
 
