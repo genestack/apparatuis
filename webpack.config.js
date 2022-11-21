@@ -97,7 +97,7 @@ module.exports = (env) => {
                     }
                 },
                 {
-                    test: /\.css/,
+                    test: /\.module\.css/,
                     enforce: 'pre',
                     include: /src/,
                     use: [
@@ -131,10 +131,7 @@ module.exports = (env) => {
                 },
                 {
                     test: /\.(jpe?g|png|gif|svg|woff|woff2|eot|ttf)$/i,
-                    loader: 'file-loader',
-                    options: {
-                        publicPath: './'
-                    }
+                    type: 'asset/resource'
                 }
             ]
         },
