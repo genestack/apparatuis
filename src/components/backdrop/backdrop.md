@@ -1,7 +1,7 @@
 ```js
-initialState = {
+const [state, setState] = React.useState({
     backdropOpened: false
-};
+});
 
 handleBackdropOpen = () => {
     this.container.focus();

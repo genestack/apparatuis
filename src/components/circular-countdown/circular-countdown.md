@@ -1,14 +1,14 @@
 ```js
-initialState = {
+const [state, setState] = React.useState({
     in: false,
     durationInputValue: '6000',
     duration: 6000
-};
+});
 
 handleDurationChange = (durationInputValue) => {
     const parsedValue = parseInt(durationInputValue, 10);
     const duration = isFinite(parsedValue) ? parsedValue : 6000;
-    setState({duration, durationInputValue});
+    setState((current) => ({...current, duration, durationInputValue}));
 };
 
 <PageContent as={Paper}>
@@ -29,7 +29,7 @@ handleDurationChange = (durationInputValue) => {
             />
         </ControlsItem>
         <ControlsItem>
-            <Button onClick={() => setState((state) => ({in: !state.in}))}>Toggle</Button>
+            <Button onClick={() => setState((state) => ({...state, in: !state.in}))}>Toggle</Button>
         </ControlsItem>
         <ControlsItem>
             <CircularCountdown in={state.in} duration={state.duration} />

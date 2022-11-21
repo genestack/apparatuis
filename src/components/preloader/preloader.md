@@ -1,27 +1,30 @@
 ```js
 const {DarkContext} = require('../../utils/dark-context');
 
-initialState = {
+const [state, setState] = React.useState({
     contextInverted: false,
     inverted: false,
     drawerOpen: false,
     isLoading: false
-};
+});
 
 handleLeftDrawerOpen = () => {
     setState({
+        ...state,
         isLoading: true,
         drawerOpen: true
     });
     setTimeout(() => {
-        setState({
+        setState((state) => ({
+            ...state,
             isLoading: false
-        });
+        }));
     }, 5000);
 };
 
 handleDrawerClose = () =>
     setState({
+        ...state,
         isLoading: false,
         drawerOpen: false
     });
@@ -34,7 +37,9 @@ handleDrawerClose = () =>
                 <ControlsItem>
                     <input
                         type="checkbox"
-                        onChange={(event) => setState({contextInverted: event.target.checked})}
+                        onChange={(event) =>
+                            setState({...state, contextInverted: event.target.checked})
+                        }
                         checked={state.contextInverted}
                         style={{margin: 0, display: 'flex'}}
                     />
@@ -56,7 +61,7 @@ handleDrawerClose = () =>
                 <ControlsItem>
                     <input
                         type="checkbox"
-                        onChange={(event) => setState({inverted: event.target.checked})}
+                        onChange={(event) => setState({...state, inverted: event.target.checked})}
                         checked={state.inverted}
                         style={{margin: 0, display: 'flex'}}
                     />

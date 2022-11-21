@@ -1,5 +1,4 @@
 ```js
-const React = require('react');
 const {
     Presentation,
     usePresentation,
@@ -142,18 +141,8 @@ function OptionLabelComponent({children}) {
 }
 
 function SelectExample() {
-    const {
-        native,
-        inverted,
-        variant,
-        intent,
-        size,
-        prepend,
-        append,
-        invalid,
-        focused,
-        disabled
-    } = usePresentation();
+    const {native, inverted, variant, intent, size, prepend, append, invalid, focused, disabled} =
+        usePresentation();
 
     const [value, setValue] = React.useState('0');
 
@@ -269,7 +258,6 @@ function SelectExample() {
 ### Native select with OptionLabel
 
 ```js
-const React = require('react');
 const {Typography} = require('../typography');
 const {QuestionGhostIcon, InfoIcon, FiltersIcon, LockIcon} = require('../../icons');
 
@@ -319,7 +307,6 @@ function SelectFrame() {
 ### Menu select with unique labels
 
 ```js
-const React = require('react');
 const {Typography} = require('../typography');
 const {CheckMarkIcon, PlayIcon, CrossIcon, MenuIcon} = require('../../icons');
 

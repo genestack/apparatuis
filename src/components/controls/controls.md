@@ -8,30 +8,30 @@ const {StopIcon} = require('../../icons/stop-icon');
 const {PlayIcon} = require('../../icons/play-icon');
 const {PauseIcon} = require('../../icons/pause-icon');
 
-initialState = {
+const [state, setState] = React.useState({
     activeRegulation: null,
     inverted: false
-};
+});
 
-handleInvertedChange = (event) => setState({inverted: event.currentTarget.checked});
+handleInvertedChange = (event) => setState({...state, inverted: event.currentTarget.checked});
 
 const regulationButtons = (
     <React.Fragment>
         <Button
             active={state.activeRegulation === 'Up'}
-            onClick={() => setState({activeRegulation: 'Up'})}
+            onClick={() => setState({...state, activeRegulation: 'Up'})}
         >
             Up
         </Button>
         <Button
             active={state.activeRegulation === 'All'}
-            onClick={() => setState({activeRegulation: 'All'})}
+            onClick={() => setState({...state, activeRegulation: 'All'})}
         >
             All
         </Button>
         <Button
             active={state.activeRegulation === 'Down'}
-            onClick={() => setState({activeRegulation: 'Down'})}
+            onClick={() => setState({...state, activeRegulation: 'Down'})}
         >
             Down
         </Button>

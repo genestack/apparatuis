@@ -1,7 +1,7 @@
 ```js
-initialState = {
+const [state, setState] = React.useState({
     referenceElement: null
-};
+});
 
 handleTooltipToggle = (event) => {
     const {currentTarget} = event;

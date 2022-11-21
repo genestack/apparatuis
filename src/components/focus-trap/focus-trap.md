@@ -10,9 +10,9 @@ const focusTrapStyle = {
     padding: '8px 8px 0'
 };
 
-initialState = {
+const [state, setState] = React.useState({
     enableSelfFocus: false
-};
+});
 
 handleCheckboxChange = (enableSelfFocus) => setState({enableSelfFocus});
 

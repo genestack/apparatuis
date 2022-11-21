@@ -5,19 +5,21 @@ notificationStyle = {
     top: 16
 };
 
-initialState = {
+const [state, setState] = React.useState({
     open: false,
     exited: true,
     countdown: 'active',
     disableCountdown: false
-};
+});
 
-handleShowNotificationClick = () => setState({open: true, exited: false, countdown: 'active'});
-handleNotificationExited = () => setState({exited: true});
-handleNotificationClose = () => setState({open: false});
-handleNotificationMouseEnter = () => setState({countdown: 'stopped'});
-handleNotificationMouseLeave = () => setState({countdown: 'active'});
-handleDisableCountdownChange = (event) => setState({disableCountdown: event.currentTarget.checked});
+handleShowNotificationClick = () =>
+    setState({...state, open: true, exited: false, countdown: 'active'});
+handleNotificationExited = () => setState({...state, exited: true});
+handleNotificationClose = () => setState({...state, open: false});
+handleNotificationMouseEnter = () => setState({...state, countdown: 'stopped'});
+handleNotificationMouseLeave = () => setState({...state, countdown: 'active'});
+handleDisableCountdownChange = (event) =>
+    setState({...state, disableCountdown: event.currentTarget.checked});
 
 <PageContent as={Paper}>
     <Controls>

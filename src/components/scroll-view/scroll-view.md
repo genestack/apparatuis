@@ -204,9 +204,9 @@ const ButtonWDialog = ({showScrollbars}) => {
     );
 };
 
-initialState = {
+const [state, setState] = React.useState({
     scrollbarsAlwaysShown: false
-};
+});
 
 handleScrollbarsModeCheckboxChange = (event) =>
     setState({scrollbarsAlwaysShown: event.currentTarget.checked});

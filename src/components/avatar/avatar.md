@@ -1,7 +1,7 @@
 ```js
-initialState = {
+const [state, setState] = React.useState({
     userName: 'Marc Chagall'
-};
+});
 
 const {UserGroupIcon} = require('../../icons/user-group-icon');
 const {OrganizationIcon} = require('../../icons/organization-icon');

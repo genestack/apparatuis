@@ -1,5 +1,5 @@
 ```js
-initialState = {visible: true};
+const [state, setState] = React.useState({visible: true});
 
 handleButtonClick = () => setState(({visible}) => ({visible: !visible}));
 

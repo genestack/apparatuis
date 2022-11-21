@@ -33,10 +33,18 @@ const postCssLoaderParams = {
 
 const babelExcludePattern = new RegExp(`node_modules/(?!(${transpileDependencies.join('|')})/).*`);
 
+const styleLoader = {
+    loader: 'style-loader',
+    options: {
+        esModule: false
+    }
+}
+
 module.exports = (env) => {
-    const isProduction = env === 'production';
+    const isProduction = env.production;
 
     return {
+        mode: isProduction ? 'production' : 'development',
         devtool: false,
         cache: true,
         entry: './src/index.ts',
@@ -57,18 +65,20 @@ module.exports = (env) => {
                       filename: 'genestack-ui.css',
                       ignoreOrder: false // Enable to remove warnings about conflicting order
                   }),
-                  new CopyPlugin([
-                      {
-                          context: path.join(__dirname, 'src'),
-                          from: '**/*.css.d.ts',
-                          to: path.join(__dirname, 'dist')
-                      },
-                      {
-                          context: path.join(__dirname, 'src'),
-                          from: 'variables.css',
-                          to: path.join(__dirname, 'dist')
-                      }
-                  ])
+                  new CopyPlugin({
+                    patterns: [
+                        {
+                            context: path.join(__dirname, 'src'),
+                            from: '**/*.css.d.ts',
+                            to: path.join(__dirname, 'dist')
+                        },
+                        {
+                            context: path.join(__dirname, 'src'),
+                            from: 'variables.css',
+                            to: path.join(__dirname, 'dist')
+                        }
+                    ]
+                  })
               ]
             : [],
         module: {
@@ -87,17 +97,18 @@ module.exports = (env) => {
                     }
                 },
                 {
-                    test: /\.module\.css/,
+                    test: /\.css/,
                     enforce: 'pre',
                     include: /src/,
                     use: [
-                        ...(isProduction ? [MiniCssExtractPlugin.loader] : ['style-loader']),
+                        ...(isProduction ? [MiniCssExtractPlugin.loader] : [styleLoader]),
                         {
                             loader: 'css-loader',
                             options: {
-                                modules: true,
+                                modules: {
+                                    localIdentName: '[name]__[local]--[hash:base64:5]',
+                                },
                                 importLoaders: 1,
-                                localIdentName: '[name]__[local]--[hash:base64:5]'
                             }
                         },
                         postCssLoaderParams
@@ -108,7 +119,7 @@ module.exports = (env) => {
                     enforce: 'pre',
                     exclude: /\.module\.css/,
                     use: [
-                        ...(isProduction ? [MiniCssExtractPlugin.loader] : ['style-loader']),
+                        ...(isProduction ? [MiniCssExtractPlugin.loader] : [styleLoader]),
                         {
                             loader: 'css-loader',
                             options: {

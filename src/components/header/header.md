@@ -3,9 +3,9 @@ const {MenuIcon} = require('../../icons/menu-icon');
 const {OpenFolderIcon} = require('../../icons/open-folder-icon');
 const {ShareIcon} = require('../../icons/share-icon');
 
-initialState = {
+const [state, setState] = React.useState({
     disablePositionFixed: true
-};
+});
 
 togglePositionFixed = () => {
     setState(({disablePositionFixed}) => ({disablePositionFixed: !disablePositionFixed}));

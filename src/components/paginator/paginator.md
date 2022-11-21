@@ -1,5 +1,5 @@
 ```js
-initialState = {offset: 0};
+const [state, setState] = React.useState({offset: 0});
 <Paginator
     offset={state.offset}
     itemsPerPage={10}
