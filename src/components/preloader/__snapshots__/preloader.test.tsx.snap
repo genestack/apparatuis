@@ -3,7 +3,7 @@
 exports[`Preloader component renders children when show === false 1`] = `"Foo"`;
 
 exports[`Preloader component renders correctly with count 1`] = `
-Array [
+[
   <p
     className="preloader backgroundRegular width100 root body"
     data-qa="typography"
@@ -28,7 +28,7 @@ Array [
 `;
 
 exports[`Preloader component works with DarkContext 1`] = `
-Array [
+[
   <p
     className="preloader backgroundInverted width100 root body inverted"
     data-qa="typography"
@@ -57,7 +57,7 @@ Array [
 `;
 
 exports[`Preloader component works with custom classnames 1`] = `
-Array [
+[
   <p
     className="preloader backgroundRegular foo root body"
     data-qa="typography"
@@ -82,7 +82,7 @@ Array [
 `;
 
 exports[`Preloader component works with inverted without DarkContext 1`] = `
-Array [
+[
   <p
     className="preloader backgroundInverted width100 root body inverted"
     data-qa="typography"

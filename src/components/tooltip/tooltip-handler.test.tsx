@@ -289,7 +289,7 @@ describe('<TooltipHandler />', () => {
             expect(document.getElementById('tooltip')).toBeFalsy();
         }, 600);
 
-        jest.runTimersToTime(600);
+        jest.advanceTimersByTime(600);
 
         act(() => {
             jest.runAllTimers();

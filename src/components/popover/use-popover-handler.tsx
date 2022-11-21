@@ -87,8 +87,8 @@ export function usePopoverHandler(props: Props) {
         popoverContentProps: T = {} as T
     ): T => ({
         ...popoverContentProps,
-        open: isOpen,
-        referenceElement,
+        // open: isOpen,
+        // referenceElement,
         onMouseEnter: chain(popoverContentProps.onMouseEnter, handleContentMouseEnter),
         onMouseLeave: chain(popoverContentProps.onMouseLeave, handleContentMouseLeave)
     });
