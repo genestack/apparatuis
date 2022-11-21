@@ -1,8 +1,8 @@
 ```js
-initialState = {
+const [state, setState] = React.useState({
     drawerOpen: false,
     drawerSide: 'left'
-};
+)};
 
 handleLeftDrawerOpen = () =>
     setState({
@@ -18,6 +18,7 @@ handleRightDrawerOpen = () =>
 
 handleDrawerClose = () =>
     setState({
+        ...state,
         drawerOpen: false
     });
 

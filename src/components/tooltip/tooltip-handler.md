@@ -50,9 +50,9 @@ class AsyncTooltip extends React.Component {
     }
 }
 
-initialState = {
+const [state, setState] = React.useState({
     asyncDuration: 600
-};
+});
 
 <PageContent as={Paper}>
     <Controls>
