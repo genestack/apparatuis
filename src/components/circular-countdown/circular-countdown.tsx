@@ -6,7 +6,7 @@
  * actual or intended publication of such source code.
  */
 import classNames from 'classnames';
-import style from 'dom-helpers/style';
+import style from 'dom-helpers/css';
 import * as React from 'react';
 import Transition, {TransitionProps, TransitionStatus} from 'react-transition-group/Transition';
 

@@ -1,7 +1,7 @@
 ```js
 const {DownloadIcon} = require('../../icons/download-icon');
 const {QuestionGhostIcon} = require('../../icons/question-ghost-icon');
-initialState = {
+const [state, setState] = React.useState({
     longTitle: false,
     caption: false,
     wrap: false,
@@ -12,7 +12,7 @@ initialState = {
     subMenu: false,
     subtitle: 'none',
     inclusiveDisabled: false
-};
+});
 
 const shortTitle = 'Menu item';
 const longTitle = 'Super long menu item that could break line in some cases';
@@ -28,7 +28,7 @@ renderCheckbox = (name, label) => (
             <input
                 type="checkbox"
                 checked={state[name]}
-                onChange={(event) => setState({[name]: event.target.checked})}
+                onChange={(event) => setState({...state, [name]: event.target.checked})}
             />
         }
     >
@@ -46,7 +46,7 @@ renderRadio = (name, label, value) => (
                 name={name}
                 value={value}
                 checked={state[name] === value}
-                onChange={(event) => setState({[name]: value})}
+                onChange={(event) => setState({...state, [name]: value})}
             />
         }
     >

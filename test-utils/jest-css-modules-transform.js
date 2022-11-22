@@ -33,8 +33,10 @@ module.exports = {
             }
         } catch (error) {}
 
-        return `module.exports = {\n${classNames
-            .map((className) => `    "${className}":"${className}"`)
-            .join(',\n')}\n}`;
+        return {
+            code: `module.exports = {\n${
+                classNames.map((className) => `    "${className}":"${className}"`).join(',\n')
+            }\n}`
+        };
     }
 };

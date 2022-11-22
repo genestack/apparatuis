@@ -2,7 +2,7 @@
 
 Import example:
 
-```ts
+```ts static
 import {DownloadIcon, WarningIcon} from '@genestack/ui/src/icons';
 ```
 
@@ -39,9 +39,9 @@ function IconPlate({icon, name, variable}) {
     );
 }
 
-initialState = {
+const [state, setState] = React.useState({
     value: ''
-};
+});
 
 const results = Object.keys(icons).filter((name) =>
     name.toLowerCase().match(state.value.toLowerCase())

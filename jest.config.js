@@ -11,6 +11,7 @@ module.exports = {
     verbose: false,
     collectCoverage: true,
     silent: false,
+    testEnvironment: 'jsdom',
 
     testMatch: ['**/*.test.tsx', '**/*.test.ts'],
 
@@ -23,6 +24,8 @@ module.exports = {
     moduleNameMapper: {
         '^((?!(module)).)*\\.css$': '<rootDir>/test-utils/jest-css-mock.js'
     },
-    setupTestFrameworkScriptFile: '<rootDir>/test-utils/setup-jest.js',
-    testURL: 'http://localhost/'
+    setupFilesAfterEnv: ['<rootDir>/test-utils/setup-jest.js'],
+    testEnvironmentOptions: {
+        url: 'http://localhost/',
+    }
 };

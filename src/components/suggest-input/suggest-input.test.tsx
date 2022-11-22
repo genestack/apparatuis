@@ -86,7 +86,7 @@ describe('<SuggestInput />', () => {
         const onComplete = jest.fn();
 
         function AnyComponent(props: any) {
-            const {value, ...rest} = props;
+            const {value, focused, ...rest} = props;
 
             return <div {...rest} />;
         }

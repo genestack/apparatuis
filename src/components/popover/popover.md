@@ -1,38 +1,41 @@
 ```js
-initialState = {
+const [state, setState] = React.useState({
     referenceElement: null,
     expanded: false,
     placement: 'bottom',
     withArrow: true,
     disableTransition: false,
     roundCorners: false
-};
+});
 
 handleButtonClick = (event) => {
     const target = event.currentTarget;
 
     setState(({referenceElement}) => ({
+        ...state,
         referenceElement: !referenceElement ? target : null
     }));
 };
 
-handleToggleExpandButtonClick = () =>
-    setState(
-        ({expanded}) => ({expanded: !expanded}),
-        () => this.popper.scheduleUpdate()
-    );
+handleToggleExpandButtonClick = () => setState(({expanded}) => ({...state, expanded: !expanded}));
 
 handlePlacementChange = (event) => {
-    setState({placement: event.target.value});
+    setState({...state, placement: event.target.value});
 };
 
-handleWithArrowChange = (event) =>
-    setState({withArrow: event.currentTarget.checked}, () => this.popper.scheduleUpdate());
+handleWithArrowChange = (event) => setState({...state, withArrow: event.currentTarget.checked});
 
 handleDisableTransitionChange = (event) =>
-    setState({disableTransition: event.currentTarget.checked});
+    setState({...state, disableTransition: event.currentTarget.checked});
 
-handleRoundCornersChange = (event) => setState({roundCorners: event.currentTarget.checked});
+handleRoundCornersChange = (event) =>
+    setState({...state, roundCorners: event.currentTarget.checked});
+
+const popperRef = React.useRef(null);
+
+React.useLayoutEffect(() => {
+    popperRef.current.scheduleUpdate();
+}, [state.expanded, state.withArrow]);
 
 const placements = [
     'auto',
@@ -108,7 +111,7 @@ const placements = [
         <Popover
             open={!!state.referenceElement}
             referenceElement={state.referenceElement}
-            popperRef={(popper) => (this.popper = popper)}
+            popperRef={popperRef}
             placement={state.placement}
             withArrow={state.withArrow}
             disableTransition={state.disableTransition}

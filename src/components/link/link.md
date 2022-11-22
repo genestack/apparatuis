@@ -2,9 +2,9 @@
 const {DarkContext} = require('../../utils/dark-context');
 const {DownloadIcon} = require('../../icons/download-icon');
 
-initialState = {
+const [state, setState] = React.useState({
     inverted: false
-};
+});
 
 handleInvertedChange = (event) => setState({inverted: event.currentTarget.checked});
 

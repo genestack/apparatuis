@@ -1,5 +1,5 @@
 ```js
-initialState = {shaking: false};
+const [state, setState] = React.useState({shaking: false});
 
 handleButtonClick = () => {
     setState({shaking: true});

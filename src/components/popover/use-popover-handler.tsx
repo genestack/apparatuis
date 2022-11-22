@@ -5,7 +5,7 @@
  * The copyright notice above does not evidence any
  * actual or intended publication of such source code.
  */
-import contains from 'dom-helpers/query/contains';
+import contains from 'dom-helpers/contains';
 import * as React from 'react';
 
 import {debounce, chain} from '../../utils';
@@ -60,7 +60,7 @@ export function usePopoverHandler(props: Props) {
     };
 
     const handleMouseLeave = (e: React.MouseEvent<HTMLDivElement>) => {
-        if (e.relatedTarget instanceof Node && contains(e.currentTarget, e.relatedTarget)) {
+        if (e.relatedTarget instanceof Element && contains(e.currentTarget, e.relatedTarget)) {
             return;
         }
 
@@ -87,8 +87,8 @@ export function usePopoverHandler(props: Props) {
         popoverContentProps: T = {} as T
     ): T => ({
         ...popoverContentProps,
-        open: isOpen,
-        referenceElement,
+        // open: isOpen,
+        // referenceElement,
         onMouseEnter: chain(popoverContentProps.onMouseEnter, handleContentMouseEnter),
         onMouseLeave: chain(popoverContentProps.onMouseLeave, handleContentMouseLeave)
     });

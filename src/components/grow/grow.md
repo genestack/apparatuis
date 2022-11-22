@@ -11,11 +11,11 @@ const transformOrigins = [
     'bottom right'
 ];
 
-initialState = {visible: true, transformOrigin: transformOrigins[0]};
+const [state, setState] = React.useState({visible: true, transformOrigin: transformOrigins[0]});
 
-handleButtonClick = () => setState(({visible}) => ({visible: !visible}));
+handleButtonClick = () => setState(({visible}) => ({...state, visible: !visible}));
 
-handleTransformOriginChange = (event) => setState({transformOrigin: event.target.value});
+handleTransformOriginChange = (event) => setState({...state, transformOrigin: event.target.value});
 
 <Controls justify="space-between">
     <FlexExpander />

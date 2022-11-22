@@ -102,7 +102,7 @@ describe('<PopoverHandler />', () => {
             expect(document.getElementById('content')).toBeFalsy();
         }, 700);
 
-        jest.runTimersToTime(700);
+        jest.advanceTimersByTime(700);
 
         act(() => {
             jest.runAllTimers();

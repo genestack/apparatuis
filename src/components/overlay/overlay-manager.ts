@@ -5,7 +5,7 @@
  * The copyright notice above does not evidence any
  * actual or intended publication of such source code.
  */
-import scrollbarSize from 'dom-helpers/util/scrollbarSize';
+import scrollbarSize from 'dom-helpers/scrollbarSize';
 import ReactDOM from 'react-dom';
 
 import {getFirstReachableElement, getLastReachableElement} from '../../utils/focusable-elements';

@@ -1,10 +1,10 @@
 ```js
-initialState = {visible: true, direction: 'left', fast: false};
+const [state, setState] = React.useState({visible: true, direction: 'left', fast: false});
 
 const directions = ['left', 'right', 'top', 'bottom'];
 
-handleFastChange = (event) => setState({fast: event.currentTarget.checked});
-handleButtonClick = () => setState(({visible}) => ({visible: !visible}));
+handleFastChange = (event) => setState({...state, fast: event.currentTarget.checked});
+handleButtonClick = () => setState(({visible}) => ({...state, visible: !visible}));
 
 <Controls>
     <FlexExpander />

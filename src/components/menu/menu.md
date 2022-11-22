@@ -1,9 +1,9 @@
 ### Stateful
 
 ```js
-initialState = {
+const [state, setState] = React.useState({
     value: null
-};
+});
 
 handleValueSelect = (value) => {
     setState({value});
@@ -83,17 +83,17 @@ const getInfiniteSubMenu = () => (
     </SubMenu>
 );
 
-initialState = {
+const [state, setState] = React.useState({
     referenceElement: null,
     selectedItemValue: undefined
-};
+});
 
 handleButtonClick = (event) => {
-    setState({referenceElement: event.currentTarget});
+    setState({...state, referenceElement: event.currentTarget});
 };
 
 handleMenuClose = () => {
-    setState({referenceElement: null});
+    setState({...state, referenceElement: null});
 };
 
 handleMenuValueSelect = (value) => {
@@ -175,9 +175,9 @@ items = new Array(100).fill(null).map((_, index) => (
 ### Extreme
 
 ```js
-initialState = {
+const [state, setState] = React.useState({
     referenceElement: null
-};
+});
 
 handleButtonClick = (event) => {
     setState({referenceElement: event.currentTarget});

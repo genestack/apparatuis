@@ -5,7 +5,7 @@
  * The copyright notice above does not evidence any
  * actual or intended publication of such source code.
  */
-import contains from 'dom-helpers/query/contains';
+import contains from 'dom-helpers/contains';
 import * as React from 'react';
 
 import {chain} from '../../utils/chain';
@@ -55,7 +55,7 @@ export function useTooltipHandler(props: Props) {
     const handleWindowMouseMove = React.useCallback((event: MouseEvent) => {
         if (
             referenceElementRef.current &&
-            event.target instanceof Node &&
+            event.target instanceof Element &&
             !contains(referenceElementRef.current, event.target)
         ) {
             close();
@@ -83,7 +83,7 @@ export function useTooltipHandler(props: Props) {
 
     const handleReferenceMouseLeave: React.MouseEventHandler = (event) => {
         if (
-            event.relatedTarget instanceof Node &&
+            event.relatedTarget instanceof Element &&
             contains(event.currentTarget, event.relatedTarget)
         ) {
             return;

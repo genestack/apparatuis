@@ -88,9 +88,9 @@ function ButtonGroupExample() {
 ### Active Buttons
 
 ```js
-initialState = {
+const [state, setState] = React.useState({
     value: null
-};
+});
 
 <PageContent as={Paper}>
     <ButtonGroup>

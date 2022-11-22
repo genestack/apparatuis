@@ -9,12 +9,12 @@ const {ArrowRightIcon} = require('../../icons/arrow-right-icon');
 
 const capitalize = (str) => str[0].toUpperCase() + str.slice(1);
 
-initialState = {
+const [state, setState] = React.useState({
     component: 'button',
     shakeOnClick: false,
     fullScreen: false,
     inverted: false
-};
+});
 
 const renderRadio = (stateKey, value, label) => (
     <label>
@@ -23,7 +23,7 @@ const renderRadio = (stateKey, value, label) => (
             name={stateKey}
             value={value}
             checked={state[stateKey] === value}
-            onChange={(event) => setState({[stateKey]: value})}
+            onChange={(event) => setState({...state, [stateKey]: value})}
         />{' '}
         <Typography box="inline">{label}</Typography>
     </label>
@@ -35,7 +35,7 @@ const renderCheckbox = (stateKey, label) => (
             type="checkbox"
             name={stateKey}
             checked={state[stateKey]}
-            onChange={(event) => setState({[stateKey]: !state[stateKey]})}
+            onChange={(event) => setState({...state, [stateKey]: !state[stateKey]})}
         />{' '}
         <Typography box="inline">{label}</Typography>
     </label>

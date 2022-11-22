@@ -90,7 +90,11 @@ export function SuggestInput(props: Props) {
     );
     const [isOpen, setIsOpen] = React.useState(false);
 
-    const handleSelect = (item: string) => {
+    const handleSelect = (item: string | null) => {
+        if (!item) {
+            return;
+        }
+
         if (rest.value === undefined) {
             onValueChange(item);
         }

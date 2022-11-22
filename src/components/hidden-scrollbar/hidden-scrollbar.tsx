@@ -7,7 +7,7 @@
  */
 
 import classNames from 'classnames';
-import contains from 'dom-helpers/query/contains';
+import contains from 'dom-helpers/contains';
 import * as React from 'react';
 
 import {chain} from '../../utils/chain';

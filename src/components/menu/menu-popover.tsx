@@ -6,7 +6,7 @@
  * actual or intended publication of such source code.
  */
 import classNames from 'classnames';
-import closest from 'dom-helpers/query/closest';
+import closest from 'dom-helpers/closest';
 import * as React from 'react';
 
 import {Omit} from '../../utils/omit';

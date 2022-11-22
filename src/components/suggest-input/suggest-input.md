@@ -176,9 +176,9 @@ function AsyncExample() {
     );
 }
 
-initialState = {
+const [state, setState] = React.useState({
     async: false
-};
+});
 
 <Paper>
     <PageContent>

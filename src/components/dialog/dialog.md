@@ -1,9 +1,9 @@
 #### Simple Dialog
 
 ```js
-initialState = {
+const [state, setState] = React.useState({
     open: false
-};
+});
 
 handleDialogOpen = () => {
     setState({open: true});
@@ -82,9 +82,9 @@ handleDialogClose = () => {
 FormExampleTransition =
     this.FormExampleTransition || ((props) => <Slide {...props} direction="top" />);
 
-initialState = {
+const [state, setState] = React.useState({
     dialogOpen: false
-};
+});
 
 handleDialogOpen = () => {
     setState({dialogOpen: true});
@@ -144,7 +144,7 @@ handleFormSubmit = (event) => {
 ```
 
 ```js
-initialState = {
+const [state, setState] = React.useState({
     dialogOpen: false,
     scrollableDialog: false,
     showCloseButton: true,
@@ -155,7 +155,7 @@ initialState = {
     showList: true,
     showFooter: true,
     size: 'auto'
-};
+});
 
 renderStateCheckbox = (key, title) => (
     <ListItem
@@ -165,7 +165,7 @@ renderStateCheckbox = (key, title) => (
             <input
                 type="checkbox"
                 checked={state[key]}
-                onChange={(event) => setState({[key]: event.target.checked})}
+                onChange={(event) => setState({...state, [key]: event.target.checked})}
             />
         }
     >
@@ -182,7 +182,7 @@ renderStateRadio = (key, value, title) => (
                 name={key}
                 type="radio"
                 checked={state[key] === value}
-                onChange={(event) => setState({[key]: value})}
+                onChange={(event) => setState({...state, [key]: value})}
             />
         }
     >
@@ -191,11 +191,11 @@ renderStateRadio = (key, value, title) => (
 );
 
 handleDialogOpen = () => {
-    setState({dialogOpen: true});
+    setState({...state, dialogOpen: true});
 };
 
 handleDialogClose = () => {
-    setState({dialogOpen: false});
+    setState({...state, dialogOpen: false});
 };
 
 const samples = [
@@ -348,9 +348,9 @@ const samples = [
 #### Dialog with auto focusable input
 
 ```js
-initialState = {
+const [state, setState] = React.useState({
     open: false
-};
+});
 
 handleDialogOpen = () => {
     setState({open: true});
