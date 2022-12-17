@@ -17,3 +17,5 @@ coverage/
 
 # styleguide build
 styleguide
+
+.env
