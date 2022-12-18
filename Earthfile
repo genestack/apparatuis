@@ -19,9 +19,9 @@ deps:
     ENV AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY}
 
     COPY package.json package-lock.json ./
-    #RUN --secret NEXUS_PASSWORD \
-    #    npm-login.sh && npm install
-    RUN npm-login.sh && npm install
+    RUN --secret NEXUS_PASSWORD \
+        npm-login.sh && npm install
+    #RUN npm-login.sh && npm install
 
     SAVE IMAGE --cache-hint
 
@@ -56,13 +56,13 @@ publish-preview:
   ARG TARGET_S3_URL=s3://${AWS_S3_UIKIT_BUCKET}/${TARGET_PATH}
   ARG HTML_URL=https://${AWS_S3_UIKIT_BUCKET}.s3.amazonaws.com/${TARGET_PATH}/index.html
 
-  #RUN --secret AWS_SECRET_ACCESS_KEY \
-  #    aws s3 sync ${BUNDLE_SUBDIR} ${TARGET_S3_URL} \
-  #    --grants read=uri=http://acs.amazonaws.com/groups/global/AllUsers \
-  #    --delete && \
-  #    echo "Synced successfully, see ${HTML_URL}"
-
-  RUN aws s3 sync ${BUNDLE_SUBDIR} ${TARGET_S3_URL} \
+  RUN --secret AWS_SECRET_ACCESS_KEY \
+      aws s3 sync ${BUNDLE_SUBDIR} ${TARGET_S3_URL} \
       --grants read=uri=http://acs.amazonaws.com/groups/global/AllUsers \
       --delete && \
       echo "Synced successfully, see ${HTML_URL}"
+
+  #RUN aws s3 sync ${BUNDLE_SUBDIR} ${TARGET_S3_URL} \
+  #    --grants read=uri=http://acs.amazonaws.com/groups/global/AllUsers \
+  #    --delete && \
+  #    echo "Synced successfully, see ${HTML_URL}"
