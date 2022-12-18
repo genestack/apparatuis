@@ -5,6 +5,8 @@ ARG --required NEXUS_USER
 ARG --required NPM_REGISTRY_GROUP
 ARG --required NEXUS_REPOSITORY_URL
 ARG --required AWS_ACCESS_KEY_ID
+ARG --required NEXUS_PASSWORD
+ARG --required AWS_SECRET_ACCESS_KEY
 
 deps:
     FROM ${DOCKER_REGISTRY_GROUP}/genestack-builder:latest
