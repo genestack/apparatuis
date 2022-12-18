@@ -54,4 +54,5 @@ publish-preview:
   RUN --secret AWS_SECRET_ACCESS_KEY \
       aws s3 sync ${BUNDLE_SUBDIR} ${TARGET_S3_URL} \
       --grants read=uri=http://acs.amazonaws.com/groups/global/AllUsers \
-      --delete
+      --delete && \
+      echo "Synced successfully, see ${HTML_URL}"
