@@ -18,7 +18,6 @@ deps:
 
     COPY package.json package-lock.json ./
     RUN --secret NEXUS_PASSWORD \
-        --secret AWS_SECRET_ACCESS_KEY \
         npm-login.sh && npm install
 
     SAVE IMAGE --cache-hint
@@ -27,24 +26,19 @@ build:
     FROM +deps
 
     COPY . .
-    RUN --secret NEXUS_PASSWORD \
-        --secret AWS_SECRET_ACCESS_KEY \
-        npm build && npm test
+    RUN npm run build && npm run test
 
     SAVE IMAGE --cache-hint
 
 publish-ui:
     FROM +test
 
-    RUN --secret NEXUS_PASSWORD \
-        --secret AWS_SECRET_ACCESS_KEY \
-        npm publish
+    RUN npm publish
 
     SAVE IMAGE --cache-hint
 
 publish-preview:
   FROM +test
 
-  RUN --secret NEXUS_PASSWORD \
-      --secret AWS_SECRET_ACCESS_KEY \
+  RUN --secret AWS_SECRET_ACCESS_KEY \
       ./scripts/build_and_s3upload.sh
