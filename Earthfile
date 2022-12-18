@@ -23,7 +23,7 @@ deps:
 
     SAVE IMAGE --cache-hint
 
-test:
+build:
     FROM +deps
 
     COPY . .
