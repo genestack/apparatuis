@@ -27,18 +27,24 @@ build:
     FROM +deps
 
     COPY . .
-    RUN npm build && npm test
+    RUN --secret NEXUS_PASSWORD \
+        --secret AWS_SECRET_ACCESS_KEY \
+        npm build && npm test
 
     SAVE IMAGE --cache-hint
 
 publish-ui:
     FROM +test
 
-    RUN npm publish
+    RUN --secret NEXUS_PASSWORD \
+        --secret AWS_SECRET_ACCESS_KEY \
+        npm publish
 
     SAVE IMAGE --cache-hint
 
 publish-preview:
   FROM +test
 
-  RUN ./scripts/build_and_s3upload.sh
+  RUN --secret NEXUS_PASSWORD \
+      --secret AWS_SECRET_ACCESS_KEY \
+      ./scripts/build_and_s3upload.sh
