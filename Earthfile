@@ -31,14 +31,14 @@ build:
     SAVE IMAGE --cache-hint
 
 publish-ui:
-    FROM +test
+    FROM +build
 
     RUN npm publish
 
     SAVE IMAGE --cache-hint
 
 publish-preview:
-  FROM +test
+  FROM +build
 
   RUN --secret AWS_SECRET_ACCESS_KEY \
       ./scripts/build_and_s3upload.sh
