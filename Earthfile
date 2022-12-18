@@ -33,8 +33,6 @@ publish-ui:
 
     RUN npm publish
 
-    SAVE IMAGE --cache-hint
-
 publish-preview:
   FROM +build
 
@@ -44,7 +42,7 @@ publish-preview:
   ARG AWS_S3_UIKIT_PATH=ui_kit
   ARG BRANCH=$(git symbolic-ref HEAD)
 
-  IF [ "$BRANCH" == "refs/heads/master" ]
+  IF [ ${BRANCH} == "refs/heads/master" ]
       ARG TARGET_PATH=${AWS_S3_UIKIT_PATH}/master
   ELSE
       ARG TARGET_PATH=${AWS_S3_UIKIT_PATH}/${DEV_PATH_PREFIX}/${BRANCH}
