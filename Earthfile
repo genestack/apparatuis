@@ -21,7 +21,6 @@ deps:
     COPY package.json package-lock.json ./
     RUN --secret NEXUS_PASSWORD \
         npm-login.sh && npm install
-    #RUN npm-login.sh && npm install
 
     SAVE IMAGE --cache-hint
 
@@ -61,8 +60,3 @@ publish-preview:
       --grants read=uri=http://acs.amazonaws.com/groups/global/AllUsers \
       --delete && \
       echo "Synced successfully, see ${HTML_URL}"
-
-  #RUN aws s3 sync ${BUNDLE_SUBDIR} ${TARGET_S3_URL} \
-  #    --grants read=uri=http://acs.amazonaws.com/groups/global/AllUsers \
-  #    --delete && \
-  #    echo "Synced successfully, see ${HTML_URL}"
