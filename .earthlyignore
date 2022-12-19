@@ -1,0 +1,5 @@
+# Remove unused in build pipeline directories
+.github/
+.idea/
+README.md
+.env
