@@ -27,7 +27,7 @@ build:
     FROM +deps
 
     COPY . .
-    RUN npm run build && npm run test
+    RUN npm run test && npm run build && npm run build:bundle
 
     SAVE IMAGE --cache-hint
 
