@@ -5,21 +5,14 @@ ARG --required NEXUS_USER
 ARG --required NPM_REGISTRY_GROUP
 ARG --required NEXUS_REPOSITORY_URL
 ARG --required AWS_ACCESS_KEY_ID
-ARG --required NEXUS_PASSWORD
-ARG --required AWS_SECRET_ACCESS_KEY
 
 deps:
-    FROM ${DOCKER_REGISTRY_GROUP}/genestack-builder:latest
-
-    ENV NEXUS_USER=${NEXUS_USER}
-    ENV NPM_REGISTRY_GROUP=${NPM_REGISTRY_GROUP}
-    ENV NEXUS_REPOSITORY_URL=${NEXUS_REPOSITORY_URL}
-    ENV AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID}
-    ENV AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY}
+    FROM ${DOCKER_REGISTRY_GROUP}/genestack-builder:2ce8405-SNAPSHOT
 
     COPY package.json package-lock.json ./
     RUN --secret NEXUS_PASSWORD \
-        npm-login.sh && npm install
+        npm-login.sh && \
+        npm install
 
     SAVE IMAGE --cache-hint
 
@@ -27,14 +20,20 @@ build:
     FROM +deps
 
     COPY . .
-    RUN npm run test && npm run build && npm run build:bundle
+    RUN \
+        npm run test && \
+        npm run build && \
+        npm run build:bundle
 
     SAVE IMAGE --cache-hint
 
 publish-ui:
     FROM +build
 
-    RUN --push npm publish
+    RUN --push \
+        --secret NEXUS_PASSWORD \
+        npm-login.sh && \
+        npm publish
 
 publish-preview:
   FROM +build
