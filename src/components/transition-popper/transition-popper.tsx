@@ -9,7 +9,7 @@ import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import {Popper, PopperProps, PopperChildrenProps} from 'react-popper';
 
-import {Omit} from '../../utils/omit';
+import {Omit} from '../../utils';
 
 type TargetProps = Omit<PopperProps, 'referenceElement' | 'children'>;
 
@@ -137,7 +137,7 @@ export class TransitionPopper<T> extends React.Component<Props<T>, State> {
                     children({
                         ...popperChildrenProps,
                         ref: (node) => {
-                            popperChildrenProps.ref(node);
+                            (popperChildrenProps.ref as React.RefCallback<{}>)(node);
                             this.popperScheduleUpdate = popperChildrenProps.scheduleUpdate;
                         },
                         targetProps: targetProps as T,

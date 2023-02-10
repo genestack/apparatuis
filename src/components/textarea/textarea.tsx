@@ -7,15 +7,14 @@
  */
 import classNames from 'classnames';
 import React from 'react';
-import TextareaAutosize, {TextareaAutosizeProps} from 'react-textarea-autosize';
+import {TextareaAutosizeProps, default as TextareaAutosize} from 'react-textarea-autosize';
 
-import {chain, mergeClassesProps, WithClasses, Omit} from '../../utils';
+import {chain, mergeClassesProps, WithClasses} from '../../utils';
 
 import * as styles from './textarea.module.css';
-type TargetProps = Omit<TextareaAutosizeProps, 'ref' | 'inputRef'>;
 
 /** Textarea Autosize public properties */
-export interface Props extends TargetProps, WithClasses<keyof typeof styles> {
+export interface Props extends TextareaAutosizeProps, WithClasses<keyof typeof styles> {
     /** If `true` input has invalid styles */
     invalid?: boolean;
     /** If `true` input has width: 100% */
@@ -46,7 +45,7 @@ export const Textarea = (props: Props) => {
         <TextareaAutosize
             data-qa="textarea"
             {...rest}
-            inputRef={inputRef as any}
+            ref={inputRef as any}
             onChange={chain(rest.onChange, handleChange)}
             className={classNames(rest.className, classes.root, {
                 [classes.fullWidth]: fullWidth,
