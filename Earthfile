@@ -29,8 +29,7 @@ build:
 
     SAVE IMAGE --cache-hint
 
-# libraries:
-publish-ui:
+libraries:
     FROM +build
 
     RUN --push \
@@ -38,8 +37,7 @@ publish-ui:
             npm-login.sh && \
             npm publish
 
-# ui-kit:
-publish-preview:
+ui-kit:
     FROM +build
 
     ARG --required AWS_ACCESS_KEY_ID
@@ -59,13 +57,13 @@ publish-preview:
     ARG TARGET_S3_URL=s3://${AWS_S3_UIKIT_BUCKET}/${TARGET_PATH}
     ARG HTML_URL=https://${AWS_S3_UIKIT_BUCKET}.s3.amazonaws.com/${TARGET_PATH}/index.html
 
-    RUN --push --secret AWS_SECRET_ACCESS_KEY \
-      aws s3 sync ${BUNDLE_SUBDIR} ${TARGET_S3_URL} \
-      --grants read=uri=http://acs.amazonaws.com/groups/global/AllUsers \
-      --delete && \
-      echo "Synced successfully, see ${HTML_URL}"
+    RUN --no-cache \
+        --secret AWS_SECRET_ACCESS_KEY \
+              aws s3 sync ${BUNDLE_SUBDIR} ${TARGET_S3_URL} \
+                  --grants read=uri=http://acs.amazonaws.com/groups/global/AllUsers \
+                  --delete && \
+              echo "Synced successfully, see ${HTML_URL}"
 
-# main:
-#
-#
-#
+main:
+    BUILD +libraries
+    BUILD +ui-kit
