@@ -1,11 +1,14 @@
 VERSION 0.6
 
 ARG --required DOCKER_REGISTRY_GROUP
-ARG --required NEXUS_USER
 ARG --required NPM_REGISTRY_GROUP
+ARG --required NPM_REGISTRY_RELEASES
+ARG --required NPM_REGISTRY_SNAPSHOTS
 ARG --required NEXUS_REPOSITORY_URL
+ARG --required NEXUS_USER
 
 deps:
+    ARG --required BASE_IMAGES_VERSION
     FROM ${DOCKER_REGISTRY_GROUP}/genestack-builder:${BASE_IMAGES_VERSION}
 
     COPY package.json package-lock.json ./
@@ -26,6 +29,7 @@ build:
 
     SAVE IMAGE --cache-hint
 
+# libraries:
 publish-ui:
     FROM +build
 
@@ -34,6 +38,7 @@ publish-ui:
             npm-login.sh && \
             npm publish
 
+# ui-kit:
 publish-preview:
     FROM +build
 
@@ -59,3 +64,8 @@ publish-preview:
       --grants read=uri=http://acs.amazonaws.com/groups/global/AllUsers \
       --delete && \
       echo "Synced successfully, see ${HTML_URL}"
+
+# main:
+#
+#
+#
