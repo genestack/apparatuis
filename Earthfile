@@ -24,9 +24,6 @@ build:
 
     COPY . .
     RUN \
-        --secret NEXUS_USER \
-        --secret NEXUS_PASSWORD \
-            npm-login.sh && \
             npm run test && \
             npm run build && \
             npm run build:bundle
