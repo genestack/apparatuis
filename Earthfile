@@ -16,6 +16,8 @@ deps:
         --secret NEXUS_USER \
             npm-login.sh && \
             npm install
+    
+    SAVE IMAGE --cache-hint
 
 build:
     FROM +deps
@@ -28,6 +30,8 @@ build:
             npm run test && \
             npm run build && \
             npm run build:bundle
+    
+    SAVE IMAGE --cache-hint
 
 publish-ui:
     FROM +build
