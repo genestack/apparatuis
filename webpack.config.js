@@ -28,7 +28,12 @@ const postCssLoaderParams = {
     loader: 'postcss-loader',
     options: {
         postcssOptions: {
-            plugins: [postcssImport, postcssCustomProperties({preserve: false}), calc(), autoprefixer]
+            plugins: [
+                postcssImport,
+                postcssCustomProperties({preserve: false}),
+                calc(),
+                autoprefixer
+            ]
         }
     }
 };
@@ -40,7 +45,7 @@ const styleLoader = {
     options: {
         esModule: false
     }
-}
+};
 
 module.exports = (env) => {
     const isProduction = env.production;
@@ -52,7 +57,6 @@ module.exports = (env) => {
         entry: './src/index.ts',
         output: {
             libraryTarget: 'commonjs',
-            publicPath: '/',
             path: path.join(__dirname, 'dist'),
             filename: isProduction ? 'index.js' : 'genestack-ui.js'
         },
@@ -68,18 +72,18 @@ module.exports = (env) => {
                       ignoreOrder: false // Enable to remove warnings about conflicting order
                   }),
                   new CopyPlugin({
-                    patterns: [
-                        {
-                            context: path.join(__dirname, 'src'),
-                            from: '**/*.css.d.ts',
-                            to: path.join(__dirname, 'dist')
-                        },
-                        {
-                            context: path.join(__dirname, 'src'),
-                            from: 'variables.css',
-                            to: path.join(__dirname, 'dist')
-                        }
-                    ]
+                      patterns: [
+                          {
+                              context: path.join(__dirname, 'src'),
+                              from: '**/*.css.d.ts',
+                              to: path.join(__dirname, 'dist')
+                          },
+                          {
+                              context: path.join(__dirname, 'src'),
+                              from: 'variables.css',
+                              to: path.join(__dirname, 'dist')
+                          }
+                      ]
                   })
               ]
             : [],
@@ -103,14 +107,23 @@ module.exports = (env) => {
                     enforce: 'pre',
                     include: /src/,
                     use: [
-                        ...(isProduction ? [MiniCssExtractPlugin.loader] : [styleLoader]),
+                        ...(isProduction
+                            ? [
+                                  {
+                                      loader: MiniCssExtractPlugin.loader,
+                                      options: {
+                                          esModule: false
+                                      }
+                                  }
+                              ]
+                            : [styleLoader]),
                         {
                             loader: 'css-loader',
                             options: {
                                 modules: {
-                                    localIdentName: '[name]__[local]--[hash:base64:5]',
+                                    localIdentName: '[name]__[local]--[hash:base64:5]'
                                 },
-                                importLoaders: 1,
+                                importLoaders: 1
                             }
                         },
                         postCssLoaderParams
@@ -121,7 +134,16 @@ module.exports = (env) => {
                     enforce: 'pre',
                     exclude: /\.module\.css/,
                     use: [
-                        ...(isProduction ? [MiniCssExtractPlugin.loader] : [styleLoader]),
+                        ...(isProduction
+                            ? [
+                                  {
+                                      loader: MiniCssExtractPlugin.loader,
+                                      options: {
+                                          esModule: false
+                                      }
+                                  }
+                              ]
+                            : [styleLoader]),
                         {
                             loader: 'css-loader',
                             options: {

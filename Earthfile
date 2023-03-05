@@ -12,8 +12,8 @@ deps:
 
     COPY package.json package-lock.json ./
     RUN \
-        --secret NEXUS_PASSWORD \
         --secret NEXUS_USER \
+        --secret NEXUS_PASSWORD \
             npm-login.sh && \
             npm install
     
@@ -24,8 +24,8 @@ build:
 
     COPY . .
     RUN \
-        --secret NEXUS_PASSWORD \
         --secret NEXUS_USER \
+        --secret NEXUS_PASSWORD \
             npm-login.sh && \
             npm run test && \
             npm run build && \
@@ -33,16 +33,16 @@ build:
     
     SAVE IMAGE --cache-hint
 
-publish-ui:
+libraries:
     FROM +build
 
     RUN --push \
-        --secret NEXUS_PASSWORD \
         --secret NEXUS_USER \
+        --secret NEXUS_PASSWORD \
             npm-login.sh && \
             npm publish
 
-publish-preview:
+ui-kit:
     FROM +build
 
     ARG BUNDLE_SUBDIR=styleguide
@@ -63,7 +63,6 @@ publish-preview:
             --delete && \
             echo "Synced successfully, see ${HTML_URL}"
 
-
 main:
-    BUILD +publish-ui
-    BUILD +publish-preview
+    BUILD +libraries
+    BUILD +ui-kit
