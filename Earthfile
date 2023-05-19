@@ -11,7 +11,7 @@ deps:
     ARG --required BASE_IMAGES_VERSION
     FROM ${HARBOR_DOCKER_REGISTRY}/builder:${BASE_IMAGES_VERSION}
 
-    COPY package.json package-lock.json ./
+    COPY package.json package-lock.json .npmrc ./
     RUN \
         --secret NEXUS_USER \
         --secret NEXUS_PASSWORD \
