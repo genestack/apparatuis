@@ -9,7 +9,7 @@ ARG --global --required NEXUS_REPOSITORY_URL
 
 deps:
     ARG --required BASE_IMAGES_VERSION
-    FROM ${HARBOR_DOCKER_REGISTRY}/genestack-builder:${BASE_IMAGES_VERSION}
+    FROM ${HARBOR_DOCKER_REGISTRY}/builder:${BASE_IMAGES_VERSION}
 
     COPY package.json package-lock.json ./
     RUN \
