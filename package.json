@@ -1,6 +1,6 @@
 {
   "name": "@genestack/ui",
-  "version": "13.0.1",
+  "version": "13.0.2",
   "description": "UI library",
   "main": "dist/",
   "types": "dist/",
@@ -10,9 +10,6 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/genestack/apparatuis"
-  },
-  "publishConfig": {
-    "registry": "https://nexus.devops.gs.team/repository/npm-releases"
   },
   "keywords": [
     "genestack",
