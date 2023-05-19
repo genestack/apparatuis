@@ -38,7 +38,7 @@ libraries:
         --secret NEXUS_USER \
         --secret NEXUS_PASSWORD \
             npm-login.sh && \
-            npm publish --registry=${NPM_REGISTRY_RELEASES}
+            npm publish --@genestack:registry=${NPM_REGISTRY_RELEASES}
 
 ui-kit:
     FROM +build
