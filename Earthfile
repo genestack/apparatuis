@@ -1,8 +1,6 @@
 VERSION 0.7
 
-ARG --global --required HARBOR_DOCKER_SNAPSHOTS
-ARG --global --required HARBOR_DOCKER_RELEASES
-ARG --global --required HARBOR_DOCKER_CACHE
+ARG --global --required HARBOR_DOCKER_REGISTRY
 ARG --global --required HARBOR_DOCKER_HUB_MIRROR
 ARG --global --required NPM_REGISTRY_GROUP
 ARG --global --required NPM_REGISTRY_RELEASES
@@ -11,7 +9,7 @@ ARG --global --required NEXUS_REPOSITORY_URL
 
 deps:
     ARG --required BASE_IMAGES_VERSION
-    FROM ${HARBOR_DOCKER_SNAPSHOTS}/genestack-builder:${BASE_IMAGES_VERSION}
+    FROM ${HARBOR_DOCKER_REGISTRY}/genestack-builder:${BASE_IMAGES_VERSION}
 
     COPY package.json package-lock.json ./
     RUN \
