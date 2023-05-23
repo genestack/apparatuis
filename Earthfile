@@ -1,7 +1,6 @@
 VERSION 0.7
 
 ARG --global --required HARBOR_DOCKER_REGISTRY
-ARG --global --required HARBOR_DOCKER_HUB_MIRROR
 ARG --global --required NPM_REGISTRY_GROUP
 ARG --global --required NPM_REGISTRY_RELEASES
 ARG --global --required NPM_REGISTRY_SNAPSHOTS
