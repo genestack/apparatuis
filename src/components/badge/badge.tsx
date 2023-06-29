@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2011-2021 Genestack Limited
+ * Copyright (c) 2011-2023 Genestack Limited
  * All Rights Reserved
  * THIS IS UNPUBLISHED PROPRIETARY SOURCE CODE OF GENESTACK LIMITED
  * The copyright notice above does not evidence any
@@ -9,6 +9,7 @@ import classNames from 'classnames';
 import * as React from 'react';
 
 import {DarkContext, WithClasses, mergeClassesProps} from '../../utils';
+import {SlotProps} from '../../utils/slot-props';
 import {Typography, TypographyProps} from '../typography';
 
 import * as styles from './badge.module.css';
@@ -27,7 +28,7 @@ export interface Props extends RootProps, WithClasses<keyof typeof styles> {
      */
     disableTextTransform?: boolean;
     /** Properties for content element */
-    contentProps?: React.HTMLAttributes<HTMLDivElement>;
+    contentProps?: SlotProps<'div'>;
     inverted?: boolean;
 }
 

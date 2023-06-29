@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2011-2019 Genestack Limited
+ * Copyright (c) 2011-2023 Genestack Limited
  * All Rights Reserved
  * THIS IS UNPUBLISHED PROPRIETARY SOURCE CODE OF GENESTACK LIMITED
  * The copyright notice above does not evidence any
@@ -14,6 +14,7 @@ import {chain} from '../../utils/chain';
 import {Omit} from '../../utils/omit';
 import {OmitIndexSignature} from '../../utils/omit-index-signature';
 import {reflow} from '../../utils/reflow';
+import {SlotProps} from '../../utils/slot-props';
 import {WithClasses, mergeClassesProps} from '../../utils/styles';
 
 import * as styles from './circular-countdown.module.css';
@@ -44,7 +45,7 @@ export interface Props extends TargetProps, WithClasses<keyof typeof styles> {
     /** Transition component properties */
     transitionProps?: Omit<StrictTransitionProps, 'timeout' | 'children' | 'in'>;
     /** SVG Circle element properties that is used for countdown indicator */
-    circleProps?: React.SVGAttributes<SVGCircleElement>;
+    circleProps?: SlotProps<'circle'>;
 }
 
 /**

@@ -1,35 +1,30 @@
 /*
- * Copyright (c) 2011-2019 Genestack Limited
+ * Copyright (c) 2011-2023 Genestack Limited
  * All Rights Reserved
  * THIS IS UNPUBLISHED PROPRIETARY SOURCE CODE OF GENESTACK LIMITED
  * The copyright notice above does not evidence any
  * actual or intended publication of such source code.
  */
-// tslint:disable no-non-null-assertion
+import {render} from '@testing-library/react';
 import * as React from 'react';
 
-import {createTestApp} from '../../../test-utils/create-test-app';
 import {Button} from '../button';
 
 import {ButtonGroup} from './button-group';
 
-const app = createTestApp();
-
-beforeEach(app.beforeEach);
-afterEach(app.afterEach);
-
 describe('<ButtonGroup />', () => {
     it('should pass variant to containing buttons', () => {
-        app.mount(
+        const screen = render(
             <ButtonGroup ghost intent="accent">
-                <Button id="button-1" />
+                <Button data-testid="button-1" />
             </ButtonGroup>
         );
 
-        const className = document.getElementById('button-1')!.className;
+        const button = screen.queryByTestId('button-1');
 
-        expect(className).toContain('ghost');
-        expect(className).toContain('accent');
-        expect(className).toContain('ghostAccent');
+        expect(button).toBeTruthy();
+        expect(button).toHaveProperty('className', expect.stringContaining('ghost'));
+        expect(button).toHaveProperty('className', expect.stringContaining('accent'));
+        expect(button).toHaveProperty('className', expect.stringContaining('ghostAccent'));
     });
 });

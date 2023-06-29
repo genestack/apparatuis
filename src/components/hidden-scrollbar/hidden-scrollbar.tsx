@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2011-2019 Genestack Limited
+ * Copyright (c) 2011-2023 Genestack Limited
  * All Rights Reserved
  * THIS IS UNPUBLISHED PROPRIETARY SOURCE CODE OF GENESTACK LIMITED
  * The copyright notice above does not evidence any
@@ -11,8 +11,8 @@ import contains from 'dom-helpers/contains';
 import * as React from 'react';
 
 import {chain} from '../../utils/chain';
-import {Omit} from '../../utils/omit';
 import {chainRefs} from '../../utils/set-ref';
+import {SlotProps} from '../../utils/slot-props';
 import {WithClasses, mergeClassesProps} from '../../utils/styles';
 import {createIcon} from '../icon';
 
@@ -40,15 +40,15 @@ export interface Props extends TargetProps, WithClasses<keyof typeof styles> {
     /** How often scrollStep should be applied */
     scrollStepTimeout?: number;
     /** Properties of scrollable container */
-    containerProps?: React.HTMLAttributes<HTMLDivElement>;
+    containerProps?: SlotProps<'div'>;
     /** Reference to scrollable container */
     containerRef?: React.Ref<HTMLDivElement>;
     /** Properties of start scroll control */
-    startControlProps?: Omit<React.HTMLAttributes<HTMLDivElement>, 'children'>;
+    startControlProps?: Omit<SlotProps<'div'>, 'children'>;
     /** Reference to start scroll control */
     startControlRef?: React.Ref<HTMLDivElement>;
     /** Properties of end scroll control */
-    endControlProps?: Omit<React.HTMLAttributes<HTMLDivElement>, 'children'>;
+    endControlProps?: Omit<SlotProps<'div'>, 'children'>;
     /** Reference to end scroll control */
     endControlRef?: React.Ref<HTMLDivElement>;
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2011-2019 Genestack Limited
+ * Copyright (c) 2011-2023 Genestack Limited
  * All Rights Reserved
  * THIS IS UNPUBLISHED PROPRIETARY SOURCE CODE OF GENESTACK LIMITED
  * The copyright notice above does not evidence any
@@ -14,7 +14,7 @@ import {ButtonContextValue, ButtonContext} from '../button/button-context';
 
 import * as styles from './button-group.module.css';
 
-type TargetProps = React.HTMLAttributes<HTMLDivElement>;
+type TargetProps = React.ComponentPropsWithoutRef<'div'>;
 
 /** ButtonGroup public properties */
 export interface Props extends TargetProps, WithClasses<keyof typeof styles> {
@@ -25,7 +25,7 @@ export interface Props extends TargetProps, WithClasses<keyof typeof styles> {
 }
 
 /** Joined group of buttons */
-export const ButtonGroup = (props: Props) => {
+export function ButtonGroup(props: Props) {
     const {rootRef, intent, ghost, classes, size, ...rest} = mergeClassesProps(props, styles);
 
     const contextValue: ButtonContextValue = React.useMemo(
@@ -50,4 +50,4 @@ export const ButtonGroup = (props: Props) => {
             />
         </ButtonContext.Provider>
     );
-};
+}

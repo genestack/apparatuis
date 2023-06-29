@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2011-2019 Genestack Limited
+ * Copyright (c) 2011-2023 Genestack Limited
  * All Rights Reserved
  * THIS IS UNPUBLISHED PROPRIETARY SOURCE CODE OF GENESTACK LIMITED
  * The copyright notice above does not evidence any
@@ -10,7 +10,7 @@ import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 
 import {chain} from '../../utils/chain';
-import {Omit} from '../../utils/omit';
+import {DataAttributes} from '../../utils/slot-props';
 import {Backdrop, BackdropProps} from '../backdrop';
 import {FocusTrap} from '../focus-trap';
 import {RootRef} from '../root-ref';
@@ -21,7 +21,7 @@ import * as styles from './overlay.module.css';
 const container = document.body;
 const manager = new OverlayManager(container);
 
-type TargetProps = React.HTMLAttributes<HTMLDivElement>;
+type TargetProps = React.HTMLAttributes<HTMLDivElement> & DataAttributes;
 
 /** Reason of overlay close */
 export type OverlayCloseReason = 'backdrop-click' | 'escape-keydown';

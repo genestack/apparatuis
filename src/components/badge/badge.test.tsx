@@ -1,29 +1,24 @@
 /*
- * Copyright (c) 2011-2021 Genestack Limited
+ * Copyright (c) 2011-2023 Genestack Limited
  * All Rights Reserved
  * THIS IS UNPUBLISHED PROPRIETARY SOURCE CODE OF GENESTACK LIMITED
  * The copyright notice above does not evidence any
  * actual or intended publication of such source code.
  */
+import {render} from '@testing-library/react';
+import '@testing-library/jest-dom';
 import * as React from 'react';
-
-import {createTestApp} from '../../../test-utils/create-test-app';
 
 import {Badge} from './badge';
 
-const app = createTestApp();
-
-beforeEach(app.beforeEach);
-afterEach(app.afterEach);
-
 describe('<Badge />', () => {
-    it('should render div HTML element by default', () => {
-        app.mount(<Badge id="test">Foo</Badge>);
-        expect(document.getElementById('test')).toBeInstanceOf(HTMLSpanElement);
+    it('should render span HTML element by default', () => {
+        const screen = render(<Badge data-testid="test">Foo</Badge>);
+        expect(screen.queryByTestId('test')).toBeInstanceOf(HTMLSpanElement);
     });
 
     it('should render children', () => {
-        app.mount(<Badge id="test">Foo</Badge>);
-        expect(document.getElementById('test')?.textContent).toBe('Foo');
+        const screen = render(<Badge data-testid="test">Foo</Badge>);
+        expect(screen.queryByTestId('test')).toHaveTextContent('Foo');
     });
 });

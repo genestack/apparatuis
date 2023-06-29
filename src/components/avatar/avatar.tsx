@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2011-2022 Genestack Limited
+ * Copyright (c) 2011-2023 Genestack Limited
  * All Rights Reserved
  * THIS IS UNPUBLISHED PROPRIETARY SOURCE CODE OF GENESTACK LIMITED
  * The copyright notice above does not evidence any
@@ -13,10 +13,10 @@ import {Typography} from '../typography';
 
 import * as styles from './avatar.module.css';
 
-type TargetProps = React.HTMLAttributes<HTMLDivElement>;
-
 /** Avatar public properties */
-export interface Props extends TargetProps, WithClasses<keyof typeof styles> {
+export interface Props
+    extends React.ComponentPropsWithoutRef<'div'>,
+        WithClasses<keyof typeof styles> {
     /**
      * Defines the initials displayed.
      * Displays one symbol, if the property consists of one symbol.
@@ -29,7 +29,7 @@ export interface Props extends TargetProps, WithClasses<keyof typeof styles> {
 /**
  * Avatar component is the graphical representation of a user
  */
-export const Avatar = (props: Props) => {
+export function Avatar(props: Props) {
     const {initials: initialsProp, classes, icon, ...rest} = mergeClassesProps(props, styles);
 
     let initials: React.ReactElement | null = null;
@@ -37,7 +37,7 @@ export const Avatar = (props: Props) => {
     if (initialsProp) {
         const letters = Array.from(initialsProp);
         initials = (
-            <>
+            <React.Fragment>
                 {letters[1] ? (
                     <div className={classes.letter} data-qa="avatar-letter">
                         {letters[1].toUpperCase()}
@@ -46,7 +46,7 @@ export const Avatar = (props: Props) => {
                 <div className={classes.letter} data-qa="avatar-letter">
                     {letters[0].toUpperCase()}
                 </div>
-            </>
+            </React.Fragment>
         );
     }
 
@@ -60,11 +60,11 @@ export const Avatar = (props: Props) => {
             {icon ? (
                 icon
             ) : (
-                <>
+                <React.Fragment>
                     {initials}
                     {rest.children}
-                </>
+                </React.Fragment>
             )}
         </Typography>
     );
-};
+}

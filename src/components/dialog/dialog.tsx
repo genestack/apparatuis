@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2011-2020 Genestack Limited
+ * Copyright (c) 2011-2023 Genestack Limited
  * All Rights Reserved
  * THIS IS UNPUBLISHED PROPRIETARY SOURCE CODE OF GENESTACK LIMITED
  * The copyright notice above does not evidence any
@@ -11,7 +11,7 @@ import {TransitionProps} from 'react-transition-group/Transition';
 
 import {CrossIcon} from '../../icons/cross-icon';
 import {chain} from '../../utils/chain';
-import {Omit} from '../../utils/omit';
+import {SlotProps} from '../../utils/slot-props';
 import {WithClasses, mergeClassesProps} from '../../utils/styles';
 import {Button, ButtonProps} from '../button';
 import {Fade} from '../fade';
@@ -22,7 +22,7 @@ import {DialogContext} from './dialog-context';
 import * as styles from './dialog.module.css';
 
 type TargetProps = PaperProps & Pick<OverlayProps, 'open'>;
-type ContainerProps = React.HTMLAttributes<HTMLDivElement>;
+type ContainerProps = SlotProps<'div'>;
 
 type CloseHandler = (reason: DialogCloseReason, event?: React.SyntheticEvent) => void;
 
@@ -38,7 +38,7 @@ export interface Props extends TargetProps, WithClasses<keyof typeof styles> {
     /** Hides close button */
     hideCloseButton?: boolean;
     /** Properties passed to close button */
-    closeButtonProps?: ButtonProps & React.ComponentPropsWithRef<'button'>;
+    closeButtonProps?: ButtonProps & SlotProps<'button'>;
     /** Calls when dialog closes by user action */
     onClose?: CloseHandler;
     /** Calls when dialog close transition is completed */

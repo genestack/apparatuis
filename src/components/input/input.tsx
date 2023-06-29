@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2011-2020 Genestack Limited
+ * Copyright (c) 2011-2023 Genestack Limited
  * All Rights Reserved
  * THIS IS UNPUBLISHED PROPRIETARY SOURCE CODE OF GENESTACK LIMITED
  * The copyright notice above does not evidence any
@@ -11,6 +11,7 @@ import * as React from 'react';
 import {chain} from '../../utils/chain';
 import {Omit} from '../../utils/omit';
 import {chainRefs} from '../../utils/set-ref';
+import {SlotProps} from '../../utils/slot-props';
 import {mergeClassesProps, WithClasses} from '../../utils/styles';
 import {useInputInvalidity} from '../../utils/use-input-invalidity';
 import {FieldProps, Field} from '../field';
@@ -77,17 +78,17 @@ export interface Props extends TargetProps, RootProps {
     /** Ref to native input element */
     inputRef?: React.Ref<HTMLInputElement>;
     /** Properties for input wrapper element */
-    inputCellProps?: React.ComponentPropsWithRef<'div'>;
+    inputCellProps?: SlotProps<'div'>;
     /** Properties for prepend wrapper element */
-    prependCellProps?: React.ComponentPropsWithRef<'div'>;
+    prependCellProps?: SlotProps<'div'>;
     /** Properties for append wrapper element */
-    appendCellProps?: React.ComponentPropsWithRef<'div'>;
+    appendCellProps?: SlotProps<'div'>;
     /**
      * Properties for helpers wrapper element.
      * Helpers help user to see and to manage state of input
      * like loading or clear value button.
      */
-    helpersProps?: React.ComponentPropsWithRef<'div'>;
+    helpersProps?: SlotProps<'div'>;
     /** Properties for clear button */
     clearButtonProps?: InputClearButtonProps;
     /** Properties for loading spinner */

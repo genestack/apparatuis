@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2011-2019 Genestack Limited
+ * Copyright (c) 2011-2023 Genestack Limited
  * All Rights Reserved
  * THIS IS UNPUBLISHED PROPRIETARY SOURCE CODE OF GENESTACK LIMITED
  * The copyright notice above does not evidence any
@@ -9,7 +9,6 @@ import classNames from 'classnames';
 import closest from 'dom-helpers/closest';
 import * as React from 'react';
 
-import {Omit} from '../../utils/omit';
 import {HiddenScrollbar, HiddenScrollbarProps} from '../hidden-scrollbar';
 import {PopoverProps, Popover} from '../popover';
 
@@ -37,7 +36,7 @@ const modifiers: PopoverProps['modifiers'] = {
 };
 
 const popperElementProps: PopoverProps['popperElementProps'] = {
-    [MENU_POPOVER_DATA_ATTRIBUTE.toString()]: true
+    [MENU_POPOVER_DATA_ATTRIBUTE.toString()]: 'true'
 };
 
 /** Shortcut to Popover that is used in menu  */

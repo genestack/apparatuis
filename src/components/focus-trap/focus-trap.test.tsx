@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2011-2019 Genestack Limited
+ * Copyright (c) 2011-2023 Genestack Limited
  * All Rights Reserved
  * THIS IS UNPUBLISHED PROPRIETARY SOURCE CODE OF GENESTACK LIMITED
  * The copyright notice above does not evidence any
@@ -10,6 +10,7 @@ import {render} from '@testing-library/react';
 import * as React from 'react';
 
 import {createTestApp} from '../../../test-utils/create-test-app';
+import {SlotProps} from '../../utils/slot-props';
 
 import {FocusTrap, Props as FocusTrapProps} from './focus-trap';
 
@@ -60,10 +61,7 @@ describe('<FocusTrap />', () => {
     beforeEach(app.beforeEach);
     afterEach(app.afterEach);
 
-    const setup = (
-        containerProps?: React.HTMLAttributes<HTMLDivElement>,
-        props?: Partial<FocusTrapProps>
-    ) => {
+    const setup = (containerProps?: SlotProps<'div'>, props?: Partial<FocusTrapProps>) => {
         render(
             <React.Fragment>
                 <input id="first" tabIndex={0} />
@@ -176,7 +174,7 @@ describe('<FocusTrap />', () => {
 
     describe('without focusable elements', () => {
         const setupEmptyContainer = (
-            containerProps?: React.HTMLAttributes<HTMLDivElement>,
+            containerProps?: SlotProps<'div'>,
             props?: Partial<FocusTrapProps>
         ) => {
             const wrapper = app.mount(

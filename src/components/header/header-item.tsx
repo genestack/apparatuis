@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2011-2021 Genestack Limited
+ * Copyright (c) 2011-2023 Genestack Limited
  * All Rights Reserved
  * THIS IS UNPUBLISHED PROPRIETARY SOURCE CODE OF GENESTACK LIMITED
  * The copyright notice above does not evidence any
@@ -10,6 +10,7 @@ import * as React from 'react';
 
 import {chain} from '../../utils/chain';
 import {getReachableElements, getSiblingElement} from '../../utils/focusable-elements';
+import {SlotProps} from '../../utils/slot-props';
 import {mergeClassesProps, WithClasses} from '../../utils/styles';
 import {InteractiveElement, InteractiveElementProps} from '../interactive-element';
 
@@ -29,7 +30,7 @@ export interface Props extends TargetProps, WithClasses<keyof typeof styles> {
      * Properties of `fakeHover` helper element.
      * @see ./header-button.module.css
      */
-    fakeHoverProps?: React.HTMLAttributes<HTMLDivElement>;
+    fakeHoverProps?: SlotProps<'div'>;
 }
 
 /**
@@ -58,10 +59,13 @@ export class HeaderItem extends React.Component<Props> {
     };
 
     public render() {
-        const {active, disabled, classes, fakeHoverProps = {}, ...rest} = mergeClassesProps(
-            this.props,
-            styles
-        );
+        const {
+            active,
+            disabled,
+            classes,
+            fakeHoverProps = {},
+            ...rest
+        } = mergeClassesProps(this.props, styles);
 
         const interactiveElementProps: Omit<InteractiveElementProps, 'inclusiveDisabled'> = {
             disabled,

@@ -1,44 +1,39 @@
 /*
- * Copyright (c) 2011-2020 Genestack Limited
+ * Copyright (c) 2011-2023 Genestack Limited
  * All Rights Reserved
  * THIS IS UNPUBLISHED PROPRIETARY SOURCE CODE OF GENESTACK LIMITED
  * The copyright notice above does not evidence any
  * actual or intended publication of such source code.
  */
+import {render} from '@testing-library/react';
 import * as React from 'react';
-
-import {createTestApp} from '../../../test-utils/create-test-app';
 
 import {Button} from './button';
 
-const app = createTestApp();
-
-beforeEach(app.beforeEach);
-afterEach(app.afterEach);
-
 describe('<Button />', () => {
     it('should render children', () => {
-        app.mount(
+        const screen = render(
             <Button>
-                <div id="test" />
+                <div data-testid="test" />
             </Button>
         );
-        expect(document.getElementById('test')).toBeTruthy();
+
+        expect(screen.queryByTestId('test')).toBeTruthy();
     });
 
     it('should render icon', () => {
-        app.mount(<Button icon={<div id="icon" />} />);
-        expect(document.getElementById('icon')).toBeTruthy();
+        const screen = render(<Button iconStart={<div data-testid="icon" />} />);
+        expect(screen.queryByTestId('icon')).toBeTruthy();
     });
 
     it('should render button element by default', () => {
-        app.mount(<Button id="test" />);
-        expect(document.getElementById('test')).toBeInstanceOf(HTMLButtonElement);
+        const screen = render(<Button data-testid="test" />);
+        expect(screen.queryByTestId('test')).toBeInstanceOf(HTMLButtonElement);
     });
 
     it('should render anchor element if href and component="a" are passed', () => {
-        app.mount(<Button id="test" component="a" href="foo" />);
-        expect(document.getElementById('test')).toBeInstanceOf(HTMLAnchorElement);
-        expect(document.getElementById('test')).toHaveProperty('href', 'http://localhost/foo');
+        const screen = render(<Button data-testid="test" component="a" href="foo" />);
+        expect(screen.queryByTestId('test')).toBeInstanceOf(HTMLAnchorElement);
+        expect(screen.queryByTestId('test')).toHaveProperty('href', 'http://localhost/foo');
     });
 });

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2011-2021 Genestack Limited
+ * Copyright (c) 2011-2023 Genestack Limited
  * All Rights Reserved
  * THIS IS UNPUBLISHED PROPRIETARY SOURCE CODE OF GENESTACK LIMITED
  * The copyright notice above does not evidence any
@@ -9,6 +9,7 @@ import classNames from 'classnames';
 import * as React from 'react';
 
 import {Omit} from '../../utils/omit';
+import {SlotProps} from '../../utils/slot-props';
 import {WithClasses, mergeClassesProps} from '../../utils/styles';
 import {InteractiveElement, InteractiveElementProps} from '../interactive-element';
 import {MarginBoxContext} from '../margin-box/margin-box-context';
@@ -57,17 +58,17 @@ export interface Props extends TargetProps, WithClasses<keyof typeof styles> {
      */
     inclusiveDisabled?: boolean;
     /** Properties for wrapper of prepend element */
-    prependProps?: React.HTMLAttributes<HTMLDivElement>;
+    prependProps?: SlotProps<'div'>;
     /** Properties for wrapper of append element */
-    appendProps?: React.HTMLAttributes<HTMLDivElement>;
+    appendProps?: SlotProps<'div'>;
     /** Properties for wrapper of content element */
-    contentProps?: React.HTMLAttributes<HTMLDivElement>;
+    contentProps?: SlotProps<'div'>;
     /** Properties for wrapper of title element */
-    titleProps?: React.HTMLAttributes<HTMLDivElement>;
+    titleProps?: SlotProps<'div'>;
     /** Properties for wrapper of children */
     titleContentProps?: TypographyProps;
     /** Properties for wrapper of subtitle element */
-    subtitleProps?: React.HTMLAttributes<HTMLDivElement>;
+    subtitleProps?: SlotProps<'div'>;
 }
 
 /**
