@@ -15,7 +15,7 @@ import {mergeClassesProps, WithClasses} from '../../utils/styles';
 import {InteractiveElement, InteractiveElementProps} from '../interactive-element';
 
 import {HeaderBlock, Props as HeaderBlockProps} from './header-block';
-import {HeaderItemText} from './header-item-text';
+import {HeaderItemText, Props as HeaderItemTextProps} from './header-item-text';
 import * as styles from './header-item.module.css';
 
 type TargetProps = React.AnchorHTMLAttributes<HTMLElement> &
@@ -31,6 +31,7 @@ export interface Props extends TargetProps, WithClasses<keyof typeof styles> {
      * @see ./header-button.module.css
      */
     fakeHoverProps?: SlotProps<'div'>;
+    headerItemTextProps?: HeaderItemTextProps;
 }
 
 /**
@@ -64,6 +65,7 @@ export class HeaderItem extends React.Component<Props> {
             disabled,
             classes,
             fakeHoverProps = {},
+            headerItemTextProps,
             ...rest
         } = mergeClassesProps(this.props, styles);
 
@@ -74,7 +76,7 @@ export class HeaderItem extends React.Component<Props> {
 
         const children =
             typeof rest.children === 'string' ? (
-                <HeaderItemText>{rest.children}</HeaderItemText>
+                <HeaderItemText {...headerItemTextProps}>{rest.children}</HeaderItemText>
             ) : (
                 rest.children
             );

@@ -5,14 +5,16 @@
  * The copyright notice above does not evidence any
  * actual or intended publication of such source code.
  */
-import {mount} from 'enzyme';
+import {render} from '@testing-library/react';
+import '@testing-library/jest-dom';
+
 import * as React from 'react';
 
 import {List} from './list';
 
 describe('<List />', () => {
     test('should render div HTML element', () => {
-        const wrapper = mount(<List />);
-        expect(wrapper.children().is('ul')).toBe(true);
+        render(<List />);
+        expect(document.querySelector('ul')).toBeVisible();
     });
 });

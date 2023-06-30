@@ -91,7 +91,10 @@ module.exports = (env) => {
             rules: [
                 {
                     test: /\.(ts|tsx)$/i,
-                    loader: 'ts-loader'
+                    loader: 'ts-loader',
+                    options: {
+                        configFile: path.resolve(__dirname, './tsconfig.build.json')
+                    }
                 },
                 {
                     test: /\.js?$/,

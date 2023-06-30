@@ -11,6 +11,7 @@ import * as React from 'react';
 import {OverridableComponent, OverridableProps} from '../../utils/overridable-component';
 import {WithClasses, mergeClassesProps} from '../../utils/styles';
 import {ButtonBaseProps, ButtonBase} from '../button-base';
+import {DataAttributes} from '../../utils/slot-props';
 
 import {ButtonContext} from './button-context';
 import * as styles from './button.module.css';
@@ -21,7 +22,8 @@ type ButtonClassNames = keyof typeof styles;
 /** Button public properties */
 export interface Props
     extends Omit<ButtonBaseProps, 'classes'>,
-        WithClasses<ButtonBaseClassNames | ButtonClassNames> {
+        WithClasses<ButtonBaseClassNames | ButtonClassNames>,
+        DataAttributes {
     /** @deprecated use iconStart instead */
     /** Component that is inserted in the left side of the button. */
     icon?: React.ReactNode;

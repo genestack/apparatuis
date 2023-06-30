@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2011-2019 Genestack Limited
+ * Copyright (c) 2011-2023 Genestack Limited
  * All Rights Reserved
  * THIS IS UNPUBLISHED PROPRIETARY SOURCE CODE OF GENESTACK LIMITED
  * The copyright notice above does not evidence any
@@ -9,7 +9,7 @@ import classNames from 'classnames';
 import * as React from 'react';
 
 import * as styles from './header-block.module.css';
-import {HeaderItemText} from './header-item-text';
+import {HeaderItemText, Props as HeaderItemTextProps} from './header-item-text';
 
 type TargetProps = React.HTMLAttributes<HTMLElement>;
 
@@ -24,18 +24,19 @@ export interface Props extends TargetProps {
      * `div` by default
      */
     as?: React.ElementType;
+    headerItemTextProps?: HeaderItemTextProps;
 }
 
 /**
  * Use HeaderBlock if you want to show some non-interactive information
  * in the Header.
  */
-export const HeaderBlock = (props: Props) => {
-    const {as: Component = 'div', grow, shrink, ...rest} = props;
+export function HeaderBlock(props: Props) {
+    const {as: Component = 'div', grow, shrink, headerItemTextProps, ...rest} = props;
 
     const children =
         typeof props.children === 'string' ? (
-            <HeaderItemText>{props.children}</HeaderItemText>
+            <HeaderItemText {...headerItemTextProps}>{props.children}</HeaderItemText>
         ) : (
             props.children
         );
@@ -52,4 +53,4 @@ export const HeaderBlock = (props: Props) => {
             {children}
         </Component>
     );
-};
+}

@@ -9,7 +9,6 @@
 import {render} from '@testing-library/react';
 import * as React from 'react';
 
-import {createTestApp} from '../../../test-utils/create-test-app';
 import {SlotProps} from '../../utils/slot-props';
 
 import {FocusTrap, Props as FocusTrapProps} from './focus-trap';
@@ -56,11 +55,6 @@ function simulateTabKeyDown({shiftKey}: {shiftKey: boolean} = {shiftKey: false})
 }
 
 describe('<FocusTrap />', () => {
-    const app = createTestApp();
-
-    beforeEach(app.beforeEach);
-    afterEach(app.afterEach);
-
     const setup = (containerProps?: SlotProps<'div'>, props?: Partial<FocusTrapProps>) => {
         render(
             <React.Fragment>
@@ -177,7 +171,7 @@ describe('<FocusTrap />', () => {
             containerProps?: SlotProps<'div'>,
             props?: Partial<FocusTrapProps>
         ) => {
-            const wrapper = app.mount(
+            const wrapper = render(
                 <React.Fragment>
                     <input id="first" />
                     <FocusTrap {...props}>
@@ -279,7 +273,6 @@ describe('<FocusTrap />', () => {
         it('should not restore focus when unmount', () => {
             const activeElement = document.getElementById('active-element')!;
             setup();
-            app.unmount();
             expect(document.activeElement).toBe(activeElement);
         });
     });

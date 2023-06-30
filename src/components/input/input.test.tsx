@@ -6,53 +6,51 @@
  * actual or intended publication of such source code.
  */
 // tslint:disable no-non-null-assertion
+import {fireEvent, render, waitFor} from '@testing-library/react';
+import '@testing-library/jest-dom';
 import * as React from 'react';
-
-import {awaitTimeout} from '../../../test-utils/await-timeout';
-import {createTestApp} from '../../../test-utils/create-test-app';
-import {Spinner} from '../spinner';
 
 import {Input} from './input';
 
-const app = createTestApp();
-
-beforeEach(app.beforeEach);
-afterEach(app.afterEach);
-
 describe('<Input />', () => {
     it('should render input element', () => {
-        app.mount(<Input id="input" />);
-        expect(document.getElementById('input')!.tagName).toBe('INPUT');
+        render(<Input id="input" />);
+        expect(document.getElementById('input')!).toBeInstanceOf(HTMLInputElement);
     });
 
-    it('should call onValueChange on input change', () => {
+    it('should call onValueChange on input change', async () => {
         const onValueChange = jest.fn();
-        const wrapper = app.mount(<Input id="input" value="" onValueChange={onValueChange} />);
-        (document.getElementById('input')! as HTMLInputElement).value = 'foo';
-        wrapper.find('input').simulate('change');
-        expect(onValueChange).toBeCalledWith('foo');
+        render(<Input id="input" value="" onValueChange={onValueChange} />);
+        const input = document.getElementById('input')! as HTMLInputElement;
+
+        fireEvent.change(input, {target: {value: 'foo'}});
+
+        await waitFor(() => {
+            expect(onValueChange).toBeCalledWith('foo');
+        });
     });
 
     it('should render div element as root', () => {
-        const wrapper = app.mount(<Input />);
-        expect(wrapper.getDOMNode()).toBeInstanceOf(HTMLDivElement);
+        const screen = render(<Input rootProps={{'data-testid': 'test'}} />);
+        expect(screen.queryByTestId('test')).toBeInstanceOf(HTMLDivElement);
     });
 
-    it('should have behaviour like native label element', () => {
-        const wrapper = app.mount(<Input />);
-        wrapper.simulate('focus');
+    it('should have behavior like native label element', () => {
+        const screen = render(<Input rootProps={{'data-testid': 'test'}} />);
+        fireEvent.focus(screen.queryByTestId('test')!);
         expect(document.activeElement).toBeInstanceOf(HTMLInputElement);
     });
 
     describe('when "clearable" prop is passed', () => {
         it('should not render clear button when input value is empty', () => {
-            const wrapper = app.mount(<Input clearable clearButtonProps={{id: 'clear-button'}} />);
-            wrapper.find('input').simulate('change', {target: {value: ''}});
+            render(<Input id="input" clearable clearButtonProps={{id: 'clear-button'}} />);
+            const input = document.getElementById('input')! as HTMLInputElement;
+            fireEvent.change(input, {target: {value: ''}});
             expect(document.getElementById('clear-button')).toBeFalsy();
         });
 
         it('should not render clear button when empty "value" prop is passed', () => {
-            app.mount(
+            render(
                 <Input
                     clearable
                     value=""
@@ -64,7 +62,7 @@ describe('<Input />', () => {
         });
 
         it('should render clear button when input value is not empty', () => {
-            app.mount(
+            render(
                 <Input
                     clearable
                     value="test"
@@ -77,7 +75,7 @@ describe('<Input />', () => {
         });
 
         it('should render clear button when "value" prop is passed', () => {
-            app.mount(
+            render(
                 <Input
                     clearable
                     value="foo"
@@ -92,7 +90,7 @@ describe('<Input />', () => {
             const handleClearButtonClick = jest.fn();
             const handleValueChange = jest.fn();
 
-            const wrapper = app.mount(
+            render(
                 <Input
                     clearable
                     id="input"
@@ -103,7 +101,7 @@ describe('<Input />', () => {
                 />
             );
 
-            wrapper.find('#clear-button').hostNodes().simulate('click');
+            fireEvent.click(document.getElementById('clear-button')!);
 
             expect(handleClearButtonClick).toHaveBeenCalledTimes(1);
             expect(handleValueChange).not.toBeCalled();
@@ -111,20 +109,18 @@ describe('<Input />', () => {
     });
 
     it('should render spinner when "loading" prop is passed', () => {
-        const wrapper = app.mount(<Input loading />);
-        expect(wrapper.find(Spinner)).toHaveLength(1);
+        const screen = render(<Input loading spinnerProps={{'data-testid': 'test'}} />);
+        expect(screen.queryByTestId('test')).toBeVisible();
     });
 
     describe('when "required" prop is passed', () => {
         it('should have "invalid" class name when input is empty', () => {
-            app.mount(
-                <Input rootProps={{id: 'test', classes: {invalid: 'invalid-test'}}} required />
-            );
+            render(<Input rootProps={{id: 'test', classes: {invalid: 'invalid-test'}}} required />);
             expect(document.getElementById('test')!.classList.contains('invalid-test')).toBe(true);
         });
 
         it('should remove invalid className when input is not empty', () => {
-            app.mount(
+            render(
                 <Input
                     rootProps={{id: 'test', classes: {invalid: 'invalid-test'}}}
                     required
@@ -137,20 +133,19 @@ describe('<Input />', () => {
     });
 
     it('should be blurred after disabling', async () => {
-        const wrapper = app.mount(
+        const screen = render(
             <Input rootProps={{id: 'test', classes: {focused: 'focused-test'}}} />
         );
 
         const classList = document.getElementById('test')?.classList;
 
-        wrapper.simulate('focus');
+        document.getElementById('test')!.focus();
 
         expect(classList?.contains('focused-test')).toStrictEqual(true);
 
-        wrapper.setProps({disabled: true});
-
-        // apply effects
-        await awaitTimeout();
+        screen.rerender(
+            <Input disabled rootProps={{id: 'test', classes: {focused: 'focused-test'}}} />
+        );
 
         expect(classList?.contains('focused-test')).toStrictEqual(false);
     });

@@ -9,9 +9,8 @@ import classNames from 'classnames';
 import * as React from 'react';
 
 import {chain} from '../../utils/chain';
-import {Omit} from '../../utils/omit';
 import {chainRefs} from '../../utils/set-ref';
-import {SlotProps} from '../../utils/slot-props';
+import {DataAttributes, SlotProps} from '../../utils/slot-props';
 import {mergeClassesProps, WithClasses} from '../../utils/styles';
 import {useInputInvalidity} from '../../utils/use-input-invalidity';
 import {FieldProps, Field} from '../field';
@@ -39,7 +38,9 @@ type RootProps = Pick<BaseRootProps, ExchangedProps> &
     WithClasses<keyof typeof styles>;
 
 type OtherTargetProps = Pick<BaseTargetProps, ExchangedProps>;
-type OtherRootProps = Omit<BaseRootProps, ExchangedProps> & Pick<FieldProps, 'classes'>;
+type OtherRootProps = Omit<BaseRootProps, ExchangedProps> &
+    Pick<FieldProps, 'classes'> &
+    DataAttributes;
 
 /** Input public properties */
 export interface Props extends TargetProps, RootProps {

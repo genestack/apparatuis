@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2011-2019 Genestack Limited
+ * Copyright (c) 2011-2023 Genestack Limited
  * All Rights Reserved
  * THIS IS UNPUBLISHED PROPRIETARY SOURCE CODE OF GENESTACK LIMITED
  * The copyright notice above does not evidence any
@@ -9,11 +9,12 @@ import * as React from 'react';
 
 import {Fade} from '../fade';
 import {Spinner} from '../spinner';
+import {DataAttributes} from '../../utils/slot-props';
 
 const SPINNER_SIZE = 16;
 
 /** InputSpinner public properties */
-export interface Props extends React.ComponentPropsWithRef<'div'> {
+export interface Props extends React.ComponentPropsWithRef<'div'>, DataAttributes {
     show?: boolean;
 }
 

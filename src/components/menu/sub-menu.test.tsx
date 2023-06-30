@@ -1,14 +1,13 @@
 /*
- * Copyright (c) 2011-2019 Genestack Limited
+ * Copyright (c) 2011-2023 Genestack Limited
  * All Rights Reserved
  * THIS IS UNPUBLISHED PROPRIETARY SOURCE CODE OF GENESTACK LIMITED
  * The copyright notice above does not evidence any
  * actual or intended publication of such source code.
  */
 // tslint:disable no-non-null-assertion
+import {render} from '@testing-library/react';
 import * as React from 'react';
-
-import {createTestApp} from '../../../test-utils/create-test-app';
 
 import {Menu} from './menu';
 import {MenuItem} from './menu-item';
@@ -17,10 +16,6 @@ import {SubMenu} from './sub-menu';
 jest.useFakeTimers();
 
 describe('<SubMenu />', () => {
-    const app = createTestApp();
-    beforeEach(app.beforeEach);
-    afterEach(app.afterEach);
-
     const setup = (getSubMenu?: (() => JSX.Element) | JSX.Element) => {
         const referenceElement = document.createElement('div');
         const onClose = jest.fn();
@@ -33,7 +28,7 @@ describe('<SubMenu />', () => {
             </SubMenu>
         );
 
-        const wrapper = app.mount(
+        const screen = render(
             <Menu id="menu" open referenceElement={referenceElement} onClose={onClose}>
                 <MenuItem id="first" />
                 <MenuItem id="middle" subMenu={subMenu} />
@@ -51,7 +46,7 @@ describe('<SubMenu />', () => {
                 .dispatchEvent(new KeyboardEvent('keydown', {bubbles: true, key}));
         };
 
-        return {wrapper, dispatchMouseEvent, dispatchKeyDownEvent};
+        return {screen, dispatchMouseEvent, dispatchKeyDownEvent};
     };
 
     it('should not render sub menu items if sub menu is not open', () => {

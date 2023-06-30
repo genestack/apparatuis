@@ -1,63 +1,54 @@
 /*
- * Copyright (c) 2011-2020 Genestack Limited
+ * Copyright (c) 2011-2023 Genestack Limited
  * All Rights Reserved
  * THIS IS UNPUBLISHED PROPRIETARY SOURCE CODE OF GENESTACK LIMITED
  * The copyright notice above does not evidence any
  * actual or intended publication of such source code.
  */
+import {render} from '@testing-library/react';
 import * as React from 'react';
-
-import {createTestApp} from '../../../test-utils/create-test-app';
 
 import {Option} from './option';
 import {Select} from './select';
-import {SelectEmitter} from './select-emitter';
-import {SelectMenu} from './select-menu';
-import {SelectNative} from './select-native';
-
-const app = createTestApp();
-
-beforeEach(app.beforeEach);
-afterEach(app.afterEach);
 
 const mockOnValueChange = jest.fn();
 
 describe('<Select />', () => {
     // Menu select
     it('should render menu select', () => {
-        const wrapper = app.mount(<Select />);
-        expect(wrapper.find(SelectNative)).toHaveLength(0);
-        expect(wrapper.find(SelectMenu)).toHaveLength(1);
+        render(<Select />);
+        expect(document.querySelectorAll('select')).toHaveLength(0);
+        expect(document.querySelectorAll('[data-qa="select"]')).toHaveLength(1);
     });
 
     it('should render emitter as button', () => {
-        const wrapper = app.mount(<Select />);
-        expect(wrapper.find(SelectEmitter).getDOMNode().tagName).toBe('BUTTON');
+        render(<Select />);
+        expect(document.querySelectorAll('button')).toHaveLength(1);
     });
 
     // Native select
     it('should render native select', () => {
-        const wrapper = app.mount(<Select native />);
-        expect(wrapper.find(SelectNative)).toHaveLength(1);
-        expect(wrapper.find(SelectMenu)).toHaveLength(0);
+        render(<Select native />);
+        expect(document.querySelectorAll('select')).toHaveLength(1);
+        expect(document.querySelectorAll('[data-qa="select-menu"]')).toHaveLength(0);
     });
 
     it('should render emitter as div', () => {
-        const wrapper = app.mount(<Select native />);
-        expect(wrapper.find(SelectEmitter).getDOMNode().tagName).toBe('DIV');
+        render(<Select native />);
+        expect(document.querySelector('[data-qa="select"]')).toBeInstanceOf(HTMLDivElement);
     });
 
     it('should render Option as option', () => {
-        const wrapper = app.mount(
+        render(
             <Select native>
                 <Option value="1" />
             </Select>
         );
-        expect(wrapper.find('option')).toHaveLength(1);
+        expect(document.querySelectorAll('option')).toHaveLength(1);
     });
 
     it('should render emitter with placeholder', () => {
-        const wrapper = app.mount(
+        render(
             <Select
                 native
                 value="0"
@@ -68,16 +59,22 @@ describe('<Select />', () => {
             </Select>
         );
 
-        expect(wrapper.find(SelectEmitter).text()).toBe('Some placeholder');
+        expect(document.querySelector('[data-qa="select"]')).toHaveProperty(
+            'textContent',
+            'Some placeholder'
+        );
     });
 
     it('should render emitter with custom label', () => {
-        const wrapper = app.mount(
+        render(
             <Select native value="1" onValueChange={mockOnValueChange}>
                 <Option value="1" label="Some text" />
             </Select>
         );
 
-        expect(wrapper.find(SelectEmitter).text()).toBe('Some text');
+        expect(document.querySelector('[data-qa="select"]')).toHaveProperty(
+            'textContent',
+            'Some text'
+        );
     });
 });

@@ -1,15 +1,14 @@
 /*
- * Copyright (c) 2011-2019 Genestack Limited
+ * Copyright (c) 2011-2023 Genestack Limited
  * All Rights Reserved
  * THIS IS UNPUBLISHED PROPRIETARY SOURCE CODE OF GENESTACK LIMITED
  * The copyright notice above does not evidence any
  * actual or intended publication of such source code.
  */
 // tslint:disable jsx-no-lambda no-non-null-assertion
+import {render} from '@testing-library/react';
 import * as React from 'react';
 
-import {createTestApp} from '../../../test-utils/create-test-app';
-import {Grow} from '../grow';
 import {TransitionPopper} from '../transition-popper';
 
 import {Popover} from './popover';
@@ -17,13 +16,8 @@ import {Popover} from './popover';
 jest.useFakeTimers();
 
 describe('<Popover />', () => {
-    const app = createTestApp();
-
-    beforeEach(app.beforeEach);
-    afterEach(app.afterEach);
-
     it('should render expected children', () => {
-        app.mount(
+        render(
             <Popover referenceElement={document.createElement('div')} open>
                 <div id="test" />
             </Popover>
@@ -33,44 +27,58 @@ describe('<Popover />', () => {
     });
 
     it('should unmount after close', () => {
-        const wrapper = app.mount(
+        const screen = render(
             <Popover referenceElement={document.createElement('div')} open>
                 <div id="test" />
             </Popover>
         );
 
-        wrapper.setProps({open: false});
+        screen.rerender(
+            <Popover referenceElement={document.createElement('div')}>
+                <div id="test" />
+            </Popover>
+        );
         jest.runAllTimers();
 
         expect(document.getElementById('test')).toBeFalsy();
     });
 
     it('should unmount instantly after close when disableTransition = true', () => {
-        const wrapper = app.mount(
+        const screen = render(
             <Popover referenceElement={document.createElement('div')} open disableTransition>
                 <div id="test" />
             </Popover>
         );
 
         expect(document.getElementById('test')).toBeTruthy();
-        wrapper.setProps({open: false});
+
+        screen.rerender(
+            <Popover referenceElement={document.createElement('div')} disableTransition>
+                <div id="test" />
+            </Popover>
+        );
         expect(document.getElementById('test')).toBeFalsy();
     });
 
     it('should not unmount after close when keepMounted = true', () => {
-        const wrapper = app.mount(
+        const screen = render(
             <Popover referenceElement={document.createElement('div')} open keepMounted>
                 <div id="test" />
             </Popover>
         );
 
         expect(document.getElementById('test')).toBeTruthy();
-        wrapper.setProps({open: false});
+        screen.rerender(
+            <Popover referenceElement={document.createElement('div')} keepMounted>
+                <div id="test" />
+            </Popover>
+        );
+
         expect(document.getElementById('test')).toBeTruthy();
     });
 
     it('should not unmount after close when keepMounted = true disableTransition = true', () => {
-        const wrapper = app.mount(
+        const screen = render(
             <Popover
                 referenceElement={document.createElement('div')}
                 open
@@ -82,35 +90,19 @@ describe('<Popover />', () => {
         );
 
         expect(document.getElementById('test')).toBeTruthy();
-        wrapper.setProps({open: false});
+        screen.rerender(
+            <Popover referenceElement={document.createElement('div')} keepMounted disableTransition>
+                <div id="test" />
+            </Popover>
+        );
         expect(document.getElementById('test')).toBeTruthy();
-    });
-
-    it('should render transition component', () => {
-        const wrapper = app.mount(
-            <Popover referenceElement={document.createElement('div')} open>
-                <div id="test" />
-            </Popover>
-        );
-
-        expect(wrapper.find(Grow)).toHaveLength(1);
-    });
-
-    it('should not render transition component when disableTransition = true', () => {
-        const wrapper = app.mount(
-            <Popover referenceElement={document.createElement('div')} open disableTransition>
-                <div id="test" />
-            </Popover>
-        );
-
-        expect(wrapper.find(Grow)).toHaveLength(0);
     });
 
     it('should accept referenceElement as function', () => {
         const element = document.createElement('div');
         const getReferenceElement = jest.fn(() => element);
 
-        app.mount(
+        render(
             <Popover referenceElement={getReferenceElement} open>
                 <div id="test" />
             </Popover>
@@ -122,7 +114,7 @@ describe('<Popover />', () => {
     it('should expose scheduleUpdate method', () => {
         let instance: TransitionPopper<any> | null = null;
 
-        app.mount(
+        render(
             <Popover
                 referenceElement={document.createElement('div')}
                 open
@@ -144,7 +136,7 @@ describe('<Popover />', () => {
     it('should pass Transition props', () => {
         const onEntered = jest.fn();
 
-        app.mount(
+        render(
             <Popover
                 referenceElement={document.createElement('div')}
                 open

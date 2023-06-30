@@ -9,6 +9,7 @@ import classNames from 'classnames';
 import * as React from 'react';
 
 import {DarkContext, mergeClassesProps, WithClasses} from '../../utils';
+import {DataAttributes} from '../../utils/slot-props';
 
 import * as styles from './typography.module.css';
 
@@ -72,7 +73,9 @@ interface TypographyProps extends WithClasses<keyof typeof styles> {
 }
 
 /** Typography public properties */
-export type Props<T extends TargetProps = DefaultTargetProps> = T & TypographyProps;
+export type Props<T extends TargetProps = DefaultTargetProps> = T &
+    TypographyProps &
+    DataAttributes;
 
 /**
  * Component that renders text with specific preset.

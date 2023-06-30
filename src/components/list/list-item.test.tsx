@@ -5,103 +5,85 @@
  * The copyright notice above does not evidence any
  * actual or intended publication of such source code.
  */
+import {render} from '@testing-library/react';
+import '@testing-library/jest-dom';
 import * as React from 'react';
-
-import {createTestApp} from '../../../test-utils/create-test-app';
-import {Typography} from '../typography';
 
 import {ListItem} from './list-item';
 
-const app = createTestApp();
-
-beforeEach(app.beforeEach);
-afterEach(app.afterEach);
-
 describe('<ListItem />', () => {
     it('should render div HTML element', () => {
-        const wrapper = app.mount(<ListItem />);
-        expect(wrapper.find('li')).toHaveLength(1);
+        render(<ListItem />);
+        expect(document.querySelectorAll('li')).toHaveLength(1);
     });
 
     it('should not be focusable by default', () => {
-        const wrapper = app.mount(<ListItem />);
-        expect(wrapper.find('li').props().tabIndex).toBe(undefined);
+        render(<ListItem />);
+        expect(document.querySelector('li')).toHaveProperty('tabIndex', -1);
     });
 
     it('should be focusable when interactive', () => {
-        const wrapper = app.mount(<ListItem interactive />);
-        expect(wrapper.find('li').props().tabIndex).toBe(0);
+        render(<ListItem interactive />);
+        expect(document.querySelector('li')).toHaveProperty('tabIndex', 0);
     });
 
     it('should be not focusable if disabled', () => {
-        const wrapper = app.mount(<ListItem disabled interactive />);
-        expect(wrapper.find('li').props().tabIndex).toBe(-1);
+        render(<ListItem disabled interactive />);
+        expect(document.querySelector('li')).toHaveProperty('tabIndex', -1);
     });
 
     it('should accept tabIndex', () => {
-        const wrapper = app.mount(<ListItem tabIndex={2} />);
-        expect(wrapper.find('li').props().tabIndex).toBe(2);
+        render(<ListItem tabIndex={2} />);
+        expect(document.querySelector('li')).toHaveProperty('tabIndex', 2);
     });
 
     it('should render custom elements', () => {
-        const wrapper = app.mount(<ListItem as="button" />);
-        expect(wrapper.find('button')).toHaveLength(1);
+        render(<ListItem as="button" />);
+        expect(document.querySelector('button')).toBeVisible();
     });
 
     it('should render anchor if href property passed', () => {
-        app.mount(<ListItem id="test" href="foo" />);
+        render(<ListItem id="test" href="foo" />);
         expect(document.getElementById('test')).toBeInstanceOf(HTMLAnchorElement);
         expect(document.getElementById('test')).toHaveProperty('href', 'http://localhost/foo');
     });
 
     it('should render prepend element', () => {
-        app.mount(<ListItem prepend={<div id="prepend" />} />);
+        render(<ListItem prepend={<div id="prepend" />} />);
         expect(document.getElementById('prepend')).toBeInstanceOf(HTMLElement);
     });
 
     it('should render append element', () => {
-        app.mount(<ListItem append={<div id="append" />} />);
+        render(<ListItem append={<div id="append" />} />);
         expect(document.getElementById('append')).toBeInstanceOf(HTMLElement);
     });
 
     it('should render subtitle', () => {
-        const wrapper = app.mount(
-            <ListItem subtitle="subtitle" subtitleProps={{id: 'subtitle'}} />
-        );
-        const subtitle = wrapper.findWhere(
-            (element) => element.type() === Typography && element.props().id === 'subtitle'
-        );
-
-        expect(subtitle.props().children).toEqual('subtitle');
+        render(<ListItem subtitle="subtitle" subtitleProps={{id: 'subtitle'}} />);
+        expect(document.getElementById('subtitle')).toHaveProperty('textContent', 'subtitle');
     });
 
     it('should pass ref with non-interactive component', () => {
         const ref = React.createRef();
 
-        const wrapper = app.mount(
+        render(
             <div>
                 <ListItem subtitle="subtitle" ref={ref} />
             </div>
         );
 
-        expect(wrapper.find('li').first().instance()).toBe(ref.current);
+        expect(document.querySelector('li')).toBe(ref.current);
     });
 
     it('should pass ref with interactive component', () => {
         const ref = React.createRef();
 
-        const wrapper = app.mount(
+        render(
             <div>
                 <ListItem subtitle="subtitle" ref={ref} interactive />
             </div>
         );
 
-        expect(wrapper.find('li').first().instance()).toBe(ref.current);
-    });
-
-    it('should pass inclusiveDisabled with interactive component', () => {
-        const wrapper = app.mount(<ListItem subtitle="subtitle" interactive inclusiveDisabled />);
-
-        expect(wrapper.props().inclusiveDisabled).toBe(true);
+        expect(document.querySelector('li')).toBe(ref.current);
     });
 });

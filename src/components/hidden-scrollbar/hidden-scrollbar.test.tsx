@@ -1,32 +1,29 @@
 /*
- * Copyright (c) 2011-2019 Genestack Limited
+ * Copyright (c) 2011-2023 Genestack Limited
  * All Rights Reserved
  * THIS IS UNPUBLISHED PROPRIETARY SOURCE CODE OF GENESTACK LIMITED
  * The copyright notice above does not evidence any
  * actual or intended publication of such source code.
  */
 // tslint:disable no-non-null-assertion no-magic-numbers
+import {render} from '@testing-library/react';
 import * as React from 'react';
 
 import {createRafMock} from '../../../test-utils/create-raf-mock';
-import {createTestApp} from '../../../test-utils/create-test-app';
 
 import {HiddenScrollbar} from './hidden-scrollbar';
 
 jest.useFakeTimers();
 
 describe('<HiddenScrollbar />', () => {
-    const app = createTestApp();
     const rafMock = createRafMock();
 
-    beforeEach(app.beforeEach);
     beforeEach(rafMock.beforeEach);
 
-    afterEach(app.afterEach);
     afterEach(rafMock.afterEach);
 
     const setup = () => {
-        app.mount(
+        render(
             <HiddenScrollbar
                 containerProps={{
                     id: 'container'
@@ -98,7 +95,7 @@ describe('<HiddenScrollbar />', () => {
             }
         });
 
-        return {app, end, start, container, scrollTopSetter};
+        return {end, start, container, scrollTopSetter};
     };
 
     it('start control should be hidden on init', () => {
