@@ -5,7 +5,6 @@
  * The copyright notice above does not evidence any
  * actual or intended publication of such source code.
  */
-// tslint:disable no-unbound-method
 import {fireEvent, render} from '@testing-library/react';
 import * as React from 'react';
 
@@ -33,7 +32,7 @@ describe('<Notification />', () => {
         );
 
         jest.runAllTimers();
-        expect(onClose).toBeCalledWith('countdown-timeout');
+        expect(onClose).toHaveBeenCalledWith('countdown-timeout');
     });
 
     it('should call onClose callback with reason on close button click', () => {
@@ -45,8 +44,9 @@ describe('<Notification />', () => {
             </Notification>
         );
 
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
         fireEvent.click(document.getElementById('button')!);
-        expect(onClose).toBeCalledWith('close-button-click');
+        expect(onClose).toHaveBeenCalledWith('close-button-click');
     });
 
     it('should not call onClose callback if countdown is disabled', () => {
@@ -59,7 +59,7 @@ describe('<Notification />', () => {
         );
 
         jest.runAllTimers();
-        expect(onClose).not.toBeCalled();
+        expect(onClose).not.toHaveBeenCalled();
     });
 
     it('should not call onClose callback if countdown is stopped', () => {
@@ -72,6 +72,6 @@ describe('<Notification />', () => {
         );
 
         jest.runAllTimers();
-        expect(onClose).not.toBeCalled();
+        expect(onClose).not.toHaveBeenCalled();
     });
 });

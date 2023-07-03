@@ -17,6 +17,7 @@ interface TabsInfo {
 }
 
 /** Return valid tabs and selected tab data */
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const getTabsInfo = (selectedValue: any, children: ReactNode): TabsInfo => {
     let tabIndex = 0;
 

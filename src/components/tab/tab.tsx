@@ -14,11 +14,9 @@ import {
     OverridableProps,
     WithClasses,
     mergeClassesProps,
-    shouldRenderNode,
-    chainRefs
+    shouldRenderNode
 } from '../../utils';
 import {SlotProps} from '../../utils/slot-props';
-import {Tooltip, useTooltipHandler, TooltipProps} from '../tooltip';
 
 import {Indicator, IndicatorPlacement, Props as IndicatorProps} from './indicator';
 import * as styles from './tab.module.css';
@@ -26,6 +24,7 @@ import * as styles from './tab.module.css';
 /** Tab props */
 export interface Props extends WithClasses<keyof typeof styles> {
     /** Value of tab */
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     value?: any;
     /** Style of tab (default: "ghost") */
     variant?: 'ghost' | 'solid';
@@ -50,17 +49,6 @@ export interface Props extends WithClasses<keyof typeof styles> {
     append?: React.ReactNode;
     /** Properties for wrapper of append element */
     appendProps?: SlotProps<'span'>;
-
-    /**
-     * Node used as tooltip
-     * @deprecated This property will be removed in version 11.0.0.
-     */
-    tooltip?: React.ReactNode;
-    /**
-     *  Properties for tooltip
-     * @deprecated This property will be removed in version 11.0.0.
-     */
-    tooltipProps?: TooltipProps;
 
     /** Indicator placement of tab (default: "bottom") */
     indicatorPlacement?: IndicatorPlacement;
@@ -104,22 +92,12 @@ export const Tab: OverridableComponent<TypeMap> = React.forwardRef<
         indicatorPlacement = 'bottom',
         indicatorProps = {},
 
-        // tslint:disable-next-line:deprecation
-        tooltip,
-        // tslint:disable-next-line:deprecation
-        tooltipProps = {},
-
         classes,
         disabled,
         inclusiveDisabled = false,
         children,
         ...restProps
     } = mergeClassesProps(props, styles);
-
-    const tabRef = React.useRef(null);
-    const tooltipHandler = useTooltipHandler({
-        referenceElement: tabRef.current
-    });
 
     const anyDisabled = disabled || inclusiveDisabled;
 
@@ -145,10 +123,9 @@ export const Tab: OverridableComponent<TypeMap> = React.forwardRef<
                 aria-selected={selected}
                 aria-disabled={anyDisabled}
                 title={typeof children === 'string' ? children : ''}
-                {...tooltipHandler.getReferenceProps()}
                 {...restProps}
                 onClick={!anyDisabled ? restProps.onClick : undefined}
-                ref={chainRefs(ref, tabRef)}
+                ref={ref}
             >
                 <span {...bodyProps} className={classes.body}>
                     {shouldRenderNode(prepend) && (
@@ -180,12 +157,6 @@ export const Tab: OverridableComponent<TypeMap> = React.forwardRef<
                     />
                 )}
             </Component>
-
-            {shouldRenderNode(tooltip) && (
-                <Tooltip {...tooltipHandler.getTooltipProps()} {...tooltipProps}>
-                    {tooltip}
-                </Tooltip>
-            )}
         </>
     );
 });

@@ -19,6 +19,7 @@
  *
  * type Bar = OmitIndexSignature<Foo>; // type Bar = { bar?: string; baz: () => void }
  */
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export type OmitIndexSignature<T extends Record<any, any>> = {
     [K in keyof T as string extends K ? never : number extends K ? never : K]: T[K];
 };

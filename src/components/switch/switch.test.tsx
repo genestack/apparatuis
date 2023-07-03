@@ -5,8 +5,7 @@
  * The copyright notice above does not evidence any
  * actual or intended publication of such source code.
  */
-
-// tslint:disable no-non-null-assertion
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
 import {render} from '@testing-library/react';
 import * as React from 'react';
 
@@ -23,7 +22,7 @@ describe('<Switch />', () => {
         render(<Switch onCheckedChange={onCheckedChange} id="switch" />);
         document.getElementById('switch')!.dispatchEvent(new MouseEvent('click', {bubbles: true}));
 
-        expect(onCheckedChange).toBeCalledWith(true);
+        expect(onCheckedChange).toHaveBeenCalledWith(true);
     });
 
     it('should call onCheckedChange on click on label', () => {
@@ -35,6 +34,6 @@ describe('<Switch />', () => {
         );
         document.getElementById('label')!.dispatchEvent(new MouseEvent('click', {bubbles: true}));
 
-        expect(onCheckedChange).toBeCalledWith(true);
+        expect(onCheckedChange).toHaveBeenCalledWith(true);
     });
 });

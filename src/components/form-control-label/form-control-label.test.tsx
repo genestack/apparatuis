@@ -8,10 +8,10 @@
 import {render} from '@testing-library/react';
 import * as React from 'react';
 
-import {FormControlLabel} from './form-control-label';
 import {Switch} from '../switch';
 import {Typography} from '../typography';
 
+import {FormControlLabel} from './form-control-label';
 import {disabled, typographyDisabled} from './form-control-label.module.css';
 
 describe('<FormControlLabel />', () => {

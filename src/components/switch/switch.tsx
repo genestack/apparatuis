@@ -9,7 +9,6 @@ import classNames from 'classnames';
 import * as React from 'react';
 
 import {chain} from '../../utils/chain';
-import {Omit} from '../../utils/omit';
 import {SlotProps} from '../../utils/slot-props';
 import {mergeClassesProps, WithClasses} from '../../utils/styles';
 

@@ -5,7 +5,7 @@
  * The copyright notice above does not evidence any
  * actual or intended publication of such source code.
  */
-// tslint:disable no-unbound-method no-non-null-assertion max-file-line-count no-magic-numbers
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
 import {render} from '@testing-library/react';
 import * as React from 'react';
 
@@ -56,7 +56,7 @@ function simulateTabKeyDown({shiftKey}: {shiftKey: boolean} = {shiftKey: false})
 
 describe('<FocusTrap />', () => {
     const setup = (containerProps?: SlotProps<'div'>, props?: Partial<FocusTrapProps>) => {
-        render(
+        const screen = render(
             <React.Fragment>
                 <input id="first" tabIndex={0} />
                 <FocusTrap {...props}>
@@ -80,7 +80,8 @@ describe('<FocusTrap />', () => {
             lastOuterElement,
             trapContainer,
             firstTrapElement,
-            lastTrapElement
+            lastTrapElement,
+            screen
         };
     };
 
@@ -241,14 +242,12 @@ describe('<FocusTrap />', () => {
             expect(document.activeElement).toBe(firstTrapElement);
         });
 
-        // this test breaks for some reason, the case seems pretty obscure, so I won't waste any more time fixing it
-        // (also this is probably a problem in the test environment)
-        /* it('should restore focus when unmount', () => {
+        it('should restore focus when unmount', () => {
             const activeElement = document.getElementById('active-element')!;
-            setup({}, {focusOnMount: true});
-            app.unmount();
+            const {screen} = setup({}, {focusOnMount: true});
+            screen.unmount();
             expect(document.activeElement).toBe(activeElement);
-        });*/
+        });
     });
 
     describe('when focusOnMount property is not passed', () => {

@@ -8,7 +8,6 @@
 import classNames from 'classnames';
 import * as React from 'react';
 
-import {Omit} from '../../utils/omit';
 import {shouldRenderNode} from '../../utils/should-render-node';
 import {SlotProps} from '../../utils/slot-props';
 import {WithClasses, mergeClassesProps} from '../../utils/styles';

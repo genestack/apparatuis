@@ -5,8 +5,8 @@
  * The copyright notice above does not evidence any
  * actual or intended publication of such source code.
  */
-// tslint:disable no-non-null-assertion no-unbound-method max-file-line-count
-// tslint:disable match-default-export-name
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
 jest.mock('../../utils/has-vertical-scrollbar');
 jest.mock('dom-helpers/scrollbarSize');
 

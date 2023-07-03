@@ -7,8 +7,6 @@
  */
 import * as React from 'react';
 
-import {Omit} from '../../utils/omit';
-
 import {Flex, Props as FlexProps} from './flex';
 
 /** FlexItem public properties */

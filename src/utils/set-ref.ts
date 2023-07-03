@@ -15,6 +15,7 @@ export function setRef<T>(ref: React.Ref<T>, value: T) {
         ref(value);
     } else if (ref) {
         // ref.current is readonly, but not for us
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         (ref as any).current = value;
     }
 }

@@ -26,6 +26,7 @@ export interface Props extends TargetProps {
      * Default: `"false"`
      */
     inverted?: boolean;
+    className?: string;
 }
 
 /**

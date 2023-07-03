@@ -26,8 +26,10 @@ import {PositionStyles, getPositionStyles} from './utils';
 /** Tabs props */
 export interface Props extends WithClasses<keyof typeof styles> {
     /** Value of selected tab */
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     value: any;
     /** Tabs onChange handler */
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     onValueChange?: (value: any) => void;
 
     /** Tabs orientation (default: "horizontal") */

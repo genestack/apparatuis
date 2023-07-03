@@ -1,6 +1,10 @@
 {
-  "extends": "./node_modules/@genestack/tsconfig/tsconfig.json",
   "compilerOptions": {
+    "target": "es5",
+    "moduleResolution": "node",
+    "lib": ["es2016", "dom"],
+    "strict": true,
+    "allowSyntheticDefaultImports": true,
     "jsx": "react",
     "allowJs": false,
     "checkJs": false,

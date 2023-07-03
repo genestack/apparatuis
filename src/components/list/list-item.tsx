@@ -8,7 +8,6 @@
 import classNames from 'classnames';
 import * as React from 'react';
 
-import {Omit} from '../../utils/omit';
 import {SlotProps} from '../../utils/slot-props';
 import {WithClasses, mergeClassesProps} from '../../utils/styles';
 import {InteractiveElement, InteractiveElementProps} from '../interactive-element';
@@ -74,7 +73,7 @@ export interface Props extends TargetProps, WithClasses<keyof typeof styles> {
 /**
  * Single item of List component
  */
-export const ListItem = React.forwardRef((props: Props, ref) => {
+export const ListItem = React.forwardRef(function ListItem(props: Props, ref) {
     const {
         as: Component,
         classes,

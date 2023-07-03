@@ -9,8 +9,6 @@ import * as React from 'react';
 
 import {createIcon} from '../components/icon';
 
-// tslint:disable max-line-length
-
 /**
  * Keyboard arrow key icon shows user possible transformation direction
  * after some interaction has applied.

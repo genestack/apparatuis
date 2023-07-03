@@ -27,7 +27,7 @@ describe('<Avatar />', () => {
     });
 
     describe('"initials" property has length 2', () => {
-        it('it should render two div HTML elements', () => {
+        it('should render two div HTML elements', () => {
             render(<Avatar data-testid="test" initials="AB" />);
             expect(screen.getByTestId('test').querySelectorAll('div')).toHaveLength(2);
         });

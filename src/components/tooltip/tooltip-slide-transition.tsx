@@ -34,7 +34,6 @@ const getSlideDirection = (
 export interface Props extends SlideProps {
     disableTransition?: boolean;
     placement?: TransitionPopperChildrenProps['placement'];
-    children: JSX.Element;
     open?: boolean;
 }
 

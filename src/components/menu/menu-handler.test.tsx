@@ -5,6 +5,7 @@
  * The copyright notice above does not evidence any
  * actual or intended publication of such source code.
  */
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
 import {fireEvent, render} from '@testing-library/react';
 import * as React from 'react';
 
@@ -52,7 +53,7 @@ describe('<MenuHandler />', () => {
         expect(document.getElementById('menu')).toBeTruthy();
     });
 
-    it('should open menu on child click', () => {
+    it('should not open menu on child click', () => {
         setup({disableListeners: true});
         fireEvent.click(document.getElementById('button')!);
         expect(document.getElementById('menu')).toBeFalsy();

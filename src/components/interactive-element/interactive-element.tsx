@@ -5,6 +5,7 @@
  * The copyright notice above does not evidence any
  * actual or intended publication of such source code.
  */
+/* eslint-disable react/prop-types */
 import classNames from 'classnames';
 import * as React from 'react';
 
@@ -39,11 +40,11 @@ interface State {
 }
 
 /**
- * Internal component that simulates native button behaviour.
+ * Internal component that simulates native button behavior.
  * It is used for placing button elements into other "button" elements.
  */
 
-export const InteractiveElement = React.forwardRef((props: Props, ref) => {
+export const InteractiveElement = React.forwardRef(function InteractiveElement(props: Props, ref) {
     const [state, setState] = React.useState<State>({active: false});
 
     const {
@@ -84,6 +85,7 @@ export const InteractiveElement = React.forwardRef((props: Props, ref) => {
             setState({active: false});
 
             // keyboard accessibility for non interactive elements hack
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
             props.onClick?.(event as any);
         }
     };

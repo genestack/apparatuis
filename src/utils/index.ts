@@ -11,7 +11,6 @@ export * from './debounce';
 export * from './escape-reg-exp';
 export * from './focusable-elements';
 export * from './has-vertical-scrollbar';
-export * from './omit';
 export * from './omit-index-signature';
 export * from './overridable-component';
 export * from './reflow';

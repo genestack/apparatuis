@@ -57,7 +57,6 @@ interface TypeMap {
 export const ButtonBase: OverridableComponent<TypeMap> = React.forwardRef<
     HTMLButtonElement,
     OverridableProps<TypeMap>
-    // tslint:disable-next-line: no-shadowed-variable
 >(function ButtonBase(props, ref) {
     const darkContext = React.useContext(DarkContext);
 

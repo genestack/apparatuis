@@ -9,6 +9,7 @@ import * as React from 'react';
 
 /** StateValue */
 export interface StateValue {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     [key: string]: any;
 }
 
@@ -19,11 +20,8 @@ export type SetState = (state: StateValue) => void;
 export type PresentationContextValue = [StateValue, SetState];
 
 /** Sharing state in context */
-export const PresentationContext = React.createContext<PresentationContextValue>([
-    {},
-    // tslint:disable-next-line: no-empty
-    () => {}
-]);
+// eslint-disable-next-line @typescript-eslint/no-empty-function
+export const PresentationContext = React.createContext<PresentationContextValue>([{}, () => {}]);
 
 /** Hook for injecting presentation state */
 export function usePresentation() {

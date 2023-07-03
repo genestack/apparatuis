@@ -5,7 +5,7 @@
  * The copyright notice above does not evidence any
  * actual or intended publication of such source code.
  */
-// tslint:disable: no-non-null-assertion
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
 import {fireEvent, render} from '@testing-library/react';
 import * as React from 'react';
 
@@ -124,13 +124,13 @@ describe('<HeaderItemSecondaryActions />', () => {
         const {onClick} = clickSetup();
 
         fireEvent.click(document.getElementById('button')!);
-        expect(onClick).not.toBeCalled();
+        expect(onClick).not.toHaveBeenCalled();
     });
 
     it('should propagate click from inner text to HeaderButton', () => {
         const {onClick} = clickSetup();
 
         fireEvent.click(document.getElementById('text')!);
-        expect(onClick).toBeCalled();
+        expect(onClick).toHaveBeenCalled();
     });
 });

@@ -10,7 +10,6 @@ import React from 'react';
 
 import {chain} from '../../utils/chain';
 import {DarkContext} from '../../utils/dark-context';
-import {Omit} from '../../utils/omit';
 import {WithClasses, mergeClassesProps} from '../../utils/styles';
 import {createIcon} from '../icon';
 import {TransitionPopperProps, TransitionPopper} from '../transition-popper';

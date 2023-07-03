@@ -8,19 +8,14 @@
 import classNames from 'classnames';
 import * as React from 'react';
 
-import {SlotProps} from '../../utils/slot-props';
 import {MarginBox, MarginBoxProps} from '../margin-box';
 
 import {DialogContext} from './dialog-context';
 import * as styles from './dialog-footer.module.css';
 
-type TargetProps = React.HTMLAttributes<HTMLDivElement> &
-    Pick<MarginBoxProps, 'startDividerProps' | 'endDividerProps'>;
-
 /** DialogFooter public properties */
-export interface Props extends TargetProps {
-    contentProps?: SlotProps<'div'>;
-}
+export type Props = React.HTMLAttributes<HTMLDivElement> &
+    Pick<MarginBoxProps, 'startDividerProps' | 'endDividerProps'>;
 
 /**
  * Dialog Footer is element that placed in bottom of Dialog.
@@ -29,7 +24,6 @@ export interface Props extends TargetProps {
 export const DialogFooter = (props: Props) => {
     const {
         children,
-        contentProps = {},
         startDividerProps,
 
         ...rest

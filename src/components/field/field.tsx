@@ -34,7 +34,6 @@ interface TypeMap {
 export const Field: OverridableComponent<TypeMap> = React.forwardRef<
     HTMLDivElement,
     OverridableProps<TypeMap>
-    // tslint:disable-next-line: no-shadowed-variable
 >(function Field(props, ref) {
     const {
         component: Component = 'div',

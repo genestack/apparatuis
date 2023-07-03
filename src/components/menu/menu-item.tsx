@@ -5,7 +5,6 @@
  * The copyright notice above does not evidence any
  * actual or intended publication of such source code.
  */
-// tslint:disable max-file-line-count
 import classNames from 'classnames';
 import contains from 'dom-helpers/contains';
 import * as React from 'react';

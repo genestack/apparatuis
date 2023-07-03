@@ -7,7 +7,6 @@
  */
 import * as React from 'react';
 
-import {Omit} from '../../utils/omit';
 import {ListItem, ListItemProps} from '../list';
 
 /** SuggestInputItem public properties */

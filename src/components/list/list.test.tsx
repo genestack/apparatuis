@@ -5,9 +5,8 @@
  * The copyright notice above does not evidence any
  * actual or intended publication of such source code.
  */
-import {render} from '@testing-library/react';
 import '@testing-library/jest-dom';
-
+import {render} from '@testing-library/react';
 import * as React from 'react';
 
 import {List} from './list';

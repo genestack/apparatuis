@@ -83,7 +83,6 @@ export const SelectEmitter = React.forwardRef<HTMLElement, Props>(function Emitt
     );
 
     const buttonLabel = label ?? placeholder;
-    // tslint:disable-next-line:strict-type-predicates
     const isInlineLabel = typeof buttonLabel === 'string' || typeof buttonLabel === 'number';
 
     return (

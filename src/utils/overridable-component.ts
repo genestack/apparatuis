@@ -7,16 +7,16 @@
  */
 import * as React from 'react';
 
-import {Omit} from './omit';
-
 /**
  * A component whose root component can be controlled via a `component` prop.
  *
  * Adjusts valid props based on the type of `component`.
  */
 export interface OverridableComponent<M extends OverridableTypeMap> {
-    <C extends React.ElementType>(props: {component: C} & OverrideProps<M, C>): JSX.Element | null;
-    (props: DefaultComponentProps<M>): JSX.Element | null;
+    <C extends React.ElementType>(
+        props: {component: C} & OverrideProps<M, C>
+    ): React.ReactElement | null;
+    (props: DefaultComponentProps<M>): React.ReactElement | null;
 }
 
 /**
@@ -57,6 +57,7 @@ export interface CommonProps {
  * Type map to configure overridable components
  */
 export interface OverridableTypeMap {
+    // eslint-disable-next-line @typescript-eslint/ban-types
     props: {};
     defaultType: React.ElementType;
 }

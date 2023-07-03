@@ -8,6 +8,7 @@
 /**
  * Chain all functions in single one.
  */
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export function chain<T extends (...args: any[]) => void>(
     ...items: Array<T | undefined>
 ): T | undefined {
@@ -28,7 +29,7 @@ export function chain<T extends (...args: any[]) => void>(
                 func(...args);
             }) as T;
         },
-        // tslint:disable-next-line no-empty
+        // eslint-disable-next-line @typescript-eslint/no-empty-function
         (() => {}) as T
     );
 }

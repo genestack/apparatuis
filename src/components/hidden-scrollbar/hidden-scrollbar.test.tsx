@@ -5,7 +5,7 @@
  * The copyright notice above does not evidence any
  * actual or intended publication of such source code.
  */
-// tslint:disable no-non-null-assertion no-magic-numbers
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
 import {render} from '@testing-library/react';
 import * as React from 'react';
 
@@ -187,7 +187,7 @@ describe('<HiddenScrollbar />', () => {
         scrollTopSetter.mockClear();
         end.dispatchEvent(new MouseEvent('mouseover', {bubbles: true}));
         expect(scrollTopSetter).toHaveBeenCalledTimes(1);
-        expect(scrollTopSetter).toBeCalledWith(32);
+        expect(scrollTopSetter).toHaveBeenCalledWith(32);
     });
 
     it(
@@ -200,7 +200,7 @@ describe('<HiddenScrollbar />', () => {
             scrollTopSetter.mockClear();
             start.dispatchEvent(new MouseEvent('mouseover', {bubbles: true}));
             expect(scrollTopSetter).toHaveBeenCalledTimes(1);
-            expect(scrollTopSetter).toBeCalledWith(50 - 32);
+            expect(scrollTopSetter).toHaveBeenCalledWith(50 - 32);
         }
     );
 

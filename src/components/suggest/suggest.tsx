@@ -8,7 +8,6 @@
 import classNames from 'classnames';
 import * as React from 'react';
 
-import {Omit} from '../../utils/omit';
 import {chainRefs} from '../../utils/set-ref';
 import {InputProps, Input} from '../input';
 import {PaperProps} from '../paper';

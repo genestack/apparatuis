@@ -12,7 +12,7 @@ import {ControlsItem, PageContent} from '../../src';
 import {PresentationContext} from './presentation-context';
 
 interface Props {
-    children?: ((state: {[key: string]: unknown}) => JSX.Element) | React.ReactNode;
+    children?: ((state: {[key: string]: unknown}) => React.ReactNode) | React.ReactNode;
 }
 
 /** Renders main presentation component with injected presentation state */

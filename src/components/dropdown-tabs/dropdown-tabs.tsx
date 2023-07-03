@@ -26,6 +26,7 @@ import {getTabsInfo} from './utils';
 /** Dropdown tabs props */
 export interface Props extends Pick<TabProps, 'value' | 'variant'> {
     /** Tabs onChange handler */
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     onValueChange?: (value: any) => void;
     /** Size of tab control (default: "normal") */
     size?: 'normal' | 'small';

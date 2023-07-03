@@ -74,7 +74,7 @@ export interface Props {
     box?: TypographyProps['box'];
 }
 
-const getIterator = function* <T extends any = any>(array: T[]): IterableIterator<T> {
+const getIterator = function* <T>(array: T[]): IterableIterator<T> {
     while (true) {
         for (const value of array) {
             yield value;
@@ -82,18 +82,14 @@ const getIterator = function* <T extends any = any>(array: T[]): IterableIterato
     }
 };
 
-const reduceNumber = <T extends any = any>(
-    count: number,
-    reducer: (value: T, i: number) => T,
-    initialValue: T
-) => {
+function reduceNumber<T>(count: number, reducer: (value: T, i: number) => T, initialValue: T) {
     let value = initialValue;
     for (let i = 0; i < count; i += 1) {
         value = reducer(value, i);
     }
 
     return value;
-};
+}
 
 const DEFAULT_CLASSES = [styles.width100, styles.width75, styles.width85];
 
@@ -123,7 +119,7 @@ export const Preloader = ({
 
     return (
         <ListWrapper>
-            {reduceNumber<JSX.Element[]>(
+            {reduceNumber<React.ReactElement[]>(
                 count,
                 (preloaderLines, index) => {
                     const nextClassName = classNameGenerator.next().value;

@@ -5,6 +5,7 @@
  * The copyright notice above does not evidence any
  * actual or intended publication of such source code.
  */
+/* eslint-disable react/prop-types */
 import classNames from 'classnames';
 import * as React from 'react';
 

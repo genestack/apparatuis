@@ -5,7 +5,7 @@
  * The copyright notice above does not evidence any
  * actual or intended publication of such source code.
  */
-// tslint:disable no-non-null-assertion
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
 import {render} from '@testing-library/react';
 import * as React from 'react';
 
@@ -16,7 +16,7 @@ import {SubMenu} from './sub-menu';
 jest.useFakeTimers();
 
 describe('<SubMenu />', () => {
-    const setup = (getSubMenu?: (() => JSX.Element) | JSX.Element) => {
+    const setup = (getSubMenu?: (() => React.ReactElement) | React.ReactElement) => {
         const referenceElement = document.createElement('div');
         const onClose = jest.fn();
 
@@ -117,7 +117,7 @@ describe('<SubMenu />', () => {
     it('should not call subMenu callback if sub menu closed', () => {
         const subMenu = jest.fn(() => <SubMenu id="sub-menu" />);
         setup(subMenu);
-        expect(subMenu).not.toBeCalled();
+        expect(subMenu).not.toHaveBeenCalled();
     });
 
     it('should call subMenu callback if sub menu opened', () => {

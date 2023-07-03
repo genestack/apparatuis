@@ -5,7 +5,7 @@
  * The copyright notice above does not evidence any
  * actual or intended publication of such source code.
  */
-/* tslint:disable no-unbound-method no-magic-numbers max-file-line-count */
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
 import {act, fireEvent, render} from '@testing-library/react';
 import * as React from 'react';
 
@@ -222,7 +222,6 @@ describe('<TooltipHandler />', () => {
         screen.rerender(<Test></Test>);
 
         act(() => {
-            // tslint:disable-next-line: no-non-null-assertion no-unnecessary-type-assertion
             window.document.getElementById('wrapper')!.dispatchEvent(
                 new MouseEvent('mousemove', {
                     bubbles: true
@@ -230,7 +229,8 @@ describe('<TooltipHandler />', () => {
             );
         });
 
-        expect(console.error).not.toBeCalled();
+        // eslint-disable-next-line no-console
+        expect(console.error).not.toHaveBeenCalled();
     });
 
     it('should show tooltip after `openDelay` timeout', async () => {

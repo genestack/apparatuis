@@ -34,9 +34,9 @@ module.exports = {
         } catch (error) {}
 
         return {
-            code: `module.exports = {\n${
-                classNames.map((className) => `    "${className}":"${className}"`).join(',\n')
-            }\n}`
+            code: `module.exports = {\n${classNames
+                .map((className) => `    "${className}":"${className}"`)
+                .join(',\n')}\n}`
         };
     }
 };

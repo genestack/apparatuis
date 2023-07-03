@@ -145,6 +145,7 @@ export class OverlayManager {
     private getLastOverlayNode() {
         const lastOverlay = this.overlays[this.overlays.length - 1];
         if (lastOverlay) {
+            // eslint-disable-next-line react/no-find-dom-node
             const overlay = ReactDOM.findDOMNode(lastOverlay);
             if (overlay instanceof HTMLElement) {
                 return overlay;

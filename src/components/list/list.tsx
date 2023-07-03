@@ -15,6 +15,7 @@ type TargetProps = React.HTMLAttributes<HTMLDivElement>;
 /** List public properties */
 export interface Props extends TargetProps {
     as?: React.ElementType;
+    className?: string;
 }
 
 /**

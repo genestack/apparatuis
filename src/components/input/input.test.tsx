@@ -5,7 +5,7 @@
  * The copyright notice above does not evidence any
  * actual or intended publication of such source code.
  */
-// tslint:disable no-non-null-assertion
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
 import {fireEvent, render, waitFor} from '@testing-library/react';
 import '@testing-library/jest-dom';
 import * as React from 'react';
@@ -26,7 +26,7 @@ describe('<Input />', () => {
         fireEvent.change(input, {target: {value: 'foo'}});
 
         await waitFor(() => {
-            expect(onValueChange).toBeCalledWith('foo');
+            expect(onValueChange).toHaveBeenCalledWith('foo');
         });
     });
 
@@ -104,7 +104,7 @@ describe('<Input />', () => {
             fireEvent.click(document.getElementById('clear-button')!);
 
             expect(handleClearButtonClick).toHaveBeenCalledTimes(1);
-            expect(handleValueChange).not.toBeCalled();
+            expect(handleValueChange).not.toHaveBeenCalled();
         });
     });
 
