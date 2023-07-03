@@ -114,7 +114,10 @@ export const Popover = (props: Props) => {
                                     [classes.arrowHidden]: !withArrow
                                 })}
                             >
-                                <PopoverArrowIcon className={classes.arrow} />
+                                <PopoverArrowIcon
+                                    data-placement={placement}
+                                    className={classes.arrowIcon}
+                                />
                             </div>
                         </div>
                     </PopoverGrow>

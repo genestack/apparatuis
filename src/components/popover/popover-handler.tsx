@@ -59,11 +59,14 @@ export function PopoverHandler(props: Props) {
                 placement="left"
                 positionFixed
                 portalContainer={document.body}
-                modifiers={{
-                    preventOverflow: {
-                        boundariesElement: 'viewport'
+                modifiers={[
+                    {
+                        name: 'preventOverflow',
+                        options: {
+                            altAxis: true
+                        }
                     }
-                }}
+                ]}
                 roundCorners
                 withArrow
                 {...rest}

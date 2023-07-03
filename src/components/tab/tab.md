@@ -9,17 +9,8 @@ const {
 const {DraftIcon} = require('../../icons');
 
 const BadgeExample = (props) => {
-    const {
-        useTooltip,
-        hovered,
-        selected,
-        disabled,
-        variant,
-        size,
-        hasPrepend,
-        hasAppend,
-        indicatorPlacement
-    } = usePresentation();
+    const {hovered, selected, disabled, variant, size, hasPrepend, hasAppend, indicatorPlacement} =
+        usePresentation();
     const [text, setText] = React.useState('Gene Expression Similarity Search');
 
     return (
@@ -46,7 +37,6 @@ const BadgeExample = (props) => {
                         selected={selected}
                         disabled={disabled}
                         indicatorPlacement={indicatorPlacement}
-                        tooltip={useTooltip && text}
                     >
                         {text}
                     </Tab>
@@ -74,7 +64,6 @@ const BadgeExample = (props) => {
 
 <Presentation
     initialState={{
-        useTooltip: false,
         hovered: false,
         selected: false,
         disabled: false,
@@ -89,7 +78,6 @@ const BadgeExample = (props) => {
         <BadgeExample />
     </PresentationPane>
     <PresentationControls>
-        <PresentationState name="useTooltip" label="Use tooltip" />
         <PresentationState name="hovered" label="Hovered" />
         <PresentationState name="selected" label="Selected" />
         <PresentationState name="disabled" label="Disabled" />

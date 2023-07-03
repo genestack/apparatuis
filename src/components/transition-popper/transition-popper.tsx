@@ -9,7 +9,7 @@ import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import {Popper, PopperProps, PopperChildrenProps} from 'react-popper';
 
-type TargetProps = Omit<PopperProps, 'referenceElement' | 'children'>;
+type TargetProps = Omit<PopperProps<any>, 'referenceElement' | 'children'>;
 
 /** Alias for popper reference */
 export type TransitionPopperPlacement = PopperChildrenProps['placement'];
@@ -22,7 +22,7 @@ export type TransitionPopperChildrenProps<T = any> = Omit<PopperChildrenProps, '
     placement?: TransitionPopperPlacement;
 };
 
-type PopperReferenceElement = PopperProps['referenceElement'] | null;
+type PopperReferenceElement = PopperProps<any>['referenceElement'] | null;
 type ReferenceElement = PopperReferenceElement | (() => PopperReferenceElement);
 
 interface InnerProps<T> extends TargetProps {
@@ -32,7 +32,7 @@ interface InnerProps<T> extends TargetProps {
      * DOM element, or a function that returns the DOM element
      * (or DOM-like object @see PopperJS.ReferenceObject),
      * that will be used to set the position of the popover.
-     * The return value will passed as the reference object of the Popper.js
+     * The return value will passed as the reference object of the @popperjs/core
      * instance.
      */
     referenceElement?: ReferenceElement;
@@ -47,6 +47,7 @@ interface InnerProps<T> extends TargetProps {
     /** Element that will be used for portal if passed */
     portalContainer?: Element;
     children: (props: TransitionPopperChildrenProps<T>) => React.ReactNode;
+    positionFixed?: boolean;
 }
 
 /** TransitionPopper */
@@ -89,7 +90,6 @@ export class TransitionPopper<T> extends React.Component<Props<T>, State> {
     /**
      * Recalculate position of popper.
      * Call it when any user action changes reference element position.
-     * By default `popper.js` subscribes to window scroll event.
      */
     public scheduleUpdate() {
         if (this.popperScheduleUpdate) {
@@ -105,7 +105,6 @@ export class TransitionPopper<T> extends React.Component<Props<T>, State> {
             disableTransition,
             portalContainer,
             children,
-            eventsEnabled,
             innerRef,
             modifiers,
             placement,
@@ -126,10 +125,9 @@ export class TransitionPopper<T> extends React.Component<Props<T>, State> {
 
         const popper = (
             <Popper
-                positionFixed={positionFixed}
+                strategy={positionFixed ? 'fixed' : 'absolute'}
                 placement={placement}
                 referenceElement={element || undefined}
-                eventsEnabled={eventsEnabled}
                 innerRef={innerRef}
                 modifiers={modifiers}
             >
@@ -140,7 +138,7 @@ export class TransitionPopper<T> extends React.Component<Props<T>, State> {
                             if (typeof popperChildrenProps.ref === 'function') {
                                 popperChildrenProps.ref(node);
                             }
-                            this.popperScheduleUpdate = popperChildrenProps.scheduleUpdate;
+                            this.popperScheduleUpdate = popperChildrenProps.forceUpdate;
                         },
                         targetProps: targetProps as T,
                         onTransitionExited: this.handleTransitionExited

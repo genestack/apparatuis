@@ -169,6 +169,7 @@ module.exports = (env) => {
             'dom-helpers',
             'downshift',
             'react-popper',
+            '@popperjs/core',
             'react-textarea-autosize',
             'react-transition-group',
             'simplebar',

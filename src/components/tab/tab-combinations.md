@@ -47,11 +47,6 @@ function TabSamples(props) {
                         Disabled
                     </Tab>
                 </ControlsItem>
-                <ControlsItem>
-                    <Tab {...tabProps} tooltip="Some tooltip text">
-                        With tooltip
-                    </Tab>
-                </ControlsItem>
             </Controls>
         </React.Fragment>
     );

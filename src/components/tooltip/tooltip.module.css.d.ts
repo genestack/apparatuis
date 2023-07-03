@@ -9,4 +9,5 @@ export const root: string;
 export const popperContainer: string;
 export const tooltipContainer: string;
 export const arrow: string;
+export const arrowIcon: string;
 export const withGaps: string;
