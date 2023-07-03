@@ -10,7 +10,6 @@ import * as React from 'react';
 import Transition, {TransitionProps} from 'react-transition-group/Transition';
 
 import {chain} from '../../utils/chain';
-import {Omit} from '../../utils/omit';
 import {OmitIndexSignature} from '../../utils/omit-index-signature';
 import {reflow} from '../../utils/reflow';
 import {WithClasses, mergeClassesProps} from '../../utils/styles';
@@ -107,10 +106,14 @@ export class Slide extends React.Component<Props> {
     };
 
     public render() {
-        const {className, classes, children, direction = 'left', fast, ...rest} = mergeClassesProps(
-            this.props,
-            styles
-        );
+        const {
+            className,
+            classes,
+            children,
+            direction = 'left',
+            fast,
+            ...rest
+        } = mergeClassesProps(this.props, styles);
         const child = React.Children.only(children) as Children;
 
         return (

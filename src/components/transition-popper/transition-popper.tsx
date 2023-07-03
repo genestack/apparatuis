@@ -9,14 +9,13 @@ import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import {Popper, PopperProps, PopperChildrenProps} from 'react-popper';
 
-import {Omit} from '../../utils/omit';
-
 type TargetProps = Omit<PopperProps, 'referenceElement' | 'children'>;
 
 /** Alias for popper reference */
 export type TransitionPopperPlacement = PopperChildrenProps['placement'];
 
 /** TransitionPopperChildrenProps  */
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export type TransitionPopperChildrenProps<T = any> = Omit<PopperChildrenProps, 'placement'> & {
     targetProps: T;
     onTransitionExited: () => void;
@@ -47,10 +46,11 @@ interface InnerProps<T> extends TargetProps {
     disableTransition?: boolean;
     /** Element that will be used for portal if passed */
     portalContainer?: Element;
-    children: (props: TransitionPopperChildrenProps<T>) => JSX.Element;
+    children: (props: TransitionPopperChildrenProps<T>) => React.ReactNode;
 }
 
 /** TransitionPopper */
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export type Props<T = any> = T & InnerProps<T>;
 
 interface State {

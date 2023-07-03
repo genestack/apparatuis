@@ -138,7 +138,6 @@ export function useTooltipHandler(props: Props) {
         onClosed: chain(tooltipProps.onClosed, handleTooltipClosed)
     });
 
-    // tslint:disable-next-line: no-object-literal-type-assertion
     const getReferenceProps = <T extends ReferenceProps>(referenceProps: T = {} as T): T => ({
         ...referenceProps,
         onMouseEnter: chain(referenceProps.onMouseEnter, handleReferenceMouseEnter),

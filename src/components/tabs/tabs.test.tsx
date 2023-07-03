@@ -5,6 +5,7 @@
  * The copyright notice above does not evidence any
  * actual or intended publication of such source code.
  */
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
 import {fireEvent, render, waitFor} from '@testing-library/react';
 import * as React from 'react';
 
@@ -12,7 +13,6 @@ import {Tab} from '../tab';
 
 import {Tabs} from './tabs';
 
-// tslint:disable no-magic-numbers
 describe('<Tabs />', () => {
     it('should set values for size and variant from tabs to children', () => {
         render(
@@ -83,7 +83,7 @@ describe('<Tabs />', () => {
         fireEvent.click(document.getElementById('tab')!);
 
         expect(onValueChange).toHaveBeenCalledTimes(1);
-        expect(onValueChange).toBeCalledWith(2);
+        expect(onValueChange).toHaveBeenCalledWith(2);
     });
 
     it('should execute onValueChange with 30', () => {
@@ -102,6 +102,6 @@ describe('<Tabs />', () => {
         fireEvent.click(document.getElementById('tab')!);
 
         expect(onValueChange).toHaveBeenCalledTimes(1);
-        expect(onValueChange).toBeCalledWith(30);
+        expect(onValueChange).toHaveBeenCalledWith(30);
     });
 });

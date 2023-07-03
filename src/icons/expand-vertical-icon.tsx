@@ -1,4 +1,5 @@
 import React from 'react';
+
 import {createIcon} from '../components/icon';
 
 /** Expand vertical icon */

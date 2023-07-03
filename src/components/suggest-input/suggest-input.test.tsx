@@ -5,7 +5,7 @@
  * The copyright notice above does not evidence any
  * actual or intended publication of such source code.
  */
-// tslint:disable: no-non-null-assertion
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
 import {fireEvent, render} from '@testing-library/react';
 import * as React from 'react';
 
@@ -53,11 +53,11 @@ describe('<SuggestInput />', () => {
             </SuggestInput>
         );
 
-        expect(onOpenChange).not.toBeCalled();
+        expect(onOpenChange).not.toHaveBeenCalled();
 
         fireEvent.change(document.getElementById('input')!, {target: {value: 'foo'}});
         expect(onOpenChange).toHaveBeenCalledTimes(1);
-        expect(onOpenChange).toBeCalledWith(true);
+        expect(onOpenChange).toHaveBeenCalledWith(true);
     });
 
     it('should open suggest on focus', () => {
@@ -71,12 +71,13 @@ describe('<SuggestInput />', () => {
         document.getElementById('input')!.focus();
 
         expect(onOpenChange).toHaveBeenCalledTimes(1);
-        expect(onOpenChange).toBeCalledWith(true);
+        expect(onOpenChange).toHaveBeenCalledWith(true);
     });
 
     it('should accept any component with value property', () => {
         const onComplete = jest.fn();
 
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         function AnyComponent(props: any) {
             const {value, focused, ...rest} = props;
 
@@ -94,7 +95,7 @@ describe('<SuggestInput />', () => {
 
         document.getElementById('input')!.focus();
 
-        expect(onComplete).toBeCalledWith('bar');
+        expect(onComplete).toHaveBeenCalledWith('bar');
     });
 
     describe('when item has been selected', () => {
@@ -121,7 +122,7 @@ describe('<SuggestInput />', () => {
         it('should call onComplete', () => {
             const {onComplete} = setup();
             expect(onComplete).toHaveBeenCalledTimes(1);
-            expect(onComplete).toBeCalledWith('bar');
+            expect(onComplete).toHaveBeenCalledWith('bar');
         });
 
         it('should close suggest', () => {
@@ -147,6 +148,6 @@ describe('<SuggestInput />', () => {
         expect(renderComponent).toHaveBeenCalledTimes(0);
         fireEvent.change(document.getElementById('input')!, {target: {value: 'foo'}});
         expect(renderComponent).toHaveBeenCalledTimes(1);
-        expect(renderComponent).toBeCalledWith('foo');
+        expect(renderComponent).toHaveBeenCalledWith('foo');
     });
 });

@@ -46,6 +46,7 @@ export const Textarea = (props: Props) => {
         <TextareaAutosize
             data-qa="textarea"
             {...rest}
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
             ref={inputRef as any}
             onChange={chain(rest.onChange, handleChange)}
             className={classNames(rest.className, classes.root, {

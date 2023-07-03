@@ -5,6 +5,7 @@
  * The copyright notice above does not evidence any
  * actual or intended publication of such source code.
  */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import * as Components from './src';
 
 (global as any).PageContent = Components.PageContent;

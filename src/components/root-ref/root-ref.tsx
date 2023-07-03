@@ -13,7 +13,7 @@ import {setRef} from '../../utils/set-ref';
 /** RootRef props */
 export interface Props {
     rootRef: React.Ref<HTMLElement>;
-    children: JSX.Element;
+    children: React.ReactElement;
 }
 
 /**
@@ -48,6 +48,7 @@ export class RootRef extends React.Component<Props> {
     }
 
     private getHTMLNode() {
+        // eslint-disable-next-line react/no-find-dom-node
         const node = ReactDOM.findDOMNode(this);
 
         return node instanceof HTMLElement ? node : null;

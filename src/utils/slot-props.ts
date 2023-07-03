@@ -8,6 +8,7 @@
 import React from 'react';
 
 export type DataAttributes = {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     [P in keyof any as `data-${string}`]: string;
 };
 

@@ -56,7 +56,7 @@ export interface Props extends TargetProps {
     keepMounted?: boolean;
     /** Properties of nested Backdrop component */
     backdropProps?: Omit<BackdropProps, 'open' | 'invisible'>;
-    children?: JSX.Element;
+    children?: React.ReactElement;
     rootRef?: React.Ref<HTMLDivElement>;
 }
 

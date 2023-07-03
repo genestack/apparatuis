@@ -10,8 +10,6 @@ import * as React from 'react';
 
 import {createIcon} from '../components/icon';
 
-// tslint:disable max-line-length
-
 /**
  * User icon and plus sign at the left top corner
  */

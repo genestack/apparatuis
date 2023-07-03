@@ -11,7 +11,9 @@ import * as React from 'react';
 import * as styles from './flex-expander.module.css';
 
 /** Flex Expander public properties */
-export interface Props extends React.HTMLAttributes<HTMLDivElement> {}
+export interface Props extends React.ComponentPropsWithoutRef<'div'> {
+    className?: string;
+}
 
 /**
  * Helper component that lets to expand two near flex element.

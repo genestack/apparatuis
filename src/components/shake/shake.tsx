@@ -9,7 +9,6 @@ import classNames from 'classnames';
 import * as React from 'react';
 import CSSTransition, {CSSTransitionProps} from 'react-transition-group/CSSTransition';
 
-import {Omit} from '../../utils/omit';
 import {OmitIndexSignature} from '../../utils/omit-index-signature';
 import {WithClasses, mergeClassesProps} from '../../utils/styles';
 

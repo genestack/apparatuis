@@ -5,7 +5,7 @@
  * The copyright notice above does not evidence any
  * actual or intended publication of such source code.
  */
-/* tslint:disable no-magic-numbers */
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
 import {act, fireEvent, render, waitFor} from '@testing-library/react';
 import * as React from 'react';
 

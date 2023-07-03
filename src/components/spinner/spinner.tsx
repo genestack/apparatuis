@@ -5,7 +5,6 @@
  * The copyright notice above does not evidence any
  * actual or intended publication of such source code.
  */
-// tslint:disable: no-magic-numbers
 import classNames from 'classnames';
 import * as React from 'react';
 

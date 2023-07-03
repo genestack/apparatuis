@@ -9,8 +9,6 @@ import * as React from 'react';
 
 import {createIcon} from '../components/icon';
 
-// tslint:disable max-line-length
-
 /**
  * The same as the Cross icon, but smaller
  */

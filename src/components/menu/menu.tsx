@@ -10,7 +10,6 @@ import * as React from 'react';
 
 import {chain} from '../../utils/chain';
 import {getFirstReachableElement, getLastReachableElement} from '../../utils/focusable-elements';
-import {Omit} from '../../utils/omit';
 import {Overlay, OverlayProps} from '../overlay';
 
 import {MenuContext, MenuContextValue} from './menu-context';
@@ -38,6 +37,7 @@ export interface Props extends TargetProps {
     keepMounted?: boolean;
     overlayProps?: RestOverlayProps;
     popoverProps?: RestPopoverProps;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     onValueSelect?: (value: any, event: React.SyntheticEvent, ref: MenuItem) => void;
 }
 
@@ -87,7 +87,6 @@ export class Menu extends React.Component<Props> {
             keepMounted,
             popoverProps = {},
             onValueSelect,
-            // tslint:disable-next-line no-object-literal-type-assertion
             overlayProps = {} as RestOverlayProps,
             ...rest
         } = this.props;

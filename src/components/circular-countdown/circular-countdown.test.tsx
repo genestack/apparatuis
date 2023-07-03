@@ -21,10 +21,10 @@ describe('<CircularCountdown />', () => {
     it('should call onComplete callback', async () => {
         const onComplete = jest.fn();
         const screen = render(<CircularCountdown onComplete={onComplete} />);
-        expect(onComplete).not.toBeCalled();
+        expect(onComplete).not.toHaveBeenCalled();
         screen.rerender(<CircularCountdown in onComplete={onComplete} />);
-        expect(onComplete).not.toBeCalled();
+        expect(onComplete).not.toHaveBeenCalled();
         jest.runAllTimers();
-        expect(onComplete).toBeCalled();
+        expect(onComplete).toHaveBeenCalled();
     });
 });

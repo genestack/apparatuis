@@ -29,7 +29,7 @@ const transformByPlacement: {[key in TransitionPopperPlacement]?: GrowTransformO
 export interface Props extends GrowProps {
     disableTransition?: boolean;
     placement?: TransitionPopperChildrenProps['placement'];
-    children: JSX.Element;
+    children: React.ReactElement;
     open?: boolean;
 }
 

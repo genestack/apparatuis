@@ -5,7 +5,6 @@
  * The copyright notice above does not evidence any
  * actual or intended publication of such source code.
  */
-// tslint:disable jsx-no-lambda no-non-null-assertion
 import {render} from '@testing-library/react';
 import * as React from 'react';
 
@@ -108,10 +107,11 @@ describe('<Popover />', () => {
             </Popover>
         );
 
-        expect(getReferenceElement).toBeCalled();
+        expect(getReferenceElement).toHaveBeenCalled();
     });
 
     it('should expose scheduleUpdate method', () => {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         let instance: TransitionPopper<any> | null = null;
 
         render(
@@ -129,6 +129,7 @@ describe('<Popover />', () => {
         expect(instance).toBeTruthy();
 
         expect(() => {
+            // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
             instance!.scheduleUpdate();
         }).not.toThrow();
     });
@@ -150,6 +151,6 @@ describe('<Popover />', () => {
 
         jest.runAllTimers();
 
-        expect(onEntered).toBeCalled();
+        expect(onEntered).toHaveBeenCalled();
     });
 });

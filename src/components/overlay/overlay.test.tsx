@@ -5,7 +5,7 @@
  * The copyright notice above does not evidence any
  * actual or intended publication of such source code.
  */
-// tslint:disable no-use-before-declare no-non-null-assertion no-unnecessary-type-assertion
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
 import {render} from '@testing-library/react';
 import * as React from 'react';
 
@@ -39,8 +39,8 @@ describe('<Overlay />', () => {
 
             dispatchEvent(event);
 
-            expect(onClose).toBeCalled();
-            expect(onClose).toBeCalledWith('escape-keydown', expect.anything());
+            expect(onClose).toHaveBeenCalled();
+            expect(onClose).toHaveBeenCalledWith('escape-keydown', expect.anything());
         });
 
         it('should not call onClose callback when disableEscListener passed', () => {
@@ -50,7 +50,7 @@ describe('<Overlay />', () => {
 
             dispatchEvent(event);
 
-            expect(onClose).not.toBeCalled();
+            expect(onClose).not.toHaveBeenCalled();
         });
     });
 
@@ -77,8 +77,8 @@ describe('<Overlay />', () => {
 
             dispatchEvent(event);
 
-            expect(onClose).toBeCalled();
-            expect(onClose).toBeCalledWith('backdrop-click', expect.anything());
+            expect(onClose).toHaveBeenCalled();
+            expect(onClose).toHaveBeenCalledWith('backdrop-click', expect.anything());
         });
 
         it('should not call onClose callback when disableClickListener passed', () => {
@@ -86,7 +86,7 @@ describe('<Overlay />', () => {
 
             dispatchEvent(event);
 
-            expect(onClose).not.toBeCalled();
+            expect(onClose).not.toHaveBeenCalled();
         });
     });
 
@@ -108,9 +108,9 @@ describe('<Overlay />', () => {
         const onClosed = jest.fn();
         const screen = render(<Overlay open onClose={jest.fn()} onClosed={onClosed} />);
         screen.rerender(<Overlay onClose={jest.fn()} onClosed={onClosed} />);
-        expect(onClosed).not.toBeCalled();
+        expect(onClosed).not.toHaveBeenCalled();
         jest.runAllTimers();
-        expect(onClosed).toBeCalled();
+        expect(onClosed).toHaveBeenCalled();
     });
 
     it('should unrender after close', () => {

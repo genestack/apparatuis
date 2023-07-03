@@ -10,7 +10,6 @@ import classNames from 'classnames';
 import * as React from 'react';
 
 import {chain} from '../../utils/chain';
-import {Omit} from '../../utils/omit';
 import {WithClasses, mergeClassesProps} from '../../utils/styles';
 import {FadeProps, Fade} from '../fade';
 

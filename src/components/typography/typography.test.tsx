@@ -5,9 +5,9 @@
  * The copyright notice above does not evidence any
  * actual or intended publication of such source code.
  */
-import * as React from 'react';
 import '@testing-library/jest-dom';
 import {fireEvent, render} from '@testing-library/react';
+import * as React from 'react';
 
 import {Typography} from './typography';
 
@@ -46,6 +46,7 @@ describe('Typography Component', () => {
     });
 
     describe('when pass React.Component to `as` property', () => {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         function Paragraph(props: any) {
             return <span {...props} />;
         }
@@ -76,8 +77,9 @@ describe('Typography Component', () => {
         );
 
         expect(screen.queryByTestId('test')).toBeInstanceOf(HTMLAnchorElement);
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
         fireEvent.click(screen.queryByTestId('test')!);
-        expect(handleClick).toBeCalled();
+        expect(handleClick).toHaveBeenCalled();
     });
 
     it('should merge class name with own', () => {

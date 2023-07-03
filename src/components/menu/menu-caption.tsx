@@ -8,7 +8,6 @@
 import classNames from 'classnames';
 import * as React from 'react';
 
-import {Omit} from '../../utils/omit';
 import {ListItemProps, ListItem} from '../list';
 
 import * as styles from './menu-caption.module.css';
@@ -16,7 +15,7 @@ import * as styles from './menu-caption.module.css';
 type TargetProps = Omit<ListItemProps, 'value' | 'interactive'>;
 
 /** MenuCaption public properties */
-export interface Props extends TargetProps {}
+export type Props = TargetProps;
 
 /** Caption that is used as menu item */
 export const MenuCaption = (props: Props) => (

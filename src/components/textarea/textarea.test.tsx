@@ -5,7 +5,7 @@
  * The copyright notice above does not evidence any
  * actual or intended publication of such source code.
  */
-// tslint:disable no-non-null-assertion
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
 import {fireEvent, render} from '@testing-library/react';
 import * as React from 'react';
 
@@ -21,6 +21,6 @@ describe('<Textarea />', () => {
         const onValueChange = jest.fn();
         render(<Textarea id="textarea" onValueChange={onValueChange} />);
         fireEvent.change(document.getElementById('textarea')!, {target: {value: 'foo'}});
-        expect(onValueChange).toBeCalledWith('foo');
+        expect(onValueChange).toHaveBeenCalledWith('foo');
     });
 });

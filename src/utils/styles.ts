@@ -7,8 +7,6 @@
  */
 import classNames from 'classnames';
 
-import {Omit} from './omit';
-
 /**
  * @description
  * You might need to change the style of a component in some very specific situation.
@@ -109,6 +107,7 @@ export function mergeClassesProps<P extends WithClasses<K>, K extends string>(
     props: P,
     styles: ClassNames<K>
 ): InternalProps<P, K> {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const {classes: publicClasses = {}, ...rest} = props as any;
 
     const privateClasses: Partial<ClassNames<K>> = {};

@@ -77,7 +77,6 @@ export function useMenuHandler(props: Props) {
         onValueSelect: chain(menuProps.onValueSelect, handleMenuValueSelect)
     });
 
-    // tslint:disable-next-line: no-object-literal-type-assertion
     const getReferenceProps = <T extends ReferenceProps>(referenceProps: T = {} as T): T => ({
         ...referenceProps,
         onClick: chain(referenceProps.onClick, handleReferenceClick),

@@ -5,6 +5,7 @@
  * The copyright notice above does not evidence any
  * actual or intended publication of such source code.
  */
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
 import {render, fireEvent} from '@testing-library/react';
 import '@testing-library/jest-dom';
 import * as React from 'react';
@@ -84,7 +85,7 @@ describe('<Dialog />', () => {
         const dialogBody = screen.queryByTestId('dialog-body')!;
         fireEvent.mouseDown(dialogBody);
         fireEvent.click(container);
-        expect(onClose).not.toBeCalled();
+        expect(onClose).not.toHaveBeenCalled();
     });
 
     it('should render close button', () => {

@@ -10,7 +10,7 @@ import * as React from 'react';
 import {MarginBoxFullWidth} from '../margin-box';
 
 /** DialogFullWidth public properties */
-export interface Props extends React.HTMLAttributes<HTMLDivElement> {}
+export type Props = React.HTMLAttributes<HTMLDivElement>;
 
 /**
  * Use this element to remove side paddings from Dialog elements.

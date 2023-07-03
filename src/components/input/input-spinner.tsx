@@ -7,9 +7,9 @@
  */
 import * as React from 'react';
 
+import {DataAttributes} from '../../utils/slot-props';
 import {Fade} from '../fade';
 import {Spinner} from '../spinner';
-import {DataAttributes} from '../../utils/slot-props';
 
 const SPINNER_SIZE = 16;
 

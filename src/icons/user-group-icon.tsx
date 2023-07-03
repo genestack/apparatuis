@@ -10,8 +10,6 @@ import * as React from 'react';
 
 import {createIcon} from '../components/icon';
 
-// tslint:disable max-line-length
-
 /**
  * Two human figures, one of which is bigger
  */

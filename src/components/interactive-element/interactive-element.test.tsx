@@ -5,7 +5,7 @@
  * The copyright notice above does not evidence any
  * actual or intended publication of such source code.
  */
-// tslint:disable no-non-null-assertion
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
 import {fireEvent, render} from '@testing-library/react';
 import * as React from 'react';
 
@@ -21,28 +21,28 @@ describe('<InteractiveElement/>', () => {
         const onClick = jest.fn();
         render(<InteractiveElement id="test" onClick={onClick} />);
         fireEvent.click(document.getElementById('test')!);
-        expect(onClick).toBeCalled();
+        expect(onClick).toHaveBeenCalled();
     });
 
     it('should call onClick callback on buttons', () => {
         const onClick = jest.fn();
         render(<InteractiveElement id="test" as="button" onClick={onClick} />);
         fireEvent.click(document.getElementById('test')!);
-        expect(onClick).toBeCalled();
+        expect(onClick).toHaveBeenCalled();
     });
 
     it('should not call onClick when disabled', () => {
         const onClick = jest.fn();
         render(<InteractiveElement id="test" onClick={onClick} disabled />);
         fireEvent.click(document.getElementById('test')!);
-        expect(onClick).not.toBeCalled();
+        expect(onClick).not.toHaveBeenCalled();
     });
 
     it('should not call onClick when inclusiveDisabled', () => {
         const onClick = jest.fn();
         render(<InteractiveElement id="test" onClick={onClick} inclusiveDisabled />);
         fireEvent.click(document.getElementById('test')!);
-        expect(onClick).not.toBeCalled();
+        expect(onClick).not.toHaveBeenCalled();
     });
 
     describe('when as="button" and disabled passed', () => {
@@ -83,7 +83,7 @@ describe('<InteractiveElement/>', () => {
             render(<InteractiveElement id="test" onClick={onClick} disableListeners />);
             fireEvent.keyDown(document.getElementById('test')!, {key: ' '});
             fireEvent.keyUp(document.getElementById('test')!, {key: ' '});
-            expect(onClick).not.toBeCalled();
+            expect(onClick).not.toHaveBeenCalled();
         });
 
         it('should not call onClick on "Space" key press when it is native button', () => {

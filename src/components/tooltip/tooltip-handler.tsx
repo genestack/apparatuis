@@ -79,9 +79,11 @@ export const TooltipHandler = React.forwardRef<TooltipHandlerApi, Props>(functio
     );
 
     const renderChild = () => {
-        const child = (typeof props.children === 'function'
-            ? props.children({open: tooltipHandler.isOpen})
-            : props.children) as React.ReactElement<ChildProps>;
+        const child = (
+            typeof props.children === 'function'
+                ? props.children({open: tooltipHandler.isOpen})
+                : props.children
+        ) as React.ReactElement<ChildProps>;
 
         return React.cloneElement(child, tooltipHandler.getReferenceProps(child.props));
     };

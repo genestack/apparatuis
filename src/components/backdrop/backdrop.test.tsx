@@ -39,7 +39,7 @@ describe('Backdrop Component', () => {
         screen.rerender(<Backdrop onExited={onExited} />);
 
         await waitFor(() => {
-            expect(onExited).toBeCalled();
+            expect(onExited).toHaveBeenCalled();
         });
     });
 });

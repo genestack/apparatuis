@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2011-2019 Genestack Limited
+ * Copyright (c) 2011-2023 Genestack Limited
  * All Rights Reserved
  * THIS IS UNPUBLISHED PROPRIETARY SOURCE CODE OF GENESTACK LIMITED
  * The copyright notice above does not evidence any
@@ -7,10 +7,9 @@
  */
 /** React Popper (c), MIT Licensed @see https://git.io/fhAG1 */
 
-// tslint:disable-next-line
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import PopperJs from 'popper.js';
 
-// tslint:disable-next-line
 export default class Popper {
     public static placements = PopperJs.placements;
 

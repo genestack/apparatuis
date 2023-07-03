@@ -13,7 +13,9 @@ import * as styles from './header-item-icon.module.css';
 type TargetProps = React.HTMLAttributes<HTMLDivElement>;
 
 /** HeaderItemIcon public properties */
-export interface Props extends TargetProps {}
+export interface Props extends TargetProps {
+    className?: string;
+}
 
 /**
  * Icon that could be placed in header item or button.

@@ -8,7 +8,6 @@
 import classNames from 'classnames';
 import React from 'react';
 
-import {Omit} from '../../utils/omit';
 import {Button} from '../button';
 
 import * as styles from './paginator.module.css';
@@ -17,18 +16,22 @@ type TargetProps = React.HTMLAttributes<HTMLDivElement>;
 
 /** Paginator public properties */
 export interface Props extends Omit<TargetProps, 'onChange'> {
-    onChange: (value: number) => any;
+    onChange: (value: number) => void;
     itemsLength: number;
     itemsPerPage: number;
     offset: number;
     className?: string;
 }
 
-const clickPrevious = ({onChange, offset, itemsPerPage}: Props) => () =>
-    onChange(offset - itemsPerPage);
+const clickPrevious =
+    ({onChange, offset, itemsPerPage}: Props) =>
+    () =>
+        onChange(offset - itemsPerPage);
 
-const clickNext = ({onChange, offset, itemsPerPage}: Props) => () =>
-    onChange(offset + itemsPerPage);
+const clickNext =
+    ({onChange, offset, itemsPerPage}: Props) =>
+    () =>
+        onChange(offset + itemsPerPage);
 
 /**
  * Paginator React component.

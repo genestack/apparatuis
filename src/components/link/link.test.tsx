@@ -5,7 +5,7 @@
  * The copyright notice above does not evidence any
  * actual or intended publication of such source code.
  */
-// tslint:disable: no-non-null-assertion
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
 import {fireEvent, render} from '@testing-library/react';
 import * as React from 'react';
 
@@ -29,7 +29,7 @@ describe('<Link/>', () => {
         const onClick = jest.fn();
         render(<Link id="link" onClick={onClick} disabled />);
         fireEvent.click(document.getElementById('link')!);
-        expect(onClick).not.toBeCalled();
+        expect(onClick).not.toHaveBeenCalled();
     });
 
     it('should pass href to anchor', () => {

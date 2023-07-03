@@ -5,8 +5,8 @@
  * The copyright notice above does not evidence any
  * actual or intended publication of such source code.
  */
-import * as React from 'react';
 import {render} from '@testing-library/react';
+import * as React from 'react';
 
 import {Tab} from './tab';
 

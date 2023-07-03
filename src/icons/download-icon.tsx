@@ -9,8 +9,6 @@ import * as React from 'react';
 
 import {createIcon} from '../components/icon';
 
-// tslint:disable max-line-length
-
 /**
  * Download icon indicates that the bound action could initialize
  * some download process.

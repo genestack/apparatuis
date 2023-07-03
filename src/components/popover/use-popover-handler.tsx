@@ -83,7 +83,6 @@ export function usePopoverHandler(props: Props) {
     }, []);
 
     const getPopoverContentProps = <T extends PopoverContentProps>(
-        // tslint:disable-next-line: no-object-literal-type-assertion
         popoverContentProps: T = {} as T
     ): T => ({
         ...popoverContentProps,
@@ -93,7 +92,6 @@ export function usePopoverHandler(props: Props) {
         onMouseLeave: chain(popoverContentProps.onMouseLeave, handleContentMouseLeave)
     });
 
-    // tslint:disable-next-line: no-object-literal-type-assertion
     const getReferenceProps = <T extends ReferenceProps>(referenceProps: T = {} as T): T => ({
         ...referenceProps,
         onMouseEnter: chain(referenceProps.onMouseEnter, handleMouseEnter),

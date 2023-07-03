@@ -19,7 +19,6 @@ import {
     getFirstReachableElement,
     getLastReachableElement
 } from '../../utils/focusable-elements';
-import {Omit} from '../../utils/omit';
 import {RootRef} from '../root-ref';
 
 type SentinelProps = Omit<React.HTMLAttributes<HTMLDivElement>, 'tabIndex'>;
@@ -36,7 +35,7 @@ export interface Props {
     endSentinelProps?: SentinelProps;
     /** End sentinel React.Ref */
     endSentinelRef?: React.Ref<HTMLDivElement>;
-    children: JSX.Element;
+    children: React.ReactElement;
 }
 
 function focusElement(element: HTMLElement | null) {

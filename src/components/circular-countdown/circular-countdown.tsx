@@ -11,7 +11,6 @@ import * as React from 'react';
 import Transition, {TransitionProps, TransitionStatus} from 'react-transition-group/Transition';
 
 import {chain} from '../../utils/chain';
-import {Omit} from '../../utils/omit';
 import {OmitIndexSignature} from '../../utils/omit-index-signature';
 import {reflow} from '../../utils/reflow';
 import {SlotProps} from '../../utils/slot-props';
@@ -25,7 +24,6 @@ const EXIT_DURATION = 120;
 const DIAMETER = 24;
 const STROKE_WIDTH = 1.5;
 const CIRCLE_RADIUS = (DIAMETER - STROKE_WIDTH) / 2;
-// tslint:disable-next-line: no-magic-numbers
 const CIRCLE_PERIMETER = (CIRCLE_RADIUS * 2 * Math.PI).toFixed(3);
 
 type StrictTransitionProps = OmitIndexSignature<TransitionProps>;
@@ -105,6 +103,7 @@ export class CircularCountdown extends React.PureComponent<Props> {
     }
 
     private setCircleStyles(node: Element, status: TransitionStatus) {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         (style as any)(node, this.getCircleStyles(status));
     }
 

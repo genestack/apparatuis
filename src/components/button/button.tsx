@@ -9,9 +9,9 @@ import classNames from 'classnames';
 import * as React from 'react';
 
 import {OverridableComponent, OverridableProps} from '../../utils/overridable-component';
+import {DataAttributes} from '../../utils/slot-props';
 import {WithClasses, mergeClassesProps} from '../../utils/styles';
 import {ButtonBaseProps, ButtonBase} from '../button-base';
-import {DataAttributes} from '../../utils/slot-props';
 
 import {ButtonContext} from './button-context';
 import * as styles from './button.module.css';
@@ -57,7 +57,6 @@ interface TypeMap {
 export const Button: OverridableComponent<TypeMap> = React.forwardRef<
     HTMLButtonElement,
     OverridableProps<TypeMap>
-    // tslint:disable-next-line: no-shadowed-variable
 >(function Button(props, ref) {
     const buttonContext = React.useContext(ButtonContext);
 

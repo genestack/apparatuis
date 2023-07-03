@@ -10,7 +10,6 @@ import * as React from 'react';
 import Transition, {TransitionProps} from 'react-transition-group/Transition';
 
 import {chain} from '../../utils/chain';
-import {Omit} from '../../utils/omit';
 import {OmitIndexSignature} from '../../utils/omit-index-signature';
 import {reflow} from '../../utils/reflow';
 import {WithClasses, mergeClassesProps} from '../../utils/styles';
@@ -125,10 +124,12 @@ export class Grow extends React.Component<Props> {
     };
 
     public render() {
-        const {className, classes, transformOrigin = 'center center', ...rest} = mergeClassesProps(
-            this.props,
-            styles
-        );
+        const {
+            className,
+            classes,
+            transformOrigin = 'center center',
+            ...rest
+        } = mergeClassesProps(this.props, styles);
         const child = React.Children.only(this.props.children) as Children;
 
         const transformOriginClassName = classes[getTransformOriginClassName(transformOrigin)];
