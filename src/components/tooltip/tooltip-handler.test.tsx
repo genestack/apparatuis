@@ -1,22 +1,16 @@
 /*
- * Copyright (c) 2011-2019 Genestack Limited
+ * Copyright (c) 2011-2023 Genestack Limited
  * All Rights Reserved
  * THIS IS UNPUBLISHED PROPRIETARY SOURCE CODE OF GENESTACK LIMITED
  * The copyright notice above does not evidence any
  * actual or intended publication of such source code.
  */
 /* tslint:disable no-unbound-method no-magic-numbers max-file-line-count */
+import {act, fireEvent, render} from '@testing-library/react';
 import * as React from 'react';
-import {act} from 'react-dom/test-utils';
-
-import {createTestApp} from '../../../test-utils/create-test-app';
 
 import {Tooltip} from './tooltip';
 import {TooltipHandler, Props as TooltipHandlerProps} from './tooltip-handler';
-
-const app = createTestApp();
-beforeEach(app.beforeEach);
-afterEach(app.afterEach);
 
 beforeEach(() => {
     jest.useFakeTimers();
@@ -29,17 +23,16 @@ afterEach(() => {
 
 describe('<TooltipHandler />', () => {
     const setup = (props?: Partial<TooltipHandlerProps>) =>
-        app.mount(
+        render(
             <TooltipHandler tooltip={<Tooltip id="tooltip" />} {...props}>
                 <div id="reference" />
             </TooltipHandler>
         );
 
     it('should show tooltip when mouse enter on reference element', async () => {
-        const wrapper = setup();
-        act(() => {
-            wrapper.find('#reference').simulate('mouseenter');
-        });
+        setup();
+
+        fireEvent.mouseEnter(document.getElementById('reference')!);
 
         act(() => {
             jest.runAllTimers();
@@ -49,25 +42,17 @@ describe('<TooltipHandler />', () => {
     });
 
     it('should not show tooltip immediately', () => {
-        const wrapper = setup();
+        setup();
 
-        act(() => {
-            wrapper.find('#reference').simulate('mouseenter');
-        });
+        fireEvent.mouseEnter(document.getElementById('reference')!);
 
         expect(document.getElementById('tooltip')).toBeFalsy();
-
-        act(() => {
-            jest.runAllTimers();
-        });
     });
 
     it('should hide tooltip when mouse leave on reference element', () => {
-        const wrapper = setup();
+        setup();
 
-        act(() => {
-            wrapper.find('#reference').simulate('mouseenter');
-        });
+        fireEvent.mouseEnter(document.getElementById('reference')!);
 
         act(() => {
             jest.runAllTimers();
@@ -75,9 +60,7 @@ describe('<TooltipHandler />', () => {
 
         expect(document.getElementById('tooltip')).toBeTruthy();
 
-        act(() => {
-            wrapper.find('#reference').simulate('mouseleave');
-        });
+        fireEvent.mouseLeave(document.getElementById('reference')!);
 
         act(() => {
             jest.runAllTimers();
@@ -87,11 +70,9 @@ describe('<TooltipHandler />', () => {
     });
 
     it('should show tooltip when focus on reference element', () => {
-        const wrapper = setup();
+        setup();
 
-        act(() => {
-            wrapper.find('#reference').simulate('focus');
-        });
+        fireEvent.focus(document.getElementById('reference')!);
 
         act(() => {
             jest.runAllTimers();
@@ -101,19 +82,15 @@ describe('<TooltipHandler />', () => {
     });
 
     it('should hide tooltip when blur on reference element', () => {
-        const wrapper = setup();
+        setup();
 
-        act(() => {
-            wrapper.find('#reference').simulate('focus');
-        });
+        fireEvent.focus(document.getElementById('reference')!);
 
         act(() => {
             jest.runAllTimers();
         });
 
-        act(() => {
-            wrapper.find('#reference').simulate('blur');
-        });
+        fireEvent.blur(document.getElementById('reference')!);
 
         act(() => {
             jest.runAllTimers();
@@ -123,11 +100,9 @@ describe('<TooltipHandler />', () => {
     });
 
     it('should hide tooltip on escape window keydown event', () => {
-        const wrapper = setup();
+        setup();
 
-        act(() => {
-            wrapper.find('#reference').simulate('focus');
-        });
+        fireEvent.focus(document.getElementById('reference')!);
 
         act(() => {
             jest.runAllTimers();
@@ -151,10 +126,8 @@ describe('<TooltipHandler />', () => {
 
     describe('when all listeners are disabled', () => {
         it('should not show tooltip on mouse enter', () => {
-            const wrapper = setup({disableListeners: true});
-            act(() => {
-                wrapper.find('#reference').simulate('mouseenter');
-            });
+            setup({disableListeners: true});
+            fireEvent.mouseEnter(document.getElementById('reference')!);
             act(() => {
                 jest.runAllTimers();
             });
@@ -162,10 +135,8 @@ describe('<TooltipHandler />', () => {
         });
 
         it('should not show tooltip on focus', () => {
-            const wrapper = setup({disableListeners: true});
-            act(() => {
-                wrapper.find('#reference').simulate('focus');
-            });
+            setup({disableListeners: true});
+            fireEvent.focus(document.getElementById('reference')!);
             act(() => {
                 jest.runAllTimers();
             });
@@ -175,10 +146,8 @@ describe('<TooltipHandler />', () => {
 
     describe('when only focus listener is disabled', () => {
         it('should show tooltip on mouse enter', () => {
-            const wrapper = setup({disableFocusListener: true});
-            act(() => {
-                wrapper.find('#reference').simulate('mouseenter');
-            });
+            setup({disableFocusListener: true});
+            fireEvent.mouseEnter(document.getElementById('reference')!);
             act(() => {
                 jest.runAllTimers();
             });
@@ -186,10 +155,8 @@ describe('<TooltipHandler />', () => {
         });
 
         it('should not show tooltip on focus', () => {
-            const wrapper = setup({disableFocusListener: true});
-            act(() => {
-                wrapper.find('#reference').simulate('focus');
-            });
+            setup({disableFocusListener: true});
+            fireEvent.focus(document.getElementById('reference')!);
 
             act(() => {
                 jest.runAllTimers();
@@ -201,10 +168,8 @@ describe('<TooltipHandler />', () => {
 
     describe('when only hover listener is disabled', () => {
         it('should not show tooltip on mouse enter', () => {
-            const wrapper = setup({disableHoverListener: true});
-            act(() => {
-                wrapper.find('#reference').simulate('mouseenter');
-            });
+            setup({disableHoverListener: true});
+            fireEvent.mouseEnter(document.getElementById('reference')!);
             act(() => {
                 jest.runAllTimers();
             });
@@ -212,10 +177,8 @@ describe('<TooltipHandler />', () => {
         });
 
         it('should show tooltip on focus', () => {
-            const wrapper = setup({disableHoverListener: true});
-            act(() => {
-                wrapper.find('#reference').simulate('focus');
-            });
+            setup({disableHoverListener: true});
+            fireEvent.focus(document.getElementById('reference')!);
             act(() => {
                 jest.runAllTimers();
             });
@@ -230,7 +193,7 @@ describe('<TooltipHandler />', () => {
             return <div id="wrapper">{props.children}</div>;
         }
 
-        const wrapper = app.mount(
+        const screen = render(
             <Test>
                 <TooltipHandler tooltip={<Tooltip id="tooltip" />}>
                     <div id="reference" />
@@ -238,33 +201,25 @@ describe('<TooltipHandler />', () => {
             </Test>
         );
 
-        act(() => {
-            wrapper.find('#reference').simulate('mouseenter');
-        });
+        fireEvent.mouseEnter(document.getElementById('reference')!);
 
         act(() => {
             jest.runAllTimers();
         });
 
-        act(() => {
-            wrapper.find('#reference').simulate('mouseleave');
-        });
+        fireEvent.mouseLeave(document.getElementById('reference')!);
 
         act(() => {
             jest.runAllTimers();
         });
 
-        act(() => {
-            wrapper.find('#reference').simulate('mouseenter');
-        });
+        fireEvent.mouseEnter(document.getElementById('reference')!);
 
         act(() => {
             jest.runAllTimers();
         });
 
-        wrapper.setProps({
-            children: null
-        });
+        screen.rerender(<Test></Test>);
 
         act(() => {
             // tslint:disable-next-line: no-non-null-assertion no-unnecessary-type-assertion
@@ -279,11 +234,9 @@ describe('<TooltipHandler />', () => {
     });
 
     it('should show tooltip after `openDelay` timeout', async () => {
-        const wrapper = setup({openDelay: 1000});
+        setup({openDelay: 1000});
 
-        act(() => {
-            wrapper.find('#reference').simulate('mouseenter');
-        });
+        fireEvent.mouseEnter(document.getElementById('reference')!);
 
         setTimeout(() => {
             expect(document.getElementById('tooltip')).toBeFalsy();
