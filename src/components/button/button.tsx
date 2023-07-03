@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2011-2021 Genestack Limited
+ * Copyright (c) 2011-2023 Genestack Limited
  * All Rights Reserved
  * THIS IS UNPUBLISHED PROPRIETARY SOURCE CODE OF GENESTACK LIMITED
  * The copyright notice above does not evidence any
@@ -8,10 +8,10 @@
 import classNames from 'classnames';
 import * as React from 'react';
 
-import {Omit} from '../../utils/omit';
 import {OverridableComponent, OverridableProps} from '../../utils/overridable-component';
 import {WithClasses, mergeClassesProps} from '../../utils/styles';
 import {ButtonBaseProps, ButtonBase} from '../button-base';
+import {DataAttributes} from '../../utils/slot-props';
 
 import {ButtonContext} from './button-context';
 import * as styles from './button.module.css';
@@ -22,7 +22,8 @@ type ButtonClassNames = keyof typeof styles;
 /** Button public properties */
 export interface Props
     extends Omit<ButtonBaseProps, 'classes'>,
-        WithClasses<ButtonBaseClassNames | ButtonClassNames> {
+        WithClasses<ButtonBaseClassNames | ButtonClassNames>,
+        DataAttributes {
     /** @deprecated use iconStart instead */
     /** Component that is inserted in the left side of the button. */
     icon?: React.ReactNode;

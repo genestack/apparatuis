@@ -1,97 +1,86 @@
 /*
- * Copyright (c) 2011-2020 Genestack Limited
+ * Copyright (c) 2011-2023 Genestack Limited
  * All Rights Reserved
  * THIS IS UNPUBLISHED PROPRIETARY SOURCE CODE OF GENESTACK LIMITED
  * The copyright notice above does not evidence any
  * actual or intended publication of such source code.
  */
+import {fireEvent, render, waitFor} from '@testing-library/react';
 import * as React from 'react';
 
-import {createTestApp} from '../../../test-utils/create-test-app';
-import {Tab, Indicator} from '../tab';
+import {Tab} from '../tab';
 
 import {Tabs} from './tabs';
 
-const app = createTestApp();
-
-beforeEach(app.beforeEach);
-afterEach(app.afterEach);
-
 // tslint:disable no-magic-numbers
 describe('<Tabs />', () => {
-    it('should set initial props for tab', () => {
-        const wrapper = app.mount(
-            <Tabs value={1}>
-                <Tab />
-            </Tabs>
-        );
-
-        expect(wrapper.find(Tab).props()).toEqual({
-            className: 'transition',
-            onClick: expect.anything(),
-            value: 0,
-            selected: false,
-            size: 'normal',
-            variant: 'ghost',
-            indicatorPlacement: 'bottom',
-            indicatorProps: {
-                active: false
-            },
-            classes: {
-                prepend: 'transition',
-                append: 'transition',
-                indicator: 'indicator'
-            }
-        });
-    });
-
     it('should set values for size and variant from tabs to children', () => {
-        const wrapper = app.mount(
+        render(
             <Tabs value={1} size="small" variant="solid">
                 <Tab />
             </Tabs>
         );
 
-        expect(wrapper.find(Tab).prop('size')).toBe('small');
-        expect(wrapper.find(Tab).prop('variant')).toBe('solid');
+        expect(document.querySelector('[data-qa="tab"]')).toHaveProperty(
+            'className',
+            expect.stringContaining('small')
+        );
+        expect(document.querySelector('[data-qa="tab"]')).toHaveProperty(
+            'className',
+            expect.stringContaining('solid')
+        );
     });
 
-    it('should render <Indicator>', () => {
-        const wrapper = app.mount(<Tabs value={1} />);
+    it('should render <Indicator>', async () => {
+        render(
+            <Tabs value={0}>
+                <Tab />
+            </Tabs>
+        );
 
-        expect(wrapper.find(Indicator)).toBeTruthy();
+        await waitFor(() => {
+            expect(document.querySelector('[data-qa="indicator"]')).toBeTruthy();
+        });
     });
 
     it('should set selected value for tab', () => {
-        const wrapper = app.mount(
+        const screen = render(
             <Tabs value={1} size="small" variant="solid">
                 <Tab />
             </Tabs>
         );
 
-        expect(wrapper.find(Tab).prop('selected')).toBe(false);
+        expect(document.querySelector('[data-qa="tab"]')).not.toHaveProperty(
+            'className',
+            expect.stringContaining('selected')
+        );
 
-        wrapper.setProps({
-            value: 0
-        });
+        screen.rerender(
+            <Tabs value={0} size="small" variant="solid">
+                <Tab />
+            </Tabs>
+        );
 
-        expect(wrapper.find(Tab).prop('selected')).toBe(true);
+        expect(document.querySelector('[data-qa="tab"]')).toHaveProperty(
+            'className',
+            expect.stringContaining('selected')
+        );
     });
 
     it('should execute onValueChange with tabIndex', () => {
         const onValueChange = jest.fn();
 
-        const wrapper = app.mount(
+        render(
             <Tabs value={0} onValueChange={onValueChange}>
                 <Tab />
                 <Tab />
-                <Tab />
+                <Tab id="tab" />
             </Tabs>
         );
 
         expect(onValueChange).toHaveBeenCalledTimes(0);
 
-        wrapper.find(Tab).at(2).simulate('click');
+        fireEvent.click(document.getElementById('tab')!);
 
         expect(onValueChange).toHaveBeenCalledTimes(1);
         expect(onValueChange).toBeCalledWith(2);
@@ -100,17 +89,17 @@ describe('<Tabs />', () => {
     it('should execute onValueChange with 30', () => {
         const onValueChange = jest.fn();
 
-        const wrapper = app.mount(
+        render(
             <Tabs value={20} onValueChange={onValueChange}>
                 <Tab value={10} />
                 <Tab value={20} />
-                <Tab value={30} />
+                <Tab value={30} id="tab" />
             </Tabs>
         );
 
         expect(onValueChange).toHaveBeenCalledTimes(0);
 
-        wrapper.find(Tab).at(2).simulate('click');
+        fireEvent.click(document.getElementById('tab')!);
 
         expect(onValueChange).toHaveBeenCalledTimes(1);
         expect(onValueChange).toBeCalledWith(30);

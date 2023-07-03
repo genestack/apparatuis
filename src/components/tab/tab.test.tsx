@@ -6,19 +6,13 @@
  * actual or intended publication of such source code.
  */
 import * as React from 'react';
-
-import {createTestApp} from '../../../test-utils/create-test-app';
+import {render} from '@testing-library/react';
 
 import {Tab} from './tab';
 
-const app = createTestApp();
-
-beforeEach(app.beforeEach);
-afterEach(app.afterEach);
-
 describe('<Tab />', () => {
     it('should render children', () => {
-        app.mount(
+        render(
             <Tab>
                 <div id="test" />
             </Tab>
@@ -27,36 +21,36 @@ describe('<Tab />', () => {
     });
 
     it('should render prepend', () => {
-        app.mount(<Tab prepend={<div id="prepend" />} />);
+        render(<Tab prepend={<div id="prepend" />} />);
         expect(document.getElementById('prepend')).toBeTruthy();
     });
 
     it('should render append', () => {
-        app.mount(<Tab prepend={<div id="append" />} />);
+        render(<Tab prepend={<div id="append" />} />);
         expect(document.getElementById('append')).toBeTruthy();
     });
 
     it('should show title', () => {
-        const wrapper = app.mount(<Tab>Some title</Tab>);
-        expect(wrapper.find('button').prop('title')).toBe('Some title');
+        render(<Tab>Some title</Tab>);
+        expect(document.querySelector('button')).toHaveProperty('title', 'Some title');
     });
 
     it('should have empty title', () => {
-        const wrapper = app.mount(
+        render(
             <Tab>
                 <div>Some title</div>
             </Tab>
         );
-        expect(wrapper.find('button').prop('title')).toBe('');
+        expect(document.querySelector('button')).toHaveProperty('title', '');
     });
 
     it('should render button element by default', () => {
-        app.mount(<Tab id="test" />);
+        render(<Tab id="test" />);
         expect(document.getElementById('test')).toBeInstanceOf(HTMLButtonElement);
     });
 
     it('should render anchor element if href and component="a" are passed', () => {
-        app.mount(<Tab id="test" component="a" href="foo" />);
+        render(<Tab id="test" component="a" href="foo" />);
         expect(document.getElementById('test')).toBeInstanceOf(HTMLAnchorElement);
         expect(document.getElementById('test')).toHaveProperty('href', 'http://localhost/foo');
     });

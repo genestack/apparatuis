@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2011-2019 Genestack Limited
+ * Copyright (c) 2011-2023 Genestack Limited
  * All Rights Reserved
  * THIS IS UNPUBLISHED PROPRIETARY SOURCE CODE OF GENESTACK LIMITED
  * The copyright notice above does not evidence any
@@ -24,8 +24,7 @@ module.exports = {
     moduleNameMapper: {
         '^((?!(module)).)*\\.css$': '<rootDir>/test-utils/jest-css-mock.js'
     },
-    setupFilesAfterEnv: ['<rootDir>/test-utils/setup-jest.js'],
     testEnvironmentOptions: {
-        url: 'http://localhost/',
+        url: 'http://localhost/'
     }
 };

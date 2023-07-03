@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2011-2021 Genestack Limited
+ * Copyright (c) 2011-2023 Genestack Limited
  * All Rights Reserved
  * THIS IS UNPUBLISHED PROPRIETARY SOURCE CODE OF GENESTACK LIMITED
  * The copyright notice above does not evidence any
@@ -11,6 +11,7 @@ import * as React from 'react';
 
 import {chain} from '../../utils/chain';
 import {chainRefs} from '../../utils/set-ref';
+import {SlotProps} from '../../utils/slot-props';
 import {useControlledProp} from '../../utils/use-controlled-prop';
 import {List} from '../list';
 import {PopoverProps} from '../popover';
@@ -72,7 +73,7 @@ export interface Props extends SuggestProps {
     /** Calls when open state is changed */
     onOpenChange?: (open: boolean) => void;
     children?: SuggestInputChildren;
-    listProps?: React.ComponentPropsWithRef<typeof List>;
+    listProps?: SlotProps<typeof List>;
 }
 
 /**

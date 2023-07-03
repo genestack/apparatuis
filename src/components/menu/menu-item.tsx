@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2011-2021 Genestack Limited
+ * Copyright (c) 2011-2023 Genestack Limited
  * All Rights Reserved
  * THIS IS UNPUBLISHED PROPRIETARY SOURCE CODE OF GENESTACK LIMITED
  * The copyright notice above does not evidence any
@@ -18,7 +18,6 @@ import {
     getReachableElements,
     getFirstReachableElement
 } from '../../utils/focusable-elements';
-import {Omit} from '../../utils/omit';
 import {chainRefs} from '../../utils/set-ref';
 import {WithClasses, mergeClassesProps} from '../../utils/styles';
 import {FocusTrap} from '../focus-trap';

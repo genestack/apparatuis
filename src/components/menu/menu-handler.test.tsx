@@ -1,13 +1,12 @@
 /*
- * Copyright (c) 2011-2019 Genestack Limited
+ * Copyright (c) 2011-2023 Genestack Limited
  * All Rights Reserved
  * THIS IS UNPUBLISHED PROPRIETARY SOURCE CODE OF GENESTACK LIMITED
  * The copyright notice above does not evidence any
  * actual or intended publication of such source code.
  */
+import {fireEvent, render} from '@testing-library/react';
 import * as React from 'react';
-
-import {createTestApp} from '../../../test-utils/create-test-app';
 
 import {Menu} from './menu';
 import {MenuHandler, Props as MenuHandlerProps, MenuHandlerApi} from './menu-handler';
@@ -16,16 +15,12 @@ import {SubMenu} from './sub-menu';
 
 jest.useFakeTimers();
 
-const app = createTestApp();
-beforeEach(app.beforeEach);
-afterEach(app.afterEach);
-
 describe('<MenuHandler />', () => {
     const setup = (props?: Partial<MenuHandlerProps>) => {
         const subMenu = () => <SubMenu />;
         const ref = React.createRef<MenuHandlerApi>();
 
-        const wrapper = app.mount(
+        const screen = render(
             // https://git.io/JecSk
             <React.Fragment>
                 <MenuHandler
@@ -43,7 +38,7 @@ describe('<MenuHandler />', () => {
             </React.Fragment>
         );
 
-        return {wrapper, ref};
+        return {screen, ref};
     };
 
     it('should not show menu at mount', () => {
@@ -52,21 +47,21 @@ describe('<MenuHandler />', () => {
     });
 
     it('should open menu on child click', () => {
-        const {wrapper} = setup();
-        wrapper.find('#button').simulate('click');
+        setup();
+        fireEvent.click(document.getElementById('button')!);
         expect(document.getElementById('menu')).toBeTruthy();
     });
 
     it('should open menu on child click', () => {
-        const {wrapper} = setup({disableListeners: true});
-        wrapper.find('#button').simulate('click');
+        setup({disableListeners: true});
+        fireEvent.click(document.getElementById('button')!);
         expect(document.getElementById('menu')).toBeFalsy();
     });
 
     it('should close menu on menu item without sub menu', () => {
-        const {wrapper} = setup();
-        wrapper.find('#button').simulate('click');
-        wrapper.find('#item').hostNodes().simulate('click');
+        setup();
+        fireEvent.click(document.getElementById('button')!);
+        fireEvent.click(document.getElementById('item')!);
 
         expect(document.getElementById('menu')).toBeTruthy();
 
@@ -84,14 +79,14 @@ describe('<MenuHandler />', () => {
     });
 
     it('should open menu on ArrowDown keypress', () => {
-        const {wrapper} = setup();
-        wrapper.find('#button').simulate('keydown', {key: 'ArrowDown'});
+        setup();
+        fireEvent.keyDown(document.getElementById('button')!, {key: 'ArrowDown'});
         expect(document.getElementById('menu')).toBeTruthy();
     });
 
     it('should not open menu on ArrowDown keypress if `disabledListeners` is passed', () => {
-        const {wrapper} = setup({disableListeners: true});
-        wrapper.find('#button').simulate('keydown', {key: 'ArrowDown'});
+        setup({disableListeners: true});
+        fireEvent.keyDown(document.getElementById('button')!, {key: 'ArrowDown'});
         expect(document.getElementById('menu')).toBeFalsy();
     });
 });

@@ -12,7 +12,5 @@
     "sourceMap": true,
     "esModuleInterop": true,
     "noUnusedLocals": true
-  },
-  "include": ["src/**/*"],
-  "exclude": ["./dist", "./coverage", "**.js", "**/*.test.ts", "**/*.test.tsx"]
+  }
 }

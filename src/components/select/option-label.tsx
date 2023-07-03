@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2011-2020 Genestack Limited
+ * Copyright (c) 2011-2023 Genestack Limited
  * All Rights Reserved
  * THIS IS UNPUBLISHED PROPRIETARY SOURCE CODE OF GENESTACK LIMITED
  * The copyright notice above does not evidence any
@@ -10,21 +10,20 @@ import classNames from 'classnames';
 import React from 'react';
 
 import {WithClasses, OverridableProps, OverridableComponent, mergeClassesProps} from '../../utils';
+import {SlotProps} from '../../utils/slot-props';
 
 import * as styles from './select-emitter.module.css';
-
-type SpanProps = React.HTMLAttributes<HTMLSpanElement>;
 
 /** SelectLabel props */
 export interface Props extends WithClasses<keyof typeof styles> {
     /** Element before children */
     prepend?: React.ReactNode;
-    prependProps?: SpanProps;
+    prependProps?: SlotProps<'span'>;
     /** Element after children */
     append?: React.ReactNode;
-    appendProps?: SpanProps;
+    appendProps?: SlotProps<'span'>;
     /** Label props */
-    labelProps?: SpanProps;
+    labelProps?: SlotProps<'span'>;
 }
 
 interface TypeMap {

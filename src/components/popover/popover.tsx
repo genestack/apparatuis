@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2011-2021 Genestack Limited
+ * Copyright (c) 2011-2023 Genestack Limited
  * All Rights Reserved
  * THIS IS UNPUBLISHED PROPRIETARY SOURCE CODE OF GENESTACK LIMITED
  * The copyright notice above does not evidence any
@@ -11,6 +11,7 @@ import * as React from 'react';
 import {chain} from '../../utils/chain';
 import {Omit} from '../../utils/omit';
 import {chainRefs} from '../../utils/set-ref';
+import {SlotProps} from '../../utils/slot-props';
 import {WithClasses, mergeClassesProps} from '../../utils/styles';
 import {createIcon} from '../icon';
 import {MarginBoxContext} from '../margin-box/margin-box-context';
@@ -41,7 +42,7 @@ export interface Props extends TargetProps, WithClasses<keyof typeof styles> {
     /** Rounds paper corners according the placement and the arrow */
     roundCorners?: boolean;
     popperRef?: React.Ref<TransitionPopper<PaperProps>>;
-    popperElementProps?: React.HTMLAttributes<HTMLDivElement>;
+    popperElementProps?: SlotProps<'div'>;
     containerProps?: ContainerProps;
     containerRef?: React.Ref<HTMLDivElement>;
     transitionProps?: TransitionProps;

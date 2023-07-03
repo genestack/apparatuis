@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2011-2019 Genestack Limited
+ * Copyright (c) 2011-2023 Genestack Limited
  * All Rights Reserved
  * THIS IS UNPUBLISHED PROPRIETARY SOURCE CODE OF GENESTACK LIMITED
  * The copyright notice above does not evidence any
@@ -10,6 +10,7 @@ import * as React from 'react';
 
 import {chain} from '../../utils/chain';
 import {Omit} from '../../utils/omit';
+import {SlotProps} from '../../utils/slot-props';
 import {mergeClassesProps, WithClasses} from '../../utils/styles';
 
 import * as styles from './switch.module.css';
@@ -52,9 +53,9 @@ export interface Props extends TargetProps, RootProps, WithClasses<keyof typeof 
      */
     inputProps?: OtherTargetProps;
     /** Properties for a track element */
-    trackProps?: React.ComponentPropsWithRef<'div'>;
+    trackProps?: SlotProps<'div'>;
     /** Properties for a handler element */
-    handlerProps?: React.ComponentPropsWithRef<'div'>;
+    handlerProps?: SlotProps<'div'>;
 }
 
 /** The input component which toggles the state of a single setting on or off */

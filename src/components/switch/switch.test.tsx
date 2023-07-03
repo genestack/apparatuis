@@ -7,26 +7,20 @@
  */
 
 // tslint:disable no-non-null-assertion
+import {render} from '@testing-library/react';
 import * as React from 'react';
-
-import {createTestApp} from '../../../test-utils/create-test-app';
 
 import {Switch} from './switch';
 
-const app = createTestApp();
-
-beforeEach(app.beforeEach);
-afterEach(app.afterEach);
-
 describe('<Switch />', () => {
     it('should render input element', () => {
-        app.mount(<Switch id="switch" />);
+        render(<Switch id="switch" />);
         expect(document.getElementById('switch')!.tagName).toBe('INPUT');
     });
 
     it('should call onCheckedChange on click on input', () => {
         const onCheckedChange = jest.fn();
-        app.mount(<Switch onCheckedChange={onCheckedChange} id="switch" />);
+        render(<Switch onCheckedChange={onCheckedChange} id="switch" />);
         document.getElementById('switch')!.dispatchEvent(new MouseEvent('click', {bubbles: true}));
 
         expect(onCheckedChange).toBeCalledWith(true);
@@ -34,7 +28,7 @@ describe('<Switch />', () => {
 
     it('should call onCheckedChange on click on label', () => {
         const onCheckedChange = jest.fn();
-        app.mount(
+        render(
             <label id="label">
                 <Switch onCheckedChange={onCheckedChange} />
             </label>

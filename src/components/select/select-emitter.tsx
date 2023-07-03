@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2011-2021 Genestack Limited
+ * Copyright (c) 2011-2023 Genestack Limited
  * All Rights Reserved
  * THIS IS UNPUBLISHED PROPRIETARY SOURCE CODE OF GENESTACK LIMITED
  * The copyright notice above does not evidence any
@@ -10,6 +10,7 @@ import classNames from 'classnames';
 import React from 'react';
 
 import {ArrowBottomThinIcon} from '../../icons';
+import {SlotProps} from '../../utils/slot-props';
 import {ButtonBase, ButtonBaseProps} from '../button-base';
 
 import {OptionLabel} from './option-label';
@@ -40,7 +41,7 @@ export interface Props extends TargetProps, ButtonProps {
     invalid?: boolean;
     /** Disable button */
     disabled?: boolean;
-    arrowProps?: React.ComponentPropsWithRef<typeof ArrowBottomThinIcon>;
+    arrowProps?: SlotProps<typeof ArrowBottomThinIcon>;
 }
 
 /** Wrapper for select */

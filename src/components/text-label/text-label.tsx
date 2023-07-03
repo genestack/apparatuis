@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2011-2019 Genestack Limited
+ * Copyright (c) 2011-2023 Genestack Limited
  * All Rights Reserved
  * THIS IS UNPUBLISHED PROPRIETARY SOURCE CODE OF GENESTACK LIMITED
  * The copyright notice above does not evidence any
@@ -10,6 +10,7 @@ import * as React from 'react';
 
 import {Omit} from '../../utils/omit';
 import {shouldRenderNode} from '../../utils/should-render-node';
+import {SlotProps} from '../../utils/slot-props';
 import {WithClasses, mergeClassesProps} from '../../utils/styles';
 import {Typography, TypographyProps} from '../typography';
 
@@ -26,7 +27,7 @@ export interface Props extends RootProps, WithClasses<keyof typeof styles> {
     /** Makes label to grow */
     grow?: boolean;
     /** Properties for children wrapper */
-    labelProps?: React.HTMLAttributes<HTMLSpanElement>;
+    labelProps?: SlotProps<'span'>;
     /** Properties for caption wrapper */
     captionProps?: TypographyProps;
 }

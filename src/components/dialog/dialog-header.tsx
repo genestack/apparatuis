@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2011-2019 Genestack Limited
+ * Copyright (c) 2011-2023 Genestack Limited
  * All Rights Reserved
  * THIS IS UNPUBLISHED PROPRIETARY SOURCE CODE OF GENESTACK LIMITED
  * The copyright notice above does not evidence any
@@ -8,6 +8,7 @@
 import classNames from 'classnames';
 import * as React from 'react';
 
+import {SlotProps} from '../../utils/slot-props';
 import {mergeClassesProps, WithClasses} from '../../utils/styles';
 import {MarginBox, MarginBoxProps} from '../margin-box';
 
@@ -19,7 +20,7 @@ type TargetProps = React.HTMLAttributes<HTMLDivElement> &
 
 /** DialogHeader public properties */
 export interface Props extends TargetProps, WithClasses<keyof typeof styles> {
-    contentProps?: React.HTMLAttributes<HTMLDivElement>;
+    contentProps?: SlotProps<'div'>;
 }
 
 /**

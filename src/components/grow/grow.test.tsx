@@ -1,25 +1,26 @@
 /*
- * Copyright (c) 2011-2019 Genestack Limited
+ * Copyright (c) 2011-2023 Genestack Limited
  * All Rights Reserved
  * THIS IS UNPUBLISHED PROPRIETARY SOURCE CODE OF GENESTACK LIMITED
  * The copyright notice above does not evidence any
  * actual or intended publication of such source code.
  */
-import {mount} from 'enzyme';
+import {render} from '@testing-library/react';
 import * as React from 'react';
 
 import {Grow} from './grow';
 
 describe('<Grow />', () => {
     test('should pass className to children element', () => {
-        const wrapper = mount(
+        const screen = render(
             <Grow className="grow">
-                <div className="div" />
+                <div data-testid="div" />
             </Grow>
         );
 
-        const props = wrapper.find('.div').props();
-
-        expect(props.className).toContain('grow');
+        expect(screen.queryByTestId('div')).toHaveProperty(
+            'className',
+            expect.stringContaining('grow')
+        );
     });
 });

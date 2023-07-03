@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2011-2019 Genestack Limited
+ * Copyright (c) 2011-2023 Genestack Limited
  * All Rights Reserved
  * THIS IS UNPUBLISHED PROPRIETARY SOURCE CODE OF GENESTACK LIMITED
  * The copyright notice above does not evidence any
@@ -11,6 +11,7 @@ import * as React from 'react';
 import {CrossIcon} from '../../icons/cross-icon';
 import {chain} from '../../utils/chain';
 import {DarkContext} from '../../utils/dark-context';
+import {SlotProps} from '../../utils/slot-props';
 import {WithClasses, mergeClassesProps} from '../../utils/styles';
 import {ButtonProps, Button} from '../button';
 import {CircularCountdown} from '../circular-countdown';
@@ -35,7 +36,7 @@ export interface Props extends TargetProps, WithClasses<keyof typeof styles> {
     /** State of countdown */
     countdown?: 'active' | 'stopped' | 'none';
     /** Close button properties */
-    closeButtonProps?: ButtonProps & React.ComponentPropsWithRef<'button'>;
+    closeButtonProps?: ButtonProps & SlotProps<'button'>;
 }
 
 interface State {

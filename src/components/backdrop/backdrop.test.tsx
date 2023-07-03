@@ -1,33 +1,45 @@
 /*
- * Copyright (c) 2011-2019 Genestack Limited
+ * Copyright (c) 2011-2023 Genestack Limited
  * All Rights Reserved
  * THIS IS UNPUBLISHED PROPRIETARY SOURCE CODE OF GENESTACK LIMITED
  * The copyright notice above does not evidence any
  * actual or intended publication of such source code.
  */
-import {mount} from 'enzyme';
+import {render, waitFor} from '@testing-library/react';
+import '@testing-library/jest-dom';
 import * as React from 'react';
 
 import {Backdrop} from './backdrop';
 
-jest.useFakeTimers();
-
 describe('Backdrop Component', () => {
-    xtest('should unmount children after close and end transition', () => {
-        const wrapper = mount(<Backdrop open />);
-        expect(wrapper.html()).toBeTruthy();
-        wrapper.setProps({open: false});
-        expect(wrapper.html()).toBeTruthy();
-        jest.runAllTimers();
-        expect(wrapper.html()).toBeFalsy();
+    test('should unmount children after close and end transition', async () => {
+        const screen = render(
+            <Backdrop open>
+                <div data-testid="test" />
+            </Backdrop>
+        );
+
+        expect(screen.queryByTestId('test')).toBeVisible();
+
+        screen.rerender(
+            <Backdrop>
+                <div data-testid="test" />
+            </Backdrop>
+        );
+
+        await waitFor(() => {
+            expect(screen.queryByTestId('test')).toBeNull();
+        });
     });
 
-    test('should pass onExited callback to Fade element', () => {
+    test('should pass onExited callback to Fade element', async () => {
         const onExited = jest.fn();
 
-        const wrapper = mount(<Backdrop open fadeProps={{onExited}} />);
-        wrapper.setProps({open: false});
-        jest.runAllTimers();
-        expect(onExited).toBeCalled();
+        const screen = render(<Backdrop open onExited={onExited} />);
+        screen.rerender(<Backdrop onExited={onExited} />);
+
+        await waitFor(() => {
+            expect(onExited).toBeCalled();
+        });
     });
 });

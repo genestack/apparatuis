@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2011-2019 Genestack Limited
+ * Copyright (c) 2011-2023 Genestack Limited
  * All Rights Reserved
  * THIS IS UNPUBLISHED PROPRIETARY SOURCE CODE OF GENESTACK LIMITED
  * The copyright notice above does not evidence any
@@ -8,6 +8,7 @@
 import classNames from 'classnames';
 import * as React from 'react';
 
+import {SlotProps} from '../../utils/slot-props';
 import {WithClasses, mergeClassesProps} from '../../utils/styles';
 import {Flex} from '../flex';
 import {FIXED_BLOCKS_CLASS_NAME} from '../overlay/overlay-manager';
@@ -28,7 +29,7 @@ export interface Props extends TargetProps, WithClasses<keyof typeof styles> {
      */
     disableStaticSpacer?: boolean;
     /** Properties for spacer element */
-    staticSpacerProps?: React.HTMLAttributes<HTMLDivElement>;
+    staticSpacerProps?: SlotProps<'div'>;
 }
 
 /**

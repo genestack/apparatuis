@@ -1,12 +1,12 @@
 /*
- * Copyright (c) 2011-2019 Genestack Limited
+ * Copyright (c) 2011-2023 Genestack Limited
  * All Rights Reserved
  * THIS IS UNPUBLISHED PROPRIETARY SOURCE CODE OF GENESTACK LIMITED
  * The copyright notice above does not evidence any
  * actual or intended publication of such source code.
  */
 // tslint:disable no-use-before-declare no-non-null-assertion no-unnecessary-type-assertion
-import * as enzyme from 'enzyme';
+import {render} from '@testing-library/react';
 import * as React from 'react';
 
 import {Overlay, Props} from './overlay';
@@ -14,37 +14,13 @@ import {Overlay, Props} from './overlay';
 jest.useFakeTimers();
 
 describe('<Overlay />', () => {
-    let localWrapper: enzyme.ReactWrapper<any> | null = null;
-    function mount<P>(element: React.ReactElement<P>) {
-        if (localWrapper) {
-            localWrapper.unmount();
-        }
-
-        localWrapper = enzyme.mount(element);
-
-        return localWrapper as enzyme.ReactWrapper<P>;
-    }
-
-    beforeEach(() => {
-        if (document.activeElement instanceof HTMLElement) {
-            document.activeElement.blur();
-        }
-    });
-
-    afterEach(() => {
-        if (localWrapper) {
-            localWrapper.unmount();
-            localWrapper = null;
-        }
-    });
-
     describe('on Escape keydown event', () => {
         const dispatchEvent = (event: KeyboardEvent) =>
             document.getElementById('button')!.dispatchEvent(event);
 
         const setup = (props?: Partial<Props>) => {
             const onClose = jest.fn();
-            const wrapper = mount(
+            const screen = render(
                 <Overlay open onClose={onClose} {...props}>
                     <button id="button" />
                 </Overlay>
@@ -55,7 +31,7 @@ describe('<Overlay />', () => {
                 bubbles: true
             });
 
-            return {onClose, wrapper, event};
+            return {onClose, screen, event};
         };
 
         it('should call onClose callback', () => {
@@ -84,7 +60,7 @@ describe('<Overlay />', () => {
 
         const setup = (props?: Partial<Props>) => {
             const onClose = jest.fn();
-            const wrapper = mount(
+            const screen = render(
                 <Overlay open onClose={onClose} backdropProps={{id: 'backdrop'}} {...props} />
             );
 
@@ -93,7 +69,7 @@ describe('<Overlay />', () => {
                 bubbles: true
             });
 
-            return {onClose, wrapper, event};
+            return {onClose, screen, event};
         };
 
         it('should call onClose callback on Backdrop click', () => {
@@ -119,9 +95,9 @@ describe('<Overlay />', () => {
 
         const activeElement = document.activeElement;
 
-        const wrapper = mount(<Overlay open onClose={onClose} />);
+        const screen = render(<Overlay open onClose={onClose} />);
 
-        wrapper.setProps({open: false});
+        screen.rerender(<Overlay onClose={onClose} />);
 
         jest.runAllTimers();
 
@@ -130,34 +106,42 @@ describe('<Overlay />', () => {
 
     it('should call onClosed after close', () => {
         const onClosed = jest.fn();
-        const wrapper = mount(<Overlay open onClose={jest.fn()} onClosed={onClosed} />);
-        wrapper.setProps({open: false});
+        const screen = render(<Overlay open onClose={jest.fn()} onClosed={onClosed} />);
+        screen.rerender(<Overlay onClose={jest.fn()} onClosed={onClosed} />);
         expect(onClosed).not.toBeCalled();
         jest.runAllTimers();
         expect(onClosed).toBeCalled();
     });
 
-    it('should unmount after close', () => {
-        const wrapper = mount(
+    it('should unrender after close', () => {
+        const screen = render(
             <Overlay open onClose={jest.fn()}>
                 <div id="test" />
             </Overlay>
         );
 
-        wrapper.setProps({open: false});
+        screen.rerender(
+            <Overlay onClose={jest.fn()}>
+                <div id="test" />
+            </Overlay>
+        );
         expect(document.getElementById('test')).toBeTruthy();
         jest.runAllTimers();
         expect(document.getElementById('test')).toBeFalsy();
     });
 
-    it('should stay mounted after close (used keepMounted property)', () => {
-        const wrapper = mount(
+    it('should stay rendered after close (used keepMounted property)', () => {
+        const screen = render(
             <Overlay open keepMounted onClose={jest.fn()}>
                 <div id="test" />
             </Overlay>
         );
 
-        wrapper.setProps({open: false});
+        screen.rerender(
+            <Overlay keepMounted onClose={jest.fn()}>
+                <div id="test" />
+            </Overlay>
+        );
         expect(document.getElementById('test')).toBeTruthy();
         jest.runAllTimers();
         expect(document.getElementById('test')).toBeTruthy();
@@ -165,7 +149,7 @@ describe('<Overlay />', () => {
 
     describe('when focus to sentinels', () => {
         beforeEach(() => {
-            mount(
+            render(
                 <Overlay open onClose={jest.fn()}>
                     <div>
                         <input id="first" />

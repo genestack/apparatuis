@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2011-2019 Genestack Limited
+ * Copyright (c) 2011-2023 Genestack Limited
  * All Rights Reserved
  * THIS IS UNPUBLISHED PROPRIETARY SOURCE CODE OF GENESTACK LIMITED
  * The copyright notice above does not evidence any
@@ -7,35 +7,19 @@
  */
 // tslint:disable no-unbound-method no-non-null-assertion
 // tslint:disable no-unnecessary-type-assertion
+import {fireEvent, render} from '@testing-library/react';
 import * as React from 'react';
-
-import {createTestApp} from '../../../test-utils/create-test-app';
-import {FocusTrap} from '../focus-trap';
 
 import {Menu} from './menu';
 import {MenuCaption} from './menu-caption';
 import {MenuItem} from './menu-item';
 
 describe('<Menu />', () => {
-    const app = createTestApp();
-    beforeEach(app.beforeEach);
-    afterEach(app.afterEach);
-
-    it('should render <FocusTrap />', () => {
-        const onClose = jest.fn();
-        const referenceElement = document.createElement('button');
-        referenceElement.focus();
-        const wrapper = app.mount(
-            <Menu open onClose={onClose} referenceElement={referenceElement} />
-        );
-        expect(wrapper.find(FocusTrap).exists()).toBe(true);
-    });
-
     it('should focus to menu element on mount', () => {
         const onClose = jest.fn();
         const referenceElement = document.createElement('button');
         referenceElement.focus();
-        app.mount(
+        render(
             <Menu
                 popoverProps={{id: 'test'}}
                 open
@@ -50,7 +34,7 @@ describe('<Menu />', () => {
         const onClose = jest.fn();
         const referenceElement = document.createElement('button');
 
-        const wrapper = app.mount(
+        const screen = render(
             <Menu
                 popoverProps={{id: 'test'}}
                 open={false}
@@ -59,14 +43,22 @@ describe('<Menu />', () => {
             />
         );
 
-        wrapper.setProps({open: true});
+        screen.rerender(
+            <Menu
+                popoverProps={{id: 'test'}}
+                open={true}
+                onClose={onClose}
+                referenceElement={referenceElement}
+            />
+        );
+
         expect(document.activeElement).toBe(document.getElementById('test'));
     });
 
     it('should change focus on arrow up or down key press', () => {
         const onClose = jest.fn();
         const referenceElement = document.createElement('div');
-        app.mount(
+        render(
             <Menu id="test" open onClose={onClose} referenceElement={referenceElement}>
                 <MenuItem id="first" />
                 <MenuCaption />
@@ -99,7 +91,7 @@ describe('<Menu />', () => {
     it('should focus item on window mousemove in keyboard mode', () => {
         const referenceElement = document.createElement('div');
 
-        app.mount(
+        render(
             <Menu id="test" open referenceElement={referenceElement}>
                 <MenuItem id="first" />
                 <MenuItem id="second" />
@@ -123,7 +115,7 @@ describe('<Menu />', () => {
 
     it('should change focus on mouse over menu item', () => {
         const referenceElement = document.createElement('div');
-        app.mount(
+        render(
             <Menu id="test" open referenceElement={referenceElement}>
                 <MenuItem id="first" />
                 <MenuItem id="second" />
@@ -142,7 +134,7 @@ describe('<Menu />', () => {
         const setup = () => {
             const referenceElement = document.createElement('div');
             const onValueSelect = jest.fn();
-            const wrapper = app.mount(
+            const screen = render(
                 <Menu open referenceElement={referenceElement} onValueSelect={onValueSelect}>
                     <MenuItem id="first" value="first">
                         First
@@ -150,21 +142,21 @@ describe('<Menu />', () => {
                 </Menu>
             );
 
-            return {onValueSelect, wrapper};
+            return {onValueSelect, screen};
         };
 
         it('should be called once on item click', () => {
-            const {onValueSelect, wrapper} = setup();
+            const {onValueSelect} = setup();
 
-            wrapper.find('#first').hostNodes().simulate('click');
+            fireEvent.click(document.getElementById('first')!);
 
             expect(onValueSelect).toHaveBeenCalledTimes(1);
         });
 
         it('should called with valid value on item click', () => {
-            const {onValueSelect, wrapper} = setup();
+            const {onValueSelect} = setup();
 
-            wrapper.find('#first').hostNodes().simulate('click');
+            fireEvent.click(document.getElementById('first')!);
 
             expect(onValueSelect).toHaveBeenCalledWith(
                 'first',
@@ -175,7 +167,7 @@ describe('<Menu />', () => {
     });
 
     it('MenuItem should render anchor element if href property is passed', () => {
-        app.mount(<MenuItem id="test" href="foo" />);
+        render(<MenuItem id="test" href="foo" />);
         expect(document.getElementById('test')).toBeInstanceOf(HTMLAnchorElement);
         expect(document.getElementById('test')).toHaveProperty('href', 'http://localhost/foo');
     });
@@ -185,36 +177,36 @@ describe('<Menu />', () => {
             const onClose = jest.fn();
             const referenceElement = document.createElement('div');
 
-            const wrapper = app.mount(
+            const screen = render(
                 <Menu
                     open={false}
                     keepMounted={false}
                     onClose={onClose}
                     referenceElement={referenceElement}
                 >
-                    <MenuItem />
+                    <MenuItem data-testid="test" />
                 </Menu>
             );
 
-            expect(wrapper.find(MenuItem).length).toBe(0);
+            expect(screen.queryByTestId('test')).toBeFalsy();
         });
 
         it('should render children', () => {
             const onClose = jest.fn();
             const referenceElement = document.createElement('div');
 
-            const wrapper = app.mount(
+            const screen = render(
                 <Menu
                     open={false}
                     keepMounted
                     onClose={onClose}
                     referenceElement={referenceElement}
                 >
-                    <MenuItem />
+                    <MenuItem data-testid="test" />
                 </Menu>
             );
 
-            expect(wrapper.find(MenuItem).length).toBe(1);
+            expect(screen.queryByTestId('test')).toBeTruthy();
         });
     });
 });

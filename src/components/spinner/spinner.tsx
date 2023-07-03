@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2011-2019 Genestack Limited
+ * Copyright (c) 2011-2023 Genestack Limited
  * All Rights Reserved
  * THIS IS UNPUBLISHED PROPRIETARY SOURCE CODE OF GENESTACK LIMITED
  * The copyright notice above does not evidence any
@@ -9,6 +9,7 @@
 import classNames from 'classnames';
 import * as React from 'react';
 
+import {SlotProps} from '../../utils/slot-props';
 import {WithClasses, mergeClassesProps} from '../../utils/styles';
 
 import * as styles from './spinner.module.css';
@@ -26,9 +27,9 @@ export interface Props extends TargetProps, WithClasses<keyof typeof styles> {
     /** Do not show background spinner circle */
     hideBackgroundCircle?: boolean;
     /** Properties for the main SVG circle element */
-    circleProps?: React.SVGAttributes<SVGCircleElement>;
+    circleProps?: SlotProps<'circle'>;
     /** Properties for the background SVG circle element */
-    backgroundCircleProps?: React.SVGAttributes<SVGCircleElement>;
+    backgroundCircleProps?: SlotProps<'circle'>;
 }
 
 const getDefaultStokeWidth = ({size = DEFAULT_SIZE}: Props) => size / 8;

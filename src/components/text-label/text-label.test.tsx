@@ -1,55 +1,45 @@
 /*
- * Copyright (c) 2011-2019 Genestack Limited
+ * Copyright (c) 2011-2023 Genestack Limited
  * All Rights Reserved
  * THIS IS UNPUBLISHED PROPRIETARY SOURCE CODE OF GENESTACK LIMITED
  * The copyright notice above does not evidence any
  * actual or intended publication of such source code.
  */
+import {render} from '@testing-library/react';
 import * as React from 'react';
-
-import {createTestApp} from '../../../test-utils/create-test-app';
-import {Typography} from '../typography';
 
 import {TextLabel} from './text-label';
 
-const app = createTestApp();
-
-beforeEach(app.beforeEach);
-afterEach(app.afterEach);
-
 describe('<TextLabel />', () => {
     it('should render caption with title variant if main variant is header', () => {
-        const wrapper = app.mount(
+        render(
             <TextLabel variant="header" caption="title">
                 Label
             </TextLabel>
         );
-        expect(
-            wrapper.findWhere((node) => {
-                return node.type() === Typography && node.props().variant === 'title';
-            })
-        ).toHaveLength(1);
+        expect(document.querySelector('[data-qa=typography]')).toHaveProperty(
+            'className',
+            expect.stringContaining('title')
+        );
     });
 
     it('should render caption with body variant if main variant is title', () => {
-        const wrapper = app.mount(
+        render(
             <TextLabel variant="title" caption="body">
                 Label
             </TextLabel>
         );
-        expect(
-            wrapper.findWhere((node) => {
-                return node.type() === Typography && node.props().variant === 'body';
-            })
-        ).toHaveLength(1);
+        expect(document.querySelector('[data-qa=typography]')).toHaveProperty(
+            'className',
+            expect.stringContaining('body')
+        );
     });
 
     it('should render caption with caption variant if main variant is default', () => {
-        const wrapper = app.mount(<TextLabel caption="caption">Label</TextLabel>);
-        expect(
-            wrapper.findWhere((node) => {
-                return node.type() === Typography && node.props().variant === 'caption';
-            })
-        ).toHaveLength(1);
+        render(<TextLabel caption="caption">Label</TextLabel>);
+        expect(document.querySelector('[data-qa=typography]')).toHaveProperty(
+            'className',
+            expect.stringContaining('caption')
+        );
     });
 });

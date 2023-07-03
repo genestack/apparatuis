@@ -1,65 +1,60 @@
 /*
- * Copyright (c) 2011-2021 Genestack Limited
+ * Copyright (c) 2011-2023 Genestack Limited
  * All Rights Reserved
  * THIS IS UNPUBLISHED PROPRIETARY SOURCE CODE OF GENESTACK LIMITED
  * The copyright notice above does not evidence any
  * actual or intended publication of such source code.
  */
-
+import {render} from '@testing-library/react';
 import * as React from 'react';
-import {createTestApp} from '../../../test-utils/create-test-app';
 
 import {FormControlLabel} from './form-control-label';
 import {Switch} from '../switch';
 import {Typography} from '../typography';
-import {Controls} from '../controls';
 
 import {disabled, typographyDisabled} from './form-control-label.module.css';
-
-const app = createTestApp();
-
-beforeEach(app.beforeEach);
-afterEach(app.afterEach);
 
 describe('<FormControlLabel />', () => {
     describe('prop: disabled', () => {
         it('should disable everything 1', () => {
-            const wrapper = app.mount(
+            const screen = render(
                 <FormControlLabel
+                    data-testid="root"
                     control={<Switch disabled />}
                     label={
-                        <Typography intent="quiet" id="disabledLabel">
+                        <Typography intent="quiet" data-testid="label">
                             Disabled
                         </Typography>
                     }
                 />
             );
 
-            const root = wrapper.find(Controls);
-            const label = wrapper.find(Typography);
+            const root = screen.queryByTestId('root');
+            const label = screen.queryByTestId('label');
 
-            expect(root.hasClass(disabled)).toEqual(true);
-            expect(label.hasClass(typographyDisabled)).toEqual(true);
+            expect(root).toHaveProperty('className', expect.stringContaining(disabled));
+            expect(label).toHaveProperty('className', expect.stringContaining(typographyDisabled));
         });
 
         it('should disable everything 2', () => {
-            const wrapper = app.mount(
+            const screen = render(
                 <FormControlLabel
                     disabled
+                    data-testid="root"
                     control={<Switch />}
                     label={
-                        <Typography intent="quiet" id="disabledLabel">
+                        <Typography intent="quiet" data-testid="label">
                             Disabled
                         </Typography>
                     }
                 />
             );
 
-            const root = wrapper.find(Controls);
-            const label = wrapper.find(Typography);
+            const root = screen.queryByTestId('root');
+            const label = screen.queryByTestId('label');
 
-            expect(root.hasClass(disabled)).toEqual(true);
-            expect(label.hasClass(typographyDisabled)).toEqual(true);
+            expect(root).toHaveProperty('className', expect.stringContaining(disabled));
+            expect(label).toHaveProperty('className', expect.stringContaining(typographyDisabled));
         });
     });
 });

@@ -160,8 +160,8 @@ the `target` element.
 
 ```tsx
 interface TabProps extends React.HTMLAttributes<HTMLDivElement> {
-    iconProps?: React.HTMLAttributes<HTMLDivElement>;
-    labelProps?: React.HTMLAttributes<HTMLDivElement>;
+    iconProps?: SlotProps<'div'>;
+    labelProps?: SlotProps<'div'>;
 }
 
 function Tab(props: TabProps) {
@@ -175,7 +175,7 @@ function Tab(props: TabProps) {
 }
 
 interface InputProps extends React.HTMLAttributes<HTMLInputElement> {
-    rootProps?: React.HTMLAttributes<HTMLDivElement>;
+    rootProps?: SlotProps<'div'>;
 }
 
 function Input(props: InputProps) {

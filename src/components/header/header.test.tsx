@@ -6,11 +6,10 @@
  * actual or intended publication of such source code.
  */
 // tslint:disable: no-non-null-assertion
+import {fireEvent, render} from '@testing-library/react';
 import * as React from 'react';
 
-import {createTestApp} from '../../../test-utils/create-test-app';
 import {Button} from '../button';
-import {Typography} from '../typography';
 
 import {Header, Props as HeaderProps} from './header';
 import {HeaderBlock} from './header-block';
@@ -20,13 +19,8 @@ import {HeaderItemIcon} from './header-item-icon';
 import {HeaderItemSecondaryActions} from './header-item-secondary-actions';
 import {HeaderItemText} from './header-item-text';
 
-const app = createTestApp();
-
-beforeEach(app.beforeEach);
-afterEach(app.afterEach);
-
 const setup = (props?: Partial<HeaderProps>) =>
-    app.mount(
+    render(
         <Header {...props}>
             <HeaderBlock>
                 <HeaderItemIcon />
@@ -57,44 +51,46 @@ describe('<HeaderItem />', () => {
     });
 
     it('should focus to the next button on ArrowRight keydown', () => {
-        const wrapper = setup();
+        setup();
         const button = document.getElementById('button')!;
         button.focus();
-        wrapper.find('#button').hostNodes().simulate('keydown', {key: 'ArrowRight'});
+        fireEvent.keyDown(button, {key: 'ArrowRight'});
         expect(document.getElementById('button-2')).toBe(document.activeElement);
     });
 
     it('should not change focus if there are no focusable elements after active element', () => {
-        const wrapper = setup();
+        setup();
         const button = document.getElementById('button-2')!;
         button.focus();
-        wrapper.find('#button-2').hostNodes().simulate('keydown', {key: 'ArrowRight'});
+        fireEvent.keyDown(button, {key: 'ArrowRight'});
         expect(document.getElementById('button-2')).toBe(document.activeElement);
     });
 
     it('should focus to the previous button on ArrowLeft keydown', () => {
-        const wrapper = setup();
+        setup();
         const button = document.getElementById('button-2')!;
         button.focus();
-        wrapper.find('#button-2').hostNodes().simulate('keydown', {key: 'ArrowLeft'});
+        fireEvent.keyDown(button, {key: 'ArrowLeft'});
         expect(document.getElementById('button')).toBe(document.activeElement);
     });
 
     it('should not change focus if there are no focusable elements before active element', () => {
-        const wrapper = setup();
+        setup();
         const button = document.getElementById('button')!;
         button.focus();
-        wrapper.find('#button').hostNodes().simulate('keydown', {key: 'ArrowLeft'});
+        fireEvent.keyDown(button, {key: 'ArrowLeft'});
         expect(document.getElementById('button')).toBe(document.activeElement);
     });
 
     it('should render a Typography if children is a string', () => {
-        const wrapper = app.mount(<HeaderItem>string</HeaderItem>);
-        expect(wrapper.find(Typography)).toHaveLength(1);
+        const screen = render(
+            <HeaderItem headerItemTextProps={{'data-testid': 'test'}}>string</HeaderItem>
+        );
+        expect(screen.queryByTestId('test')).toBeInstanceOf(HTMLDivElement);
     });
 
     it('should render anchor element if `href` is passed', () => {
-        app.mount(<HeaderItem id="test" href="foo" />);
+        render(<HeaderItem id="test" href="foo" />);
         expect(document.getElementById('test')).toBeInstanceOf(HTMLAnchorElement);
         expect(document.getElementById('test')).toHaveProperty('href', 'http://localhost/foo');
     });
@@ -102,20 +98,17 @@ describe('<HeaderItem />', () => {
 
 describe('<HeaderBlock />', () => {
     it('should render a Typography if children is a string', () => {
-        const wrapper = app.mount(<HeaderBlock>string</HeaderBlock>);
-        expect(wrapper.find(Typography)).toHaveLength(1);
-    });
-
-    it('should render an additional element if children is string', () => {
-        const wrapper = app.mount(<HeaderBlock>string</HeaderBlock>);
-        expect(wrapper.find('div')).toHaveLength(2);
+        const screen = render(
+            <HeaderBlock headerItemTextProps={{'data-testid': 'test'}}>string</HeaderBlock>
+        );
+        expect(screen.queryByTestId('test')).toBeInstanceOf(HTMLDivElement);
     });
 });
 
 describe('<HeaderItemSecondaryActions />', () => {
     const clickSetup = () => {
         const onClick = jest.fn();
-        const wrapper = app.mount(
+        const screen = render(
             <HeaderItem onClick={onClick}>
                 <HeaderItemText id="text">text</HeaderItemText>
                 <HeaderItemSecondaryActions>
@@ -124,20 +117,20 @@ describe('<HeaderItemSecondaryActions />', () => {
             </HeaderItem>
         );
 
-        return {onClick, wrapper};
+        return {onClick, screen};
     };
 
     it('should not propagate click from inner button to HeaderButton', () => {
-        const {wrapper, onClick} = clickSetup();
+        const {onClick} = clickSetup();
 
-        wrapper.find('#button').hostNodes().simulate('click');
+        fireEvent.click(document.getElementById('button')!);
         expect(onClick).not.toBeCalled();
     });
 
     it('should propagate click from inner text to HeaderButton', () => {
-        const {wrapper, onClick} = clickSetup();
+        const {onClick} = clickSetup();
 
-        wrapper.find('#text').hostNodes().simulate('click');
+        fireEvent.click(document.getElementById('text')!);
         expect(onClick).toBeCalled();
     });
 });

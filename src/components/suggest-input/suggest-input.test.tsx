@@ -1,27 +1,21 @@
 /*
- * Copyright (c) 2011-2021 Genestack Limited
+ * Copyright (c) 2011-2023 Genestack Limited
  * All Rights Reserved
  * THIS IS UNPUBLISHED PROPRIETARY SOURCE CODE OF GENESTACK LIMITED
  * The copyright notice above does not evidence any
  * actual or intended publication of such source code.
  */
 // tslint:disable: no-non-null-assertion
+import {fireEvent, render} from '@testing-library/react';
 import * as React from 'react';
-
-import {createTestApp} from '../../../test-utils/create-test-app';
 
 import {SuggestInput} from './suggest-input';
 import {SuggestInputItem} from './suggest-input-item';
 
-const app = createTestApp();
-
-beforeEach(app.beforeEach);
-afterEach(app.afterEach);
-
 describe('<SuggestInput />', () => {
     describe('on base setup', () => {
         const setup = () =>
-            app.mount(
+            render(
                 <SuggestInput id="input">
                     <div id="title" />
                     <SuggestInputItem id="item" value="bar" />
@@ -39,23 +33,21 @@ describe('<SuggestInput />', () => {
         });
 
         it('should render suggest items when value has been changed', () => {
-            const wrapper = setup();
-            (document.getElementById('input') as HTMLInputElement).value = 'foo';
-            wrapper.find('input').simulate('change');
+            setup();
+            fireEvent.change(document.getElementById('input')!, {target: {value: 'foo'}});
             expect(document.getElementById('item')).toBeTruthy();
         });
 
         it('should render other children when value has been changed', () => {
-            const wrapper = setup();
-            (document.getElementById('input') as HTMLInputElement).value = 'foo';
-            wrapper.find('input').simulate('change');
+            setup();
+            fireEvent.change(document.getElementById('input')!, {target: {value: 'foo'}});
             expect(document.getElementById('title')).toBeTruthy();
         });
     });
 
     it('should call onOpenChange when suggest has been opened', () => {
         const onOpenChange = jest.fn();
-        const wrapper = app.mount(
+        render(
             <SuggestInput id="input" onOpenChange={onOpenChange}>
                 <SuggestInputItem id="item" value="bar" />
             </SuggestInput>
@@ -63,21 +55,21 @@ describe('<SuggestInput />', () => {
 
         expect(onOpenChange).not.toBeCalled();
 
-        (document.getElementById('input') as HTMLInputElement).value = 'foo';
-        wrapper.find('input').simulate('change');
+        fireEvent.change(document.getElementById('input')!, {target: {value: 'foo'}});
         expect(onOpenChange).toHaveBeenCalledTimes(1);
         expect(onOpenChange).toBeCalledWith(true);
     });
 
     it('should open suggest on focus', () => {
         const onOpenChange = jest.fn();
-        const wrapper = app.mount(
+        render(
             <SuggestInput id="input" onOpenChange={onOpenChange} openOnFocus>
                 <SuggestInputItem id="item" value="bar" />
             </SuggestInput>
         );
 
-        wrapper.find('input').simulate('focus');
+        document.getElementById('input')!.focus();
+
         expect(onOpenChange).toHaveBeenCalledTimes(1);
         expect(onOpenChange).toBeCalledWith(true);
     });
@@ -91,16 +83,16 @@ describe('<SuggestInput />', () => {
             return <div {...rest} />;
         }
 
-        const wrapper = app.mount(
+        render(
             <SuggestInput id="input" onComplete={onComplete} openOnFocus>
                 <AnyComponent id="any-component" value="bar" />
             </SuggestInput>
         );
 
-        wrapper.find('input').simulate('focus');
-        wrapper.find('#any-component').hostNodes().simulate('click');
+        document.getElementById('input')!.focus();
+        fireEvent.click(document.getElementById('any-component')!);
 
-        wrapper.find('input').simulate('focus');
+        document.getElementById('input')!.focus();
 
         expect(onComplete).toBeCalledWith('bar');
     });
@@ -109,7 +101,7 @@ describe('<SuggestInput />', () => {
         const setup = () => {
             const onComplete = jest.fn();
             const onOpenChange = jest.fn();
-            const wrapper = app.mount(
+            const screen = render(
                 <SuggestInput
                     id="input"
                     onComplete={onComplete}
@@ -120,10 +112,10 @@ describe('<SuggestInput />', () => {
                 </SuggestInput>
             );
 
-            wrapper.find('input').simulate('focus');
-            wrapper.find('#item').hostNodes().simulate('click');
+            document.getElementById('input')!.focus();
+            fireEvent.click(document.getElementById('item')!);
 
-            return {wrapper, onComplete, onOpenChange};
+            return {screen, onComplete, onOpenChange};
         };
 
         it('should call onComplete', () => {
@@ -133,9 +125,9 @@ describe('<SuggestInput />', () => {
         });
 
         it('should close suggest', () => {
-            const {wrapper} = setup();
+            setup();
 
-            expect(wrapper.find('#item')).toHaveLength(0);
+            expect(document.querySelectorAll('#item')).toHaveLength(0);
         });
 
         it('should onOpenChange with false', () => {
@@ -146,16 +138,15 @@ describe('<SuggestInput />', () => {
     });
 
     it('should use children as function', () => {
-        const render = jest.fn();
-        render.mockImplementation(() => {
+        const renderComponent = jest.fn();
+        renderComponent.mockImplementation(() => {
             return [<SuggestInputItem key="item" id="item" />];
         });
-        const wrapper = app.mount(<SuggestInput id="input">{render}</SuggestInput>);
+        render(<SuggestInput id="input">{renderComponent}</SuggestInput>);
 
-        expect(render).toHaveBeenCalledTimes(0);
-        (document.getElementById('input') as HTMLInputElement).value = 'foo';
-        wrapper.find('input').simulate('change');
-        expect(render).toHaveBeenCalledTimes(1);
-        expect(render).toBeCalledWith('foo');
+        expect(renderComponent).toHaveBeenCalledTimes(0);
+        fireEvent.change(document.getElementById('input')!, {target: {value: 'foo'}});
+        expect(renderComponent).toHaveBeenCalledTimes(1);
+        expect(renderComponent).toBeCalledWith('foo');
     });
 });

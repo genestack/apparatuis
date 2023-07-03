@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2011-2021 Genestack Limited
+ * Copyright (c) 2011-2023 Genestack Limited
  * All Rights Reserved
  * THIS IS UNPUBLISHED PROPRIETARY SOURCE CODE OF GENESTACK LIMITED
  * The copyright notice above does not evidence any
@@ -17,12 +17,11 @@ import {
     shouldRenderNode,
     chainRefs
 } from '../../utils';
+import {SlotProps} from '../../utils/slot-props';
 import {Tooltip, useTooltipHandler, TooltipProps} from '../tooltip';
 
 import {Indicator, IndicatorPlacement, Props as IndicatorProps} from './indicator';
 import * as styles from './tab.module.css';
-
-type SpanProps = React.HTMLAttributes<HTMLSpanElement>;
 
 /** Tab props */
 export interface Props extends WithClasses<keyof typeof styles> {
@@ -40,17 +39,17 @@ export interface Props extends WithClasses<keyof typeof styles> {
     /** Adds styles for selected state */
     selected?: boolean;
     /** Properties for body of tab */
-    bodyProps?: SpanProps;
+    bodyProps?: SlotProps<'span'>;
     /** Properties for wrapper of label element */
-    labelProps?: SpanProps;
+    labelProps?: SlotProps<'span'>;
     /** Node that is placed before tab label */
     prepend?: React.ReactNode;
     /** Properties for wrapper of prepend element */
-    prependProps?: SpanProps;
+    prependProps?: SlotProps<'span'>;
     /** Node that is placed after tab label */
     append?: React.ReactNode;
     /** Properties for wrapper of append element */
-    appendProps?: SpanProps;
+    appendProps?: SlotProps<'span'>;
 
     /**
      * Node used as tooltip

@@ -10,6 +10,7 @@ import classNames from 'classnames';
 import React from 'react';
 
 import {chain, chainRefs} from '../../utils';
+import {SlotProps} from '../../utils/slot-props';
 
 import {CommonSelectProps} from './common-select-props';
 import {SelectEmitter} from './select-emitter';
@@ -22,7 +23,7 @@ export interface Props extends CommonSelectProps {
     /** Select onChange handler */
     onValueChange?: (value: string | number, event: React.ChangeEvent<HTMLSelectElement>) => void;
     /** Other native select props */
-    selectProps?: React.ComponentPropsWithRef<'select'>;
+    selectProps?: SlotProps<'select'>;
 }
 
 /** Native select */

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2011-2020 Genestack Limited
+ * Copyright (c) 2011-2023 Genestack Limited
  * All Rights Reserved
  * THIS IS UNPUBLISHED PROPRIETARY SOURCE CODE OF GENESTACK LIMITED
  * The copyright notice above does not evidence any
@@ -16,6 +16,7 @@ import {
     chain,
     WithClasses
 } from '../../utils';
+import {SlotProps} from '../../utils/slot-props';
 import {IndicatorProps, IndicatorPlacement, Indicator} from '../tab';
 
 import {Orientation, Variant, Size} from './common-tabs-props';
@@ -39,7 +40,7 @@ export interface Props extends WithClasses<keyof typeof styles> {
     animated?: boolean;
 
     /** Props of tabs wrapper */
-    tabListProps?: React.HTMLAttributes<HTMLDivElement>;
+    tabListProps?: SlotProps<'div'>;
     /**
      * Indicator placement
      * Default value for horizontal tabs: "bottom"

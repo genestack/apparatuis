@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2011-2021 Genestack Limited
+ * Copyright (c) 2011-2023 Genestack Limited
  * All Rights Reserved
  * THIS IS UNPUBLISHED PROPRIETARY SOURCE CODE OF GENESTACK LIMITED
  * The copyright notice above does not evidence any
@@ -9,6 +9,7 @@ import classNames from 'classnames';
 import * as React from 'react';
 
 import {DarkContext} from '../../utils/dark-context';
+import {SlotProps} from '../../utils/slot-props';
 import {mergeClassesProps, WithClasses} from '../../utils/styles';
 import {Typography} from '../typography';
 
@@ -37,7 +38,7 @@ export interface Props extends TargetProps, WithClasses<keyof typeof styles> {
     /** Node that is placed after link label */
     append?: React.ReactNode;
     /** Properties for label wrapper element */
-    labelProps?: React.HTMLAttributes<HTMLSpanElement>;
+    labelProps?: SlotProps<'span'>;
     /** You could redefine the target component by passing ReactType. */
     as?: React.ElementType;
 }

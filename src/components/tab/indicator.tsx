@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2011-2020 Genestack Limited
+ * Copyright (c) 2011-2023 Genestack Limited
  * All Rights Reserved
  * THIS IS UNPUBLISHED PROPRIETARY SOURCE CODE OF GENESTACK LIMITED
  * The copyright notice above does not evidence any
@@ -47,6 +47,7 @@ export const Indicator: OverridableComponent<TypeMap> = React.forwardRef<
 
     return (
         <Component
+            data-qa="indicator"
             className={classNames(
                 classes.root,
                 {
