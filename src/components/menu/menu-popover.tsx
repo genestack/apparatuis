@@ -29,11 +29,14 @@ export interface Props extends TargetProps {
     hiddenScrollbarProps?: Omit<HiddenScrollbarProps, 'children'>;
 }
 
-const modifiers: PopoverProps['modifiers'] = {
-    preventOverflow: {
-        boundariesElement: 'viewport'
+const modifiers: PopoverProps['modifiers'] = [
+    {
+        name: 'preventOverflow',
+        options: {
+            altAxis: true
+        }
     }
-};
+];
 
 const popperElementProps: PopoverProps['popperElementProps'] = {
     [MENU_POPOVER_DATA_ATTRIBUTE.toString()]: 'true'

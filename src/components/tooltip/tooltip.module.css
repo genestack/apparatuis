@@ -44,26 +44,44 @@
     height: 10px;
 }
 
+.arrowIcon {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+}
+
 .arrow[data-placement^="top"] {
-    transform: rotate(-90deg);
     margin-bottom: -8px;
     bottom: 0;
 }
 
 .arrow[data-placement^="right"] {
-    transform: rotate(0deg);
     margin-left: -8px;
     left: 0;
 }
 
 .arrow[data-placement^="bottom"] {
-    transform: rotate(90deg);
     margin-top: -8px;
     top: 0;
 }
 
 .arrow[data-placement^="left"] {
-    transform: rotate(180deg);
     margin-right: -8px;
     right: 0;
+}
+
+.arrowIcon[data-placement^="top"] {
+    transform: rotate(-90deg);
+}
+
+.arrowIcon[data-placement^="right"] {
+    transform: rotate(0deg);
+}
+
+.arrowIcon[data-placement^="bottom"] {
+    transform: rotate(90deg);
+}
+
+.arrowIcon[data-placement^="left"] {
+    transform: rotate(180deg);
 }

@@ -58,9 +58,15 @@ export function Suggest(props: Props) {
     const popperRef = React.useRef<TransitionPopper<PaperProps>>(null);
 
     React.useEffect(() => {
-        if (popperRef.current) {
-            popperRef.current.scheduleUpdate();
-        }
+        const id = setTimeout(() => {
+            if (popperRef.current) {
+                popperRef.current.scheduleUpdate();
+            }
+        });
+
+        return () => {
+            clearTimeout(id);
+        };
     });
 
     return (

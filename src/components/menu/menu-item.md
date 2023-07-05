@@ -63,11 +63,14 @@ renderRadio = (name, label, value) => (
                         state.hasTooltip ? (
                             <Tooltip
                                 portalContainer={document.body}
-                                modifiers={{
-                                    preventOverflow: {
-                                        boundariesElement: 'viewport'
+                                modifiers={[
+                                    {
+                                        name: 'preventOverflow',
+                                        options: {
+                                            altAxis: true
+                                        }
                                     }
-                                }}
+                                ]}
                                 placement="top"
                             >
                                 Explanation text

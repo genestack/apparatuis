@@ -134,7 +134,10 @@ export class Tooltip extends React.Component<Props> {
                                     data-placement={actualPlacement}
                                     className={classes.arrow}
                                 >
-                                    <TooltipArrowIcon className={classes.arrow} />
+                                    <TooltipArrowIcon
+                                        data-placement={actualPlacement}
+                                        className={classes.arrowIcon}
+                                    />
                                 </div>
                             </div>
                         </TooltipSlide>
