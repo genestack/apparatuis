@@ -8,7 +8,11 @@
 import classNames from 'classnames';
 import style from 'dom-helpers/css';
 import * as React from 'react';
-import Transition, {TransitionProps, TransitionStatus} from 'react-transition-group/Transition';
+import Transition, {
+    TransitionActions,
+    TransitionProps,
+    TransitionStatus
+} from 'react-transition-group/Transition';
 
 import {chain} from '../../utils/chain';
 import {OmitIndexSignature} from '../../utils/omit-index-signature';
@@ -26,7 +30,7 @@ const STROKE_WIDTH = 1.5;
 const CIRCLE_RADIUS = (DIAMETER - STROKE_WIDTH) / 2;
 const CIRCLE_PERIMETER = (CIRCLE_RADIUS * 2 * Math.PI).toFixed(3);
 
-type StrictTransitionProps = OmitIndexSignature<TransitionProps>;
+type StrictTransitionProps = OmitIndexSignature<TransitionProps> & TransitionActions;
 type TargetProps = Omit<React.SVGAttributes<SVGSVGElement>, 'in'>;
 
 /** CircularCountdown public properties */
