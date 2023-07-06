@@ -17,7 +17,7 @@ import * as styles from './form-control-label.module.css';
 /** Public FormControlLabel properties */
 export interface Props extends React.HTMLAttributes<HTMLLabelElement>, Pick<ControlsProps, 'gap'> {
     control: React.ReactElement;
-    label: React.ReactChild;
+    label: React.ReactNode;
     labelProps?: TypographyProps;
     disabled?: boolean;
 }

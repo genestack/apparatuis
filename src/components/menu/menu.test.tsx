@@ -6,7 +6,7 @@
  * actual or intended publication of such source code.
  */
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
-import {fireEvent, render} from '@testing-library/react';
+import {act, fireEvent, render, waitFor} from '@testing-library/react';
 import * as React from 'react';
 
 import {Menu} from './menu';
@@ -14,7 +14,7 @@ import {MenuCaption} from './menu-caption';
 import {MenuItem} from './menu-item';
 
 describe('<Menu />', () => {
-    it('should focus to menu element on mount', () => {
+    it('should focus to menu element on mount', async () => {
         const onClose = jest.fn();
         const referenceElement = document.createElement('button');
         referenceElement.focus();
@@ -26,7 +26,9 @@ describe('<Menu />', () => {
                 referenceElement={referenceElement}
             />
         );
-        expect(document.activeElement).toBe(document.getElementById('test'));
+        await waitFor(() => {
+            expect(document.activeElement).toBe(document.getElementById('test'));
+        });
     });
 
     it('should focus to menu element on open', async () => {
@@ -51,10 +53,12 @@ describe('<Menu />', () => {
             />
         );
 
-        expect(document.activeElement).toBe(document.getElementById('test'));
+        await waitFor(() => {
+            expect(document.activeElement).toBe(document.getElementById('test'));
+        });
     });
 
-    it('should change focus on arrow up or down key press', () => {
+    it('should change focus on arrow up or down key press', async () => {
         const onClose = jest.fn();
         const referenceElement = document.createElement('div');
         render(
@@ -75,19 +79,39 @@ describe('<Menu />', () => {
             bubbles: true
         });
 
-        document.activeElement!.dispatchEvent(down);
-        expect(document.activeElement).toBe(document.getElementById('first'));
-        document.activeElement!.dispatchEvent(down);
-        expect(document.activeElement).toBe(document.getElementById('second'));
-        document.activeElement!.dispatchEvent(down);
-        expect(document.activeElement).toBe(document.getElementById('second'));
-        document.activeElement!.dispatchEvent(up);
-        expect(document.activeElement).toBe(document.getElementById('first'));
-        document.activeElement!.dispatchEvent(up);
-        expect(document.activeElement).toBe(document.getElementById('first'));
+        act(() => {
+            document.activeElement!.dispatchEvent(down);
+        });
+        await waitFor(() => {
+            expect(document.activeElement).toBe(document.getElementById('first'));
+        });
+        act(() => {
+            document.activeElement!.dispatchEvent(down);
+        });
+        await waitFor(() => {
+            expect(document.activeElement).toBe(document.getElementById('second'));
+        });
+        act(() => {
+            document.activeElement!.dispatchEvent(down);
+        });
+        await waitFor(() => {
+            expect(document.activeElement).toBe(document.getElementById('second'));
+        });
+        act(() => {
+            document.activeElement!.dispatchEvent(up);
+        });
+        await waitFor(() => {
+            expect(document.activeElement).toBe(document.getElementById('first'));
+        });
+        act(() => {
+            document.activeElement!.dispatchEvent(up);
+        });
+        await waitFor(() => {
+            expect(document.activeElement).toBe(document.getElementById('first'));
+        });
     });
 
-    it('should focus item on window mousemove in keyboard mode', () => {
+    it('should focus item on window mousemove in keyboard mode', async () => {
         const referenceElement = document.createElement('div');
 
         render(
@@ -102,17 +126,22 @@ describe('<Menu />', () => {
             bubbles: true
         });
 
-        document.getElementById('first')!.focus();
-        document.activeElement!.dispatchEvent(down);
-        document.getElementById('first')!.dispatchEvent(
-            new MouseEvent('mousemove', {
-                bubbles: true
-            })
-        );
-        expect(document.activeElement).toBe(document.getElementById('first'));
+        act(() => {
+            document.getElementById('first')!.focus();
+            document.activeElement!.dispatchEvent(down);
+            document.getElementById('first')!.dispatchEvent(
+                new MouseEvent('mousemove', {
+                    bubbles: true
+                })
+            );
+        });
+
+        await waitFor(() => {
+            expect(document.activeElement).toBe(document.getElementById('first'));
+        });
     });
 
-    it('should change focus on mouse over menu item', () => {
+    it('should change focus on mouse over menu item', async () => {
         const referenceElement = document.createElement('div');
         render(
             <Menu id="test" open referenceElement={referenceElement}>
@@ -125,8 +154,12 @@ describe('<Menu />', () => {
             bubbles: true
         });
 
-        document.getElementById('second')!.dispatchEvent(mouseMoveEvent);
-        expect(document.activeElement).toBe(document.getElementById('second'));
+        act(() => {
+            document.getElementById('second')!.dispatchEvent(mouseMoveEvent);
+        });
+        await waitFor(() => {
+            expect(document.activeElement).toBe(document.getElementById('second'));
+        });
     });
 
     describe('onValueSelect method', () => {
@@ -144,24 +177,28 @@ describe('<Menu />', () => {
             return {onValueSelect, screen};
         };
 
-        it('should be called once on item click', () => {
+        it('should be called once on item click', async () => {
             const {onValueSelect} = setup();
 
             fireEvent.click(document.getElementById('first')!);
 
-            expect(onValueSelect).toHaveBeenCalledTimes(1);
+            await waitFor(() => {
+                expect(onValueSelect).toHaveBeenCalledTimes(1);
+            });
         });
 
-        it('should called with valid value on item click', () => {
+        it('should called with valid value on item click', async () => {
             const {onValueSelect} = setup();
 
             fireEvent.click(document.getElementById('first')!);
 
-            expect(onValueSelect).toHaveBeenCalledWith(
-                'first',
-                expect.anything(),
-                expect.anything()
-            );
+            await waitFor(() => {
+                expect(onValueSelect).toHaveBeenCalledWith(
+                    'first',
+                    expect.anything(),
+                    expect.anything()
+                );
+            });
         });
     });
 
@@ -190,7 +227,7 @@ describe('<Menu />', () => {
             expect(screen.queryByTestId('test')).toBeFalsy();
         });
 
-        it('should render children', () => {
+        it('should render children', async () => {
             const onClose = jest.fn();
             const referenceElement = document.createElement('div');
 
@@ -205,7 +242,9 @@ describe('<Menu />', () => {
                 </Menu>
             );
 
-            expect(screen.queryByTestId('test')).toBeTruthy();
+            await waitFor(() => {
+                expect(screen.queryByTestId('test')).toBeTruthy();
+            });
         });
     });
 });

@@ -44,18 +44,12 @@ describe('<PopoverHandler />', () => {
         });
     });
 
-    it('should not show popover content immediately', () => {
+    it('should not show popover content immediately', async () => {
         setup();
 
-        act(() => {
-            fireEvent.mouseEnter(document.getElementById('reference')!);
-        });
+        fireEvent.mouseEnter(document.getElementById('reference')!);
 
-        expect(document.getElementById('content')).toBeFalsy();
-
-        act(() => {
-            jest.runAllTimers();
-        });
+        await waitFor(() => expect(document.getElementById('content')).toBeFalsy());
     });
 
     it('should hide popover content when mouse leave on reference element', () => {
@@ -90,9 +84,7 @@ describe('<PopoverHandler />', () => {
     it('should show popover content after `openDelay` timeout', async () => {
         setup({openDelay: 1000});
 
-        act(() => {
-            fireEvent.mouseEnter(document.getElementById('reference')!);
-        });
+        fireEvent.mouseEnter(document.getElementById('reference')!);
 
         // after 700 ms should be hidden
         setTimeout(() => {
@@ -105,7 +97,9 @@ describe('<PopoverHandler />', () => {
             jest.runAllTimers();
         });
 
-        // after 1000ms are passed should be shown
-        expect(document.getElementById('content')).toBeTruthy();
+        await waitFor(() => {
+            // after 1000ms are passed should be shown
+            expect(document.getElementById('content')).toBeTruthy();
+        });
     });
 });

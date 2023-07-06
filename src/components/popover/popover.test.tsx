@@ -5,7 +5,7 @@
  * The copyright notice above does not evidence any
  * actual or intended publication of such source code.
  */
-import {render} from '@testing-library/react';
+import {act, render, waitFor} from '@testing-library/react';
 import * as React from 'react';
 
 import {TransitionPopper} from '../transition-popper';
@@ -15,17 +15,17 @@ import {Popover} from './popover';
 jest.useFakeTimers();
 
 describe('<Popover />', () => {
-    it('should render expected children', () => {
+    it('should render expected children', async () => {
         render(
             <Popover referenceElement={document.createElement('div')} open>
                 <div id="test" />
             </Popover>
         );
 
-        expect(document.getElementById('test')).toBeTruthy();
+        await waitFor(() => expect(document.getElementById('test')).toBeTruthy());
     });
 
-    it('should unmount after close', () => {
+    it('should unmount after close', async () => {
         const screen = render(
             <Popover referenceElement={document.createElement('div')} open>
                 <div id="test" />
@@ -37,9 +37,9 @@ describe('<Popover />', () => {
                 <div id="test" />
             </Popover>
         );
-        jest.runAllTimers();
+        act(() => jest.runAllTimers());
 
-        expect(document.getElementById('test')).toBeFalsy();
+        await waitFor(() => expect(document.getElementById('test')).toBeFalsy());
     });
 
     it('should unmount instantly after close when disableTransition = true', () => {
@@ -56,10 +56,11 @@ describe('<Popover />', () => {
                 <div id="test" />
             </Popover>
         );
+
         expect(document.getElementById('test')).toBeFalsy();
     });
 
-    it('should not unmount after close when keepMounted = true', () => {
+    it('should not unmount after close when keepMounted = true', async () => {
         const screen = render(
             <Popover referenceElement={document.createElement('div')} open keepMounted>
                 <div id="test" />
@@ -73,10 +74,10 @@ describe('<Popover />', () => {
             </Popover>
         );
 
-        expect(document.getElementById('test')).toBeTruthy();
+        await waitFor(() => expect(document.getElementById('test')).toBeTruthy());
     });
 
-    it('should not unmount after close when keepMounted = true disableTransition = true', () => {
+    it('should not unmount after close when keepMounted = true disableTransition = true', async () => {
         const screen = render(
             <Popover
                 referenceElement={document.createElement('div')}
@@ -94,10 +95,10 @@ describe('<Popover />', () => {
                 <div id="test" />
             </Popover>
         );
-        expect(document.getElementById('test')).toBeTruthy();
+        await waitFor(() => expect(document.getElementById('test')).toBeTruthy());
     });
 
-    it('should accept referenceElement as function', () => {
+    it('should accept referenceElement as function', async () => {
         const element = document.createElement('div');
         const getReferenceElement = jest.fn(() => element);
 
@@ -107,10 +108,10 @@ describe('<Popover />', () => {
             </Popover>
         );
 
-        expect(getReferenceElement).toHaveBeenCalled();
+        await waitFor(() => expect(getReferenceElement).toHaveBeenCalled());
     });
 
-    it('should expose scheduleUpdate method', () => {
+    it('should expose scheduleUpdate method', async () => {
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         let instance: TransitionPopper<any> | null = null;
 
@@ -128,13 +129,15 @@ describe('<Popover />', () => {
 
         expect(instance).toBeTruthy();
 
-        expect(() => {
-            // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-            instance!.scheduleUpdate();
-        }).not.toThrow();
+        await waitFor(() => {
+            expect(() => {
+                // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+                instance!.scheduleUpdate();
+            }).not.toThrow();
+        });
     });
 
-    it('should pass Transition props', () => {
+    it('should pass Transition props', async () => {
         const onEntered = jest.fn();
 
         render(
@@ -149,8 +152,8 @@ describe('<Popover />', () => {
             </Popover>
         );
 
-        jest.runAllTimers();
+        act(() => jest.runAllTimers());
 
-        expect(onEntered).toHaveBeenCalled();
+        await waitFor(() => expect(onEntered).toHaveBeenCalled());
     });
 });
