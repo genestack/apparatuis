@@ -78,7 +78,7 @@
     "dom-helpers": "^5.2.1",
     "downshift": "^7.6.0",
     "react-popper": "^2.3.0",
-    "react-textarea-autosize": "^8.3.4",
+    "react-textarea-autosize": "^8.5.0",
     "react-transition-group": "^4.4.5",
     "simplebar": "^6.2.5",
     "simplebar-react": "^3.2.4"
