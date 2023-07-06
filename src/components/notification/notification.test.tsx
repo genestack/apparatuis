@@ -5,7 +5,7 @@
  * The copyright notice above does not evidence any
  * actual or intended publication of such source code.
  */
-import {fireEvent, render} from '@testing-library/react';
+import {act, fireEvent, render} from '@testing-library/react';
 import * as React from 'react';
 
 import {Notification} from './notification';
@@ -31,7 +31,7 @@ describe('<Notification />', () => {
             </Notification>
         );
 
-        jest.runAllTimers();
+        act(() => jest.runAllTimers());
         expect(onClose).toHaveBeenCalledWith('countdown-timeout');
     });
 

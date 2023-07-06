@@ -6,7 +6,7 @@
  * actual or intended publication of such source code.
  */
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
-import {render} from '@testing-library/react';
+import {act, render, waitFor} from '@testing-library/react';
 import * as React from 'react';
 
 import {Menu} from './menu';
@@ -37,102 +37,120 @@ describe('<SubMenu />', () => {
         );
 
         const dispatchMouseEvent = (id: string, type: string) => {
-            document.getElementById(id)!.dispatchEvent(new MouseEvent(type, {bubbles: true}));
+            act(() => {
+                document.getElementById(id)!.dispatchEvent(new MouseEvent(type, {bubbles: true}));
+            });
         };
 
         const dispatchKeyDownEvent = (id: string, key: string) => {
-            document
-                .getElementById(id)!
-                .dispatchEvent(new KeyboardEvent('keydown', {bubbles: true, key}));
+            act(() => {
+                document
+                    .getElementById(id)!
+                    .dispatchEvent(new KeyboardEvent('keydown', {bubbles: true, key}));
+            });
         };
 
         return {screen, dispatchMouseEvent, dispatchKeyDownEvent};
     };
 
-    it('should not render sub menu items if sub menu is not open', () => {
+    it('should not render sub menu items if sub menu is not open', async () => {
         setup();
-        expect(document.getElementById('sub-menu')).toBeFalsy();
+        await waitFor(() => {
+            expect(document.getElementById('sub-menu')).toBeFalsy();
+        });
     });
 
-    it('should open sub menu when mouse over on menu item', () => {
+    it('should open sub menu when mouse over on menu item', async () => {
         const {dispatchMouseEvent} = setup();
         dispatchMouseEvent('middle', 'mouseover');
-        jest.runAllTimers();
-        expect(document.getElementById('sub-menu')).toBeTruthy();
+        act(() => jest.runAllTimers());
+        await waitFor(() => {
+            expect(document.getElementById('sub-menu')).toBeTruthy();
+        });
     });
 
-    it('should close sub menu when mouse over on menu item', () => {
+    it('should close sub menu when mouse over on menu item', async () => {
         const {dispatchMouseEvent} = setup();
         dispatchMouseEvent('middle', 'mouseover');
-        jest.runAllTimers();
+        act(() => jest.runAllTimers());
         dispatchMouseEvent('middle', 'mouseout');
-        jest.runAllTimers();
-        expect(document.getElementById('sub-menu')).toBeFalsy();
+        act(() => jest.runAllTimers());
+        await waitFor(() => {
+            expect(document.getElementById('sub-menu')).toBeFalsy();
+        });
     });
 
-    it('should not close sub menu if sub menu item has mouse over in time', () => {
+    it('should not close sub menu if sub menu item has mouse over in time', async () => {
         const {dispatchMouseEvent} = setup();
         dispatchMouseEvent('middle', 'mouseover');
-        jest.runAllTimers();
+        act(() => jest.runAllTimers());
         dispatchMouseEvent('middle', 'mouseout');
         dispatchMouseEvent('sub-menu-first', 'mouseover');
-        jest.runAllTimers();
-        expect(document.getElementById('sub-menu')).toBeTruthy();
+        act(() => jest.runAllTimers());
+        await waitFor(() => {
+            expect(document.getElementById('sub-menu')).toBeTruthy();
+        });
     });
 
-    it('should close sub menu if mouse leaves it', () => {
+    it('should close sub menu if mouse leaves it', async () => {
         const {dispatchMouseEvent} = setup();
         dispatchMouseEvent('middle', 'mouseover');
-        jest.runAllTimers();
+        act(() => jest.runAllTimers());
         dispatchMouseEvent('sub-menu', 'mouseout');
-        jest.runAllTimers();
-        expect(document.getElementById('sub-menu')).toBeFalsy();
+        act(() => jest.runAllTimers());
+        await waitFor(() => {
+            expect(document.getElementById('sub-menu')).toBeFalsy();
+        });
     });
 
-    it('should open sub menu on ArrowRight keydown', () => {
+    it('should open sub menu on ArrowRight keydown', async () => {
         const {dispatchMouseEvent, dispatchKeyDownEvent} = setup();
         dispatchMouseEvent('middle', 'mouseover');
-        jest.runAllTimers();
+        act(() => jest.runAllTimers());
         dispatchKeyDownEvent('middle', 'ArrowRight');
-        expect(document.getElementById('sub-menu')).toBeTruthy();
+        await waitFor(() => {
+            expect(document.getElementById('sub-menu')).toBeTruthy();
+        });
     });
 
-    it('should focus to first element in sub menu when ArrowRight keydown', () => {
+    it('should focus to first element in sub menu when ArrowRight keydown', async () => {
         const {dispatchMouseEvent, dispatchKeyDownEvent} = setup();
         dispatchMouseEvent('middle', 'mouseover');
-        jest.runAllTimers();
+        act(() => jest.runAllTimers());
         dispatchKeyDownEvent('middle', 'ArrowRight');
-        expect(document.activeElement).toBe(document.getElementById('sub-menu-first'));
+        await waitFor(() =>
+            expect(document.activeElement).toBe(document.getElementById('sub-menu-first'))
+        );
     });
 
-    it('should close sub menu on ArrowLeft keydown when it opens', () => {
+    it('should close sub menu on ArrowLeft keydown when it opens', async () => {
         const {dispatchMouseEvent, dispatchKeyDownEvent} = setup();
         dispatchMouseEvent('middle', 'mouseover');
-        jest.runAllTimers();
+        act(() => jest.runAllTimers());
         dispatchKeyDownEvent('middle', 'ArrowRight');
         dispatchKeyDownEvent('sub-menu-first', 'ArrowLeft');
-        expect(document.getElementById('sub-menu')).toBeFalsy();
+        await waitFor(() => expect(document.getElementById('sub-menu')).toBeFalsy());
     });
 
-    it('should not call subMenu callback if sub menu closed', () => {
+    it('should not call subMenu callback if sub menu closed', async () => {
         const subMenu = jest.fn(() => <SubMenu id="sub-menu" />);
         setup(subMenu);
-        expect(subMenu).not.toHaveBeenCalled();
+        await waitFor(() => expect(subMenu).not.toHaveBeenCalled());
     });
 
-    it('should call subMenu callback if sub menu opened', () => {
+    it('should call subMenu callback if sub menu opened', async () => {
         const subMenu = jest.fn(() => <SubMenu id="sub-menu-callback" />);
         const {dispatchMouseEvent} = setup(subMenu);
         dispatchMouseEvent('middle', 'mouseover');
-        jest.runAllTimers();
-        expect(subMenu).toHaveBeenCalledTimes(1);
+        act(() => jest.runAllTimers());
+        await waitFor(() => expect(subMenu).toHaveBeenCalledTimes(1));
     });
 
-    it('should render element from subMenu callback if sub menu opened', () => {
+    it('should render element from subMenu callback if sub menu opened', async () => {
         const subMenu = jest.fn(() => <SubMenu id="sub-menu-callback" />);
         const {dispatchMouseEvent} = setup(subMenu);
         dispatchMouseEvent('middle', 'mouseover');
-        jest.runAllTimers();
-        expect(document.getElementById('sub-menu-callback')).toBeTruthy();
+        act(() => jest.runAllTimers());
+        await waitFor(() => expect(document.getElementById('sub-menu-callback')).toBeTruthy());
     });
 });

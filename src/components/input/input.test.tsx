@@ -139,7 +139,7 @@ describe('<Input />', () => {
 
         const classList = document.getElementById('test')?.classList;
 
-        document.getElementById('test')!.focus();
+        fireEvent.focus(document.getElementById('test')!);
 
         expect(classList?.contains('focused-test')).toStrictEqual(true);
 

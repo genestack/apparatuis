@@ -71,7 +71,7 @@ export const Popover = (props: Props) => {
     } = mergeClassesProps(props, styles);
 
     return (
-        <TransitionPopper<PaperProps> {...rest} ref={popperRef}>
+        <TransitionPopper<Omit<PaperProps, 'children'>> {...rest} ref={popperRef}>
             {({ref, style, arrowProps, placement, targetProps, onTransitionExited}) => (
                 <div
                     {...containerProps}

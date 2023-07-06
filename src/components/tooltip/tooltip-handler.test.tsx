@@ -6,7 +6,7 @@
  * actual or intended publication of such source code.
  */
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
-import {act, fireEvent, render} from '@testing-library/react';
+import {act, fireEvent, render, waitFor} from '@testing-library/react';
 import * as React from 'react';
 
 import {Tooltip} from './tooltip';
@@ -34,11 +34,9 @@ describe('<TooltipHandler />', () => {
 
         fireEvent.mouseEnter(document.getElementById('reference')!);
 
-        act(() => {
-            jest.runAllTimers();
-        });
+        act(() => jest.runAllTimers());
 
-        expect(document.getElementById('tooltip')).toBeTruthy();
+        await waitFor(() => expect(document.getElementById('tooltip')).toBeTruthy());
     });
 
     it('should not show tooltip immediately', () => {
@@ -69,7 +67,7 @@ describe('<TooltipHandler />', () => {
         expect(document.getElementById('tooltip')).toBeFalsy();
     });
 
-    it('should show tooltip when focus on reference element', () => {
+    it('should show tooltip when focus on reference element', async () => {
         setup();
 
         fireEvent.focus(document.getElementById('reference')!);
@@ -78,7 +76,7 @@ describe('<TooltipHandler />', () => {
             jest.runAllTimers();
         });
 
-        expect(document.getElementById('tooltip')).toBeTruthy();
+        await waitFor(() => expect(document.getElementById('tooltip')).toBeTruthy());
     });
 
     it('should hide tooltip when blur on reference element', () => {
@@ -145,13 +143,11 @@ describe('<TooltipHandler />', () => {
     });
 
     describe('when only focus listener is disabled', () => {
-        it('should show tooltip on mouse enter', () => {
+        it('should show tooltip on mouse enter', async () => {
             setup({disableFocusListener: true});
             fireEvent.mouseEnter(document.getElementById('reference')!);
-            act(() => {
-                jest.runAllTimers();
-            });
-            expect(document.getElementById('tooltip')).toBeTruthy();
+            act(() => jest.runAllTimers());
+            await waitFor(() => expect(document.getElementById('tooltip')).toBeTruthy());
         });
 
         it('should not show tooltip on focus', () => {
@@ -176,13 +172,13 @@ describe('<TooltipHandler />', () => {
             expect(document.getElementById('tooltip')).toBeFalsy();
         });
 
-        it('should show tooltip on focus', () => {
+        it('should show tooltip on focus', async () => {
             setup({disableHoverListener: true});
             fireEvent.focus(document.getElementById('reference')!);
             act(() => {
                 jest.runAllTimers();
             });
-            expect(document.getElementById('tooltip')).toBeTruthy();
+            await waitFor(() => expect(document.getElementById('tooltip')).toBeTruthy());
         });
     });
 
@@ -248,6 +244,6 @@ describe('<TooltipHandler />', () => {
             jest.runAllTimers();
         });
 
-        expect(document.getElementById('tooltip')).toBeTruthy();
+        await waitFor(() => expect(document.getElementById('tooltip')).toBeTruthy());
     });
 });

@@ -5,7 +5,7 @@
  * The copyright notice above does not evidence any
  * actual or intended publication of such source code.
  */
-import {render} from '@testing-library/react';
+import {act, render, waitFor} from '@testing-library/react';
 import * as React from 'react';
 
 import {Tooltip} from './tooltip';
@@ -13,13 +13,14 @@ import {Tooltip} from './tooltip';
 jest.useFakeTimers();
 
 describe('<Tooltip />', () => {
-    it('should render children', () => {
+    it('should render children', async () => {
         render(
             <Tooltip referenceElement={document.createElement('div')} open>
                 <div id="test" />
             </Tooltip>
         );
-        expect(document.getElementById('test')).toBeTruthy();
+
+        await waitFor(() => expect(document.getElementById('test')).toBeTruthy());
     });
 
     it('should not mount when closed', () => {
@@ -36,12 +37,12 @@ describe('<Tooltip />', () => {
             </Tooltip>
         );
 
-        jest.runAllTimers();
+        act(() => jest.runAllTimers());
 
         expect(document.getElementById('test')).toBeFalsy();
     });
 
-    it('should call onClose on window escape keydown', () => {
+    it('should call onClose on window escape keydown', async () => {
         const onClose = jest.fn();
 
         render(
@@ -57,11 +58,13 @@ describe('<Tooltip />', () => {
             })
         );
 
-        expect(onClose).toHaveBeenCalledTimes(1);
-        expect(onClose).toHaveBeenCalledWith('escape_keydown', expect.anything());
+        await waitFor(() => {
+            expect(onClose).toHaveBeenCalledTimes(1);
+            expect(onClose).toHaveBeenCalledWith('escape_keydown', expect.anything());
+        });
     });
 
-    it('should call onClose on window escape keydown when listener is disabled', () => {
+    it('should call onClose on window escape keydown when listener is disabled', async () => {
         const onClose = jest.fn();
 
         render(
@@ -82,6 +85,6 @@ describe('<Tooltip />', () => {
             })
         );
 
-        expect(onClose).not.toHaveBeenCalled();
+        await waitFor(() => expect(onClose).not.toHaveBeenCalled());
     });
 });

@@ -7,7 +7,7 @@
  */
 import classNames from 'classnames';
 import * as React from 'react';
-import Transition, {TransitionProps} from 'react-transition-group/Transition';
+import Transition, {TransitionActions, TransitionProps} from 'react-transition-group/Transition';
 
 import {chain} from '../../utils/chain';
 import {OmitIndexSignature} from '../../utils/omit-index-signature';
@@ -18,7 +18,7 @@ import * as styles from './grow.module.css';
 
 const DURATION_TIMEOUT = 300;
 
-type StrictTransitionProps = OmitIndexSignature<TransitionProps>;
+type StrictTransitionProps = OmitIndexSignature<TransitionProps> & TransitionActions;
 type TargetProps = Omit<StrictTransitionProps, 'timeout' | 'children'>;
 type Children = React.ReactElement<{className?: string}>;
 

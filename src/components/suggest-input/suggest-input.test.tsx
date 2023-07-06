@@ -6,7 +6,7 @@
  * actual or intended publication of such source code.
  */
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
-import {fireEvent, render} from '@testing-library/react';
+import {act, fireEvent, render, waitFor} from '@testing-library/react';
 import * as React from 'react';
 
 import {SuggestInput} from './suggest-input';
@@ -32,20 +32,20 @@ describe('<SuggestInput />', () => {
             expect(document.getElementById('item')).toBeFalsy();
         });
 
-        it('should render suggest items when value has been changed', () => {
+        it('should render suggest items when value has been changed', async () => {
             setup();
             fireEvent.change(document.getElementById('input')!, {target: {value: 'foo'}});
-            expect(document.getElementById('item')).toBeTruthy();
+            await waitFor(() => expect(document.getElementById('item')).toBeTruthy());
         });
 
-        it('should render other children when value has been changed', () => {
+        it('should render other children when value has been changed', async () => {
             setup();
             fireEvent.change(document.getElementById('input')!, {target: {value: 'foo'}});
-            expect(document.getElementById('title')).toBeTruthy();
+            await waitFor(() => expect(document.getElementById('title')).toBeTruthy());
         });
     });
 
-    it('should call onOpenChange when suggest has been opened', () => {
+    it('should call onOpenChange when suggest has been opened', async () => {
         const onOpenChange = jest.fn();
         render(
             <SuggestInput id="input" onOpenChange={onOpenChange}>
@@ -56,11 +56,13 @@ describe('<SuggestInput />', () => {
         expect(onOpenChange).not.toHaveBeenCalled();
 
         fireEvent.change(document.getElementById('input')!, {target: {value: 'foo'}});
-        expect(onOpenChange).toHaveBeenCalledTimes(1);
-        expect(onOpenChange).toHaveBeenCalledWith(true);
+        await waitFor(() => {
+            expect(onOpenChange).toHaveBeenCalledTimes(1);
+            expect(onOpenChange).toHaveBeenCalledWith(true);
+        });
     });
 
-    it('should open suggest on focus', () => {
+    it('should open suggest on focus', async () => {
         const onOpenChange = jest.fn();
         render(
             <SuggestInput id="input" onOpenChange={onOpenChange} openOnFocus>
@@ -68,13 +70,17 @@ describe('<SuggestInput />', () => {
             </SuggestInput>
         );
 
-        document.getElementById('input')!.focus();
+        act(() => {
+            document.getElementById('input')!.focus();
+        });
 
-        expect(onOpenChange).toHaveBeenCalledTimes(1);
-        expect(onOpenChange).toHaveBeenCalledWith(true);
+        await waitFor(() => {
+            expect(onOpenChange).toHaveBeenCalledTimes(1);
+            expect(onOpenChange).toHaveBeenCalledWith(true);
+        });
     });
 
-    it('should accept any component with value property', () => {
+    it('should accept any component with value property', async () => {
         const onComplete = jest.fn();
 
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -90,12 +96,11 @@ describe('<SuggestInput />', () => {
             </SuggestInput>
         );
 
-        document.getElementById('input')!.focus();
+        fireEvent.focus(document.getElementById('input')!);
         fireEvent.click(document.getElementById('any-component')!);
+        fireEvent.focus(document.getElementById('input')!);
 
-        document.getElementById('input')!.focus();
-
-        expect(onComplete).toHaveBeenCalledWith('bar');
+        await waitFor(() => expect(onComplete).toHaveBeenCalledWith('bar'));
     });
 
     describe('when item has been selected', () => {
@@ -113,32 +118,36 @@ describe('<SuggestInput />', () => {
                 </SuggestInput>
             );
 
-            document.getElementById('input')!.focus();
+            fireEvent.focus(document.getElementById('input')!);
             fireEvent.click(document.getElementById('item')!);
 
             return {screen, onComplete, onOpenChange};
         };
 
-        it('should call onComplete', () => {
+        it('should call onComplete', async () => {
             const {onComplete} = setup();
-            expect(onComplete).toHaveBeenCalledTimes(1);
-            expect(onComplete).toHaveBeenCalledWith('bar');
+            await waitFor(() => {
+                expect(onComplete).toHaveBeenCalledTimes(1);
+                expect(onComplete).toHaveBeenCalledWith('bar');
+            });
         });
 
-        it('should close suggest', () => {
+        it('should close suggest', async () => {
             setup();
 
-            expect(document.querySelectorAll('#item')).toHaveLength(0);
+            await waitFor(() => expect(document.querySelectorAll('#item')).toHaveLength(0));
         });
 
-        it('should onOpenChange with false', () => {
+        it('should onOpenChange with false', async () => {
             const {onOpenChange} = setup();
-            expect(onOpenChange).toHaveBeenCalledTimes(2);
-            expect(onOpenChange.mock.calls[1][0]).toBe(false);
+            await waitFor(() => {
+                expect(onOpenChange).toHaveBeenCalledTimes(2);
+                expect(onOpenChange.mock.calls[1][0]).toBe(false);
+            });
         });
     });
 
-    it('should use children as function', () => {
+    it('should use children as function', async () => {
         const renderComponent = jest.fn();
         renderComponent.mockImplementation(() => {
             return [<SuggestInputItem key="item" id="item" />];
@@ -147,7 +156,9 @@ describe('<SuggestInput />', () => {
 
         expect(renderComponent).toHaveBeenCalledTimes(0);
         fireEvent.change(document.getElementById('input')!, {target: {value: 'foo'}});
-        expect(renderComponent).toHaveBeenCalledTimes(1);
-        expect(renderComponent).toHaveBeenCalledWith('foo');
+        await waitFor(() => {
+            expect(renderComponent).toHaveBeenCalledTimes(1);
+            expect(renderComponent).toHaveBeenCalledWith('foo');
+        });
     });
 });

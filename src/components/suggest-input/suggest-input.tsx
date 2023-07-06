@@ -65,7 +65,7 @@ function getSuggestInputChildren(
 type SuggestInputChildren = React.ReactNode | ((value?: string) => React.ReactNode[]);
 
 /** SuggestInput public properties */
-export interface Props extends SuggestProps {
+export interface Props extends Omit<SuggestProps, 'children'> {
     /** Open suggest when user focuses in input */
     openOnFocus?: boolean;
     /** Calls when user selects a suggested item */
@@ -133,7 +133,7 @@ export function SuggestInput(props: Props) {
                     {suppressRefError: true}
                 );
 
-                const inputProps = downshift.getInputProps<SuggestProps>({
+                const inputProps = downshift.getInputProps({
                     ...rest,
                     onFocus: chain(rest.onFocus, handleInputFocus)
                 });

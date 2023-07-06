@@ -6,7 +6,7 @@
  * actual or intended publication of such source code.
  */
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
-import {fireEvent, render} from '@testing-library/react';
+import {act, fireEvent, render, waitFor} from '@testing-library/react';
 import * as React from 'react';
 
 import {Menu} from './menu';
@@ -47,26 +47,34 @@ describe('<MenuHandler />', () => {
         expect(document.getElementById('menu')).toBeFalsy();
     });
 
-    it('should open menu on child click', () => {
+    it('should open menu on child click', async () => {
         setup();
+
         fireEvent.click(document.getElementById('button')!);
-        expect(document.getElementById('menu')).toBeTruthy();
+
+        await waitFor(() => {
+            expect(document.getElementById('menu')).toBeTruthy();
+        });
     });
 
-    it('should not open menu on child click', () => {
+    it('should not open menu on child click', async () => {
         setup({disableListeners: true});
         fireEvent.click(document.getElementById('button')!);
-        expect(document.getElementById('menu')).toBeFalsy();
+        await waitFor(() => {
+            expect(document.getElementById('menu')).toBeFalsy();
+        });
     });
 
-    it('should close menu on menu item without sub menu', () => {
+    it('should close menu on menu item without sub menu', async () => {
         setup();
         fireEvent.click(document.getElementById('button')!);
         fireEvent.click(document.getElementById('item')!);
 
         expect(document.getElementById('menu')).toBeTruthy();
 
-        jest.runAllTimers();
+        act(() => {
+            jest.runAllTimers();
+        });
 
         expect(document.getElementById('menu')).toBeFalsy();
     });
@@ -79,10 +87,13 @@ describe('<MenuHandler />', () => {
         expect(setup().ref.current).toHaveProperty('close', expect.any(Function));
     });
 
-    it('should open menu on ArrowDown keypress', () => {
+    it('should open menu on ArrowDown keypress', async () => {
         setup();
         fireEvent.keyDown(document.getElementById('button')!, {key: 'ArrowDown'});
-        expect(document.getElementById('menu')).toBeTruthy();
+
+        await waitFor(() => {
+            expect(document.getElementById('menu')).toBeTruthy();
+        });
     });
 
     it('should not open menu on ArrowDown keypress if `disabledListeners` is passed', () => {

@@ -1,10 +1,11 @@
 /*
- * Copyright (c) 2011-2019 Genestack Limited
+ * Copyright (c) 2011-2023 Genestack Limited
  * All Rights Reserved
  * THIS IS UNPUBLISHED PROPRIETARY SOURCE CODE OF GENESTACK LIMITED
  * The copyright notice above does not evidence any
  * actual or intended publication of such source code.
  */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import {Popper, PopperProps, PopperChildrenProps} from 'react-popper';
@@ -15,7 +16,6 @@ type TargetProps = Omit<PopperProps<any>, 'referenceElement' | 'children'>;
 export type TransitionPopperPlacement = PopperChildrenProps['placement'];
 
 /** TransitionPopperChildrenProps  */
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export type TransitionPopperChildrenProps<T = any> = Omit<PopperChildrenProps, 'placement'> & {
     targetProps: T;
     onTransitionExited: () => void;
@@ -138,7 +138,7 @@ export class TransitionPopper<T> extends React.Component<Props<T>, State> {
                             if (typeof popperChildrenProps.ref === 'function') {
                                 popperChildrenProps.ref(node);
                             }
-                            this.popperScheduleUpdate = popperChildrenProps.forceUpdate;
+                            this.popperScheduleUpdate = popperChildrenProps.update;
                         },
                         targetProps: targetProps as T,
                         onTransitionExited: this.handleTransitionExited

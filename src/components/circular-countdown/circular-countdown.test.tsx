@@ -5,7 +5,7 @@
  * The copyright notice above does not evidence any
  * actual or intended publication of such source code.
  */
-import {render} from '@testing-library/react';
+import {act, render} from '@testing-library/react';
 import * as React from 'react';
 
 import {CircularCountdown} from './circular-countdown';
@@ -18,13 +18,15 @@ describe('<CircularCountdown />', () => {
         expect(screen.queryByTestId('test')).toHaveProperty('tagName', 'circle');
     });
 
-    it('should call onComplete callback', async () => {
+    it('should call onComplete callback', () => {
         const onComplete = jest.fn();
         const screen = render(<CircularCountdown onComplete={onComplete} />);
         expect(onComplete).not.toHaveBeenCalled();
         screen.rerender(<CircularCountdown in onComplete={onComplete} />);
         expect(onComplete).not.toHaveBeenCalled();
-        jest.runAllTimers();
+        act(() => {
+            jest.runAllTimers();
+        });
         expect(onComplete).toHaveBeenCalled();
     });
 });

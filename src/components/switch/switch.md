@@ -71,13 +71,7 @@ function MenuExample() {
             <Menu {...menu.getMenuProps()}>
                 <MenuItem
                     as="label"
-                    append={
-                        <Switch
-                            checked={checked}
-                            onCheckedChange={onCheckedChange}
-                            disableVisualFocus
-                        />
-                    }
+                    append={<Switch checked={checked} onCheckedChange={onCheckedChange} />}
                 >
                     Public access
                 </MenuItem>

@@ -6,7 +6,7 @@
  * actual or intended publication of such source code.
  */
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
-import {render} from '@testing-library/react';
+import {act, render} from '@testing-library/react';
 import * as React from 'react';
 
 import {Overlay, Props} from './overlay';
@@ -99,7 +99,7 @@ describe('<Overlay />', () => {
 
         screen.rerender(<Overlay onClose={onClose} />);
 
-        jest.runAllTimers();
+        act(() => jest.runAllTimers());
 
         expect(document.activeElement).toBe(activeElement);
     });
@@ -109,7 +109,7 @@ describe('<Overlay />', () => {
         const screen = render(<Overlay open onClose={jest.fn()} onClosed={onClosed} />);
         screen.rerender(<Overlay onClose={jest.fn()} onClosed={onClosed} />);
         expect(onClosed).not.toHaveBeenCalled();
-        jest.runAllTimers();
+        act(() => jest.runAllTimers());
         expect(onClosed).toHaveBeenCalled();
     });
 
@@ -126,7 +126,7 @@ describe('<Overlay />', () => {
             </Overlay>
         );
         expect(document.getElementById('test')).toBeTruthy();
-        jest.runAllTimers();
+        act(() => jest.runAllTimers());
         expect(document.getElementById('test')).toBeFalsy();
     });
 
@@ -143,7 +143,7 @@ describe('<Overlay />', () => {
             </Overlay>
         );
         expect(document.getElementById('test')).toBeTruthy();
-        jest.runAllTimers();
+        act(() => jest.runAllTimers());
         expect(document.getElementById('test')).toBeTruthy();
     });
 

@@ -7,7 +7,7 @@
  */
 import classNames from 'classnames';
 import * as React from 'react';
-import Transition, {TransitionProps} from 'react-transition-group/Transition';
+import Transition, {TransitionActions, TransitionProps} from 'react-transition-group/Transition';
 
 import {chain} from '../../utils/chain';
 import {OmitIndexSignature} from '../../utils/omit-index-signature';
@@ -18,7 +18,7 @@ import * as styles from './fade.module.css';
 
 const DURATION_TIMEOUT = 300;
 
-type StrictCSSTransitionProps = OmitIndexSignature<TransitionProps>;
+type StrictCSSTransitionProps = OmitIndexSignature<TransitionProps> & TransitionActions;
 type TargetProps = Omit<StrictCSSTransitionProps, 'timeout' | 'children'>;
 type Children = React.ReactElement<{className?: string}>;
 

@@ -18,7 +18,7 @@ import {Typography} from '../typography';
 import {TooltipSlide} from './tooltip-slide-transition';
 import * as styles from './tooltip.module.css';
 
-type TargetElementProps = React.HTMLAttributes<HTMLDivElement>;
+type TargetElementProps = Omit<React.HTMLAttributes<HTMLDivElement>, 'children'>;
 type TargetProps = Omit<TransitionPopperProps<TargetElementProps>, 'children'>;
 
 const TooltipArrowIcon = createIcon(
