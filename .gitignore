@@ -1,0 +1,24 @@
+.idea
+.vscode
+.genestack_shell_history
+*.iml
+
+node_modules
+npm-debug.log*
+
+.eslintcache
+
+# our modules builds
+dist/
+
+# jest stuff
+coverage/
+
+# styleguide build
+styleguide
+
+# Earthly stuff
+.env
+.env-woq
+.arg
+.secret
