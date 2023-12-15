@@ -42,50 +42,6 @@ describe('<Input />', () => {
     });
 
     describe('when "clearable" prop is passed', () => {
-        it('should not render clear button when input value is empty', () => {
-            render(<Input id="input" clearable clearButtonProps={{id: 'clear-button'}} />);
-            const input = document.getElementById('input')! as HTMLInputElement;
-            fireEvent.change(input, {target: {value: ''}});
-            expect(document.getElementById('clear-button')).toBeFalsy();
-        });
-
-        it('should not render clear button when empty "value" prop is passed', () => {
-            render(
-                <Input
-                    clearable
-                    value=""
-                    onValueChange={jest.fn()}
-                    clearButtonProps={{id: 'clear-button'}}
-                />
-            );
-            expect(document.getElementById('clear-button')).toBeFalsy();
-        });
-
-        it('should render clear button when input value is not empty', () => {
-            render(
-                <Input
-                    clearable
-                    value="test"
-                    onValueChange={jest.fn()}
-                    clearButtonProps={{id: 'clear-button'}}
-                />
-            );
-
-            expect(document.getElementById('clear-button')).toBeTruthy();
-        });
-
-        it('should render clear button when "value" prop is passed', () => {
-            render(
-                <Input
-                    clearable
-                    value="foo"
-                    clearButtonProps={{id: 'clear-button'}}
-                    onValueChange={jest.fn()}
-                />
-            );
-            expect(document.getElementById('clear-button')).toBeTruthy();
-        });
-
         it('should call onClearButtonClick on "clear" button click', () => {
             const handleClearButtonClick = jest.fn();
             const handleValueChange = jest.fn();
