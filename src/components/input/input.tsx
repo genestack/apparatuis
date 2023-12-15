@@ -232,7 +232,6 @@ export function Input(props: Props) {
                             {...clearButtonProps}
                             show={
                                 clearable &&
-                                !!inputProps.value &&
                                 !inputProps.disabled &&
                                 !inputProps.readOnly &&
                                 !loading
