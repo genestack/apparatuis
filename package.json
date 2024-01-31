@@ -16,7 +16,7 @@
     "ui"
   ],
   "author": "Genestack Limited",
-  "license": "UNLICENSED",
+  "license": "MIT",
   "scripts": {
     "start": "styleguidist server",
     "build": "styleguidist build",
