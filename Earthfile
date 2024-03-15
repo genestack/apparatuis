@@ -48,6 +48,14 @@ ui-kit:
     ARG AWS_S3_UIKIT_PATH=ui_kit
     ARG BRANCH=$(git symbolic-ref HEAD)
 
+    COPY requirements.txt .
+    RUN \
+        --secret NEXUS_USER \
+        --secret NEXUS_PASSWORD \
+            pypi-login.sh && \
+            python3 -m pip install --no-cache-dir -r requirements.txt&& \
+            pypi-clean.sh
+
     ARG TARGET_PATH=${AWS_S3_UIKIT_PATH}/${BRANCH}
     ARG TARGET_S3_URL=s3://${AWS_S3_UIKIT_BUCKET}/${TARGET_PATH}
     ARG HTML_URL=https://${AWS_S3_UIKIT_BUCKET}.s3.amazonaws.com/${TARGET_PATH}/index.html
