@@ -117,7 +117,7 @@ function useItemsRequest() {
 
 function SyncExample() {
     return (
-        <SuggestInput onComplete={(value) => console.log(value)}>
+        <SuggestInput onComplete={(value) => console.log(value)} openOnFocus>
             {(value = '') => {
                 const suggests = items
                     .filter((item) => hasItemMatch(value, item))

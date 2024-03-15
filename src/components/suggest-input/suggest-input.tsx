@@ -90,6 +90,15 @@ export function SuggestInput(props: Props) {
         rest.onValueChange
     );
     const [isOpen, setIsOpen] = React.useState(false);
+    const skipClick = React.useRef(false);
+    const firstMount = React.useRef(true);
+
+    React.useEffect(() => {
+        if (!firstMount.current && onOpenChange) {
+            onOpenChange(isOpen);
+        }
+        firstMount.current = false;
+    }, [isOpen]);
 
     const handleSelect = (item: string | null) => {
         if (!item) {
@@ -108,21 +117,26 @@ export function SuggestInput(props: Props) {
     const handleStateChange = (changes: StateChangeOptions<string>) => {
         if (changes.isOpen !== undefined) {
             setIsOpen(changes.isOpen);
-
-            if (onOpenChange) {
-                onOpenChange(changes.isOpen);
-            }
         }
     };
 
     const handleInputFocus = () => {
         if (openOnFocus) {
+            skipClick.current = true;
             setIsOpen(true);
+        }
+    };
 
-            if (onOpenChange) {
-                onOpenChange(true);
+    const handleInputClick = () => {
+        if (!skipClick.current) {
+            if (isOpen) {
+                setIsOpen(false);
+            } else if (openOnFocus) {
+                setIsOpen(true);
             }
         }
+
+        skipClick.current = false;
     };
 
     return (
@@ -135,7 +149,8 @@ export function SuggestInput(props: Props) {
 
                 const inputProps = downshift.getInputProps({
                     ...rest,
-                    onFocus: chain(rest.onFocus, handleInputFocus)
+                    onFocus: chain(rest.onFocus, handleInputFocus),
+                    onClick: chain(rest.onClick, handleInputClick)
                 });
 
                 const inputPopoverProps = inputProps.popoverProps || {};
