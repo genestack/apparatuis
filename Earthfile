@@ -5,6 +5,7 @@ ARG --global --required NPM_REGISTRY_GROUP
 ARG --global --required NPM_REGISTRY_RELEASES
 ARG --global --required NPM_REGISTRY_SNAPSHOTS
 ARG --global --required NEXUS_REPOSITORY_URL
+ARG --global --required NEXUS_URL
 
 deps:
     ARG --required BASE_IMAGES_VERSION
