@@ -8,3 +8,5 @@
 **/package.json
 **/package-lock.json
 
+# GitHub Actions
+.github/workflows/*
