@@ -8,5 +8,9 @@
 **/package.json
 **/package-lock.json
 
+# OCI-images
+**/Earthfile
+**/Dockerfile
+
 # GitHub Actions
 .github/workflows/*
