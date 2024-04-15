@@ -4,6 +4,9 @@
 # To address the GitHub issue about applications and CODEOWNERS file, exclude some file patterns from it.
 # https://github.com/orgs/community/discussions/23064#discussioncomment-3238917
 
+# Pre-commit
+.pre-commit-config.yaml
+
 # NodeJS packages
 **/package.json
 **/package-lock.json
