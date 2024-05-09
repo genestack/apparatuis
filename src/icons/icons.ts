@@ -98,3 +98,4 @@ export {FailedIcon} from './failed-icon';
 export {PublishIcon} from './publish-icon';
 export {WorkingCopyEdited} from './working-copy-edited';
 export {CompletedIcon} from './completed-icon';
+export {StarIcon} from './star-icon';
