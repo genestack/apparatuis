@@ -43,9 +43,9 @@ const [state, setState] = React.useState({
     value: ''
 });
 
-const results = Object.keys(icons).filter((name) =>
-    name.toLowerCase().match(state.value.toLowerCase())
-).sort();
+const results = Object.keys(icons)
+    .filter((name) => name.toLowerCase().match(state.value.toLowerCase()))
+    .sort();
 
 <PageContent as={Paper}>
     <Controls>
