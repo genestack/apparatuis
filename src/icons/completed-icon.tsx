@@ -7,7 +7,7 @@
  */
 import * as React from 'react';
 
-import {createIcon} from "../components/icon";
+import {createIcon} from '../components/icon';
 
 export const CompletedIcon = createIcon(
     <svg fill="none" width="20" height="20" viewBox="0 0 20 20">
