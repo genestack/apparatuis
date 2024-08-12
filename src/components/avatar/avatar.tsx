@@ -29,7 +29,7 @@ export interface Props
 /**
  * Avatar component is the graphical representation of a user
  */
-export function Avatar(props: Props) {
+export const Avatar = React.forwardRef<HTMLDivElement, Props>(function Avatar(props, ref) {
     const {initials: initialsProp, classes, icon, ...rest} = mergeClassesProps(props, styles);
 
     let initials: React.ReactElement | null = null;
@@ -56,6 +56,7 @@ export function Avatar(props: Props) {
             as="div"
             {...rest}
             className={classNames(classes.root, rest.className)}
+            ref={ref as React.ForwardedRef<HTMLElement>}
         >
             {icon ? (
                 icon
@@ -67,4 +68,4 @@ export function Avatar(props: Props) {
             )}
         </Typography>
     );
-}
+});

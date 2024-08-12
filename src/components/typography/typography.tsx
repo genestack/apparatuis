@@ -83,7 +83,10 @@ export type Props<T extends TargetProps = DefaultTargetProps> = T &
  * It is one of the base components of whole UI Kit.
  * Will be moved to UI Kit.
  */
-export function Typography<T extends TargetProps = DefaultTargetProps>(props: Props<T>) {
+function TypographyComponent<T extends TargetProps = DefaultTargetProps>(
+    props: Props<T>,
+    ref?: React.ForwardedRef<HTMLElement>
+) {
     return (
         <DarkContext.Consumer>
             {(darkContext) => {
@@ -151,9 +154,16 @@ export function Typography<T extends TargetProps = DefaultTargetProps>(props: Pr
 
                             [classes.condensed]: condensed
                         })}
+                        ref={ref}
                     />
                 );
             }}
         </DarkContext.Consumer>
     );
 }
+
+export const Typography = React.forwardRef(TypographyComponent) as <
+    T extends TargetProps = DefaultTargetProps
+>(
+    props: Props<T> & {ref?: React.ForwardedRef<HTMLElement>}
+) => ReturnType<typeof TypographyComponent>;
