@@ -26,7 +26,7 @@ import {RootRef} from '../root-ref';
 
 import {MenuContext, MenuContextValue} from './menu-context';
 import * as styles from './menu-item.module.css';
-import {MenuPopover, Props as MenuPopoverProps} from './menu-popover';
+import {getClosestMenuContainer, MenuPopover, Props as MenuPopoverProps} from './menu-popover';
 import {Props as SubMenuProps} from './sub-menu';
 
 const OPEN_TIMEOUT = 200;
@@ -54,7 +54,7 @@ export interface Props extends TargetProps, WithClasses<keyof typeof styles> {
         | 'referenceElement'
         | 'disableTransition'
         | 'placement'
-    >;
+    > & {ref?: React.Ref<HTMLElement>};
     /** Properties for right arrow icon */
     subMenuArrowIconProps?: IconProps;
 }
@@ -108,7 +108,7 @@ export class MenuItem extends React.PureComponent<Props, State> {
             return;
         }
 
-        const container = MenuPopover.getClosestMenuContainer(item);
+        const container = getClosestMenuContainer(item);
         this.setState({item, container, highlighted: true}, callback);
     };
 
@@ -291,7 +291,7 @@ export class MenuItem extends React.PureComponent<Props, State> {
                     referenceElement={item}
                     disableTransition
                     placement="right-start"
-                    rootRef={chainRefs(subMenuPopoverProps.rootRef, this.subMenuPaperRef)}
+                    ref={chainRefs(subMenuPopoverProps.ref, this.subMenuPaperRef)}
                     onKeyDown={chain(subMenuPopoverProps.onKeyDown, this.handleSubMenuKeyDown)}
                     onBlur={chain(subMenuPopoverProps.onBlur, this.handleSubMenuBlur)}
                     onFocus={chain(subMenuPopoverProps.onFocus, this.handleSubMenuFocus)}

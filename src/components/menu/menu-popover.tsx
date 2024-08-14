@@ -42,25 +42,24 @@ const popperElementProps: PopoverProps['popperElementProps'] = {
     [MENU_POPOVER_DATA_ATTRIBUTE.toString()]: 'true'
 };
 
-/** Shortcut to Popover that is used in menu  */
-export class MenuPopover extends React.Component<Props> {
-    public static getClosestMenuContainer(element: HTMLElement): Element | null {
-        return closest(element, `[${MENU_POPOVER_DATA_ATTRIBUTE}]`, document.body);
-    }
-
-    public render() {
-        const {className, children, hiddenScrollbarProps, ...rest} = this.props;
-
-        return (
-            <Popover
-                roundCorners
-                {...rest}
-                className={classNames(className, styles.root)}
-                modifiers={modifiers}
-                popperElementProps={popperElementProps}
-            >
-                <HiddenScrollbar {...hiddenScrollbarProps}>{children}</HiddenScrollbar>
-            </Popover>
-        );
-    }
+export function getClosestMenuContainer(element: HTMLElement): Element | null {
+    return closest(element, `[${MENU_POPOVER_DATA_ATTRIBUTE}]`, document.body);
 }
+
+/** Shortcut to Popover that is used in menu  */
+export const MenuPopover = React.forwardRef<HTMLElement, Props>(function MenuPopover(props, ref) {
+    const {className, children, hiddenScrollbarProps, ...rest} = props;
+
+    return (
+        <Popover
+            roundCorners
+            {...rest}
+            ref={ref}
+            className={classNames(className, styles.root)}
+            modifiers={modifiers}
+            popperElementProps={popperElementProps}
+        >
+            <HiddenScrollbar {...hiddenScrollbarProps}>{children}</HiddenScrollbar>
+        </Popover>
+    );
+});

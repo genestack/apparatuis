@@ -27,7 +27,7 @@ export interface Props extends TargetProps, WithClasses<keyof typeof styles> {
  * Dialog Header should present common info about dialog (title, subtitle).
  * Also it adds right padding for close button placing if exists.
  */
-export const DialogHeader = (props: Props) => {
+export const DialogHeader = React.forwardRef<HTMLElement, Props>(function DialogHeader(props, ref) {
     const {
         children,
         contentProps = {},
@@ -44,6 +44,7 @@ export const DialogHeader = (props: Props) => {
             data-qa="dialog-header"
             contained="in-dialog"
             {...rest}
+            ref={ref}
             className={classNames(rest.className, classes.root)}
             startDividerProps={{
                 endGap: 5,
@@ -65,4 +66,4 @@ export const DialogHeader = (props: Props) => {
             </div>
         </MarginBox>
     );
-};
+});

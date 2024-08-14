@@ -174,9 +174,9 @@ export function SuggestInput(props: Props) {
                 const popoverProps: PopoverProps = {
                     ...inputPopoverProps,
                     ...menuProps,
-                    rootRef: chainRefs(
-                        chainRefs(menuProps.rootRef, inputPopoverProps.rootRef),
-                        rest.popoverProps?.rootRef
+                    ref: chainRefs(
+                        chainRefs(menuProps.rootRef, inputPopoverProps.ref),
+                        rest.popoverProps?.ref
                     ),
                     style: {
                         ...inputPopoverProps.style,

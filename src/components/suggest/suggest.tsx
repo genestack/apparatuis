@@ -36,7 +36,7 @@ export interface Props extends InputProps {
     /** if `true` popover is shown */
     open?: boolean;
     /** properties passed to the `Popover` element */
-    popoverProps?: Omit<PopoverProps, 'referenceElement' | 'open'>;
+    popoverProps?: Omit<PopoverProps, 'referenceElement' | 'open'> & {ref?: React.Ref<HTMLElement>};
     /** children of the `Popover` element */
     children?: React.ReactNode;
 }

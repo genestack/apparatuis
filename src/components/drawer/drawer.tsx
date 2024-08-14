@@ -34,7 +34,7 @@ export interface Props
  * Side sheets are surfaces containing supplementary content
  * that are anchored to the left or right edge of the screen.
  */
-export const Drawer = (props: Props) => {
+export const Drawer = React.forwardRef<HTMLElement, Props>(function Drawer(props, ref) {
     const {
         open,
         onClose,
@@ -60,6 +60,7 @@ export const Drawer = (props: Props) => {
                     tabIndex={-1}
                     contained="in-dialog"
                     {...rest}
+                    ref={ref}
                     as={Paper}
                     className={classNames(rest.className, classes.root, {
                         [classes.leftSided]: side === 'left',
@@ -69,4 +70,4 @@ export const Drawer = (props: Props) => {
             </Slide>
         </Overlay>
     );
-};
+});

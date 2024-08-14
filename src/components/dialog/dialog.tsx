@@ -59,7 +59,7 @@ export interface Props extends TargetProps, WithClasses<keyof typeof styles> {
  * Mostly dialog should contain
  * `<DialogHeader />`, `<DialogBody />` and `<DialogFooter />` elements.
  */
-export function Dialog(props: Props) {
+export const Dialog = React.forwardRef<HTMLElement, Props>(function Dialog(props, ref) {
     const handleCloseButtonClick: ButtonProps['onClick'] = (event) => {
         if (props.onClose) {
             props.onClose('header-close-button-click', event);
@@ -108,16 +108,16 @@ export function Dialog(props: Props) {
     } = mergeClassesProps(props, styles);
 
     return (
-        <Overlay
-            {...overlayProps}
-            open={open}
-            onClose={chain(overlayProps.onClose, onClose)}
-            onClosed={chain(overlayProps.onClosed, onClosed)}
-            className={classNames(overlayProps.className, classes.overlay, {
-                [classes.overlayScrollable]: !scrollable
-            })}
-        >
-            <DialogContext.Provider value={{scrollable, hideCloseButton}}>
+        <DialogContext.Provider value={{scrollable, hideCloseButton}}>
+            <Overlay
+                {...overlayProps}
+                open={open}
+                onClose={chain(overlayProps.onClose, onClose)}
+                onClosed={chain(overlayProps.onClosed, onClosed)}
+                className={classNames(overlayProps.className, classes.overlay, {
+                    [classes.overlayScrollable]: !scrollable
+                })}
+            >
                 <div
                     {...containerProps}
                     onClick={chain(containerProps.onClick, handleContainerClick)}
@@ -128,6 +128,7 @@ export function Dialog(props: Props) {
                         <Paper
                             data-qa="dialog"
                             {...rest}
+                            ref={ref}
                             tabIndex={-1}
                             className={classNames(rest.className, classes.root, {
                                 [classes.small]: size === 'small',
@@ -158,7 +159,7 @@ export function Dialog(props: Props) {
                         </Paper>
                     </Transition>
                 </div>
-            </DialogContext.Provider>
-        </Overlay>
+            </Overlay>
+        </DialogContext.Provider>
     );
-}
+});

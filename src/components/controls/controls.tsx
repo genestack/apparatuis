@@ -31,7 +31,7 @@ export interface Props extends TargetProps {
  * Every sibling controls item has left and right margins
  * that are defined by `gap` property of controls container.
  */
-export const Controls = (props: Props) => {
+export const Controls = React.forwardRef<HTMLElement, Props>(function Controls(props, ref) {
     const {
         as: Component = 'div',
         gap = 2,
@@ -45,6 +45,7 @@ export const Controls = (props: Props) => {
         <Component
             data-qa="controls"
             {...rest}
+            ref={ref}
             className={classNames(rest.className, styles.container, {
                 [styles.gap1]: gap === 1,
                 [styles.gap2]: gap === 2,
@@ -61,4 +62,4 @@ export const Controls = (props: Props) => {
             })}
         />
     );
-};
+});

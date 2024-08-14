@@ -35,34 +35,33 @@ export interface Props extends TargetProps, WithClasses<keyof typeof styles> {
  *
  * Can be transparent when rendering a popover or a menu.
  */
-export class Backdrop extends React.Component<Props> {
-    public render() {
-        const {
-            open,
-            invisible,
-            className,
-            fadeProps = {},
-            classes,
-            onExited,
-            ...rest
-        } = mergeClassesProps(this.props, styles);
+export const Backdrop = React.forwardRef<HTMLDivElement, Props>(function Backdrop(props, ref) {
+    const {
+        open,
+        invisible,
+        className,
+        fadeProps = {},
+        classes,
+        onExited,
+        ...rest
+    } = mergeClassesProps(props, styles);
 
-        return (
-            <Fade
-                {...fadeProps}
-                in={open}
-                appear
-                unmountOnExit
-                onExited={chain(fadeProps.onExited, onExited)}
-            >
-                <div
-                    data-qa="backdrop"
-                    {...rest}
-                    className={classNames(className, classes.root, {
-                        [classes.invisible]: invisible
-                    })}
-                />
-            </Fade>
-        );
-    }
-}
+    return (
+        <Fade
+            {...fadeProps}
+            in={open}
+            appear
+            unmountOnExit
+            onExited={chain(fadeProps.onExited, onExited)}
+        >
+            <div
+                data-qa="backdrop"
+                {...rest}
+                ref={ref}
+                className={classNames(className, classes.root, {
+                    [classes.invisible]: invisible
+                })}
+            />
+        </Fade>
+    );
+});

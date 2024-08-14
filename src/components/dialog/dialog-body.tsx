@@ -25,7 +25,7 @@ export interface Props extends TargetProps, WithClasses<keyof typeof styles> {}
  * By default dialog body could have scroll when the content is too long.
  * This scroll could be disabled by compact dialog mode.
  */
-export const DialogBody = (props: Props) => {
+export const DialogBody = React.forwardRef<HTMLElement, Props>(function DialogBody(props, ref) {
     const {classes, ...rest} = mergeClassesProps(props, styles);
 
     return (
@@ -35,6 +35,7 @@ export const DialogBody = (props: Props) => {
                     data-qa="dialog-body"
                     contained="in-dialog"
                     {...rest}
+                    ref={ref}
                     className={classNames(rest.className, classes.root, {
                         [classes.scrollable]: dialogContext.scrollable
                     })}
@@ -42,4 +43,4 @@ export const DialogBody = (props: Props) => {
             )}
         </DialogContext.Consumer>
     );
-};
+});

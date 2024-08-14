@@ -21,7 +21,7 @@ export type Props = React.HTMLAttributes<HTMLDivElement> &
  * Dialog Footer is element that placed in bottom of Dialog.
  * It should presents required actions (buttons).
  */
-export const DialogFooter = (props: Props) => {
+export const DialogFooter = React.forwardRef<HTMLElement, Props>(function DialogFooter(props, ref) {
     const {
         children,
         startDividerProps,
@@ -36,6 +36,7 @@ export const DialogFooter = (props: Props) => {
                     data-qa="dialog-footer"
                     contained="in-dialog"
                     {...rest}
+                    ref={ref}
                     className={classNames(rest.className, styles.root)}
                     noStartDivider={!dialogContext.scrollable}
                     startDividerProps={{
@@ -48,4 +49,4 @@ export const DialogFooter = (props: Props) => {
             )}
         </DialogContext.Consumer>
     );
-};
+});
