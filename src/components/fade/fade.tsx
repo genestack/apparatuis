@@ -20,7 +20,7 @@ const DURATION_TIMEOUT = 300;
 
 type StrictCSSTransitionProps = OmitIndexSignature<TransitionProps> & TransitionActions;
 type TargetProps = Omit<StrictCSSTransitionProps, 'timeout' | 'children'>;
-type Children = React.ReactElement<{className?: string}>;
+type Children = React.ReactElement<{className?: string; ref?: React.Ref<HTMLElement>}>;
 
 /** Public Fade properties */
 export interface Props extends TargetProps, WithClasses<keyof typeof styles> {
@@ -86,10 +86,10 @@ export const Fade = React.forwardRef<HTMLElement, Props>(function Fade(props, re
         >
             {React.cloneElement(child, {
                 className: classNames(className, child.props.className, {
-                    ref,
                     [classes.enter]: rest.in,
                     [classes.exit]: !rest.in
-                })
+                }),
+                ref
             })}
         </Transition>
     );

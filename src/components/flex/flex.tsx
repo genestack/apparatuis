@@ -41,7 +41,7 @@ export interface Props extends WithClasses<keyof typeof styles> {
 /**
  * Component to build flex layouts.
  */
-export const Flex = (props: Props) => {
+export const Flex = React.forwardRef<HTMLElement, Props>(function Flex(props, ref) {
     const {
         container,
         shrink,
@@ -59,7 +59,10 @@ export const Flex = (props: Props) => {
         ...rest
     } = mergeClassesProps(props, styles);
 
-    const child = React.Children.only(children) as React.ReactElement<{className?: string}>;
+    const child = React.Children.only(children) as React.ReactElement<{
+        className?: string;
+        ref?: React.Ref<HTMLElement>;
+    }>;
 
     return React.cloneElement(child, {
         ...rest,
@@ -87,6 +90,7 @@ export const Flex = (props: Props) => {
             [classes.rowReverse]: direction === 'row-reverse',
             [classes.column]: direction === 'column',
             [classes.columnReverse]: direction === 'column-reverse'
-        })
+        }),
+        ref
     });
-};
+});

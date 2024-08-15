@@ -6,7 +6,6 @@
  * actual or intended publication of such source code.
  */
 import scrollbarSize from 'dom-helpers/scrollbarSize';
-import ReactDOM from 'react-dom';
 
 import {getFirstReachableElement, getLastReachableElement} from '../../utils/focusable-elements';
 import {hasVerticalScrollbar} from '../../utils/has-vertical-scrollbar';
@@ -17,7 +16,7 @@ export const FIXED_BLOCKS_CLASS_NAME = 'gs-fixed';
 /**
  * Base interface for overlays are used in manager
  */
-export type OverlayComponent = React.ReactInstance;
+export type OverlayComponent = HTMLElement;
 
 interface ContainerState {
     startFocusButton: HTMLButtonElement;
@@ -144,12 +143,8 @@ export class OverlayManager {
 
     private getLastOverlayNode() {
         const lastOverlay = this.overlays[this.overlays.length - 1];
-        if (lastOverlay) {
-            // eslint-disable-next-line react/no-find-dom-node
-            const overlay = ReactDOM.findDOMNode(lastOverlay);
-            if (overlay instanceof HTMLElement) {
-                return overlay;
-            }
+        if (lastOverlay instanceof HTMLElement) {
+            return lastOverlay;
         }
     }
 

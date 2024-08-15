@@ -13,8 +13,13 @@ import {Flex, Props as FlexProps} from './flex';
 export interface Props extends Omit<FlexProps, 'children'>, React.HTMLAttributes<HTMLDivElement> {}
 
 /** Helper component to make flex layouts with paddings */
-export const FlexItem = (props: Props) => (
-    <Flex {...props}>
-        <div>{props.children}</div>
-    </Flex>
-);
+export const FlexItem = React.forwardRef<HTMLDivElement, Props>(function FlexItem(
+    props: Props,
+    ref
+) {
+    return (
+        <Flex {...props}>
+            <div ref={ref}>{props.children}</div>
+        </Flex>
+    );
+});

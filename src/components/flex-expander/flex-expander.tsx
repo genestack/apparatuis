@@ -19,6 +19,9 @@ export interface Props extends React.ComponentPropsWithoutRef<'div'> {
  * Helper component that lets to expand two near flex element.
  * Useful when you want to push flex element to the right of container.
  */
-export const FlexExpander = (props: Props) => (
-    <div {...props} className={classNames(props.className, styles.root)} />
-);
+export const FlexExpander = React.forwardRef<HTMLDivElement, Props>(function FlexExpander(
+    props,
+    ref
+) {
+    return <div {...props} ref={ref} className={classNames(props.className, styles.root)} />;
+});

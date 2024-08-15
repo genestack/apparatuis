@@ -106,7 +106,7 @@ export const DropdownTabs: OverridableComponent<TypeMap> = React.forwardRef<
                     component="span"
                     tabIndex={undefined}
                     size={size === 'normal' ? 'small' : 'tiny'}
-                    icon={<ArrowBottomThinIcon />}
+                    iconStart={<ArrowBottomThinIcon />}
                     {...buttonIconProps}
                     onClick={chain(handleMenuOpen, buttonIconProps.onClick)}
                     className={classNames(classes.icon, buttonIconProps.className)}

@@ -18,10 +18,13 @@ type TargetProps = Omit<ListItemProps, 'value' | 'interactive'>;
 export type Props = TargetProps;
 
 /** Caption that is used as menu item */
-export const MenuCaption = (props: Props) => (
-    <ListItem
-        data-qa="menu-caption"
-        {...props}
-        className={classNames(props.className, styles.root)}
-    />
-);
+export const MenuCaption = React.forwardRef<HTMLElement, Props>(function MenuCaption(props, ref) {
+    return (
+        <ListItem
+            data-qa="menu-caption"
+            {...props}
+            ref={ref}
+            className={classNames(props.className, styles.root)}
+        />
+    );
+});
