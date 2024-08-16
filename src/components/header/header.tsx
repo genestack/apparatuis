@@ -36,7 +36,7 @@ export interface Props extends TargetProps, WithClasses<keyof typeof styles> {
  * Header displays common information and actions related to the current screen.
  * It is used for branding, page title, navigation and actions.
  */
-export const Header = (props: Props) => {
+export const Header = React.forwardRef<HTMLDivElement, Props>(function Header(props, ref) {
     const {
         disablePositionFixed,
         disableStaticSpacer,
@@ -61,6 +61,7 @@ export const Header = (props: Props) => {
                 <div
                     data-qa="header"
                     {...rest}
+                    ref={ref}
                     className={classNames(classes.root, rest.className, {
                         [FIXED_BLOCKS_CLASS_NAME]: !disablePositionFixed,
                         [classes.fixed]: !disablePositionFixed,
@@ -70,4 +71,4 @@ export const Header = (props: Props) => {
             </Flex>
         </React.Fragment>
     );
-};
+});

@@ -67,66 +67,81 @@ export interface Props extends TargetProps, WithClasses<keyof typeof styles> {
  * you should wrap it by element with `display: flex; flex-direction: row`
  * styles. @see https://git.io/fhjPt
  */
+export const HiddenScrollbar = React.forwardRef<HTMLDivElement, Props>(function HiddenScrollbar(
+    props,
+    ref
+) {
+    const {
+        scrollStep = DEFAULT_SCROLL_STEP,
+        scrollStepTimeout = DEFAULT_SCROLL_STEP_TIMEOUT,
+        children,
+        className,
+        classes,
+        containerProps = {},
+        containerRef,
+        startControlProps = {},
+        startControlRef,
+        endControlProps = {},
+        endControlRef,
+        ...rest
+    } = mergeClassesProps(props, styles);
 
-export class HiddenScrollbar extends React.Component<Props> {
-    /** This timer starts when user hover on the edge scroll controls */
-    private scrollIntervalId: number | null = null;
-    /** Container that have scroll */
-    private containerRef = React.createRef<HTMLDivElement>();
-    /** Scroll controls that initiate scrolling on hover */
-    private startControlRef = React.createRef<HTMLDivElement>();
-    private endControlRef = React.createRef<HTMLDivElement>();
-    private animationRequestId: number | null = null;
+    const thisContainerRef = React.useRef<HTMLElement>(null);
+    const thisStartControlRef = React.useRef<HTMLElement>(null);
+    const thisEndControlRef = React.useRef<HTMLElement>(null);
 
-    public componentDidMount() {
-        this.updateContainer();
-    }
+    const requestId = React.useRef<number | null>(null);
 
-    public componentDidUpdate() {
-        this.updateContainer();
-    }
-
-    public componentWillUnmount() {
-        this.cancelAnimationFrame();
-        this.clearScrollInterval();
-    }
-
-    private cancelAnimationFrame() {
-        if (this.animationRequestId) {
-            window.cancelAnimationFrame(this.animationRequestId);
-            this.animationRequestId = null;
+    function cancelAnimationFrame() {
+        if (requestId.current) {
+            window.cancelAnimationFrame(requestId.current);
         }
     }
 
-    private requestAnimationFrame(callback: () => void) {
-        this.cancelAnimationFrame();
-        this.animationRequestId = window.requestAnimationFrame(callback);
+    function requestAnimationFrame(callback: () => void) {
+        cancelAnimationFrame();
+        requestId.current = window.requestAnimationFrame(callback);
     }
 
-    private clearScrollInterval() {
-        if (this.scrollIntervalId) {
-            window.clearInterval(this.scrollIntervalId);
-            this.scrollIntervalId = null;
+    React.useEffect(() => cancelAnimationFrame, []);
+
+    const scrollIntervalId = React.useRef<number | null>(null);
+
+    function clearScrollInterval() {
+        if (scrollIntervalId.current) {
+            window.clearInterval(scrollIntervalId.current);
+            scrollIntervalId.current = null;
         }
     }
 
-    private setScrollInterval(callback: () => void) {
-        this.clearScrollInterval();
-        const {scrollStepTimeout = DEFAULT_SCROLL_STEP_TIMEOUT} = this.props;
-        this.scrollIntervalId = window.setInterval(callback, scrollStepTimeout);
+    function setScrollInterval(callback: () => void) {
+        clearScrollInterval();
+        scrollIntervalId.current = window.setInterval(callback, scrollStepTimeout);
         callback();
     }
+
+    React.useEffect(() => {
+        updateContainer();
+    });
+
+    React.useEffect(
+        () => () => {
+            cancelAnimationFrame();
+            clearScrollInterval();
+        },
+        []
+    );
 
     /**
      * We should hide scroll controls when they are not necessary:
      * - in edge positions (the top or the bottom)
      * - when scroll container does not have scroll
      */
-    private updateContainer() {
-        this.requestAnimationFrame(() => {
-            const container = this.containerRef.current;
-            const startControl = this.startControlRef.current;
-            const endControl = this.endControlRef.current;
+    function updateContainer() {
+        requestAnimationFrame(() => {
+            const container = thisContainerRef.current;
+            const startControl = thisStartControlRef.current;
+            const endControl = thisEndControlRef.current;
 
             if (!container || !startControl || !endControl) {
                 return;
@@ -145,18 +160,18 @@ export class HiddenScrollbar extends React.Component<Props> {
         });
     }
 
-    private handleScroll = () => {
-        this.updateContainer();
+    const handleScroll = () => {
+        updateContainer();
     };
 
     /**
      * To prevent partial hiding focused elements below the scroll controls
      * we should move the focused element to visible area in the scroll container.
      */
-    private handleFocus: React.HTMLAttributes<HTMLDivElement>['onFocus'] = (event) => {
-        const container = this.containerRef.current;
-        const startControl = this.startControlRef.current;
-        const endControl = this.endControlRef.current;
+    const handleFocus: React.HTMLAttributes<HTMLDivElement>['onFocus'] = (event) => {
+        const container = thisContainerRef.current;
+        const startControl = thisStartControlRef.current;
+        const endControl = thisEndControlRef.current;
         const target = event.target;
 
         if (container && startControl && endControl && contains(container, target)) {
@@ -170,29 +185,27 @@ export class HiddenScrollbar extends React.Component<Props> {
     };
 
     /** Starts scroll changing interval whe user hovers to the scroll controls */
-    private handleStartScrollElementMouseEnter = () => {
-        this.setScrollInterval(() => {
-            const container = this.containerRef.current;
+    const handleStartScrollElementMouseEnter = () => {
+        setScrollInterval(() => {
+            const container = thisContainerRef.current;
 
             if (!container) {
                 return;
             }
 
-            const {scrollStep = DEFAULT_SCROLL_STEP} = this.props;
             const {scrollTop} = container;
             container.scrollTop = Math.max(scrollTop - scrollStep, 0);
         });
     };
 
-    private handleEndControlMouseEnter = () => {
-        this.setScrollInterval(() => {
-            const container = this.containerRef.current;
+    const handleEndControlMouseEnter = () => {
+        setScrollInterval(() => {
+            const container = thisContainerRef.current;
 
             if (!container) {
                 return;
             }
 
-            const {scrollStep = DEFAULT_SCROLL_STEP} = this.props;
             const {scrollTop, scrollHeight, clientHeight} = container;
             const maxScrollTop = scrollHeight - clientHeight;
             container.scrollTop = Math.min(scrollTop + scrollStep, maxScrollTop);
@@ -200,75 +213,53 @@ export class HiddenScrollbar extends React.Component<Props> {
     };
 
     /** Stop scroll changing interval when mouse leaves scroll controls */
-    private handleStartScrollElementMouseLeave = () => {
-        this.clearScrollInterval();
+    const handleStartScrollElementMouseLeave = () => {
+        clearScrollInterval();
     };
 
-    private handleEndControlMouseLeave = () => {
-        this.clearScrollInterval();
+    const handleEndControlMouseLeave = () => {
+        clearScrollInterval();
     };
 
-    public render() {
-        const {
-            scrollStep,
-            scrollStepTimeout,
-            children,
-            className,
-            classes,
-            containerProps = {},
-            containerRef,
-            startControlProps = {},
-            startControlRef,
-            endControlProps = {},
-            endControlRef,
-            ...rest
-        } = mergeClassesProps(this.props, styles);
-
-        return (
+    return (
+        <div
+            {...rest}
+            ref={ref}
+            className={classNames(className, classes.root)}
+            onFocus={chain(rest.onFocus, handleFocus)}
+        >
             <div
-                {...rest}
-                className={classNames(className, classes.root)}
-                onFocus={chain(rest.onFocus, this.handleFocus)}
+                {...containerProps}
+                ref={chainRefs(containerRef, thisContainerRef)}
+                onScroll={chain(containerProps.onScroll, handleScroll)}
+                className={classNames(containerProps.className, classes.container)}
             >
-                <div
-                    {...containerProps}
-                    ref={chainRefs(containerRef, this.containerRef)}
-                    onScroll={chain(containerProps.onScroll, this.handleScroll)}
-                    className={classNames(containerProps.className, classes.container)}
-                >
-                    {children}
-                </div>
-                <div
-                    {...startControlProps}
-                    ref={chainRefs(startControlRef, this.startControlRef)}
-                    onMouseEnter={chain(
-                        startControlProps.onMouseEnter,
-                        this.handleStartScrollElementMouseEnter
-                    )}
-                    onMouseLeave={chain(
-                        startControlProps.onMouseLeave,
-                        this.handleStartScrollElementMouseLeave
-                    )}
-                    className={classNames(startControlProps.className, classes.startControl)}
-                >
-                    <ScrollDirectionIcon className={classes.startControlIcon} />
-                </div>
-                <div
-                    {...endControlProps}
-                    ref={chainRefs(endControlRef, this.endControlRef)}
-                    className={classNames(endControlProps.className, classes.endControl)}
-                    onMouseEnter={chain(
-                        endControlProps.onMouseEnter,
-                        this.handleEndControlMouseEnter
-                    )}
-                    onMouseLeave={chain(
-                        endControlProps.onMouseLeave,
-                        this.handleEndControlMouseLeave
-                    )}
-                >
-                    <ScrollDirectionIcon className={classes.endControlIcon} />
-                </div>
+                {children}
             </div>
-        );
-    }
-}
+            <div
+                {...startControlProps}
+                ref={chainRefs(startControlRef, thisStartControlRef)}
+                onMouseEnter={chain(
+                    startControlProps.onMouseEnter,
+                    handleStartScrollElementMouseEnter
+                )}
+                onMouseLeave={chain(
+                    startControlProps.onMouseLeave,
+                    handleStartScrollElementMouseLeave
+                )}
+                className={classNames(startControlProps.className, classes.startControl)}
+            >
+                <ScrollDirectionIcon className={classes.startControlIcon} />
+            </div>
+            <div
+                {...endControlProps}
+                ref={chainRefs(endControlRef, thisEndControlRef)}
+                className={classNames(endControlProps.className, classes.endControl)}
+                onMouseEnter={chain(endControlProps.onMouseEnter, handleEndControlMouseEnter)}
+                onMouseLeave={chain(endControlProps.onMouseLeave, handleEndControlMouseLeave)}
+            >
+                <ScrollDirectionIcon className={classes.endControlIcon} />
+            </div>
+        </div>
+    );
+});
