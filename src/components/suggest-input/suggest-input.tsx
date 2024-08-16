@@ -164,8 +164,8 @@ export function SuggestInput(props: Props) {
                       )
                     : null;
 
-                const menuProps = downshift.getMenuProps(
-                    {refKey: 'rootRef'},
+                const {menuRef, ...menuProps} = downshift.getMenuProps(
+                    {refKey: 'menuRef'},
                     {suppressRefError: true}
                 );
 
@@ -175,7 +175,7 @@ export function SuggestInput(props: Props) {
                     ...inputPopoverProps,
                     ...menuProps,
                     ref: chainRefs(
-                        chainRefs(menuProps.rootRef, inputPopoverProps.ref),
+                        chainRefs(menuRef, inputPopoverProps.ref),
                         rest.popoverProps?.ref
                     ),
                     style: {

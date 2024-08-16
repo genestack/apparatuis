@@ -20,7 +20,7 @@ const DURATION_TIMEOUT = 300;
 
 type StrictCSSTransitionProps = OmitIndexSignature<TransitionProps> & TransitionActions;
 type TargetProps = Omit<StrictCSSTransitionProps, 'timeout' | 'children'>;
-type Children = React.ReactElement<{className?: string; ref?: React.Ref<HTMLElement>}>;
+type Children = React.ReactElement<{className?: string; ref?: React.Ref<unknown>}>;
 
 /** Public Fade properties */
 export interface Props extends TargetProps, WithClasses<keyof typeof styles> {
