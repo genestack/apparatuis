@@ -23,7 +23,10 @@ export interface Props extends React.HTMLAttributes<HTMLLabelElement>, Pick<Cont
 }
 
 /** Drop-in replacement of the Switch component. Use this component if you want to display an extra label. */
-export function FormControlLabel(props: Props) {
+export const FormControlLabel = React.forwardRef<HTMLElement, Props>(function FormControlLabel(
+    props,
+    ref
+) {
     const {control, label, labelProps, disabled: disabledProp, gap = 1, ...restProps} = props;
 
     let disabled = disabledProp;
@@ -60,9 +63,10 @@ export function FormControlLabel(props: Props) {
             className={classNames(styles.label, restProps.className, {
                 [styles.disabled]: disabled
             })}
+            ref={ref}
         >
             <ControlsItem>{React.cloneElement(props.control, controlProps)}</ControlsItem>
             <ControlsItem>{renderLabel()}</ControlsItem>
         </Controls>
     );
-}
+});

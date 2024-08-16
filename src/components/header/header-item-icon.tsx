@@ -21,10 +21,16 @@ export interface Props extends TargetProps {
  * Icon that could be placed in header item or button.
  * It has different margins from header item cell or text.
  */
-export const HeaderItemIcon = (props: Props) => (
-    <div
-        data-qa="header-item-icon"
-        {...props}
-        className={classNames(props.className, styles.root)}
-    />
-);
+export const HeaderItemIcon = React.forwardRef<HTMLDivElement, Props>(function HeaderItemIcon(
+    props,
+    ref
+) {
+    return (
+        <div
+            data-qa="header-item-icon"
+            {...props}
+            className={classNames(props.className, styles.root)}
+            ref={ref}
+        />
+    );
+});

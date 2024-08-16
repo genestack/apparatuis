@@ -20,20 +20,21 @@ export type Props = React.HTMLAttributes<HTMLElement>;
  * Header item could include other buttons.
  * Wrap this buttons with HeaderItemSecondaryActions to avoid click conflicts.
  */
-export class HeaderItemSecondaryActions extends React.Component<Props> {
-    private handleClick: Props['onClick'] = (event) => {
-        event.stopPropagation();
-        event.preventDefault();
-    };
+export const HeaderItemSecondaryActions = React.forwardRef<HTMLDivElement, Props>(
+    function HeaderItemSecondaryActions(props, ref) {
+        const handleClick: Props['onClick'] = (event) => {
+            event.stopPropagation();
+            event.preventDefault();
+        };
 
-    public render() {
         return (
             <div
                 data-qa="header-item-secondary-actions"
-                {...this.props}
-                onClick={chain(this.props.onClick, this.handleClick)}
-                className={classNames(this.props.className, styles.root)}
+                {...props}
+                onClick={chain(props.onClick, handleClick)}
+                className={classNames(props.className, styles.root)}
+                ref={ref}
             />
         );
     }
-}
+);

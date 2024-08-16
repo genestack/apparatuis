@@ -39,8 +39,22 @@ export interface Props extends TargetProps, WithClasses<keyof typeof styles> {
  * By default it is not a native button because it could have nested buttons.
  * For add nested buttons use `HeaderItemSecondaryActions`.
  */
-export class HeaderItem extends React.Component<Props> {
-    private handleKeyDown: Props['onKeyDown'] = (event) => {
+export const HeaderItem = React.forwardRef<HTMLElement, Props>(function HeaderItem(props, ref) {
+    const {
+        active,
+        disabled,
+        classes,
+        fakeHoverProps = {},
+        headerItemTextProps,
+        ...rest
+    } = mergeClassesProps(props, styles);
+
+    const interactiveElementProps: Omit<InteractiveElementProps, 'inclusiveDisabled'> = {
+        disabled,
+        activeClassName: classes.active
+    };
+
+    const handleKeyDown: Props['onKeyDown'] = (event) => {
         const item = event.currentTarget;
 
         if (event.key === 'ArrowRight' || event.key === 'ArrowLeft') {
@@ -59,50 +73,35 @@ export class HeaderItem extends React.Component<Props> {
         }
     };
 
-    public render() {
-        const {
-            active,
-            disabled,
-            classes,
-            fakeHoverProps = {},
-            headerItemTextProps,
-            ...rest
-        } = mergeClassesProps(this.props, styles);
-
-        const interactiveElementProps: Omit<InteractiveElementProps, 'inclusiveDisabled'> = {
-            disabled,
-            activeClassName: classes.active
-        };
-
-        const children =
-            typeof rest.children === 'string' ? (
-                <HeaderItemText {...headerItemTextProps}>{rest.children}</HeaderItemText>
-            ) : (
-                rest.children
-            );
-
-        const fakeHoverElement = (
-            <div
-                {...fakeHoverProps}
-                className={classNames(fakeHoverProps.className, classes.fakeHover)}
-            />
+    const children =
+        typeof rest.children === 'string' ? (
+            <HeaderItemText {...headerItemTextProps}>{rest.children}</HeaderItemText>
+        ) : (
+            rest.children
         );
 
-        return (
-            <HeaderBlock
-                data-qa="header-item"
-                {...rest}
-                as={InteractiveElement}
-                {...interactiveElementProps}
-                onKeyDown={chain(rest.onKeyDown, this.handleKeyDown)}
-                className={classNames(rest.className, classes.root, {
-                    [classes.active]: active,
-                    [classes.disabled]: disabled
-                })}
-            >
-                {children}
-                {fakeHoverElement}
-            </HeaderBlock>
-        );
-    }
-}
+    const fakeHoverElement = (
+        <div
+            {...fakeHoverProps}
+            className={classNames(fakeHoverProps.className, classes.fakeHover)}
+        />
+    );
+
+    return (
+        <HeaderBlock
+            data-qa="header-item"
+            {...rest}
+            as={InteractiveElement}
+            {...interactiveElementProps}
+            onKeyDown={chain(rest.onKeyDown, handleKeyDown)}
+            className={classNames(rest.className, classes.root, {
+                [classes.active]: active,
+                [classes.disabled]: disabled
+            })}
+            ref={ref}
+        >
+            {children}
+            {fakeHoverElement}
+        </HeaderBlock>
+    );
+});
