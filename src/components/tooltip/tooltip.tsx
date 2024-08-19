@@ -8,11 +8,12 @@
 import classNames from 'classnames';
 import React from 'react';
 
+import {chainRefs} from '../../utils';
 import {chain} from '../../utils/chain';
 import {DarkContext} from '../../utils/dark-context';
-import {WithClasses, mergeClassesProps} from '../../utils/styles';
+import {mergeClassesProps, WithClasses} from '../../utils/styles';
 import {createIcon} from '../icon';
-import {TransitionPopperProps, TransitionPopper} from '../transition-popper';
+import {TransitionPopper, TransitionPopperProps} from '../transition-popper';
 import {Typography} from '../typography';
 
 import {TooltipSlide} from './tooltip-slide-transition';
@@ -57,93 +58,88 @@ export interface Props extends TargetProps, WithClasses<keyof typeof styles> {
  * Tooltip is a simple and small block of text that shows some useful information
  * near some reference element.
  */
-export class Tooltip extends React.Component<Props> {
-    public componentDidMount() {
-        window.addEventListener('keydown', this.handleWindowKeyDown);
-    }
+export const Tooltip = React.forwardRef<HTMLDivElement, Props>(function Tooltip(props, rootRef) {
+    const {
+        popperRef,
+        children,
+        classes,
+        placement = 'top',
+        noGaps,
+        onClose,
+        onClosed,
+        disableEscListener,
+        ...rest
+    } = mergeClassesProps(props, styles);
 
-    public componentWillUnmount() {
-        window.removeEventListener('keydown', this.handleWindowKeyDown);
-    }
+    React.useEffect(() => {
+        const handleWindowKeyDown = (event: KeyboardEvent) => {
+            if (disableEscListener) {
+                return;
+            }
 
-    private handleWindowKeyDown = (event: KeyboardEvent) => {
-        if (this.props.disableEscListener) {
-            return;
-        }
+            if (event.key === 'Escape') {
+                onClose?.('escape_keydown', event);
+            }
+        };
 
-        if (event.key === 'Escape' && this.props.onClose) {
-            this.props.onClose('escape_keydown', event);
-        }
-    };
+        window.addEventListener('keydown', handleWindowKeyDown);
 
-    public render() {
-        const {
-            popperRef,
-            children,
-            classes,
-            placement = 'top',
-            noGaps,
-            onClose,
-            onClosed,
-            disableEscListener,
-            ...rest
-        } = mergeClassesProps(this.props, styles);
+        return () => {
+            window.removeEventListener('keydown', handleWindowKeyDown);
+        };
+    }, [disableEscListener, onClose]);
 
-        return (
-            <TransitionPopper<TargetElementProps> {...rest} ref={popperRef} placement={placement}>
-                {({
-                    ref,
-                    style,
-                    arrowProps,
-                    placement: actualPlacement,
-                    targetProps,
-                    onTransitionExited
-                }) => (
-                    <div
-                        ref={ref}
-                        style={style}
-                        data-placement={actualPlacement}
-                        className={classes.popperContainer}
+    return (
+        <TransitionPopper<TargetElementProps> {...rest} ref={popperRef} placement={placement}>
+            {({
+                ref,
+                style,
+                arrowProps,
+                placement: actualPlacement,
+                targetProps,
+                onTransitionExited
+            }) => (
+                <div
+                    ref={chainRefs(ref, rootRef)}
+                    style={style}
+                    data-placement={actualPlacement}
+                    className={classes.popperContainer}
+                >
+                    <TooltipSlide
+                        appear
+                        disableTransition={rest.disableTransition}
+                        placement={actualPlacement}
+                        open={!!actualPlacement && rest.open}
+                        onExited={chain(onTransitionExited, onClosed)}
                     >
-                        <TooltipSlide
-                            appear
-                            disableTransition={rest.disableTransition}
-                            placement={actualPlacement}
-                            open={!!actualPlacement && rest.open}
-                            onExited={chain(onTransitionExited, onClosed)}
-                        >
-                            <div
-                                data-placement={actualPlacement}
-                                className={classes.tooltipContainer}
-                            >
-                                <DarkContext.Provider value>
-                                    <Typography
-                                        data-qa="tooltip"
-                                        as="div"
-                                        {...targetProps}
-                                        className={classNames(targetProps.className, classes.root, {
-                                            [classes.withGaps]: !noGaps
-                                        })}
-                                        variant="caption"
-                                    >
-                                        {children}
-                                    </Typography>
-                                </DarkContext.Provider>
-                                <div
-                                    {...arrowProps}
-                                    data-placement={actualPlacement}
-                                    className={classes.arrow}
+                        <div data-placement={actualPlacement} className={classes.tooltipContainer}>
+                            <DarkContext.Provider value>
+                                <Typography
+                                    data-qa="tooltip"
+                                    as="div"
+                                    {...targetProps}
+                                    className={classNames(targetProps.className, classes.root, {
+                                        [classes.withGaps]: !noGaps
+                                    })}
+                                    variant="caption"
                                 >
-                                    <TooltipArrowIcon
-                                        data-placement={actualPlacement}
-                                        className={classes.arrowIcon}
-                                    />
-                                </div>
+                                    {children}
+                                </Typography>
+                            </DarkContext.Provider>
+                            <div
+                                {...arrowProps}
+                                data-placement={actualPlacement}
+                                className={classes.arrow}
+                            >
+                                <TooltipArrowIcon
+                                    data-placement={actualPlacement}
+                                    className={classes.arrowIcon}
+                                />
                             </div>
-                        </TooltipSlide>
-                    </div>
-                )}
-            </TransitionPopper>
-        );
-    }
-}
+                        </div>
+                    </TooltipSlide>
+                </div>
+            )}
+        </TransitionPopper>
+    );
+});
