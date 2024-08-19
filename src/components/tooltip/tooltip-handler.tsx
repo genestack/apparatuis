@@ -7,8 +7,6 @@
  */
 import * as React from 'react';
 
-import {RootRef} from '../root-ref';
-
 import {Props as TooltipProps} from './tooltip';
 import {useTooltipHandler} from './use-tooltip-handler';
 
@@ -17,6 +15,7 @@ interface ChildProps {
     onMouseLeave?: React.MouseEventHandler;
     onFocus?: React.FocusEventHandler;
     onBlur?: React.FocusEventHandler;
+    ref?: React.Ref<unknown>;
 }
 
 type TooltipElement = React.ReactElement<TooltipProps> | null | undefined;
@@ -85,7 +84,10 @@ export const TooltipHandler = React.forwardRef<TooltipHandlerApi, Props>(functio
                 : props.children
         ) as React.ReactElement<ChildProps>;
 
-        return React.cloneElement(child, tooltipHandler.getReferenceProps(child.props));
+        return React.cloneElement(child, {
+            ...tooltipHandler.getReferenceProps(child.props),
+            ref: childRef
+        });
     };
 
     const renderTooltip = () => {
@@ -102,7 +104,7 @@ export const TooltipHandler = React.forwardRef<TooltipHandlerApi, Props>(functio
 
     return (
         <React.Fragment>
-            <RootRef rootRef={childRef}>{renderChild()}</RootRef>
+            {renderChild()}
             {renderTooltip()}
         </React.Fragment>
     );
