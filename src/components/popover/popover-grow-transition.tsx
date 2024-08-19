@@ -7,7 +7,7 @@
  */
 import * as React from 'react';
 
-import {GrowProps, Grow, GrowTransformOrigin} from '../grow';
+import {Grow, GrowProps, GrowTransformOrigin} from '../grow';
 import {TransitionPopperChildrenProps, TransitionPopperPlacement} from '../transition-popper';
 
 const transformByPlacement: {[key in TransitionPopperPlacement]?: GrowTransformOrigin} = {
@@ -34,7 +34,7 @@ export interface Props extends GrowProps {
 }
 
 /** Internal Grow transition for popover. */
-export const PopoverGrow = (props: Props) => {
+export const PopoverGrow = React.forwardRef<HTMLElement, Props>(function PopoverGrow(props, ref) {
     const {disableTransition, children, placement, open, ...rest} = props;
 
     return disableTransition ? (
@@ -49,8 +49,9 @@ export const PopoverGrow = (props: Props) => {
                 (placement && transformByPlacement[placement]) ||
                 'center center'
             }
+            ref={ref}
         >
             {children}
         </Grow>
     );
-};
+});

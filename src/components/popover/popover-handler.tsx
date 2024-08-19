@@ -28,7 +28,10 @@ export interface Props extends Omit<PopoverProps, 'open' | 'referenceElement' | 
  * Popover handler.
  * It listens hover on the reference element and shows/hide content with customizable delay.
  */
-export function PopoverHandler(props: Props) {
+export const PopoverHandler = React.forwardRef<HTMLElement, Props>(function PopoverHandler(
+    props,
+    ref
+) {
     const {openDelay, closeDelay, children, popoverContent, ...rest} = props;
     const childRef = React.useRef<HTMLElement>(null);
 
@@ -70,9 +73,10 @@ export function PopoverHandler(props: Props) {
                 roundCorners
                 withArrow
                 {...rest}
+                ref={ref}
             >
                 {renderContent()}
             </Popover>
         </React.Fragment>
     );
-}
+});
