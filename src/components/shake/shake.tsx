@@ -10,7 +10,7 @@ import * as React from 'react';
 import CSSTransition, {CSSTransitionProps} from 'react-transition-group/CSSTransition';
 
 import {OmitIndexSignature} from '../../utils/omit-index-signature';
-import {WithClasses, mergeClassesProps} from '../../utils/styles';
+import {mergeClassesProps, WithClasses} from '../../utils/styles';
 
 import * as styles from './shake.module.css';
 
@@ -25,7 +25,7 @@ type TargetProps = Omit<StrictCSSTransitionProps, 'classNames' | 'timeout' | 'ch
 
 /** Public Shake properties */
 export interface Props extends TargetProps, WithClasses<keyof typeof styles> {
-    children: React.ReactElement<{className?: string}>;
+    children: React.ReactElement<{className?: string; ref?: React.Ref<unknown>}>;
 }
 
 /**
@@ -37,7 +37,7 @@ export interface Props extends TargetProps, WithClasses<keyof typeof styles> {
  * This transition does not have exit stage. So pass `onEntered` callback
  * to subscribe shake transition complete.
  */
-export const Shake = (props: Props) => {
+export const Shake = React.forwardRef<HTMLElement, Props>(function Shake(props, ref) {
     const {className, classes, ...rest} = mergeClassesProps(props, styles);
     const child = React.Children.only(props.children);
 
@@ -51,8 +51,9 @@ export const Shake = (props: Props) => {
             timeout={TRANSITION_TIMEOUT}
         >
             {React.cloneElement(child, {
-                className: classNames(className, child.props.className, classes.root)
+                className: classNames(className, child.props.className, classes.root),
+                ref
             })}
         </CSSTransition>
     );
-};
+});

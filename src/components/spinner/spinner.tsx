@@ -9,7 +9,7 @@ import classNames from 'classnames';
 import * as React from 'react';
 
 import {SlotProps} from '../../utils/slot-props';
-import {WithClasses, mergeClassesProps} from '../../utils/styles';
+import {mergeClassesProps, WithClasses} from '../../utils/styles';
 
 import * as styles from './spinner.module.css';
 
@@ -34,7 +34,7 @@ export interface Props extends TargetProps, WithClasses<keyof typeof styles> {
 const getDefaultStokeWidth = ({size = DEFAULT_SIZE}: Props) => size / 8;
 
 /** Shows to user intermediate process */
-export const Spinner = (props: Props) => {
+export const Spinner = React.forwardRef<SVGSVGElement, Props>(function Spinner(props, ref) {
     const {
         size = DEFAULT_SIZE,
         strokeWidth = getDefaultStokeWidth(props),
@@ -57,6 +57,7 @@ export const Spinner = (props: Props) => {
             style={{width: size, height: size}}
             {...rest}
             className={classNames(rest.className, classes.root)}
+            ref={ref}
         >
             {!hideBackgroundCircle ? (
                 <circle
@@ -85,4 +86,4 @@ export const Spinner = (props: Props) => {
             />
         </svg>
     );
-};
+});

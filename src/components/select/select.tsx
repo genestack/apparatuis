@@ -8,7 +8,7 @@
 
 import React from 'react';
 
-import {SelectContext, Props} from './select-context';
+import {Props, SelectContext} from './select-context';
 import {SelectMenu} from './select-menu';
 import {SelectNative} from './select-native';
 import {getSelectLabel} from './utils';
@@ -17,16 +17,16 @@ import {getSelectLabel} from './utils';
 export {Props};
 
 /** Select wrapper */
-export function Select(props: Props) {
+export const Select = React.forwardRef<HTMLElement, Props>(function Select(props, ref) {
     const label = getSelectLabel(props.children, props.value);
 
     return (
         <SelectContext.Provider value={props}>
             {props.native ? (
-                <SelectNative label={label} {...props} />
+                <SelectNative label={label} {...props} ref={ref} />
             ) : (
-                <SelectMenu label={label} {...props} />
+                <SelectMenu label={label} {...props} ref={ref} />
             )}
         </SelectContext.Provider>
     );
-}
+});

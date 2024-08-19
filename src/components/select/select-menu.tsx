@@ -8,7 +8,7 @@
 
 import React from 'react';
 
-import {DarkContext, chain} from '../../utils';
+import {chain, chainRefs, DarkContext} from '../../utils';
 import {Menu, MenuProps} from '../menu';
 
 import {CommonSelectProps} from './common-select-props';
@@ -25,7 +25,7 @@ export interface Props extends CommonSelectProps {
 }
 
 /** Menu based select */
-export function SelectMenu(props: Props) {
+export const SelectMenu = React.forwardRef<HTMLElement, Props>(function SelectMenu(props, ref) {
     const {native, selectProps, value, onValueChange, children, ...rest} = props;
 
     const emitterRef = React.useRef<HTMLButtonElement>(null);
@@ -46,7 +46,7 @@ export function SelectMenu(props: Props) {
                 {...rest}
                 isButton
                 onClick={chain(handleMenuOpen, rest.onClick)}
-                ref={emitterRef}
+                ref={chainRefs(emitterRef, ref)}
             />
             <DarkContext.Provider value={false}>
                 <Menu
@@ -66,4 +66,4 @@ export function SelectMenu(props: Props) {
             </DarkContext.Provider>
         </>
     );
-}
+});

@@ -27,7 +27,7 @@ export interface Props extends CommonSelectProps {
 }
 
 /** Native select */
-export function SelectNative(props: Props) {
+export const SelectNative = React.forwardRef<HTMLElement, Props>(function SelectNative(props, ref) {
     const {native, selectProps, value, onValueChange, children, ...rest} = props;
 
     const selectRef = React.useRef<HTMLSelectElement | null>(null);
@@ -39,7 +39,7 @@ export function SelectNative(props: Props) {
         });
 
     return (
-        <SelectEmitter {...rest}>
+        <SelectEmitter {...rest} ref={ref}>
             <select
                 {...selectProps}
                 value={value}
@@ -52,4 +52,4 @@ export function SelectNative(props: Props) {
             </select>
         </SelectEmitter>
     );
-}
+});

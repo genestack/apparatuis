@@ -22,17 +22,13 @@ export interface Props extends TargetProps, WithClasses<keyof typeof styles> {
     fullWidth?: boolean;
     /** Custom change event handler */
     onValueChange?: (value: string) => void;
-    inputRef?: React.Ref<HTMLTextAreaElement>;
 }
 
 /**
  * React Textarea Autosize wrapper
  */
-export const Textarea = (props: Props) => {
-    const {invalid, fullWidth, onValueChange, classes, inputRef, ...rest} = mergeClassesProps(
-        props,
-        styles
-    );
+export const Textarea = React.forwardRef<HTMLTextAreaElement, Props>(function Textarea(props, ref) {
+    const {invalid, fullWidth, onValueChange, classes, ...rest} = mergeClassesProps(props, styles);
 
     const handleChange: React.ChangeEventHandler<HTMLTextAreaElement> = (event) => {
         const {value} = event.currentTarget;
@@ -46,8 +42,7 @@ export const Textarea = (props: Props) => {
         <TextareaAutosize
             data-qa="textarea"
             {...rest}
-            // eslint-disable-next-line @typescript-eslint/no-explicit-any
-            ref={inputRef as any}
+            ref={ref}
             onChange={chain(rest.onChange, handleChange)}
             className={classNames(rest.className, classes.root, {
                 [classes.fullWidth]: fullWidth,
@@ -55,4 +50,4 @@ export const Textarea = (props: Props) => {
             })}
         />
     );
-};
+});
