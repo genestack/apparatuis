@@ -19,7 +19,10 @@ export interface Props extends React.ComponentPropsWithRef<'div'>, DataAttribute
 }
 
 /** Fadable spinner that is used in input field when loading */
-export const InputSpinner = (props: Props) => {
+export const InputSpinner = React.forwardRef<HTMLDivElement, Props>(function InputSpinner(
+    props,
+    ref
+) {
     const {show, ...rest} = props;
     const [isSpinnerExited, setSpinnerExited] = React.useState(true);
 
@@ -34,9 +37,9 @@ export const InputSpinner = (props: Props) => {
                 setSpinnerExited(true);
             }}
         >
-            <div data-qa="input-spinner" {...rest}>
+            <div data-qa="input-spinner" {...rest} ref={ref}>
                 <Spinner size={SPINNER_SIZE} />
             </div>
         </Fade>
     ) : null;
-};
+});

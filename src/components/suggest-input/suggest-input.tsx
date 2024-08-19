@@ -82,7 +82,7 @@ export interface Props extends Omit<SuggestProps, 'children'> {
  *
  * It supports only string values.
  */
-export function SuggestInput(props: Props) {
+export const SuggestInput = React.forwardRef<HTMLElement, Props>(function SuggestInput(props, ref) {
     const {onComplete, openOnFocus, onOpenChange, listProps = {}, ...rest} = props;
     const [value, onValueChange] = useControlledProp(
         rest.value,
@@ -207,11 +207,11 @@ export function SuggestInput(props: Props) {
                         onValueChange={onValueChange}
                         rootProps={{
                             ...inputProps.rootProps,
-                            ...rootProps,
-                            ref: chainRefs(rootRef, inputProps.rootProps?.ref)
+                            ...rootProps
                         }}
                         popoverProps={popoverProps}
                         open={open}
+                        ref={chainRefs(rootRef, ref)}
                     >
                         {open ? (
                             <List
@@ -227,4 +227,4 @@ export function SuggestInput(props: Props) {
             }}
         </Downshift>
     );
-}
+});

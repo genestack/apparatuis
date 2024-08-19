@@ -15,8 +15,11 @@ export interface Props extends Omit<ListItemProps, 'interactive'> {
 }
 
 /** Shortcut to `ListItem` with string value property for usage in `SuggestInput` */
-export const SuggestInputItem = (props: Props) => {
+export const SuggestInputItem = React.forwardRef<HTMLElement, Props>(function SuggestInputItem(
+    props,
+    ref
+) {
     const {value, ...rest} = props;
 
-    return <ListItem {...rest} interactive />;
-};
+    return <ListItem {...rest} interactive ref={ref} />;
+});
