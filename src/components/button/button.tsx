@@ -15,7 +15,7 @@ import {ButtonBaseProps, ButtonBase} from '../button-base';
 
 import {ButtonContext} from './button-context';
 import * as styles from './button.module.css';
-import {SubmenuIndicator} from "./submenu-indicator";
+import {SubmenuIndicator} from './submenu-indicator';
 
 type ButtonBaseClassNames = keyof Exclude<ButtonBaseProps['classes'], undefined>;
 type ButtonClassNames = keyof typeof styles;
