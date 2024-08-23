@@ -17,3 +17,4 @@ export const small: string;
 export const tiny: string;
 export const rounded: string;
 export const text: string;
+export const submenuIndicator: string;
