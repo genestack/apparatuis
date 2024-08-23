@@ -15,6 +15,7 @@ import {ButtonBaseProps, ButtonBase} from '../button-base';
 
 import {ButtonContext} from './button-context';
 import * as styles from './button.module.css';
+import {SubmenuIndicator} from "./submenu-indicator";
 
 type ButtonBaseClassNames = keyof Exclude<ButtonBaseProps['classes'], undefined>;
 type ButtonClassNames = keyof typeof styles;
@@ -33,6 +34,8 @@ export interface Props
     iconEnd?: React.ReactNode;
     /** If `true` text in the button is wrapped */
     wrap?: boolean;
+    /** Add indicator that the button has a submenu */
+    hasSubmenuIndicator?: boolean;
     /** Size of button */
     size?: 'normal' | 'small' | 'tiny';
     /** If `true` button will have fully-rounded border */
@@ -72,6 +75,7 @@ export const Button: OverridableComponent<TypeMap> = React.forwardRef<
         rounded,
         classes,
         inclusiveDisabled = false,
+        hasSubmenuIndicator,
         ...rest
     } = mergeClassesProps(props, styles);
 
@@ -119,6 +123,7 @@ export const Button: OverridableComponent<TypeMap> = React.forwardRef<
                     {iconEnd}
                 </span>
             ) : null}
+            {hasSubmenuIndicator ? <SubmenuIndicator /> : null}
         </ButtonBase>
     );
 });

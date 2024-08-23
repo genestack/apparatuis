@@ -80,6 +80,7 @@ function ButtonExample() {
                 wrap={presentation.wrap}
                 size={presentation.size}
                 rounded={presentation.rounded}
+                hasSubmenuIndicator={presentation.hasSubmenuIndicator}
             >
                 {text}
             </Button>
@@ -105,6 +106,7 @@ function ButtonExample() {
         <PresentationState name="inclusiveDisabled" label="Inclusive Disabled" />
         <PresentationState name="wrap" label="Wrap words" />
         <PresentationState name="rounded" label="Rounded" />
+        <PresentationState name="hasSubmenuIndicator" label="Has submenu indicator" />
         <ListItem>
             <Typography variant="section">Text</Typography>
         </ListItem>
