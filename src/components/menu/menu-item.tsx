@@ -144,7 +144,7 @@ export const MenuItem = React.forwardRef<HTMLElement, Props>(function MenuItem(p
             return;
         }
 
-        closeSubMenuDebouncedRef.current();
+        openSubMenuDebouncedRef.current();
     }
 
     function scheduleSubMenuClose() {
@@ -184,9 +184,9 @@ export const MenuItem = React.forwardRef<HTMLElement, Props>(function MenuItem(p
         return () => {
             closeSubMenuDebouncedRef.current.cancel();
             openSubMenuDebouncedRef.current.cancel();
-            removeEventListener('mousemove', handleWindowMouseMove);
+            window.removeEventListener('mousemove', handleWindowMouseMove);
         };
-    });
+    }, []);
 
     const handleKeyDown: Props['onKeyDown'] = (event) => {
         if (event.key === 'ArrowRight') {
