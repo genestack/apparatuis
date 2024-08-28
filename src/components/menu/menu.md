@@ -96,9 +96,9 @@ handleMenuClose = () => {
     setState({...state, referenceElement: null});
 };
 
-handleMenuValueSelect = (value) => {
+handleMenuValueSelect = (item) => {
     setState({
-        selectedItemValue: value,
+        selectedItemValue: item.value,
         referenceElement: null
     });
 };
