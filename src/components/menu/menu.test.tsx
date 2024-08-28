@@ -129,6 +129,9 @@ describe('<Menu />', () => {
         act(() => {
             document.getElementById('first')!.focus();
             document.activeElement!.dispatchEvent(down);
+        });
+
+        act(() => {
             document.getElementById('first')!.dispatchEvent(
                 new MouseEvent('mousemove', {
                     bubbles: true
@@ -193,11 +196,7 @@ describe('<Menu />', () => {
             fireEvent.click(document.getElementById('first')!);
 
             await waitFor(() => {
-                expect(onValueSelect).toHaveBeenCalledWith(
-                    'first',
-                    expect.anything(),
-                    expect.anything()
-                );
+                expect(onValueSelect).toHaveBeenCalledWith({value: 'first', hasSubMenu: false});
             });
         });
     });

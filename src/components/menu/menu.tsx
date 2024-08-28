@@ -12,11 +12,10 @@ import {chain} from '../../utils/chain';
 import {getFirstReachableElement, getLastReachableElement} from '../../utils/focusable-elements';
 import {Overlay, OverlayProps} from '../overlay';
 
-import {MenuContext, MenuContextValue} from './menu-context';
-import {MenuItem} from './menu-item';
+import {MenuContext, MenuContextValue, MenuItemRef} from './menu-context';
 import {MenuPopover, Props as MenuPopoverProps} from './menu-popover';
 import * as styles from './menu.module.css';
-import {SubMenu, Props as ListProps} from './sub-menu';
+import {Props as ListProps, SubMenu} from './sub-menu';
 
 type TargetProps = ListProps;
 
@@ -37,8 +36,7 @@ export interface Props extends TargetProps {
     keepMounted?: boolean;
     overlayProps?: RestOverlayProps;
     popoverProps?: RestPopoverProps;
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    onValueSelect?: (value: any, event: React.SyntheticEvent, ref: MenuItem) => void;
+    onValueSelect?: (item: MenuItemRef) => void;
 }
 
 /**
@@ -49,9 +47,9 @@ export interface Props extends TargetProps {
  */
 export class Menu extends React.Component<Props> {
     private menuContext: MenuContextValue = {
-        onItemSelect: (item, event) => {
+        onItemSelect: (item) => {
             if (this.props.onValueSelect) {
-                this.props.onValueSelect(item.props.value, event, item);
+                this.props.onValueSelect(item);
             }
         }
     };
