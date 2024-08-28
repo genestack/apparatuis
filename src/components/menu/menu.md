@@ -5,8 +5,8 @@ const [state, setState] = React.useState({
     value: null
 });
 
-handleValueSelect = (value) => {
-    setState({value});
+handleValueSelect = (item) => {
+    setState({value: item.value});
 };
 
 const menu = (
