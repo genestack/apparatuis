@@ -42,7 +42,7 @@ export function useMenuHandler(props: Props) {
     }
 
     const handleMenuValueSelect: MenuProps['onValueSelect'] = (item) => {
-        if (!item) {
+        if (!item.hasSubMenu) {
             close();
         }
     };
