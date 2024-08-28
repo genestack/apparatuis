@@ -111,7 +111,7 @@ describe('<Menu />', () => {
         });
     });
 
-    it.only('should focus item on window mousemove in keyboard mode', async () => {
+    it('should focus item on window mousemove in keyboard mode', async () => {
         const referenceElement = document.createElement('div');
 
         render(
@@ -129,6 +129,9 @@ describe('<Menu />', () => {
         act(() => {
             document.getElementById('first')!.focus();
             document.activeElement!.dispatchEvent(down);
+        });
+
+        act(() => {
             document.getElementById('first')!.dispatchEvent(
                 new MouseEvent('mousemove', {
                     bubbles: true

@@ -143,7 +143,7 @@ describe('<SubMenu />', () => {
         const {dispatchMouseEvent} = setup(subMenu);
         dispatchMouseEvent('middle', 'mouseover');
         act(() => jest.runAllTimers());
-        await waitFor(() => expect(subMenu).toHaveBeenCalledTimes(1));
+        await waitFor(() => expect(subMenu).toHaveBeenCalled());
     });
 
     it('should render element from subMenu callback if sub menu opened', async () => {

@@ -22,7 +22,6 @@ import {mergeClassesProps, WithClasses} from '../../utils/styles';
 import {FocusTrap} from '../focus-trap';
 import {IconProps} from '../icon';
 import {ListItem, ListItemProps} from '../list';
-import {RootRef} from '../root-ref';
 
 import {MenuContext} from './menu-context';
 import * as styles from './menu-item.module.css';
@@ -171,6 +170,8 @@ export const MenuItem = React.forwardRef<HTMLElement, Props>(function MenuItem(p
                 return;
             }
 
+            setKeyboardMode(false);
+
             const {target} = event;
             const item = itemRef.current;
 
@@ -187,7 +188,7 @@ export const MenuItem = React.forwardRef<HTMLElement, Props>(function MenuItem(p
             openSubMenuDebouncedRef.current.cancel();
             window.removeEventListener('mousemove', handleWindowMouseMove);
         };
-    }, []);
+    }, [keyboardMode]);
 
     const handleKeyDown: Props['onKeyDown'] = (event) => {
         if (event.key === 'ArrowRight') {
@@ -300,41 +301,38 @@ export const MenuItem = React.forwardRef<HTMLElement, Props>(function MenuItem(p
 
     return (
         <React.Fragment>
-            <RootRef rootRef={chainRefs(ref, itemRef)}>
-                <ListItem
-                    data-qa="menu-item"
-                    {...rest}
-                    interactive
-                    focused={highlighted}
-                    className={classNames(className, classes.root)}
-                    prependProps={{
-                        ...prependProps,
-                        className: classNames(prependProps.className, classes.prepend)
-                    }}
-                    prepend={<React.Fragment>{prepend}</React.Fragment>}
-                    appendProps={{
-                        ...appendProps,
-                        className: classNames(appendProps.className, classes.append)
-                    }}
-                    titleProps={titleProps}
-                    append={
-                        append || subMenu ? (
-                            <React.Fragment>
-                                {append}
-                                {subMenu ? (
-                                    <KeyboardArrowRightIcon {...subMenuArrowIconProps} />
-                                ) : null}
-                            </React.Fragment>
-                        ) : null
-                    }
-                    onClick={chain(rest.onClick, handleClick)}
-                    onFocus={chain(rest.onFocus, handleFocus)}
-                    onBlur={chain(rest.onBlur, handleBlur)}
-                    onKeyDown={chain(rest.onKeyDown, handleKeyDown)}
-                    onMouseEnter={chain(rest.onMouseEnter, handleMouseEnter)}
-                    onMouseLeave={chain(rest.onMouseLeave, handleMouseLeave)}
-                />
-            </RootRef>
+            <ListItem
+                data-qa="menu-item"
+                {...rest}
+                interactive
+                focused={highlighted}
+                className={classNames(className, classes.root)}
+                prependProps={{
+                    ...prependProps,
+                    className: classNames(prependProps.className, classes.prepend)
+                }}
+                prepend={<React.Fragment>{prepend}</React.Fragment>}
+                appendProps={{
+                    ...appendProps,
+                    className: classNames(appendProps.className, classes.append)
+                }}
+                titleProps={titleProps}
+                append={
+                    append || subMenu ? (
+                        <React.Fragment>
+                            {append}
+                            {subMenu ? <KeyboardArrowRightIcon {...subMenuArrowIconProps} /> : null}
+                        </React.Fragment>
+                    ) : null
+                }
+                onClick={chain(rest.onClick, handleClick)}
+                onFocus={chain(rest.onFocus, handleFocus)}
+                onBlur={chain(rest.onBlur, handleBlur)}
+                onKeyDown={chain(rest.onKeyDown, handleKeyDown)}
+                onMouseEnter={chain(rest.onMouseEnter, handleMouseEnter)}
+                onMouseLeave={chain(rest.onMouseLeave, handleMouseLeave)}
+                ref={chainRefs(ref, itemRef)}
+            />
             {subMenuPopover}
         </React.Fragment>
     );
