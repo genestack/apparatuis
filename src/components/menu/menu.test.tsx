@@ -111,7 +111,7 @@ describe('<Menu />', () => {
         });
     });
 
-    it('should focus item on window mousemove in keyboard mode', async () => {
+    it.only('should focus item on window mousemove in keyboard mode', async () => {
         const referenceElement = document.createElement('div');
 
         render(

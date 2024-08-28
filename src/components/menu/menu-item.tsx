@@ -120,14 +120,15 @@ export const MenuItem = React.forwardRef<HTMLElement, Props>(function MenuItem(p
     };
 
     React.useEffect(() => {
-        if (highlighted) {
+        if (container) {
             const subMenuPaper = subMenuPaperRef.current;
             const subMenuItem = subMenuPaper && getFirstReachableElement(subMenuPaper);
+
             if (subMenuItem) {
                 subMenuItem.focus();
             }
         }
-    }, [highlighted]);
+    }, [container]);
 
     const closeSubMenu = () => {
         setItem(null);
