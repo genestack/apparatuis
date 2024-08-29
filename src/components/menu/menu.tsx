@@ -45,16 +45,27 @@ export interface Props extends TargetProps {
  *
  * @example ./focus-to-input-after-menu-item-click.md
  */
-export class Menu extends React.Component<Props> {
-    private menuContext: MenuContextValue = {
+export const Menu = React.forwardRef<HTMLElement, Props>(function Menu(props, ref) {
+    const {
+        open,
+        onClose,
+        onClosed,
+        referenceElement,
+        placement = 'bottom-start',
+        keepMounted,
+        popoverProps = {},
+        onValueSelect,
+        overlayProps = {} as RestOverlayProps,
+        ...rest
+    } = props;
+
+    const menuContext: MenuContextValue = {
         onItemSelect: (item) => {
-            if (this.props.onValueSelect) {
-                this.props.onValueSelect(item);
-            }
+            onValueSelect?.(item);
         }
     };
 
-    private handleKeyDown: MenuPopoverProps['onKeyDown'] = (event) => {
+    const handleKeyDown: MenuPopoverProps['onKeyDown'] = (event) => {
         if (event.target !== event.currentTarget) {
             return;
         }
@@ -75,48 +86,34 @@ export class Menu extends React.Component<Props> {
         }
     };
 
-    public render() {
-        const {
-            open,
-            onClose,
-            onClosed,
-            referenceElement,
-            placement = 'bottom-start',
-            keepMounted,
-            popoverProps = {},
-            onValueSelect,
-            overlayProps = {} as RestOverlayProps,
-            ...rest
-        } = this.props;
-
-        return (
-            <MenuContext.Provider value={this.menuContext}>
-                <Overlay
-                    {...overlayProps}
+    return (
+        <MenuContext.Provider value={menuContext}>
+            <Overlay
+                {...overlayProps}
+                open={open}
+                keepMounted={keepMounted}
+                onClose={onClose}
+                onClosed={onClosed}
+                invisible
+            >
+                <MenuPopover
+                    data-qa="menu"
+                    {...popoverProps}
+                    referenceElement={referenceElement}
                     open={open}
+                    placement={placement}
                     keepMounted={keepMounted}
-                    onClose={onClose}
-                    onClosed={onClosed}
-                    invisible
+                    positionFixed
+                    tabIndex={-1}
+                    onKeyDown={chain(popoverProps.onKeyDown, handleKeyDown)}
+                    ref={ref}
                 >
-                    <MenuPopover
-                        data-qa="menu"
-                        {...popoverProps}
-                        referenceElement={referenceElement}
-                        open={open}
-                        placement={placement}
-                        keepMounted={keepMounted}
-                        positionFixed
-                        tabIndex={-1}
-                        onKeyDown={chain(popoverProps.onKeyDown, this.handleKeyDown)}
-                    >
-                        <SubMenu
-                            {...rest}
-                            className={classNames(rest.className, {[styles.closed]: !open})}
-                        />
-                    </MenuPopover>
-                </Overlay>
-            </MenuContext.Provider>
-        );
-    }
-}
+                    <SubMenu
+                        {...rest}
+                        className={classNames(rest.className, {[styles.closed]: !open})}
+                    />
+                </MenuPopover>
+            </Overlay>
+        </MenuContext.Provider>
+    );
+});
