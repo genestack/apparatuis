@@ -196,7 +196,10 @@ describe('<Menu />', () => {
             fireEvent.click(document.getElementById('first')!);
 
             await waitFor(() => {
-                expect(onValueSelect).toHaveBeenCalledWith({value: 'first', hasSubMenu: false});
+                expect(onValueSelect).toHaveBeenCalledWith('first', {
+                    value: 'first',
+                    hasSubMenu: false
+                });
             });
         });
     });

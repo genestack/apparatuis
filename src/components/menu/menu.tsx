@@ -36,7 +36,8 @@ export interface Props extends TargetProps {
     keepMounted?: boolean;
     overlayProps?: RestOverlayProps;
     popoverProps?: RestPopoverProps;
-    onValueSelect?: (item: MenuItemRef) => void;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    onValueSelect?: (value: any, item: MenuItemRef) => void;
 }
 
 /**
@@ -61,7 +62,7 @@ export const Menu = React.forwardRef<HTMLElement, Props>(function Menu(props, re
 
     const menuContext: MenuContextValue = {
         onItemSelect: (item) => {
-            onValueSelect?.(item);
+            onValueSelect?.(item.value, item);
         }
     };
 

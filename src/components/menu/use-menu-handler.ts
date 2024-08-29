@@ -41,7 +41,7 @@ export function useMenuHandler(props: Props) {
         setState((prevState) => ({...prevState, open: false}));
     }
 
-    const handleMenuValueSelect: MenuProps['onValueSelect'] = (item) => {
+    const handleMenuValueSelect: MenuProps['onValueSelect'] = (_, item) => {
         if (!item.hasSubMenu) {
             close();
         }
