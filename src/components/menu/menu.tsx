@@ -19,7 +19,9 @@ import {Props as ListProps, SubMenu} from './sub-menu';
 
 type TargetProps = ListProps;
 
-type RestOverlayProps = Omit<OverlayProps, 'invisible' | 'open' | 'onClose' | 'onClosed'>;
+type RestOverlayProps = Omit<OverlayProps, 'invisible' | 'open' | 'onClose' | 'onClosed'> & {
+    ref?: React.Ref<HTMLElement>;
+};
 type RestPopoverProps = Omit<
     MenuPopoverProps,
     'referenceElement' | 'open' | 'withArrow' | 'positionFixed' | 'placement' | 'tabIndex'
