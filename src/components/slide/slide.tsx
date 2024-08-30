@@ -7,20 +7,19 @@
  */
 import classNames from 'classnames';
 import * as React from 'react';
-import Transition, {TransitionActions, TransitionProps} from 'react-transition-group/Transition';
+import Transition, {TransitionProps} from 'react-transition-group/Transition';
 
+import {chainRefs} from '../../utils';
 import {chain} from '../../utils/chain';
-import {OmitIndexSignature} from '../../utils/omit-index-signature';
 import {reflow} from '../../utils/reflow';
-import {WithClasses, mergeClassesProps} from '../../utils/styles';
+import {mergeClassesProps, WithClasses} from '../../utils/styles';
 
 import * as styles from './slide.module.css';
 
 const DURATION_TIMEOUT = 300;
 const FAST_DURATION_TIMEOUT = 160;
 
-type StrictCSSTransitionProps = OmitIndexSignature<TransitionProps> & TransitionActions;
-type TargetProps = Omit<StrictCSSTransitionProps, 'timeout' | 'children'>;
+type TargetProps = Omit<TransitionProps<HTMLElement>, 'timeout' | 'children'>;
 type Children = React.ReactElement<{className?: string; ref?: React.Ref<unknown>}>;
 
 /** Public Slide properties */
@@ -49,6 +48,7 @@ export const Slide = React.forwardRef<HTMLElement, Props>(function Slide(props, 
     const child = React.Children.only(children) as Children;
 
     const requestId = React.useRef<number | null>(null);
+    const nodeRef = React.useRef<HTMLElement>(null);
 
     function cancelAnimationFrame() {
         if (requestId.current) {
@@ -63,7 +63,13 @@ export const Slide = React.forwardRef<HTMLElement, Props>(function Slide(props, 
 
     React.useEffect(() => cancelAnimationFrame, []);
 
-    const handleEnter: Props['onEnter'] = (node) => {
+    const handleEnter: Props['onEnter'] = () => {
+        const node = nodeRef.current;
+
+        if (!node) {
+            return;
+        }
+
         node.classList.remove(classes.enter);
         node.classList.add(
             classNames({
@@ -86,7 +92,13 @@ export const Slide = React.forwardRef<HTMLElement, Props>(function Slide(props, 
         });
     };
 
-    const handleExit: Props['onExit'] = (node) => {
+    const handleExit: Props['onExit'] = () => {
+        const node = nodeRef.current;
+
+        if (!node) {
+            return;
+        }
+
         node.classList.remove(classes.exitLeft);
         node.classList.remove(classes.exitRight);
         node.classList.remove(classes.exitTop);
@@ -116,6 +128,7 @@ export const Slide = React.forwardRef<HTMLElement, Props>(function Slide(props, 
             timeout={fast ? FAST_DURATION_TIMEOUT : DURATION_TIMEOUT}
             onEnter={chain(rest.onEnter, handleEnter)}
             onExit={chain(rest.onExit, handleExit)}
+            nodeRef={nodeRef}
         >
             {React.cloneElement(child, {
                 className: classNames(className, child.props.className, {
@@ -126,7 +139,7 @@ export const Slide = React.forwardRef<HTMLElement, Props>(function Slide(props, 
                     [classes.exitTop]: !rest.in && direction === 'top',
                     [classes.exitBottom]: !rest.in && direction === 'bottom'
                 }),
-                ref
+                ref: chainRefs(nodeRef, ref)
             })}
         </Transition>
     );

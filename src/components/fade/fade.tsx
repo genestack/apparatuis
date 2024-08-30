@@ -7,19 +7,18 @@
  */
 import classNames from 'classnames';
 import * as React from 'react';
-import Transition, {TransitionActions, TransitionProps} from 'react-transition-group/Transition';
+import Transition, {TransitionProps} from 'react-transition-group/Transition';
 
+import {chainRefs} from '../../utils';
 import {chain} from '../../utils/chain';
-import {OmitIndexSignature} from '../../utils/omit-index-signature';
 import {reflow} from '../../utils/reflow';
-import {WithClasses, mergeClassesProps} from '../../utils/styles';
+import {mergeClassesProps, WithClasses} from '../../utils/styles';
 
 import * as styles from './fade.module.css';
 
 const DURATION_TIMEOUT = 300;
 
-type StrictCSSTransitionProps = OmitIndexSignature<TransitionProps> & TransitionActions;
-type TargetProps = Omit<StrictCSSTransitionProps, 'timeout' | 'children'>;
+type TargetProps = Omit<TransitionProps<HTMLElement>, 'timeout' | 'children'>;
 type Children = React.ReactElement<{className?: string; ref?: React.Ref<unknown>}>;
 
 /** Public Fade properties */
@@ -38,6 +37,8 @@ export const Fade = React.forwardRef<HTMLElement, Props>(function Fade(props, re
 
     const requestId = React.useRef<number | null>(null);
 
+    const nodeRef = React.useRef<HTMLElement>(null);
+
     function cancelAnimationFrame() {
         if (requestId.current) {
             window.cancelAnimationFrame(requestId.current);
@@ -51,7 +52,13 @@ export const Fade = React.forwardRef<HTMLElement, Props>(function Fade(props, re
 
     React.useEffect(() => cancelAnimationFrame, []);
 
-    function handleEnter(node: HTMLElement) {
+    function handleEnter() {
+        const node = nodeRef.current;
+
+        if (!node) {
+            return;
+        }
+
         node.classList.remove(classes.enter);
         node.classList.add(classes.exit);
 
@@ -64,7 +71,13 @@ export const Fade = React.forwardRef<HTMLElement, Props>(function Fade(props, re
         });
     }
 
-    function handleExit(node: HTMLElement) {
+    function handleExit() {
+        const node = nodeRef.current;
+
+        if (!node) {
+            return;
+        }
+
         node.classList.remove(classes.exit);
         node.classList.add(classes.enter);
 
@@ -83,13 +96,14 @@ export const Fade = React.forwardRef<HTMLElement, Props>(function Fade(props, re
             timeout={DURATION_TIMEOUT}
             onEnter={chain(rest.onEnter, handleEnter)}
             onExit={chain(rest.onExit, handleExit)}
+            nodeRef={nodeRef}
         >
             {React.cloneElement(child, {
                 className: classNames(className, child.props.className, {
                     [classes.enter]: rest.in,
                     [classes.exit]: !rest.in
                 }),
-                ref
+                ref: chainRefs(ref, nodeRef)
             })}
         </Transition>
     );
