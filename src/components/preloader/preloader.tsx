@@ -96,18 +96,21 @@ const DEFAULT_CLASSES = [styles.width100, styles.width75, styles.width85];
 /**
  * Component that renders preloader lines
  */
-export const Preloader = ({
-    count = 1,
-    iterateClassnames = DEFAULT_CLASSES,
-    show = false,
-    wrapAll = React.Fragment,
-    wrapEach = React.Fragment,
-    children,
-    className,
-    inverted,
-    variant,
-    box
-}: Props) => {
+export const Preloader = React.forwardRef<HTMLElement, Props>(function Preloader(
+    {
+        count = 1,
+        iterateClassnames = DEFAULT_CLASSES,
+        show = false,
+        wrapAll = React.Fragment,
+        wrapEach = React.Fragment,
+        children,
+        className,
+        inverted,
+        variant,
+        box
+    },
+    ref
+) {
     const classNameGenerator = getIterator(iterateClassnames);
     const ListWrapper = wrapAll;
     const ListItemWrapper = wrapEach;
@@ -118,7 +121,7 @@ export const Preloader = ({
     }
 
     return (
-        <ListWrapper>
+        <ListWrapper ref={ref}>
             {reduceNumber<React.ReactElement[]>(
                 count,
                 (preloaderLines, index) => {
@@ -159,4 +162,4 @@ export const Preloader = ({
             )}
         </ListWrapper>
     );
-};
+});

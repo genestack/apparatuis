@@ -64,7 +64,7 @@ describe('<ListItem />', () => {
     });
 
     it('should pass ref with non-interactive component', () => {
-        const ref = React.createRef();
+        const ref = React.createRef<HTMLElement>();
 
         render(
             <div>
@@ -76,7 +76,7 @@ describe('<ListItem />', () => {
     });
 
     it('should pass ref with interactive component', () => {
-        const ref = React.createRef();
+        const ref = React.createRef<HTMLElement>();
 
         render(
             <div>

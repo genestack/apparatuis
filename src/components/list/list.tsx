@@ -23,8 +23,15 @@ export interface Props extends TargetProps {
  * They are composed of items containing primary text and supplemental cells
  * which are represented by icons, radios, checkboxes or other text.
  */
-export const List = (props: Props) => {
+export const List = React.forwardRef<HTMLElement, Props>(function List(props, ref) {
     const {as: Component = 'ul', className, ...rest} = props;
 
-    return <Component data-qa="list" {...rest} className={classNames(className, styles.root)} />;
-};
+    return (
+        <Component
+            data-qa="list"
+            {...rest}
+            className={classNames(className, styles.root)}
+            ref={ref}
+        />
+    );
+});

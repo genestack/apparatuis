@@ -56,7 +56,7 @@ export interface Props extends TargetProps, WithClasses<keyof typeof styles> {
  * It uses [react-popper](https://github.com/FezVrasta/react-popper)
  * under the hood.
  */
-export const Popover = (props: Props) => {
+export const Popover = React.forwardRef<HTMLElement, Props>(function Popover(props, paperRef) {
     const {
         classes,
         withArrow,
@@ -98,6 +98,7 @@ export const Popover = (props: Props) => {
                             <Paper
                                 data-qa="popover"
                                 {...targetProps}
+                                ref={paperRef}
                                 data-placement={placement}
                                 className={classNames(targetProps.className, classes.paper, {
                                     [classes.roundCorners]: roundCorners
@@ -125,4 +126,4 @@ export const Popover = (props: Props) => {
             )}
         </TransitionPopper>
     );
-};
+});

@@ -23,16 +23,20 @@ export interface Props extends TargetProps {
 }
 
 /** Single item of controls container */
-export const ControlsItem = (props: Props) => {
+export const ControlsItem = React.forwardRef<HTMLElement, Props>(function ControlsItem(
+    props: Props,
+    ref
+) {
     const {as: Component = 'div', shrink, grow, ...rest} = props;
 
     return (
         <Component
             {...rest}
+            ref={ref}
             className={classNames(rest.className, styles.root, {
                 [styles.shrink]: shrink,
                 [styles.grow]: grow
             })}
         />
     );
-};
+});

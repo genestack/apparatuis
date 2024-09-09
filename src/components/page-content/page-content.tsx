@@ -15,4 +15,6 @@ export type Props = MarginBoxProps;
 /**
  * Shortcut to MarginBox for adding common paddings to the main page container
  */
-export const PageContent = (props: Props) => <MarginBox data-qa="page-content" {...props} />;
+export const PageContent = React.forwardRef<HTMLElement, Props>(function PageContent(props, ref) {
+    return <MarginBox data-qa="page-content" {...props} ref={ref} />;
+});

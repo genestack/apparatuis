@@ -35,7 +35,7 @@ export interface Props extends RootProps, WithClasses<keyof typeof styles> {
 /**
  * Text which plays the role of an icon
  */
-export const Badge = React.forwardRef(function Badge(props: Props, ref) {
+export const Badge = React.forwardRef<HTMLElement, Props>(function Badge(props, ref) {
     const {
         as: Component = 'span',
         variant = 'body',

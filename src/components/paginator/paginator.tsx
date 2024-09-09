@@ -12,7 +12,7 @@ import {Button} from '../button';
 
 import * as styles from './paginator.module.css';
 
-type TargetProps = React.HTMLAttributes<HTMLDivElement>;
+type TargetProps = React.ComponentPropsWithoutRef<'div'>;
 
 /** Paginator public properties */
 export interface Props extends Omit<TargetProps, 'onChange'> {
@@ -36,8 +36,8 @@ const clickNext =
 /**
  * Paginator React component.
  */
-export const Paginator = (props: Props) => {
-    const {offset, itemsPerPage, itemsLength, className} = props;
+export const Paginator = React.forwardRef<HTMLDivElement, Props>(function Paginator(props, ref) {
+    const {offset, itemsPerPage, itemsLength, className, onChange, ...rest} = props;
     const isFirstPage = offset === 0;
     const isLastPage = offset + itemsPerPage >= itemsLength;
     const firstShownItem = offset + 1;
@@ -45,7 +45,7 @@ export const Paginator = (props: Props) => {
     const paginatorFullClassName = classNames(styles.container, className);
 
     return (
-        <div data-qa="paginator" className={paginatorFullClassName}>
+        <div data-qa="paginator" className={paginatorFullClassName} {...rest} ref={ref}>
             <div className={styles.info}>
                 {firstShownItem === lastShownItem
                     ? lastShownItem
@@ -70,4 +70,4 @@ export const Paginator = (props: Props) => {
             </Button>
         </div>
     );
-};
+});

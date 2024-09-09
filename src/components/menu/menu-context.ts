@@ -7,11 +7,14 @@
  */
 import * as React from 'react';
 
-import {MenuItem} from './menu-item';
+export interface MenuItemRef {
+    value: unknown;
+    hasSubMenu: boolean;
+}
 
 /** MenuContext value */
 export interface MenuContextValue {
-    onItemSelect: (instance: MenuItem, event: React.SyntheticEvent) => void;
+    onItemSelect: (instance: MenuItemRef) => void;
 }
 
 /** Menu Context */

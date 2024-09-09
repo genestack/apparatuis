@@ -18,15 +18,17 @@ type TargetProps = React.ComponentPropsWithoutRef<'div'>;
 
 /** ButtonGroup public properties */
 export interface Props extends TargetProps, WithClasses<keyof typeof styles> {
-    rootRef?: React.Ref<HTMLDivElement>;
     intent?: ButtonProps['intent'];
     ghost?: ButtonProps['ghost'];
     size?: ButtonProps['size'];
 }
 
 /** Joined group of buttons */
-export function ButtonGroup(props: Props) {
-    const {rootRef, intent, ghost, classes, size, ...rest} = mergeClassesProps(props, styles);
+export const ButtonGroup = React.forwardRef<HTMLDivElement, Props>(function ButtonGroup(
+    props,
+    ref
+) {
+    const {intent, ghost, classes, size, ...rest} = mergeClassesProps(props, styles);
 
     const contextValue: ButtonContextValue = React.useMemo(
         () => ({
@@ -45,9 +47,9 @@ export function ButtonGroup(props: Props) {
             <div
                 data-qa="button-group"
                 {...rest}
-                ref={rootRef}
+                ref={ref}
                 className={classNames(rest.className, classes.root)}
             />
         </ButtonContext.Provider>
     );
-}
+});

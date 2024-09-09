@@ -27,8 +27,8 @@ export interface Props extends TargetProps {
  * It is enough to wrap your application once at application entry point.
  * Remember that this component creates DOM element.
  */
-export const RootElement = (props: Props) => {
+export const RootElement = React.forwardRef<HTMLElement, Props>(function RootElement(props, ref) {
     const {as: Component = 'div', ...rest} = props;
 
-    return <Component {...rest} className={classNames(rest.className, styles.root)} />;
-};
+    return <Component {...rest} className={classNames(rest.className, styles.root)} ref={ref} />;
+});

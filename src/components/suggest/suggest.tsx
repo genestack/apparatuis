@@ -9,9 +9,9 @@ import classNames from 'classnames';
 import * as React from 'react';
 
 import {chainRefs} from '../../utils/set-ref';
-import {InputProps, Input} from '../input';
+import {Input, InputProps} from '../input';
 import {PaperProps} from '../paper';
-import {PopoverProps, Popover} from '../popover';
+import {Popover, PopoverProps} from '../popover';
 import {TransitionPopper} from '../transition-popper';
 
 import * as styles from './suggest.module.css';
@@ -36,7 +36,7 @@ export interface Props extends InputProps {
     /** if `true` popover is shown */
     open?: boolean;
     /** properties passed to the `Popover` element */
-    popoverProps?: Omit<PopoverProps, 'referenceElement' | 'open'>;
+    popoverProps?: Omit<PopoverProps, 'referenceElement' | 'open'> & {ref?: React.Ref<HTMLElement>};
     /** children of the `Popover` element */
     children?: React.ReactNode;
 }
@@ -48,8 +48,8 @@ export interface Props extends InputProps {
  *
  * Wrap it with your controller or use some predefined components like `SuggestInput`.
  */
-export function Suggest(props: Props) {
-    const {open, rootProps = {}, popoverProps = {}, children, ...rest} = props;
+export const Suggest = React.forwardRef<HTMLElement, Props>(function Suggest(props, ref) {
+    const {open, popoverProps = {}, children, ...rest} = props;
     const {containerProps = {}} = popoverProps;
 
     const inputRootRef = React.useRef<HTMLElement>(null);
@@ -68,11 +68,8 @@ export function Suggest(props: Props) {
             <Input
                 data-qa="suggest"
                 {...rest}
-                rootProps={{
-                    ...rootProps,
-                    ref: chainRefs(rootProps.ref, inputRootRef)
-                }}
                 className={classNames(rest.className, styles.root)}
+                ref={chainRefs(ref, inputRootRef)}
             />
             <Popover
                 data-qa="suggest-popover"
@@ -93,4 +90,4 @@ export function Suggest(props: Props) {
             </Popover>
         </React.Fragment>
     );
-}
+});

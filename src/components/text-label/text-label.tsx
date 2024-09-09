@@ -10,7 +10,7 @@ import * as React from 'react';
 
 import {shouldRenderNode} from '../../utils/should-render-node';
 import {SlotProps} from '../../utils/slot-props';
-import {WithClasses, mergeClassesProps} from '../../utils/styles';
+import {mergeClassesProps, WithClasses} from '../../utils/styles';
 import {Typography, TypographyProps} from '../typography';
 
 import * as styles from './text-label.module.css';
@@ -43,7 +43,7 @@ const captionVariantsMap: Partial<Record<TypographyVariant, TypographyVariant>> 
  *
  * It takes in account text overflowing. Caption is never overflowed.
  */
-export const TextLabel = (props: Props) => {
+export const TextLabel = React.forwardRef<HTMLElement, Props>(function TextLabel(props, ref) {
     const {
         caption,
         as: Component = 'div',
@@ -70,6 +70,7 @@ export const TextLabel = (props: Props) => {
             className={classNames(rest.className, classes.root, {
                 [classes.inline]: box === 'inline'
             })}
+            ref={ref}
         >
             <span
                 {...labelProps}
@@ -94,4 +95,4 @@ export const TextLabel = (props: Props) => {
             ) : null}
         </Typography>
     );
-};
+});

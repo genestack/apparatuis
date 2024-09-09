@@ -9,11 +9,11 @@ import classNames from 'classnames';
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 
+import {chainRefs} from '../../utils';
 import {chain} from '../../utils/chain';
 import {DataAttributes} from '../../utils/slot-props';
 import {Backdrop, BackdropProps} from '../backdrop';
 import {FocusTrap} from '../focus-trap';
-import {RootRef} from '../root-ref';
 
 import {OverlayManager} from './overlay-manager';
 import * as styles from './overlay.module.css';
@@ -57,11 +57,6 @@ export interface Props extends TargetProps {
     /** Properties of nested Backdrop component */
     backdropProps?: Omit<BackdropProps, 'open' | 'invisible'>;
     children?: React.ReactElement;
-    rootRef?: React.Ref<HTMLDivElement>;
-}
-
-interface State {
-    exited: boolean;
 }
 
 /**
@@ -70,61 +65,64 @@ interface State {
  *   - with click on `<Backdrop />`
  *   - with `Escape` keydown
  */
-export class Overlay extends React.Component<Props, State> {
-    private childRef = React.createRef<HTMLElement>();
+export const Overlay = React.forwardRef<HTMLElement, Props>(function Overlay(props, ref) {
+    const {
+        open,
+        keepMounted,
+        onClose,
+        onClosed,
+        disableClickListener,
+        disableEscListener,
+        invisible,
+        backdropProps = {},
+        children,
+        className,
+        ...rest
+    } = props;
 
-    public static getDerivedStateFromProps(props: Props, state: State): State {
-        if (props.open) {
-            return {
-                exited: false
-            };
+    const rootRef = React.useRef<HTMLElement>(null);
+    const childRef = React.useRef<HTMLElement>(null);
+    const [exited, setExited] = React.useState(!open);
+
+    React.useEffect(() => {
+        if (open) {
+            setExited(false);
+            openOverlay();
         }
+    }, [open]);
 
-        return state;
-    }
+    React.useLayoutEffect(() => {
+        return () => {
+            if (rootRef.current) {
+                manager.unmount(rootRef.current);
+            }
+        };
+    }, []);
 
-    public state: State = {
-        exited: true
-    };
-
-    public componentDidMount() {
-        if (this.props.open) {
-            this.open();
+    function openOverlay() {
+        if (rootRef.current) {
+            manager.mount(rootRef.current);
         }
-    }
-
-    public componentDidUpdate(props: Props) {
-        if (this.props.open && !props.open) {
-            this.open();
-        }
-    }
-
-    public componentWillUnmount() {
-        manager.unmount(this);
-    }
-
-    private open() {
-        manager.mount(this);
 
         // Revert scroll position when focused element triggers scroll
         // changes into scrollable overlay.
         // May be it is better to move scroll container to overlay.
-        if (this.childRef.current) {
-            this.childRef.current.scrollTop = 0;
+        if (childRef.current) {
+            childRef.current.scrollTop = 0;
         }
     }
 
-    private close() {
-        manager.unmount(this);
+    function closeOverlay() {
+        if (rootRef.current) {
+            manager.unmount(rootRef.current);
+        }
 
-        if (this.props.onClosed) {
-            this.props.onClosed();
+        if (onClosed) {
+            onClosed();
         }
     }
 
-    private handleBackdropClick: BackdropProps['onClick'] = (event) => {
-        const {onClose, disableClickListener} = this.props;
-
+    const handleBackdropClick: BackdropProps['onClick'] = (event) => {
         if (disableClickListener) {
             return;
         }
@@ -134,15 +132,13 @@ export class Overlay extends React.Component<Props, State> {
         }
     };
 
-    private handleBackdropExited = () => {
-        this.close();
-        this.setState({exited: true});
+    const handleBackdropExited = () => {
+        closeOverlay();
+        setExited(true);
     };
 
-    private handleKeyDown: TargetProps['onKeyDown'] = (event) => {
-        const {disableEscListener, onClose} = this.props;
-
-        if (disableEscListener || !manager.isTopOverlay(this)) {
+    const handleKeyDown: TargetProps['onKeyDown'] = (event) => {
+        if (disableEscListener || (rootRef.current && !manager.isTopOverlay(rootRef.current))) {
             return;
         }
 
@@ -152,55 +148,38 @@ export class Overlay extends React.Component<Props, State> {
         }
     };
 
-    public render() {
-        const {
-            open,
-            keepMounted,
-            onClose,
-            onClosed,
-            disableClickListener,
-            disableEscListener,
-            invisible,
-            backdropProps = {},
-            children,
-            className,
-            rootRef,
-            ...rest
-        } = this.props;
-
-        const {exited} = this.state;
-
-        if (!keepMounted && !open && exited) {
-            return null;
-        }
-
-        return ReactDOM.createPortal(
-            <div
-                {...rest}
-                ref={rootRef}
-                className={classNames(
-                    className,
-                    {
-                        [styles.invisible]: !open && exited
-                    },
-                    styles.root
-                )}
-                onKeyDown={chain(rest.onKeyDown, this.handleKeyDown)}
-            >
-                <Backdrop
-                    {...backdropProps}
-                    invisible={invisible}
-                    open={open}
-                    onExited={chain(backdropProps.onExited, this.handleBackdropExited)}
-                    onClick={chain(backdropProps.onClick, this.handleBackdropClick)}
-                />
-                {children ? (
-                    <FocusTrap focusOnMount>
-                        <RootRef rootRef={this.childRef}>{children}</RootRef>
-                    </FocusTrap>
-                ) : null}
-            </div>,
-            container
-        );
+    if (!keepMounted && !open && exited) {
+        return null;
     }
-}
+
+    return ReactDOM.createPortal(
+        <div
+            {...rest}
+            ref={chainRefs(rootRef, ref)}
+            className={classNames(
+                className,
+                {
+                    [styles.invisible]: !open && exited
+                },
+                styles.root
+            )}
+            onKeyDown={chain(rest.onKeyDown, handleKeyDown)}
+        >
+            <Backdrop
+                {...backdropProps}
+                invisible={invisible}
+                open={open}
+                onExited={chain(backdropProps.onExited, handleBackdropExited)}
+                onClick={chain(backdropProps.onClick, handleBackdropClick)}
+            />
+            {children ? (
+                <FocusTrap focusOnMount>
+                    {React.cloneElement(children, {
+                        ref: childRef
+                    })}
+                </FocusTrap>
+            ) : null}
+        </div>,
+        container
+    );
+});

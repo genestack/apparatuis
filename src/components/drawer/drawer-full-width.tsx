@@ -16,4 +16,9 @@ export type Props = React.HTMLAttributes<HTMLDivElement>;
  * Use this element to remove side paddings from Drawer elements.
  * It add negative margins to compensate drawer side paddings.
  */
-export const DrawerFullWidth = (props: Props) => <MarginBoxFullWidth {...props} />;
+export const DrawerFullWidth = React.forwardRef<HTMLElement, Props>(function DrawerFullWidth(
+    props,
+    ref
+) {
+    return <MarginBoxFullWidth {...props} ref={ref} />;
+});

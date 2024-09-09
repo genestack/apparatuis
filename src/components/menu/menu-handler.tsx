@@ -7,8 +7,6 @@
  */
 import * as React from 'react';
 
-import {RootRef} from '../root-ref';
-
 import {Props as MenuProps} from './menu';
 import {useMenuHandler} from './use-menu-handler';
 
@@ -17,6 +15,7 @@ type MenuProp = (() => React.ReactElement<MenuProps>) | React.ReactElement<MenuP
 interface ChildProps {
     onClick?: React.ReactEventHandler;
     onKeyDown?: React.KeyboardEventHandler;
+    ref?: React.Ref<unknown>;
 }
 
 type ChildrenProp =
@@ -76,7 +75,10 @@ export const MenuHandler = React.forwardRef<MenuHandlerApi, Props>(function Menu
                 ? props.children({open: menuHandler.isOpen})
                 : (props.children as React.ReactElement<ChildProps>);
 
-        return React.cloneElement(child, menuHandler.getReferenceProps(child.props));
+        return React.cloneElement(child, {
+            ...menuHandler.getReferenceProps(child.props),
+            ref: childRef
+        });
     };
 
     const renderMenu = () => {
@@ -91,7 +93,7 @@ export const MenuHandler = React.forwardRef<MenuHandlerApi, Props>(function Menu
 
     return (
         <React.Fragment>
-            <RootRef rootRef={childRef}>{renderChild()}</RootRef>
+            {renderChild()}
             {renderMenu()}
         </React.Fragment>
     );

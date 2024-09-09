@@ -8,17 +8,12 @@
 import classNames from 'classnames';
 import style from 'dom-helpers/css';
 import * as React from 'react';
-import Transition, {
-    TransitionActions,
-    TransitionProps,
-    TransitionStatus
-} from 'react-transition-group/Transition';
+import Transition, {TransitionProps, TransitionStatus} from 'react-transition-group/Transition';
 
 import {chain} from '../../utils/chain';
-import {OmitIndexSignature} from '../../utils/omit-index-signature';
 import {reflow} from '../../utils/reflow';
 import {SlotProps} from '../../utils/slot-props';
-import {WithClasses, mergeClassesProps} from '../../utils/styles';
+import {mergeClassesProps, WithClasses} from '../../utils/styles';
 
 import * as styles from './circular-countdown.module.css';
 
@@ -30,7 +25,6 @@ const STROKE_WIDTH = 1.5;
 const CIRCLE_RADIUS = (DIAMETER - STROKE_WIDTH) / 2;
 const CIRCLE_PERIMETER = (CIRCLE_RADIUS * 2 * Math.PI).toFixed(3);
 
-type StrictTransitionProps = OmitIndexSignature<TransitionProps> & TransitionActions;
 type TargetProps = Omit<React.SVGAttributes<SVGSVGElement>, 'in'>;
 
 /** CircularCountdown public properties */
@@ -45,7 +39,7 @@ export interface Props extends TargetProps, WithClasses<keyof typeof styles> {
     /** Is called when counting down has completed */
     onComplete?: () => void;
     /** Transition component properties */
-    transitionProps?: Omit<StrictTransitionProps, 'timeout' | 'children' | 'in'>;
+    transitionProps?: Omit<TransitionProps<HTMLElement>, 'timeout' | 'children' | 'in'>;
     /** SVG Circle element properties that is used for countdown indicator */
     circleProps?: SlotProps<'circle'>;
 }
@@ -55,25 +49,42 @@ export interface Props extends TargetProps, WithClasses<keyof typeof styles> {
  * [Transition Component](https://github.com/reactjs/react-transition-group)
  * and indicates how much time is left by contrast circle.
  */
-export class CircularCountdown extends React.PureComponent<Props> {
-    private requestId: number | null = null;
+export const CircularCountdown = React.forwardRef<HTMLElement, Props>(function CircularCountdown(
+    props,
+    ref
+) {
+    const {
+        in: transitionIn,
+        onComplete,
+        transitionProps = {},
+        circleProps = {},
+        duration = DEFAULT_ENTER_DURATION,
+        classes,
+        ...rest
+    } = mergeClassesProps(props, styles);
 
-    public componentWillUnmount() {
-        if (this.requestId) {
-            cancelAnimationFrame(this.requestId);
+    const requestIdRef = React.useRef<number | null>(null);
+    const nodeRef = React.useRef<HTMLElement>(null);
+
+    function cancelAnimationFrame() {
+        if (requestIdRef.current) {
+            window.cancelAnimationFrame(requestIdRef.current);
         }
     }
 
-    private requestAnimationFrame(callback: () => void) {
-        if (this.requestId) {
-            cancelAnimationFrame(this.requestId);
-        }
-        this.requestId = requestAnimationFrame(callback);
+    function requestAnimationFrame(callback: () => void) {
+        cancelAnimationFrame();
+        requestIdRef.current = window.requestAnimationFrame(callback);
     }
 
-    private getCircleStyles(status: TransitionStatus): React.CSSProperties {
-        const {duration = DEFAULT_ENTER_DURATION} = this.props;
+    React.useEffect(() => cancelAnimationFrame, []);
 
+    const timeout: TransitionProps['timeout'] = {
+        enter: duration,
+        exit: EXIT_DURATION
+    };
+
+    function getCircleStyles(status: TransitionStatus): React.CSSProperties {
         const defaultStyle: React.CSSProperties = {
             strokeDasharray: CIRCLE_PERIMETER,
             strokeDashoffset: '0',
@@ -106,80 +117,79 @@ export class CircularCountdown extends React.PureComponent<Props> {
         };
     }
 
-    private setCircleStyles(node: Element, status: TransitionStatus) {
+    function setCircleStyles(node: Element, status: TransitionStatus) {
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        (style as any)(node, this.getCircleStyles(status));
+        (style as any)(node, getCircleStyles(status));
     }
 
-    private handleEnter: TransitionProps['onEnter'] = (node) => {
-        this.setCircleStyles(node, 'exited');
+    const handleEnter = () => {
+        const node = nodeRef.current;
 
-        this.requestAnimationFrame(() => {
+        if (!node) {
+            return;
+        }
+
+        setCircleStyles(node, 'exited');
+
+        requestAnimationFrame(() => {
             reflow(node);
-            this.setCircleStyles(node, 'entering');
+            setCircleStyles(node, 'entering');
 
-            this.requestAnimationFrame(() => {
-                this.setCircleStyles(node, 'entered');
+            requestAnimationFrame(() => {
+                setCircleStyles(node, 'entered');
             });
         });
     };
 
-    private handleExit: TransitionProps['onExit'] = (node) => {
-        this.setCircleStyles(node, 'entered');
+    const handleExit = () => {
+        const node = nodeRef.current;
 
-        this.requestAnimationFrame(() => {
+        if (!node) {
+            return;
+        }
+
+        setCircleStyles(node, 'entered');
+
+        requestAnimationFrame(() => {
             reflow(node);
-            this.setCircleStyles(node, 'exiting');
+            setCircleStyles(node, 'exiting');
 
-            this.requestAnimationFrame(() => {
-                this.setCircleStyles(node, 'exited');
+            requestAnimationFrame(() => {
+                setCircleStyles(node, 'exited');
             });
         });
     };
 
-    public render() {
-        const {
-            in: transitionIn,
-            onComplete,
-            transitionProps = {},
-            circleProps = {},
-            duration = DEFAULT_ENTER_DURATION,
-            classes,
-            ...rest
-        } = mergeClassesProps(this.props, styles);
-
-        const timeout: TransitionProps['timeout'] = {
-            enter: duration,
-            exit: EXIT_DURATION
-        };
-
-        return (
-            <svg
-                data-qa="circular-countdown"
-                viewBox={`0 0 ${DIAMETER} ${DIAMETER}`}
-                {...rest}
-                className={classNames(rest.className, classes.root)}
+    return (
+        <svg
+            data-qa="circular-countdown"
+            viewBox={`0 0 ${DIAMETER} ${DIAMETER}`}
+            {...rest}
+            className={classNames(rest.className, classes.root)}
+            ref={ref as React.Ref<SVGSVGElement>}
+        >
+            <Transition
+                {...transitionProps}
+                timeout={timeout}
+                in={transitionIn}
+                onEnter={chain(transitionProps.onEnter, handleEnter)}
+                onEntered={chain(transitionProps.onEntered, onComplete)}
+                onExit={chain(transitionProps.onExit, handleExit)}
+                nodeRef={nodeRef}
             >
-                <Transition
-                    {...transitionProps}
-                    timeout={timeout}
-                    in={transitionIn}
-                    onEnter={chain(transitionProps.onEnter, this.handleEnter)}
-                    onEntered={chain(transitionProps.onEntered, onComplete)}
-                    onExit={chain(transitionProps.onExit, this.handleExit)}
-                >
-                    <circle
-                        style={this.getCircleStyles(transitionIn ? 'entered' : 'exited')}
-                        cx={DIAMETER / 2}
-                        cy={DIAMETER / 2}
-                        r={CIRCLE_RADIUS}
-                        fill="none"
-                        strokeWidth={STROKE_WIDTH}
-                        {...circleProps}
-                        className={classNames(circleProps.className, classes.progressCircle)}
-                    />
-                </Transition>
-            </svg>
-        );
-    }
-}
+                <circle
+                    style={getCircleStyles(transitionIn ? 'entered' : 'exited')}
+                    cx={DIAMETER / 2}
+                    cy={DIAMETER / 2}
+                    r={CIRCLE_RADIUS}
+                    fill="none"
+                    strokeWidth={STROKE_WIDTH}
+                    {...circleProps}
+                    className={classNames(circleProps.className, classes.progressCircle)}
+                    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                    ref={nodeRef as any}
+                />
+            </Transition>
+        </svg>
+    );
+});

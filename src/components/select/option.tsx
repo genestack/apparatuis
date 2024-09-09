@@ -27,7 +27,10 @@ interface MenuOptionProps extends Omit<MenuItemProps, 'value'> {
 export type Props = MenuOptionProps | NativeOptionProps;
 
 /** Option component for Select */
-export function Option({label, ...restProps}: Props) {
+export const Option = React.forwardRef<HTMLOptionElement, Props>(function Option(
+    {label, ...restProps},
+    ref
+) {
     const {native} = useSelectContext();
 
     if (native) {
@@ -39,6 +42,7 @@ export function Option({label, ...restProps}: Props) {
                 label={optionLabel}
                 {...restProps}
                 className={classNames(styles.root, restProps.className)}
+                ref={ref}
             >
                 {restProps.children}
             </option>
@@ -46,4 +50,4 @@ export function Option({label, ...restProps}: Props) {
     }
 
     return <MenuItem {...restProps} />;
-}
+});

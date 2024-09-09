@@ -31,7 +31,7 @@ export interface Props extends TargetProps {
  * Use HeaderBlock if you want to show some non-interactive information
  * in the Header.
  */
-export function HeaderBlock(props: Props) {
+export const HeaderBlock = React.forwardRef<HTMLElement, Props>(function HeaderBlock(props, ref) {
     const {as: Component = 'div', grow, shrink, headerItemTextProps, ...rest} = props;
 
     const children =
@@ -49,8 +49,9 @@ export function HeaderBlock(props: Props) {
                 [styles.grow]: grow,
                 [styles.shrink]: shrink
             })}
+            ref={ref}
         >
             {children}
         </Component>
     );
-}
+});

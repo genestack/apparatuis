@@ -21,7 +21,10 @@ export interface Props extends TargetProps {
 }
 
 /** Shortcut to ListItemCell */
-export const HeaderItemCell = (props: Props) => {
+export const HeaderItemCell = React.forwardRef<HTMLDivElement, Props>(function HeaderItemCell(
+    props,
+    ref
+) {
     const {grow, shrink, ...rest} = props;
 
     return (
@@ -32,6 +35,7 @@ export const HeaderItemCell = (props: Props) => {
                 [styles.grow]: grow,
                 [styles.shrink]: shrink
             })}
+            ref={ref}
         />
     );
-};
+});

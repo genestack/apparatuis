@@ -13,14 +13,20 @@ import {Typography, TypographyProps} from '../typography';
 import * as styles from './header-item-text.module.css';
 
 /** HeaderItemText public properties */
-export type Props = TypographyProps;
+export type Props = Omit<TypographyProps, 'as'>;
 
 /** Shortcut to ListItemText */
-export const HeaderItemText = (props: Props) => (
-    <Typography
-        data-qa="header-item-text"
-        as="div"
-        {...props}
-        className={classNames(props.className, styles.root)}
-    />
-);
+export const HeaderItemText = React.forwardRef<HTMLElement, Props>(function HeaderItemText(
+    props,
+    ref
+) {
+    return (
+        <Typography
+            data-qa="header-item-text"
+            as="div"
+            {...props}
+            className={classNames(props.className, styles.root)}
+            ref={ref}
+        />
+    );
+});

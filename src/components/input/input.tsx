@@ -13,14 +13,14 @@ import {chainRefs} from '../../utils/set-ref';
 import {DataAttributes, SlotProps} from '../../utils/slot-props';
 import {mergeClassesProps, WithClasses} from '../../utils/styles';
 import {useInputInvalidity} from '../../utils/use-input-invalidity';
-import {FieldProps, Field} from '../field';
+import {Field, FieldProps} from '../field';
 
 import {InputClearButton, Props as InputClearButtonProps} from './input-clear-button';
 import {InputSpinner, Props as InputSpinnerProps} from './input-spinner';
 import * as styles from './input.module.css';
 
 type BaseTargetProps = React.ComponentPropsWithoutRef<'input'>;
-type BaseRootProps = React.ComponentPropsWithRef<'div'>;
+type BaseRootProps = React.ComponentPropsWithoutRef<'div'>;
 
 /** Properties that are exchanged between input and its wrapper (root element) */
 type ExchangedProps =
@@ -102,7 +102,7 @@ export interface Props extends TargetProps, RootProps {
  *
  * This component is stateless.
  */
-export function Input(props: Props) {
+export const Input = React.forwardRef<HTMLDivElement, Props>(function Input(props, ref) {
     const {
         className,
         style,
@@ -196,6 +196,7 @@ export function Input(props: Props) {
             disabled={inputProps.disabled}
             fullWidth={fullWidth}
             {...fieldProps}
+            ref={ref}
         >
             {prepend ? (
                 <div
@@ -252,4 +253,4 @@ export function Input(props: Props) {
             ) : null}
         </Field>
     );
-}
+});

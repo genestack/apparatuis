@@ -16,8 +16,6 @@ type TargetProps = React.HTMLAttributes<HTMLElement>;
 
 /** Paper public props */
 export interface Props extends TargetProps {
-    /** Reference to root element */
-    rootRef?: React.Ref<HTMLElement>;
     /** You could redefine the target component by passing ReactType */
     as?: React.ElementType;
     /**
@@ -33,10 +31,9 @@ export interface Props extends TargetProps {
  * Paper is a block with background and shadow.
  * Is used for overlay components.
  */
-export function Paper(props: Props) {
+export const Paper = React.forwardRef<HTMLElement, Props>(function Paper(props, ref) {
     const {
         as: Component = 'div',
-        rootRef,
         className,
         inverted = React.useContext(DarkContext),
         ...rest
@@ -46,8 +43,8 @@ export function Paper(props: Props) {
         <Component
             data-qa="paper"
             {...rest}
-            ref={rootRef}
+            ref={ref}
             className={classNames(className, styles.root, {[styles.inverted]: inverted})}
         />
     );
-}
+});

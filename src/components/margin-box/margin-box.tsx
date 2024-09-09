@@ -34,7 +34,7 @@ export interface Props extends TargetProps, WithClasses<keyof typeof styles> {
  * If you want to add margins to some container use specific
  * as `PageContent`, `DialogBody`, etc.
  */
-export const MarginBox = (props: Props) => {
+export const MarginBox = React.forwardRef<HTMLElement, Props>(function MarginBox(props, ref) {
     const {
         as: Component = 'div',
         contained = 'in-page',
@@ -52,6 +52,7 @@ export const MarginBox = (props: Props) => {
             <Component
                 data-qa="margin-box"
                 {...rest}
+                ref={ref}
                 className={classNames(rest.className, classes.root, {
                     [classes.inPage]: contained === 'in-page',
                     [classes.inDialog]: contained === 'in-dialog'
@@ -79,4 +80,4 @@ export const MarginBox = (props: Props) => {
             </Component>
         </MarginBoxContext.Provider>
     );
-};
+});

@@ -26,7 +26,10 @@ export interface Props extends TargetProps, WithClasses<keyof typeof styles> {
  * If you want to remove margins from some container use specific
  * as `PageFullWidth`, `DialogFullWidth`, `DrawerFullWidth`, etc.
  */
-export const MarginBoxFullWidth = (props: Props) => {
+export const MarginBoxFullWidth = React.forwardRef<HTMLElement, Props>(function MarginBoxFullWidth(
+    props,
+    ref
+) {
     const {as: Component = 'div', classes, ...rest} = mergeClassesProps(props, styles);
 
     const contained = React.useContext(MarginBoxContext);
@@ -34,10 +37,11 @@ export const MarginBoxFullWidth = (props: Props) => {
     return (
         <Component
             {...rest}
+            ref={ref}
             className={classNames(rest.className, {
                 [classes.inPage]: contained === 'in-page',
                 [classes.inDialog]: contained === 'in-dialog'
             })}
         />
     );
-};
+});

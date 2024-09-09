@@ -8,7 +8,6 @@
 import classNames from 'classnames';
 import * as React from 'react';
 
-import {wrapPureComponent} from '../../utils/wrap-pure-component';
 import {List, ListProps} from '../list';
 
 import * as styles from './menu.module.css';
@@ -21,11 +20,12 @@ export type Props = ListProps;
  * It uses pure component to prevent unnecessary updates
  * caused by transition components.
  */
-export const SubMenu = wrapPureComponent((props: Props) => {
+export const SubMenu = React.forwardRef<HTMLElement, Props>(function SubMenu(props, ref) {
     return (
         <List
             data-qa="sub-menu"
             {...props}
+            ref={ref}
             className={classNames(props.className, styles.subMenu)}
         />
     );

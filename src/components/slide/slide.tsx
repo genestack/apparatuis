@@ -7,21 +7,20 @@
  */
 import classNames from 'classnames';
 import * as React from 'react';
-import Transition, {TransitionActions, TransitionProps} from 'react-transition-group/Transition';
+import Transition, {TransitionProps} from 'react-transition-group/Transition';
 
+import {chainRefs} from '../../utils';
 import {chain} from '../../utils/chain';
-import {OmitIndexSignature} from '../../utils/omit-index-signature';
 import {reflow} from '../../utils/reflow';
-import {WithClasses, mergeClassesProps} from '../../utils/styles';
+import {mergeClassesProps, WithClasses} from '../../utils/styles';
 
 import * as styles from './slide.module.css';
 
 const DURATION_TIMEOUT = 300;
 const FAST_DURATION_TIMEOUT = 160;
 
-type StrictCSSTransitionProps = OmitIndexSignature<TransitionProps> & TransitionActions;
-type TargetProps = Omit<StrictCSSTransitionProps, 'timeout' | 'children'>;
-type Children = React.ReactElement<{className?: string}>;
+type TargetProps = Omit<TransitionProps<HTMLElement>, 'timeout' | 'children'>;
+type Children = React.ReactElement<{className?: string; ref?: React.Ref<unknown>}>;
 
 /** Public Slide properties */
 export interface Props extends TargetProps, WithClasses<keyof typeof styles> {
@@ -37,24 +36,39 @@ export interface Props extends TargetProps, WithClasses<keyof typeof styles> {
  *
  * It uses [react-transition-group](https://github.com/reactjs/react-transition-group) internally.
  */
-export class Slide extends React.Component<Props> {
-    private requestId: number | null = null;
+export const Slide = React.forwardRef<HTMLElement, Props>(function Slide(props, ref) {
+    const {
+        className,
+        classes,
+        children,
+        direction = 'left',
+        fast,
+        ...rest
+    } = mergeClassesProps(props, styles);
+    const child = React.Children.only(children) as Children;
 
-    public componentWillUnmount() {
-        if (this.requestId) {
-            cancelAnimationFrame(this.requestId);
+    const requestId = React.useRef<number | null>(null);
+    const nodeRef = React.useRef<HTMLElement>(null);
+
+    function cancelAnimationFrame() {
+        if (requestId.current) {
+            window.cancelAnimationFrame(requestId.current);
         }
     }
 
-    private requestAnimationFrame(callback: () => void) {
-        if (this.requestId) {
-            cancelAnimationFrame(this.requestId);
-        }
-        this.requestId = requestAnimationFrame(callback);
+    function requestAnimationFrame(callback: () => void) {
+        cancelAnimationFrame();
+        requestId.current = window.requestAnimationFrame(callback);
     }
 
-    private handleEnter: Props['onEnter'] = (node) => {
-        const {classes, direction = 'left'} = mergeClassesProps(this.props, styles);
+    React.useEffect(() => cancelAnimationFrame, []);
+
+    const handleEnter: Props['onEnter'] = () => {
+        const node = nodeRef.current;
+
+        if (!node) {
+            return;
+        }
 
         node.classList.remove(classes.enter);
         node.classList.add(
@@ -66,7 +80,7 @@ export class Slide extends React.Component<Props> {
             })
         );
 
-        this.requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
             node.classList.remove(classes.exiting);
             node.classList.add(classes.entering);
             reflow(node);
@@ -78,8 +92,12 @@ export class Slide extends React.Component<Props> {
         });
     };
 
-    private handleExit: Props['onExit'] = (node) => {
-        const {classes} = mergeClassesProps(this.props, styles);
+    const handleExit: Props['onExit'] = () => {
+        const node = nodeRef.current;
+
+        if (!node) {
+            return;
+        }
 
         node.classList.remove(classes.exitLeft);
         node.classList.remove(classes.exitRight);
@@ -88,8 +106,7 @@ export class Slide extends React.Component<Props> {
 
         node.classList.add(classes.enter);
 
-        this.requestAnimationFrame(() => {
-            const {direction = 'left'} = this.props;
+        requestAnimationFrame(() => {
             node.classList.remove(classes.entering);
             node.classList.add(classes.exiting);
             reflow(node);
@@ -105,35 +122,25 @@ export class Slide extends React.Component<Props> {
         });
     };
 
-    public render() {
-        const {
-            className,
-            classes,
-            children,
-            direction = 'left',
-            fast,
-            ...rest
-        } = mergeClassesProps(this.props, styles);
-        const child = React.Children.only(children) as Children;
-
-        return (
-            <Transition
-                {...rest}
-                timeout={fast ? FAST_DURATION_TIMEOUT : DURATION_TIMEOUT}
-                onEnter={chain(rest.onEnter, this.handleEnter)}
-                onExit={chain(rest.onExit, this.handleExit)}
-            >
-                {React.cloneElement(child, {
-                    className: classNames(className, child.props.className, {
-                        [classes.enter]: rest.in,
-                        [classes.fast]: fast,
-                        [classes.exitLeft]: !rest.in && direction === 'left',
-                        [classes.exitRight]: !rest.in && direction === 'right',
-                        [classes.exitTop]: !rest.in && direction === 'top',
-                        [classes.exitBottom]: !rest.in && direction === 'bottom'
-                    })
-                })}
-            </Transition>
-        );
-    }
-}
+    return (
+        <Transition
+            {...rest}
+            timeout={fast ? FAST_DURATION_TIMEOUT : DURATION_TIMEOUT}
+            onEnter={chain(rest.onEnter, handleEnter)}
+            onExit={chain(rest.onExit, handleExit)}
+            nodeRef={nodeRef}
+        >
+            {React.cloneElement(child, {
+                className: classNames(className, child.props.className, {
+                    [classes.enter]: rest.in,
+                    [classes.fast]: fast,
+                    [classes.exitLeft]: !rest.in && direction === 'left',
+                    [classes.exitRight]: !rest.in && direction === 'right',
+                    [classes.exitTop]: !rest.in && direction === 'top',
+                    [classes.exitBottom]: !rest.in && direction === 'bottom'
+                }),
+                ref: chainRefs(nodeRef, ref)
+            })}
+        </Transition>
+    );
+});

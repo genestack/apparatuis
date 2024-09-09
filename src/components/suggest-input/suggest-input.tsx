@@ -82,7 +82,7 @@ export interface Props extends Omit<SuggestProps, 'children'> {
  *
  * It supports only string values.
  */
-export function SuggestInput(props: Props) {
+export const SuggestInput = React.forwardRef<HTMLElement, Props>(function SuggestInput(props, ref) {
     const {onComplete, openOnFocus, onOpenChange, listProps = {}, ...rest} = props;
     const [value, onValueChange] = useControlledProp(
         rest.value,
@@ -164,8 +164,8 @@ export function SuggestInput(props: Props) {
                       )
                     : null;
 
-                const menuProps = downshift.getMenuProps(
-                    {refKey: 'rootRef'},
+                const {menuRef, ...menuProps} = downshift.getMenuProps(
+                    {refKey: 'menuRef'},
                     {suppressRefError: true}
                 );
 
@@ -174,9 +174,9 @@ export function SuggestInput(props: Props) {
                 const popoverProps: PopoverProps = {
                     ...inputPopoverProps,
                     ...menuProps,
-                    rootRef: chainRefs(
-                        chainRefs(menuProps.rootRef, inputPopoverProps.rootRef),
-                        rest.popoverProps?.rootRef
+                    ref: chainRefs(
+                        chainRefs(menuRef, inputPopoverProps.ref),
+                        rest.popoverProps?.ref
                     ),
                     style: {
                         ...inputPopoverProps.style,
@@ -207,11 +207,11 @@ export function SuggestInput(props: Props) {
                         onValueChange={onValueChange}
                         rootProps={{
                             ...inputProps.rootProps,
-                            ...rootProps,
-                            ref: chainRefs(rootRef, inputProps.rootProps?.ref)
+                            ...rootProps
                         }}
                         popoverProps={popoverProps}
                         open={open}
+                        ref={chainRefs(rootRef, ref)}
                     >
                         {open ? (
                             <List
@@ -227,4 +227,4 @@ export function SuggestInput(props: Props) {
             }}
         </Downshift>
     );
-}
+});

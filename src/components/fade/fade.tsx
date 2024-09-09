@@ -7,20 +7,19 @@
  */
 import classNames from 'classnames';
 import * as React from 'react';
-import Transition, {TransitionActions, TransitionProps} from 'react-transition-group/Transition';
+import Transition, {TransitionProps} from 'react-transition-group/Transition';
 
+import {chainRefs} from '../../utils';
 import {chain} from '../../utils/chain';
-import {OmitIndexSignature} from '../../utils/omit-index-signature';
 import {reflow} from '../../utils/reflow';
-import {WithClasses, mergeClassesProps} from '../../utils/styles';
+import {mergeClassesProps, WithClasses} from '../../utils/styles';
 
 import * as styles from './fade.module.css';
 
 const DURATION_TIMEOUT = 300;
 
-type StrictCSSTransitionProps = OmitIndexSignature<TransitionProps> & TransitionActions;
-type TargetProps = Omit<StrictCSSTransitionProps, 'timeout' | 'children'>;
-type Children = React.ReactElement<{className?: string}>;
+type TargetProps = Omit<TransitionProps<HTMLElement>, 'timeout' | 'children'>;
+type Children = React.ReactElement<{className?: string; ref?: React.Ref<unknown>}>;
 
 /** Public Fade properties */
 export interface Props extends TargetProps, WithClasses<keyof typeof styles> {
@@ -32,70 +31,80 @@ export interface Props extends TargetProps, WithClasses<keyof typeof styles> {
  *
  * It uses [react-transition-group](https://github.com/reactjs/react-transition-group) internally.
  */
-export class Fade extends React.Component<Props> {
-    private requestId: number | null = null;
+export const Fade = React.forwardRef<HTMLElement, Props>(function Fade(props, ref) {
+    const {className, classes, children, ...rest} = mergeClassesProps(props, styles);
+    const child = React.Children.only(children) as Children;
 
-    public componentWillUnmount() {
-        if (this.requestId) {
-            cancelAnimationFrame(this.requestId);
+    const requestId = React.useRef<number | null>(null);
+
+    const nodeRef = React.useRef<HTMLElement>(null);
+
+    function cancelAnimationFrame() {
+        if (requestId.current) {
+            window.cancelAnimationFrame(requestId.current);
         }
     }
 
-    private requestAnimationFrame(callback: () => void) {
-        if (this.requestId) {
-            cancelAnimationFrame(this.requestId);
-        }
-        this.requestId = requestAnimationFrame(callback);
+    function requestAnimationFrame(callback: () => void) {
+        cancelAnimationFrame();
+        requestId.current = window.requestAnimationFrame(callback);
     }
 
-    private handleEnter: Props['onEnter'] = (node) => {
-        const {classes} = mergeClassesProps(this.props, styles);
+    React.useEffect(() => cancelAnimationFrame, []);
+
+    function handleEnter() {
+        const node = nodeRef.current;
+
+        if (!node) {
+            return;
+        }
 
         node.classList.remove(classes.enter);
         node.classList.add(classes.exit);
 
-        this.requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
             node.classList.remove(classes.exiting);
             node.classList.add(classes.entering);
             reflow(node);
             node.classList.remove(classes.exit);
             node.classList.add(classes.enter);
         });
-    };
+    }
 
-    private handleExit: Props['onExit'] = (node) => {
-        const {classes} = mergeClassesProps(this.props, styles);
+    function handleExit() {
+        const node = nodeRef.current;
+
+        if (!node) {
+            return;
+        }
 
         node.classList.remove(classes.exit);
         node.classList.add(classes.enter);
 
-        this.requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
             node.classList.remove(classes.entering);
             node.classList.add(classes.exiting);
             reflow(node);
             node.classList.remove(classes.enter);
             node.classList.add(classes.exit);
         });
-    };
-
-    public render() {
-        const {className, classes, children, ...rest} = mergeClassesProps(this.props, styles);
-        const child = React.Children.only(children) as Children;
-
-        return (
-            <Transition
-                {...rest}
-                timeout={DURATION_TIMEOUT}
-                onEnter={chain(rest.onEnter, this.handleEnter)}
-                onExit={chain(rest.onExit, this.handleExit)}
-            >
-                {React.cloneElement(child, {
-                    className: classNames(className, child.props.className, {
-                        [classes.enter]: rest.in,
-                        [classes.exit]: !rest.in
-                    })
-                })}
-            </Transition>
-        );
     }
-}
+
+    return (
+        <Transition
+            {...rest}
+            timeout={DURATION_TIMEOUT}
+            onEnter={chain(rest.onEnter, handleEnter)}
+            onExit={chain(rest.onExit, handleExit)}
+            nodeRef={nodeRef}
+        >
+            {React.cloneElement(child, {
+                className: classNames(className, child.props.className, {
+                    [classes.enter]: rest.in,
+                    [classes.exit]: !rest.in
+                }),
+                ref: chainRefs(ref, nodeRef)
+            })}
+        </Transition>
+    );
+});

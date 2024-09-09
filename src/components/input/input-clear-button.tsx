@@ -8,7 +8,7 @@
 import * as React from 'react';
 
 import {ClearIcon} from '../../icons/clear-icon';
-import {ButtonProps, Button} from '../button';
+import {Button, ButtonProps} from '../button';
 import {Fade} from '../fade';
 
 type TargetProps = ButtonProps & React.ComponentPropsWithoutRef<'button'>;
@@ -19,32 +19,35 @@ export interface Props extends TargetProps {
 }
 
 /** Fadable button with clear icon that is used in input field */
-export const InputClearButton = (props: Props) => {
-    const {show, ...rest} = props;
+export const InputClearButton = React.forwardRef<HTMLButtonElement, Props>(
+    function InputClearButton(props, ref) {
+        const {show, ...rest} = props;
 
-    const [isClearButtonExited, setClearButtonExited] = React.useState(true);
+        const [isClearButtonExited, setClearButtonExited] = React.useState(true);
 
-    return show || !isClearButtonExited ? (
-        <Fade
-            in={show}
-            appear
-            onEnter={() => {
-                setClearButtonExited(false);
-            }}
-            onExited={() => {
-                setClearButtonExited(true);
-            }}
-        >
-            <Button
-                data-qa="input-clear-button"
-                size="tiny"
-                ghost
-                component="button"
-                rounded
-                icon={<ClearIcon />}
-                inverted={false}
-                {...rest}
-            />
-        </Fade>
-    ) : null;
-};
+        return show || !isClearButtonExited ? (
+            <Fade
+                in={show}
+                appear
+                onEnter={() => {
+                    setClearButtonExited(false);
+                }}
+                onExited={() => {
+                    setClearButtonExited(true);
+                }}
+            >
+                <Button
+                    data-qa="input-clear-button"
+                    size="tiny"
+                    ghost
+                    component="button"
+                    rounded
+                    iconStart={<ClearIcon />}
+                    inverted={false}
+                    {...rest}
+                    ref={ref}
+                />
+            </Fade>
+        ) : null;
+    }
+);

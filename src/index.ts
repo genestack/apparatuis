@@ -42,7 +42,6 @@ export * from './components/paper';
 export * from './components/popover';
 export * from './components/preloader';
 export * from './components/root-element';
-export * from './components/root-ref';
 export * from './components/scroll-view';
 export * from './components/select';
 export * from './components/shake';

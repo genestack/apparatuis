@@ -73,7 +73,7 @@ export interface Props extends TargetProps, WithClasses<keyof typeof styles> {
 /**
  * Single item of List component
  */
-export const ListItem = React.forwardRef(function ListItem(props: Props, ref) {
+export const ListItem = React.forwardRef<HTMLElement, Props>(function ListItem(props, ref) {
     const {
         as: Component,
         classes,
@@ -164,7 +164,8 @@ export const ListItem = React.forwardRef(function ListItem(props: Props, ref) {
                         variant="caption"
                         intent="quiet"
                         as="div"
-                        {...subtitleProps}
+                        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                        {...(subtitleProps as any)}
                         className={classNames(subtitleProps.className, classes.subtitle)}
                     >
                         {subtitle}

@@ -15,4 +15,9 @@ export type Props = MarginBoxFullWidthProps;
 /**
  * Remove paddings from page content. Is used for Lists and Dividers in common.
  */
-export const PageFullWidth = (props: Props) => <MarginBoxFullWidth {...props} />;
+export const PageFullWidth = React.forwardRef<HTMLElement, Props>(function PageFullWidth(
+    props,
+    ref
+) {
+    return <MarginBoxFullWidth {...props} ref={ref} />;
+});

@@ -8,6 +8,7 @@
 import contains from 'dom-helpers/contains';
 import * as React from 'react';
 
+import {chainRefs} from '../../utils';
 import {chain} from '../../utils/chain';
 import {
     isElementFocusable,
@@ -19,7 +20,6 @@ import {
     getFirstReachableElement,
     getLastReachableElement
 } from '../../utils/focusable-elements';
-import {RootRef} from '../root-ref';
 
 type SentinelProps = Omit<React.HTMLAttributes<HTMLDivElement>, 'tabIndex'>;
 
@@ -82,48 +82,27 @@ function getSiblingReachableElement(element: HTMLElement, direction: 'next' | 'p
  *
  * @see https://www.w3.org/TR/wai-aria-practices/examples/dialog-modal/dialog.html
  */
-export class FocusTrap extends React.Component<Props> {
-    private trapRef = React.createRef<HTMLDivElement>();
-    private activeElementOnMount: HTMLElement | null = null;
+export const FocusTrap = React.forwardRef<HTMLElement, Props>(function FocusTrap(props, ref) {
+    const {
+        startSentinelProps = {},
+        startSentinelRef,
+        endSentinelProps = {},
+        endSentinelRef,
+        children
+    } = props;
 
-    constructor(props: Props) {
-        super(props);
-
+    const trapRef = React.useRef<HTMLElement>(null);
+    const [activeElementOnMount] = React.useState(() => {
         // remember active element before mounting because
         // focus trap could contains inputs with `autoFocus`
         // which will steal focus on mount
         if (props.focusOnMount && document.activeElement instanceof HTMLElement) {
-            this.activeElementOnMount = document.activeElement;
+            return document.activeElement;
         }
-    }
+    });
 
-    public componentDidMount() {
-        if (this.props.focusOnMount) {
-            this.trapFocus();
-        }
-    }
-
-    public componentWillUnmount() {
-        const {activeElementOnMount} = this;
-        const trapElement = this.trapRef.current;
-
-        // focus could be exit from the trap, do not restore focus in this cases
-        if (
-            document.activeElement &&
-            isElementFocusable(document.activeElement) &&
-            trapElement &&
-            !contains(trapElement, document.activeElement)
-        ) {
-            return;
-        }
-
-        if (activeElementOnMount && contains(document.body, activeElementOnMount)) {
-            activeElementOnMount.focus();
-        }
-    }
-
-    private trapFocus() {
-        const trapElement = this.trapRef.current;
+    function trapFocus() {
+        const trapElement = trapRef.current;
 
         if (!trapElement) {
             return;
@@ -142,8 +121,8 @@ export class FocusTrap extends React.Component<Props> {
         }
     }
 
-    private handleStartFocus: SentinelProps['onFocus'] = (event) => {
-        const trapElement = this.trapRef.current;
+    const handleStartFocus: SentinelProps['onFocus'] = (event) => {
+        const trapElement = trapRef.current;
 
         if (!trapElement) {
             return;
@@ -163,8 +142,8 @@ export class FocusTrap extends React.Component<Props> {
         );
     };
 
-    private handleEndFocus: SentinelProps['onFocus'] = (event) => {
-        const trapElement = this.trapRef.current;
+    const handleEndFocus: SentinelProps['onFocus'] = (event) => {
+        const trapElement = trapRef.current;
 
         if (!trapElement) {
             return;
@@ -184,31 +163,46 @@ export class FocusTrap extends React.Component<Props> {
         );
     };
 
-    public render() {
-        const {
-            startSentinelProps = {},
-            startSentinelRef,
-            endSentinelProps = {},
-            endSentinelRef,
-            children
-        } = this.props;
+    React.useEffect(() => {
+        if (props.focusOnMount) {
+            trapFocus();
+        }
 
-        return (
-            <React.Fragment>
-                <div
-                    {...startSentinelProps}
-                    ref={startSentinelRef}
-                    tabIndex={0}
-                    onFocus={chain(startSentinelProps.onFocus, this.handleStartFocus)}
-                />
-                <RootRef rootRef={this.trapRef}>{children}</RootRef>
-                <div
-                    {...endSentinelProps}
-                    ref={endSentinelRef}
-                    tabIndex={0}
-                    onFocus={chain(endSentinelProps.onFocus, this.handleEndFocus)}
-                />
-            </React.Fragment>
-        );
-    }
-}
+        return () => {
+            const trapElement = trapRef.current;
+            // focus could be exit from the trap, do not restore focus in this cases
+            if (
+                document.activeElement &&
+                isElementFocusable(document.activeElement) &&
+                trapElement &&
+                !contains(trapElement, document.activeElement)
+            ) {
+                return;
+            }
+
+            if (activeElementOnMount && contains(document.body, activeElementOnMount)) {
+                activeElementOnMount.focus();
+            }
+        };
+    }, []);
+
+    return (
+        <React.Fragment>
+            <div
+                {...startSentinelProps}
+                ref={startSentinelRef}
+                tabIndex={0}
+                onFocus={chain(startSentinelProps.onFocus, handleStartFocus)}
+            />
+            {React.cloneElement(children, {
+                ref: chainRefs(trapRef, ref)
+            })}
+            <div
+                {...endSentinelProps}
+                ref={endSentinelRef}
+                tabIndex={0}
+                onFocus={chain(endSentinelProps.onFocus, handleEndFocus)}
+            />
+        </React.Fragment>
+    );
+});

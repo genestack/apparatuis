@@ -46,7 +46,7 @@ export interface Props extends TargetProps, WithClasses<keyof typeof styles> {
 /**
  * Link component presents an styled anchor.
  */
-export const Link = (props: Props) => {
+export const Link = React.forwardRef<HTMLElement, Props>(function Link(props, ref) {
     const invertedContext = React.useContext(DarkContext);
 
     const {
@@ -90,6 +90,7 @@ export const Link = (props: Props) => {
                 [classes.inverted]: inverted,
                 [classes.alarm]: intent === 'alarm'
             })}
+            ref={ref}
         >
             {prepend}
             <span {...labelProps} className={classNames(labelProps.className, classes.label)}>
@@ -98,4 +99,4 @@ export const Link = (props: Props) => {
             {append}
         </Typography>
     );
-};
+});

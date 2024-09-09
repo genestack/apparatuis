@@ -58,7 +58,7 @@ export interface Props extends TargetProps, RootProps, WithClasses<keyof typeof 
 }
 
 /** The input component which toggles the state of a single setting on or off */
-export const Switch = (props: Props) => {
+export const Switch = React.forwardRef<HTMLDivElement, Props>(function Switch(props, ref) {
     const {
         size,
         classes,
@@ -97,6 +97,7 @@ export const Switch = (props: Props) => {
                 [classes.disabled]: rest.disabled,
                 [classes.focused]: focused
             })}
+            ref={ref}
         >
             <input
                 type="checkbox"
@@ -115,4 +116,4 @@ export const Switch = (props: Props) => {
             </div>
         </div>
     );
-};
+});

@@ -16,4 +16,9 @@ export type Props = React.HTMLAttributes<HTMLDivElement>;
  * Use this element to remove side paddings from Dialog elements.
  * It add negative margins to compensate dialog side paddings.
  */
-export const DialogFullWidth = (props: Props) => <MarginBoxFullWidth {...props} />;
+export const DialogFullWidth = React.forwardRef<HTMLElement, Props>(function DialogFullWidth(
+    props,
+    ref
+) {
+    return <MarginBoxFullWidth {...props} ref={ref} />;
+});

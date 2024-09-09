@@ -37,7 +37,7 @@ export interface Props extends TargetProps, WithClasses<keyof typeof styles>, Da
 }
 
 /** A divider is a thin line that groups content in lists and layouts. */
-export function Divider(props: Props) {
+export const Divider = React.forwardRef<HTMLHRElement, Props>(function Divider(props, ref) {
     return (
         <DarkContext.Consumer>
             {(darkContext) => {
@@ -58,6 +58,7 @@ export function Divider(props: Props) {
                     <hr
                         data-qa="divider"
                         {...rest}
+                        ref={ref}
                         className={classNames(className, classes.root, {
                             [classes.dashed]: variant === 'dashed',
                             [classes.transparent]: variant === 'transparent',
@@ -78,4 +79,4 @@ export function Divider(props: Props) {
             }}
         </DarkContext.Consumer>
     );
-}
+});
