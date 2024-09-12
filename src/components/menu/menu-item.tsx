@@ -290,7 +290,11 @@ export const MenuItem = React.forwardRef<HTMLElement, Props>(function MenuItem(p
 
     const menuContext = React.useContext(MenuContext);
 
-    function handleClick() {
+    function handleClick(event: React.MouseEvent) {
+        if (event.isPropagationStopped()) {
+            return;
+        }
+
         if (menuContext) {
             menuContext.onItemSelect({
                 value,
