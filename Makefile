@@ -8,6 +8,10 @@ SHELL = /usr/bin/env bash -o pipefail
 IMAGE_VERSION          ?= 1.0.0
 # The S3 folder of the styleguide site: the git ref of the checkout, such as refs/heads/develop.
 BRANCH                 ?= $(shell git symbolic-ref HEAD 2>/dev/null)
+# CI's Push build sets IMAGE_PUSH=registry. Uploads run only with registry or full: a local
+# `make push` builds the artifacts and uploads nothing.
+IMAGE_PUSH             ?= docker
+UPLOAD                 := $(filter registry full,$(IMAGE_PUSH))
 
 .PHONY: main
 main: push
@@ -32,16 +36,20 @@ help: ## Display this help.
 ##@ Build
 
 .PHONY: push
-push: libraries ui-kit ## Publish the library to Nexus and the styleguide site to S3, without tests.
+push: $(if $(UPLOAD),check-branch) libraries ui-kit ## Build the library and the styleguide site, without tests; with IMAGE_PUSH registry or full, publish them to Nexus and S3.
+
+.PHONY: check-branch
+check-branch: ## Stop unless BRANCH, the styleguide's S3 folder, is set. push and ui-kit run it before an upload.
+	@test -n "$(BRANCH)" || { echo "BRANCH is not set: check out a branch, or pass BRANCH=refs/heads/<name>." >&2; exit 1; }
 
 # In CI the Vault step writes every secret to .secret and the Nexus repositories to .arg in
 # the checkout (teamcity-main's templates/Vault.kt).
 .PHONY: libraries
-libraries: ## Publish @genestack/ui at package.json's version to NPM_REGISTRY_RELEASES from .arg, with NEXUS_USER and NEXUS_PASSWORD from .secret.
+libraries: ## Build the library and, with IMAGE_PUSH registry or full, publish @genestack/ui at package.json's version to NPM_REGISTRY_RELEASES from .arg, with NEXUS_USER and NEXUS_PASSWORD from .secret.
 	@if [ -f .secret ]; then set -a; . ./.secret; set +a; fi; \
 	if [ -f .arg ]; then set -a; . ./.arg; set +a; fi; \
 	docker buildx build \
-	--target=libraries-upload \
+	--target=$(if $(UPLOAD),libraries-upload,build) \
 	--build-arg=NEXUS_REPOSITORY_URL \
 	--build-arg=NPM_REGISTRY_RELEASES \
 	--secret=id=NEXUS_USER,env=NEXUS_USER \
@@ -51,11 +59,11 @@ libraries: ## Publish @genestack/ui at package.json's version to NPM_REGISTRY_RE
 	.
 
 .PHONY: ui-kit
-ui-kit: ## Sync the styleguide site to s3://gs-public-resources/ui_kit/BRANCH, with AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY from .secret.
+ui-kit: $(if $(UPLOAD),check-branch) ## Build the styleguide site and, with IMAGE_PUSH registry or full, sync it to s3://gs-public-resources/ui_kit/BRANCH, with AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY from .secret.
 	@if [ -f .secret ]; then set -a; . ./.secret; set +a; fi; \
 	docker buildx build \
-	--target=ui-kit-upload \
-	--build-arg=BRANCH=$(or $(BRANCH),$(error BRANCH is not set)) \
+	--target=$(if $(UPLOAD),ui-kit-upload,ui-kit) \
+	--build-arg=BRANCH=$(BRANCH) \
 	--secret=id=AWS_ACCESS_KEY_ID,env=AWS_ACCESS_KEY_ID \
 	--secret=id=AWS_SECRET_ACCESS_KEY,env=AWS_SECRET_ACCESS_KEY \
 	--no-cache-filter=ui-kit-upload \
