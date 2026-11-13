@@ -1,0 +1,19 @@
+# The build context is this repo. Host build state stays out of the image and the cache
+# key: the image installs its own node_modules for its own platform.
+.git
+.github
+node_modules
+dist
+styleguide
+coverage
+.eslintcache
+npm-debug.log*
+.genestack_shell_history
+*.iml
+.idea
+.vscode
+# CI's Vault step writes its secrets into the checkout. No stage reads them.
+.env
+.env-woq
+.arg
+.secret

@@ -12,6 +12,17 @@
 
 To see UI kit demo run `npm start`.
 
+### Docker image
+
+The `Makefile` builds the `Dockerfile`'s targets:
+
+```bash
+make push   # build the library and the styleguide site; IMAGE_PUSH=registry publishes them to Nexus and S3
+make test   # the same library and site, then npm run test
+```
+
+With `IMAGE_PUSH=registry` or `full`, as CI sets it, `make push` uploads; otherwise it only builds. It reads `NEXUS_USER`, `NEXUS_PASSWORD`, `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY` from `.secret` and the Nexus repositories from `.arg`, or from the environment. npm publishes the library at `package.json`'s version. `make help` lists every target.
+
 ## API Design Approach
 
 This approach is based on [Material UI API Design Approach](https://material-ui.com/guides/api/).
