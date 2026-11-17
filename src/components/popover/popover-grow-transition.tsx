@@ -35,10 +35,7 @@ export interface Props extends GrowProps {
 
 /** Internal Grow transition for popover. */
 export const PopoverGrow = React.forwardRef<HTMLElement, Props>(function PopoverGrow(props, ref) {
-    // Props has an index signature (react-transition-group's TransitionProps), so forwardRef's
-    // PropsWithoutRef<Props> omits "ref" through Omit, which drops every named key and leaves
-    // them `any`. Props holds no ref, so the cast restores the named keys.
-    const {disableTransition, children, placement, open, ...rest} = props as Props;
+    const {disableTransition, children, placement, open, ...rest} = props;
 
     return disableTransition ? (
         children

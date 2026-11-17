@@ -11,6 +11,7 @@ import Transition, {TransitionProps} from 'react-transition-group/Transition';
 
 import {chainRefs} from '../../utils';
 import {chain} from '../../utils/chain';
+import {OmitIndexSignature} from '../../utils/omit-index-signature';
 import {reflow} from '../../utils/reflow';
 import {mergeClassesProps, WithClasses} from '../../utils/styles';
 
@@ -18,7 +19,9 @@ import * as styles from './fade.module.css';
 
 const DURATION_TIMEOUT = 300;
 
-type TargetProps = Omit<TransitionProps<HTMLElement>, 'timeout' | 'children'>;
+// Without the index signature of react-transition-group's props, Omit keeps their named keys,
+// and forwardRef's PropsWithoutRef keeps them typed.
+type TargetProps = Omit<OmitIndexSignature<TransitionProps<HTMLElement>>, 'timeout' | 'children'>;
 type Children = React.ReactElement<{className?: string; ref?: React.Ref<unknown>}>;
 
 /** Public Fade properties */
