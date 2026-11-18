@@ -38,7 +38,9 @@ export function createIcon<P extends Props = Props>(
     icon: ((props: P) => React.ReactElement) | React.ReactElement
 ) {
     return React.forwardRef<Element, P>(function Icon(props, ref) {
-        const element = typeof icon === 'function' ? icon(props) : icon;
+        // forwardRef types props as PropsWithoutRef<P>, which TypeScript cannot prove is P for a
+        // generic P. Icon props carry no ref, so they are P.
+        const element = typeof icon === 'function' ? icon(props as P) : icon;
 
         if (!element) {
             return null;
